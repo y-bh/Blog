@@ -3,10 +3,10 @@
  * @LastEditors: 朱占伟
  * @description: 统一接口响应
  * @Date: 2022-04-22 15:03:50
- * @LastEditTime: 2022-04-22 15:03:51
+ * @LastEditTime: 2022-04-22 16:13:39
  */
 
-export default function routerResponse(option = {}) {
+exports.routerResponse = (option = {}) => {
   return async function (ctx, next) {
     ctx.success = function (data, msg) {
       ctx.type = option.type || "json";
@@ -28,3 +28,4 @@ export default function routerResponse(option = {}) {
     await next();
   };
 }
+

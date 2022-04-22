@@ -3,14 +3,14 @@
  * @LastEditors: 朱占伟
  * @description: 路由配置
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-04-22 15:46:37
+ * @LastEditTime: 2022-04-22 16:15:24
  */
 
 const router = require("koa-router")();
 
 
 
-export default function Router(App) {
+ function Router(App) {
   //用户管理
   // router.use("/user", user.routes(), user.allowedMethods());
 
@@ -23,3 +23,5 @@ export default function Router(App) {
   App.use(router.routes()); //作用：启动路由
   App.use(router.allowedMethods());
 }
+
+module.exports = Router;

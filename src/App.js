@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-04-22 15:56:13
+ * @LastEditTime: 2022-04-22 16:17:10
  */
 
 const Koa = require("koa");
@@ -13,9 +13,14 @@ const bodyParser = require("koa-bodyparser");
 const views = require("koa-views");
 
 
-const path = require("path")
-import Router from "./router/index"; //路由控制器
-import routerResponse from "./utils/parseJson"; //响应中间件
+//应用配置文件
+const config = require("./config/app.config")
+
+//统一接口响应中间件
+const {routerResponse} = require("./utils/parseJson")
+
+//路由配置文件
+const Router = require("./router/index")
 
 
 const app = new Koa();
@@ -34,13 +39,13 @@ app.silent = true;
 
 
 //处理模板
-app.use(views(path.join(__dirname, "./views"), {
+app.use(views(config.templates, {
   /* 视图文件后缀名 */
   map: { html: 'ejs' }
 }))
 
 //静态文件位置
-app.use(koa_static(__dirname, "./static"))
+app.use(koa_static(config.static))
 
 //解析入参
 app.use(bodyParser());
