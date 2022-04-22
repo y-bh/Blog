@@ -3,20 +3,35 @@
  * @LastEditors: 朱占伟
  * @description: 首页
  * @Date: 2022-04-22 15:15:09
- * @LastEditTime: 2022-04-22 15:51:36
+ * @LastEditTime: 2022-04-22 16:26:07
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>首页</title>
+  <title>天启http</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="force-rendering" content="webkit">
+  <meta name="renderer" content="webkit">
+  <meta name="keywords" content="天启http">
+  <meta name="description" content="天启http">
+
+  <!-- 公共css -->
+  <%- include('components/style.html'); %>
 </head>
+
 <body>
+
   <h1>hello world</h1>
-  <h2><%=title%></h2>
-  
+  <h2>
+    <%=title%>
+  </h2>
+
+  <img src="/images/logo.png" />
+
 </body>
+<!-- 公共js -->
+<%- include('components/js.html'); %>
 </html>
