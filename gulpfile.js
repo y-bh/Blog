@@ -1,16 +1,10 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: 朱占伟
- * @description: page description
- * @Date: 2022-04-22 17:18:50
- * @LastEditTime: 2022-04-24 11:33:54
- */
+
 /*
  * @Author: 朱占伟
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-12 16:15:50
+ * @LastEditTime: 2022-04-24 13:59:28
  */
 
 
@@ -33,56 +27,53 @@
 // exports.dev = gulp.series(localServe);
 
 
-const localServe = require("./src/build/local.dev")
+
+
+
 const config = require("./src/config/app.config")
 
+
+
 var gulp = require('gulp')
-  , nodemon = require('gulp-nodemon')
- 
-  const { task } = require('gulp');
+var nodemon = require('gulp-nodemon')
 
-  const Replace = require('gulp-replace');//替换h内容
-// css
-//配置css适配
-const px2remOptions = {
-  replace: false
-};
-const postCssOptions = {
-  map: true
-};
-
-const Sass = require('gulp-sass')(require('sass')) //编辑sass
-const Autoprefixer = require("gulp-autoprefixer"); // 添加 CSS 浏览器前缀
-const px2rem = require('gulp-px2rem'); //浏览器适配
+const path = require("path")
 
 
 
-  gulp.task('cssMin', function () {
-    var stream = gulp.src(config.src + "/static/css/*.scss")
-      .pipe(Sass()) //编译sass
-      .pipe(px2rem(px2remOptions, postCssOptions))
-      .pipe(Autoprefixer({
-        cascade: true, //是否美化属性值 默认：true 像这样：
-        remove: false, //是否去掉不必要的前缀 默认：true
-      }))
-      .pipe(gulp.dest(config.src + "/static/cssmin")) //当前对应css文件
-    return stream 
-  })
 
 
-gulp.task('develop',gulp.series( function () {
-  var stream = nodemon({ script: './start.js'
-          , ext: 'css scss'
-          , ignore: ['./node_modules'],
-            watch:    [config.src+'/static/css/home.scss']
-          , tasks: ['cssMin'] })
- 
-  stream
-      .on('restart', function () {
-        console.log('restarted!')
+//本地开发环境任务
+require("./src/build/local.dev");
+const local = require("./src/build/local.dev");
+
+gulp.task('develop', gulp.series("cssMin2", function (done) {
+  console.info("开发环境工程")
+
+  var stream = nodemon({
+    script: './start.js'
+    , ext: 'js html css scss'
+    , ignore: ['./node_modules'],
+    done: done,
+    tasks: function (changedFiles) {
+      var tasks = []
+      if (!changedFiles) return tasks;
+      changedFiles.forEach(function (file) {
+
+        console.log("文件改变",changedFiles)
+
+        if (path.extname(file) === '.scss' && !~tasks.indexOf('cssMin2')) tasks.push('cssMin2')
       })
-}))
+      return tasks
+    }
+  }
+  )
+  stream.on("restart", function (err, res) {
+    console.log("重启nodemon", err)
+  })
+}
+))
 
 
 
-exports.css = gulp.series(localServe.css)
+
