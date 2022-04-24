@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-24 14:23:15
+ * @LastEditTime: 2022-04-24 16:51:01
  */
 
 
@@ -31,6 +31,7 @@
 
 
 const config = require("./src/config/app.config")
+const localServerConfig = require("./src/config/ssr.config")
 
 
 
@@ -52,23 +53,38 @@ gulp.task('develop', gulp.series("CssComplie", "ThirdPlugin", function (done) {
     script: './start.js'
     , ext: 'js html css scss'
     , ignore: ['./node_modules'],
+    "delay": 1000,
+    stdout: false,
     done: done,
-    tasks: function (changedFiles) {
+    tasks: function (changedFiles = []) {
       var tasks = []
-      if (!changedFiles) return tasks;
+      const sourceDIR = (path.dirname(localServerConfig.sourceDir)).slice(2) + `${path.sep}${path.basename(localServerConfig.sourceDir)}`;
+
+      console.log("changedFiles 过滤前", sourceDIR, changedFiles)
+      //获取需要gulp 编译的文件
+      changedFiles = changedFiles.filter((file) => {
+        let dirs = (path.dirname(file)).slice(2)
+        return dirs.includes(sourceDIR)
+      })
+      console.log("changedFiles 过滤后", changedFiles)
+
+      if (!changedFiles.length) return tasks;
+
+
       changedFiles.forEach(function (file) {
-
-        console.log("文件改变", changedFiles)
-
-        if (path.extname(file) === '.scss' && !~tasks.indexOf('CssComplie')) tasks.push('CssComplie')
+        let ext = (path.extname(file)).slice(1)
+        console.info("ext", ext)
+        if ((ext === 'scss' || ext === 'css') && !~tasks.indexOf('CssComplie')) {
+          tasks.push('CssComplie')
+        }
       })
       return tasks
     }
   }
   )
-  stream.on("restart", function (err, res) {
-    console.log("重启nodemon", err)
-  })
+  // stream.on("restart", function (err, res) {
+  //   console.log("重启nodemon", err)
+  // })
 }
 ))
 

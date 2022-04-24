@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 本地开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-24 14:23:27
+ * @LastEditTime: 2022-04-24 15:15:03
  */
 
 
@@ -37,9 +37,8 @@ const postCssOptions = {
 };
 gulp.task('CssComplie', function () {
   console.log("编译css任务")
-  return gulp.src(localConfig.sourceDir + "/css/*.scss")
+  return gulp.src([localConfig.sourceDir + "/css/*.scss",localConfig.sourceDir + "/css/*.css"])
     .pipe(Sass()) //编译sass
-    .pipe(gulp.src(localConfig.sourceDir + "/css/*.css"))
     .pipe(px2rem(px2remOptions, postCssOptions))
     .pipe(Autoprefixer({
       cascade: true, //是否美化属性值 默认：true 像这样：
