@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 本地开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-24 14:20:33
+ * @LastEditTime: 2022-04-24 14:23:27
  */
 
 
@@ -14,22 +14,28 @@ const localConfig = require("../config/ssr.config")
 const config = require("../config/app.config")
 
 
+
+
 // css
-//配置css适配
+const Sass = require('gulp-sass')(require('sass')) //编辑sass
+const Autoprefixer = require("gulp-autoprefixer"); // 添加 CSS 浏览器前缀
+const px2rem = require('gulp-px2rem'); //浏览器适配
+
+
+//js
+
+
+
+
+
+//注册css编译任务
 const px2remOptions = {
   replace: false
 };
 const postCssOptions = {
   map: true
 };
-const Sass = require('gulp-sass')(require('sass')) //编辑sass
-const Autoprefixer = require("gulp-autoprefixer"); // 添加 CSS 浏览器前缀
-const px2rem = require('gulp-px2rem'); //浏览器适配
-
-
-
-//注册css编译任务
-gulp.task('cssMin', function () {
+gulp.task('CssComplie', function () {
   console.log("编译css任务")
   return gulp.src(localConfig.sourceDir + "/css/*.scss")
     .pipe(Sass()) //编译sass
@@ -43,11 +49,16 @@ gulp.task('cssMin', function () {
 })
 
 
-//处理三方库
-gulp.task('handleThirdPlugin', function () {
+//注册处理三方库
+gulp.task('ThirdPlugin', function () {
   console.log("处理三方库任务")
   return gulp.src(localConfig.sourceDir + "/lib/**").pipe(gulp.dest(localConfig.destDir + "/lib", { sourcemaps: false }))
 })
+
+
+
+
+
 
 
 

@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-24 14:20:47
+ * @LastEditTime: 2022-04-24 14:23:15
  */
 
 
@@ -45,7 +45,7 @@ const path = require("path")
 
 //本地开发环境任务
 require("./src/build/local.dev");
-gulp.task('develop', gulp.series("cssMin", "handleThirdPlugin", function (done) {
+gulp.task('develop', gulp.series("CssComplie", "ThirdPlugin", function (done) {
   console.info("开发环境工程")
 
   var stream = nodemon({
@@ -60,7 +60,7 @@ gulp.task('develop', gulp.series("cssMin", "handleThirdPlugin", function (done) 
 
         console.log("文件改变", changedFiles)
 
-        if (path.extname(file) === '.scss' && !~tasks.indexOf('cssMin')) tasks.push('cssMin')
+        if (path.extname(file) === '.scss' && !~tasks.indexOf('CssComplie')) tasks.push('CssComplie')
       })
       return tasks
     }
