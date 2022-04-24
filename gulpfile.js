@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-24 16:56:35
+ * @LastEditTime: 2022-04-24 17:00:06
  */
 
 
@@ -46,7 +46,7 @@ const path = require("path")
 
 //本地开发环境任务
 require("./src/build/local.dev");
-gulp.task('develop', gulp.series("JsComplie","CssComplie", "ThirdPlugin", function (done) {
+gulp.task('develop', gulp.series("JsComplie","CssComplie", 'ImageComplie',"ThirdPlugin", function (done) {
   console.info("开发环境工程")
 
   var stream = nodemon({

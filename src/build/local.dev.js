@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 本地开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-24 16:57:12
+ * @LastEditTime: 2022-04-24 16:59:47
  */
 
 
@@ -64,6 +64,14 @@ gulp.task('ThirdPlugin', function () {
 })
 
 
+
+
+//注册图片任务
+gulp.task('ImageComplie', function () {
+  console.log("编译图片任务")
+  return gulp.src(localConfig.sourceDir + "/images/**/*.*")
+    .pipe(gulp.dest(localConfig.destDir + "/images"));
+})
 
 
 
