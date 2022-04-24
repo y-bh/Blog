@@ -3,11 +3,11 @@
  * @LastEditors: 朱占伟
  * @description: 生产环境部署工程
  * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-04-24 17:34:39
+ * @LastEditTime: 2022-04-24 17:37:53
  */
 
 const gulp = require('gulp');
-
+var shell = require('shelljs');
 const localConfig = require("../config/ssr.config")
 
 
@@ -113,5 +113,8 @@ async function cleanDir() {
   return await gulp.src(localConfig.destDir, { allowEmpty: true }).pipe(Clean());
 }
 
+
+//打包前先删除
+shell.rm('-rf', localConfig.destDir);
 
 module.exports = { CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont }
