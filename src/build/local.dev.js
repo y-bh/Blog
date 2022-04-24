@@ -3,15 +3,13 @@
  * @LastEditors: 朱占伟
  * @description: 本地开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-24 17:04:02
+ * @LastEditTime: 2022-04-24 17:20:44
  */
 
 
 const gulp = require('gulp');
 
 const localConfig = require("../config/ssr.config")
-
-const config = require("../config/app.config")
 
 
 
@@ -31,7 +29,7 @@ const Clean = require("gulp-clean"); // 清理目录
 
 //注册js编译任务
 gulp.task('JsComplie', function () {
-  console.log("编译js任务")
+  console.info("编译js任务")
   return gulp.src(localConfig.sourceDir + "/js/*.js")
     .pipe(gulp.dest(localConfig.destDir + "/js")) // 拷贝
 })
@@ -47,7 +45,7 @@ const postCssOptions = {
 };
 
 gulp.task('CssComplie', function () {
-  console.log("编译css任务")
+  console.info("编译css任务")
   return gulp.src([localConfig.sourceDir + "/css/*.scss", localConfig.sourceDir + "/css/*.css"])
     .pipe(Sass()) //编译sass
     .pipe(px2rem(px2remOptions, postCssOptions))

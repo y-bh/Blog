@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-24 17:06:48
+ * @LastEditTime: 2022-04-24 17:32:33
  */
 
 
@@ -79,7 +79,12 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
 
 
 //服务端生产环境任务
-gulp.task('build', function () {
-  console.log("开始构建生产环境包")
+const prodServer = require("./src/build/serve.build")
+// gulp.task('build', async function () {
+//   console.log("开始构建生产环境包")
+//   return await gulp.series(prodServer.clean,prodServer.ThirdPlugin,prodServer.HandleFont,prodServer.ImageComplie,prodServer.JsComplie,prodServer.CssComplie)
 
-}) 
+// }) 
+
+//打包生产环境
+exports.build = gulp.series(prodServer.cleanDir,  prodServer.JsComplie, prodServer.CssComplie,prodServer.ThirdPlugin,prodServer.HandleFont,prodServer.ImageComplie);
