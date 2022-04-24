@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 本地开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-24 16:59:47
+ * @LastEditTime: 2022-04-24 17:04:02
  */
 
 
@@ -25,6 +25,8 @@ const px2rem = require('gulp-px2rem'); //浏览器适配
 //js
 
 
+//清空目录
+const Clean = require("gulp-clean"); // 清理目录
 
 
 //注册js编译任务
@@ -75,6 +77,12 @@ gulp.task('ImageComplie', function () {
 
 
 
+
+
+gulp.task('clean', function () {
+  console.log("清空目录任务")
+  return gulp.src(localConfig.destDir, { allowEmpty: true }).pipe(Clean());
+})
 
 
 

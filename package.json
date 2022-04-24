@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon ./start.js",
     "local": "gulp develop",
-    "test": "gulp css"
+    "build": "gulp build"
   },
   "author": "zhuzhanwei",
   "license": "ISC",

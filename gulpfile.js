@@ -4,27 +4,9 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-24 17:00:06
+ * @LastEditTime: 2022-04-24 17:06:48
  */
 
-
-
-
-// //本地开发环境
-// const {localServe} = require('./src/build/local.dev.js');
-
-
-// //本地开发环境热更新功能
-// function gulpWatch() {
-//   gulp.watch('src/component/**', devConfig.html); // 监听HTML变化
-//   gulp.watch('src/views/**/*.html', devConfig.html); // 监听HTML变化
-//   gulp.watch('src/js/*.js', gulp.series(devConfig.js)); // 监听js变化
-//   gulp.watch(['src/css/*.scss','src/css/*.css'], gulp.series(devConfig.css)); // 监听css变化
-//   gulp.watch('src/images/*', gulp.series(devConfig.image)); // 监听image变化
-// }
-// console.log("xxxxxxxxxxxxxxxx",localServe())
-
-// exports.dev = gulp.series(localServe);
 
 
 
@@ -37,7 +19,6 @@ const localServerConfig = require("./src/config/ssr.config")
 
 var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
-
 const path = require("path")
 
 
@@ -46,9 +27,8 @@ const path = require("path")
 
 //本地开发环境任务
 require("./src/build/local.dev");
-gulp.task('develop', gulp.series("JsComplie","CssComplie", 'ImageComplie',"ThirdPlugin", function (done) {
-  console.info("开发环境工程")
-
+gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", function (done) {
+  console.info("开发环境工程编译完成,开启启动应用")
   var stream = nodemon({
     script: './start.js'
     , ext: 'js html css scss'
@@ -73,19 +53,16 @@ gulp.task('develop', gulp.series("JsComplie","CssComplie", 'ImageComplie',"Third
 
       changedFiles.forEach(function (file) {
         let ext = (path.extname(file)).slice(1)
-        console.info("ext", ext)
 
         //处理css 任务
         if ((ext === 'scss' || ext === 'css') && !~tasks.indexOf('CssComplie')) {
           tasks.push('CssComplie')
         }
 
-
         //处理js任务
         if (ext === 'js' && !~tasks.indexOf('JsComplie')) {
           tasks.push('JsComplie')
         }
-
 
       })
       return tasks
@@ -101,3 +78,8 @@ gulp.task('develop', gulp.series("JsComplie","CssComplie", 'ImageComplie',"Third
 
 
 
+//服务端生产环境任务
+gulp.task('build', function () {
+  console.log("开始构建生产环境包")
+
+}) 
