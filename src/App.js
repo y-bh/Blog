@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-04-22 16:17:10
+ * @LastEditTime: 2022-04-22 16:42:18
  */
 
 const Koa = require("koa");
@@ -61,6 +61,6 @@ app.on("error", (err) => {
 });
 
 
-app.listen(8081, async () => {
-  console.log("天启http 应用启动成功", 8081);
+app.listen(config.appPort, async () => {
+  console.log("天启http 应用启动成功", config.appPort);
 });

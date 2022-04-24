@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./start.js"
+    "dev": "nodemon ./start.js",
+    "local": "gulp develop",
+    "test": "gulp css"
   },
   "author": "zhuzhanwei",
   "license": "ISC",
@@ -19,9 +21,28 @@
     "koa-views": "^8.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "nodemon": "^2.0.15"
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-cli": "^2.3.0",
+    "gulp-file-include": "^2.3.0",
+    "gulp-imagemin": "^8.0.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-px2rem": "^1.1.4",
+    "gulp-px2rem-plugin": "^0.4.0",
+    "gulp-replace": "^1.1.3",
+    "gulp-sass": "^5.1.0",
+    "http-proxy-middleware": "^2.0.6",
+    "nodemon": "^2.0.15",
+    "sass": "^1.50.1",
+    "shelljs": "^0.8.5"
   }
 }
