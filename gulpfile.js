@@ -4,25 +4,15 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-24 17:38:37
+ * @LastEditTime: 2022-04-24 17:39:50
  */
 
 
-
-
-
-
-const config = require("./src/config/app.config")
 const localServerConfig = require("./src/config/ssr.config")
-
-
 
 var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
 const path = require("path")
-
-
-
 
 
 //本地开发环境任务

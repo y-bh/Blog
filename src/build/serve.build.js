@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
  * @LastEditors: 朱占伟
- * @description: 生产环境部署工程
+ * @description: 服务端生产环境工程
  * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-04-24 17:37:53
+ * @LastEditTime: 2022-04-24 17:40:53
  */
 
 const gulp = require('gulp');
