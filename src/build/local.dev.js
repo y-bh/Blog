@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 本地开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-24 15:15:03
+ * @LastEditTime: 2022-04-24 16:57:12
  */
 
 
@@ -27,6 +27,14 @@ const px2rem = require('gulp-px2rem'); //浏览器适配
 
 
 
+//注册js编译任务
+gulp.task('JsComplie', function () {
+  console.log("编译js任务")
+  return gulp.src(localConfig.sourceDir + "/js/*.js")
+    .pipe(gulp.dest(localConfig.destDir + "/js")) // 拷贝
+})
+
+
 
 //注册css编译任务
 const px2remOptions = {
@@ -35,9 +43,10 @@ const px2remOptions = {
 const postCssOptions = {
   map: true
 };
+
 gulp.task('CssComplie', function () {
   console.log("编译css任务")
-  return gulp.src([localConfig.sourceDir + "/css/*.scss",localConfig.sourceDir + "/css/*.css"])
+  return gulp.src([localConfig.sourceDir + "/css/*.scss", localConfig.sourceDir + "/css/*.css"])
     .pipe(Sass()) //编译sass
     .pipe(px2rem(px2remOptions, postCssOptions))
     .pipe(Autoprefixer({
@@ -53,6 +62,7 @@ gulp.task('ThirdPlugin', function () {
   console.log("处理三方库任务")
   return gulp.src(localConfig.sourceDir + "/lib/**").pipe(gulp.dest(localConfig.destDir + "/lib", { sourcemaps: false }))
 })
+
 
 
 
