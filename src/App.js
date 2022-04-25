@@ -3,9 +3,9 @@
  * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-04-25 10:52:40
+ * @LastEditTime: 2022-04-25 11:18:37
  */
-require('module-alias/register')
+
 const Koa = require("koa");
 const koa_static = require("koa-static");
 const koa_body = require("koa-body")

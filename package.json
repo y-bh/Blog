@@ -48,7 +48,8 @@
     "src"      : "./src",
     "dao" : "./src/dao",
     "service" : "./src/service",
+    "controller"  : "./src/controller",
     "utils"  : "./src/utils",
-    "controller"  : "./src/controller"
+    "config"  : "./src/config"
   }
 }

@@ -3,16 +3,20 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-04-25 11:13:12
+ * @LastEditTime: 2022-04-25 11:20:33
  */
 
 
 
 let request = require('async-request')
+const appConfig = require("config/app.config")
 
 async function post(url, data = null, headers = null) {
   let response;
   try {
+    if (!url.includes('http')) {
+      url = `${appConfig.url}${url}`
+    }
     response = await request(url, {
       method: 'POST',
       data,

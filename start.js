@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 项目启动文件
  * @Date: 2022-04-22 15:36:56
- * @LastEditTime: 2022-04-22 16:16:29
+ * @LastEditTime: 2022-04-25 11:18:42
  */
 
 //加babel 编译
@@ -11,6 +11,6 @@
 //   presets: ['env']
 // })
 // require('babel-polyfill');
-
+require('module-alias/register')
 
 module.exports = require("./src/App")
