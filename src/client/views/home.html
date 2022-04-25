@@ -3,11 +3,12 @@
  * @LastEditors: 朱占伟
  * @description: 首页
  * @Date: 2022-04-22 15:15:09
- * @LastEditTime: 2022-04-24 17:53:37
+ * @LastEditTime: 2022-04-25 11:26:56
 -->
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>天启http</title>
@@ -20,19 +21,30 @@
 
   <!-- 公共css -->
   <%- include('components/style.html'); %>
-  <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 
 <body>
 
-  <h1>hello world2222</h1>
-  <h2>
-    <%=title%>
-  </h2>
+  <h1>hello world</h1>
+
+
+  <dl>
+    <dt>
+      <%=name%>
+    </dt>
+    <dd>
+      <span>地址:</span>
+      <span>
+        <%=url%>
+      </span>
+    </dd>
+  </dl>
 
   <img src="/images/logo.png" />
 
 </body>
 <!-- 公共js -->
 <%- include('components/js.html'); %>
+
 </html>

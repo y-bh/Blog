@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-04-25 11:13:38
+ * @LastEditTime: 2022-04-25 11:26:41
  */
 
 const router = require("koa-router")();
@@ -25,7 +25,7 @@ function Router(App) {
     console.log("控制层:", res)
 
     return ctx.render("home", {
-      title: '测试标题'
+    ...res
     })
   })
 
