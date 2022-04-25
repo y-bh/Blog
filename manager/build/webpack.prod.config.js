@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: webpack 服务端生产环境配置
  * @Date: 2021-07-16 13:22:46
- * @LastEditTime: 2022-03-14 16:37:34
+ * @LastEditTime: 2022-04-25 13:45:22
  */
 const path = require('path');
 const resolve = (filePth) => {
@@ -20,6 +20,11 @@ module.exports = (data) => {
   console.log('==================common=======', common);
   const obj = merge(base, {
     mode: 'production',
+    output: {
+      filename: 'js/[name].[contenthash].js',
+      path: config.m_dest,
+      clean: true
+    },
     devtool: 'source-map',
     // 资源转换
     module: {
@@ -53,10 +58,8 @@ module.exports = (data) => {
         minChunks: 1,
         maxAsyncRequests: 5,
         maxInitialRequests: 3,
-        // automaticNameDelimiter: '~',
-        // name: true,
         cacheGroups: {
-          elementPlus:{
+          elementPlus: {
             test: /element-plus/,
             name: 'elementPlus',
             chunks: 'all',
@@ -76,21 +79,10 @@ module.exports = (data) => {
       maxAssetSize: 300000, // 整数类型（以字节为单位）
       maxEntrypointSize: 500000, // 整数类型（以字节为单位）
       assetFilter: function (assetFilename) {
-        
-          // 提供资源文件名的断言函数
-          // 只给出js与css文件的性能提示
-          return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
+        return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
       }
-  }
+    }
   });
-
-  //是否打开分析日志
-  const config = require(resolve('config'))(process.env.NODE_ENV);
-  console.log("===env==",config)
-  if (config && config.analyzer) {
-    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-    obj.plugins.push(new BundleAnalyzerPlugin())
-  }
 
   return obj
 };

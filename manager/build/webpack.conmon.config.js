@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: webpack通用配置
  * @Date: 2021-07-16 13:22:20
- * @LastEditTime: 2022-03-14 16:36:34
+ * @LastEditTime: 2022-04-25 13:38:10
  */
 const path = require('path');
 const resolve = (filePth) => {
@@ -12,10 +12,6 @@ const resolve = (filePth) => {
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
-// 友好的错误提示插件
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-// 提示插件
-const notifier = require('node-notifier');
 module.exports = {
   context: __dirname,
   entry: {
@@ -84,17 +80,6 @@ module.exports = {
         collapseWhitespace: true // 删除空格，
       }
     }),
-    new FriendlyErrorsWebpackPlugin({
-      onErrors: (severity, errors) => {
-        const error = errors[0];
-        notifier.notify({
-          title: 'Webpack编译失败',
-          message: severity + ': ' + error.name,
-          subtitle: error.file || ''
-          // icon: ICON,
-        });
-      }
-    })
   ],
 
   resolve: {
