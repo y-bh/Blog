@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心开发环境配置
  * @Date: 2022-04-25 16:16:31
- * @LastEditTime: 2022-04-25 18:09:29
+ * @LastEditTime: 2022-04-25 18:27:28
  */
 
 const gulp = require('gulp');
@@ -47,10 +47,5 @@ async function webpackProd() {
 }
 
 
-async function webpackTemplate() {
-  console.log("转译模板")
-  return await gulp.src('src/client/public/manager.html')
-    .pipe(gulp.dest('src/client/views/manager.html'));
-}
 
-module.exports = { webpackDev ,webpackProd,webpackTemplate}
+module.exports = { webpackDev ,webpackProd}

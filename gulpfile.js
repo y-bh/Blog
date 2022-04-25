@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-25 18:19:53
+ * @LastEditTime: 2022-04-25 18:26:50
  */
 
 
@@ -18,8 +18,8 @@ const path = require("path")
 
 const webpackConfig = require('./src/build/webpack')
 
-//本地开发环境webpack任务
-exports.webpack = gulp.series(webpackConfig.webpackProd,webpackConfig.webpackTemplate)
+//webpack打包任务
+exports.webpack = gulp.series(webpackConfig.webpackProd)
 
 
 //本地开发环境任务
@@ -73,13 +73,9 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
 ))
 
 
-
-
 //服务端生产环境任务
 const prodServer = require("./src/build/serve.build")
-
-//打包生产环境
-exports.build = gulp.series(webpackConfig.webpackProd,prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
+exports.build = gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
 
 
 
