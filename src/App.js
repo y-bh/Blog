@@ -3,9 +3,9 @@
  * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-04-25 10:34:53
+ * @LastEditTime: 2022-04-25 10:52:40
  */
-
+require('module-alias/register')
 const Koa = require("koa");
 const koa_static = require("koa-static");
 const koa_body = require("koa-body")
@@ -17,10 +17,10 @@ const views = require("koa-views");
 const config = require("./config/app.config")
 
 //统一接口响应中间件
-const {routerResponse} = require("./utils/parseJson")
+const {routerResponse} = require("utils/parseJson")
 
 //路由配置文件
-const Router = require("./controller/index")
+const Router = require("controller/index")
 
 
 const app = new Koa();

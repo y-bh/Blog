@@ -18,7 +18,8 @@
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
-    "koa-views": "^8.0.0"
+    "koa-views": "^8.0.0",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -41,5 +42,12 @@
     "nodemon": "^2.0.15",
     "sass": "^1.50.1",
     "shelljs": "^0.8.5"
+  },
+  "_moduleAliases": {
+    "@"      : ".", 
+    "src"      : "./src",
+    "dao" : "./src/dao",
+    "utils"  : "./src/utils",
+    "controller"  : "./src/controller"
   }
 }
