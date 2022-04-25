@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-04-25 10:45:07
+ * @LastEditTime: 2022-04-25 11:13:12
  */
 
 
@@ -22,8 +22,11 @@ async function post(url, data = null, headers = null) {
     console.error('post:', e)
   }
 
-  return response
-
+  //处理响应
+  if (response.statusCode === 200) {
+    return response.body
+  }
+  return console.error('post', response)
 }
 
 module.exports = post

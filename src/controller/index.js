@@ -3,24 +3,29 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-04-25 10:35:21
+ * @LastEditTime: 2022-04-25 11:13:38
  */
 
 const router = require("koa-router")();
+const { renderHome } = require("service/home")
 
 
-
- function Router(App) {
+function Router(App) {
   //用户管理
   // router.use("/user", user.routes(), user.allowedMethods());
- 
+
 
   //首页
-  router.get("/",async (ctx)=>{
+  router.get("/", async (ctx) => {
 
 
-    return ctx.render("home",{
-      title:'测试标题'
+    const res = await renderHome()
+
+
+    console.log("控制层:", res)
+
+    return ctx.render("home", {
+      title: '测试标题'
     })
   })
 
