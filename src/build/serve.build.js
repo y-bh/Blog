@@ -3,13 +3,15 @@
  * @LastEditors: 朱占伟
  * @description: 服务端生产环境工程
  * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-04-24 17:40:53
+ * @LastEditTime: 2022-04-25 18:15:53
  */
 
 const gulp = require('gulp');
 var shell = require('shelljs');
-const localConfig = require("../config/ssr.config")
 
+
+const localConfig = require("../config/ssr.config")
+const appConfig = require("../config/app.config")
 
 // js
 const Uglify = require('gulp-uglify');          // 压缩js
@@ -107,6 +109,20 @@ async function HandleFont() {
 }
 
 
+//处理个人中心包
+async function HandleManager(cb) {
+  console.info("处理个人中心包")
+  try {
+    console.log("vvvvvvvvvv",`${appConfig.static}/manager.html`)
+    shell.mv(`${appConfig.static}/manager.html`,`${appConfig.templates}/manager.html` );
+
+  } catch (error) {
+    console.error("HandleManager:", error)
+  }
+  cb()
+}
+
+
 // clean 清空dist文件内容
 async function cleanDir() {
   // 不设置allowEmpty: true会报File not found with singular glob
@@ -117,4 +133,4 @@ async function cleanDir() {
 //打包前先删除
 shell.rm('-rf', localConfig.destDir);
 
-module.exports = { CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont }
+module.exports = { CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont,HandleManager }

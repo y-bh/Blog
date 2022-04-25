@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 应用配置文件
  * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-04-25 13:44:10
+ * @LastEditTime: 2022-04-25 16:49:37
  */
 
 const path = require("path")
@@ -23,7 +23,7 @@ var config = {
 
 
   //个人中心相关工程配置 带前缀 m
-  m_dest: path.join(__dirname, '../client/views/manager'),  //个人中心打包目录
+  m_dest: path.join(__dirname, '../client/views/manager/dist'),  //个人中心打包目录
   
   m_address: 'http://localhost', //spa 服务地址
 

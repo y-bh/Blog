@@ -3,15 +3,16 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心首页
  * @Date: 2022-04-25 16:08:31
- * @LastEditTime: 2022-04-25 16:09:34
+ * @LastEditTime: 2022-04-25 17:36:45
 -->
 
 <template>
-  <div>我是个人中心</div>
+ <router-view />
 </template>
 
 <script>
 export default {
+    name: 'App',
 data(){ 
 return {} 
 } 
@@ -19,4 +20,8 @@ return {}
 
 </script>
 <style lang="scss" scoped>
+  body{
+    color: red;
+    font-size: 362px;
+  }
 </style>

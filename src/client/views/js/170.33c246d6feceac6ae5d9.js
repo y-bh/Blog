@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[170],{881:(n,t)=>{t.Z=(n,t)=>{const e=n.__vccOpts||n;for(const[n,r]of t)e[n]=r;return e}},170:(n,t,e)=>{e.r(t),e.d(t,{default:()=>s});var r=e(429);const c={data:()=>({})},s=(0,e(881).Z)(c,[["render",function(n,t,e,c,s,u){return(0,r.wg)(),(0,r.iD)("div",null,"我是个人中心")}]])}}]);

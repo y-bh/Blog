@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心工程配置文件
  * @Date: 2022-04-25 15:57:44
- * @LastEditTime: 2022-04-25 16:26:46
+ * @LastEditTime: 2022-04-25 18:21:45
  */
 
 const path = require('path');
@@ -18,11 +18,10 @@ const config = require("./app.config")
 
 module.exports = {
   context: __dirname,
-
   output: {
-    filename: 'js/[name].[contenthash].js',
-    path: config.m_dest,
-    clean: true
+    filename: 'manager/js/[name].[contenthash].js',
+    clean: true,
+    publicPath:'/'
   },
   // 资源转换
   module: {
@@ -48,7 +47,7 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
-              resources: resolve('src/assets/css/var.scss')
+              resources: resolve('client_m/assets/css/var.scss')
             }
           }
         ]
@@ -71,11 +70,12 @@ module.exports = {
 
     // 提取css
     new MiniCssExtractPlugin({
-      filename: './css/[name].[contenthash].css' // 输出的文件名字
+      filename: 'manager/css/[name].[contenthash].css'
+      // 'css/[name].[contenthash].css' // 输出的文件名字
     }),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
-      filename: 'index.html',
+      filename: './../views/manager.html',
       minify: {
         removeAttributeQuotes: false, // 删除属性的引号
         removeComments: true, // 删除注释
