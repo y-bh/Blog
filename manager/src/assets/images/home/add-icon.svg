@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="32.999" viewBox="0 0 33 32.999">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #6153ff;
+        stroke: rgba(0,0,0,0);
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <path id="圆角矩形_1" data-name="圆角矩形 1" class="cls-1" d="M485,724V712H473a2,2,0,0,1,0-4h12V696a2,2,0,0,1,4,0v12h12a2,2,0,0,1,0,4H489v12a2,2,0,0,1-4,0Z" transform="translate(-470.5 -693.5)"/>
+</svg>

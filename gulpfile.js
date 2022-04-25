@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-24 17:39:50
+ * @LastEditTime: 2022-04-25 13:20:14
  */
 
 
@@ -22,7 +22,7 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
   var stream = nodemon({
     script: './start.js'
     , ext: 'js html css scss'
-    , ignore: ['./node_modules'],
+    , ignore: ['./node_modules','./manager'],
     "delay": 1000,
     stdout: false,
     done: done,
