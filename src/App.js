@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-04-24 11:40:25
+ * @LastEditTime: 2022-04-25 10:34:53
  */
 
 const Koa = require("koa");
@@ -20,7 +20,7 @@ const config = require("./config/app.config")
 const {routerResponse} = require("./utils/parseJson")
 
 //路由配置文件
-const Router = require("./router/index")
+const Router = require("./controller/index")
 
 
 const app = new Koa();
