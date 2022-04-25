@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-25 15:46:03
+ * @LastEditTime: 2022-04-25 16:21:34
  */
 
 
@@ -13,6 +13,13 @@ const localServerConfig = require("./src/config/ssr.config")
 var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
 const path = require("path")
+
+
+
+const webpackConfig = require('./src/build/webpack.dev')
+
+//本地开发环境webpack任务
+exports.webpack = gulp.series(webpackConfig.webpackDev)
 
 
 //本地开发环境任务
