@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "download": "node ./init.js",
     "dev": "nodemon ./start.js",
     "local": "gulp develop",
     "build": "gulp build"
