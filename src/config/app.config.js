@@ -3,15 +3,12 @@
  * @LastEditors: 朱占伟
  * @description: 应用配置文件
  * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-04-26 14:02:57
+ * @LastEditTime: 2022-04-26 14:05:52
  */
 
 const path = require("path")
 
 var config = {
-  //项目源码目录
-  src:path.join(__dirname, '../../'),
-
   //静态资源目录
   static: path.join(__dirname, '../client/public'),
 
