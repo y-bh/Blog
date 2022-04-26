@@ -14,7 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "async-request": "^1.2.0",
+    "axios": "^0.21.1",
     "ejs": "^3.1.7",
+    "element-plus": "^1.0.2-beta.70",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",
     "koa-bodyparser": "^4.3.0",
@@ -24,9 +26,7 @@
     "module-alias": "^2.2.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.10",
-    "vuex": "^4.0.2",
-    "element-plus": "^1.0.2-beta.70",
-    "axios": "^0.21.1"
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
