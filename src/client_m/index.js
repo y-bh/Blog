@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-04-26 14:46:21
+ * @LastEditTime: 2022-04-26 14:58:15
  */
 
 import { createApp } from 'vue';
@@ -16,6 +16,7 @@ import App from './index.vue';
 /** **************全局css管理 */
 import 'assets/css/elementUi.reset.scss';
 
+import * as re from 'config/re.config';
 
 const app = createApp(App);
 
@@ -34,6 +35,9 @@ app.config.globalProperties.$post = post;
 app.provide('$post', post)
 
 
+//注入正则表达式管理
+app.config.globalProperties.$re = re;
+app.provide('$re', re)
 
 
 router.isReady().then(() => app.mount('#app'));
