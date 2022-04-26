@@ -26,7 +26,7 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
     , ext: 'js html css scss vue'
     , ignore: ['./node_modules'],
     "delay": 1000,
-    stdout: false,
+    stdout: true,
     done: done,
     tasks: function (changedFiles = []) {
       var tasks = []
