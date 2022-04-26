@@ -3,43 +3,45 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心开发环境配置
  * @Date: 2022-04-25 16:16:31
- * @LastEditTime: 2022-04-25 18:27:28
+ * @LastEditTime: 2022-04-26 12:02:45
  */
 
 const gulp = require('gulp');
-const webpack = require('webpack-stream');
-
-
-// gulp.task('default', function () {
-//   return gulp.src('src/entry.js')
-//     .pipe(webpack())
-//     .pipe(gulp.dest('dist/'));
-// });
+const webpackStream = require('webpack-stream');
+const webpackConfig = require("../config/webpack.config");
+const path = require("path")
 
 
 
 //webpack 本地开发任务
 async function webpackDev() {
-  console.log("开始构建webpack")
+  console.log("个人中心:本地开发环境构建任务")
   return await gulp.src('src/client_m/index.js')
-    .pipe(webpack(
+    .pipe(webpackStream(
       {
-        ...require("../config/webpack.config"),
+        ...webpackConfig,
         mode: 'development',
+        entry: '../client_m/index.js',
+        output: {
+          path: path.resolve(__dirname, "../client/public"),
+          filename: 'manager/js/[name].[contenthash].js',
+          publicPath: '/'
+        },
+        watch: true
       }
     ))
-    .pipe(gulp.dest('src/client/views'));
+    .pipe(gulp.dest('src/client/public'));
 }
 
 
 
 //webpack 生产打包任务
 async function webpackProd() {
-  console.log("开始构建 生产环境webpack")
+  console.log("个人中心:生产环境构建任务")
   return await gulp.src('src/client_m/index.js')
-    .pipe(webpack(
+    .pipe(webpackStream(
       {
-        ...require("../config/webpack.config"),
+        ...webpackConfig,
         mode: 'production',
       }
     ))
@@ -48,4 +50,4 @@ async function webpackProd() {
 
 
 
-module.exports = { webpackDev ,webpackProd}
+module.exports = { webpackProd, webpackDev }

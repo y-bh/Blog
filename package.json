@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "download": "node ./init.js",
-    "dev": "nodemon ./start.js",
-    "local": "gulp develop",
+    "app": "nodemon ./start.js",
+    "dev": "gulp develop",
     "build": "gulp build",
-    "webpack": "gulp webpack"
+    "manager": "gulp webpack",
+    "managerLocal": "gulp managerLocal"
   },
   "author": "zhuzhanwei",
   "license": "ISC",
