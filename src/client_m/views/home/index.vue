@@ -3,10 +3,11 @@
  * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-04-25 17:37:05
- * @LastEditTime: 2022-04-26 14:27:23
+ * @LastEditTime: 2022-04-26 14:52:29
 -->
 <template>
   <div>我是4432</div>
+    <el-button type="primary">Primary</el-button>
 </template>
 
 <script>
