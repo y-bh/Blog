@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心路由
  * @Date: 2022-04-25 16:06:50
- * @LastEditTime: 2022-04-25 17:42:16
+ * @LastEditTime: 2022-04-25 18:36:21
  */
 
 import { createRouter, createWebHistory } from 'vue-router';
@@ -12,9 +12,16 @@ const routes = [
   { // 首页
     path: '/manager/',
     name: 'manager',
-    component: () => import('../views/home/index.vue')
+    component: () => import('../views/home/index.vue'),
+  
+  },
+  { // 首页
+    path: '/manager/package',
+    name: 'package',
+    component: () => import('../views/package/index.vue')
   },
 ];
+
 
 export default function (app) {
   const router = createRouter({
