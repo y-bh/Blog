@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-26 14:09:05
+ * @LastEditTime: 2022-04-26 15:41:19
  */
 
 require('module-alias/register')
@@ -14,13 +14,6 @@ const webpackConfig = require('./src/build/webpack')
 var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
 const path = require("path")
-
-
-//个人中心打包任务【只构建个人中心的vue 应用】
-exports.manager = gulp.series(webpackConfig.webpackProd)
-
-//个人中心 本地环境构建任务 【只构建个人中心的vue 应用】
-exports.managerLocal = gulp.series(webpackConfig.webpackDev);
 
 
 //本地开发环境任务

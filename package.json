@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "app": "nodemon ./start.js",
+    "serve": "pm2 start ./start.js",
     "dev": "gulp develop",
-    "build": "gulp build",
-    "manager": "gulp webpack",
-    "managerLocal": "gulp managerLocal"
+    "build": "gulp build"
   },
   "author": "zhuzhanwei",
   "license": "ISC",
