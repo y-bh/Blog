@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心工程配置文件
  * @Date: 2022-04-25 15:57:44
- * @LastEditTime: 2022-04-26 13:50:44
+ * @LastEditTime: 2022-04-26 14:04:42
  */
 
 const appConfig = require('config/app.config.js')
@@ -22,7 +22,7 @@ module.exports = {
   output: {
     filename: 'manager/js/[name].[contenthash].js',
     clean: true,
-    publicPath:'/'
+    publicPath: '/'
   },
   // 资源转换
   module: {
@@ -90,12 +90,13 @@ module.exports = {
     mainFiles: ['index'],
     extensions: ['.vue', '.js', '.scss', '.css'],
     alias: {
-      tools: path.join(config.client_m,'/tools'),
-      views: resolve('views'),
-      model: resolve('model'),
-      assets: resolve('src/assets'),
-      '@': path.resolve(__dirname, '..'),
-      'components': resolve('components'),
+      config:path.join(__dirname, "../config"),
+      tools: path.join(config.client_m, '/tools'),
+      views: path.join(config.client_m, '/views'),
+      model: path.join(config.client_m, '/model'),
+      assets: path.join(config.client_m, '/assets'),
+      '@': config.client_m,
+      'components': path.join(config.client_m, '/components'),
       vue$: 'vue/dist/vue.runtime.esm-bundler.js'
     }
   },

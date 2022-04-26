@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-04-26 13:46:01
+ * @LastEditTime: 2022-04-26 13:59:34
  */
 
 import { createApp } from 'vue';
