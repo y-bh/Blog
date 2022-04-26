@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "gulp develop",
     "build": "gulp build",
-    "app": "nodemon ./start.js",
+    "local": "nodemon ./start.js",
     "serve": "pm2 start ./start.js"
   },
   "author": "zhuzhanwei",

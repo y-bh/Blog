@@ -3,15 +3,12 @@
  * @LastEditors: 朱占伟
  * @description: 官网页面生产环境工程
  * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-04-26 13:10:14
+ * @LastEditTime: 2022-04-26 15:49:10
  */
 
 const gulp = require('gulp');
 var shell = require('shelljs');
-
-
-const localConfig = require("../config/ssr.config")
-const appConfig = require("../config/app.config")
+const localConfig = require("../config/app.config")
 
 // js
 const Uglify = require('gulp-uglify');          // 压缩js
@@ -59,7 +56,7 @@ async function CssComplie() {
       //保留所有特殊前缀 当你用autoprefixer生成浏览器前缀，如果不加这个参数，可能将会删除你的部分前缀        
       keepSpecialComments: '*'
     }))
-    .pipe(gulp.dest(localConfig.destDir + "/css")) //当前对应css文件
+    .pipe(gulp.dest(localConfig.static + "/css")) //当前对应css文件
 }
 
 
@@ -72,7 +69,7 @@ async function JsComplie() {
       presets: ['@babel/env']
     }))
     .pipe(Uglify()) // 压缩js
-    .pipe(gulp.dest(localConfig.destDir + '/js'))
+    .pipe(gulp.dest(localConfig.static + '/js'))
 }
 
 
@@ -83,7 +80,7 @@ async function ImageComplie() {
     .pipe(imagemin({
       progressive: true
     }))
-    .pipe(gulp.dest(localConfig.destDir + "/images"));
+    .pipe(gulp.dest(localConfig.static + "/images"));
 }
 
 
@@ -91,7 +88,7 @@ async function ImageComplie() {
 async function ThirdPlugin() {
   console.info("处理第三方组件")
   try {
-    return await gulp.src(localConfig.sourceDir + "/lib/**").pipe(gulp.dest(localConfig.destDir + "/lib", { sourcemaps: false }))
+    return await gulp.src(localConfig.sourceDir + "/lib/**").pipe(gulp.dest(localConfig.static + "/lib", { sourcemaps: false }))
   } catch (error) {
     console.error("ThirdPlugin:", error)
   }
@@ -102,7 +99,7 @@ async function ThirdPlugin() {
 async function HandleFont() {
   console.info("处理字体文件")
   try {
-    return await gulp.src(localConfig.sourceDir + "/font/**").pipe(gulp.dest(localConfig.destDir + "/font", { sourcemaps: false }))
+    return await gulp.src(localConfig.sourceDir + "/font/**").pipe(gulp.dest(localConfig.static + "/font", { sourcemaps: false }))
   } catch (error) {
     console.error("HandleFont:", error)
   }
@@ -113,11 +110,11 @@ async function HandleFont() {
 // clean 清空dist文件内容
 async function cleanDir() {
   // 不设置allowEmpty: true会报File not found with singular glob
-  return await gulp.src(localConfig.destDir, { allowEmpty: true }).pipe(Clean());
+  return await gulp.src(localConfig.static, { allowEmpty: true }).pipe(Clean());
 }
 
 
 //打包前先删除
-shell.rm('-rf', localConfig.destDir);
+shell.rm('-rf', localConfig.static);
 
 module.exports = { CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont }

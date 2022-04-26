@@ -4,11 +4,11 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-26 15:41:19
+ * @LastEditTime: 2022-04-26 15:48:35
  */
 
 require('module-alias/register')
-const localServerConfig = require("./src/config/ssr.config")
+const localServerConfig = require("./src/config/app.config")
 const webpackConfig = require('./src/build/webpack')
 
 var gulp = require('gulp')

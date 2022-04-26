@@ -3,17 +3,24 @@
  * @LastEditors: 朱占伟
  * @description: 应用配置文件
  * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-04-26 14:14:40
+ * @LastEditTime: 2022-04-26 15:49:30
  */
 
 const path = require("path")
+const resolve = (dir) => {
+  return path.join(__dirname, "../" + dir);
+}
+
 
 var config = {
-  //静态资源目录
-  static: path.join(__dirname, '../client/public'),
-
   //html模板目录
-  templates: path.join(__dirname, '../client/views'),
+  templates: resolve('/client/views'),
+
+  //静态资源构建前 源目录
+  sourceDir: resolve("/client/static"),
+
+  //静态资源 构建后输出目录
+  static: resolve('/client/public'),
 
   //本应用启动端口
   appPort: '8080',
@@ -25,7 +32,7 @@ var config = {
   //个人中心相关工程配置 带前缀 m
 
   //个人中心源码目录
-  client_m: path.join(__dirname, '../client_m'),
+  client_m: resolve('/client_m'),
 
   //开发环境全局变量配置
   development_m: {
@@ -33,7 +40,7 @@ var config = {
     NODE_ENV: '"development"',
     API: "'http://localhost:8089'", // 域名
   },
-  
+
   //生产环境全局变量配置
   production_m: {
     NODE_NAME: '"生产环境"',
