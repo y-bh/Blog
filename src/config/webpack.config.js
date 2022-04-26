@@ -3,9 +3,10 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心工程配置文件
  * @Date: 2022-04-25 15:57:44
- * @LastEditTime: 2022-04-25 18:21:45
+ * @LastEditTime: 2022-04-26 13:50:44
  */
 
+const appConfig = require('config/app.config.js')
 const path = require('path');
 const resolve = (filePth) => {
   return path.resolve(__dirname, path.join('../', filePth));
@@ -14,7 +15,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
-const config = require("./app.config")
+const config = require("config/app.config.js")
 
 module.exports = {
   context: __dirname,
@@ -89,6 +90,7 @@ module.exports = {
     mainFiles: ['index'],
     extensions: ['.vue', '.js', '.scss', '.css'],
     alias: {
+      tools: path.join(config.client_m,'/tools'),
       views: resolve('views'),
       model: resolve('model'),
       assets: resolve('src/assets'),

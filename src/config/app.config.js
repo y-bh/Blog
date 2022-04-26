@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 应用配置文件
  * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-04-25 16:49:37
+ * @LastEditTime: 2022-04-26 13:49:05
  */
 
 const path = require("path")
@@ -23,19 +23,8 @@ var config = {
 
 
   //个人中心相关工程配置 带前缀 m
-  m_dest: path.join(__dirname, '../client/views/manager/dist'),  //个人中心打包目录
-  
-  m_address: 'http://localhost', //spa 服务地址
-
-  m_port: 8081,//服务端口
-
-  m_stylelint: false, //是否开启css检查
-
-  m_eslint: false, // 是否开启js检查
-
-  m_devtool: 'inline-source-map',
-
-  m_assetsPublicPath: '/',//web访问目录
+  //个人中心源码目录
+  client_m: path.join(__dirname, '../client_m'),
 }
 
 

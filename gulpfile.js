@@ -4,10 +4,10 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-26 13:10:49
+ * @LastEditTime: 2022-04-26 13:51:17
  */
 
-
+require('module-alias/register')
 const localServerConfig = require("./src/config/ssr.config")
 const webpackConfig = require('./src/build/webpack')
 
@@ -25,8 +25,6 @@ exports.managerLocal = gulp.series(webpackConfig.webpackDev);
 
 //本地开发环境任务
 require("./src/build/gulp.dev");
-
-//个人中心
 gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", webpackConfig.webpackDev, function (done) {
   console.info("开发环境工程编译完成,开启启动应用")
   var stream = nodemon({
