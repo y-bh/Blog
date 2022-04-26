@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-26 11:59:10
+ * @LastEditTime: 2022-04-26 13:10:49
  */
 
 
@@ -24,7 +24,7 @@ exports.managerLocal = gulp.series(webpackConfig.webpackDev);
 
 
 //本地开发环境任务
-require("./src/build/local.dev");
+require("./src/build/gulp.dev");
 
 //个人中心
 gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", webpackConfig.webpackDev, function (done) {
@@ -76,7 +76,7 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
 
 
 //生产环境打包任务 【官网seo页面 与 个人中心 同步构建】
-const prodServer = require("./src/build/serve.build")
+const prodServer = require("./src/build/gulp.build")
 exports.build = gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
 
 
