@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-26 13:51:17
+ * @LastEditTime: 2022-04-26 14:09:05
  */
 
 require('module-alias/register')
@@ -28,7 +28,8 @@ require("./src/build/gulp.dev");
 gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", webpackConfig.webpackDev, function (done) {
   console.info("开发环境工程编译完成,开启启动应用")
   var stream = nodemon({
-    script: './start.js'
+    script: './start.js',
+    env: { 'NODE_ENV': 'development' }
     , ext: 'js html css scss vue'
     , ignore: ['./node_modules'],
     "delay": 1000,

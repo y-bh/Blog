@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: Ajax 封装
  * @Date: 2022-04-26 13:45:01
- * @LastEditTime: 2022-04-26 13:45:01
+ * @LastEditTime: 2022-04-26 14:38:10
  */
 
 import axios from 'axios';
@@ -11,6 +11,7 @@ axios.defaults.withCredentials = true;
 
 // 基础地址
 let baseURL = '/myApi';
+console.log("process.env.NODE_ENV",process.env.NODE_ENV)
 // if (process.env.NODE_ENV === 'production') {
 //   baseURL = process.env.common['API'];
 // }
