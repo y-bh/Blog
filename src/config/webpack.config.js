@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心工程配置文件
  * @Date: 2022-04-25 15:57:44
- * @LastEditTime: 2022-04-26 14:04:42
+ * @LastEditTime: 2022-04-26 15:37:50
  */
 
 const appConfig = require('config/app.config.js')
@@ -35,7 +35,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 3000,
-            name: 'images/[name].[ext]'
+            name: 'manager/images/[name].[ext]'
           }
         }]
       },
@@ -59,7 +59,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 3000,
-            name: 'font/[name].[ext]'
+            name: 'manager/font/[name].[ext]'
           }
         }]
       },
@@ -90,7 +90,7 @@ module.exports = {
     mainFiles: ['index'],
     extensions: ['.vue', '.js', '.scss', '.css'],
     alias: {
-      config:path.join(__dirname, "../config"),
+      config: path.join(__dirname, "../config"),
       tools: path.join(config.client_m, '/tools'),
       views: path.join(config.client_m, '/views'),
       model: path.join(config.client_m, '/model'),
