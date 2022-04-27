@@ -4,11 +4,12 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-25 15:46:03
+ * @LastEditTime: 2022-04-26 15:48:35
  */
 
-
-const localServerConfig = require("./src/config/ssr.config")
+require('module-alias/register')
+const localServerConfig = require("./src/config/app.config")
+const webpackConfig = require('./src/build/webpack')
 
 var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
@@ -16,21 +17,22 @@ const path = require("path")
 
 
 //本地开发环境任务
-require("./src/build/local.dev");
-gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", function (done) {
+require("./src/build/gulp.dev");
+gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", webpackConfig.webpackDev, function (done) {
   console.info("开发环境工程编译完成,开启启动应用")
   var stream = nodemon({
-    script: './start.js'
-    , ext: 'js html css scss'
+    script: './start.js',
+    env: { 'NODE_ENV': 'development' }
+    , ext: 'js html css scss vue'
     , ignore: ['./node_modules'],
     "delay": 1000,
-    stdout: false,
+    stdout: true,
     done: done,
     tasks: function (changedFiles = []) {
       var tasks = []
       const sourceDIR = (path.dirname(localServerConfig.sourceDir)).slice(2) + `${path.sep}${path.basename(localServerConfig.sourceDir)}`;
 
-      console.log("changedFiles 过滤前", sourceDIR, changedFiles)
+      console.log("changedFiles 过滤前", changedFiles)
       //获取需要gulp 编译的文件
       changedFiles = changedFiles.filter((file) => {
         let dirs = (path.dirname(file)).slice(2)
@@ -39,8 +41,6 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
       console.log("changedFiles 过滤后", changedFiles)
 
       if (!changedFiles.length) return tasks;
-
-
       changedFiles.forEach(function (file) {
         let ext = (path.extname(file)).slice(1)
 
@@ -55,6 +55,7 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
         }
 
       })
+
       return tasks
     }
   }
@@ -66,9 +67,10 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
 ))
 
 
+//生产环境打包任务 【官网seo页面 与 个人中心 同步构建】
+const prodServer = require("./src/build/gulp.build")
+exports.build = gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
 
 
-//服务端生产环境任务
-const prodServer = require("./src/build/serve.build")
-//打包生产环境
-exports.build = gulp.series(prodServer.JsComplie, prodServer.CssComplie,prodServer.ThirdPlugin,prodServer.HandleFont,prodServer.ImageComplie);
+
+

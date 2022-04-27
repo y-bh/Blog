@@ -1,15 +1,15 @@
 /*
  * @Author: 朱占伟
  * @LastEditors: 朱占伟
- * @description: 本地开发环境工程
+ * @description: 官网页面开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-24 17:40:40
+ * @LastEditTime: 2022-04-26 15:47:53
  */
 
 
 const gulp = require('gulp');
 
-const localConfig = require("../config/ssr.config")
+const localConfig = require("../config/app.config")
 
 
 
@@ -31,7 +31,7 @@ const Clean = require("gulp-clean"); // 清理目录
 gulp.task('JsComplie', function () {
   console.info("编译js任务")
   return gulp.src(localConfig.sourceDir + "/js/*.js")
-    .pipe(gulp.dest(localConfig.destDir + "/js")) // 拷贝
+    .pipe(gulp.dest(localConfig.static + "/js")) // 拷贝
 })
 
 
@@ -53,14 +53,14 @@ gulp.task('CssComplie', function () {
       cascade: true, //是否美化属性值 默认：true 像这样：
       remove: false, //是否去掉不必要的前缀 默认：true
     }))
-    .pipe(gulp.dest(localConfig.destDir + "/css")) //当前对应css文件
+    .pipe(gulp.dest(localConfig.static + "/css")) //当前对应css文件
 })
 
 
 //注册处理三方库
 gulp.task('ThirdPlugin', function () {
   console.log("处理三方库任务")
-  return gulp.src(localConfig.sourceDir + "/lib/**").pipe(gulp.dest(localConfig.destDir + "/lib", { sourcemaps: false }))
+  return gulp.src(localConfig.sourceDir + "/lib/**").pipe(gulp.dest(localConfig.static + "/lib", { sourcemaps: false }))
 })
 
 
@@ -70,7 +70,7 @@ gulp.task('ThirdPlugin', function () {
 gulp.task('ImageComplie', function () {
   console.log("编译图片任务")
   return gulp.src(localConfig.sourceDir + "/images/**/*.*")
-    .pipe(gulp.dest(localConfig.destDir + "/images"));
+    .pipe(gulp.dest(localConfig.static + "/images"));
 })
 
 
@@ -79,7 +79,7 @@ gulp.task('ImageComplie', function () {
 
 gulp.task('clean', function () {
   console.log("清空目录任务")
-  return gulp.src(localConfig.destDir, { allowEmpty: true }).pipe(Clean());
+  return gulp.src(localConfig.static, { allowEmpty: true }).pipe(Clean());
 })
 
 

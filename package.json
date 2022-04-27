@@ -4,30 +4,39 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "download": "node ./init.js",
-    "dev": "nodemon ./start.js",
-    "local": "gulp develop",
-    "build": "gulp build"
+    "dev": "gulp develop",
+    "build": "gulp build",
+    "local": "nodemon ./start.js",
+    "serve": "pm2 start ./start.js"
   },
   "author": "zhuzhanwei",
   "license": "ISC",
   "dependencies": {
     "async-request": "^1.2.0",
+    "axios": "^0.21.1",
     "ejs": "^3.1.7",
+    "element-plus": "^1.0.2-beta.70",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
     "koa-views": "^8.0.0",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.10",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-import": "^1.13.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-babel": "^8.0.0",
@@ -40,17 +49,29 @@
     "gulp-px2rem": "^1.1.4",
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.6.0",
+    "node-polyfill-webpack-plugin": "^1.1.4",
+    "node-sass": "^6.0.1",
     "nodemon": "^2.0.15",
     "sass": "^1.50.1",
-    "shelljs": "^0.8.5"
+    "sass-loader": "^12.6.0",
+    "sass-resources-loader": "^2.2.5",
+    "shelljs": "^0.8.5",
+    "url-loader": "^4.1.1",
+    "vue-loader": "^17.0.0",
+    "webpack": "^5.72.0",
+    "webpack-stream": "^7.0.0"
   },
   "_moduleAliases": {
-    "@"      : ".", 
-    "src"      : "./src",
-    "dao" : "./src/dao",
-    "service" : "./src/service",
-    "controller"  : "./src/controller",
-    "utils"  : "./src/utils",
-    "config"  : "./src/config"
+    "@": ".",
+    "src": "./src",
+    "dao": "./src/dao",
+    "service": "./src/service",
+    "controller": "./src/controller",
+    "utils": "./src/utils",
+    "config": "./src/config",
+    "client": "./src/client",
+    "client_m": "./src/client_m"
   }
 }
