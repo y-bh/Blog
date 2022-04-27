@@ -1,0 +1,33 @@
+.home {
+  width: 768px;
+  height: 768px;
+  border: 1px solid red;
+  margin: 0 auto;
+}
+
+@media screen (max-width: 575px) {
+  .home {
+    width: 575px;
+    height: 575px;
+    border: 1px solid red;
+    margin: 0 auto;
+  }
+}
+
+@media screen (max-width: 414px) {
+  .home {
+    width: 575px;
+    height: 575px;
+    border: 1px solid red;
+    margin: 0 auto;
+  }
+}
+
+@media screen (max-width: 775px) {
+  .home {
+    width: 575px;
+    height: 575px;
+    border: 1px solid red;
+    margin: 0 auto;
+  }
+}
