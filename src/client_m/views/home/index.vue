@@ -3,15 +3,15 @@
  * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-04-25 17:37:05
- * @LastEditTime: 2022-04-29 12:10:22
+ * @LastEditTime: 2022-04-29 14:23:12
 -->
 <template>
   <div>我是4432</div>
   <el-button type="primary">Primary</el-button>
-  <img src="/manager/images/empty.png" alt="">
+  <img src="@/assets/images/empty.png" alt="">
   <div class="bg"></div>
   <div class="bg2"></div>
-  <img src="/manager/images/logo.png" alt="">
+  <img src="@/assets/images/logo.png" alt="">
 </template>
 
 <script>
@@ -39,7 +39,7 @@ export default {
   height: 300px;
   margin: 10px auto;
   border: 1px solid red;
- //background: url(assets/images/empty.png);
+ background: url(assets/images/empty.png);
 }
 .bg2{
   width: 300px;
