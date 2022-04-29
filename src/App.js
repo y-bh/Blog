@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-04-29 15:20:43
+ * @LastEditTime: 2022-04-29 15:33:28
  */
 
 const Koa = require("koa");
@@ -58,12 +58,7 @@ Router(app);
 
 
 //处理404
-app.use(async (ctx, next) => {
-  await next();
-  if (parseInt(ctx.status) === 404) {
-    ctx.response.redirect("/404")
-  }
-})
+app.use(require("utils/error_middleware.js")())
 
 
 app.on("error", (err) => {
