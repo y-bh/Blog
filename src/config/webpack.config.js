@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心工程配置文件
  * @Date: 2022-04-25 15:57:44
- * @LastEditTime: 2022-04-26 15:37:50
+ * @LastEditTime: 2022-04-29 14:26:40
  */
 
 const appConfig = require('config/app.config.js')
@@ -31,13 +31,15 @@ module.exports = {
       { test: /\.vue$/i, use: ['vue-loader'] },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 3000,
-            name: 'manager/images/[name].[ext]'
+        type: 'asset',
+        generator: {
+          filename: 'manager/images/[hash][ext][query]'
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 1024 // 4kb
           }
-        }]
+        }
       },
       {
         test: /\.(css)|(scss)$/,

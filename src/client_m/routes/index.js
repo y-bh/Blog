@@ -1,27 +1,13 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: dengxiujie
  * @description: 个人中心路由
  * @Date: 2022-04-25 16:06:50
- * @LastEditTime: 2022-04-25 18:36:21
+ * @LastEditTime: 2022-04-28 11:15:44
  */
 
 import { createRouter, createWebHistory } from 'vue-router';
-
-const routes = [
-  { // 首页
-    path: '/manager/',
-    name: 'manager',
-    component: () => import('../views/home/index.vue'),
-  
-  },
-  { // 首页
-    path: '/manager/package',
-    name: 'package',
-    component: () => import('../views/package/index.vue')
-  },
-];
-
+import { routes } from '@/routes/data/routes.js';
 
 export default function (app) {
   const router = createRouter({
