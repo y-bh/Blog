@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-04-26 15:56:03
+ * @LastEditTime: 2022-04-29 15:20:43
  */
 
 const Koa = require("koa");
@@ -17,7 +17,7 @@ const views = require("koa-views");
 const config = require("./config/app.config")
 
 //统一接口响应中间件
-const {routerResponse} = require("utils/parseJson")
+const { routerResponse } = require("utils/parseJson")
 
 //路由配置文件
 const Router = require("controller/index")
@@ -55,6 +55,16 @@ app.use(routerResponse());
 
 //路由器
 Router(app);
+
+
+//处理404
+app.use(async (ctx, next) => {
+  await next();
+  if (parseInt(ctx.status) === 404) {
+    ctx.response.redirect("/404")
+  }
+})
+
 
 app.on("error", (err) => {
   console.error("server error", err);
