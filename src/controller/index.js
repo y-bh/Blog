@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-04-27 15:05:38
+ * @LastEditTime: 2022-04-29 17:05:34
  */
 
 const router = require("koa-router")();
@@ -14,6 +14,7 @@ function Router(App) {
   //用户管理
   // router.use("/user", user.routes(), user.allowedMethods());
 
+  var ejs = require('ejs')
 
   //首页
   router.get("/", async (ctx) => {
@@ -91,7 +92,7 @@ function Router(App) {
   router.get("/helpCenter/:alias/:page", async (ctx) => {
 
     /**数据请求 */
-    const {alias, page} = ctx.request.params
+    const { alias, page } = ctx.request.params
 
 
     return ctx.render("help/helpCenter", {
@@ -104,7 +105,7 @@ function Router(App) {
   router.get("/helpDetails/:id", async (ctx) => {
 
     /**数据请求 */
-    const {id} = ctx.request.params
+    const { id } = ctx.request.params
 
 
     return ctx.render("help/helpDetails", {
@@ -118,9 +119,9 @@ function Router(App) {
   router.get("/firmsServer", async (ctx) => {
 
     /**数据请求 */
-  
-  
-  
+
+
+
     return ctx.render("firmsServer/firmsServer", {
       name: 'This is firmsServer',
       data: 2222,
@@ -133,9 +134,9 @@ function Router(App) {
   router.get("/login/index", async (ctx) => {
 
     /**数据请求 */
-  
-  
-  
+
+
+
     return ctx.render("login/index", {
       name: 'This is main login',
       data: 2222,
@@ -146,21 +147,25 @@ function Router(App) {
   router.get("/user/protocol", async (ctx) => {
 
     /**数据请求 */
-  
-  
-  
+
+
+
     return ctx.render("user/protocol", {
       name: 'This is protocol window',
       data: 2222,
     })
   })
 
+  
 
   //个人中心
-  const htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
+  let htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
+  const headerHtml = fs.readFileSync(`${config.templates}/components/header.html`, 'utf-8')
+  const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
-    console.log("控制层:", ctx.params.path)
-    ctx.response.body = htmls
+    var headers = ejs.render(headerHtml, { name: 'zhuzhanwei' })
+    let res = htmls.replace(re, headers)
+    ctx.response.body = res
   })
 
 
@@ -170,7 +175,7 @@ function Router(App) {
     return ctx.render("error/404", {
       name: 'This is 404',
     })
-    
+
   })
 
 
