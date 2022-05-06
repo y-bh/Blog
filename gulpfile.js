@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-04-26 15:48:35
+ * @LastEditTime: 2022-05-06 20:19:48
  */
 
 require('module-alias/register')
@@ -18,51 +18,49 @@ const path = require("path")
 
 //本地开发环境任务
 require("./src/build/gulp.dev");
-gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", webpackConfig.webpackDev, function (done) {
+gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", 'HandleFont', webpackConfig.webpackDev, function (done) {
   console.info("开发环境工程编译完成,开启启动应用")
   var stream = nodemon({
     script: './start.js',
     env: { 'NODE_ENV': 'development' }
-    , ext: 'js html css scss vue'
-    , ignore: ['./node_modules'],
+    , ext: 'js'
+    , ignore: ['./node_modules','./client','./client_m'],
     "delay": 1000,
     stdout: true,
     done: done,
-    tasks: function (changedFiles = []) {
-      var tasks = []
-      const sourceDIR = (path.dirname(localServerConfig.sourceDir)).slice(2) + `${path.sep}${path.basename(localServerConfig.sourceDir)}`;
-
-      console.log("changedFiles 过滤前", changedFiles)
-      //获取需要gulp 编译的文件
-      changedFiles = changedFiles.filter((file) => {
-        let dirs = (path.dirname(file)).slice(2)
-        return dirs.includes(sourceDIR)
-      })
-      console.log("changedFiles 过滤后", changedFiles)
-
-      if (!changedFiles.length) return tasks;
-      changedFiles.forEach(function (file) {
-        let ext = (path.extname(file)).slice(1)
-
-        //处理css 任务
-        if ((ext === 'scss' || ext === 'css') && !~tasks.indexOf('CssComplie')) {
-          tasks.push('CssComplie')
-        }
-
-        //处理js任务
-        if (ext === 'js' && !~tasks.indexOf('JsComplie')) {
-          tasks.push('JsComplie')
-        }
-
-      })
-
-      return tasks
-    }
   }
   )
-  // stream.on("restart", function (err, res) {
-  //   console.log("重启nodemon", err)
-  // })
+  stream.on("restart", function (err, res) {
+    console.log("重启nodemon", err)
+
+    //监听css/scss 变化
+    gulp.watch([
+      'src/client/static/css/*.scss', 'src/client/static/css/*.css'
+    ], gulp.series('CssComplie'))
+
+
+    //监听js 变化
+    gulp.watch([
+      'src/client/static/js/*.js'
+    ], gulp.series('JsComplie'))
+
+
+    //监听imagers 变化
+    gulp.watch([
+      'src/client/static/images/**'
+    ], gulp.series('ImageComplie'))
+
+    //监听三方组件 变化
+    gulp.watch([
+      'src/client/static/lib/**'
+    ], gulp.series('ThirdPlugin'))
+
+
+    //监听三方组件 变化
+    gulp.watch([
+      'src/client/static/font/**'
+    ], gulp.series('HandleFont'))
+  })
 }
 ))
 
