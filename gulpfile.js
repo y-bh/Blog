@@ -4,16 +4,13 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-05-06 20:19:48
+ * @LastEditTime: 2022-05-06 20:23:12
  */
 
 require('module-alias/register')
-const localServerConfig = require("./src/config/app.config")
 const webpackConfig = require('./src/build/webpack')
-
 var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
-const path = require("path")
 
 
 //本地开发环境任务
