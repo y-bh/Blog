@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 官网页面开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-04-26 15:47:53
+ * @LastEditTime: 2022-05-06 20:15:43
  */
 
 
@@ -80,6 +80,13 @@ gulp.task('ImageComplie', function () {
 gulp.task('clean', function () {
   console.log("清空目录任务")
   return gulp.src(localConfig.static, { allowEmpty: true }).pipe(Clean());
+})
+
+
+//处理字体
+gulp.task('HandleFont', function () {
+  console.log("处理字体")
+      return  gulp.src(localConfig.sourceDir + "/font/**").pipe(gulp.dest(localConfig.static + "/font", { sourcemaps: false }))
 })
 
 
