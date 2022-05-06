@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-04-29 17:05:34
+ * @LastEditTime: 2022-05-06 20:24:06
  */
 
 const router = require("koa-router")();
@@ -70,6 +70,21 @@ function Router(App) {
     return ctx.render("getApi/getApi", {
       name: 'This is getApi',
       data: 2222,
+    })
+  })
+
+
+  //业务场景-businessScene
+
+  router.get("/businessScene", async (ctx) => {
+
+    /**数据请求 */
+
+
+
+    return ctx.render("help/helpCenter", {
+      name: 'This is businessScene',
+      data: 'businessScene',
     })
   })
 

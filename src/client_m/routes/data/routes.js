@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 静态路由数据
  * @Date: 2022-04-27 13:26:51
- * @LastEditTime: 2022-04-28 11:24:14
+ * @LastEditTime: 2022-05-06 13:19:03
  */
 let prefix = '/manager';
 let path404 = `${prefix}/404`;
@@ -14,57 +14,76 @@ export const routes = [
   { // 首页
     path: '/manager/',
     name: 'manager',
+    ignore: true,
     component: () => import('views/home/index.vue'),
   },
   { // 首页
     path: '/manager/package',
     name: 'package',
+    ignore: true,
     component: () => import('views/package/index.vue')
   },
   {//领取关注福利
     path: `${prefix}/wxLogin`,
     name: 'wxLogin',
+    ignore: true,
     component: () => import('views/wxLogin'),
     meta: { ignore: true }
   },
   {//个人中心
     path: `${prefix}`,
+    name:"personCenter",
     component: Layout,
     redirect: `${prefix}/user`,
+    meta: {
+      title: "个人中心",
+      icon: ""
+    },
     children: [
       {//个人账户
         path: 'user',
-        name: 'userAccount',
+        name: 'user',
+        meta: {
+          title: "个人账户",
+          icon: ""
+        },
         component: () => import('views/userAccount'),
       },
       {//资金明细
         path: 'finance',
         name: 'finance',
+        meta: { title: "资金明细",icon: ""},
         component: () => import('views/finance'),
       },
       {//我的订单
         path: "myOrder",
         name: 'myOrder',
+        meta: {title: "我的订单", icon: ""},
         component: () => import('views/myOrder'),
       },
       {
         path: 'setMeal',
         name: 'setMeal',
+        meta: {title: "我的套餐",icon: ""},
         component: () => import('views/setMeal'),
       },
       {
         path: 'longIp',
         name: 'longIp',
+        meta: {title: "我的长效IP",icon: ""},
         component: () => import('views/longIp'),
       },
       {//IP白名单
         path: 'whiteListIp',
         name: 'whiteListIp',
+        meta: {title: "白名单",icon: ""},
         component: () => import('views/whiteListIp'),
       },
       {
         path: 'giftManage',
         name: 'giftManage',
+        ignore: true,
+        meta: {title: "礼券管理",icon: ""},
         component: () => import('views/giftManage'),
       },
     ],
@@ -76,6 +95,7 @@ export const routes = [
   {
     path: '/manager/:pathMatch(.*)*',
     name: 'notFound',
+    ignore: true,
     component: () => import('views/404')
   },
 ];
