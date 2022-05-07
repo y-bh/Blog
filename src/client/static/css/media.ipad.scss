@@ -4,3 +4,14 @@
   border: 1px solid red;
   margin: 0 auto;
 }
+//右侧导航栏
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .rightToolbar.mediaStyle {
+    top: 150px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .rightToolbar.mediaStyle {
+    display: none;
+  }
+}

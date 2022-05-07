@@ -1,0 +1,33 @@
+.rightToolbar {
+  position: fixed;
+  top: 50%;
+  right: 40px;
+  z-index: 99999;
+  border-radius: 4px;
+  right: 40px;
+  li {
+    &.toolbar-backg {
+      width: 60px;
+      height: 60px;
+      margin-top: 15px;
+      border-radius: 4px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 12px;
+      background: #3e6ae2;
+      img {
+        width: 20px;
+        height: 20px;
+        margin: 10px auto 6px;
+      }
+    }
+    &.toolbar-gift {
+      width: 60px;
+      height: 76px;
+      background: url("/images/rightToolbar/register.png") no-repeat;
+      animation: headShake 2s linear infinite;
+    }
+    .toolbar-consult {
+    }
+  }
+}
