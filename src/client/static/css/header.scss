@@ -4,6 +4,7 @@
     background: rgba(244, 247, 255, 0.39);
     font-family: 'Microsoft YaHei', 'Times New Roman', serif;
     font-size: 16px;
+    padding: 0 16px;
     // header内容区域
     .header-main{
         max-width: 1400px;
@@ -18,6 +19,7 @@
     .logo {
         display: inline-flex;
         align-items: center;
+        margin-right: 20px;
         img {
             width: 40px;
         }
@@ -25,19 +27,32 @@
             margin-left: 10px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #1968FC;
-            padding-right: 70px;
+            padding-right: 50px;
+            white-space: nowrap;
+            transition: all .8s;
         }
+
     }
 
     // 中间导航部分
     .nav-wrap{
         height: 80px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        flex-flow: row nowrap;
     }
 
+    .navbar-body{
+        display: flex;
+        flex-direction: row;
+    }
+
+
     .nav-list {
-        display: inline-flex;
-        height: 100%;
+        display: flex;
         align-items: center;
+        flex-direction: row;
         // 每个导航元素
         .nav-item {
             position: relative;
@@ -47,8 +62,11 @@
             margin: 0 10px; // 导航文本元素间距
             text-align: center;
             line-height: 80px;
+            white-space: nowrap;  // 文本禁止换行
             &:hover{
                 cursor: pointer;
+                color: #0984e3;
+                font-weight: 600;
             }
             &::after{
                 position: absolute;
@@ -80,5 +98,59 @@
             
         }
     }
+
+    .nav-toggler{
+        display: none;
+    }
+
 }
 
+// 顶部导航logo + nav + 右侧区域宽度
+@media screen and (max-width: 918px) {
+    .header {
+        // 网站logo
+        .logo {
+            .logo-title{
+                // transition: all .8s;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 868px) {
+    .header {
+        .navbar-body{
+
+        }
+        .nav-collapse {
+            // flex: 100%;
+            flex-basis: 100%;
+            flex-grow: 1;
+            align-items: center;
+            flex-direction: column;
+        }
+        .nav-collapse:not(.show) {
+            // flex: 0;
+            // width: 0;
+            // overflow: hidden;
+            display: none;
+            
+        }
+        .nav-list {
+            // display: none;
+            
+            // 每个导航元素
+            .nav-item {
+                
+ 
+            }
+        }
+
+        .nav-toggler{
+            display: inline-block;
+            height: 80px;
+            line-height: 80px;
+        }
+    }
+}
