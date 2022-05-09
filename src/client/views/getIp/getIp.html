@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-09 10:24:30
+ * @LastEditTime: 2022-05-09 13:40:38
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +15,35 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>提取IP</title>
+  <%- include('../components/style.html'); %>
+  <%- include('./style.html') %>
 </head>
 <body>
-  <h1>提取IP</h1>
-  <div>
-    <%=name%>
-  </div>
-  <div>
-    <%=data%>
+  <div class="container">
+    <div class="left">
+      <div class="extract_ip_left pd-20 grid justify-center">
+        <span class="desc font-25 title">提取IP</span>
+        <div class="anchor grid justify-center">
+        </div>
+      </div>
+      <div class="code_demo_left mt-20 pd-20 grid justify-center">
+        <span class="desc font-25 title">代码demo</span>
+        <div class="demo grid justify-center"></div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="extract_ip_right">
+        <span class="font-25 title">提取IP</span>
+      </div>
+      <div class="extract_note">
+        <span class="font-25 title">提取接口使用说明</span>
+      </div>
+      <div class="code_demo_right">
+        <span class="font-25 title">用户接入天启HTTP代码demo</span>
+      </div>
+    </div>
   </div>
 </body>
+<%- include('../components/js.html'); %>
+<%- include('./js.html') %>
 </html>

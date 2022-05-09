@@ -1,0 +1,69 @@
+<!--
+ * @Author: 陈昊天
+ * @LastEditors: 陈昊天
+ * @description: page description
+ * @Date: 2022-05-09 10:29:23
+ * @LastEditTime: 2022-05-09 13:36:49
+-->
+<script>
+$(function() {
+  const extractIp = [
+    {
+      title: 'API获取',
+    },
+    {
+      title: '提取接口'
+    },
+    {
+      title: '白名单接口'
+    },
+    {
+      title: '错误码'
+    }
+  ]
+
+  const codeDemo = [
+    {
+      title: 'Python语言'
+    },
+    {
+      title: 'GO语言'
+    },
+    {
+      title: 'JavaScript语言'
+    },
+    {
+      title: 'Java语言'
+    },
+    {
+      title: 'Kotlin语言'
+    },
+    {
+      title: 'Php语言'
+    },
+    {
+      title: '易语言'
+    },
+    {
+      title: 'C语言'
+    },
+    {
+      title: 'Phantomjs语言'
+    },
+    {
+      title: 'Selenium语言'
+    },
+    {
+      title: 'Node语言'
+    },
+  ]
+
+  $.each(extractIp,(index,item) => {
+    $('.anchor').append(`<span class="pointer">${item.title}<span>`)
+  })
+
+  $.each(codeDemo,(index,item) => {
+    $('.demo').append(`<span class="pointer">${item.title}<span>`)
+  })
+})
+</script>
