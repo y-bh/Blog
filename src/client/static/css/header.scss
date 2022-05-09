@@ -1,0 +1,84 @@
+// 公共头部导航
+.header {
+    width: 100%;
+    background: rgba(244, 247, 255, 0.39);
+    font-family: 'Microsoft YaHei', 'Times New Roman', serif;
+    font-size: 16px;
+    // header内容区域
+    .header-main{
+        max-width: 1400px;
+        display: grid;
+        grid-template-columns: auto 1fr 120px;
+        align-items: center;
+        grid-auto-flow: row dense;
+        margin: 0 auto;
+    }
+
+    // 网站logo
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        img {
+            width: 40px;
+        }
+        .logo-title{
+            margin-left: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1968FC;
+            padding-right: 70px;
+        }
+    }
+
+    // 中间导航部分
+    .nav-wrap{
+        height: 80px;
+    }
+
+    .nav-list {
+        display: inline-flex;
+        height: 100%;
+        align-items: center;
+        // 每个导航元素
+        .nav-item {
+            position: relative;
+            min-width: 64px;
+            height: 80px;
+            padding: 0 4px; // 底部线超出文字
+            margin: 0 10px; // 导航文本元素间距
+            text-align: center;
+            line-height: 80px;
+            &:hover{
+                cursor: pointer;
+            }
+            &::after{
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                width: 0;
+                height: 2px;
+                content: "";
+                background-color: #0984e3;
+                transition: all .8s;
+                -webkit-transition: all .8s;
+                -moz-transition: all .8s;
+                -ms-transition: all .8s;
+                -o-transition: all .8s;
+            }
+
+            &:hover::after{
+                left: 0;
+                width: 100%;
+            }
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child{
+                margin-right: 0;
+            }
+            
+        }
+    }
+}
+

@@ -1,9 +1,9 @@
 <!--
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: 首页
  * @Date: 2022-04-22 15:15:09
- * @LastEditTime: 2022-05-07 13:18:23
+ * @LastEditTime: 2022-05-09 15:10:25
 -->
 
 <!DOCTYPE html>
@@ -25,24 +25,24 @@
 </head>
 
 <body>
+  <%- include('../components/header.html'); %>
+    <h1>hello world</h1>
 
-  <h1>hello world</h1>
 
+    <dl>
+      <dt>
+        <%=name%>
+      </dt>
+      <dd>
+        <span>地址:</span>
+        <span>
+          <%=url%>
+        </span>
+      </dd>
+    </dl>
 
-  <dl>
-    <dt>
-      <%=name%>
-    </dt>
-    <dd>
-      <span>地址:</span>
-      <span>
-        <%=url%>
-      </span>
-    </dd>
-  </dl>
-
-  <img src="/images/logo.png" />
-  <%- include('../components/rightToolbar/rightToolbar.html'); %>
+    <img src="/images/logo.png" />
+    <%- include('../components/rightToolbar/rightToolbar.html'); %>
 </body>
 <!-- 公共js -->
 <%- include('../components/js.html'); %>

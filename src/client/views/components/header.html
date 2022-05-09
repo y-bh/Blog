@@ -1,21 +1,37 @@
-
-
-<div>
-
-  <div class="logo"><img src="/images/logo.png" alt="logo"></div>
-
-  <nav>
-    <ul>
-      <li>
-        首页
-      </li>
-      <li>个人中心</li>
-      <li>套餐页</li>
-    </ul>
-  </nav>
-
-  <div class="user">
-    <%=name %>
+<!--
+ * @Author: 秦琛
+ * @LastEditors: 秦琛
+ * @description: 公共头部导航
+ * @Date: 2022-05-09 09:48:25
+ * @LastEditTime: 2022-05-09 15:10:35
+-->
+<link rel="stylesheet" href="/css/header.css">
+<div class="header">
+  <div class="header-main">
+    <!-- logo -->
+    <div class="logo">
+      <img src="/images/tq_logo.png" alt="天启HTTP" title="天启HTTP">
+      <span class="logo-title box-border">天启HTTP</span>
+    </div>
+    <!-- 中间导航 -->
+    <nav class="nav-wrap">
+      <ul class="nav-list">
+        <li class="nav-item box-border">
+          首页
+        </li>
+        <li class="nav-item box-border">礼券管理</li>
+        <li class="nav-item box-border">套餐购买</li>
+        <li class="nav-item box-border">提取IP</li>
+        <li class="nav-item box-border">业务场景</li>
+        <li class="nav-item box-border">帮助中心</li>
+        <li class="nav-item box-border">企业服务</li>
+      </ul>
+    </nav>
+    <!-- 右侧按钮/登录信息 -->
+    <div class="user">
+      <%=name %>
+    </div>
   </div>
-
+  <%- include('../components/js.html'); %>
 </div>
+<!-- <script src="/js/common.js"></script> -->
