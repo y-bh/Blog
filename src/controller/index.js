@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-06 20:24:06
+ * @LastEditTime: 2022-05-09 10:26:08
  */
 
 const router = require("koa-router")();
@@ -60,15 +60,15 @@ function Router(App) {
   })
 
 
-  //提取API-getApi
-  router.get("/getApi", async (ctx) => {
+  //提取ip-getIp
+  router.get("/getIp", async (ctx) => {
 
     /**数据请求 */
 
 
 
-    return ctx.render("getApi/getApi", {
-      name: 'This is getApi',
+    return ctx.render("getIp/getIp", {
+      name: 'This is getIp',
       data: 2222,
     })
   })
