@@ -308,6 +308,10 @@ body {
   font-size: 30px;
 }
 
+.font-bold {
+  font-weight: bold;
+}
+
 .flex {
   display: flex;
 }
@@ -330,6 +334,22 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.widthAll {
+  width: 100%;
+}
+
+.hightAll {
+  height: 100%;
+}
+
+.main-title-color {
+  color: #091D43;
+}
+
+.text-blue {
+  color: #1968FC;
 }
 
 //设置计算因子

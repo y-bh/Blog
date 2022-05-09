@@ -1,9 +1,9 @@
 <!--
  * @Author: 陈昊天
  * @LastEditors: 陈昊天
- * @description: page description
+ * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-09 13:36:49
+ * @LastEditTime: 2022-05-09 16:02:49
 -->
 <script>
 $(function() {
@@ -12,10 +12,10 @@ $(function() {
       title: 'API获取',
     },
     {
-      title: '提取接口'
+      title: '提取接口',
     },
     {
-      title: '白名单接口'
+      title: '白名单接口',
     },
     {
       title: '错误码'
@@ -58,12 +58,99 @@ $(function() {
     },
   ]
 
+  const paidList = [
+    {
+      id: 1,
+      desc: '已购套餐1'
+    },
+    {
+      id: 2,
+      desc: '已购套餐2'
+    }
+  ]
+
+  const mealBox = [
+    {
+      desc: '3分钟的IP',
+      num: '40,000',
+    },
+    {
+      desc: '5分钟的IP',
+      num: '20,000',
+    },
+    {
+      desc: '10分钟的IP',
+      num: '11,111',
+    },
+    {
+      desc: '15分钟的IP',
+      num: '6,666',
+    },
+    {
+      desc: '1~5分钟的IP',
+      num: '40,000',
+    },
+    {
+    desc: '5~25分钟的IP',
+      num: '20,000',
+    },
+    {
+      desc: '25分钟~3小时的IP',
+      num: '20,000',
+    },
+    {
+      desc: '3~6小时的IP',
+      num: '11,111',
+    },
+    {
+      desc: '6~12小时的IP',
+      num: '6,666',
+    },
+    {
+      desc: '12~24小时的IP',
+      num: '40,000',
+    },
+  ]
+
+  //列表渲染-提取IP
   $.each(extractIp,(index,item) => {
     $('.anchor').append(`<span class="pointer">${item.title}<span>`)
   })
 
+  //列表渲染-代码demo
   $.each(codeDemo,(index,item) => {
     $('.demo').append(`<span class="pointer">${item.title}<span>`)
+  })
+
+  //点击定位
+  $('.anchor span').on('click', function() {
+    let currentAnchor = $('.right .head').eq($(this).index()).offset().top
+    $('body,html').stop().animate({
+      scrollTop: currentAnchor
+    })
+  })
+  $('.demo span').on('click', function() {  //代码demo定位
+    let currentDemo = $('.right div').last($(this).index()).offset().top
+    $('body,html').stop().animate({
+      scrollTop: currentDemo
+    })
+  })
+
+  //select渲染
+  $.each(paidList,(index,item) => {
+    $('.extract_select').append(`<option>${item.desc}</option>`)
+  })
+
+  $.each(mealBox,(index,item) => {
+    $('.meal_box').append(`<div class="meal_item grid justify-center align-center">
+        <div class="desc flex justify-center">
+          <span class="font-15">${item.desc}</span>
+        </div>
+        <div class="num flex justify-center align-center">
+          <span class="text-blue font-25">${item.num}</span>
+          <span class="text-blue font-15">个</span>
+        </div>
+      </div>`)
   })
 })
 </script>

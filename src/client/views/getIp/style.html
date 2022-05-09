@@ -3,16 +3,20 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP样式
  * @Date: 2022-05-09 10:29:18
- * @LastEditTime: 2022-05-09 13:40:28
+ * @LastEditTime: 2022-05-09 16:01:33
 -->
 <style scoped>
+  .container {
+    grid-template-columns: 260px 1fr;
+  }
   .left {
     position: fixed;
+    left: 15%;
+    transform: translate(-15%,0)
   }
   .right {
-    display: grid;
-    justify-content: center;
     grid-row-gap: 40px;
+    width: 1070px;
   }
   .extract_ip_left {
     width: 220px;
@@ -47,5 +51,46 @@
     grid-row-gap: 20px;
     color: #4C5664;
     font-size: 15px;
+  }
+  .extract_ip_right {
+    border-bottom: 1px solid #E4E5EB;
+    padding-bottom: 30px;
+  }
+  .extract_select {
+    border-radius: 4px;
+  }
+  .count_box {   
+    max-width: 800px;
+    padding: 20px 30px;
+    background: rgba(208, 224, 255, 0.3);
+    border-radius: 8px;
+  }
+  .left_count {
+    color: #4C5664;
+    font-size: 20px;
+  }
+  .right_btn {
+    border: none;
+    width: 80px;
+    height: 40px;
+    color: #fff;
+    background: #FC7019;
+    border-radius: 4px;
+  }
+  .meal_box {
+    grid-template-columns: repeat(5,1fr);
+    grid-row-gap: 20px;
+  }
+  .meal_item {
+    width: 190px;
+    height: 144px;
+    border-radius: 8px;
+    background: rgba(208, 224, 255, 0.3);
+  }
+  .meal_item .desc {
+    padding: 10px 30px;
+    height: 40px;
+    border-radius: 20px;
+    background: rgba(208, 224, 255, 0.6);
   }
 </style>
