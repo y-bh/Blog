@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-09 16:02:49
+ * @LastEditTime: 2022-05-09 18:17:36
 -->
 <script>
 $(function() {
@@ -112,6 +112,25 @@ $(function() {
     },
   ]
 
+  const ipUse = [
+    {
+      time: '3分钟',
+      deal: '5天启币/IP'
+    },
+    {
+      time: '5分钟',
+      deal: '10天启币/IP'
+    },
+    {
+      time: '10分钟',
+      deal: '18天启币/IP'
+    },
+    {
+      time: '15分钟',
+      deal: '30天启币/IP'
+    },
+  ]
+
   //列表渲染-提取IP
   $.each(extractIp,(index,item) => {
     $('.anchor').append(`<span class="pointer">${item.title}<span>`)
@@ -141,9 +160,10 @@ $(function() {
     $('.extract_select').append(`<option>${item.desc}</option>`)
   })
 
+  //ip数量列表渲染
   $.each(mealBox,(index,item) => {
     $('.meal_box').append(`<div class="meal_item grid justify-center align-center">
-        <div class="desc flex justify-center">
+        <div class="desc flex justify-center pt-10 pb-10">
           <span class="font-15">${item.desc}</span>
         </div>
         <div class="num flex justify-center align-center">
@@ -151,6 +171,25 @@ $(function() {
           <span class="text-blue font-15">个</span>
         </div>
       </div>`)
+  })
+
+  //ip套餐列表渲染
+  $.each(ipUse,(index,item) => {
+    $('.ip_use_box').append(`<div class="ip_use_item flex flex-column align-center justify-center">
+        <div class="time_box">
+          <span class="time_text font-25 font-bold main-title-color">${item.time}</span>
+        </div>
+        <div class="deal_box mt-15 pt-10 flex justify-center align-center pb-10 ">
+          <span class="deal_text text-blue">${item.deal}</span>  
+        </div>
+      </div>`)
+  })
+
+  //点击IP使用时长
+  $('.ip_use_box .ip_use_item').on('click',function() {
+    $(this).toggleClass('ip_use_item_choose')
+    $(this).find('.time_text').toggleClass('time_text_choose','font-25','font-bold','main-title-color')
+    $(this).find('.deal_text').toggleClass('deal_text_choose','text-blue')
   })
 })
 </script>

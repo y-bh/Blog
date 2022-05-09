@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP样式
  * @Date: 2022-05-09 10:29:18
- * @LastEditTime: 2022-05-09 16:01:33
+ * @LastEditTime: 2022-05-09 18:16:46
 -->
 <style scoped>
   .container {
@@ -16,7 +16,6 @@
   }
   .right {
     grid-row-gap: 40px;
-    width: 1070px;
   }
   .extract_ip_left {
     width: 220px;
@@ -39,9 +38,6 @@
     color: #091D43;
     font-weight: bold;
   }
-  .desc {
-    height: 0;
-  }
   .anchor {
     grid-row-gap: 20px;
     color: #4C5664;
@@ -52,12 +48,12 @@
     color: #4C5664;
     font-size: 15px;
   }
-  .extract_ip_right {
-    border-bottom: 1px solid #E4E5EB;
-    padding-bottom: 30px;
-  }
   .extract_select {
     border-radius: 4px;
+  }
+  .count {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #E4E5EB;
   }
   .count_box {   
     max-width: 800px;
@@ -78,19 +74,60 @@
     border-radius: 4px;
   }
   .meal_box {
-    grid-template-columns: repeat(5,1fr);
-    grid-row-gap: 20px;
+    grid-template-columns: repeat(auto-fit,190px);
+    grid-gap: 20px 30px;
   }
   .meal_item {
-    width: 190px;
     height: 144px;
     border-radius: 8px;
     background: rgba(208, 224, 255, 0.3);
   }
   .meal_item .desc {
-    padding: 10px 30px;
+    width: 140px;
     height: 40px;
     border-radius: 20px;
     background: rgba(208, 224, 255, 0.6);
+  }
+  .extract_num .btn {
+    width: 40px;
+    background: #D8DCE6;
+  }
+  .ip_use_box {
+    grid-template-columns: repeat(auto-fit,202px);
+    grid-gap: 20px 30px;
+  }
+  .ip_use_item {
+    height: 129px;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+    background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.4), #fff, #fff, #fff);
+  }
+  .ip_use_item:hover {
+    cursor: pointer;
+  }
+  .ip_use_item_choose {
+    height: 129px;
+    border-radius: 8px;
+    border: 2px solid #fc7019;
+    background-image: linear-gradient(to bottom right, rgba(252, 112, 25, 0.4), #fff, #fff, #fff);
+    box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.1);
+  }
+  .time_text_choose {
+    color: #FC7019;
+  }
+  .deal_box_choose {
+    width: 120px;
+    border-radius: 20px;
+    background: #FFF4ED;
+  }
+  .deal_text_choose {
+    color: #FC7019;
+  }
+
+  .deal_box {
+    width: 120px;
+    border-radius: 20px;
+    background: #E8F0FF;
   }
 </style>
