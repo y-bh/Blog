@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-10 11:34:57
+ * @LastEditTime: 2022-05-10 16:13:46
 -->
 <script>
 $(function() {
@@ -131,6 +131,167 @@ $(function() {
     },
   ]
 
+  const chooseType = [
+    {
+      status: false,
+      label: '城市'
+    },
+    {
+      status: false,
+      label: '运营商'
+    },
+    {
+      status: false,
+      label: '到期时间'
+    }
+  ]
+
+  const separator = [
+    {
+      label: '回车换行(\\r\\n)'
+    },
+    {
+      label: '回车(\\r)'
+    },
+    {
+      label: '换行(\\n)'
+    },
+    {
+      label: 'Tab换行(\\t)'
+    }
+  ]
+
+  const province = [
+    {
+      status: false,
+      label: '北京市'
+    },
+    {
+      status: false,
+      label: '天津市'
+    },
+    {
+      status: false,
+      label: '上海市'
+    },
+    {
+      status: false,
+      label: '重庆市'
+    },
+    {
+      status: false,
+      label: '河北省'
+    },
+    {
+      status: false,
+      label: '山西省'
+    },
+    {
+      status: false,
+      label: '山东省'
+    },
+    {
+      status: false,
+      label: '辽宁省'
+    },
+    {
+      status: false,
+      label: '吉林省'
+    },
+    {
+      status: false,
+      label: '黑龙江省'
+    },
+    {
+      status: false,
+      label: '江苏省'
+    },
+    {
+      status: false,
+      label: '浙江省'
+    },
+    {
+      status: false,
+      label: '安徽省'
+    },
+    {
+      status: false,
+      label: '福建省'
+    },
+    {
+      status: false,
+      label: '江西省'
+    },
+    {
+      status: false,
+      label: '山东省'
+    },
+    {
+      status: false,
+      label: '河南省'
+    },
+    {
+      status: false,
+      label: '湖北省'
+    },
+    {
+      status: false,
+      label: '湖南省'
+    },
+    {
+      status: false,
+      label: '广东省'
+    },
+    {
+      status: false,
+      label: '河南省'
+    },
+    {
+      status: false,
+      label: '四川省'
+    },
+    {
+      status: false,
+      label: '贵州省'
+    },
+    {
+      status: false,
+      label: '云南省'
+    },
+    {
+      status: false,
+      label: '陕西省'
+    },
+    {
+      status: false,
+      label: '甘肃省'
+    },
+    {
+      status: false,
+      label: '青海省'
+    },
+    {
+      status: false,
+      label: '台湾省'
+    },
+    {
+      status: false,
+      label: '内蒙古自治区'
+    },
+    {
+      status: false,
+      label: '广西壮族自治区'
+    },
+    {
+      status: false,
+      label: '宁夏回族自治区'
+    },
+    {
+      status: false,
+      label: '新疆维吾尔自治区'
+    },
+  ]
+
   //列表渲染-提取IP
   $.each(extractIp,(index,item) => {
     $('.anchor').append(`<span class="pointer">${item.title}<span>`)
@@ -188,8 +349,9 @@ $(function() {
   //点击IP使用时长
   $('.ip_use_box .ip_use_item').on('click',function() {
     $(this).toggleClass('ip_use_item_choose')
-    $(this).find('.time_text').toggleClass('time_text_choose','font-25','font-bold','main-title-color')
-    $(this).find('.deal_text').toggleClass('deal_text_choose','text-blue')
+    $(this).find('.time_text').toggleClass('time_text_choose')
+    $(this).find('.deal_box').toggleClass('deal_box_choose')
+    $(this).find('.deal_text').toggleClass('deal_text_choose')
   })
 
   //提取数量
@@ -208,7 +370,6 @@ $(function() {
       }
     }
   }
-  
   $('.decrement,.increment').on('click',function() {
     let currentVal = $(this).siblings('.extract_num_input').val() //获取input值
     let currentEl = $(this).attr('class') //获取当前类名
@@ -216,6 +377,36 @@ $(function() {
     if (newVal !== null) {  //判断是否逻辑正确
       $(this).siblings('.extract_num_input').val(newVal)
     }
+  })
+
+  //选择属性列表
+  $.each(chooseType,(index,item) => {
+    $('.choose_type').append(`<div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value=${item.status}>
+      <label class="form-check-label">${item.label}</label>
+    </div>`)
+  })
+
+  //分隔符列表
+  $.each(separator,(index,item) => {
+    $('.separator').append(`<div>
+      <div class="narrow_box mr-40 flex justify-center align-center pointer">
+        <span class="font-15 main-title-color">${item.label}</span>
+      </div>
+    </div>`)
+  })
+
+  //样式切换
+  $('.narrow_box').on('click',function() {
+    $(this).toggleClass('narrow_box_choose')
+  })
+  
+  //省份列表
+  $.each(province,(index,item) => {
+    $('.choose_area .bottom').append(`<div class="form-check mr-20 mb-20">
+      <input class="form-check-input" type="checkbox" value=${item.status}>
+      <label class="form-check-label">${item.label}</label>
+    </div>`)
   })
 })
 </script>
