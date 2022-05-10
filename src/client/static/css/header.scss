@@ -9,16 +9,17 @@
     font-size: 16px;
     padding: 0 16px;
     z-index: 999;
-    background-color: #e0e3e6;
+    // background-color: #e0e3e6;
     
     // header内容区域
     .header-main{
         max-width: 1400px;
         display: grid;
         grid-template-columns: auto 1fr 120px;
-        align-items: flex-start;
+        align-items: center;
         grid-auto-flow: row dense;
         margin: 0 auto;
+        
     }
 
     // 网站logo
@@ -26,7 +27,6 @@
         display: inline-flex;
         align-items: center;
         margin-right: 20px;
-        height: 80px;
         img {
             width: 40px;
         }
@@ -43,27 +43,17 @@
 
     // 中间导航部分
     .nav-wrap{
-        // height: 80px;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+        height: 80px;
     }
 
     .nav-toggler{
         display: none;
     }
 
-    .navbar-body{
-        flex-basis: 100%;
-        flex-grow: 1;
-        align-items: center;
-    }
-
-
     .nav-list {
         display: flex;
-        transition: all .8s;
-        // 每个导航元素
+        // transition: all .8s;
+                // 每个导航元素        
         .nav-item {
             position: relative;
             min-width: 64px;
@@ -74,6 +64,12 @@
             text-align: center;
             line-height: 80px;
             white-space: nowrap;  // 文本禁止换行
+            a {
+              display: block;
+              height: inherit;
+              text-decoration: none;
+              color: inherit;
+            }
             &:hover{
                 cursor: pointer;
                 color: #0984e3;
@@ -111,8 +107,8 @@
     }
 
     .user{
+        
         display: inline-flex;
-        height: 80px;
         align-items: center;
         margin-left: 20px;
     }
@@ -134,41 +130,41 @@
 
 @media screen and (max-width: 868px) {
     .header {
-        .navbar-body{
 
-        }
-
-        .nav-toggler{
-            display: inline-flex;
-            height: 80px;
-            line-height: 80px;
-            flex: 100%;
-            align-items: flex-end;
-            justify-content: flex-end;
-        }
-        .nav-collapse:not(.show) {
+        .nav-body {
             display: none;
-        }
-        .nav-collapse {
-            flex-basis: 100%;
-            flex-grow: 1;
-            align-items: center;
-            flex-direction: column;
-            &.show {
-                align-items: flex-end;
-                .nav-list{
+            width: 100%;
+            position: absolute;
+            top: 80px;
+            &.show{
+                display: block;
+                right: 0;
+                padding: 0 10px;
+                // background: #e0e3e6;
+                .nav-list {
                     flex-direction: column;
-                    max-width: 78px;
-                }
-                // 每个导航元素
-                .nav-item {
                     justify-content: center;
-                    margin: 0;
+                     align-items: center;
+                    .nav-item {
+                        margin: 0;
+                        width: 76px;
+                    }
+                }
+                .adjust_position{
+                    float: right;
                 }
             }
         }
-
-
         
+
+        .nav-toggler {
+            display: flex;
+            height: 100%;
+            flex: 100%;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+
     }
 }
