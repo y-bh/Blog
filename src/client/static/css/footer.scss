@@ -30,6 +30,10 @@
     }
     .ewm-img{
       grid-column: ewmimg;
+      img{
+        width: 100px;
+        height: 100px;
+      }
     }
     .ewm-text{
       grid-column: ewmtext;
