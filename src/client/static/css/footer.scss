@@ -52,10 +52,11 @@
         display: block;
         color: inherit;
         align-self: end;
-      }
-      a:hover{
-        cursor: pointer;
+
+        &:hover{
+          cursor: pointer;
         text-decoration: none;
+        }
       }
     }
 
@@ -84,10 +85,11 @@
           vertical-align: bottom;
           margin-right: 8px;
         }
-      }
-      a:hover{
-        text-decoration: none;
-        color: initial;
+
+        &:hover{
+          text-decoration: none;
+          color: initial;
+        }
       }
     }
   }
