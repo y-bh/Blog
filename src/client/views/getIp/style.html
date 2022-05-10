@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP样式
  * @Date: 2022-05-09 10:29:18
- * @LastEditTime: 2022-05-09 18:16:46
+ * @LastEditTime: 2022-05-10 10:49:44
 -->
 <style scoped>
   .container {
@@ -91,6 +91,27 @@
   .extract_num .btn {
     width: 40px;
     background: #D8DCE6;
+  }
+  .extract_box {
+    width: 184px;
+    height: 40px;
+  }
+  .extract_box .extract_num_input {
+    border-left:"none";
+    border-right:"none";
+  }
+  .extract_box .decrement,.increment {
+    width: 40px;
+    height: 38px;
+    border: 1px solid #ced4da;
+  }
+  .decrement {
+    border-radius: 4px 0px 0px 4px;
+    border-right: none;
+  }
+  .increment {
+    border-radius: 0px 4px 4px 0px;
+    border-left: none;
   }
   .ip_use_box {
     grid-template-columns: repeat(auto-fit,202px);
