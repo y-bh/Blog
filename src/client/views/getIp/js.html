@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-10 16:13:46
+ * @LastEditTime: 2022-05-10 18:25:50
 -->
 <script>
 $(function() {
@@ -292,6 +292,43 @@ $(function() {
     },
   ]
 
+  const paramsDesc = [
+    {
+      label: 'secret:提取秘钥'
+    },
+    {
+      label: 'num(可选):提取IP数量,不能超过200,默认值10'
+    },
+    {
+      label: 'yys(可选):提取IP运营商,电信、移动、联通'
+    },
+    {
+      label: 'type(可选):返回类型,txt,json'
+    },
+    {
+      label: 'lb(可选):txt格式返回的分隔符'
+    },
+    {
+      label: 'region(可选):区域编号,多个用英文逗号分隔'
+    },
+    {
+      label: 'port:IP协议  1:HTTP 2:SOCKS5  3:HTTPS'
+    },
+    {
+      label: 'time(按次提取必选):IP使用时长只支持(3,5,10,15)'
+    },
+    {
+      label: 'ts(可选):是否显示IP过期时间, 1:显示   默认不显示'
+    },
+    {
+      label: 'ys(可选):是否显示IP运营商,1:显示  默认不显示'
+    },
+    {
+      label: 'cs(可选):是否显示位置,1:显示  默认不显示'
+    },
+
+  ]
+
   //列表渲染-提取IP
   $.each(extractIp,(index,item) => {
     $('.anchor').append(`<span class="pointer">${item.title}<span>`)
@@ -407,6 +444,31 @@ $(function() {
       <input class="form-check-input" type="checkbox" value=${item.status}>
       <label class="form-check-label">${item.label}</label>
     </div>`)
+  })
+
+  //参数说明
+  $.each(paramsDesc,(index,item) => {
+    $('.params_desc').append(`<div class="li_item_box flex-center">
+      ${item.label}
+    </div>`)
+  })
+
+  //获取内容列表每一行的高度
+  const getContentHeight = () => {
+    let heightList = []
+    $('.note_content .ele').each((index,item)=>{
+      heightList.push($(item).css('height'))
+    })
+    return heightList
+  }
+
+  let heightList = getContentHeight()
+  $('.note_desc .ele').each((i,e)=>{
+    heightList.map(item => {
+      $(e).css({
+        'height':item
+      })
+    })
   })
 })
 </script>

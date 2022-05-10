@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-10 15:45:43
+ * @LastEditTime: 2022-05-10 18:18:42
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,7 @@
         <div class="meal_box mt-30 grid"></div>
         <div class="mt-30 extract_num flex flex-wrap align-center">
           <label class="font-18 main-title-color label_lay">提取数量</label>
-          <div class="input-group extract_box flex justify-center align-center">
+          <div class="input-group extract_box flex-center">
             <button class="decrement">-</button>
             <input type="text" class="form-control extract_num_input text-center" value="1">
             <button class="increment">+</button>
@@ -69,10 +69,10 @@
         <div class="flex flex-wrap align-center data_format_box mt-40">
           <label class="label_lay font-18 main-title-color">数据格式</label>
           <div class="data_format flex">
-            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+            <div class="narrow_box mr-40 flex-center pointer">
               <span class="font-15 main-title-color">TEXT</span>
             </div>
-            <div class="narrow_box flex justify-center align-center pointer">
+            <div class="narrow_box flex-center pointer">
               <span class="font-15 main-title-color">JSON</span>
             </div>
           </div>
@@ -89,10 +89,10 @@
           <label class="font-18 main-title-color">选择地区</label>
           <div class="choose_area grid mt-30">
             <div class="top flex">
-              <div class="narrow_box mr-40 flex justify-center align-center pointer">
+              <div class="narrow_box mr-40 flex-center pointer">
                 <span class="font-15 main-title-color">全国混拨</span>
               </div>
-              <div class="narrow_box flex justify-center align-center pointer">
+              <div class="narrow_box flex-center pointer">
                 <span class="font-15 main-title-color">省份混拨</span>
               </div>
             </div>
@@ -102,13 +102,13 @@
         <div class="flex flex-wrap align-center operator_box mt-40">
           <label class="label_lay font-18 main-title-color">运营商</label>
           <div class="operator_box flex">
-            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+            <div class="narrow_box mr-40 flex-center pointer">
               <span class="font-15 main-title-color">不限</span>
             </div>
-            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+            <div class="narrow_box mr-40 flex-center pointer">
               <span class="font-15 main-title-color">电信</span>
             </div>
-            <div class="narrow_box flex justify-center align-center pointer">
+            <div class="narrow_box flex-center pointer">
               <span class="font-15 main-title-color">联通</span>
             </div>
           </div>
@@ -116,13 +116,13 @@
         <div class="flex flex-wrap align-center ip_box mt-40">
           <label class="label_lay font-18 main-title-color">运营商</label>
           <div class="ip_agreement flex">
-            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+            <div class="narrow_box mr-40 flex-center pointer">
               <span class="font-15 main-title-color">HTTP</span>
             </div>
-            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+            <div class="narrow_box mr-40 flex-center pointer">
               <span class="font-15 main-title-color">HTTPS</span>
             </div>
-            <div class="narrow_box flex justify-center align-center pointer">
+            <div class="narrow_box flex-center pointer">
               <span class="font-15 main-title-color">SOCKS5</span>
             </div>
           </div>
@@ -150,8 +150,71 @@
       </div>
       <div class="head extract_interface mt-40">
         <span class="font-25 title">提取接口</span>
+        <div class="note_box flex mt-40">
+          <ul class="note_desc">
+            <li class="top_li flex-center">属性</li>
+            <li class="ele flex-center">URL</li>
+            <li class="ele flex-center">方法</li>
+            <li class="ele flex-center">编码</li>
+            <li class="ele flex-center">参数说明</li>
+            <li class="ele flex-center">异常</li>
+            <li class="ele flex-center">成功</li>
+            <li class="ele flex-center">状态码</li>
+          </ul>
+          <ul class="note_content widthAll">
+            <li class="top_li flex-center">内容</li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                http://api.tianqiip.com/getip
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                GET
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                utf-8
+              </div>
+            </li>
+            <li class="ele grid pt-20 pb-20 align-center params_desc"></li>
+            <li class="ele flex-center flex-column pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                code: 错误编号
+              </div>
+              <div class="li_item_box flex-center mt-20">
+                Msg: 描述信息
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="code flex-center">
+                <br>
+                  返回内容的标签或字段类型可在产品管理里通过设置提取格式来定制；<br/>
+                  类型为txt文本的定制标签如下：<br/>
+                  ip：port自定义分隔符；<br/>
+                  类型为json格式的响应字段如下：<br/>
+                  data：[<br/>
+                          {<br/>
+                            ip：IP<br/>
+                            port：端口<br/>
+                            expire：有效时间<br/>
+                            city：城市<br/>
+                            isp：运营商<br/>
+                          }<br/>
+                  ]
+                </p>
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                1000: 获取成功
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="head white_list" style="height: 500px">
+      <div class="head white_list mt-40" style="height: 500px">
         <span class="font-25 title">白名单接口</span>
       </div>
       <div class="head error_code" style="height: 500px">
