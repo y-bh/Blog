@@ -3,16 +3,16 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP样式
  * @Date: 2022-05-09 10:29:18
- * @LastEditTime: 2022-05-10 10:49:44
+ * @LastEditTime: 2022-05-10 16:09:33
 -->
 <style scoped>
   .container {
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 1fr;
   }
   .left {
     position: fixed;
-    left: 15%;
-    transform: translate(-15%,0)
+    left: 6%;
+    transform: translate(-6%,0)
   }
   .right {
     grid-row-gap: 40px;
@@ -50,6 +50,7 @@
   }
   .extract_select {
     border-radius: 4px;
+    max-width: 460px;
   }
   .count {
     padding-bottom: 30px;
@@ -130,20 +131,20 @@
   .ip_use_item_choose {
     height: 129px;
     border-radius: 8px;
-    border: 2px solid #fc7019;
-    background-image: linear-gradient(to bottom right, rgba(252, 112, 25, 0.4), #fff, #fff, #fff);
-    box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.1);
+    border: 1px solid #fc7019 !important;
+    background-image: linear-gradient(to bottom right, rgba(252, 112, 25, 0.4), #fff, #fff, #fff) !important;
+    box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.1) !important;
   }
   .time_text_choose {
-    color: #FC7019;
+    color: #FC7019 !important;
   }
   .deal_box_choose {
     width: 120px;
     border-radius: 20px;
-    background: #FFF4ED;
+    background: #FFF4ED !important;
   }
   .deal_text_choose {
-    color: #FC7019;
+    color: #FC7019 !important;
   }
 
   .deal_box {
@@ -151,4 +152,66 @@
     border-radius: 20px;
     background: #E8F0FF;
   }
+  .label_lay {
+    width: 150px;
+  }
+  .narrow_box {
+    width: 200px;
+    height: 50px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+    background-image: linear-gradient(to right, rgba(208, 224, 255, 0.4), #fff, #fff, #fff);
+  }
+  .narrow_box_choose {
+    width: 200px;
+    height: 50px;
+    border: 1px solid #fc7019 !important;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(51, 51, 51, 0.1) !important;
+    background-image: linear-gradient(to right, rgba(252, 112, 25, 0.4), #fff, #fff, #fff) !important;
+  }
+  .choose_area {
+    grid-template-columns: 1fr;
+    grid-row-gap: 30px;
+  }
+  .create_api_url {
+    width: 240px;
+    height: 60px;
+    border-radius: 4px;
+    background: #1968FC;
+    border: none;
+    color: #fff;
+  }
+  .apiUrl_input_box .copy {
+    background: #1968FC;
+    border: none;
+    color: #fff;
+  }
+  .apiUrl_input_box .open {
+    background: #FC7019;
+    border: none;
+    color: #fff;
+  }
+
+  /* 适配 */
+  @media screen and (max-width: 414px) {
+
+  }
+
+  @media screen and (max-width: 575px) {
+
+  } 
+
+  @media screen and (max-width: 775px) {
+
+  }
+
+  @media screen and (max-width: 901px) {
+
+  }  
+
+  @media screen and (max-width: 1200px) {
+
+  } 
 </style>
