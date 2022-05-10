@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: 秦琛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-10 16:08:05
+ * @LastEditTime: 2022-05-10 17:59:21
  */
 
 const router = require("koa-router")();
@@ -45,6 +45,16 @@ function Router(App) {
       }],
     })
   })
+
+    //落地推广页面
+    router.get("/promotion", async (ctx) => {
+      //const res = await renderHome()
+      //console.log("控制层:", res)
+      return ctx.render("promotion/index", {
+        name: '落地推广页面',
+        url: 2222
+      })
+    })
 
 
   //套餐购买

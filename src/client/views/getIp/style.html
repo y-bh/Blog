@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP样式
  * @Date: 2022-05-09 10:29:18
- * @LastEditTime: 2022-05-10 16:09:33
+ * @LastEditTime: 2022-05-10 18:00:29
 -->
 <style scoped>
   .container {
@@ -192,6 +192,50 @@
     background: #FC7019;
     border: none;
     color: #fff;
+  }
+  .note_box {
+    border: 1px solid #E4E5EB;
+  }
+  .note_desc {
+    border-right: 1px solid #E4E5EB;
+  }
+  .note_desc li{
+    width: 200px;
+    border-bottom: 1px solid #E4E5EB;
+  }
+  .note_desc li:last-child {
+    border: none;
+  }
+  .note_content li {
+    width: 100%;
+    border-bottom: 1px solid #E4E5EB;
+  }
+  .note_content li:last-child {
+    border: none;
+  }
+  .top_li {
+    height: 40px;
+    background-color: rgba(208, 224, 255, 0.25);
+    color: #4C5664;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .li_item_box {
+    width: 378px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: rgba(208, 224, 255, 0.25);
+  }
+  .params_desc {
+    grid-template-columns: repeat(2,1fr);
+    grid-row-gap: 20px;
+    justify-items: center;
+  }
+  .note_content .code {
+    width: 810px;
+    border-radius: 8px;
+    background-color: rgba(208, 224, 255, 0.25);
+    white-space: pre;
   }
 
   /* 适配 */
