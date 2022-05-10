@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: 李云涛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-10 11:28:37
+ * @LastEditTime: 2022-05-10 14:31:10
  */
 
 const router = require("koa-router")();
@@ -27,7 +27,20 @@ function Router(App) {
 
     return ctx.render("home/home", {
       name: '住在我',
-      url: 2222
+      url: 2222,
+      link: [{
+        id:1,
+        title:'测试1',
+        link: 'https://www.baidu.com'
+      },{
+        id:2,
+        title:'测试2',
+        link: 'https://www.youtube.com'
+      },{
+        id:2,
+        title:'海外代理IP',
+        link: 'https://www.youtube.com'
+      }],
     })
   })
 
