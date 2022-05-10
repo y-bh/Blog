@@ -3,11 +3,14 @@
  * @LastEditors: 李云涛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-10 14:31:10
+ * @LastEditTime: 2022-05-10 16:08:05
  */
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
+
+const { getQueryLink } = require("service/footer")
+
 const fs = require("fs")
 const config = require("../config/app.config")
 function Router(App) {
@@ -21,9 +24,8 @@ function Router(App) {
 
 
     //const res = await renderHome()
-
-
-    //console.log("控制层:", res)
+    //友情链接
+    // const query_link = await getQueryLink()
 
     return ctx.render("home/home", {
       name: '住在我',
