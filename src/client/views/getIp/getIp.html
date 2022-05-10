@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-09 17:33:03
+ * @LastEditTime: 2022-05-10 11:22:59
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -56,14 +56,10 @@
         <div class="meal_box mt-30 grid"></div>
         <div class="form-group row mt-30 extract_num align-center">
           <label class="font-20 main-title-color col-sm-2">提取数量</label>
-          <div class="input-group col-sm-3">
-            <div class="input-group-prepend">
-              <button class="btn no-border">-</button>
-            </div>
-            <input type="text" class="form-control">
-            <div class="input-group-append">
-              <button class="btn no-border">+</button>
-            </div>
+          <div class="input-group col-sm-3 extract_box flex justify-center align-center">
+            <button class="decrement">-</button>
+            <input type="text" class="form-control extract_num_input text-center" value="1">
+            <button class="increment">+</button>
           </div>
         </div>
         <div class="form-group mt-30 ip_use">
