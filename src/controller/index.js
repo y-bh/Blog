@@ -1,13 +1,16 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: 秦琛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-10 14:31:10
+ * @LastEditTime: 2022-05-10 17:59:21
  */
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
+
+const { getQueryLink } = require("service/footer")
+
 const fs = require("fs")
 const config = require("../config/app.config")
 function Router(App) {
@@ -21,9 +24,8 @@ function Router(App) {
 
 
     //const res = await renderHome()
-
-
-    //console.log("控制层:", res)
+    //友情链接
+    // const query_link = await getQueryLink()
 
     return ctx.render("home/home", {
       name: '住在我',
@@ -43,6 +45,16 @@ function Router(App) {
       }],
     })
   })
+
+    //落地推广页面
+    router.get("/promotion", async (ctx) => {
+      //const res = await renderHome()
+      //console.log("控制层:", res)
+      return ctx.render("promotion/index", {
+        name: '落地推广页面',
+        url: 2222
+      })
+    })
 
 
   //套餐购买
