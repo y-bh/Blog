@@ -3,11 +3,12 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 14:52:32
+ * @LastEditTime: 2022-05-11 17:46:53
 -->
 <script>
 $(function() {
   let loginStatus = false;  //登录情况
+  let isJSON = false; //是否选择JSON
 
   const extractIp = [
     {
@@ -119,18 +120,22 @@ $(function() {
 
   const ipUse = [
     {
+      id: 1,
       time: '3分钟',
       deal: '5天启币/IP'
     },
     {
+      id: 2,
       time: '5分钟',
       deal: '10天启币/IP'
     },
     {
+      id: 3,
       time: '10分钟',
       deal: '18天启币/IP'
     },
     {
+      id: 4,
       time: '15分钟',
       deal: '30天启币/IP'
     },
@@ -525,20 +530,6 @@ $(function() {
     $('.demo').append(`<span class="pointer">${item.title}<span>`)
   })
 
-  //点击定位
-  $('.anchor span').on('click', function() {
-    let currentAnchor = $('.right .head').eq($(this).index()).offset().top
-    $('body,html').stop().animate({
-      scrollTop: currentAnchor
-    })
-  })
-  $('.demo span').on('click', function() {  //代码demo定位
-    let currentDemo = $('.right div').last($(this).index()).offset().top
-    $('body,html').stop().animate({
-      scrollTop: currentDemo
-    })
-  })
-
   //select渲染
   $.each(paidList,(index,item) => {
     $('.extract_select').append(`<option>${item.desc}</option>`)
@@ -557,9 +548,9 @@ $(function() {
       </div>`)
   })
 
-  //ip套餐列表渲染
+  //ip使用时长列表渲染
   $.each(ipUse,(index,item) => {
-    $('.ip_use_box').append(`<div class="ip_use_item flex flex-column align-center justify-center">
+    $('.ip_use_box').append(`<div class="ip_use_item flex flex-column align-center justify-center" name="${item.id}">
         <div class="time_box">
           <span class="time_text font-25 font-bold main-title-color">${item.time}</span>
         </div>
@@ -569,69 +560,32 @@ $(function() {
       </div>`)
   })
 
-  //点击IP使用时长
-  $('.ip_use_box .ip_use_item').on('click',function() {
-    $(this).toggleClass('ip_use_item_choose')
-    $(this).find('.time_text').toggleClass('time_text_choose')
-    $(this).find('.deal_box').toggleClass('deal_box_choose')
-    $(this).find('.deal_text').toggleClass('deal_text_choose')
-  })
-
-  //提取数量
-  const changeIpNum = (val,btn) => {
-    let num = Number(val)
-    if (btn === 'decrement' && val <= 1) {  //点击"-"并且数值为1
-      $message.warning({
-        message: '单次最小提取量为1',
-        showClose: true
-      })
-      return null
-    } else {
-      if (btn === 'decrement') {
-        num-=5;
-        return num;
-      } else {
-        num+=5;
-        return num;
-      }
-    }
-  }
-  $('.decrement,.increment').on('click',function() {
-    let currentVal = $(this).siblings('.extract_num_input').val() //获取input值
-    let currentEl = $(this).attr('class') //获取当前类名
-    let newVal = changeIpNum(currentVal,currentEl)
-    if (newVal !== null) {  //判断是否逻辑正确
-      $(this).siblings('.extract_num_input').val(newVal)
-    }
-  })
-
   //选择属性列表
   $.each(chooseType,(index,item) => {
     $('.choose_type').append(`<div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" value=${item.status}>
-      <label class="form-check-label">${item.label}</label>
+      <label class="form-check-label pointer">
+        <input class="form-check-input" type="checkbox" value=${item.status}>
+        ${item.label}
+      </label>
     </div>`)
   })
 
   //分隔符列表
   $.each(separator,(index,item) => {
-    $('.separator').append(`<div>
+    $('.separator').append(`
       <div class="narrow_box mr-40 flex justify-center align-center pointer">
         <span class="font-15 main-title-color">${item.label}</span>
       </div>
-    </div>`)
-  })
-
-  //样式切换
-  $('.narrow_box').on('click',function() {
-    $(this).toggleClass('narrow_box_choose')
+    `)
   })
   
   //省份列表
   $.each(province,(index,item) => {
     $('.choose_area .bottom').append(`<div class="form-check mr-20 mb-20">
-      <input class="form-check-input" type="checkbox" value=${item.status}>
-      <label class="form-check-label">${item.label}</label>
+      <label class="form-check-label pointer">
+        <input class="form-check-input" type="checkbox" value=${item.status}>
+        ${item.label}
+      </label>
     </div>`)
   })
 
@@ -693,6 +647,62 @@ $(function() {
     </div>`)
   })
 
+  //点击定位
+  $('.anchor span').on('click', function() {
+    let currentAnchor = $('.right .head').eq($(this).index()).offset().top
+    $('body,html').stop().animate({
+      scrollTop: currentAnchor
+    })
+  })
+  $('.demo span').on('click', function() {  //代码demo定位
+    let currentDemo = $('.right div').last($(this).index()).offset().top
+    $('body,html').stop().animate({
+      scrollTop: currentDemo
+    })
+  })
+
+  //点击IP使用时长
+  $('.ip_use_box .ip_use_item').on('click',function() {
+    $(this).toggleClass('ip_use_item_choose').siblings().removeClass('ip_use_item_choose')
+    $(this).find('.time_text').toggleClass('time_text_choose').parent().parent().siblings().children().children().removeClass('time_text_choose')
+    $(this).find('.deal_box').toggleClass('deal_box_choose').parent().siblings().children().removeClass('deal_box_choose')
+    $(this).find('.deal_text').toggleClass('deal_text_choose').parent().parent().siblings().children().children().removeClass('deal_text_choose')
+  })
+
+  //样式切换
+  $('.narrow_box').on('click',function() {
+    console.log($(this).siblings());
+    $(this).toggleClass('narrow_box_choose').siblings().removeClass('narrow_box_choose')
+  })
+
+  //提取数量
+  const changeIpNum = (val,btn) => {
+    let num = Number(val)
+    if (btn === 'decrement' && val <= 1) {  //点击"-"并且数值为1
+      $message.warning({
+        message: '单次最小提取量为1',
+        showClose: true
+      })
+      return null
+    } else {
+      if (btn === 'decrement') {
+        num-=5;
+        return num;
+      } else {
+        num+=5;
+        return num;
+      }
+    }
+  }
+  $('.decrement,.increment').on('click',function() {
+    let currentVal = $(this).siblings('.extract_num_input').val() //获取input值
+    let currentEl = $(this).attr('class') //获取当前类名
+    let newVal = changeIpNum(currentVal,currentEl)
+    if (newVal !== null) {  //判断是否逻辑正确
+      $(this).siblings('.extract_num_input').val(newVal)
+    }
+  })
+
   //动态改变列表高度
   const getContentHeight = () => {//获取内容列表每一行的高度
     let heightList = []
@@ -715,5 +725,18 @@ $(function() {
   //登录情况判断渲染
   $('.already_login').css('display',loginStatus ? 'block' : 'none')
   $('.not_login').css('display',loginStatus ? 'none' : 'block')
+
+  //未登录点击"选择提取类型"跳转至登录页
+  $('.extract_select').on('click',function() {
+    if (!loginStatus) {
+      window.location.href="http://localhost:8080/login/index"
+    }
+  })
+
+  //是否选择JSON
+  $('.data_format .narrow_box').on('click',function() {
+    let currentClass = $(this).attr('class')
+    $('.choose_type_box').css('display',currentClass === 'data_json' ? 'flex' : 'none')
+  })
 })
 </script>
