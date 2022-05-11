@@ -3,15 +3,15 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-11 14:46:45
+ * @LastEditTime: 2022-05-11 14:50:45
  */
 
 // 弹窗消息提示
 /*
     params:
-        msg: 消息文本
+        message: 消息文本
         showClose: 控制显示关闭按钮  默认显示x
-        type: 消息类型
+        type: 消息类型  success/warning/danger
         duration: 消息持续时间
 */
 
