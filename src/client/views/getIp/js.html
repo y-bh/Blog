@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-10 18:25:50
+ * @LastEditTime: 2022-05-11 09:40:00
 -->
 <script>
 $(function() {
@@ -453,21 +453,22 @@ $(function() {
     </div>`)
   })
 
-  //获取内容列表每一行的高度
-  const getContentHeight = () => {
+  //动态改变列表高度
+  const getContentHeight = () => {//获取内容列表每一行的高度
     let heightList = []
     $('.note_content .ele').each((index,item)=>{
       heightList.push($(item).css('height'))
     })
     return heightList
   }
-
   let heightList = getContentHeight()
   $('.note_desc .ele').each((i,e)=>{
-    heightList.map(item => {
-      $(e).css({
-        'height':item
-      })
+    heightList.map((item,index) => {
+      if (i === index) {  //如果高度数组索引等于dom数组索引才进行高度赋值
+        $(e).css({
+          'height':item
+        })
+      }
     })
   })
 })
