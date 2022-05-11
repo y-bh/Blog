@@ -3,12 +3,11 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 17:46:53
+ * @LastEditTime: 2022-05-11 18:48:13
 -->
 <script>
 $(function() {
   let loginStatus = false;  //登录情况
-  let isJSON = false; //是否选择JSON
 
   const extractIp = [
     {
@@ -671,7 +670,6 @@ $(function() {
 
   //样式切换
   $('.narrow_box').on('click',function() {
-    console.log($(this).siblings());
     $(this).toggleClass('narrow_box_choose').siblings().removeClass('narrow_box_choose')
   })
 
@@ -733,10 +731,52 @@ $(function() {
     }
   })
 
-  //是否选择JSON
+  //数据格式显示
   $('.data_format .narrow_box').on('click',function() {
-    let currentClass = $(this).attr('class')
-    $('.choose_type_box').css('display',currentClass === 'data_json' ? 'flex' : 'none')
+    let currentClass = $(this).attr('class').split(' ')[1]
+    if (currentClass === 'data_json') {
+      $('.isJSON').show()
+    } else {
+      $('.isJSON').hide()
+    }
   })
+
+  //点击省份显示地区
+  const showArea = () => {
+    $('.choose_area_box .narrow_box').on('click',function() {
+      let currentClass = $(this).attr('class').split(' ')[0]
+      if (currentClass === 'a_province') {
+        $('.isProvince').show()
+      } else {
+        $('.isProvince').hide()
+      }
+    })
+  }
+
+  // 地区展示登陆判断
+  if (loginStatus) {
+    $('.isProvince').show()
+    showArea()
+  } else {
+    $('.isProvince').hide()
+  }
+
+  //默认选中第一个
+  let ipUseFirst = $('.ip_use_box .ip_use_item')[0]
+  $(ipUseFirst).addClass('ip_use_item_choose')
+  $(ipUseFirst).find('.time_text').addClass('time_text_choose')
+  $(ipUseFirst).find('.deal_box').addClass('deal_box_choose')
+  $(ipUseFirst).find('.deal_text').addClass('deal_text_choose')
+  let dataFirst = $('.data_format .narrow_box')[0]
+  $(dataFirst).addClass('narrow_box_choose')
+  let separatorFirst = $('.separator .narrow_box')[0]
+  $(separatorFirst).addClass('narrow_box_choose')
+  let areaFirst = $('.choose_area_box .narrow_box')[0]
+  $(areaFirst).addClass('narrow_box_choose')
+  let operatorFirst = $('.operator_box .narrow_box')[0]
+  $(operatorFirst).addClass('narrow_box_choose')
+  let ipFirst = $('.ip_box .narrow_box')[0]
+  $(ipFirst).addClass('narrow_box_choose')
+  $('.isJSON').hide()
 })
 </script>

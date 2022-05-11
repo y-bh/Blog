@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-11 15:27:47
+ * @LastEditTime: 2022-05-11 18:46:14
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -95,9 +95,11 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-wrap align-center choose_type_box mt-40">
-          <label class="label_lay font-18 main-title-color">选择属性</label>
-          <div class="choose_type"></div>
+        <div class="isJSON">
+          <div class="flex flex-wrap align-center choose_type_box mt-40">
+            <label class="label_lay font-18 main-title-color">选择属性</label>
+            <div class="choose_type"></div>
+          </div>
         </div>
         <div class="flex flex-wrap align-center separator_box mt-40">
           <label class="label_lay font-18 main-title-color">分隔符</label>
@@ -107,14 +109,16 @@
           <label class="font-18 main-title-color">选择地区</label>
           <div class="choose_area grid mt-30">
             <div class="top flex">
-              <div class="narrow_box mr-40 flex-center pointer">
+              <div class="a_country narrow_box mr-40 flex-center pointer">
                 <span class="font-15 main-title-color">全国混拨</span>
               </div>
-              <div class="narrow_box flex-center pointer">
+              <div class="a_province narrow_box flex-center pointer">
                 <span class="font-15 main-title-color">省份混拨</span>
               </div>
             </div>
-            <div class="bottom flex flex-wrap"></div>
+            <div class="isProvince">
+              <div class="bottom flex flex-wrap"></div>
+            </div>
           </div>
         </div>
         <div class="flex flex-wrap align-center operator_box mt-40">
@@ -132,7 +136,7 @@
           </div>
         </div>
         <div class="flex flex-wrap align-center ip_box mt-40">
-          <label class="label_lay font-18 main-title-color">运营商</label>
+          <label class="label_lay font-18 main-title-color">IP协议</label>
           <div class="ip_agreement flex">
             <div class="narrow_box mr-40 flex-center pointer">
               <span class="font-15 main-title-color">HTTP</span>
