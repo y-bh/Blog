@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: dengxiujie
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-11 10:48:10
+ * @LastEditTime: 2022-05-11 14:43:31
  */
 
 const router = require("koa-router")();
@@ -13,6 +13,11 @@ const { getQueryLink } = require("service/footer")
 
 const fs = require("fs")
 const config = require("../config/app.config")
+
+//套餐购买
+const packageObj = require("./package.js")
+const { renderPackage } = require("service/package")
+
 function Router(App) {
   //用户管理
   // router.use("/user", user.routes(), user.allowedMethods());
@@ -60,15 +65,9 @@ function Router(App) {
   //套餐购买
   //购买页-package
   router.get("/package", async (ctx) => {
-
     /**数据请求 */
-
-
-
-    return ctx.render("package/package", {
-      name: 'This is package',
-      data: 2222,
-    })
+    console.log("999999999999999999999",await renderPackage())
+    return ctx.render("package/package", packageObj)
   })
 
   //购买页wx支付-package-Wxpay
