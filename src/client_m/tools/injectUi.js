@@ -1,13 +1,13 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 李云涛
  * @description: 按需注入element-plus
  * @Date: 2022-04-26 14:41:46
- * @LastEditTime: 2022-05-06 16:48:32
+ * @LastEditTime: 2022-05-11 18:36:46
  */
 
 import {
-  ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol
+  ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol, ElSwitch
 } from "element-plus";
 
 
@@ -21,7 +21,8 @@ const components = [
   ElMenuItem,
   ElMenuItemGroup,
   ElRow,
-  ElCol
+  ElCol,
+  ElSwitch
 ]
 const plugins = [
   ElLoading,

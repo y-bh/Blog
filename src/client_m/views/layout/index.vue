@@ -3,11 +3,11 @@
  * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-11 11:55:10
+ * @LastEditTime: 2022-05-11 18:42:30
 -->
 <template>
   <div class="layout">
-    <!-- <Header ref="headerRef"></Header> -->
+    <Header ref="headerRef"></Header>
     <main class="layout-main" :style="{ 'min-height': defaultHeight + 'px' }">
       <SideBar></SideBar>
       <div class="main-right">

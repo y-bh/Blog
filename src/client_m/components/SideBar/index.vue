@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-06 16:49:17
+ * @LastEditTime: 2022-05-11 18:40:38
 -->
 <template>
   <aside class="sideBar">
@@ -89,8 +89,8 @@ export default {
       isCollapse,
       activePath,
       filterRouteList,
-      // handleOpen,
-      // handleClose,
+      handleOpen,
+      handleClose,
     };
   },
 };

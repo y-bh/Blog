@@ -3,7 +3,7 @@
  * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-11 15:53:35
+ * @LastEditTime: 2022-05-11 18:33:11
 -->
 <template>
   <div class="white-list-wrap">
@@ -16,12 +16,12 @@
       </div>
     </div>
     <div class="white-list-btn">
-      <button>查看教程</button>
-      <button>添加IP白名单</button>
+      <el-button>查看教程</el-button>
+      <el-button>添加IP白名单</el-button>
     </div>
     <div class="auto-replace">
       <span>提取IP自动替换</span>
-      <el-switch v-model="switchVal" />
+      <el-switch v-model="switchVal"></el-switch>
     </div>
     <div class="api-text">Api接口</div>
     <div class="api-link"><a href="">点击获取白名单添加接口</a></div>
@@ -61,7 +61,7 @@ export default {
         desc: 1,
         time: 1
       }],
-      switchVal: true
+      switchVal: true,
     })
 
     //移入

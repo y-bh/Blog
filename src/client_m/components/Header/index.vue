@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 14:53:32
- * @LastEditTime: 2022-04-27 16:50:48
+ * @LastEditTime: 2022-05-11 18:46:15
 -->
 <template>
   <header class="header">
@@ -32,6 +32,6 @@ export default {
 <style lang="scss" scoped>
 .header{
   height: 100px;
-  background: #bcdfdc;
+  background: transparent;
 }
 </style>
