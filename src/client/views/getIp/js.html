@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 11:40:42
+ * @LastEditTime: 2022-05-11 13:39:26
 -->
 <script>
 $(function() {
@@ -339,7 +339,7 @@ $(function() {
       label: '方法'
     },
     {
-      label: '编码'
+      label: '编码方式'
     },
     {
       label: '参数说明'
@@ -401,12 +401,23 @@ $(function() {
   ]
 
   const errorCodeContent = {
+    left_desc: [
+      {
+        label: '提取接口错误码'
+      },
+      {
+        label: '白名单接口错误码'
+      },
+      {
+        label: '代理使用错误码'
+      }
+    ],
     extractError: [
       {
         label: '1001: 请求格式不正确'
       },
       {
-        label: '1002: 但此请求数量超出最大值'
+        label: '1002: 单次请求数量超出最大值'
       },
       {
         label: '1003: 请求KEY异常'
@@ -422,6 +433,41 @@ $(function() {
       },
       {
         label: '1007: 提取地区超出服务范围'
+      }
+    ],
+    whiteError: [
+    {
+        label: '1001: 参数有误'
+      },
+      {
+        label: '1002: ip地址格式无效'
+      },
+      {
+        label: '1003: key无效'
+      },
+      {
+        label: '1004: 参数sign错误'
+      },
+      {
+        label: '1005: 不是代理用户'
+      },
+      {
+        label: '1006: 添加的新ip数量超过最大数量限制'
+      },
+      {
+        label: '1007: ip已存在'
+      },
+      {
+        label: '1008: ip地址不在服务范围'
+      },
+      {
+        label: '1009: 白名单中不存在指定的ip可以删除'
+      },
+      {
+        label: '1009: 白名单中不存在指定的ip可以删除'
+      },
+      {
+        label: '1101: 服务器内部错误'
       }
     ],
     proxyError: [
@@ -613,8 +659,18 @@ $(function() {
   })
 
   //错误码
+  $.each(errorCodeContent.left_desc,(index,item) => {
+    $('.error_code .box').append(`<li class="ele flex-center">
+      ${item.label}
+    </li>`)
+  })
   $.each(errorCodeContent.extractError,(index,item) => {
     $('.error_code .extract').append(`<div class="li_item_box flex-center mb-20 port">
+      ${item.label}
+    </div>`)
+  })
+  $.each(errorCodeContent.whiteError,(index,item) => {
+    $('.error_code .white').append(`<div class="li_item_box flex-center mb-20 port">
       ${item.label}
     </div>`)
   })
