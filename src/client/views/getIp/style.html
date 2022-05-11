@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP样式
  * @Date: 2022-05-09 10:29:18
- * @LastEditTime: 2022-05-11 10:47:49
+ * @LastEditTime: 2022-05-11 11:38:04
 -->
 <style scoped>
   .container {
@@ -239,6 +239,29 @@
   }
   .port {
     width: 600px;
+  }
+  .demo_box {
+    grid-template-columns: repeat(auto-fit,231px);
+    grid-gap: 20px 30px;
+  }
+  .demo_box_item {
+    width: 231px;
+    height: 148px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+  }
+  .demo_title {
+    color: #333;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  .download {
+    width: 135px;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    color: #1968FC;
+    background: #E8F0FF;
   }
 
   /* 适配 */

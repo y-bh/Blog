@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 11:13:39
+ * @LastEditTime: 2022-05-11 11:40:42
 -->
 <script>
 $(function() {
@@ -28,6 +28,9 @@ $(function() {
     },
     {
       title: 'GO语言'
+    },
+    {
+      title: 'C#语言'
     },
     {
       title: 'JavaScript语言'
@@ -618,6 +621,14 @@ $(function() {
   $.each(errorCodeContent.proxyError,(index,item) => {
     $('.error_code .proxy').append(`<div class="li_item_box flex-center mb-20 port">
       ${item.label}
+    </div>`)
+  })
+
+  //代码demo
+  $.each(codeDemo,(index,item) => {
+    $('.demo_box').append(`<div class="demo_box_item flex-center flex-column">
+      <span class="demo_title mb-15">${item.title}</span>
+      <button type="button" class="download">立即下载</button>
     </div>`)
   })
 
