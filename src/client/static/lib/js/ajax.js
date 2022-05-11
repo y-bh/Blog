@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 不走dao层的ajax接口封装
  * @Date: 2022-05-11 16:24:43
- * @LastEditTime: 2022-05-11 17:02:33
+ * @LastEditTime: 2022-05-11 18:16:25
  */
 
 /*
@@ -24,7 +24,7 @@ async function ajax(params) {
         $.ajax({
             type: params.type ? params.type : 'POST',
             url: 'http://192.168.10.62:17001/' + params.url,
-            contentType: 'application/x-www-form-urlencoded',
+            contentType: 'application/json',
             data: params.query,
             success: (res) => {
                 if (res) {

@@ -1,13 +1,13 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-06 16:44:43
+ * @LastEditTime: 2022-05-11 11:55:10
 -->
 <template>
   <div class="layout">
-    <Header ref="headerRef"></Header>
+    <!-- <Header ref="headerRef"></Header> -->
     <main class="layout-main" :style="{ 'min-height': defaultHeight + 'px' }">
       <SideBar></SideBar>
       <div class="main-right">
@@ -77,7 +77,7 @@ export default {
   .layout-main {
     display: flex;
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 110px auto 40px;
     min-height: 700px;
 
     .sideBar {

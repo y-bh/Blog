@@ -602,23 +602,15 @@ ul {
     -ms-border-radius: 0.025rem;
     -o-border-radius: 0.025rem;
     font-size: 0.08rem;
+    line-height: 0.08rem;
     span{
         padding-right: 0.12rem;
     }
-    // i {
-    //     right: 0.075rem;
-    // }
+
     .iconfont {
         right: 0.075rem;
         font-size: 0.08rem;
     }
-}
-.message_tip_success {
-    border: 1px solid #E1F3D8;
-}
-  
-.message_tip_error {
-    border: 1px solid #fde2e2;
 }
 
 

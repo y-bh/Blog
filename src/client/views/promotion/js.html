@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-11 16:56:50
+ * @LastEditTime: 2022-05-11 18:18:14
 -->
 <script>
     // const { post, get } = require("utils/request");
@@ -227,32 +227,34 @@
             let params = {
                 url: "/auth/registerCode",
                 type: 'post',
-                query: {
-                    phone: $('#phoneNumber').val().trim()
-                }
+                query: $('#phoneNumber').val().trim()
             };
 
             console.log(params, 'params');
 
             let resp = await ajax(params);
             console.log(resp, 'resp');
-            if (resp === false) {
+            if (!resp) {
                 btn.attr('disabled', false);
                 return;
+            } else {
+                $message.success({
+                    message: '获取成功'
+                })
+                btn.text(timeout);
+                let interval = setInterval(function () {
+                    btn.attr('disabled', true);
+                    btn.text(--timeout + 's后重新获取');
+                    if (timeout <= 0) {
+                        clearInterval(interval);
+                        btn.html("重新获取");
+                        timeout = 60;
+                        btn.attr('disabled', false);
+                        btn.css("pointer-events", "");
+                    }
+                }, 1000);
             }
-            // layer.msg("获取成功", { icon: 1 });
-            // btn.text(timeout);
-            // let interval = setInterval(function () {
-            //     btn.attr('disabled', true);
-            //     btn.text(--timeout + 's后重新获取');
-            //     if (timeout <= 0) {
-            //         clearInterval(interval);
-            //         btn.html("重新获取");
-            //         timeout = 60;
-            //         btn.attr('disabled', false);
-            //         btn.css("pointer-events", "");
-            //     }
-            // }, 1000);
+
         });
 
     })
