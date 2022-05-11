@@ -416,6 +416,8 @@ body {
   color: #ffffff;
   z-index: 999;
   transform: translate(-50%, 0);
+  font-size: 16px;
+  line-height: 16px;
   span{
     padding-right: 24px;
   }
@@ -435,18 +437,18 @@ body {
 
 .message_tip_success {
   background-color: #f0f9eb;
-  border: 1px solid #E1F3D8;
+  border: none;
   color: #67c23a;
 }
 
 .message_tip_warning {
   background-color: #E6A23C;
-  border: 1px solid #E6A23C;
+  border: none;
   color: #fff;
 }
 
 .message_tip_error {
   background-color: #fef0f0;
-  border: 1px solid #fde2e2;
+  border: none;
   color: #F76C6C;
 }
