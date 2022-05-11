@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: 李云涛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-10 17:59:21
+ * @LastEditTime: 2022-05-11 10:48:10
  */
 
 const router = require("koa-router")();
@@ -200,7 +200,7 @@ function Router(App) {
 
   //个人中心
   let htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
-  const headerHtml = fs.readFileSync(`${config.templates}/components/header.html`, 'utf-8')
+  const headerHtml = fs.readFileSync(`${config.templates}/components/header/header.html`, 'utf-8')
   const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
     var headers = ejs.render(headerHtml, { name: 'zhuzhanwei' })
