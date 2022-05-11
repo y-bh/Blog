@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 应用配置文件
  * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-04-26 15:49:30
+ * @LastEditTime: 2022-05-11 15:53:23
  */
 
 const path = require("path")

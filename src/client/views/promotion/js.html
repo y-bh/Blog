@@ -3,9 +3,8 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-11 15:25:20
+ * @LastEditTime: 2022-05-11 16:56:50
 -->
-<script src="/utils/request.js"></script>
 <script>
     // const { post, get } = require("utils/request");
     // console.log(post, get, 'post,get');
@@ -214,38 +213,46 @@
 
         //获取验证码
         $("#getCode").click(async function () {
+            console.log(sameTime, '获取验证码');
             if (sameTime == 'true') {
                 return;
             }
-            if (!usernameValidate.call($('#userName'), $('#userName').val()) || !phoneValidate.call($('#phoneNumber'), $('#phoneNumber').val())) {
-                return;
-            }
+            // if (!usernameValidate.call($('#userName'), $('#userName').val()) || !phoneValidate.call($('#phoneNumber'), $('#phoneNumber').val())) {
+            //     return;
+            // }
 
             let btn = $('#getCode');
             //点击按钮就将其置为不可点击，等倒计时结束将其置为可点击
             btn.attr('disabled', true);
             let params = {
-                "A": "User.GetCode",
-                "P": { phone: $('#phoneNumber').val().trim(), role: 400 }
+                url: "/auth/registerCode",
+                type: 'post',
+                query: {
+                    phone: $('#phoneNumber').val().trim()
+                }
             };
+
+            console.log(params, 'params');
+
             let resp = await ajax(params);
+            console.log(resp, 'resp');
             if (resp === false) {
                 btn.attr('disabled', false);
                 return;
             }
-            layer.msg("获取成功", { icon: 1 });
-            btn.text(timeout);
-            let interval = setInterval(function () {
-                btn.attr('disabled', true);
-                btn.text(--timeout + 's后重新获取');
-                if (timeout <= 0) {
-                    clearInterval(interval);
-                    btn.html("重新获取");
-                    timeout = 60;
-                    btn.attr('disabled', false);
-                    btn.css("pointer-events", "");
-                }
-            }, 1000);
+            // layer.msg("获取成功", { icon: 1 });
+            // btn.text(timeout);
+            // let interval = setInterval(function () {
+            //     btn.attr('disabled', true);
+            //     btn.text(--timeout + 's后重新获取');
+            //     if (timeout <= 0) {
+            //         clearInterval(interval);
+            //         btn.html("重新获取");
+            //         timeout = 60;
+            //         btn.attr('disabled', false);
+            //         btn.css("pointer-events", "");
+            //     }
+            // }, 1000);
         });
 
     })
