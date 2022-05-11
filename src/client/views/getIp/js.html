@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 10:45:56
+ * @LastEditTime: 2022-05-11 11:13:39
 -->
 <script>
 $(function() {
@@ -397,6 +397,73 @@ $(function() {
     }
   ]
 
+  const errorCodeContent = {
+    extractError: [
+      {
+        label: '1001: 请求格式不正确'
+      },
+      {
+        label: '1002: 但此请求数量超出最大值'
+      },
+      {
+        label: '1003: 请求KEY异常'
+      },
+      {
+        label: '1004: 套餐已过期'
+      },
+      {
+        label: '1005: 套餐提取数量上限'
+      },
+      {
+        label: '1006: 暂无可用IP'
+      },
+      {
+        label: '1007: 提取地区超出服务范围'
+      }
+    ],
+    proxyError: [
+      {
+        label: '407: 白名单IP校验失败'
+      },
+      {
+        label: '430: 客户端IP非国内'
+      },
+      {
+        label: '431: 代理认证口令为空'
+      },
+      {
+        label: '432: 账号密码错误'
+      },
+      {
+        label: '434: 代理节点异常'
+      },
+      {
+        label: '435: 代理IP状态异常'
+      },
+      {
+        label: '436: 代理IP未经授权或已超出使用时长'
+      },
+      {
+        label: '451: IP未提取或已过期'
+      },
+      {
+        label: '452: 套餐信息异常'
+      },
+      {
+        label: '453: IP提取记录不存在'
+      },
+      {
+        label: '454: 套餐不存在'
+      },
+      {
+        label: '455: 用户信息异常'
+      },
+      {
+        label: '456: 未实名'
+      },
+    ]
+  }
+
   //列表渲染-提取IP
   $.each(extractIp,(index,item) => {
     $('.anchor').append(`<span class="pointer">${item.title}<span>`)
@@ -538,6 +605,18 @@ $(function() {
   //白名单接口-参数说明
   $.each(whiteParamsDesc,(index,item) => {
     $('.white_list .params_desc').append(`<div class="li_item_box flex-center">
+      ${item.label}
+    </div>`)
+  })
+
+  //错误码
+  $.each(errorCodeContent.extractError,(index,item) => {
+    $('.error_code .extract').append(`<div class="li_item_box flex-center mb-20 port">
+      ${item.label}
+    </div>`)
+  })
+  $.each(errorCodeContent.proxyError,(index,item) => {
+    $('.error_code .proxy').append(`<div class="li_item_box flex-center mb-20 port">
       ${item.label}
     </div>`)
   })

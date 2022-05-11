@@ -339,11 +339,11 @@ body {
 }
 
 .flex-wrap {
-  flex-wrap: wrap
+  flex-wrap: wrap !important;
 }
 
 .flex-column {
-  flex-direction: column;
+  flex-direction: column !important;
 }
 
 .grid {
