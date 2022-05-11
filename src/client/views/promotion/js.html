@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-11 18:08:28
+ * @LastEditTime: 2022-05-11 18:18:14
 -->
 <script>
     // const { post, get } = require("utils/request");
@@ -227,9 +227,7 @@
             let params = {
                 url: "/auth/registerCode",
                 type: 'post',
-                query: {
-                    phone: $('#phoneNumber').val().trim()
-                }
+                query: $('#phoneNumber').val().trim()
             };
 
             console.log(params, 'params');
