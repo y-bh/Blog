@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-11 13:40:42
+ * @LastEditTime: 2022-05-11 14:31:56
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +32,9 @@
         <div class="demo grid justify-center"></div>
       </div>
     </div>
-    <div class="empty"></div>
     <!-- 右边主体内容 -->
     <div class="right grid">
+      <!-- 提取IP -->
       <div class="head extract_ip_right">
         <span class="font-25 title">提取IP</span>
         <div class="extract_type_box flex flex-wrap align-center mt-40">
@@ -43,17 +43,35 @@
             <option selected>余额提取</option>
           </select>
         </div>
-        <div class="form-group count mt-40">
-          <label for="count" class="font-18 main-title-color">账户概况</label>
-          <div class="count_box mt-20 flex justify-between align-center" id="count">
-            <div class="box_left">
-              <label for="left_desc">当前账户余额(天启币)</label>
-              <span class="left_count ml-5" id="left_count">3333.3333</span>
+        <!-- 已登录展示 -->
+        <div class="already_login">
+          <div class="form-group count mt-40">
+            <label class="font-18 main-title-color">账户概况</label>
+            <div class="count_box mt-20 flex justify-between align-center">
+              <div class="box_left">
+                <label for="left_desc">当前账户余额(天启币)</label>
+                <span class="left_count ml-5" id="left_count">3333.3333</span>
+              </div>
+              <button class="right_btn">充值</button>
             </div>
-            <button class="right_btn">充值</button>
+          </div>
+          <div class="meal_box mt-30 grid"></div>
+        </div>
+        <!-- 未登录展示 -->
+        <div class="not_login">
+          <div class="form-group mt-40">
+            <label class="font-18 main-title-color">账户概况</label>
+            <div class="count_box mt-20 flex justify-between align-center">
+              <div class="box_left">
+                登录查看当前账户余额，新用户可享新人福利
+              </div>
+              <div class="btn">
+                <button class="right_btn mr-20">登录</button>
+                <button class="right_btn">注册</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="meal_box mt-30 grid"></div>
         <div class="mt-30 extract_num flex flex-wrap align-center">
           <label class="font-18 main-title-color label_lay">提取数量</label>
           <div class="input-group extract_box flex-center">
@@ -146,10 +164,12 @@
             <p class="mb-10 font-15">* 生成API链接，调用GET请求即可返回所需的IP结果</p>
             <p class="mb-10 font-15">* 您的所有访问操作均有日志保存，望遵纪守法</p>
             <p class="font-15">* 请使用合理的频率去调用API接口，暴力调用将导致您的客户端IP被防火墙封禁</p>
+          </div>
         </div>
       </div>
-      <div class="head extract_interface mt-40">
-        <span class="font-25 title">提取接口</span>
+      <!-- 提取接口使用说明 -->
+      <div class="head extract_interface">
+        <span class="font-25 title">提取接口使用说明</span>
         <div class="note_box flex mt-40">
           <ul class="note_desc">
             <li class="top_li flex-center">属性</li>
@@ -183,7 +203,7 @@
             </li>
             <li class="ele flex-center pt-20 pb-20">
               <div class="code flex-center">
-                <br>
+                <p>
                   返回内容的标签或字段类型可在产品管理里通过设置提取格式来定制；<br/>
                   类型为txt文本的定制标签如下：<br/>
                   ip：port自定义分隔符；<br/>
@@ -208,83 +228,126 @@
           </ul>
         </div>
       </div>
-      <div class="head white_list mt-40">
-        <span class="font-25 title">白名单接口</span>
-        <div class="note_box flex mt-40">
-          <ul class="note_desc">
-            <li class="top_li flex-center">属性</li>
-            <div class="white_box"></div>
-          </ul>
-          <ul class="note_content widthAll">
-            <li class="top_li flex-center">内容</li>
-            <li class="ele flex-center pt-20 pb-20">
-              <div class="li_item_box flex-center port">
-                http://api.tianqiip.com/white/add?key=xxx&brand=2&sign=xxx&ip=xxx
-              </div>
-            </li>
-            <li class="ele flex-center pt-20 pb-20">
-              <div class="li_item_box flex-center port">
-                http://api.tianqiip.com/white/delete?key=xxx&brand=2&sign=xxx&ip=xxx
-              </div>
-            </li>
-            <li class="ele flex-center pt-20 pb-20">
-              <div class="li_item_box flex-center port">
-                http://api.tianqiip.com/white/fetch?key=xxx&brand=2&sign=xxx
-              </div>
-            </li>
-            <li class="ele flex-center pt-20 pb-20">
-              <div class="li_item_box flex-center">
-                GET
-              </div>
-            </li>
-            <li class="ele flex-center pt-20 pb-20">
-              <div class="li_item_box flex-center">
-                utf-8
-              </div>
-            </li>
-            <li class="ele grid pt-20 pb-20 align-center params_desc"></li>
-            <li class="ele flex-center flex-column pt-20 pb-20">
-              <div class="li_item_box flex-center">
-                code: 错误编号
-              </div>
-              <div class="li_item_box flex-center mt-20">
-                Msg: 描述信息
-              </div>
-            </li>
-            <li class="ele flex-center flex-column pt-20 pb-20">
-              <div class="li_item_box flex-center">
-                code: 200
-              </div>
-              <div class="li_item_box flex-center mt-20">
-                info: 描述信息
-              </div>
-            </li>
-            <li class="ele flex-center pt-20 pb-20">
-              <div class="li_item_box flex-center">
-                200: 操作成功
-              </div>
-            </li>
-          </ul>
+      <!-- 提取接口返回结果实例 -->
+      <div class="extract_return">
+        <span class="font-25 title">提取接口返回结果实例</span>
+        <div class="box grid mt-40">
+          <div class="text_format container">
+            <div class="return_left">
+              <div class="top_title flex-center">TEXT格式</div>
+            </div>
+            <div class="return_right flex-center pb-30">
+              114.101.252.126.57577<br/>
+              114.101.252.126.57577<br/>
+              114.101.252.126.57577
+            </div>
+          </div>
+          <div class="json_format container">
+            <div class="return_left">
+              <div class="top_title flex-center">JSON格式</div>
+            </div>
+            <div class="return_right white-line flex-center pb-30">
+              {
+                "code": 200,<br/>
+                "data": [<br/>
+                  {<br/>
+                    "ip": "121.227.60.236",<br/>
+                    "port": "20252",<br/>
+                    "prov": "辽宁",<br/>
+                    "city": "鞍山"<br/>
+                  },<br/>
+                  {<br/>
+                    "ip": "121.227.60.236",<br/>
+                    "port": "20252",<br/>
+                    "prov": "辽宁",<br/>
+                    "city": "鞍山"<br/>
+                  },<br/>
+                ]<br/>
+              }
+            </div>
+          </div>
         </div>
       </div>
-      <div class="head error_code mt-40">
-        <span class="font-25 title">错误码</span>
-        <div class="note_box flex mt-40">
-          <ul class="note_desc">
-            <li class="top_li flex-center">错误码</li>
-            <div class="box"></div>
-          </ul>
-          <ul class="note_content widthAll">
-            <li class="top_li flex-center">说明</li>
-            <li class="ele flex-center flex-column pt-20 pb-20 extract"></li>
-            <li class="ele flex-center flex-column pt-20 pb-20 white"></li>
-            <li class="ele flex-center flex-column pt-20 pb-20 proxy"></li>
-          </ul>
-        </div>
+      <!-- 白名单接口使用说明 -->
+      <div class="head white_list">
+          <span class="font-25 title">白名单接口使用说明</span>
+          <div class="note_box flex mt-40">
+            <ul class="note_desc">
+              <li class="top_li flex-center">属性</li>
+              <div class="white_box"></div>
+            </ul>
+            <ul class="note_content widthAll">
+              <li class="top_li flex-center">内容</li>
+              <li class="ele flex-center pt-20 pb-20">
+                <div class="li_item_box flex-center port">
+                  http://api.tianqiip.com/white/add?key=xxx&brand=2&sign=xxx&ip=xxx
+                </div>
+              </li>
+              <li class="ele flex-center pt-20 pb-20">
+                <div class="li_item_box flex-center port">
+                  http://api.tianqiip.com/white/delete?key=xxx&brand=2&sign=xxx&ip=xxx
+                </div>
+              </li>
+              <li class="ele flex-center pt-20 pb-20">
+                <div class="li_item_box flex-center port">
+                  http://api.tianqiip.com/white/fetch?key=xxx&brand=2&sign=xxx
+                </div>
+              </li>
+              <li class="ele flex-center pt-20 pb-20">
+                <div class="li_item_box flex-center">
+                  GET
+                </div>
+              </li>
+              <li class="ele flex-center pt-20 pb-20">
+                <div class="li_item_box flex-center">
+                  utf-8
+                </div>
+              </li>
+              <li class="ele grid pt-20 pb-20 align-center params_desc"></li>
+              <li class="ele flex-center flex-column pt-20 pb-20">
+                <div class="li_item_box flex-center">
+                  code: 错误编号
+                </div>
+                <div class="li_item_box flex-center mt-20">
+                  Msg: 描述信息
+                </div>
+              </li>
+              <li class="ele flex-center flex-column pt-20 pb-20">
+                <div class="li_item_box flex-center">
+                  code: 200
+                </div>
+                <div class="li_item_box flex-center mt-20">
+                  info: 描述信息
+                </div>
+              </li>
+              <li class="ele flex-center pt-20 pb-20">
+                <div class="li_item_box flex-center">
+                  200: 操作成功
+                </div>
+              </li>
+            </ul>
+          </div>
       </div>
-      <div class="head code_demo_right mt-40">
-        <span class="font-25 title">代码demo</span>
-        <div class="demo_box grid mt-40"></div>
+      <!-- 错误码 -->
+      <div class="head error_code">
+          <span class="font-25 title">错误码</span>
+          <div class="note_box flex mt-40">
+            <ul class="note_desc">
+              <li class="top_li flex-center">错误码</li>
+              <div class="box"></div>
+            </ul>
+            <ul class="note_content widthAll">
+              <li class="top_li flex-center">说明</li>
+              <li class="ele flex-center flex-column pt-20 pb-20 extract"></li>
+              <li class="ele flex-center flex-column pt-20 pb-20 white"></li>
+              <li class="ele flex-center flex-column pt-20 pb-20 proxy"></li>
+            </ul>
+          </div>
+      </div>
+      <!-- 代码demo -->
+      <div class="head code_demo_right">
+          <span class="font-25 title">代码demo</span>
+          <div class="demo_box grid mt-40"></div>
       </div>
     </div>
   </div>

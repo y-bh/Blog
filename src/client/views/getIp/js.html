@@ -3,10 +3,12 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 13:39:26
+ * @LastEditTime: 2022-05-11 14:37:34
 -->
 <script>
 $(function() {
+  let loginStatus = false;  //登录情况
+
   const extractIp = [
     {
       title: 'API获取',
@@ -706,5 +708,9 @@ $(function() {
       }
     })
   })
+
+  //登录情况判断渲染
+  $('.already_login').css('display',loginStatus ? 'block' : 'none')
+  $('.not_login').css('display',loginStatus ? 'none' : 'block')
 })
 </script>
