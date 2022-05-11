@@ -404,11 +404,11 @@ body {
 
 // 弹窗提示
 .message_tip {
-  min-width: 180px;
+  position: relative;
+  min-width: 240px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
+  padding: 15px 15px 15px 20px;
   border-radius: 8px;
   position: fixed;
   top: 15%;
@@ -416,9 +416,20 @@ body {
   color: #ffffff;
   z-index: 999;
   transform: translate(-50%, 0);
-  
+  span{
+    padding-right: 24px;
+  }
   i {
-    margin-left: 30px;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    cursor: pointer;
+    color: #dfe2e7;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
   }
 }
 

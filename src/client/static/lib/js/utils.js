@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-11 14:50:45
+ * @LastEditTime: 2022-05-11 15:10:20
  */
 
 // 弹窗消息提示
@@ -21,7 +21,7 @@ function $message (options = {}){
     const type = options.type ? options.type : 'success';
     const duration = options.duration ? options.duration : 4000;
 
-    console.log(options,'配置信息');
+    let timer = null;
 
     const domTree = "<div class='message_tip'>" + 
             "<span>" + msg + "</span>" + 
@@ -36,7 +36,15 @@ function $message (options = {}){
     messageData.addClass(typeClass);
    
     // 先将原始隐藏，然后添加到页面，最后以300毫秒的速度下拉显示出来
-    messageData.hide().appendTo("body").slideDown(300);
+    console.log(messageData,'messageData');
+    if($('.message_tip')){
+        $('.message_tip').remove();
+        clearTimeout(timer)  // 重置关闭弹出时间
+        messageData.hide().appendTo("body").slideDown(300);
+    } else {
+        messageData.hide().appendTo("body").slideDown(300);
+    }
+    
 
 
     // 关闭消息提示弹出框
@@ -47,7 +55,7 @@ function $message (options = {}){
     }
 
     // 2秒之后自动删除生成的元素
-    window.setTimeout(function () {
+    timer = window.setTimeout(function () {
         if($('.message_tip')){
             closeTip()
         }

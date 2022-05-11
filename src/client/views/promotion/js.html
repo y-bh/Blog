@@ -3,10 +3,11 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-11 14:39:44
+ * @LastEditTime: 2022-05-11 16:56:50
 -->
 <script>
-
+    // const { post, get } = require("utils/request");
+    // console.log(post, get, 'post,get');
     $(function () {
         let sameTime = 'false';
         let timeout = 60;
@@ -49,10 +50,16 @@
             let reg = /^1[34589]\d{9}|17[2-9]\d{8}|16[0-1]\d{8}|16[3-4]\d{8}|166\d{8}|16[8-9]\d{8}$/;
             let flag = reg.test(value);
             if (!value) {
-                layer.msg('请输入手机号', { icon: 2 });  // X
+                $message.warning({
+                    message: "请输入手机号",
+                    showClose: true
+                })
                 return false;
             } else if (!flag) {
-                layer.msg('请输入正确的手机号码', { icon: 5 });
+                $message.error({
+                    message: "请输入正确的手机号码",
+                    showClose: true
+                })
                 return false;
             } else {
                 sameTime = 'false';
@@ -65,13 +72,19 @@
             sameTime = 'true';
             let value = val;
             if (!value) {
-                layer.msg('请输入短信验证码', { icon: 2 });
+                $message.warning({
+                    message: "请输入短信验证码",
+                    showClose: true
+                })
                 return false;
             }
             let reg = /^[0-9]{6}$/;
             let flag = reg.test(value);
             if (!flag) {
-                layer.msg('请输入正确的短信验证码', { icon: 5 });
+                $message.error({
+                    message: "请输入正确的短信验证码",
+                    showClose: true
+                })
                 return false;
             } else {
                 sameTime = 'false';
@@ -84,17 +97,26 @@
             sameTime = 'true';
             let value = val;
             if (!value) {
-                layer.msg('请输入登录密码', { icon: 2 });  // X
+                $message.warning({
+                    message: "请输入登录密码",
+                    showClose: true
+                })
                 return false;
             }
             let reg = /^[a-zA-Z0-9_!@#$%^&*.]{6,20}$/;
             let flag = reg.test(value);
             if (!flag) {
                 if (value.length < 6 || value.length > 20) {
-                    layer.msg('密码长度在6到20个字符', { icon: 5 });
+                    $message.warning({
+                        message: "密码长度在6到20个字符",
+                        showClose: true
+                    })
                     return false;
                 }
-                layer.msg('密码只能由字母，数字，特殊符号组成', { icon: 5 });
+                $message.warning({
+                    message: "密码只能由字母，数字，特殊符号组成",
+                    showClose: true
+                })
                 return false;
             } else {
                 sameTime = 'false';
@@ -140,7 +162,98 @@
             let value = $(this).val();
             return usernameValidate.call(this, value);
         });
+        $('#userName2').blur(function () {
+            sameTime = 'true';
+            let value = $(this).val();
+            return usernameValidate.call(this, value);
+        });
+        $('#userName3').blur(function () {
+            sameTime = 'true';
+            let value = $(this).val();
+            return usernameValidate.call(this, value);
+        });
+        $('#phoneNumber').blur(function () {
+            let value = $(this).val();
+            return phoneValidate.call(this, value);
+        });
+        $('#phoneNumber2').blur(function () {
+            let value = $(this).val();
+            return phoneValidate.call(this, value);
+        });
+        $('#phoneNumber3').blur(function () {
+            let value = $(this).val();
+            return phoneValidate.call(this, value);
+        });
 
+        $('#phoneCode').blur(function () {
+            let value = $(this).val();
+            return codeValidate.call(this, value);
+        });
+        $('#phoneCode2').blur(function () {
+            let value = $(this).val();
+            return codeValidate.call(this, value);
+        });
+        $('#phoneCode3').blur(function () {
+            let value = $(this).val();
+            return codeValidate.call(this, value);
+        });
+
+        $('#password').blur(function () {
+            let value = $(this).val();
+            return passwordValidate.call(this, value);
+        });
+        $('#password2').blur(function () {
+            let value = $(this).val();
+            return passwordValidate.call(this, value);
+        });
+        $('#password3').blur(function () {
+            let value = $(this).val();
+            return passwordValidate.call(this, value);
+        });
+
+        //获取验证码
+        $("#getCode").click(async function () {
+            console.log(sameTime, '获取验证码');
+            if (sameTime == 'true') {
+                return;
+            }
+            // if (!usernameValidate.call($('#userName'), $('#userName').val()) || !phoneValidate.call($('#phoneNumber'), $('#phoneNumber').val())) {
+            //     return;
+            // }
+
+            let btn = $('#getCode');
+            //点击按钮就将其置为不可点击，等倒计时结束将其置为可点击
+            btn.attr('disabled', true);
+            let params = {
+                url: "/auth/registerCode",
+                type: 'post',
+                query: {
+                    phone: $('#phoneNumber').val().trim()
+                }
+            };
+
+            console.log(params, 'params');
+
+            let resp = await ajax(params);
+            console.log(resp, 'resp');
+            if (resp === false) {
+                btn.attr('disabled', false);
+                return;
+            }
+            // layer.msg("获取成功", { icon: 1 });
+            // btn.text(timeout);
+            // let interval = setInterval(function () {
+            //     btn.attr('disabled', true);
+            //     btn.text(--timeout + 's后重新获取');
+            //     if (timeout <= 0) {
+            //         clearInterval(interval);
+            //         btn.html("重新获取");
+            //         timeout = 60;
+            //         btn.attr('disabled', false);
+            //         btn.css("pointer-events", "");
+            //     }
+            // }, 1000);
+        });
 
     })
 </script>
