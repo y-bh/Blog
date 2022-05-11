@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 09:40:00
+ * @LastEditTime: 2022-05-11 10:45:56
 -->
 <script>
 $(function() {
@@ -326,7 +326,75 @@ $(function() {
     {
       label: 'cs(可选):是否显示位置,1:显示  默认不显示'
     },
+  ]
 
+  const extractDesc = [
+    {
+      label: 'URL'
+    },
+    {
+      label: '方法'
+    },
+    {
+      label: '编码'
+    },
+    {
+      label: '参数说明'
+    },
+    {
+      label: '异常'
+    },
+    {
+      label: '成功'
+    },
+    {
+      label: '状态码'
+    }
+  ]
+
+  const whiteDesc = [
+  {
+      label: '添加白名单接口'
+    },
+    {
+      label: '删除白名单接口'
+    },
+    {
+      label: '查询白名单接口'
+    },
+    {
+      label: '方法'
+    },
+    {
+      label: '编码方式'
+    },
+    {
+      label: '参数说明'
+    },
+    {
+      label: '异常'
+    },
+    {
+      label: '成功'
+    },
+    {
+      label: '状态码'
+    }
+  ]
+
+  const whiteParamsDesc = [
+    {
+      label: 'Key: 用户账号'
+    },
+    {
+      label: 'Sign: 密钥签名'
+    },
+    {
+      label: "需要添加或删除的ip地址,多个使用','分割"
+    },
+    {
+      label: '固定参数,固定取值2'
+    }
   ]
 
   //列表渲染-提取IP
@@ -448,7 +516,28 @@ $(function() {
 
   //参数说明
   $.each(paramsDesc,(index,item) => {
-    $('.params_desc').append(`<div class="li_item_box flex-center">
+    $('.extract_interface .params_desc').append(`<div class="li_item_box flex-center">
+      ${item.label}
+    </div>`)
+  })
+
+  //提取接口-属性
+  $.each(extractDesc,(index,item) => {
+    $('.note_desc .extract_box').append(`<li class="ele flex-center">
+      ${item.label}
+    </li>`)
+  })
+
+  //白名单接口-属性
+  $.each(whiteDesc,(index,item) => {
+    $('.note_desc .white_box').append(`<li class="ele flex-center">
+      ${item.label}
+    </li>`)
+  })
+
+  //白名单接口-参数说明
+  $.each(whiteParamsDesc,(index,item) => {
+    $('.white_list .params_desc').append(`<div class="li_item_box flex-center">
       ${item.label}
     </div>`)
   })
