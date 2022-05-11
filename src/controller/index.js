@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 李云涛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-11 14:43:31
+ * @LastEditTime: 2022-05-11 18:20:58
  */
 
 const router = require("koa-router")();
@@ -16,7 +16,7 @@ const config = require("../config/app.config")
 
 //套餐购买
 const packageObj = require("./package.js")
-const { renderPackage } = require("service/package")
+const { renderPackage } = require("service/package");
 
 function Router(App) {
   //用户管理
