@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 14:37:34
+ * @LastEditTime: 2022-05-11 14:52:32
 -->
 <script>
 $(function() {
@@ -581,7 +581,10 @@ $(function() {
   const changeIpNum = (val,btn) => {
     let num = Number(val)
     if (btn === 'decrement' && val <= 1) {  //点击"-"并且数值为1
-      alert('单次最小提取量为1')
+      $message.warning({
+        message: '单次最小提取量为1',
+        showClose: true
+      })
       return null
     } else {
       if (btn === 'decrement') {
