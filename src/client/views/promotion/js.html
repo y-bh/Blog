@@ -3,28 +3,144 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-10 14:05:36
+ * @LastEditTime: 2022-05-11 14:39:44
 -->
 <script>
-    // 不同分辨率屏幕 计算rem
-    function rootResize () {
-        var baseFontSize = 200;
-        var baseWidth = 750;
-        var minWidth = 375;
-        var clientWidth = document.documentElement.clientWidth || window.innerWidth;
-        var innerWidth = Math.max(Math.min(clientWidth, baseWidth), minWidth);
-        var rem = clientWidth / (baseWidth / baseFontSize);
-        if (innerWidth == 750 || innerWidth == 375) {
-            rem = innerWidth / (baseWidth / baseFontSize)
-        }
-        document.querySelector('html').style.fontSize = rem + 'px';
-        console.log(rem, 'document');
-    };
-    rootResize();
-    window.onresize = function () {
-        rootResize()
-    };
+
     $(function () {
+        let sameTime = 'false';
+        let timeout = 60;
+        let timeout2 = 60;
+        let timeout3 = 60;
+        // 验证用户名输入
+        function usernameValidate (val) {
+            let value = val;
+            let reg = /^[a-zA-Z0-9_@]{4,16}$/;
+            let flag = reg.test(value);
+            if (!value) {
+                $message.warning({
+                    message: "用户名不能为空",
+                    showClose: true
+                })
+                return false;
+            } else if (!flag) {
+                if (value.length < 4 || value.length > 16) {
+                    $message.warning({
+                        message: "用户名长度在4到16个字符",
+                        showClose: true
+                    })
+                    return false;
+                }
+                $message.warning({
+                    message: "用户名只能由字母，数字，_@组成",
+                    showClose: true
+                })
+                return false;
+            } else {
+                sameTime = 'false';
+                return true;
+            }
+        }
+
+        // 验证手机格式
+        function phoneValidate (val) {
+            sameTime = 'true';
+            let value = val;
+            let reg = /^1[34589]\d{9}|17[2-9]\d{8}|16[0-1]\d{8}|16[3-4]\d{8}|166\d{8}|16[8-9]\d{8}$/;
+            let flag = reg.test(value);
+            if (!value) {
+                layer.msg('请输入手机号', { icon: 2 });  // X
+                return false;
+            } else if (!flag) {
+                layer.msg('请输入正确的手机号码', { icon: 5 });
+                return false;
+            } else {
+                sameTime = 'false';
+                return true;
+            }
+        }
+
+        // 验证手机验证码
+        function codeValidate (val) {
+            sameTime = 'true';
+            let value = val;
+            if (!value) {
+                layer.msg('请输入短信验证码', { icon: 2 });
+                return false;
+            }
+            let reg = /^[0-9]{6}$/;
+            let flag = reg.test(value);
+            if (!flag) {
+                layer.msg('请输入正确的短信验证码', { icon: 5 });
+                return false;
+            } else {
+                sameTime = 'false';
+                return true;
+            }
+        }
+
+        // 验证密码
+        function passwordValidate (val) {
+            sameTime = 'true';
+            let value = val;
+            if (!value) {
+                layer.msg('请输入登录密码', { icon: 2 });  // X
+                return false;
+            }
+            let reg = /^[a-zA-Z0-9_!@#$%^&*.]{6,20}$/;
+            let flag = reg.test(value);
+            if (!flag) {
+                if (value.length < 6 || value.length > 20) {
+                    layer.msg('密码长度在6到20个字符', { icon: 5 });
+                    return false;
+                }
+                layer.msg('密码只能由字母，数字，特殊符号组成', { icon: 5 });
+                return false;
+            } else {
+                sameTime = 'false';
+                return true;
+            }
+        }
+
+        // 计数器加减事件
+        $('#getReduce').click(function () {
+            $(this).addClass('btnClick').siblings().removeClass('btnClick');
+            let $this = $(this)[0];
+            let that = $('#ip-num')[0];
+            that.value = that.value - 1;
+            if (that.value <= 0) {
+                that.value = 0;
+                $this.disabled = true;
+            }
+        })
+
+        $("#getIncrease").click(function () {
+            $(this).addClass('btnClick').siblings().removeClass('btnClick');
+            let that = $('#ip-num')[0];
+            that.value = parseInt(that.value) + 1;
+            if (that.value > 0) {
+                $("#getReduce")[0].disabled = false;
+            }
+        });
+        // 数据格式切换 
+        $('.data-group .menu-item').click(function () {
+            $('#JSON').prop("checked") ? $('.attribute').css('display', 'block') : $('.attribute').css('display', 'none');
+
+            $('#TXT').prop("checked") ? $('.split-sign').css('display', 'block') : $('.split-sign').css('display', 'none');
+        })
+        //地区选择切换
+        $('.area-group .menu-item').click(function () {
+            $('#province').prop("checked") ? $('.province-introduce').css('display', 'block') : $('.province-introduce').css('display', 'none');
+        })
+
+        // 注册规则验证
+        //第一个注册表单　用户名失去焦点事件
+        $('#userName').blur(function () {
+            sameTime = 'true';
+            let value = $(this).val();
+            return usernameValidate.call(this, value);
+        });
+
 
     })
 </script>
