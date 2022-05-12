@@ -1,0 +1,6 @@
+
+.desc-dialog {
+  .el-dialog__body {
+    padding-bottom: 10px;
+  }
+}

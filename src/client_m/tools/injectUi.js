@@ -3,15 +3,17 @@
  * @LastEditors: 李云涛
  * @description: 按需注入element-plus
  * @Date: 2022-04-26 14:41:46
- * @LastEditTime: 2022-05-11 18:36:46
+ * @LastEditTime: 2022-05-12 10:45:20
  */
 
 import {
-  ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol, ElSwitch
+  ElDialog,ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol, ElSwitch,
+  ElForm, ElFormItem,ElInput
 } from "element-plus";
 
 
 const components = [
+  ElDialog,
   ElTableColumn,
   ElTable,
   ElButton,
@@ -22,7 +24,10 @@ const components = [
   ElMenuItemGroup,
   ElRow,
   ElCol,
-  ElSwitch
+  ElSwitch,
+  ElForm,
+  ElFormItem,
+  ElInput,
 ]
 const plugins = [
   ElLoading,

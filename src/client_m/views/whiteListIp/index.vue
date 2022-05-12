@@ -3,7 +3,7 @@
  * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-11 18:33:11
+ * @LastEditTime: 2022-05-12 15:19:35
 -->
 <template>
   <div class="white-list-wrap">
@@ -17,11 +17,11 @@
     </div>
     <div class="white-list-btn">
       <el-button>查看教程</el-button>
-      <el-button>添加IP白名单</el-button>
+      <el-button @click="openWhiteListDialog('add')">添加IP白名单</el-button>
     </div>
     <div class="auto-replace">
       <span>提取IP自动替换</span>
-      <el-switch v-model="switchVal"></el-switch>
+      <el-switch v-model="switchVal" class="auto-replace-switch" @change="switchChange"></el-switch>
     </div>
     <div class="api-text">Api接口</div>
     <div class="api-link"><a href="">点击获取白名单添加接口</a></div>
@@ -33,30 +33,43 @@
         <el-table-column prop="desc" label="备注">
           <template #default="{ row }">
             {{row.desc}}
-            <button>edit</button>
+            <button @click="openWhiteListDialog('edit', row)">edit</button>
           </template>
         </el-table-column>
         <el-table-column prop="time" label="设置时间"></el-table-column>
         <el-table-column prop="operator" label="操作">
-          <template>
-            <button>移除</button>
+          <template #default="{ row }">
+            <el-button @click="openRemoveDialog(row)">移除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
   </div>
+  <editDialog ref="editDialogRef" />
+  <removeDialog ref="removeDialogRef" />
 </template>
 
 <script>
 import { reactive, toRefs, onMounted, ref } from "vue";
+
+/**components */
+import editDialog from "./components/editDialog"
+import removeDialog from "./components/removeDialog"
+
 export default {
   name: "",
   props: {},
+  components: {
+    editDialog,
+    removeDialog,
+  },
   setup() {
-    const tooltipIconRef = ref(null)
+    const editDialogRef = ref(null)
+    const removeDialogRef = ref(null)
 
     const state = reactive({
       tableData: [{
+        id: 1,
         ip: 1,
         desc: 1,
         time: 1
@@ -64,14 +77,38 @@ export default {
       switchVal: true,
     })
 
-    //移入
+    //打开弹窗
+    function openWhiteListDialog(type = 'add', val = {}) {
+      editDialogRef.value.openDialog(type, val);
+    }
+    function openRemoveDialog({ id }) {
+      removeDialogRef.value.openDialog(id)
+    }
 
-    onMounted(() => {});
+    //switch Change
+    function switchChange(val) {
+      try {
+        /**change auto replace func */
+
+        state.switchVal = val
+      } catch (error) {
+        console.error('Change Auto Replace: ', error)
+      }
+    }
+
+    onMounted(() => {
+      state.switchVal = false
+    });
     //const refData = toRefs(null);
     return {
       //   ...refData,
       ...toRefs(state),
-      tooltipIconRef, //图标Ref
+      editDialogRef, //edit&add dialog Ref
+      removeDialogRef, //remove dialog Ref
+
+      switchChange, //switch Change
+      openWhiteListDialog, //remove WhiteList Ip
+      openRemoveDialog, //open Remove Dialog
     };
   },
 };
