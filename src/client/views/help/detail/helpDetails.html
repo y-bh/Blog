@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心详情页
  * @Date: 2022-04-27 14:22:18
- * @LastEditTime: 2022-05-12 10:37:37
+ * @LastEditTime: 2022-05-12 16:51:42
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +15,64 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>文章详情</title>
+  <%- include('../../components/style.html'); %>
+  <%- include('./style.html') %>
 </head>
 <body>
-  <h1>文章详情</h1>
-  <div>
-    <%=name%>
-  </div>
-  <div>
-    <%=data%>
+  <div class="container grid">
+    <div class="a_left grid grg-30">
+      <div class="a_top flex justify-between align-center">
+        <div class="a_top_left">
+          <span class="pointer help_center">帮助中心</span>-
+          <span class="pointer go_tab">tab</span>-
+          <span class="main-title-color">题目</span>
+        </div>
+        <span class="a_top_right">2022-04-27 12:12:12</span>
+      </div>
+      <div class="tag_container flex">
+        <div class="tag_container_left flex align-center">
+          <i class="mr-10">icon</i>
+          <span class="main-title-color">标签</span>
+        </div>
+        <div class="tag_box ml-15 flex align-center"></div>
+      </div>
+      <div class="content flex-center">内容区域</div>
+      <div class="btn flex justify-between">
+        <div class="btn_left">
+          <span class="text-blue">上一篇: </span>
+          <span class="last_title text-blue">标题</span>
+        </div>
+        <div class="btn_right">
+          <span class="text-blue">下一篇: </span>
+          <span class="next_title text-blue">标题</span>
+        </div>
+      </div>
+    </div>
+    <div class="a_right grid">
+      <div class="related_blogs grid grg-30 b_box">
+        <div class="b_top font-18 font-bold main-title-color flex justify-between">
+          相关文章
+          <span class="text-blue font-16">查看更多>></span>
+        </div>
+        <div class="b_bottom"></div>
+      </div>
+      <div class="manual_book grid grg-30 b_box">
+        <div class="b_top font-18 font-bold main-title-color flex justify-between">
+          操作手册
+          <span class="text-blue font-16">查看更多>></span>
+        </div>
+        <div class="b_bottom"></div>
+      </div>
+      <div class="introduce grid grg-30 b_box">
+        <div class="b_top font-18 font-bold main-title-color flex justify-between">
+          产品介绍
+          <span class="text-blue font-16">查看更多>></span>
+        </div>
+        <div class="b_bottom"></div>
+      </div>
+    </div>
   </div>
 </body>
+<%- include('../../components/js.html'); %>
+<%- include('./js.html') %>
 </html>

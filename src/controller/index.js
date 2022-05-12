@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-12 10:38:27
+ * @LastEditTime: 2022-05-12 15:30:49
  */
 
 const router = require("koa-router")();
@@ -141,7 +141,7 @@ function Router(App) {
   })
 
   //帮助中心-helpCenter-details
-  router.get("/helpDetails/:id", async (ctx) => {
+  router.get("/helpDetails", async (ctx) => {
 
     /**数据请求 */
     const { id } = ctx.request.params

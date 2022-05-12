@@ -3,6 +3,101 @@
  * @LastEditors: 陈昊天
  * @description: 文章详情js
  * @Date: 2022-05-12 10:39:23
- * @LastEditTime: 2022-05-12 10:40:32
+ * @LastEditTime: 2022-05-12 16:51:41
 -->
-<script></script>
+<script scoped>
+  const tagList = [
+    {
+      id: 1,
+      tag: '标签1'
+    },
+    {
+      id: 2,
+      tag: '标签2'
+    },
+  ]
+
+  const relatedBlogs = [
+    {
+      id: 1,
+      title: '题目1'
+    },
+    {
+      id: 2,
+      title: '题目2'
+    },
+    {
+      id: 3,
+      title: '题目3'
+    },
+  ]
+
+  const manualBook = [
+    {
+      id: 1,
+      title: '题目1'
+    },
+    {
+      id: 2,
+      title: '题目2'
+    },
+    {
+      id: 3,
+      title: '题目3'
+    },
+  ]
+
+  const introduce = [
+    {
+      id: 1,
+      title: '题目1'
+    },
+    {
+      id: 2,
+      title: '题目2'
+    },
+    {
+      id: 3,
+      title: '题目3'
+    },
+  ]
+
+  //标签列表
+  $.each(tagList,(index,item) => {
+    $('.tag_box').append(`<span class="tag_item mr-10 flex-center pointer">
+        ${item.tag}
+      </span>`)
+  })
+
+  //相关文章
+  $.each(relatedBlogs,(index,item) => {
+    $('.related_blogs .b_bottom').append(`<div class="flex justify-between mb-10">
+        <span>${item.title}</span>
+        <i>></i>
+      </div>`)
+  })
+
+  //操作手册
+  $.each(manualBook,(index,item) => {
+    $('.manual_book .b_bottom').append(`<div class="flex justify-between mb-10">
+        <span>${item.title}</span>
+        <i>></i>
+      </div>`)
+  })
+
+  //产品介绍
+  $.each(introduce,(index,item) => {
+    $('.introduce .b_bottom').append(`<div class="flex justify-between mb-10">
+        <span>${item.title}</span>
+        <i>></i>
+      </div>`)
+  })
+
+  //点击面包屑
+  $('.help_center').on('click',function() {
+    window.location.href = "http://localhost:8080/helpCenter"
+  })
+  $('.go_tab').on('click',function() {
+    window.location.href = "http://localhost:8080/helpCenter"
+  })
+</script>

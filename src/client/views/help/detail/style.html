@@ -3,6 +3,42 @@
  * @LastEditors: 陈昊天
  * @description: 文章详情样式
  * @Date: 2022-05-12 10:39:16
- * @LastEditTime: 2022-05-12 10:40:55
+ * @LastEditTime: 2022-05-12 16:46:00
 -->
-<style scoped></style>
+<style scoped>
+  .container {
+    grid-template-columns: 8fr 4fr;
+    grid-column-gap: 60px;
+    height: 1356px;
+  }
+  .a_left {
+    grid-template-rows: 21px 36px 1fr 21px;
+    background: rgba(255, 255, 255, 0.39);
+    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+    border-radius: 8px;
+    padding: 40px 60px;
+  }
+  .a_right {
+    grid-template-rows: repeat(3,1fr);
+    grid-row-gap: 40px;
+  }
+  .a_right .b_box {  
+    grid-template-rows: 40px 1fr;
+    padding: 40px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+    background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.4), #fff, #fff, #fff, #fff);
+  }
+  .grg-30 {
+    grid-row-gap: 30px;
+  }
+  .tag_item {
+    padding: 10px 25px;
+    height: 36px;
+    color: #3E6AE2;
+    background: rgba(255, 255, 255, 0.39);
+    box-shadow: 0px 0px 3px #3E6AE2;
+    border-radius: 4px;
+  }
+</style>

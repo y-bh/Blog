@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心js
  * @Date: 2022-05-12 10:39:09
- * @LastEditTime: 2022-05-12 14:44:40
+ * @LastEditTime: 2022-05-12 15:34:06
 -->
 <script>
   //tab栏列表
@@ -86,5 +86,10 @@
   //点击tab
   $('.nav .nav-item').on('click',function() {
     $(this).toggleClass('active').siblings().removeClass('active')
+  })
+
+  //查看详情
+  $('.go_detail').on('click',function() {
+    window.location.href='http://localhost:8080/helpDetails'
   })
 </script>
