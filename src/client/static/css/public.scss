@@ -280,6 +280,10 @@ body {
   padding-left: 30px;
 }
 
+.pl-100 {
+  padding-left: 100px;
+}
+
 .pd-10 {
   padding: 10px !important;
 }
@@ -302,6 +306,10 @@ body {
 
 .font-15 {
   font-size: 15px;
+}
+
+.font-16 {
+  font-size: 16px;
 }
 
 .font-18 {
@@ -347,23 +355,31 @@ body {
 }
 
 .grid {
-  display: grid;
+  display: grid !important;
 }
 
 .justify-center {
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .justify-between {
-  justify-content: space-between;
+  justify-content: space-between !important;
 }
 
 .justify-start {
-  justify-content: start;
+  justify-content: start !important;
+}
+
+.justify-end {
+  justify-content: end !important;
 }
 
 .align-center {
-  align-items: center;
+  align-items: center !important;
+}
+
+.align-end {
+  align-items: flex-end;
 }
 
 .pointer {
@@ -379,11 +395,11 @@ body {
 }
 
 .main-title-color {
-  color: #091D43;
+  color: #091d43;
 }
 
 .text-blue {
-  color: #1968FC;
+  color: #1968fc;
 }
 
 .no-border {
@@ -414,11 +430,11 @@ body {
   top: 15%;
   left: 50%;
   color: #ffffff;
-  z-index: 999;
+  z-index: 9999;
   transform: translate(-50%, 0);
   font-size: 16px;
   line-height: 16px;
-  span{
+  span {
     padding-right: 24px;
   }
   i {
@@ -442,7 +458,7 @@ body {
 }
 
 .message_tip_warning {
-  background-color: #E6A23C;
+  background-color: #e6a23c;
   border: none;
   color: #fff;
 }
@@ -450,5 +466,5 @@ body {
 .message_tip_error {
   background-color: #fef0f0;
   border: none;
-  color: #F76C6C;
+  color: #f76c6c;
 }

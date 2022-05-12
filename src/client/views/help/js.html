@@ -1,0 +1,95 @@
+<!--
+ * @Author: 陈昊天
+ * @LastEditors: 陈昊天
+ * @description: 帮助中心js
+ * @Date: 2022-05-12 10:39:09
+ * @LastEditTime: 2022-05-12 15:34:06
+-->
+<script>
+  //tab栏列表
+  const tabList = [
+    {
+      type: 'detail',
+      typeAlias: '详情'
+    },
+    {
+      type: 'news',
+      typeAlias: '新闻'
+    },
+    {
+      type: 'note',
+      typeAlias: '说明'
+    }
+  ]
+
+  //文章列表
+  const blogList = [
+    {
+      month: '09',
+      day: '16',
+      title: '代理IP是怎么维护我们的隐私安全',
+      desc: 'HTTP代理ip在之前其实并不会被人们时常接触到，但是随着时代的发展，互联网的不断进步。越来越多的人开始意识到HTTP代理ip的重要'
+    },
+    {
+      month: '03',
+      day: '13',
+      title: '6666666666',
+      desc: 'eeeeeeeeeeeeeeeeeeee，但是随着时代的发展，互联网的不断进步。越来越多的人开始意识到HTTP代理ip的重要'
+    },
+    {
+      month: '02',
+      day: '12',
+      title: '代理I222222们的隐私安全',
+      desc: 'HTTP代ddd被人们时网始意识到HTTP代理ip的重要'
+    },
+    {
+      month: '01',
+      day: '11',
+      title: '代理IP是怎么维护我们的隐私安全',
+      desc: 'HTTP代理ip在之前其实并不会被人们时常接触到，但是随着时代的发展，互联网的不断进步。越来越多的人开始意识到HTTP代理ip的重要'
+    },
+  ]
+
+  //tab列表
+  $.each(tabList,(index,item) => {
+    $('.nav').append(`
+    <li class="nav-item flex-center">
+      <a class="nav-link flex-center widthAll pointer" href="#${item.type}" data-toggle="tab">${item.typeAlias}</a>  
+    </li>`)
+    $('.tab-content').append(`<div class="tab-pane" id="${item.type}">
+        <div class="content grid"></div>
+      </div>`)
+    //文章列表
+    $.each(blogList,(i,e) => {
+      $(`#${item.type} .content`).append(`<div class="blog_item flex justify-between align-center">
+        <div class="left grid">
+          <div class="top text-blue flex justify-start align-start">${e.day}</div>
+          <div class="bottom">
+            <div class="line"></div>
+            <span class="text-blue flex justify-end align-end">${e.month}</span>  
+          </div>
+        </div>
+        <div class="right grid">
+          <div class="right_top flex justify-between align-center">
+            <span class="font-20 main-title-color">${e.title}</span>
+            <span class="go_detail pointer">查看详情>></span>
+          </div>
+          <p class="desc">${e.desc}</p>  
+        </div>
+      </div>`)
+    })
+  })
+
+  //默认显示第一个tab
+  $('.nav .nav-item .nav-link').get(0).click();
+
+  //点击tab
+  $('.nav .nav-item').on('click',function() {
+    $(this).toggleClass('active').siblings().removeClass('active')
+  })
+
+  //查看详情
+  $('.go_detail').on('click',function() {
+    window.location.href='http://localhost:8080/helpDetails'
+  })
+</script>

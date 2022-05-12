@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-11 18:20:58
+ * @LastEditTime: 2022-05-12 17:08:22
  */
 
 const router = require("koa-router")();
@@ -15,7 +15,7 @@ const fs = require("fs")
 const config = require("../config/app.config")
 
 //套餐购买
-const packageObj = require("./package.js")
+//const packageObj = require("./package.js")
 const { renderPackage } = require("service/package");
 
 function Router(App) {
@@ -62,11 +62,12 @@ function Router(App) {
     })
 
 
-  //套餐购买
   //购买页-package
   router.get("/package", async (ctx) => {
     /**数据请求 */
-    console.log("999999999999999999999",await renderPackage())
+   // console.log("套餐购买接口返回数据, await renderPackage())
+    let packageObj = await renderPackage();
+    //console.log("ssssss",packageObj);
     return ctx.render("package/package", packageObj)
   })
 
@@ -127,27 +128,25 @@ function Router(App) {
     })
   })
 
-  //帮助中心-helpCenter-tab-page
-  router.get("/helpCenter/:alias/:page", async (ctx) => {
+  //帮助中心-关键词聚合页
+  router.get("/keyWord", async (ctx) => {
 
     /**数据请求 */
-    const { alias, page } = ctx.request.params
 
-
-    return ctx.render("help/helpCenter", {
-      name: `This is helpCenter + ${alias} + ${page}`,
+    return ctx.render("help/keyWord/keyWord", {
+      name: `This is 关键词聚合页`,
       data: `333`,
     })
   })
 
   //帮助中心-helpCenter-details
-  router.get("/helpDetails/:id", async (ctx) => {
+  router.get("/helpDetails", async (ctx) => {
 
     /**数据请求 */
     const { id } = ctx.request.params
 
 
-    return ctx.render("help/helpDetails", {
+    return ctx.render("help/detail/helpDetails", {
       name: `This is ${id} article`,
       data: 2222,
     })

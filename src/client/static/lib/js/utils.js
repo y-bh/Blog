@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-11 15:10:20
+ * @LastEditTime: 2022-05-12 10:40:08
  */
 
 // 弹窗消息提示
@@ -19,7 +19,7 @@ function $message (options = {}){
     const msg = options.message ? options.message : '出现错误';
     const showClose = options.showClose;
     const type = options.type ? options.type : 'success';
-    const duration = options.duration ? options.duration : 4000;
+    let duration = options.duration ? options.duration : 4000;
 
     let timer = null;
 
@@ -36,13 +36,14 @@ function $message (options = {}){
     messageData.addClass(typeClass);
    
     // 先将原始隐藏，然后添加到页面，最后以300毫秒的速度下拉显示出来
-    console.log(messageData,'messageData');
     if($('.message_tip')){
         $('.message_tip').remove();
-        clearTimeout(timer)  // 重置关闭弹出时间
+        clearTimeout()  // 重置关闭弹出时间
+        duration = 4000;
         messageData.hide().appendTo("body").slideDown(300);
     } else {
         messageData.hide().appendTo("body").slideDown(300);
+        
     }
     
 
@@ -61,7 +62,6 @@ function $message (options = {}){
         }
         return;
     }, duration);
-
     // 手动关闭弹窗
     window.clearMessage = function (){
         closeTip();
@@ -74,4 +74,20 @@ function $message (options = {}){
         return $message(options)
     }
 })
+
+
+
+function getParams() {
+    var url = decodeURI(location.search);
+    var request = {};
+    if (url.indexOf("?") !== -1) {
+        var str = url.slice(1); //去掉?号
+        let strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            //unescape 被弃用  decodeURI来替代
+            request[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+        }
+    }
+    return JSON.parse(JSON.stringify(request));
+}
 

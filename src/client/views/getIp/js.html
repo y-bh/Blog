@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-11 18:48:13
+ * @LastEditTime: 2022-05-12 10:24:57
 -->
 <script>
 $(function() {
@@ -662,6 +662,7 @@ $(function() {
 
   //点击IP使用时长
   $('.ip_use_box .ip_use_item').on('click',function() {
+    // deal_box,time_box为ip_use_item的子元素  time_text为time_box的子元素  deal_text为deal_box的子元素
     $(this).toggleClass('ip_use_item_choose').siblings().removeClass('ip_use_item_choose')
     $(this).find('.time_text').toggleClass('time_text_choose').parent().parent().siblings().children().children().removeClass('time_text_choose')
     $(this).find('.deal_box').toggleClass('deal_box_choose').parent().siblings().children().removeClass('deal_box_choose')
@@ -762,21 +763,39 @@ $(function() {
   }
 
   //默认选中第一个
-  let ipUseFirst = $('.ip_use_box .ip_use_item')[0]
+  let ipUseFirst = $('.ip_use_box .ip_use_item')[0] //ip使用时长
   $(ipUseFirst).addClass('ip_use_item_choose')
   $(ipUseFirst).find('.time_text').addClass('time_text_choose')
   $(ipUseFirst).find('.deal_box').addClass('deal_box_choose')
   $(ipUseFirst).find('.deal_text').addClass('deal_text_choose')
-  let dataFirst = $('.data_format .narrow_box')[0]
+  let dataFirst = $('.data_format .narrow_box')[0] //数据格式
   $(dataFirst).addClass('narrow_box_choose')
-  let separatorFirst = $('.separator .narrow_box')[0]
+  let separatorFirst = $('.separator .narrow_box')[0] //分隔符
   $(separatorFirst).addClass('narrow_box_choose')
-  let areaFirst = $('.choose_area_box .narrow_box')[0]
+  let areaFirst = $('.choose_area_box .narrow_box')[0] //选择地区
   $(areaFirst).addClass('narrow_box_choose')
-  let operatorFirst = $('.operator_box .narrow_box')[0]
+  let operatorFirst = $('.operator_box .narrow_box')[0] //运营商
   $(operatorFirst).addClass('narrow_box_choose')
-  let ipFirst = $('.ip_box .narrow_box')[0]
+  let ipFirst = $('.ip_box .narrow_box')[0] //IP协议
   $(ipFirst).addClass('narrow_box_choose')
   $('.isJSON').hide()
+})
+
+//复制链接
+$('.apiUrl_input_box .copy').on('click',function() {
+  let text = $('.apiUrl_input')
+  text.select()
+  document.execCommand('copy')
+})
+
+//打开链接
+$('.apiUrl_input_box .open').on('click',function() {
+  let text = $('.apiUrl_input').val()
+  window.location.href = text
+})
+
+//立即下载
+$('.download').on('click',function() {
+  console.log('下载');
 })
 </script>
