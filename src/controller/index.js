@@ -15,7 +15,7 @@ const fs = require("fs")
 const config = require("../config/app.config")
 
 //套餐购买
-const packageObj = require("./package.js")
+//const packageObj = require("./package.js")
 const { renderPackage } = require("service/package");
 
 function Router(App) {
@@ -62,11 +62,12 @@ function Router(App) {
     })
 
 
-  //套餐购买
   //购买页-package
   router.get("/package", async (ctx) => {
     /**数据请求 */
-    console.log("999999999999999999999",await renderPackage())
+   // console.log("套餐购买接口返回数据, await renderPackage())
+    let packageObj = await renderPackage();
+    //console.log("ssssss",packageObj);
     return ctx.render("package/package", packageObj)
   })
 

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-11 13:22:25
+ * @LastEditTime: 2022-05-12 15:31:59
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +49,7 @@
               <div class="ipPrice-title"><span>IP价格</span></div>
               <ul class="ipPrice-list">
                 <% countMeal.forEach(function(countMeal) { %>
-                  <li>
+                  <li class="mr-40">
                     <span>
                       <%= countMeal.proxyTime %>
                     </span>分钟：【<span>
@@ -73,15 +73,15 @@
             <div class="rechargeAmount-title mb-10"><span>选择预充值金额</span></div>
             <ul id="selectRechargeMeals" class="amount-list">
               <!-- 选择预充值金额 -->
-              <% rechargeRate.forEach(function(rate,index) { %>
+              <% rechargeMeals.forEach(function(rate,index) { %>
                 <% if (index==0) { %>
                   <li class="amount-item current" price="<%= rate.price %>">
                     <% } else { %>
                   <li class="amount-item" price="<%= rate.price %>">
                     <% } %>
 
-                      <% if (rate.per && Number(rate.per)>0) { %>
-                        <div class="discount"><span>赠<%= rate.per %>%</span></div>
+                      <% if (rate.giftRate && Number(rate.giftRate)>0) { %>
+                        <div class="discount"><span>赠<%= rate.giftRate %>%</span></div>
                         <% } %>
                           <div class="rechargeAmount"><span>￥<%= rate.price %></span> </div>
                           <div class="lastAmount"><span>实到<%= rate.all %>元</span></div>
@@ -185,15 +185,15 @@
             <ul id="selectIPTimes" class="column-list">
               <% proxyTimes.forEach(function(proxyTime,index) { %>
                 <% if (index==0) { %>
-                  <li class="current">
+                  <li class="current" data-id="<%= proxyTime.second %>">
                     <% } else { %>
-                  <li>
+                  <li data-id="<%= proxyTime.second %>">
                     <% } %>
                       <div class="times"><span>
-                          <%= proxyTime.key %>分钟
+                          <%= proxyTime.minute %>分钟
                         </span></div>
                       <div class="amount"><span>
-                          <%= proxyTime.value %>元/IP
+                          <%= proxyTime.price %>元/IP
                         </span></div>
                   </li>
                   <% }) %>
@@ -221,34 +221,70 @@
             <div class="column-title">
               <span>选择购买时长</span>
             </div>
+            <% mealDates.forEach(function(mealDate,index) { %>
+              <% if(mealDate.id == proxyTimes[0].second)  { %>
+                <ul class="column-list" meal-duration-id="<%= mealDate.id %>">
+              <% } else { %>
+                <ul class="column-list hide" meal-duration-id="<%= mealDate.id %>">
+              <% } %> 
+              
+                <% mealDate.list.forEach(function(item,index) { %>
+                  <% if (index==0) { %>
+                    <li class="current">
+                      <% } else { %>
+                    <li>
+                      <% } %>
 
-            <ul class="column-list">
-              <li class="current">
-                <div class="discount"><span>9折</span></div>
-                <div class="times"><span>按周购买</span></div>
-                <div class="amount"><span>7天</span></div>
-              </li>
-              <li>
-                <div class="discount"><span>8折</span></div>
-                <div class="times"><span>按周购买</span></div>
-                <div class="amount"><span>30天</span></div>
-              </li>
-              <li>
-                <div class="discount"><span>9折</span></div>
-                <div class="times"><span>按周购买</span></div>
-                <div class="amount"><span>30天</span></div>
-              </li>
-              <li>
-                <div class="discount"><span>8折</span></div>
-                <div class="times"><span>按周购买</span></div>
-                <div class="amount"><span>30天</span></div>
-              </li>
-              <li>
-                <div class="discount"><span>8折</span></div>
-                <div class="times"><span>按周购买</span></div>
-                <div class="amount"><span>30天</span></div>
-              </li>
-            </ul>
+                      <!-- 获取当前数据的id映射至activityVoMap -->
+                      <% var mealItemId =item.id %>
+                      <% if(activityVoMap && activityVoMap[mealItemId]){ %>
+                        <% var activityType =activityVoMap[mealItemId]["activityType"] %>
+                          <% if(activityType){ %>
+                            <div class="discount" activityType="<%= activityType %>"  rate="<%= activityVoMap[mealItemId].rate%>">
+                              <% if(activityType == 1){ %>
+                                <span><%= activityVoMap[mealItemId].rate/10 %>折</span>
+                              <% } %>
+                              <% if(activityType == 2){ %>
+                                <span>赠<%= activityVoMap[mealItemId].rate%>%</span>
+                                <% } %>
+                            </div>
+                          <% } %>
+                      <% } %>
+
+                      <div class="times mt-15"><span><%= item.name %></span></div>
+                      <% var days= Number(item.time)/24/60/60  %>
+                      <div class="amount"><span><%= days %>天</span></div>
+                    </li>
+                <% }) %>
+              </ul>
+              <% }) %>
+                          <!--   <ul class="column-list">
+                   <li class="current">
+                    <div class="discount"><span>9折</span></div>
+                    <div class="times"><span>按周购买</span></div>
+                    <div class="amount"><span>7天</span></div>
+                  </li>
+                  <li>
+                    <div class="discount"><span>8折</span></div>
+                    <div class="times"><span>按周购买</span></div>
+                    <div class="amount"><span>30天</span></div>
+                  </li>
+                  <li>
+                    <div class="discount"><span>9折</span></div>
+                    <div class="times"><span>按周购买</span></div>
+                    <div class="amount"><span>30天</span></div>
+                  </li>
+                  <li>
+                    <div class="discount"><span>8折</span></div>
+                    <div class="times"><span>按周购买</span></div>
+                    <div class="amount"><span>30天</span></div>
+                  </li>
+                  <li>
+                    <div class="discount"><span>8折</span></div>
+                    <div class="times"><span>按周购买</span></div>
+                    <div class="amount"><span>30天</span></div>
+                  </li> 
+            </ul>-->
           </div>
 
           <!-- 选择提取数量 -->
@@ -268,9 +304,9 @@
                 </div>
               </div>
               <div class="counter-control ml-60">
-                <div class="decrease button"><span>-</span></div>
-                <div class="enterVal"><input type="number" max="5000000" min="2000" step="2000" value="2000" /></div>
-                <div class="plus button"><span>+</span></div>
+                <div class="decrease button" onclick="computerCounter('decrease')"><span>-</span></div>
+                <div class="enterVal"><input type="number" max="5000000" min="2000" step="2000" value="2000" id="counter-enter"/></div>
+                <div class="plus button" onclick="computerCounter('plus')"><span>+</span></div>
               </div>
             </div>
           </div>
@@ -328,20 +364,27 @@
               <div class="enterMoney">
                 <div class="label "><span>输入金额</span></div>
                 <div>
-                  <input class="ml-30 mr-30" type="number" name="" id="">
+                  <input class="ml-30 mr-30" type="number" id="calculatorIPNumber" max="100000" min="1" />
                   <span>元</span>
                 </div>
               </div>
               <div class="table mt-30">
                 <div class="table-title"><span>IP数换算结果</span></div>
-                <div class="table-list mt-20">
+                <div class="table-list mt-20" id="ipConvertResult">
                   <div class="table-row">
                     <div class="colum">IP时效</div>
                     <div class="colum">可购买IP数（个）</div>
                     <div class="colum">消耗天启币（币）</div>
                   </div>
-
-                  <div class="table-row">
+                  <% countMeal.forEach(function(countMeal) { %>
+                    <div class="table-row comRow" unitPrice="<%= countMeal.price %>" >
+                      <div class="colum"><span><%= countMeal.proxyTime %>分钟 【<%= countMeal.price %>元/IP】</span></div>
+                      <div class="colum"><span class="orange ipNumber">--</span></div>
+                      <div class="colum"><span class="orange tqNumber">--</span></div>
+                    </div>
+                  <% }) %>
+                  
+                  <!-- <div class="table-row">
                     <div class="colum"><span>3分钟 【0.005元/IP】</span></div>
                     <div class="colum"><span class="orange">100000</span></div>
                     <div class="colum"><span class="orange">1000</span></div>
@@ -355,12 +398,7 @@
                     <div class="colum"><span>3分钟 【0.005元/IP】</span></div>
                     <div class="colum"><span class="orange">100000</span></div>
                     <div class="colum"><span class="orange">1000</span></div>
-                  </div>
-                  <div class="table-row">
-                    <div class="colum"><span>3分钟 【0.005元/IP】</span></div>
-                    <div class="colum"><span class="orange">100000</span></div>
-                    <div class="colum"><span class="orange">1000</span></div>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -371,7 +409,30 @@
             <!-- 计算充值金额 -->
             <div id="calcAmount" class="tabContent mt-30 pl-100" style="display: none;">
               <div class="tab-title"><span>时效组合选择</span></div>
-              <ul>
+              <ul id="rechargeAmountDialog">
+               
+                <% countMeal.forEach(function(countMeal) { %>
+                  <li class="mt-20" unitPrice="<%= countMeal.price %>">
+                    <div class="times"><span><%= countMeal.proxyTime %>分钟 【<%= countMeal.price %>元/IP】</span></div>
+                    <div class="counter-control ml-60">
+                      <div class="decrease button" onclick="computerDialog('decrease',this)"><span>-</span></div>
+                      <div class="enterVal"><input type="number" max="100000" min="0" value="0" class="conterInput"/>
+                      </div>
+                      <div class="plus button" onclick="computerDialog('plus',this)"><span>+</span></div>
+                    </div>
+                    <div class="ml-60">所需<span class="orange tianqiCoin">0</span>天启币</div>
+                  </li>
+                <% }) %>
+                <!-- <li class="mt-20">
+                  <div><span>3分钟 【0.005元/IP】</span></div>
+                  <div class="counter-control ml-60">
+                    <div class="decrease button"><span>-</span></div>
+                    <div class="enterVal"><input type="number" max="5000000" min="2000" step="2000" value="1000" />
+                    </div>
+                    <div class="plus button"><span>+</span></div>
+                  </div>
+                  <div class="ml-60">所需<span class="orange">1000</span>天启币</div>
+                </li>
                 <li class="mt-20">
                   <div><span>3分钟 【0.005元/IP】</span></div>
                   <div class="counter-control ml-60">
@@ -382,7 +443,6 @@
                   </div>
                   <div class="ml-60">所需<span class="orange">1000</span>天启币</div>
                 </li>
-
                 <li class="mt-20">
                   <div><span>3分钟 【0.005元/IP】</span></div>
                   <div class="counter-control ml-60">
@@ -392,31 +452,11 @@
                     <div class="plus button"><span>+</span></div>
                   </div>
                   <div class="ml-60">所需<span class="orange">1000</span>天启币</div>
-                </li>
-                <li class="mt-20">
-                  <div><span>3分钟 【0.005元/IP】</span></div>
-                  <div class="counter-control ml-60">
-                    <div class="decrease button"><span>-</span></div>
-                    <div class="enterVal"><input type="number" max="5000000" min="2000" step="2000" value="1000" />
-                    </div>
-                    <div class="plus button"><span>+</span></div>
-                  </div>
-                  <div class="ml-60">所需<span class="orange">1000</span>天启币</div>
-                </li>
-                <li class="mt-20">
-                  <div><span>3分钟 【0.005元/IP】</span></div>
-                  <div class="counter-control ml-60">
-                    <div class="decrease button"><span>-</span></div>
-                    <div class="enterVal"><input type="number" max="5000000" min="2000" step="2000" value="1000" />
-                    </div>
-                    <div class="plus button"><span>+</span></div>
-                  </div>
-                  <div class="ml-60">所需<span class="orange">1000</span>天启币</div>
-                </li>
+                </li> -->
               </ul>
               <div class="result mt-30">
                 <div class="title"><span>金额换算结果</span></div>
-                <div class="deatail ml-60">预计所需<span class="orange">130000</span>天启币，折合<span class="orange">130</span>元
+                <div class="deatail ml-60">预计所需<span class="orange" id="all-tianqiCoin">0</span>天启币，折合<span id="rMBPay" class="orange">0</span>元
                 </div>
               </div>
             </div>
@@ -447,3 +487,9 @@
 <script src="/js/package.js"></script>
 
 </html>
+
+<script>
+
+  var sss = '<%=proxyTimes%>'
+//console.log(55555555555,JSON.parse(sss))
+</script>

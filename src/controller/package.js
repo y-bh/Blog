@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-10 16:14:15
- * @LastEditTime: 2022-05-10 17:38:07
+ * @LastEditTime: 2022-05-11 15:42:31
  */
 var packageObj = {
   countMeal: [{//IP价格
@@ -19,7 +19,7 @@ var packageObj = {
     proxyTime: 15,
     price: 0.02
   }],
-  rechargeRate: [{//选择预充值金额rechargeMeals
+  rechargeMeals: [{//选择预充值金额rechargeMeals
     price: 50,
     all: 50,
     per: 1
@@ -55,7 +55,7 @@ var packageObj = {
   }],
   proxyTimes: [{//选择IP时效
     key: 3,
-    value: 0.005
+    price: 0.005
   }, {
     key: 5,
     value: 0.01
