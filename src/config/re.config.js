@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: dengxiujie
  * @description: 正则管理文件
  * @Date: 2021-08-12 17:00:14
- * @LastEditTime: 2021-08-13 14:37:47
+ * @LastEditTime: 2022-05-12 11:02:45
  */
 
 // 手机号码，包含排除号段
@@ -47,3 +47,6 @@ export const VPNACCOUNT = /^[a-zA-Z0-9_!@#$%^&*.]{4,20}$/
 
 // 整数
 export const INT = /^[1-9][0-9]*$/
+
+// 正整数
+// export const positiveInt = /(^[1-9]\d*$)/

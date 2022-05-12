@@ -67,18 +67,25 @@ $columnMt: 60px;
 }
 
 .packageBuy {
+  .hide {
+    display: none !important;
+  }
   .package-banner img {
     width: 100%;
   }
   .redPacket {
     display: flex;
+    align-items: center;
     .redPacket-title {
       color: #333333;
       min-width: 140px;
       font-size: 23px;
     }
     select {
-      width: 200px;
+      width: 512px;
+      height: 60px;
+      border: 1px solid #e4e5eb;
+      border-radius: 4px;
     }
   }
   .payType {
@@ -382,13 +389,14 @@ $columnMt: 60px;
                 right: 0;
                 top: 0;
                 font-size: 28px;
-                color: #1968fc;
+                color: #ffffff;
                 text-align: center;
                 line-height: 35px;
                 width: 94px;
                 height: 35px;
-                border-radius: 0 0 0 35px;
-                background: #c3d7fc;
+                border-radius: 20px 0 0 20px;
+                background: linear-gradient(90deg, #f6843c 0%, #e6491a 100%);
+                font-size: 16px;
                 span {
                   font-weight: bold;
                 }
@@ -420,7 +428,11 @@ $columnMt: 60px;
                   color: #fc7019ff;
                 }
                 .discount {
-                  background-color: #fff4edff;
+                  //background-color: #fff4edff;
+
+                  span {
+                    color: #ffffff;
+                  }
                 }
                 .amount {
                   background-color: #fff4edff;
@@ -517,6 +529,9 @@ $columnMt: 60px;
     }
   }
   .calculatModal {
+    .modal-content {
+      overflow-x: auto;
+    }
     .modalContent {
       width: 800px;
       height: 588px;
@@ -535,6 +550,9 @@ $columnMt: 60px;
             align-items: center;
             font-size: 14px;
             color: #4c5664;
+            .times {
+              width: 140px;
+            }
             .counter-control {
               @include counter-control;
               .button {
