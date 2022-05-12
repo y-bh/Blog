@@ -3,7 +3,7 @@
  * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-12 15:19:35
+ * @LastEditTime: 2022-05-12 18:34:29
 -->
 <template>
   <div class="white-list-wrap">
@@ -16,8 +16,8 @@
       </div>
     </div>
     <div class="white-list-btn">
-      <el-button>查看教程</el-button>
-      <el-button @click="openWhiteListDialog('add')">添加IP白名单</el-button>
+      <el-button class="cancel-button">查看教程</el-button>
+      <el-button class="cancel-button" @click="openWhiteListDialog('add')">添加IP白名单</el-button>
     </div>
     <div class="auto-replace">
       <span>提取IP自动替换</span>
@@ -39,7 +39,7 @@
         <el-table-column prop="time" label="设置时间"></el-table-column>
         <el-table-column prop="operator" label="操作">
           <template #default="{ row }">
-            <el-button @click="openRemoveDialog(row)">移除</el-button>
+            <el-button class="table-delete-btn" @click="openRemoveDialog(row)">移除</el-button>
           </template>
         </el-table-column>
       </el-table>
