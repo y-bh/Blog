@@ -347,23 +347,31 @@ body {
 }
 
 .grid {
-  display: grid;
+  display: grid !important;
 }
 
 .justify-center {
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .justify-between {
-  justify-content: space-between;
+  justify-content: space-between !important;
 }
 
 .justify-start {
-  justify-content: start;
+  justify-content: start !important;
+}
+
+.justify-end {
+  justify-content: end !important;
 }
 
 .align-center {
-  align-items: center;
+  align-items: center !important;
+}
+
+.align-end {
+  align-items: flex-end;
 }
 
 .pointer {

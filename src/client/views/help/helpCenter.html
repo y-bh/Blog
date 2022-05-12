@@ -1,16 +1,9 @@
 <!--
- * @Author: 李云涛
- * @LastEditors: 李云涛
- * @description: page description
- * @Date: 2022-04-27 11:57:14
- * @LastEditTime: 2022-04-27 14:17:15
--->
-<!--
- * @Author: 李云涛
- * @LastEditors: 李云涛
- * @description: page description
- * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-04-27 11:56:25
+ * @Author: 陈昊天
+ * @LastEditors: 陈昊天
+ * @description: 帮助中心
+ * @Date: 2022-05-12 10:36:58
+ * @LastEditTime: 2022-05-12 14:47:58
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -22,14 +15,20 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>帮助中心</title>
+  <%- include('../components/style.html'); %>
+  <%- include('./style.html') %>
 </head>
 <body>
-  <h1>帮助中心</h1>
-  <div>
-    <%=name%>
+  <div class="banner widthAll flex-center">
+    <span class="font-25 main-title-color font-bold title">帮助中心</span>
   </div>
-  <div>
-    <%=data%>
+  <div class="container grid justify-center">
+    <div class="flex-center">
+      <ul class="nav nav-pills nav-fill "></ul>
+    </div>
+    <div class="tab-content mt-60"></div>
   </div>
 </body>
+<%- include('../components/js.html'); %>
+<%- include('./js.html') %>
 </html>

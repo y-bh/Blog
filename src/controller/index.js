@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-11 18:20:58
+ * @LastEditTime: 2022-05-12 10:38:27
  */
 
 const router = require("koa-router")();
@@ -147,7 +147,7 @@ function Router(App) {
     const { id } = ctx.request.params
 
 
-    return ctx.render("help/helpDetails", {
+    return ctx.render("help/detail/helpDetails", {
       name: `This is ${id} article`,
       data: 2222,
     })
