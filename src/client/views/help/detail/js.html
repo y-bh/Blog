@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 文章详情js
  * @Date: 2022-05-12 10:39:23
- * @LastEditTime: 2022-05-12 16:51:41
+ * @LastEditTime: 2022-05-12 17:12:22
 -->
 <script scoped>
   const tagList = [
@@ -99,5 +99,11 @@
   })
   $('.go_tab').on('click',function() {
     window.location.href = "http://localhost:8080/helpCenter"
+  })
+
+  //点击关键词
+  $('.tag_box .tag_item').on('click',function() {
+    let handleTag = $(this)
+    window.location.href = "http://localhost:8080/keyWord"
   })
 </script>

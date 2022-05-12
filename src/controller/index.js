@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-12 15:30:49
+ * @LastEditTime: 2022-05-12 17:08:22
  */
 
 const router = require("koa-router")();
@@ -128,15 +128,13 @@ function Router(App) {
     })
   })
 
-  //帮助中心-helpCenter-tab-page
-  router.get("/helpCenter/:alias/:page", async (ctx) => {
+  //帮助中心-关键词聚合页
+  router.get("/keyWord", async (ctx) => {
 
     /**数据请求 */
-    const { alias, page } = ctx.request.params
 
-
-    return ctx.render("help/helpCenter", {
-      name: `This is helpCenter + ${alias} + ${page}`,
+    return ctx.render("help/keyWord/keyWord", {
+      name: `This is 关键词聚合页`,
       data: `333`,
     })
   })
