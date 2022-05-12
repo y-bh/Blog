@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 关键词聚合页js
  * @Date: 2022-05-12 17:09:39
- * @LastEditTime: 2022-05-12 18:25:43
+ * @LastEditTime: 2022-05-12 18:38:33
 -->
 <script>
   const blogList = [
@@ -104,7 +104,7 @@
 
   //文章列表
   $.each(blogList,(index,item) => {
-    $('.b_left').append(`<div class="blog_item flex align-center">
+    $('.b_left').append(`<div class="blog_item flex justify-between align-center">
         <div class="blog_left grid">
           <div class="item_top text-blue flex justify-start align-start month">${item.day}</div>
           <div class="item_bottom">
@@ -124,7 +124,7 @@
 
   //右侧tab相关文章
   $.each(sameBlog,(index,item) => { //相关文章
-    $('.c_bottom').append(`<div class="flex justify-bewteen align-center">
+    $('.c_bottom').append(`<div class="flex justify-between align-center">
         <span>${item.title}</span>
         <i>></i>
       </div>`)
@@ -133,15 +133,27 @@
     $('.tab_blog').append(`<div class="tag_same_blog grid box">
         <div class="tag_top flex justify-between align-center">
           <span class="same_blog">${item.typeAlias}</span>
-          <span class="text-blue">查看更多>></span>
+          <span class="look_more pointer">查看更多>></span>
         </div>
         <div class="tag_bottom"></div>
       </div>`)
     $.each(item.blogList,(i,blog) => {
-      $('.tag_bottom').append(`<div class="flex justify-bewteen align-center">
+      $('.tag_bottom').append(`<div class="flex justify-between align-center">
           <span>${blog.title}</span>
           <i>></i>
         </div>`)
     })
   }) 
+
+  //查看详情
+  $('.go_detail').on('click',function() {
+    let currentGo = $(this)
+    window.location.href = 'http://localhost:8080/helpDetails'
+  })
+
+  //查看更多
+  $('.look_more').on('click',function() {
+    let currentLook = $(this)
+    window.location.href = "http://localhost:8080/helpCenter"
+  })
 </script>
