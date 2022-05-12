@@ -8,7 +8,9 @@ ul {
     padding: 0;
     margin: 0;
 }
-
+.full{
+    width: 100%;
+}
 .flex {
     display: flex;
     justify-content: center;
@@ -532,6 +534,7 @@ ul {
                 font-size: 0.16rem;
                 font-weight: 400;
                 color: #333333;
+                text-align: center;
             }
             .cont2{
                 display: block;
