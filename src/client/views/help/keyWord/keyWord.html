@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 关键词聚合页
  * @Date: 2022-05-12 17:07:37
- * @LastEditTime: 2022-05-12 17:10:22
+ * @LastEditTime: 2022-05-12 18:26:49
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,31 @@
   <%- include('./style.html') %>
 </head>
 <body>
-  <h1>关键词聚合页</h1>
+  <div class="banner flex-center">
+    <span class="main-title-color title">帮助中心</span>
+  </div>
+  <div class="container grid mt-80 mb-80">
+    <div class="a_top flex align-center">
+      <div class="a_icon mr-20">
+        <i class="mr-10">icon</i>
+        <span class="main-title-color">标签</span>
+      </div>
+      <span class="a_tag flex-center pointer">标签</span>
+    </div>
+    <div class="a_bottom grid">
+      <div class="b_left flex flex-column"></div>
+      <div class="b_right grid">
+        <div class="same_blog grid box">
+          <div class="c_top flex justify-between align-center">
+            <span class="same_blog">相关文章</span>
+            <span class="text-blue">查看更多>></span>
+          </div>
+          <div class="c_bottom"></div>
+        </div>
+        <div class="tab_blog grid"></div>
+      </div>
+    </div>
+  </div>
 </body>
 <%- include('../../components/js.html'); %>
 <%- include('./js.html') %>

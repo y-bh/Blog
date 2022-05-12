@@ -3,6 +3,145 @@
  * @LastEditors: 陈昊天
  * @description: 关键词聚合页js
  * @Date: 2022-05-12 17:09:39
- * @LastEditTime: 2022-05-12 17:09:39
+ * @LastEditTime: 2022-05-12 18:25:43
 -->
-<script></script>
+<script>
+  const blogList = [
+    {
+      id: 1,
+      month: '01',
+      day: '11',
+      title: '第一篇文章',
+      desc: '第一篇文章第一篇文章第一篇文章第一篇文章'
+    },
+    {
+      id: 2,
+      month: '02',
+      day: '12',
+      title: '第二篇文章',
+      desc: '第二篇文章第二篇文章第二篇文章第二篇文章'
+    },
+    {
+      id: 3,
+      month: '03',
+      day: '13',
+      title: '第三篇文章',
+      desc: '第三篇文章第三篇文章第三篇文章第三篇文章'
+    },
+  ]
+
+  const tabList = [
+    {
+      type: 'detail',
+      typeAlias: '详情',
+      blogList: [
+        {
+          id: 1,
+          title: '标题1'
+        },
+        {
+          id: 2,
+          title: '标题2'
+        },
+        {
+          id: 3,
+          title: '标题3'
+        },    
+      ]
+    },
+    {
+      type: 'news',
+      typeAlias: '新闻',
+      blogList: [
+        {
+          id: 1,
+          title: '标题1'
+        },
+        {
+          id: 2,
+          title: '标题2'
+        },
+        {
+          id: 3,
+          title: '标题3'
+        },
+      ]
+    },
+    {
+      type: 'note',
+      typeAlias: '说明',
+      blogList: [
+        {
+          id: 1,
+          title: '标题1'
+        },
+        {
+          id: 2,
+          title: '标题2'
+        },
+        {
+          id: 3,
+          title: '标题3'
+        },
+      ]
+    }
+  ]
+
+  const sameBlog = [
+    {
+      id: 1,
+      title: '标题1'
+    },
+    {
+      id: 2,
+      title: '标题2'
+    },
+    {
+      id: 3,
+      title: '标题3'
+    },
+  ]
+
+  //文章列表
+  $.each(blogList,(index,item) => {
+    $('.b_left').append(`<div class="blog_item flex align-center">
+        <div class="blog_left grid">
+          <div class="item_top text-blue flex justify-start align-start month">${item.day}</div>
+          <div class="item_bottom">
+            <div class="line"></div>
+            <span class="text-blue flex justify-end align-end">${item.month}</span>  
+          </div>
+        </div>
+        <div class="blog_right grid ml-30">
+          <div class="right_top flex justify-between align-center">
+            <span class="font-20 main-title-color">${item.title}</span>
+            <span class="go_detail pointer text-blue">查看详情>></span>
+          </div>
+          <p class="desc">${item.desc}</p>  
+        </div>
+      </div>`)
+  })
+
+  //右侧tab相关文章
+  $.each(sameBlog,(index,item) => { //相关文章
+    $('.c_bottom').append(`<div class="flex justify-bewteen align-center">
+        <span>${item.title}</span>
+        <i>></i>
+      </div>`)
+  })
+  $.each(tabList,(index,item) => {  //tab相关文章
+    $('.tab_blog').append(`<div class="tag_same_blog grid box">
+        <div class="tag_top flex justify-between align-center">
+          <span class="same_blog">${item.typeAlias}</span>
+          <span class="text-blue">查看更多>></span>
+        </div>
+        <div class="tag_bottom"></div>
+      </div>`)
+    $.each(item.blogList,(i,blog) => {
+      $('.tag_bottom').append(`<div class="flex justify-bewteen align-center">
+          <span>${blog.title}</span>
+          <i>></i>
+        </div>`)
+    })
+  }) 
+</script>
