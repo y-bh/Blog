@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 不走dao层的ajax接口封装
  * @Date: 2022-05-11 16:24:43
- * @LastEditTime: 2022-05-11 18:16:25
+ * @LastEditTime: 2022-05-12 14:44:56
  */
 
 /*
@@ -14,9 +14,9 @@
 */ 
 
 // 需要加密的接口
-const aesURL = {
+// const aesURL = {
 
-}
+// }
 
 async function ajax(params) {
     return new Promise(function (resolve, reject) {

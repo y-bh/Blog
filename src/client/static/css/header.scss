@@ -9,29 +9,25 @@
     font-size: 16px;
     padding: 0 16px;
     z-index: 999;
-    // background-color: #e0e3e6;
+    background-color: #e0e3e6;
     
     // header内容区域
     .header-main{
         max-width: 1400px;
         display: grid;
         grid-template-columns: auto 1fr 120px;
-        align-items: center;
         grid-auto-flow: row dense;
         margin: 0 auto;
-        
     }
 
     // 网站logo
     .logo {
         display: inline-flex;
-        align-items: center;
-        margin-right: 20px;
         img {
             width: 40px;
         }
         .logo-title{
-            margin-left: 10px;
+            // margin-left: 10px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #1968FC;
             padding-right: 50px;
@@ -52,15 +48,15 @@
 
     .nav-list {
         display: flex;
-        // transition: all .8s;
-                // 每个导航元素        
+        
+        // 每个导航元素        
         .nav-item {
             position: relative;
             min-width: 64px;
-            max-width: 78px;
+            max-width: 96px;
             height: 80px;
             padding: 0 6px; // 底部线超出文字
-            margin: 0 10px; // 导航文本元素间距
+            // margin: 0 10px; // 导航文本元素间距
             text-align: center;
             line-height: 80px;
             white-space: nowrap;  // 文本禁止换行
@@ -70,10 +66,14 @@
               text-decoration: none;
               color: inherit;
             }
+            .iconfont {
+                font-size: 16px;
+            }
             &:hover{
                 cursor: pointer;
-                color: #0984e3;
+                color: #1968FC;
                 font-weight: 600;
+                
             }
             &::after{
                 position: absolute;
@@ -82,12 +82,8 @@
                 width: 0;
                 height: 2px;
                 content: "";
-                background-color: #0984e3;
+                background-color: #1968FC;
                 transition: all .8s;
-                -webkit-transition: all .8s;
-                -moz-transition: all .8s;
-                -ms-transition: all .8s;
-                -o-transition: all .8s;
             }
 
             &:hover::after{
@@ -104,10 +100,117 @@
             }
             
         }
+        // 子导航  水平导航
+        .child-list {
+            // display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            // width: auto;
+            max-width: 508px;
+            min-height: 162px;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+            border-radius: 8px;
+            font-size: 16px;
+            color: #091D43;
+            line-height: normal;
+            transition: all .8s;
+            width: 0;  // 为了动画效果  宽设为0
+            overflow: hidden;
+            opacity: 0;
+
+            .child-item{
+                max-width: 190px;
+                padding: 0 20px;
+                box-sizing: content-box;
+
+                // 为了动画
+                &:first-child {
+                    padding-left: 40px;
+                }
+                &:last-child {
+                    padding-right: 40px;
+                }
+
+    
+                &:hover{
+                    transition: all .8s;
+                    color: rgb(25, 104, 252);
+                }
+            }
+
+
+
+            .title{
+                .meal-icon{
+                    height: 15px;
+                    margin: 0 5px 0 0;
+                }
+                .meal-type{
+                    padding: 0 10px;
+                    font-weight: 600;
+                }
+                .activity{
+                    padding: 6px 12px;
+                    box-sizing: content-box;
+                    text-align: center;
+                    color: #FFFFFF;
+                    font-size: 12px;
+                    border-radius: 16px 16px 16px 0;
+                    background: linear-gradient(90deg, #FC7019 0%, #FE344D 100%);
+                }
+            }
+
+            .describe{
+                display: block;
+                width: 184px;
+                margin-top: 14px;
+                text-align: left;
+                white-space: normal;
+                font-size: 14px;
+                line-height: 24px;
+                color: #677294;
+            }
+
+            
+        }
+
+        //  垂直导航
+        .child-vertical{
+            // width: auto;  // 为了动画效果  宽设为0
+            // overflow: auto;
+            // opacity: 1;
+            flex-direction: column;
+            padding: 20px 0;
+            min-height: 0;
+            .child-item{
+                max-width: 190px;
+                padding: 10px 30px;
+                box-sizing: content-box;
+                // 为了动画
+                &:first-child {
+                    padding-left: 30px;
+                }
+                &:last-child {
+                    padding-right: 30px;
+                }
+            }
+        }
+
+        
+
+        .nav-item:hover .child-list {
+            // display: flex;
+
+            // 为了动画
+            width: auto;
+            opacity: 1;
+        }
     }
 
     .user{
-        
         display: inline-flex;
         align-items: center;
         margin-left: 20px;
@@ -116,7 +219,8 @@
 }
 
 // 顶部导航logo + nav + 右侧区域宽度
-@media screen and (max-width: 918px) {
+// headerAttr.allWidth
+@media screen and (max-width: 960px) {
     .header {
         // 网站logo
         .logo {
@@ -128,9 +232,9 @@
     }
 }
 
+// 减去logo padding-right 50px后
 @media screen and (max-width: 868px) {
     .header {
-
         .nav-body {
             display: none;
             width: 100%;
@@ -140,7 +244,7 @@
                 display: block;
                 right: 0;
                 padding: 0 10px;
-                // background: #e0e3e6;
+                background: #e0e3e6;
                 .nav-list {
                     flex-direction: column;
                     justify-content: center;
