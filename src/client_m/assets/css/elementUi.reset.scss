@@ -18,3 +18,21 @@
   --van-text-link-color: #576b95;
   --van-nav-bar-height: 50px; //navbar高度
 }
+
+
+//个人中心重置弹框内边距
+.el-dialog{
+  border-radius: 8px;
+  .el-dialog__header,.el-dialog__body,.el-dialog__footer {
+    padding: 0px;
+  }
+  .el-dialog__header{
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  .el-dialog__footer{
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+}
+

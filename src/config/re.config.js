@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 李云涛
  * @description: 正则管理文件
  * @Date: 2021-08-12 17:00:14
- * @LastEditTime: 2022-05-12 11:02:45
+ * @LastEditTime: 2022-05-12 17:36:02
  */
 
 // 手机号码，包含排除号段
@@ -47,6 +47,9 @@ export const VPNACCOUNT = /^[a-zA-Z0-9_!@#$%^&*.]{4,20}$/
 
 // 整数
 export const INT = /^[1-9][0-9]*$/
+
+//ip 1~255.0~255.0~255.0~255
+export const IP = /^((2(5[0-5]|[0-4]\d)|([1]\d{1,2})|([0-9]\d)|[1-9])(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}$)/
 
 // 正整数
 // export const positiveInt = /(^[1-9]\d*$)/
