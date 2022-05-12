@@ -587,11 +587,11 @@ ul {
             }
         }
     }
+ 
 
     
-      
-      
 }
+
 .message_tip {
     min-width: 1.2rem;
     padding: 0.075rem 0.075rem 0.075rem 0.1rem;
@@ -613,4 +613,148 @@ ul {
     }
 }
 
+.modal-open {
+    .modal {
+        padding: 0 0.09rem;
+        box-sizing: border-box;
+    }
+    // 模态框样式重置
+    .modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        width: 3.41rem;
+        height: 1.5rem;
+        max-width: 95%;
+        margin: 0;
+        box-shadow: 1px 1px 50px rgb(0 0 0 / 30%);
+        border-radius: 0.06rem;
+    }
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        font-size: 0.11rem;
+    }
+    .modal-content{
+        border-radius: 0.06rem;
+        padding-top: 0.29rem;
+        background: #fff;
+    }
+    .modal-header {
+        padding: 0.29rem 0 0 0;
+        border-radius: 2px 2px 0 0;
+        height: auto;
+        background: transparent;
+        border: none;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 0.18rem;
+        line-height: 0.18rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 0.05rem;
+        border: none;
+        justify-content: center;
 
+    }
+
+    .modal-body{
+        background: transparent;
+        border: none;
+        padding: 0.1rem 0.15rem;
+        box-sizing: border-box;
+        font-size: 0.16rem;
+        line-height: 0.24rem;
+        color: #333;
+        text-align: center;
+        height: auto !important;
+        margin-bottom: 0.05rem;
+    }
+
+    .modal-footer{
+        padding: 0;
+        font-size: 0.08rem;
+        margin: 0;
+        .btn {
+            padding: 0;
+            width: calc(50% - 1px);
+            border: none;
+            border-radius: 0;
+            border-top: 1px solid #d8d8d8;
+            border-right: 1px solid #d8d8d8;
+            font-size: 0.14rem;
+            color: #999999;
+            height: 0.49rem;
+            line-height: 0.49rem;
+            margin: 0;
+            text-align: center;
+            background: transparent;
+            &:last-child {
+                width: 50%;
+                font-size: 0.14rem;
+                color: #1B81FF;
+            }
+        }
+    }
+    .modal-footer>* {
+        margin: 0.025rem;
+    }
+
+}
+
+#myModalPublic,#myModalPromote {
+    .modal-content{
+        width: 3rem;
+        height: 3.14rem;
+        margin: 0;
+        background: #FFFFFF;
+        border-radius: 0.05rem;
+        padding: 0.2rem 0.5rem;
+        box-sizing: border-box;
+    }
+    .modal-header{
+        height: 0.2rem;
+        background: transparent;
+        border: none;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 0.16rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 0.17rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        .close-img {
+            height: 100%;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+    }
+    .public-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .save-bottom {
+        margin-top: 0.14rem;
+        width: 100%;
+        text-align: center;
+        font-size: 0.12rem;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: #1B81FF;
+    }
+}
+
+
+.btn-secondary:not(:disabled):not(.disabled).active:focus, 
+.btn-secondary:not(:disabled):not(.disabled):active:focus, 
+.show>.btn-secondary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.btn-secondary.focus, 
+.btn-secondary:focus {
+    box-shadow: 0 0 0 0 rgb(130 138 145 / 50%) !important;
+}
