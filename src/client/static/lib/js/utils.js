@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-12 10:09:57
+ * @LastEditTime: 2022-05-12 10:40:08
  */
 
 // 弹窗消息提示
@@ -74,4 +74,20 @@ function $message (options = {}){
         return $message(options)
     }
 })
+
+
+
+function getParams() {
+    var url = decodeURI(location.search);
+    var request = {};
+    if (url.indexOf("?") !== -1) {
+        var str = url.slice(1); //去掉?号
+        let strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            //unescape 被弃用  decodeURI来替代
+            request[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+        }
+    }
+    return JSON.parse(JSON.stringify(request));
+}
 

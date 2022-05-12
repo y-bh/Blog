@@ -3,12 +3,155 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-12 10:23:59
+ * @LastEditTime: 2022-05-12 14:29:17
 -->
 <script>
-    // const { post, get } = require("utils/request");
-    // console.log(post, get, 'post,get');
+    function fingerprint2 () {
+        //生成浏览器指纹
+        Fingerprint2.get(function (components) {
+            const values = components.map(function (component, index) {
+                if (index === 0) { //把微信浏览器里UA的wifi或4G等网络替换成空,不然切换网络会ID不一样
+                    return component.value.replace(/\bNetType\/\w+\b/, '')
+                }
+                return component.value
+            });
+            // 生成最终id murmur
+            const murmur = Fingerprint2.x64hash128(values.join(''), 31);
+            localStorage.setItem('fingerPrint', murmur)
+        });
+
+        //获取推广链接关键词等
+        let param = getParams();
+        let did = param.did;
+        if (!did) return;
+        let domain;
+        if (location.hostname == '61.147.70.57') {
+            domain = location.hostname
+        } else if (location.hostname == 'location' || location.hostname == '127.0.0.1') {
+            domain = location.hostname
+        } else {
+            domain = 'tianqiip.com'
+        }
+        try {
+            let exp = new Date();
+            exp.setTime(exp.getTime() + 30 * 24 * 60 * 60 * 1000);
+            let time = exp.toGMTString();
+            let keyword = param.keyword;
+            let from = param.from;
+            document.cookie = "did=" + did + ";domain=" + domain + ";path=/;expires=" + time;
+            localStorage.setItem("did", did);
+            if (from === 'seller') {
+                document.cookie = "from=seller" + ";domain=" + domain + ";path=/;expires=" + time;
+                localStorage.setItem("from", "seller");
+            } else {
+                document.cookie = "from=;" + ";domain=" + domain + ";path=/;expires=" + time;
+                localStorage.setItem("from", "");
+                if (keyword) {
+                    document.cookie = "keyword=" + keyword + ";domain=" + domain + ";path=/;expires=" + time;
+                    localStorage.setItem("keyword", keyword);
+                }
+            }
+        } catch (e) {
+            $message.error({
+                message: '推广链接有误，请联系客服',
+                showClose: true
+            })
+        }
+    }
+    fingerprint2()
+
     $(function () {
+
+        $('.tab-phone').click(function () {
+            $('#myModal').modal({
+                show: true,
+                backdrop: false,
+                keyboard: false,
+                remote: './dialog/index.html',
+            });
+        })
+
+        $('.tab-qq').click(async function () {
+            var clipboard = new ClipboardJS('.tab-qq');
+            let isSuccess = 0;
+            await clipboard.on('success', function (e) {
+                isSuccess = 1;
+                e.clearSelection();
+            });
+
+            setTimeout(function () {
+                if (isSuccess) {
+                    $('#myModalQQ').modal({
+                        show: true,
+                        backdrop: false,
+                        keyboard: false,
+                        remote: './dialog/index.html',
+                    });
+                } else {
+                    clipboard.on('error', function (e) {
+                    });
+                }
+            }, 120)
+        })
+
+        //　客服微信
+        $('.tab-wx').click(function () {
+            var clipboard = new ClipboardJS('.tab-wx');
+            let isSuccess = 0;
+            clipboard.on('success', function (e) {
+                isSuccess = 1;
+                e.clearSelection();
+            });
+            setTimeout(function () {
+                if (isSuccess) {
+                    console.log(isSuccess, 'isSuccess');
+                    $('#myModalWX').modal({
+                        show: true,
+                        backdrop: false,
+                        keyboard: false,
+                        remote: './dialog/index.html',
+                    });
+                } else {
+                    clipboard.on('error', function (e) {
+                    });
+                }
+            }, 120)
+        })
+
+
+        $('#submitDialog').click(function () {
+            window.open('tel:17368683470')
+        })
+
+        $('.tab-wxPublic').click(function () {
+            $('#myModalPublic').modal({
+                show: true,
+                backdrop: false,
+                keyboard: false,
+                remote: './dialog/index.html',
+            });
+        })
+
+        $('#promoteImg').click(function () {
+            $('#myModalPromote').modal({
+                show: true,
+                backdrop: false,
+                keyboard: false,
+                remote: './dialog/index.html',
+            });
+        })
+
+        // 关闭微信公众号
+        $('#myModalPublic .close-img').click(function () {
+            $('#myModalPublic').modal('hide');
+            $(".mode.fade").hide();
+        })
+        // 关闭大客户
+        $('#myModalPromote .close-img').click(function () {
+            $('#myModalPromote').modal('hide');
+            $(".mode.fade").hide();
+        })
+
         let sameTime = 'false';
         let timeout = 60;
         let timeout2 = 60;
