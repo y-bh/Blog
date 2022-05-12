@@ -1,3 +1,41 @@
 html {
   font-size: 20px;
 }
+
+//margin
+.ml-30{
+  margin-left: 30px;
+}
+
+
+
+//弹窗
+//弹窗取消按钮
+.cancel-button {
+  padding: 10px 10px;
+  min-width: 100px;
+  border: 1px solid #1968FC;
+  color: #1968FC;
+  font-size: 16px;
+}
+//弹窗确定按钮
+.confirm-button {
+  padding: 10px 10px;
+  min-width: 100px;
+  background: #FC7019;
+  border: 1px solid #FC7019;
+  color: white;
+  font-size: 16px;
+}
+
+//表格
+//表格删除按钮
+.table-delete-btn{
+  padding: 10px 20px;
+  border: 1px solid #F8486F;
+  color: #F8486F;
+  font-size: 18px;
+  &:hover{
+    background-color: rgb(252, 205, 205);
+  }
+}
