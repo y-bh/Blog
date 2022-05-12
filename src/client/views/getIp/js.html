@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-12 09:43:40
+ * @LastEditTime: 2022-05-12 09:50:09
 -->
 <script>
 $(function() {
@@ -662,6 +662,7 @@ $(function() {
 
   //点击IP使用时长
   $('.ip_use_box .ip_use_item').on('click',function() {
+    // deal_box,time_box为ip_use_item的子元素  time_text为time_box的子元素  deal_text为deal_box的子元素
     $(this).toggleClass('ip_use_item_choose').siblings().removeClass('ip_use_item_choose')
     $(this).find('.time_text').toggleClass('time_text_choose').parent().parent().siblings().children().children().removeClass('time_text_choose')
     $(this).find('.deal_box').toggleClass('deal_box_choose').parent().siblings().children().removeClass('deal_box_choose')
