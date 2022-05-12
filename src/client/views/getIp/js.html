@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-12 09:50:09
+ * @LastEditTime: 2022-05-12 10:24:57
 -->
 <script>
 $(function() {
@@ -792,5 +792,10 @@ $('.apiUrl_input_box .copy').on('click',function() {
 $('.apiUrl_input_box .open').on('click',function() {
   let text = $('.apiUrl_input').val()
   window.location.href = text
+})
+
+//立即下载
+$('.download').on('click',function() {
+  console.log('下载');
 })
 </script>
