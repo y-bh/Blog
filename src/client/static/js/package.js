@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-13 11:47:18
+ * @LastEditTime: 2022-05-13 13:26:38
  */
 
 
@@ -330,7 +330,7 @@ function getPackageTimesPrice() {
     discountPrice = totalPrice - (totalPrice * rate / 100)
   }
   $("#totalPrice").html(totalPrice.toFixed(2));
-  $("#totalPrice").attr("noredprice",discountPrice)
+  $("#totalPrice").attr("noredprice", discountPrice)
   //红包折扣后的价格,计算满减
   filterRedPacket(discountPrice, 2);
 }
@@ -411,7 +411,7 @@ $(document).on("change", '#packTimeRedPacketSelect select', function () {
   //获取充值金额
   //getPackageTimesPrice();
   //未使用红包的价格
-  let noRedPrice=Number($("#totalPrice").attr("noRedPrice"));
+  let noRedPrice = Number($("#totalPrice").attr("noRedPrice"));
   let lastPrice = (noRedPrice - Number($(this).val())).toFixed(2);
   $("#discountPrice").html(lastPrice);
 })
@@ -438,8 +438,16 @@ $('#payment1').click(function () {
     if (payType === 'ali') {
       window.open("/jumpTo/jumpTo?buyType=recharge&price=" + parseFloat(payPrice) + "&payType=" + payType + "&redRecordId=" + Number(redPacketMoney));
     } else {
-      //微信弹框
-      $('#wxPayModal').modal('show');
+      ////调用后台接口生成二维码
+      //TODO
+      let parmas = {
+        payType: 2,
+        //price: parseFloat(sessionStorage.getItem('rechargePrice')),
+        //redRecordId: redRecordId && Number(redRecordId) ? Number(redRecordId) : null
+      }
+
+      wxPayFun();
+
 
     }
 
@@ -452,8 +460,52 @@ $('#payment1').click(function () {
   }
 })
 
-
+let timer = null;
 //微信支付
 $('#wxPayModal').on('hidden.bs.modal', function (event) {
   console.log(222222222)
+  //关闭定时器
+  clearInterval(timer);
+  timer = null;
 })
+
+function wxPayFun(res) {
+  clearInterval(timer);
+  $("#time-flag").text(300);
+  //1.生成定时器
+  let intTime = 10;
+  timer = setInterval(function () {
+    $("#time-flag").html(intTime);
+    intTime--;
+    if (intTime % 3 === 0) {
+      //每3秒轮训查询是否已扫码
+      //TODO 接口
+      // if(true){
+      //   //扫码成功，跳转另一个页面
+      //   $message.success({ message: "支付成功" })
+      //   $('#wxPayModal').modal('hide');
+      //   parent.location.reload();
+      // }
+
+    }
+    console.log(intTime);
+    if (intTime < 0) {
+      //clearInterval(timer);
+      //timer = null;
+      $('#wxPayModal').modal('hide');
+
+    }
+
+  }, 1000);
+  // if (timer) {
+  //   $('#wxQcCode').qrcode({
+  //     width: 240,
+  //     height: 240,
+  //     text: "后台返回",
+  //     colorDark: "#000",
+  //     colorLight: "#fff"
+  //   });
+  // }
+
+  $('#wxPayModal').modal('show');
+}
