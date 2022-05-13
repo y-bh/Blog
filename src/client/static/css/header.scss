@@ -55,7 +55,7 @@
             max-width: 96px;
             height: 80px;
             padding: 0 6px; // 底部线超出文字
-            // margin: 0 10px; // 导航文本元素间距
+            margin: 0 10px; // 导航文本元素间距
             text-align: center;
             line-height: 80px;
             white-space: nowrap; // 文本禁止换行
@@ -302,12 +302,33 @@
             }
         }
 
+        .nav-list {
+            .child-list {
+                left: 0;
+                top: 0;
+                transform: translateX(-100%);
+                flex-direction: column;
+                padding: 20px 0;
+                .child-item {
+                    padding: 0 20px;
+                    &:first-child {
+                        padding-left: 20px;
+                    }
+
+                    &:last-child {
+                        padding-right: 20px;
+                    }
+                }
+            }
+        }
+
         .nav-toggler {
             display: flex;
             height: 100%;
             flex: 100%;
             align-items: center;
             justify-content: flex-end;
+            
         }
     }
 }
