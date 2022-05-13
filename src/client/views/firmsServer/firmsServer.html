@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 李云涛
- * @description: page description
+ * @LastEditors: 陈昊天
+ * @description: 企业服务
  * @Date: 2022-04-27 14:30:33
- * @LastEditTime: 2022-04-27 14:30:33
+ * @LastEditTime: 2022-05-13 15:05:13
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +15,55 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>企业服务</title>
+  <%- include('../components/style.html'); %>
+  <%- include('./style.html') %>
 </head>
 <body>
-  <h1>企业服务</h1>
-  <div>
-    <%=name%>
-  </div>
-  <div>
-    <%=data%>
+  <div class="banner"></div>
+  <div class="container mt-80 mb-80">
+    <form action="" class="grid justify-center form needs-validation" novalidate>
+      <div class="form-group form-inline has-validation">
+        <label for="co_name" class="col-md-3 justify-end">
+          <span class="require mr-5">*</span>
+          <span class="main-title-color font-18">企业名称</span>  
+        </label>
+        <input type="text" name="company" class="form-control col-md-9 main-title-color form_input" id="co_name" placeholder="输入营业执照上的企业全称" required>
+        <span class="error_msg invalid-feedback">请输入营业执照上的全名</span>
+      </div>
+      <div class="form-group form-inline">
+        <label for="mate_name" class="col-md-3 justify-end">
+          <span class="require mr-5">*</span>
+          <span class="main-title-color font-18">联系人姓名</span>  
+        </label>
+        <input type="text" name="name" class="form-control col-md-9 main-title-color form_input" id="mate_name" placeholder="输入联系人姓名" required>
+        <span class="error_msg invalid-feedback">请输入您的姓名</span>
+      </div>
+      <div class="form-group form-inline">
+        <label for="mate_sell" class="col-md-3 justify-end">
+          <span class="require mr-5">*</span>
+          <span class="main-title-color font-18">联系人手机号码</span>  
+        </label>
+        <input type="text" name="phone" class="form-control col-md-9 main-title-color form_input" id="mate_sell" placeholder="输入联系人手机号码" required>
+        <span class="error_msg invalid-feedback">请您输入手机号</span>
+      </div>
+      <div class="form-group form-inline">
+        <label for="mate_sell" class="col-md-3 justify-end">
+          <span class="require mr-5">*</span>
+          <span class="main-title-color font-18">每月需求用量</span>  
+        </label>
+        <input type="text" name="request" class="form-control col-md-9 main-title-color form_input" id="mate_sell" placeholder="请选择您需要的用量" required>
+        <span class="error_msg invalid-feedback">请选择您的每月需求用量</span>
+      </div>
+      <div class="form-group form-inline">
+        <label for="mate_sell" class="col-md-3 justify-end main-title-color font-18">用途</label>
+        <input type="text" class="form-control col-md-9 main-title-color form_input forWhat" id="mate_sell" placeholder="例如: 网络爬虫">
+      </div>
+      <div class="bottom_btn flex-center">
+        <button type="submit" class="submit btn btn-primary">提交</button>
+      </div>
+    </form>
   </div>
 </body>
+<%- include('../components/js.html'); %>
+<%- include('./js.html') %>
 </html>
