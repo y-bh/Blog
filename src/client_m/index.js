@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 陈昊天
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-06 16:47:44
+ * @LastEditTime: 2022-05-13 16:12:35
  */
 
 import { createApp } from 'vue';
@@ -17,6 +17,7 @@ import App from './index.vue';
 /** **************全局css管理 */
 import "element-plus/packages/theme-chalk/lib/index";
 import 'assets/css/elementUi.reset.scss';
+import 'assets/css/public.scss';
 
 import * as re from 'config/re.config';
 
