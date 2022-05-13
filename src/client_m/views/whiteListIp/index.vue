@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 李云涛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-13 09:31:33
+ * @LastEditTime: 2022-05-13 18:10:53
 -->
 <template>
   <div class="white-list-wrap">
@@ -28,16 +28,16 @@
     <div class="api-link"><a href="">点击获取白名单删除接口</a></div>
     <div class="api-link"><a href="">点击获取白名单查询接口</a></div>
     <div class="table-wrap">
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="ip" label="IP"></el-table-column>
-        <el-table-column prop="desc" label="备注">
+      <el-table :data="tableData" style="width: 100%" :header-cell-style="tableHeaderColor">
+        <el-table-column prop="ip" label="IP" align="center"></el-table-column>
+        <el-table-column prop="desc" label="备注" align="center">
           <template #default="{ row }">
             {{row.desc}}
             <button @click="openWhiteListDialog('edit', row)">edit</button>
           </template>
         </el-table-column>
-        <el-table-column prop="time" label="设置时间"></el-table-column>
-        <el-table-column prop="operator" label="操作">
+        <el-table-column prop="time" label="设置时间" align="center"></el-table-column>
+        <el-table-column prop="operator" label="操作" align="center">
           <template #default="{ row }">
             <el-button class="table-delete-btn" @click="openRemoveDialog(row)">移除</el-button>
           </template>
@@ -56,6 +56,9 @@ import { reactive, toRefs, onMounted, ref } from "vue";
 /**components */
 import editDialog from "./components/editDialog"
 import removeDialog from "./components/removeDialog"
+
+/**func */
+import { getWhiteListFunc } from "model/whiteList"
 
 export default {
   name: "",
@@ -97,10 +100,26 @@ export default {
       }
     }
 
+    //get white list
+    async function getWhiteList() {
+      const res = await getWhiteListFunc()
+      console.log(res);
+    }
+
     onMounted(() => {
       state.switchVal = false
+
+      // getWhiteList()
     });
     //const refData = toRefs(null);
+
+
+    /**表格头样式 */
+    function tableHeaderColor () {
+      return "background-color: #F2F7FE; font-size: 19px; height: 66px; color: #4C5664;"
+    }
+
+
     return {
       //   ...refData,
       ...toRefs(state),
@@ -110,6 +129,8 @@ export default {
       switchChange, //switch Change
       openWhiteListDialog, //remove WhiteList Ip
       openRemoveDialog, //open Remove Dialog
+
+      tableHeaderColor, //table-header style func
     };
   },
 };
