@@ -3,10 +3,10 @@
  * @LastEditors: 陈昊天
  * @description: 关键词聚合页js
  * @Date: 2022-05-12 17:09:39
- * @LastEditTime: 2022-05-12 18:38:33
+ * @LastEditTime: 2022-05-13 09:54:37
 -->
 <script>
-  const blogList = [
+  const leftBlogList = [
     {
       id: 1,
       month: '01',
@@ -42,11 +42,7 @@
         {
           id: 2,
           title: '标题2'
-        },
-        {
-          id: 3,
-          title: '标题3'
-        },    
+        },   
       ]
     },
     {
@@ -103,7 +99,7 @@
   ]
 
   //文章列表
-  $.each(blogList,(index,item) => {
+  $.each(leftBlogList,(index,item) => {
     $('.b_left').append(`<div class="blog_item flex justify-between align-center">
         <div class="blog_left grid">
           <div class="item_top text-blue flex justify-start align-start month">${item.day}</div>
@@ -113,7 +109,7 @@
           </div>
         </div>
         <div class="blog_right grid ml-30">
-          <div class="right_top flex justify-between align-center">
+          <div class="right_top flex justify-between align-center mb-20">
             <span class="font-20 main-title-color">${item.title}</span>
             <span class="go_detail pointer text-blue">查看详情>></span>
           </div>
@@ -130,15 +126,15 @@
       </div>`)
   })
   $.each(tabList,(index,item) => {  //tab相关文章
-    $('.tab_blog').append(`<div class="tag_same_blog grid box">
-        <div class="tag_top flex justify-between align-center">
-          <span class="same_blog">${item.typeAlias}</span>
+    $('.tab_blog').append(`<div class="tab_same_blog grid box">
+        <div class="tab_top flex justify-between align-center">
+          <span class="same_blog_text">${item.typeAlias}</span>
           <span class="look_more pointer">查看更多>></span>
         </div>
-        <div class="tag_bottom"></div>
+        <div class="tab_bottom" id="${item.type}"></div>
       </div>`)
     $.each(item.blogList,(i,blog) => {
-      $('.tag_bottom').append(`<div class="flex justify-between align-center">
+      $(`#${item.type}`).append(`<div class="flex justify-between align-center">
           <span>${blog.title}</span>
           <i>></i>
         </div>`)
