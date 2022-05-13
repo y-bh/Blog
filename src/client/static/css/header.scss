@@ -138,8 +138,28 @@
             }
 
             .meal-icon {
+                display: inline-block;
+                width: 18px;
                 height: 15px;
                 margin: 0 5px 0 0;
+                // 雪碧图每个icon间距为10px  每个icon宽18px
+                background: transparent url(/images/head/head_child.png) scroll  50% 50%/auto;
+            }
+            .icon_first {
+                //  x  y
+                background-position: -10px 50%;
+            }
+            .icon_second {
+                //  x  y
+                background-position: -38px 50%;
+            }
+            .icon_third {
+                //  x  y
+                background-position: -66px 50%;
+            }
+            .icon_forth {
+                //  x  y
+                background-position: -94px 50%;
             }
             .title-type {
                 padding: 0 10px;
@@ -165,6 +185,29 @@
                 line-height: 24px;
                 color: #677294;
             }
+        }
+
+
+        // 解开下面的注释  导航栏子菜单直接显示
+        .nav-meal{
+            // .child-list {
+            //     width: auto;
+            //     opacity: 1;
+            // }
+        }
+
+        .nav-ip{
+            // .child-list {
+            //     width: auto;
+            //     opacity: 1; 
+            // } 
+        }
+
+        .nav-business {
+            // .child-list {
+            //     width: auto;
+            //     opacity: 1; 
+            // }
         }
 
         //  垂直导航
@@ -220,11 +263,7 @@
                     padding-right: 0;
                 }
  
-                .meal-icon {
-                    width: 50px;
-                    height: 80px;
-                    background: #677294;
-                }
+                
                 .content {
                     max-width: 108px;
                     text-align: left;
@@ -237,6 +276,30 @@
                 .title-type{
                     padding: 0;
                 }
+            }
+            .meal-icon {
+                width: 58px;
+                height: 80px;
+                // 间距10px 图片58px
+                background: transparent url(/images/head/head_business.png) scroll  0 50%/auto auto;
+            }
+            .nav_first {
+                background-position: -10px;
+            }
+            .nav_second {
+                background-position: -78px;
+            }
+            .nav_third{
+                background-position: -146px;
+            }
+            .nav_forth{
+                background-position: -214px;
+            }
+            .nav_fifth{
+                background-position: -282px;
+            }
+            .nav_sixth{
+                background-position: -350px;
             }
         }
 
