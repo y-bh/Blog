@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-13 11:41:25
+ * @LastEditTime: 2022-05-13 13:28:59
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -133,7 +133,7 @@
                   <img src="https://www.tianqiip.com/website/images/buy/ali.png" alt="支付宝">
                   <span class="ml-20">支付宝</span>
                 </li>
-                <li class="wxPay" type="ali">
+                <li class="wxPay" type="weChat">
                   <img src="https://www.tianqiip.com/website/images/buy/wechat.png" alt="支付宝">
                   <span class="ml-20">微信</span>
                 </li>
@@ -326,12 +326,12 @@
             <div class="payType-content">
               <div class="payType-title mr-40"><span>选择支付方式</span></div>
               <ul class="payMode">
-                <li class="aliPay mr-30 current">
+                <li class="aliPay mr-30 current" type="ali">
                   <img src="https://www.tianqiip.com/website/images/buy/ali.png" alt="支付宝">
                   <span class="ml-20">支付宝</span>
                 </li>
                 <!-- <li class="wxPay" data-toggle="modal" data-target="#wxPayModal"> -->
-                <li class="wxPay">
+                <li class="wxPay"  type="weChat">
                   <img src="https://www.tianqiip.com/website/images/buy/wechat.png" alt="支付宝">
                   <span class="ml-20">微信</span>
                 </li>
@@ -477,7 +477,7 @@
           <div class="modal-body wxPayContent">
             <div><img src="/images/package/packageBanner.png" alt="微信头部背景"></div>
             <div class="content mt-40">请在<span class="red" id="time-flag">300秒</span>内完成支付</div>
-            <div class="mt-30 mb-40 qcCode"></div>
+            <div id="wxQcCode" class="mt-30 mb-40 qcCode"></div>
           </div>
         </div>
       </div>
