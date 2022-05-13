@@ -147,19 +147,30 @@
             }
             .icon_first {
                 //  x  y
-                background-position: -10px 50%;
+                background-position: -10px;
             }
             .icon_second {
                 //  x  y
-                background-position: -38px 50%;
+                background-position: -38px;
             }
             .icon_third {
                 //  x  y
-                background-position: -66px 50%;
+                background-position: -66px;
             }
             .icon_forth {
                 //  x  y
-                background-position: -94px 50%;
+                background-position: -94px;
+            }
+            .icon_fifth {
+                //  x  y
+                background-position: -122px;
+            }
+            .icon_sixth {
+                //  x  y
+                background-position: -150px;
+            }
+            .icon_seventh{
+                background-position: -178px;
             }
             .title-type {
                 padding: 0 10px;
@@ -197,13 +208,23 @@
         }
 
         .nav-ip{
-            // .child-list {
-            //     width: auto;
-            //     opacity: 1; 
-            // } 
+            .child-list {
+                // width: auto;
+                // opacity: 1; 
+                .child-item {
+                    width: calc(100% - 60px);
+                }
+            } 
         }
 
         .nav-business {
+            // .child-list {
+            //     width: auto;
+            //     opacity: 1; 
+            // }
+        }
+
+        .nav-help {
             // .child-list {
             //     width: auto;
             //     opacity: 1; 
