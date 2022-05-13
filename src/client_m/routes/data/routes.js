@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 李云涛
  * @description: 静态路由数据
  * @Date: 2022-04-27 13:26:51
- * @LastEditTime: 2022-05-06 13:19:03
+ * @LastEditTime: 2022-05-13 12:58:03
  */
 let prefix = '/manager';
 let path404 = `${prefix}/404`;
@@ -82,9 +82,16 @@ export const routes = [
       {
         path: 'giftManage',
         name: 'giftManage',
-        ignore: true,
+        // ignore: true,
         meta: {title: "礼券管理",icon: ""},
         component: () => import('views/giftManage'),
+      },
+      {
+        path: 'submitTicket',
+        name: 'submitTicket',
+        // ignore: true,
+        meta: {title: "提交工单",icon: ""},
+        component: () => import('views/submitTicket'),
       },
     ],
   },

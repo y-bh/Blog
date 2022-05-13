@@ -317,7 +317,6 @@ $columnMt: 60px;
             font-size: 23px;
             color: #ff5f00;
             font-weight: bold;
-            margin-left: 35px;
           }
           .pay-button {
             width: 240px;
@@ -452,6 +451,10 @@ $columnMt: 60px;
           .content {
             display: flex;
             align-items: center;
+            .realIpNum {
+              font-size: 24px;
+              color: #fc7019;
+            }
             .myProgress {
               .control-range {
                 width: 406px;
@@ -638,16 +641,21 @@ $columnMt: 60px;
   }
   .wxPayModal {
     .red {
-      color: red;
+      color: #f8486f;
     }
     .modal-content {
       width: 400px;
     }
     .wxPayContent {
       padding: 0;
+      .content {
+        font-size: 20px;
+        color: #4c5664;
+        text-align: center;
+      }
       img {
         width: 100%;
-        height: 80x;
+        height: 80px;
       }
       .qcCode {
         width: 240px;

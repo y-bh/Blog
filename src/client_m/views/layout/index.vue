@@ -3,7 +3,7 @@
  * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-11 18:42:30
+ * @LastEditTime: 2022-05-13 11:24:19
 -->
 <template>
   <div class="layout">
@@ -76,7 +76,7 @@ export default {
   background: #f8f8f8;
   .layout-main {
     display: flex;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 110px auto 40px;
     min-height: 700px;
 

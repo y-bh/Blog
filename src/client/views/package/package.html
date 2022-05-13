@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-12 15:31:59
+ * @LastEditTime: 2022-05-13 11:41:25
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +107,7 @@
                     <div class="rechargeAmount"><span>￥500</span></div>
                     <div class="lastAmount"><span>实到550元</span></div>
                   </li>-->
-                    <li class="amount-item contactUs">
+                    <li class="amount-item contactUs" onclick="payMore()">
                       <div class="discount"><span>优惠+</span></div>
                       <div class="rechargeAmount"><span>预充更多金额</span></div>
                       <div class="lastAmount"><span>联系平台客户经理</span></div>
@@ -115,7 +115,7 @@
             </ul>
           </div>
           <!-- 我的红包 -->
-          <div class="redPacket mt-50">
+          <div id="balanceRedPacketSelect" class="redPacket mt-50">
             <div class="redPacket-title mr-40"><span>我的红包</span></div>
             <div>
               <select class="form-control">
@@ -128,12 +128,12 @@
           <div class="payType mt-50">
             <div class="payType-content">
               <div class="payType-title mr-40"><span>选择支付方式</span></div>
-              <ul class="payMode">
-                <li class="aliPay mr-30 current">
+              <ul id="balancePagPayType" class="payMode">
+                <li class="aliPay mr-30 current" type="ali">
                   <img src="https://www.tianqiip.com/website/images/buy/ali.png" alt="支付宝">
                   <span class="ml-20">支付宝</span>
                 </li>
-                <li class="wxPay">
+                <li class="wxPay" type="ali">
                   <img src="https://www.tianqiip.com/website/images/buy/wechat.png" alt="支付宝">
                   <span class="ml-20">微信</span>
                 </li>
@@ -144,9 +144,9 @@
 
           <!-- 支付金额 -->
           <div class="payMoney">
-            <div class="payMoney-title"><span>支付金额</span></div>
-            <div class="payMoney-number"><span id="rechargeMoney">1000.00元</span></div>
-            <div class="pay-button"><span>立即支付</span></div>
+            <div class="payMoney-title mr-40"><span>支付金额</span></div>
+            <div class="payMoney-number"><span id="rechargeMoney">0.00</span><span>元</span></div>
+            <div class="pay-button" id="payment1"><span>立即支付</span></div>
           </div>
         </div>
         <!-- 短效IP  tab内容-->
@@ -185,9 +185,9 @@
             <ul id="selectIPTimes" class="column-list">
               <% proxyTimes.forEach(function(proxyTime,index) { %>
                 <% if (index==0) { %>
-                  <li class="current" data-id="<%= proxyTime.second %>">
+                  <li class="current" data-id="<%= proxyTime.second %>" price="<%= proxyTime.price %>">
                     <% } else { %>
-                  <li data-id="<%= proxyTime.second %>">
+                  <li data-id="<%= proxyTime.second %>"  price="<%= proxyTime.price %>">
                     <% } %>
                       <div class="times"><span>
                           <%= proxyTime.minute %>分钟
@@ -223,16 +223,17 @@
             </div>
             <% mealDates.forEach(function(mealDate,index) { %>
               <% if(mealDate.id == proxyTimes[0].second)  { %>
-                <ul class="column-list" meal-duration-id="<%= mealDate.id %>">
+                <ul class="column-list current" meal-duration-id="<%= mealDate.id %>">
               <% } else { %>
                 <ul class="column-list hide" meal-duration-id="<%= mealDate.id %>">
               <% } %> 
               
                 <% mealDate.list.forEach(function(item,index) { %>
+                  <% var days= Number(item.time)/24/60/60  %>
                   <% if (index==0) { %>
-                    <li class="current">
+                    <li class="current" days="<%= days %>">
                       <% } else { %>
-                    <li>
+                    <li days="<%= days %>">
                       <% } %>
 
                       <!-- 获取当前数据的id映射至activityVoMap -->
@@ -240,7 +241,7 @@
                       <% if(activityVoMap && activityVoMap[mealItemId]){ %>
                         <% var activityType =activityVoMap[mealItemId]["activityType"] %>
                           <% if(activityType){ %>
-                            <div class="discount" activityType="<%= activityType %>"  rate="<%= activityVoMap[mealItemId].rate%>">
+                            <div class="discount" activityType="<%= activityType %>"  rate="<%= activityVoMap[mealItemId].rate%>" rate="<%= activityVoMap[mealItemId].rate%>" >
                               <% if(activityType == 1){ %>
                                 <span><%= activityVoMap[mealItemId].rate/10 %>折</span>
                               <% } %>
@@ -252,7 +253,7 @@
                       <% } %>
 
                       <div class="times mt-15"><span><%= item.name %></span></div>
-                      <% var days= Number(item.time)/24/60/60  %>
+                      
                       <div class="amount"><span><%= days %>天</span></div>
                     </li>
                 <% }) %>
@@ -308,10 +309,11 @@
                 <div class="enterVal"><input type="number" max="5000000" min="2000" step="2000" value="2000" id="counter-enter"/></div>
                 <div class="plus button" onclick="computerCounter('plus')"><span>+</span></div>
               </div>
+              <div id="realIpNum" class="realIpNum ml-20">实际到账<span>2000</span>IP</div>
             </div>
           </div>
           <!-- 我的红包 -->
-          <div class="redPacket mt-50">
+          <div id="packTimeRedPacketSelect" class="redPacket mt-50">
             <div class="redPacket-title mr-40"><span>我的红包</span></div>
             <div>
               <select class="form-control">
@@ -340,8 +342,8 @@
           <!-- 支付金额 -->
           <div class="payMoney mt-50">
             <div class="payMoney-title mr-30"><span>支付金额</span></div>
-            <div class="payMoney-number mr-30"><span>1000.00元</span></div>
-            <div class="payMoney-origin"><span>原价：1500.00元</span></div>
+            <div class="payMoney-number mr-30"><span id="discountPrice">0.00</span><span>元</span></div>
+            <div class="payMoney-origin"><span>原价：</span><span id="totalPrice" noRedPrice="0.00">0.00</span><span>元</span></div>
             <div class="pay-button ml-40"><span>立即支付</span></div>
           </div>
         </div>
@@ -474,7 +476,7 @@
         <div class="modal-content">
           <div class="modal-body wxPayContent">
             <div><img src="/images/package/packageBanner.png" alt="微信头部背景"></div>
-            <div class="content mt-40">请在<span class="red">300秒</span>内完成支付</div>
+            <div class="content mt-40">请在<span class="red" id="time-flag">300秒</span>内完成支付</div>
             <div class="mt-30 mb-40 qcCode"></div>
           </div>
         </div>
@@ -484,6 +486,7 @@
   </div>
   <%- include('../components/js.html'); %>
 </body>
+<script src="/lib/js/qrcode.min.js"></script>
 <script src="/js/package.js"></script>
 
 </html>
