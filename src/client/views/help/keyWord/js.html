@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 关键词聚合页js
  * @Date: 2022-05-12 17:09:39
- * @LastEditTime: 2022-05-13 09:54:37
+ * @LastEditTime: 2022-05-13 11:37:33
 -->
 <script>
   const leftBlogList = [
@@ -120,7 +120,7 @@
 
   //右侧tab相关文章
   $.each(sameBlog,(index,item) => { //相关文章
-    $('.c_bottom').append(`<div class="flex justify-between align-center">
+    $('.c_bottom').append(`<div class="flex justify-between align-center mb-10 right_blog_title pointer">
         <span>${item.title}</span>
         <i>></i>
       </div>`)
@@ -134,7 +134,7 @@
         <div class="tab_bottom" id="${item.type}"></div>
       </div>`)
     $.each(item.blogList,(i,blog) => {
-      $(`#${item.type}`).append(`<div class="flex justify-between align-center">
+      $(`#${item.type}`).append(`<div class="flex justify-between align-center mb-10 right_blog_title pointer">
           <span>${blog.title}</span>
           <i>></i>
         </div>`)
@@ -151,5 +151,11 @@
   $('.look_more').on('click',function() {
     let currentLook = $(this)
     window.location.href = "http://localhost:8080/helpCenter"
+  })
+
+  //点击右侧题目跳转
+  $('.right_blog_title').on('click',function() {
+    let currentBlog = $(this)
+    window.location.href = "http://localhost:8080/helpDetails"
   })
 </script>
