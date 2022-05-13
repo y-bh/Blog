@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-13 17:11:26
+ * @LastEditTime: 2022-05-13 18:15:22
 -->
 <template>
   <div class="container grid">
@@ -73,7 +73,16 @@
           align="center"
         >
           <template #default="{ row }">
-            <span>{{ row.state ? stateMap.get(row.state) : '--' }}</span>
+            <div class="flex-center flex-column">
+              <span :class="{
+                'order_red': row.state === 1 || row.state === 6,
+                'order_green': row.state === 5,
+                'order_yellow': row.state === 4
+              }">
+                {{ row.state ? stateMap.get(row.state) : '--' }}
+              </span>
+              <span v-show="row.state === 1">{{ countDown }}</span>
+            </div>
           </template>
         </el-table-column>
         <el-table-column 
@@ -109,8 +118,8 @@
         >
           <template #default="{ row }">
             <div class="box flex-center flex-column">
-              <span>{{ row?.preAmount??'--' }}</span>
-              <span>{{ row?.payTime??'--' }}</span>
+              <span>{{ row.createTime ? row.createTime : '--' }}</span>
+              <span>{{ row.payTime ? row.payTime : '--' }}</span>
             </div>
           </template>
         </el-table-column>
@@ -118,7 +127,9 @@
           label="操作" 
           align="center"
         >
-          <el-button @click="onPay">支付</el-button>
+          <template #default="{ row }">
+            <el-button v-show="row.state === 1" @click="onPay">支付</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -128,6 +139,7 @@
 <script>
 import { reactive, ref, toRefs } from '@vue/reactivity'
 import { PAY_TYPE_MAP,ORDER_TYPE_MAP,STATE_MAP } from './data.js'
+import { onMounted } from '@vue/runtime-core'
 export default {
   setup() {
     const payTypeMap = ref(PAY_TYPE_MAP)
@@ -144,7 +156,59 @@ export default {
         payStart: null  //支付开始时间
       },
       timeList: [],
-      tableData: [],
+      tableData: [
+        {
+          createTime: 1651749593,
+          payTime: 1651749593,
+          curAmount: null,
+          desc: 'dddddddddd',
+          mealName: '固定-5分钟-7天',
+          orderNo: 'TQ123456789123456789',
+          orderType: 2,
+          payType: 1,
+          preAmount: null,
+          price: 210,
+          sequence: '123456789123456789',
+          state: 2,
+        },
+        {
+          createTime: 1651749593,
+          payTime: 1651749593,
+          curAmount: null,
+          desc: 'dddddddddd',
+          mealName: '固定-5分钟-7天',
+          orderNo: 'TQ123456789123456789',
+          orderType: 1,
+          payType: 2,
+          preAmount: null,
+          price: 210,
+          sequence: '123456789123456789',
+          state: 1,
+        },
+        {
+          createTime: 1651749593,
+          payTime: 1651749593,
+          curAmount: null,
+          desc: 'dddddddddd',
+          mealName: '固定-5分钟-7天',
+          orderNo: 'TQ123456789123456789',
+          orderType: 3,
+          payType: 4,
+          preAmount: null,
+          price: 210,
+          sequence: '123456789123456789',
+          state: 4,
+        }
+      ],
+      countDown: '', //倒计时
+    })
+
+    onMounted(() => {
+      state.tableData.map(e => {
+        e.createTime = new Date(e.createTime).toLocaleDateString().replace(/\//g,'-')
+        e.payTime = new Date(e.payTime).toLocaleDateString().replace(/\//g,'-')
+        return e.createTime,e.payTime
+      })
     })
 
     //重置
@@ -181,6 +245,11 @@ export default {
       console.log('支付');
     }
 
+    //倒计时
+    const countTime = () => {
+      let countTime;
+    }
+
     return {
       ...toRefs(state),
       onReset,
@@ -189,6 +258,7 @@ export default {
       changeTime,
       handleSelectionChange,
       onPay,
+      countTime,
       payTypeMap,
       orderTypeMap,
       stateMap
@@ -206,5 +276,14 @@ export default {
     box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
     border-radius: 4px;
     padding: 40px;
+  }
+  .order_red {
+    color: #F8486F;
+  }
+  .order_green {
+    color: #27ADC2;
+  }
+  .order_yellow {
+    color: #FC7019;
   }
 </style>
