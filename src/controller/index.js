@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: 李云涛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-12 17:08:22
+ * @LastEditTime: 2022-05-13 13:54:13
  */
 
 const router = require("koa-router")();
@@ -18,6 +18,14 @@ const config = require("../config/app.config")
 //const packageObj = require("./package.js")
 const { renderPackage } = require("service/package");
 
+
+//友情链接
+let query_link = 'link Foreach'
+async function getLink() {
+  query_link = await getQueryLink()
+}
+// getLink()
+
 function Router(App) {
   //用户管理
   // router.use("/user", user.routes(), user.allowedMethods());
@@ -29,25 +37,11 @@ function Router(App) {
 
 
     //const res = await renderHome()
-    //友情链接
-    // const query_link = await getQueryLink()
 
     return ctx.render("home/home", {
       name: '住在我',
       url: 2222,
-      link: [{
-        id:1,
-        title:'测试1',
-        link: 'https://www.baidu.com'
-      },{
-        id:2,
-        title:'测试2',
-        link: 'https://www.youtube.com'
-      },{
-        id:2,
-        title:'海外代理IP',
-        link: 'https://www.youtube.com'
-      }],
+      link: [],
     })
   })
 

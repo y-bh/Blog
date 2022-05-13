@@ -472,3 +472,69 @@ body {
   border: none;
   color: #f76c6c;
 }
+
+.or-button{
+  position: relative;
+  margin-top: 20px;
+  margin-left: 500px;
+  border-radius: 4px;
+  border: none;
+  width: 100px;
+  height: 25px;
+  background-color: #FD8320;
+  overflow: hidden;
+  
+  transition-duration:0.4s;
+  /* transition-timing-function: cubic-bezier(0.4, 2, 0.3, -0); */
+}
+
+.or-button::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  /* background-color: black; */
+  background: linear-gradient(45deg,#FFB943, #FD8320);
+  transform: translate(-101%);
+  transition: transform 0.3s;
+}
+
+.or-button:hover::after, .or-button:focus::after{
+  transform: translate(0%);
+}
+
+.bl-button{
+  position: relative;
+  margin-top: 20px;
+  margin-left: 500px;
+  border-radius: 4px;
+  border: none;
+  width: 100px;
+  height: 25px;
+  background-color: #1968FC;
+  overflow: hidden;
+  
+  transition-duration:0.4s;
+  /* transition-timing-function: cubic-bezier(0.4, 2, 0.3, -0); */
+}
+
+.bl-button::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  /* background-color: black; */
+  background: linear-gradient(45deg,#4e38c7, #1968FC);
+  transform: translate(-101%);
+  transition: transform 0.3s;
+}
+
+.bl-button:hover::after, .bl-button:focus::after{
+  transform: translate(0%);
+}
