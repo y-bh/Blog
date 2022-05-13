@@ -3,7 +3,7 @@
  * @LastEditors: 李云涛
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-12 18:34:29
+ * @LastEditTime: 2022-05-13 09:31:33
 -->
 <template>
   <div class="white-list-wrap">
@@ -45,6 +45,7 @@
       </el-table>
     </div>
   </div>
+  <!-- 弹窗 打开&编辑白名单 ~ 确认删除 -->
   <editDialog ref="editDialogRef" />
   <removeDialog ref="removeDialogRef" />
 </template>
