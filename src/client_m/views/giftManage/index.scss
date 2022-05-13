@@ -4,14 +4,16 @@
   grid-template-columns: repeat(auto-fill, minmax(440px, auto));
   justify-content: center;
 
+  padding-top: 40px;
   .gift {
     display: flex;
+    background: #F7F7F7;
     box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
     width: max-content;
 
     .gift-header{
       display: grid;
-      grid-template-rows: 2 70px 30px;
+      grid-template-rows: 65px 35px;
       row-gap: 8px;
       width: 140px;
       height: 110px;
@@ -36,7 +38,7 @@
 
       /* 裁剪div */ 
       clip-path: path(
-        'M 0 0 L 140 0 L 140 2.75 A 1 1 0 0 0 140 8.25 L 140 13.75 A 1 1 0 0 0 140 19.25 L 140 24.75 A 1 1 0 0 0 140 30.25 L 140 35.75 A 1 1 0 0 0 140 41.25 L 140 46.75 A 1 1 0 0 0 140 52.25 L 140 57.75 A 1 1 0 0 0 140 63.25 L 140 68.75 A 1 1 0 0 0 140 74.25 L 140 79.75 A 1 1 0 0 0 140 85.25 L 140 90.75 A 1 1 0 0 0 140 96.25 L 140 101.75 A 1 1 0 0 0 140 107.25 L 140 110 L 0 150 L 0 60 A 1 1 0 0 0 0 40 z'
+        'M 0 0 L 140 0 L 140 2.75 A 1 1 0 0 0 140 8.25 L 140 13.75 A 1 1 0 0 0 140 19.25 L 140 24.75 A 1 1 0 0 0 140 30.25 L 140 35.75 A 1 1 0 0 0 140 41.25 L 140 46.75 A 1 1 0 0 0 140 52.25 L 140 57.75 A 1 1 0 0 0 140 63.25 L 140 68.75 A 1 1 0 0 0 140 74.25 L 140 79.75 A 1 1 0 0 0 140 85.25 L 140 90.75 A 1 1 0 0 0 140 96.25 L 140 101.75 A 1 1 0 0 0 140 107.25 L 140 110 L 0 150 L 0 65 A 1 1 0 0 0 0 45 z'
       );
     }
 
@@ -44,6 +46,7 @@
       display: grid;
       grid-template-rows: 65px 35px;
       padding: 0px 30px;
+      background: #FFFFFF;
       div{
         &:first-child {
           align-self: center;
@@ -63,6 +66,11 @@
       border-left: 1px dashed #E5E5E5;
       font-size: 14px;
       color: #FF7D55;
+      background: #FFFFFF;
+
+      clip-path: path(
+        'M 0 0 L 45 0 L 45 45 A 1 1 0 0 0 45 65 L 45 110 L 0 110 z'
+      );
     }
   }
 
