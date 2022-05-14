@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-13 18:15:22
+ * @LastEditTime: 2022-05-14 14:32:44
 -->
 <template>
   <div class="container grid">
@@ -81,7 +81,7 @@
               }">
                 {{ row.state ? stateMap.get(row.state) : '--' }}
               </span>
-              <span v-show="row.state === 1">{{ countDown }}</span>
+              <span v-show="row.state === 1" class="order_red">{{ countDown }}</span>
             </div>
           </template>
         </el-table-column>
@@ -200,16 +200,22 @@ export default {
           state: 4,
         }
       ],
-      countDown: '', //倒计时
+      countDown: null,
     })
 
     onMounted(() => {
-      state.tableData.map(e => {
+      state.tableData.map(e => {  //日期处理
         e.createTime = new Date(e.createTime).toLocaleDateString().replace(/\//g,'-')
         e.payTime = new Date(e.payTime).toLocaleDateString().replace(/\//g,'-')
         return e.createTime,e.payTime
       })
+      countTime()
     })
+
+    //获取列表数据
+    const getQueryList = async () => {
+      /**接口处理 */
+    }
 
     //重置
     const onReset = () => {
@@ -245,9 +251,36 @@ export default {
       console.log('支付');
     }
 
-    //倒计时
-    const countTime = () => {
+    //每秒执行一次
+    const countTime = (createTime,id) => {
       let countTime;
+      createTime = 1652509642040; //测试倒计时用的时间，获取接口数据后请删除
+      let deadline = createTime + 1000*60*60*24  //倒计时测试
+      let timer = setInterval(() => {
+        let now = Date.parse(new Date()) //当前时间时间戳
+        countTime = deadline - now >= 0 ? deadline - now : 0  //判断是否到期
+        let tem = {
+          timer,
+          countTime,
+          id
+        }
+        getCountTime(tem)
+      },1000)
+    }
+
+    //倒计时
+    const getCountTime = (tem) => {
+      if (countTime <= 0) {
+        clearInterval(tem.timer)
+        /**超时接口处理 */
+      } else {
+        tem.countTime--
+        let hour,min,second;
+        hour = Math.floor(tem.countTime / 1000 / 3600 % 24)
+        min = Math.floor(tem.countTime / 1000 / 60 % 60)
+        second = Math.floor(tem.countTime / 1000 % 60)
+        state.countDown = hour+':'+min+':'+second
+      }
     }
 
     return {
@@ -259,9 +292,11 @@ export default {
       handleSelectionChange,
       onPay,
       countTime,
+      getCountTime,
+      getQueryList,
       payTypeMap,
       orderTypeMap,
-      stateMap
+      stateMap,
     }
   }
 }
