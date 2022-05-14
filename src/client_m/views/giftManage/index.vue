@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 李云涛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-13 12:53:43
+ * @LastEditTime: 2022-05-14 11:33:07
 -->
 <template>
   <div class="gift-wrap">
@@ -59,6 +59,10 @@
 
 <script>
 import { reactive,toRefs,onMounted} from 'vue'
+
+//func
+import { getGiftFunc } from "model/gift.js"
+
 export default {
   name: '',
   props:{
@@ -72,6 +76,17 @@ export default {
     function changeShowGift() {
       state.showGift = !state.showGift
     }
+
+    /**获取礼券 */
+    async function getGift() {
+      // const res = await getGiftFunc()
+    }
+
+    onMounted(()=>{
+
+      /**调用方法 */
+      getGift()
+    })
     
     return {
      //   ...refData,

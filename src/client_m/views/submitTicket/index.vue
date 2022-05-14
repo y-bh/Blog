@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 李云涛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-13 12:56:11
- * @LastEditTime: 2022-05-13 13:21:12
+ * @LastEditTime: 2022-05-14 11:26:56
 -->
 <template>
   <div class="ticket-wrap">
@@ -23,13 +23,27 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { onMounted, reactive, toRefs } from 'vue'
+
+//func
+import { submitTicketFunc } from "model/submitTicket"
 export default {
   name:'',
   components:{},
   setup(){
     const state = reactive({
       textarea: null
+    })
+
+
+    /* submit ticket */
+    async function submitTicket() {
+      const res = await submitTicketFunc()
+    } 
+
+    onMounted(()=>{
+      /* 方法 */
+      // submitTicket()
     })
 
     return {
@@ -40,37 +54,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ticket-wrap{
-  padding: 40px;
-  font-size: 16px;
-
-  .ticket-title{
-    color: #4C5664;
-  }
-
-  .ticket-desc{
-    margin-top: 30px;
-    margin-bottom: 20px;
-    color: #1968FC;
-  }
-
-  .ticket-input{
-    .el-textarea{
-      testarea{
-        resize: none;
-      }
-    }
-  }
-
-  .ticket-btn{
-    margin-top: 40px;
-    text-align: center;
-
-    .el-button{
-      width: 200px;
-      background-color: #1968FC;
-      color: #FFFFFF;
-    }
-  }
-}
+@import "./index.scss"
 </style>
