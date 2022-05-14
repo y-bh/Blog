@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-14 15:01:16
+ * @LastEditTime: 2022-05-14 15:27:49
 -->
 <template>
   <div class="container grid">
@@ -118,8 +118,8 @@
         >
           <template #default="{ row }">
             <div class="box flex-center flex-column">
-              <span>{{ row.createTime ? row.createTime : '--' }}</span>
-              <span>{{ row.payTime ? row.payTime : '--' }}</span>
+              <span>{{ row.createTime ? dateFormat(new Date(row.createTime)) : '--' }}</span>
+              <span>{{ row.payTime ? dateFormat(new Date(row.payTime)) : '--' }}</span>
             </div>
           </template>
         </el-table-column>
@@ -137,9 +137,8 @@
 </template>
 
 <script>
-import { reactive, ref, toRefs } from '@vue/reactivity'
+import { reactive, ref, toRefs ,onMounted } from 'vue'
 import { PAY_TYPE_MAP,ORDER_TYPE_MAP,STATE_MAP } from './data.js'
-import { onMounted } from '@vue/runtime-core'
 import { dateFormat } from 'tools/dateFormat.js'
 export default {
   setup() {
@@ -205,11 +204,6 @@ export default {
     })
 
     onMounted(() => {
-      state.tableData.map(e => {  //日期处理
-        e.createTime = dateFormat(new Date(e.createTime))
-        e.payTime = dateFormat(new Date(e.payTime))
-        return e.createTime,e.payTime
-      })
       countTime()
     })
 
@@ -298,6 +292,7 @@ export default {
       payTypeMap,
       orderTypeMap,
       stateMap,
+      dateFormat
     }
   }
 }

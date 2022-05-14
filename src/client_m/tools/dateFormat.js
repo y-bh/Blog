@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
  * @LastEditors: 陈昊天
- * @description: 时间格式处理
- * @Date: 2022-05-14 14:48:54
- * @LastEditTime: 2022-05-14 15:00:56
+ * @description: 日期格式化
+ * @Date: 2022-05-14 15:22:03
+ * @LastEditTime: 2022-05-14 15:29:43
  */
 export const dateFormat = (date, fmt = 'YYYY-mm-dd HH:MM:SS') => {
   let ret
