@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-13 16:12:35
+ * @LastEditTime: 2022-05-14 14:59:31
  */
 
 import { createApp } from 'vue';
@@ -11,6 +11,7 @@ import { createApp } from 'vue';
 import injectRouter from './routes'; //router
 import injectUI from 'tools/injectUI.js'; // ui组件
 import { get, post } from "tools/ajax"; //ajax 服务
+import { dateFormat } from 'tools/dateFormat';
 
 import injectState from '@/store'; //vuex
 import App from './index.vue';
@@ -38,6 +39,10 @@ app.config.globalProperties.$get = get;
 app.provide('$get', get)
 app.config.globalProperties.$post = post;
 app.provide('$post', post)
+
+//注入时间格式处理
+app.config.globalProperties.$dateFormat = dateFormat;
+app.provide('$dateForm',dateFormat)
 
 
 //注入正则表达式管理

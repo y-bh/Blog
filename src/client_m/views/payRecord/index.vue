@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-14 14:32:44
+ * @LastEditTime: 2022-05-14 15:01:16
 -->
 <template>
   <div class="container grid">
@@ -140,6 +140,7 @@
 import { reactive, ref, toRefs } from '@vue/reactivity'
 import { PAY_TYPE_MAP,ORDER_TYPE_MAP,STATE_MAP } from './data.js'
 import { onMounted } from '@vue/runtime-core'
+import { dateFormat } from 'tools/dateFormat.js'
 export default {
   setup() {
     const payTypeMap = ref(PAY_TYPE_MAP)
@@ -158,8 +159,8 @@ export default {
       timeList: [],
       tableData: [
         {
-          createTime: 1651749593,
-          payTime: 1651749593,
+          createTime: 1652509642040,
+          payTime: 1652509642040,
           curAmount: null,
           desc: 'dddddddddd',
           mealName: '固定-5分钟-7天',
@@ -172,8 +173,8 @@ export default {
           state: 2,
         },
         {
-          createTime: 1651749593,
-          payTime: 1651749593,
+          createTime: 1652509642040,
+          payTime: 1652509642040,
           curAmount: null,
           desc: 'dddddddddd',
           mealName: '固定-5分钟-7天',
@@ -186,8 +187,8 @@ export default {
           state: 1,
         },
         {
-          createTime: 1651749593,
-          payTime: 1651749593,
+          createTime: 1652509642040,
+          payTime: 1652509642040,
           curAmount: null,
           desc: 'dddddddddd',
           mealName: '固定-5分钟-7天',
@@ -205,8 +206,8 @@ export default {
 
     onMounted(() => {
       state.tableData.map(e => {  //日期处理
-        e.createTime = new Date(e.createTime).toLocaleDateString().replace(/\//g,'-')
-        e.payTime = new Date(e.payTime).toLocaleDateString().replace(/\//g,'-')
+        e.createTime = dateFormat(new Date(e.createTime))
+        e.payTime = dateFormat(new Date(e.payTime))
         return e.createTime,e.payTime
       })
       countTime()
