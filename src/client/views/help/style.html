@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心样式
  * @Date: 2022-05-12 10:39:16
- * @LastEditTime: 2022-05-13 14:07:01
+ * @LastEditTime: 2022-05-14 17:29:33
 -->
 <style scoped>
   .banner {
@@ -35,6 +35,7 @@
   .nav-item .active {
     height: 93px !important;
     font-weight: bold;
+    position: relative;
   }
   .nav .nav-item:last-child a {
     border: none;
@@ -62,7 +63,7 @@
   .blog_item .bottom .line {
     width: 80%;
     height: 0;
-    border: 1px solid #1968fc;
+    border-top: 1px solid #1968fc;
     transform: rotateZ(-50deg);
     position: relative;
     left: 10%;
@@ -89,5 +90,17 @@
   }
   .page-link {
     border: none;
+  }
+  .triangle {
+  }
+  .nav-item .active::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 13px;
+    background-color: #007bff;
+    /* M为起点坐标 L 10 0为第一条线坐标 L 6.5 10为第二条线的坐标 A滑弧 0.8 0.6为弧度的宽高 0 0 1 第一个0为角度 第二个0角度大小角度弧 1从起到到终点瞬时间滑弧 3.5 10为弧终点坐标 z连接起点*/
+    clip-path: path('M 0 0 L 10 0 L 6.5 10 A 0.8 0.6 0 0 1 3.5 10 z'); 
+    transform: translate(0px,50px);
   }
 </style>
