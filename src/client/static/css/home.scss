@@ -21,6 +21,18 @@
 //     transform: translateY(0);
 //   }
 // }
+.common-arrow-title {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  line-height: 60px;
+  justify-content: center;
+  color: #091d43;
+
+  .arrow {
+    font-size: 14px;
+  }
+}
 //背景效果图
 @mixin banner-background {
   background: url("/images/home/backg-img.png") no-repeat;
@@ -416,6 +428,9 @@
     > ul {
       display: flex;
       justify-content: center;
+      .custom-made-bg {
+        flex-direction: column;
+      }
       > li {
         display: flex;
         justify-content: center;
@@ -438,6 +453,8 @@
               line-height: 21px;
               font-size: 16px;
               color: #091d43;
+              display: block;
+              width: 150px;
             }
             .item-icon {
               width: 50px;
@@ -447,7 +464,92 @@
             .item-icon-1 {
               background-position: -30px -30px;
             }
+            .item-icon-2 {
+              background-position: -110px -30px;
+            }
+            .item-icon-3 {
+              background-position: -190px -30px;
+            }
+            .item-icon-4 {
+              background-position: -270px -30px;
+            }
+            .item-icon-5 {
+              background-position: -345px -30px;
+            }
           }
+        }
+      }
+    }
+  }
+  .eightRow {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(90deg, #e7eefd 0%, #f3fafb 47%, #f0fcff 100%);
+    img {
+      width: 247px;
+      height: 127px;
+    }
+    .desc span {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 42px;
+      color: #091d43;
+    }
+    .btn {
+      display: flex;
+      .button {
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 20px;
+      }
+    }
+  }
+  .nineRow {
+    > ul {
+      display: flex;
+      > li {
+        width: 440px;
+        height: 397px;
+        background: rgba(234, 252, 255, 0.39);
+        box-shadow: 0px 20px 40px rgba(76, 86, 100, 0.1);
+        border-radius: 8px;
+        .content {
+          font-size: 14px;
+          color: #091d43;
+          span {
+            display: inline-block;
+            &:first-of-type {
+              width: 78px;
+            }
+          }
+        }
+        .queryBtn {
+          text-align: right;
+          font-size: 14px;
+          color: #26abc3;
+        }
+      }
+      .news1 {
+        background: rgba(234, 252, 255, 0.39);
+        border-top: 1px solid #7ae1f4;
+        .title {
+          border-bottom: 1px solid #84eafa;
+        }
+      }
+      .news2 {
+        background: rgba(240, 243, 253, 0.39);
+        border-top: 1px solid #1968fc;
+        .title {
+          border-bottom: 1px solid #1968fc;
+        }
+      }
+      .news3 {
+        background: rgba(255, 244, 237, 0.39);
+        border-top: 1px solid #fc7019;
+        .title {
+          border-bottom: 1px solid #fc7019;
         }
       }
     }

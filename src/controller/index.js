@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-14 15:13:26
+ * @LastEditTime: 2022-05-14 18:25:49
  */
 
 const router = require("koa-router")();
@@ -101,7 +101,7 @@ function Router(App) {
 
 
 
-    return ctx.render("help/helpCenter", {
+    return ctx.render("businessScene/businessScene", {
       name: 'This is businessScene',
       data: 'businessScene',
     })
