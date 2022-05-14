@@ -3,13 +3,13 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-14 16:09:44
+ * @LastEditTime: 2022-05-14 16:46:21
 -->
 <template>
   <div class="white-list-wrap">
     <div class="white-list-text">
       <div class="white-list-count">
-        已设/总IP白名单数：<span>{{ 4 }}/{{ 5 }}</span>
+        已设/总IP白名单数：<span>{{ used }}/{{ total }}</span>
       </div>
       <i ref="tooltipIconRef" class="tooltip tooltip-icon icon-xianxing-wenhao">
       </i>
@@ -43,7 +43,7 @@
         style="width: 100%"
         :header-cell-style="tableHeaderColor"
       >
-        <el-table-column prop="ip" label="IP" align="center"></el-table-column>
+        <el-table-column prop="clientIP" label="IP" align="center"></el-table-column>
         <el-table-column prop="desc" label="备注" align="center">
           <template #default="{ row }">
             {{ row.desc }}
