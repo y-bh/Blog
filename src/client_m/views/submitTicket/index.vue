@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-13 12:56:11
- * @LastEditTime: 2022-05-14 11:26:56
+ * @LastEditTime: 2022-05-14 16:41:19
 -->
 <template>
   <div class="ticket-wrap">
@@ -14,7 +14,7 @@
       欢迎使用天启HTTP，请详细描述您遇到的问题或者改进意见（如网络异常、验证失败、增添线路等），我们会及时跟进处理，期待您的反馈！
     </div>
     <div class="ticket-input">
-      <el-input v-model="textarea" type="textarea" placeholder="请输入您遇到的问题或者改进意见" rows="18" resize="none" />
+      <el-input v-model="content" type="textarea" placeholder="请输入您遇到的问题或者改进意见" rows="18" resize="none" />
     </div>
     <div class="ticket-btn">
       <el-button class>提交</el-button>
@@ -32,12 +32,13 @@ export default {
   components:{},
   setup(){
     const state = reactive({
-      textarea: null
+      content: null
     })
 
 
     /* submit ticket */
     async function submitTicket() {
+      /**暂未完成 */
       const res = await submitTicketFunc()
     } 
 

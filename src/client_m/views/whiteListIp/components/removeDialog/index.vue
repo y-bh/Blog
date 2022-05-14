@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 李云涛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-12 15:00:41
- * @LastEditTime: 2022-05-12 18:29:52
+ * @LastEditTime: 2022-05-14 16:36:58
 -->
 <template>
   <el-dialog
@@ -29,6 +29,9 @@
 <script>
 //title
 import DialogTitle from "components/DialogTitle"
+
+//func
+import { removeWhiteIpFunc } from "model/whiteList"
 
 import { reactive, toRefs } from "vue";
 export default {
@@ -59,9 +62,15 @@ export default {
     }
 
     //submit result
-    function confirmRemove() {
+    async function confirmRemove() {
       try {
         /**remove func */
+        let params = {
+          ids : [state.id]
+        }
+        const res = await removeWhiteIpFunc(params)
+
+        /**条件判断 */
 
         closeDialogControl();
       } catch (error) {

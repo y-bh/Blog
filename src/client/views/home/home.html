@@ -1,9 +1,9 @@
 <!--
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: dengxiujie
  * @description: 首页
  * @Date: 2022-04-22 15:15:09
- * @LastEditTime: 2022-05-13 18:57:07
+ * @LastEditTime: 2022-05-14 16:30:06
 -->
 
 <!DOCTYPE html>
@@ -18,52 +18,260 @@
   <meta name="renderer" content="webkit">
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
-
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_3387842_6ekr9klr4z6.css">
   <!-- 公共css -->
   <%- include('../components/style.html'); %>
+    <!-- <link rel="stylesheet" href="/lib/css/animate.min.css"> -->
     <link rel="stylesheet" href="/css/home.css">
 </head>
 
-<body>
+<body style="margin-bottom: 20px">
   <%- include('../components/header/header.html'); %>
-    <h1>hello world</h1>
+    <div class="home">
+      <div id="particles-js" class="particles-container" style="display:none;"></div>
+      <div class="homeContent pt-80">
+        <!-- 第一个banner -->
+        <div class="banner-board">
+          <div class="banner-left mt-140 mb-140">
+            <div class="banner-title common-fadeInUp common-fadeInUp-delay-05"><img src="/images/home/backg-title.svg"
+                alt=""></div>
+            <div class="banner-subTitle mt-30 common-fadeInUp common-fadeInUp-delay-06">
+              <span>HTTP、HTTPS、SOCKS5协议，全方位支持大数据采集</span>
+            </div>
+            <div class="banner-btn mt-30 common-fadeInUp common-fadeInUp-delay-07">
+              <div class="backg-btn"><span>免费试用</span></div>
+              <div class="border-btn ml-30"><span>免费试用</span></div>
+            </div>
+          </div>
+          <div class="banner-right">
+            <!-- <img src="" alt=""> -->
+          </div>
+        </div>
+        <!-- 第二栏 -->
+        <ul class="secondRow">
+          <li>
+            <div class="number"><span>200+</span></div>
+            <div class="desc mt-30"><span>全国城市数量</span></div>
+          </li>
+          <li>
+            <div class="number"><span>3,251,974</span></div>
+            <div class="desc mt-30"><span>今日可用IP总数</span></div>
+          </li>
+          <li>
+            <div class="number"><span>638,451</span></div>
+            <div class="desc mt-30"><span>今日更新IP数</span></div>
+          </li>
+          <li>
+            <div class="number"><span>99%</span></div>
+            <div class="desc mt-30"><span>IP可用率</span></div>
+          </li>
+        </ul>
+        <!-- 第三栏 优质代理IP资源-->
+        <div class="commonRow threeRow mt-140">
+          <div class="common-row-title">
+            <div class="title"><img src="/images/home/proxy-title.svg" alt="优质代理IP资源"></div>
+            <div class="subTitle mt-20"><span>运营商正规授权资源,安全稳定的优质代理服务</span></div>
+          </div>
+          <ul class="mt-80">
+            <li class="common-fadeInUp common-fadeInUp-fast-1">
+              <div class="top">
+                <div class="title"><span>三大协议支持</span></div>
+                <div class="icon-img1"></div>
+              </div>
+              <div class="mt-30 bottom"><span>提供HTTP/HTTPS/SOCKS5协议，满足各类业务需求</span></div>
+            </li>
+            <li class="mt-60 common-fadeInUp common-fadeInUp-fast-2">
+              <div class="top">
+                <div class="title"><span>全国自建机房</span></div>
+                <div class="icon-img2"></div>
+              </div>
+              <div class="mt-30 bottom"><span>全国200+城市节点，自建机房纯净网络，掌握一手IP资源</span></div>
+            </li>
+            <li class="mt-110 common-fadeInUp common-fadeInUp-fast-3">
+              <div class="top">
+                <div class="title"><span>快捷极速响应</span></div>
+                <div class="icon-img3"></div>
+              </div>
+              <div class="mt-30 bottom"><span>IP可用率≥９９％，响应延迟≤10毫秒，接口请求时间＜1秒</span></div>
+            </li>
+          </ul>
+        </div>
+        <!-- 产品核心优势-->
+        <div class="fourthRow mt-150">
+          <div class="common-row-title">
+            <div class="title"><img src="/images/home/proxy-title.svg" alt="优质代理IP资源"></div>
+            <div class="subTitle mt-20"><span>以技术升级为核心,提供优质的使用体验</span></div>
+          </div>
+          <div class="content mt-80">
+            <ul id="kernelBox" class="common-fadeInUp common-fadeInUp-fast-1">
+              <li class="ml-40 mr-40 pb-40 active">
+                <div class="icon-img icon-img1"></div>
+                <div class="mt-30"><span>企业级代理服务</span></div>
+              </li>
+              <li class="ml-40 mr-40 pb-40">
+                <div class="icon-img icon-img2"></div>
+                <div class="mt-30"><span>优质性能保证</span></div>
+              </li>
+              <li class="ml-40 mr-40 pb-40">
+                <div class="icon-img icon-img3"></div>
+                <div class="mt-30"><span>资源自由去重</span></div>
+              </li>
+              <li class="ml-40 mr-40 pb-40">
+                <div class="icon-img icon-img4"></div>
+                <div class="mt-30"><span>API快捷调用</span></div>
+              </li>
+              <li class="ml-40 mr-40 pb-40">
+                <div class="icon-img icon-img5"></div>
+                <div class="mt-30"><span>终端使用授权</span></div>
+              </li>
+              <li class="ml-40 mr-40 pb-40">
+                <div class="icon-img icon-img6"></div>
+                <div class="mt-30"><span>专业技术客服</span></div>
+              </li>
+            </ul>
+
+          </div>
+          <div class="content-bg mt-80 pl-40 pr-40">
+            <div class="common-slideInLeft common-fadeInUp-fast-1"><img src="/images/home/kernel-bg.png" alt="企业级代理服务">
+            </div>
+            <ul class="ml-120 common-slideInRight common-fadeInUp-fast-1">
+              <li class="title"><span>企业级代理服务</span></li>
+              <li class="subTitle mt-30"><span>采用高性能服务器和分布式集群架构，支持高并发调用，从容应对业务爆发性增长</span></li>
+            </ul>
+          </div>
+        </div>
+        <!-- 多种套餐选择 -->
+        <div class="fiveRow mt-140">
+          <div class="common-row-title">
+            <div class="title"><img src="/images/home/proxy-title.svg" alt="多种套餐选择"></div>
+            <div class="subTitle mt-20"><span>更灵活自由的计费方式，适配多种业务需求</span></div>
+          </div>
+          <ul class="setMeal mt-80">
+            <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50">
+              <div class="title"><span>余额套餐</span></div>
+              <ul class="timesRange mt-50">
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+              </ul>
+              <ul class="setMeal-limt">
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>套餐有效期：不限制</span>
+                </li>
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>多机器调用：不限制</span>
+                </li>
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>并发请求数量：不限制</span>
+                </li>
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>支持协议：HTTP/HTTPS/SOCKS</span>
+                </li>
 
 
-    <dl>
-      <dt>
-        <%=name%>
-      </dt>
-      <dd>
-        <span>地址:</span>
-        <span>
-          <%=url%>
-        </span>
-      </dd>
-    </dl>
+              </ul>
+              <div class="common-main-button mt-50">
+                <span>了解更多</span>
+              </div>
+            </li>
+            <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50">
+              <div class="title"><span>包时套餐</span></div>
+              <ul class="timesRange mt-50">
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">IP时效：3/5/10/15分钟</span>
+                </li>
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">套餐有效期：7/30/90/180/365天</span>
+                </li>
+              </ul>
+              <ul class="setMeal-limt">
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>API调用频率：1秒</span>
+                </li>
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>多机器调用：不限制</span>
+                </li>
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>并发请求数量：不限制</span>
+                </li>
+                <li class="limit mt-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>支持协议：HTTP/HTTPS/SOCKS</span>
+                </li>
 
-    <button class="or-button">
-      <span>123</span>
-    </button>
 
-    <button class="bl-button">
-      <span>123</span>
-    </button>
+              </ul>
+              <div class="common-main-button mt-50">
+                <span>了解更多</span>
+              </div>
 
-    <button class="or-l-button">
-      <span>123</span>
-    </button>
 
-    <button class="bl-l-button">
-      <span>123</span>
-    </button>
 
-    <img src="/images/logo.png" />
+
+            </li>
+
+
+
+          </ul>
+
+
+        </div>
+        <!-- 定制企业HTTP服务 -->
+        <div class="sixRow mt-70 pt-70 pb-70">
+          <div class="common-row-title">
+            <div class="title"><img src="/images/home/proxy-title.svg" alt="定制企业HTTP服务"></div>
+            <div class="subTitle mt-20"><span>针对不同企业需求,提供专属定制服务</span></div>
+          </div>
+          <ul class="mt-80">
+            <li class="mr-50 ml-50">
+              <ul>
+                <li class="custom-made-item">
+                  <div class="item-icon item-icon-1 mr-30"></div>
+                  <span>海量优质IP资源</span>
+                </li>
+              </ul>
+            </li>
+            <li class="mr-50 ml-50">
+              <div><img src="/images/home/custom-made-bg.png" alt=""></div>
+              <div></div>
+
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
     <%- include('../components/rightToolbar/rightToolbar.html'); %>
-
+    
       <!-- footer -->
       <%- include('../components/footer/footer.html'); %>
 </body>
 <!-- 公共js -->
 <%- include('../components/js.html'); %>
+<script src="/lib/js/particles.min.js"></script>
+<script src="/js/particles-config.js"></script>
+<script src="/js/home.js"></script>
 
 </html>

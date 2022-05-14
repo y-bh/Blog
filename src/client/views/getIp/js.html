@@ -3,11 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取IP JS部分
  * @Date: 2022-05-09 10:29:23
- * @LastEditTime: 2022-05-14 16:20:05
--->
-<script>
 $(function() {
-  let loginStatus = false;  //登录情况
 
   const extractIp = [
     {
@@ -794,5 +790,32 @@ $('.apiUrl_input_box .open').on('click',function() {
 //立即下载
 $('.download').on('click',function() {
   console.log('下载');
+})
+
+//锚点
+$(function () {
+  function to() {
+    let bridge = $('#wl')[0];
+    let body = document.body;
+    let height = 0;
+
+    do{
+      height += bridge.offsetTop;
+      bridge = bridge.offsetParent;
+    } while (bridge !== body)
+    
+    console.log(height);
+
+    window.scrollTo({
+      top: height - 40,
+      behavior:"smooth",
+    })
+  }
+
+  let href = window.location.href.split('?')[1].split('&')
+  console.log(href.includes('wl'))
+  if(href.includes('wl')){
+    to()
+  }
 })
 </script>

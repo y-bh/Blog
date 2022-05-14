@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 李云涛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-12 10:19:45
- * @LastEditTime: 2022-05-12 18:29:45
+ * @LastEditTime: 2022-05-14 16:33:59
 -->
 <template>
   <el-dialog
@@ -49,6 +49,9 @@ import { IP } from "config/re.config";
 //component
 import DialogTitle from "components/DialogTitle";
 
+//func
+import { addWhiteIpFunc, updateWhiteIpDescFunc } from "model/whiteList"
+
 import { reactive, ref, toRefs } from "vue";
 export default {
   components: {
@@ -58,7 +61,7 @@ export default {
     const formRef = ref(null);
 
     const state = reactive({
-      dialogVisible: true, //dialog control
+      dialogVisible: false, //dialog control
       ipReadonly: null, //ip diable
 
       formData: {
@@ -109,8 +112,30 @@ export default {
     function closeCallback() {
       state.ipReadonly = null;
 
+      //reset params
+      state.formData = {
+        ip: null, //data-ip
+        desc: null, //data-desc
+      }
       //reset valiable
       formRef.value.resetFields();
+    }
+
+    //readonly control ? update desc & add white ip
+    async function uaFuncControl(readonly, params) {
+      try {
+
+        let res = null;
+
+        res = (readonly&&updateWhiteIpDescFunc(params)) || addWhiteIpFunc(params)
+
+        /**条件判断返回值 */
+
+        return 
+        
+      } catch (error) {
+        console.error('Update Desc Error: ', error);
+      }
     }
 
     //submit form data & close dialog
@@ -120,6 +145,10 @@ export default {
         .validate()
         .then((e, a) => {
           console.log("Submit: ", state.formData);
+
+          /**控制方法 */
+          uaFuncControl(state.ipReadonly, {...state.formData})
+
           closeDialog();
         })
         .catch((err) => {
