@@ -3,12 +3,12 @@
  * @LastEditors: 陈昊天
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-13 18:15:22
+ * @LastEditTime: 2022-05-14 16:16:58
 -->
 <template>
   <div class="container grid">
     <div class="top">
-      <el-form inline>
+      <el-form class="form flex flex-wrap">
         <el-form-item label="订单编号">
           <el-input placeholder="请输入订单编号" v-model="searchForm.orderNo"></el-input>
         </el-form-item>
@@ -28,9 +28,9 @@
         </el-form-item>
       </el-form>
       <div class="btn flex justify-end">
-        <el-button @click="onReset">重置</el-button>
-        <el-button @click="onSearch">查询</el-button>
-        <el-button @click="batchDelete">批量删除</el-button>
+        <el-button class="blue-btn" @click="onReset">重置</el-button>
+        <el-button class="blue-btn" @click="onSearch">查询</el-button>
+        <el-button class="blue-btn" @click="batchDelete">批量删除</el-button>
       </div>
     </div>
     <div class="bottom">
@@ -44,7 +44,7 @@
         }"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
+        <el-table-column type="selection" />
         <el-table-column 
           prop="orderNo" 
           label="订单编号" 
@@ -81,7 +81,7 @@
               }">
                 {{ row.state ? stateMap.get(row.state) : '--' }}
               </span>
-              <span v-show="row.state === 1">{{ countDown }}</span>
+              <span v-show="row.state === 1" class="order_red">{{ countDown }}</span>
             </div>
           </template>
         </el-table-column>
@@ -115,11 +115,12 @@
         <el-table-column 
           label="创建|支付时间" 
           align="center"
+          sortable
         >
           <template #default="{ row }">
             <div class="box flex-center flex-column">
-              <span>{{ row.createTime ? row.createTime : '--' }}</span>
-              <span>{{ row.payTime ? row.payTime : '--' }}</span>
+              <span>{{ row.createTime ? dateFormat(new Date(row.createTime)) : '--' }}</span>
+              <span>{{ row.payTime ? dateFormat(new Date(row.payTime)) : '--' }}</span>
             </div>
           </template>
         </el-table-column>
@@ -128,7 +129,7 @@
           align="center"
         >
           <template #default="{ row }">
-            <el-button v-show="row.state === 1" @click="onPay">支付</el-button>
+            <el-button v-show="row.state === 1" @click="onPay" size="small" class="pay-btn">支付</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -137,9 +138,9 @@
 </template>
 
 <script>
-import { reactive, ref, toRefs } from '@vue/reactivity'
+import { reactive, ref, toRefs ,onMounted } from 'vue'
 import { PAY_TYPE_MAP,ORDER_TYPE_MAP,STATE_MAP } from './data.js'
-import { onMounted } from '@vue/runtime-core'
+import { dateFormat } from 'tools/dateFormat.js'
 export default {
   setup() {
     const payTypeMap = ref(PAY_TYPE_MAP)
@@ -158,8 +159,8 @@ export default {
       timeList: [],
       tableData: [
         {
-          createTime: 1651749593,
-          payTime: 1651749593,
+          createTime: 1652509642040,
+          payTime: 1652509642040,
           curAmount: null,
           desc: 'dddddddddd',
           mealName: '固定-5分钟-7天',
@@ -172,8 +173,8 @@ export default {
           state: 2,
         },
         {
-          createTime: 1651749593,
-          payTime: 1651749593,
+          createTime: 1652509642040,
+          payTime: 1652509642040,
           curAmount: null,
           desc: 'dddddddddd',
           mealName: '固定-5分钟-7天',
@@ -186,8 +187,8 @@ export default {
           state: 1,
         },
         {
-          createTime: 1651749593,
-          payTime: 1651749593,
+          createTime: 1652509642040,
+          payTime: 1652509642040,
           curAmount: null,
           desc: 'dddddddddd',
           mealName: '固定-5分钟-7天',
@@ -200,20 +201,29 @@ export default {
           state: 4,
         }
       ],
-      countDown: '', //倒计时
+      countDown: null,
     })
 
     onMounted(() => {
-      state.tableData.map(e => {
-        e.createTime = new Date(e.createTime).toLocaleDateString().replace(/\//g,'-')
-        e.payTime = new Date(e.payTime).toLocaleDateString().replace(/\//g,'-')
-        return e.createTime,e.payTime
-      })
+      countTime()
     })
+
+    //获取列表数据
+    const getQueryList = async () => {
+      /**接口处理 */
+    }
 
     //重置
     const onReset = () => {
-      console.log('重置');
+      state.searchForm = {
+        mealName: '', //套餐名称
+        orderNo: '',  //订单编号
+        pageNum: null,  //分页页码
+        pageSize: null, //分页大小
+        payEnd: null, //支付结束时间
+        payStart: null  //支付开始时间
+      }
+      state.timeList = []
     }
 
     //查询
@@ -245,9 +255,36 @@ export default {
       console.log('支付');
     }
 
-    //倒计时
-    const countTime = () => {
+    //每秒执行一次
+    const countTime = (createTime,id) => {
       let countTime;
+      createTime = 1652509642040; //测试倒计时用的时间，获取接口数据后请删除
+      let deadline = createTime + 1000*60*60*24  //倒计时测试
+      let timer = setInterval(() => {
+        let now = Date.parse(new Date()) //当前时间时间戳
+        countTime = deadline - now >= 0 ? deadline - now : 0  //判断是否到期
+        let tem = {
+          timer,
+          countTime,
+          id
+        }
+        getCountTime(tem)
+      },1000)
+    }
+
+    //倒计时
+    const getCountTime = (tem) => {
+      if (countTime <= 0) {
+        clearInterval(tem.timer)
+        /**超时接口处理 */
+      } else {
+        tem.countTime--
+        let hour,min,second;
+        hour = Math.floor(tem.countTime / 1000 / 3600 % 24)
+        min = Math.floor(tem.countTime / 1000 / 60 % 60)
+        second = Math.floor(tem.countTime / 1000 % 60)
+        state.countDown = hour+':'+min+':'+second
+      }
     }
 
     return {
@@ -259,9 +296,12 @@ export default {
       handleSelectionChange,
       onPay,
       countTime,
+      getCountTime,
+      getQueryList,
       payTypeMap,
       orderTypeMap,
-      stateMap
+      stateMap,
+      dateFormat,
     }
   }
 }
@@ -271,11 +311,14 @@ export default {
   .container {
     grid-template-rows: 190px 1fr;
     grid-row-gap: 40px;
-  }
-  .top {
-    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
-    border-radius: 4px;
-    padding: 40px;
+    .top {
+      box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+      border-radius: 4px;
+      padding: 40px;
+    }
+    .form > .el-form-item {
+      margin-right: 50px;
+    }
   }
   .order_red {
     color: #F8486F;

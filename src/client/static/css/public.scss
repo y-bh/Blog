@@ -69,6 +69,9 @@ body {
 .mt-60 {
   margin-top: 60px !important;
 }
+.mt-70 {
+  margin-top: 70px !important;
+}
 .mt-80 {
   margin-top: 80px !important;
 }
@@ -87,7 +90,12 @@ body {
 .mt-130 {
   margin-top: 130px !important;
 }
-
+.mt-140 {
+  margin-top: 140px !important;
+}
+.mt-150 {
+  margin-top: 150px !important;
+}
 //底部边距
 .mb-5 {
   margin-bottom: 5px !important;
@@ -121,6 +129,9 @@ body {
   margin-bottom: 50px !important;
 }
 
+.mb-140 {
+  margin-bottom: 140px !important;
+}
 //左侧边距
 .ml-5 {
   margin-left: 5px !important;
@@ -155,6 +166,10 @@ body {
 }
 .ml-60 {
   margin-left: 60px !important;
+}
+
+.ml-120 {
+  margin-left: 120px !important;
 }
 
 //右侧边距
@@ -223,6 +238,15 @@ body {
 .pt-50 {
   padding-top: 50px !important;
 }
+.pt-60 {
+  padding-top: 60px !important;
+}
+.pt-70 {
+  padding-top: 70px !important;
+}
+.pt-80 {
+  padding-top: 80px !important;
+}
 .pt-100 {
   padding-top: 100px !important;
 }
@@ -253,6 +277,12 @@ body {
 .pb-50 {
   padding-bottom: 50px !important;
 }
+.pb-60 {
+  padding-bottom: 60px !important;
+}
+.pb-70 {
+  padding-bottom: 70px !important;
+}
 .pb-130 {
   padding-bottom: 130px !important;
 }
@@ -267,7 +297,12 @@ body {
 .pr-30 {
   padding-right: 30px;
 }
-
+.pr-40 {
+  padding-right: 40px;
+}
+.pr-50 {
+  padding-right: 50px;
+}
 .pl-10 {
   padding-left: 10px;
 }
@@ -279,7 +314,12 @@ body {
 .pl-30 {
   padding-left: 30px;
 }
-
+.pl-40 {
+  padding-left: 40px;
+}
+.pl-50 {
+  padding-left: 50px;
+}
 .pl-100 {
   padding-left: 100px;
 }
@@ -476,22 +516,22 @@ body {
 /* 动态按钮 -- start */
 /* 文字需用 <span> 包裹 */
 /* 橙色面性按钮 */
-.or-button{
+.or-button {
   position: relative;
   border-radius: 4px;
   border: none;
   width: 100px;
   height: 30px;
-  background-color: #FC7019;
+  background-color: #fc7019;
   overflow: hidden;
   color: white;
-  
-  transition-duration:0.4s;
+
+  transition-duration: 0.4s;
   /* transition-timing-function: cubic-bezier(0.4, 2, 0.3, -0); */
 }
 
-.or-button::after{
-  content: '';
+.or-button::after {
+  content: "";
   position: absolute;
   z-index: 1;
   top: 0;
@@ -500,28 +540,28 @@ body {
   left: 0;
   border-radius: inherit;
   /* background-color: black; */
-  background: linear-gradient(45deg,#fdb539, #FC7019);
+  background: linear-gradient(45deg, #fdb539, #fc7019);
   transform: translate(-101%);
   transition: transform 0.3s;
 }
 
 /* 蓝色面性按钮 */
-.bl-button{
+.bl-button {
   position: relative;
   border-radius: 4px;
   border: none;
   width: 100px;
   height: 30px;
-  background-color: #1968FC;
+  background-color: #1968fc;
   overflow: hidden;
   color: white;
-  
-  transition-duration:0.4s;
+
+  transition-duration: 0.4s;
   /* transition-timing-function: cubic-bezier(0.4, 2, 0.3, -0); */
 }
 
-.bl-button::after{
-  content: '';
+.bl-button::after {
+  content: "";
   position: absolute;
   z-index: 1;
   top: 0;
@@ -530,28 +570,28 @@ body {
   left: 0;
   border-radius: inherit;
   /* background-color: black; */
-  background: linear-gradient(45deg,#4e38c7, #1968FC);
+  background: linear-gradient(45deg, #4e38c7, #1968fc);
   transform: translate(-101%);
   transition: transform 0.3s;
 }
 
 /* 橙色线性按钮 */
-.or-l-button{
+.or-l-button {
   position: relative;
-  border: 1px solid #FC7019;
+  border: 1px solid #fc7019;
   border-radius: 4px;
   width: 100px;
   height: 25px;
-  color: #FC7019;
+  color: #fc7019;
   overflow: hidden;
-  
-  transition: all .4s;
-  transition: color .01s 0.2s;
+
+  transition: all 0.4s;
+  transition: color 0.01s 0.2s;
   /* transition-timing-function: cubic-bezier(0.4, 2, 0.3, -0); */
 }
 
-.or-l-button::after{
-  content: '';
+.or-l-button::after {
+  content: "";
   position: absolute;
   z-index: 1;
   top: -2px;
@@ -559,27 +599,27 @@ body {
   bottom: -2px;
   left: -2px;
   border-radius: inherit;
-  background-color: #FC7019;
+  background-color: #fc7019;
   transform: translate(-101%);
   transition: transform 0.3s;
 }
 
 /* 蓝色线性按钮 */
-.bl-l-button{
+.bl-l-button {
   position: relative;
-  border: 1px solid #1968FC;
+  border: 1px solid #1968fc;
   border-radius: 4px;
   width: 100px;
   height: 25px;
-  color: #1968FC;
+  color: #1968fc;
   overflow: hidden;
-  
-  transition-duration:0.4s;
+
+  transition-duration: 0.4s;
   /* transition-timing-function: cubic-bezier(0.4, 2, 0.3, -0); */
 }
 
-.bl-l-button::after{
-  content: '';
+.bl-l-button::after {
+  content: "";
   position: absolute;
   z-index: 1;
   top: -2px;
@@ -587,7 +627,7 @@ body {
   bottom: -2px;
   left: -2px;
   border-radius: inherit;
-  background-color: #1968FC;
+  background-color: #1968fc;
   transform: translate(-101%);
   transition: transform 0.3s;
 }
@@ -596,26 +636,26 @@ body {
 .or-l-button:hover span,
 .or-l-button:focus span,
 .bl-l-button:hover span,
-.bl-l-button:focus span{
-  color: white
+.bl-l-button:focus span {
+  color: white;
 }
 
 .or-l-button span,
 .bl-l-button span,
 .bl-button span,
-.or-button span{
+.or-button span {
   position: relative;
   z-index: 2;
 }
 
-.or-l-button:hover::after, 
-.or-l-button:focus::after, 
-.bl-l-button:hover::after, 
-.bl-l-button:focus::after, 
+.or-l-button:hover::after,
+.or-l-button:focus::after,
+.bl-l-button:hover::after,
+.bl-l-button:focus::after,
 .bl-button:hover::after,
-.bl-button:focus::after, 
-.or-button:hover::after, 
-.or-button:focus::after{
+.bl-button:focus::after,
+.or-button:hover::after,
+.or-button:focus::after {
   transform: translate(0%);
 }
 /* 动态按钮 -- end */

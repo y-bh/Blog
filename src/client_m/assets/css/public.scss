@@ -47,3 +47,40 @@
 .flex-column {
   flex-direction: column !important;
 }
+
+//蓝色按钮
+.blue-btn{
+  border: 1px solid #1968FC;
+  border-radius: 4px;
+  height: 25px;
+  color: #1968FC;
+
+  &:focus {
+    color: #fff;
+    background: #1968FC;
+  }
+
+  &:hover {
+    background-color: #1968FC;
+    color: #fff;
+    transition: transform 0.3s;
+  }
+}
+
+//支付按钮
+.pay-btn {
+  width: 60px;
+  height: 30px;
+  background: #3e6ae2;
+  color: #fff;
+
+  &:focus {
+    background: #3e6ae2;
+    color: #fff;
+  }
+
+  &:hover {
+    background: #3e6ae2;
+    color: #fff;
+  }
+}
