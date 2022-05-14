@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-14 11:33:07
+ * @LastEditTime: 2022-05-14 16:40:14
 -->
 <template>
   <div class="gift-wrap">
@@ -79,13 +79,15 @@ export default {
 
     /**获取礼券 */
     async function getGift() {
-      // const res = await getGiftFunc()
+      const res = await getGiftFunc()
+
+      /**条件判断 */
     }
 
     onMounted(()=>{
 
       /**调用方法 */
-      getGift()
+      // getGift()
     })
     
     return {

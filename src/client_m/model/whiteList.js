@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-13 15:40:19
- * @LastEditTime: 2022-05-13 16:40:52
+ * @LastEditTime: 2022-05-14 16:25:33
  */
 import { post } from 'tools/ajax.js';
 const api = require("config/api.config.js")
@@ -71,7 +71,7 @@ export const removeWhiteIpFunc = async (params = null) => {
 export const updateWhiteIpDescFunc = async (params = null) => {
   try {
     const res = await post(api.MANAGER_WHITE_LIST_UPDATE, params);
-    return res;
+    return res
   } catch (error) {
     console.error('getTest', error);
     return Promise.resolve(null);
