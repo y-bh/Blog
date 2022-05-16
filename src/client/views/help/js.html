@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心js
  * @Date: 2022-05-12 10:39:09
- * @LastEditTime: 2022-05-16 09:47:16
+ * @LastEditTime: 2022-05-16 10:38:29
 -->
 <script>
   const total = 80;
@@ -81,6 +81,14 @@
     })
   })
 
+  //页码列表
+  let page = total % 8 === 0 ? total / 8 : total / 8 + 1
+  for(let i = 1; i <= page; i++) {
+    $('.pageList').append(`<li class="page-item pointer">
+      <a class="page-link href="#">${i}</a>
+    </li>`) 
+  }
+
   //默认显示第一个tab
   $('.nav .nav-item .nav-link').get(0).click();
 
@@ -94,12 +102,11 @@
     window.location.href='http://localhost:8080/helpDetails'
   })
 
-  //页码列表
-  let page = total % 8 === 0 ? total / 8 : total / 8 + 1
-  for(let i = 1; i <= page; i++) {
-    $('.pageList').append(`<li class="page-item">
-      <a class="page-link href="#">${i}</a>
-    </li>`) 
-  }
+  //点击页码
+  $('.pageList .page-item').on('click',function() {
+    $(this).toggleClass('active').siblings().removeClass('active')
+  })
 
+  //默认展示第一页
+  $('.pageList .page-item').get(0).click();
 </script>
