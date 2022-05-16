@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-14 18:25:49
+ * @LastEditTime: 2022-05-16 09:54:40
  */
 
 const router = require("koa-router")();
@@ -20,11 +20,11 @@ const { renderPackage } = require("service/package");
 
 
 //友情链接
-let query_link = 'link Foreach'
+let query_link = []; //link foreach
 async function getLink() {
   query_link = await getQueryLink()
 }
-// getLink()
+getLink()
 
 function Router(App) {
   //用户管理
@@ -37,11 +37,12 @@ function Router(App) {
 
 
     //const res = await renderHome()
+    console.log(query_link);
 
     return ctx.render("home/home", {
       name: '住在我',
       url: 2222,
-      link: [],
+      link: query_link,
     })
   })
 

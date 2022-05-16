@@ -1,11 +1,12 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: 日期格式化
  * @Date: 2022-05-14 15:22:03
- * @LastEditTime: 2022-05-14 15:29:43
+ * @LastEditTime: 2022-05-16 11:07:54
  */
-export const dateFormat = (date, fmt = 'YYYY-mm-dd HH:MM:SS') => {
+export const dateFormat = (date_ms, fmt = 'YYYY-mm-dd HH:MM:SS') => {
+  let date = new Date(date_ms)
   let ret
     const opt = {
       'Y+': date.getFullYear().toString(), // 年

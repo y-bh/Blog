@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-14 16:44:55
+ * @LastEditTime: 2022-05-16 10:45:29
 -->
 <template>
   <div class="gift-wrap">
@@ -87,7 +87,7 @@ export default {
     onMounted(()=>{
 
       /**调用方法 */
-      // getGift()
+      getGift()
     })
     
     return {

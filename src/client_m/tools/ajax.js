@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: liyuntao
  * @description: Ajax 封装
  * @Date: 2022-04-26 13:45:01
- * @LastEditTime: 2022-04-28 17:23:48
+ * @LastEditTime: 2022-05-16 10:57:29
  */
 
 import axios from 'axios';
@@ -24,7 +24,8 @@ const service = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(config => {
-  config.headers.Authorization = '123';
+  config.headers.xx_uid = '6585';  //uid 联调需要，可以删掉
+  config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
   return config;
 }, error => {
   console.log(error);
@@ -36,21 +37,22 @@ service.interceptors.response.use(response => {
   // 响应正确
   if (response.status >= 200 && response.status <= 210) {
     const data = response.data;
-    if (!data.E) {
+    if (+data.code === 200) {
       return {
         code: 0,
-        data: data.P
+        data: data.data
       };
     } else {
       return {
         code: -1,
-        msg: data.E
+        msg: data.message
       };
     }
   }
   return response.data;
 },
   error => {
+    console.log(error);
     const status = error.response.status;
     const data = error.response.data;
     // 跳转登录页

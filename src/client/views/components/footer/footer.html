@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 李云涛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-09 13:31:39
- * @LastEditTime: 2022-05-11 10:49:20
+ * @LastEditTime: 2022-05-16 09:55:11
 -->
 
 <link rel="stylesheet" href="/css/footer.css">
@@ -35,7 +35,7 @@
     </div>
     <div class="link-content">
       <% link.forEach(function(item){ %>
-        <a href="<%- item.link %> " target="_blank"><%- item.title %></a>
+        <a href="<%- item.link %>" target="<%- item.link || '_blank' %>"><%- item.title %></a>
       <% }) %>  
     </div>
   </div>

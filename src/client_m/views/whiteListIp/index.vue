@@ -3,13 +3,13 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-14 16:46:21
+ * @LastEditTime: 2022-05-16 11:08:18
 -->
 <template>
   <div class="white-list-wrap">
     <div class="white-list-text">
       <div class="white-list-count">
-        已设/总IP白名单数：<span>{{ used }}/{{ total }}</span>
+        已设/总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.total }}</span>
       </div>
       <i ref="tooltipIconRef" class="tooltip tooltip-icon icon-xianxing-wenhao">
       </i>
@@ -39,7 +39,7 @@
     </div>
     <div class="table-wrap">
       <el-table
-        :data="tableData"
+        :data="whiteIpData.data"
         style="width: 100%"
         :header-cell-style="tableHeaderColor"
       >
@@ -51,10 +51,16 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="time"
+          prop="createTime"
           label="设置时间"
           align="center"
-        ></el-table-column>
+        >
+          <template #default="{ row }">
+            <div>
+              {{dateFormat(row.createTime*1000)}}
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column prop="operator" label="操作" align="center">
           <template #default="{ row }">
             <el-button class="table-delete-btn" @click="openRemoveDialog(row)"
@@ -81,6 +87,9 @@ import removeDialog from "./components/removeDialog";
 import { getWhiteListFunc } from "model/whiteList";
 import { updateUserInfo } from "model/user"
 
+//tools
+import { dateFormat } from "tools/dateFormat" 
+
 export default {
   name: "",
   props: {},
@@ -93,14 +102,7 @@ export default {
     const removeDialogRef = ref(null);
 
     const state = reactive({
-      tableData: [
-        {
-          id: 1,
-          ip: '1.1.1.1',
-          desc: 1,
-          time: 1,
-        },
-      ],
+      whiteIpData: {}, //白名单所有数据
       switchVal: false,
     });
 
@@ -140,16 +142,22 @@ export default {
 
     //get white list
     async function getWhiteList() {
-      const res = await getWhiteListFunc();
-      console.log(res);
+      let params = {
+        pageNum: 1,
+        pageSize: 9999
+      }
+      const res = await getWhiteListFunc(params);
+      if(+res.code === 0){
+        console.log(dateFormat(res.data));
+        state.whiteIpData = res.data
+      }
     }
 
     onMounted(() => {
       state.switchVal = false;
 
-      // getWhiteList()
+      getWhiteList()
     });
-    //const refData = toRefs(null);
 
     /**表格头样式 */
     function tableHeaderColor() {
@@ -168,6 +176,7 @@ export default {
       openRemoveDialog, //open Remove Dialog
 
       tableHeaderColor, //table-header style func
+      dateFormat, //date format
     };
   },
 };
