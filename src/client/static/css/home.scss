@@ -99,9 +99,18 @@
 .common-row-title {
   text-align: center;
   .title {
-    img {
-      width: 250px;
-      height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    line-height: 46px;
+    color: #091d43;
+    &:after {
+      content: "";
+      background: url("/images/home/title-icon.svg") no-repeat;
+      width: 24px;
+      height: 36px;
+      margin-left: 18px;
     }
   }
   .subTitle {
@@ -317,7 +326,7 @@
     }
     .content-bg {
       display: flex;
-      flex-flow: wrap-reverse;
+      flex-wrap: wrap;
       img {
         width: 730px;
         height: 441px;
