@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 业务场景
  * @Date: 2022-05-14 18:25:11
- * @LastEditTime: 2022-05-16 22:57:16
+ * @LastEditTime: 2022-05-16 22:59:20
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -257,7 +257,7 @@
         <div class="menu_list grid common-slideInLeft">
           <% menuList.forEach(function(item,index) { %>
             <div class="menu_item flex-center">
-              <div class="${item.className} item-icon"></div>
+              <div class="<%=item.className%> item-icon"></div>
               <div class="font-16 main-title-color"><%= item.title %></div> 
             </div>
           <% }) %>
