@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 19:44:11
+ * @LastEditTime: 2022-05-16 20:14:51
  */
 
 
@@ -100,10 +100,9 @@ function Router(App) {
   //帮助中心-helpCenter
   router.get("/helpCenter", async (ctx) => {
 
-    let res = await getHelpListS()
-    console.log('res:',res);
+    let helpData = await getHelpListS()
 
-    return ctx.render("help/helpCenter", res)
+    return ctx.render("help/helpCenter", helpData)
   })
 
 
