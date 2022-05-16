@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心js
  * @Date: 2022-05-12 10:39:09
- * @LastEditTime: 2022-05-16 09:46:13
+ * @LastEditTime: 2022-05-16 09:47:16
 -->
 <script>
   const total = 80;
@@ -97,7 +97,7 @@
   //页码列表
   let page = total % 8 === 0 ? total / 8 : total / 8 + 1
   for(let i = 1; i <= page; i++) {
-    $('.pageList').append(`<li class="page-item flex">
+    $('.pageList').append(`<li class="page-item">
       <a class="page-link href="#">${i}</a>
     </li>`) 
   }
