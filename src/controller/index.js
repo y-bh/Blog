@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 21:24:08
+ * @LastEditTime: 2022-05-16 22:18:49
  */
 
 
@@ -11,6 +11,7 @@
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
 const { getHelpListS,getBlogDetailS,getKeyWordPageS } = require('service/helpCenter')
+const { data } = require('service/getIp')
  
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -79,10 +80,8 @@ function Router(App) {
   router.get("/getIp", async (ctx) => {
 
     /**数据请求 */
-    return ctx.render("getIp/getIp", {
-      name: 'This is getIp',
-      data: 2222,
-    })
+    let getIpData = await data()
+    return ctx.render("getIp/getIp", getIpData)
   })
 
 
