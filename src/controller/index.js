@@ -3,14 +3,10 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 18:10:13
+ * @LastEditTime: 2022-05-16 19:20:36
  */
 
 const router = require("koa-router")();
-const { renderHome } = require("service/home")
-const { renderTab } = require("service/header")
-const { getQueryLink } = require("service/footer")
-
 const fs = require("fs")
 const config = require("../config/app.config")
 
@@ -19,12 +15,8 @@ const config = require("../config/app.config")
 const { renderPackage } = require("service/package");
 
 
-//友情链接
-let query_link = []; //link foreach
-async function getLink() {
-  query_link = await getQueryLink()
-}
-getLink()
+
+
 
 
 

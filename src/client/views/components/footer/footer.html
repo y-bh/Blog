@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: liyuntao
+ * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-05-09 13:31:39
- * @LastEditTime: 2022-05-16 09:55:11
+ * @LastEditTime: 2022-05-16 19:21:59
 -->
 
 <link rel="stylesheet" href="/css/footer.css">
@@ -23,7 +23,7 @@
     <!-- 二维码 -->
     <div class="ewm ewm-img">
       <!-- 二维码img -->
-      <img  src="/images/promotion/public-code.png" alt="ewm-img">
+      <img src="/images/promotion/public-code.png" alt="ewm-img">
     </div>
     <div class="ewm ewm-text">
       <!-- 二维码text -->
@@ -34,9 +34,11 @@
       友情链接
     </div>
     <div class="link-content">
-      <% link.forEach(function(item){ %>
-        <a href="<%- item.link %>" target="<%- item.link || '_blank' %>"><%- item.title %></a>
-      <% }) %>  
+      <% links.forEach(function(item){ %>
+        <a href="<%- item.link %>" target="<%- item.link || '_blank' %>">
+          <%- item.title %>
+        </a>
+        <% }) %>
     </div>
   </div>
   <hr />
@@ -52,7 +54,8 @@
     <div>
       <span>苏ICP备2021021297号-1</span>
       <span>增值电信业务经营许可证：B1-20210427 </span>
-      <span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011402010914" target="_blank"><img src="/images/footer/public.png" />苏公网安备11 32011402010914号</a></span>
+      <span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011402010914" target="_blank"><img
+            src="/images/footer/public.png" />苏公网安备11 32011402010914号</a></span>
     </div>
   </div>
 </footer>
