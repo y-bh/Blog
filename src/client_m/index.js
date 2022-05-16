@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: 秦琛
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-14 15:27:13
+ * @LastEditTime: 2022-05-16 14:56:40
  */
 
 import { createApp } from 'vue';
@@ -11,6 +11,8 @@ import { createApp } from 'vue';
 import injectRouter from './routes'; //router
 import injectUI from 'tools/injectUI.js'; // ui组件
 import { get, post } from "tools/ajax"; //ajax 服务
+import $global from 'tools/global.js';  // 全局变量
+
 
 import injectState from '@/store'; //vuex
 import App from './index.vue';
@@ -23,7 +25,8 @@ import * as re from 'config/re.config';
 
 const app = createApp(App);
 
-
+// 注入全局变量
+app.provide('_global', $global);
 // 注入ui
 injectUI(app);
 
