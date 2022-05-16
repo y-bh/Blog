@@ -1,14 +1,14 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 按需注入element-plus
  * @Date: 2022-04-26 14:41:46
- * @LastEditTime: 2022-05-16 11:25:50
+ * @LastEditTime: 2022-05-16 15:10:52
  */
 
 import {
   ElDialog,ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol, ElSwitch,
-  ElForm, ElFormItem,ElInput,ElDatePicker,ElMessage
+  ElForm, ElFormItem,ElInput,ElDatePicker,ElMessage, ElSelect, ElOption
 } from "element-plus";
 
 
@@ -29,6 +29,8 @@ const components = [
   ElFormItem,
   ElInput,
   ElDatePicker,
+  ElSelect, 
+  ElOption
 ]
 const plugins = [
   ElMessage,
