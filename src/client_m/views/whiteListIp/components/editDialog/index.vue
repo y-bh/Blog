@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-12 10:19:45
- * @LastEditTime: 2022-05-14 16:33:59
+ * @LastEditTime: 2022-05-16 14:14:12
 -->
 <template>
   <el-dialog
@@ -52,12 +52,21 @@ import DialogTitle from "components/DialogTitle";
 //func
 import { addWhiteIpFunc, updateWhiteIpDescFunc } from "model/whiteList"
 
-import { reactive, ref, toRefs } from "vue";
+import { inject, reactive, ref, toRefs } from "vue";
 export default {
+  props:{
+    ok: {
+      type: Function,
+      required: true,
+      default: () => {}
+    }
+  },
   components: {
     DialogTitle,
   },
-  setup() {
+  setup(props) {
+    const $message = inject('message')
+
     const formRef = ref(null);
 
     const state = reactive({
@@ -92,13 +101,12 @@ export default {
     }
 
     //open dialog
-    function openDialog(type, { ip = null }) {
+    function openDialog(type, { clientIP = null }) {
       /**this is func */
       if (type === "edit") {
-        state.formData.ip = ip;
+        state.formData.ip = clientIP;
         state.ipReadonly = "readonly";
       }
-      console.log(state.formData.ip);
 
       openDialogControl();
     }
@@ -127,9 +135,15 @@ export default {
 
         let res = null;
 
-        res = (readonly&&updateWhiteIpDescFunc(params)) || addWhiteIpFunc(params)
+        res = (readonly&&await updateWhiteIpDescFunc(params)) || await addWhiteIpFunc(params)
 
         /**条件判断返回值 */
+        if(+res.code === 0){
+          $message.success('操作成功')
+          props.ok()
+        } else {
+          $message.error(res.msg)
+        }
 
         return 
         

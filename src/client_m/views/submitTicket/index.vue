@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-13 12:56:11
- * @LastEditTime: 2022-05-14 16:41:19
+ * @LastEditTime: 2022-05-16 13:36:38
 -->
 <template>
   <div class="ticket-wrap">
@@ -17,13 +17,13 @@
       <el-input v-model="content" type="textarea" placeholder="请输入您遇到的问题或者改进意见" rows="18" resize="none" />
     </div>
     <div class="ticket-btn">
-      <el-button class>提交</el-button>
+      <el-button @click="submitTicket">提交</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { onMounted, reactive, toRefs } from 'vue'
+import { inject, onMounted, reactive, toRefs } from 'vue'
 
 //func
 import { submitTicketFunc } from "model/submitTicket"
@@ -31,6 +31,8 @@ export default {
   name:'',
   components:{},
   setup(){
+    const $message = inject('message')
+
     const state = reactive({
       content: null
     })
@@ -38,17 +40,29 @@ export default {
 
     /* submit ticket */
     async function submitTicket() {
+      let params = {
+        brand: 2,
+        content: state.content,
+        platform: 30,
+      }
+      if(!params.content){
+        $message.error('请输入内容')
+        return 
+      }
       /**暂未完成 */
-      const res = await submitTicketFunc()
+      const res = await submitTicketFunc(params)
+
+      if(+res.code === 0){
+        $message.success('提交成功')
+      } else {
+        $message.error(res.msg)
+      }
     } 
 
-    onMounted(()=>{
-      /* 方法 */
-      // submitTicket()
-    })
 
     return {
       ...toRefs(state),
+      submitTicket, //提交工单
     }
   }
 }

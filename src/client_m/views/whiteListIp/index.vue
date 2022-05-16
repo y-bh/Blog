@@ -3,13 +3,13 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-16 11:08:18
+ * @LastEditTime: 2022-05-16 14:29:14
 -->
 <template>
   <div class="white-list-wrap">
     <div class="white-list-text">
       <div class="white-list-count">
-        已设/总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.total }}</span>
+        已设/总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.count }}</span>
       </div>
       <i ref="tooltipIconRef" class="tooltip tooltip-icon icon-xianxing-wenhao">
       </i>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="white-list-btn">
-      <el-button class="cancel-button">查看教程</el-button>
+      <el-button class="cancel-button" @click="goTutorial">查看教程</el-button>
       <el-button class="cancel-button" @click="openWhiteListDialog('add')"
         >添加IP白名单</el-button
       >
@@ -72,12 +72,12 @@
     </div>
   </div>
   <!-- 弹窗 打开&编辑白名单 ~ 确认删除 -->
-  <editDialog ref="editDialogRef" />
-  <removeDialog ref="removeDialogRef" />
+  <editDialog ref="editDialogRef" :ok="getWhiteList" />
+  <removeDialog ref="removeDialogRef" :ok="getWhiteList" />
 </template>
 
 <script>
-import { reactive, toRefs, onMounted, ref } from "vue";
+import { reactive, toRefs, onMounted, ref, inject } from "vue";
 
 /**components */
 import editDialog from "./components/editDialog";
@@ -98,6 +98,8 @@ export default {
     removeDialog,
   },
   setup() {
+    const $message = inject('message')
+
     const editDialogRef = ref(null);
     const removeDialogRef = ref(null);
 
@@ -108,6 +110,7 @@ export default {
 
     //打开弹窗
     function openWhiteListDialog(type = "add", val = {}) {
+      console.log(val);
       editDialogRef.value.openDialog(type, val);
     }
     function openRemoveDialog({ id }) {
@@ -119,20 +122,30 @@ export default {
       let params = {
         replace: val
       }
-      updateUserInfo(params)
+      const res = await updateUserInfo(params)
+      if(+res.code === 0){
+        $message.success('success')
+      } else {
+        $message.error('error')
+      }
     }
 
     //switch Change
-    function switchChange(val) {
+    async function switchChange(val) {
       try {
         /**change auto replace func */
-        // const res = await switchChangeControl(val)
+        switchChangeControl(val)
 
         /**条件更改 */
         state.switchVal = val;
       } catch (error) {
         console.error("Change Auto Replace: ", error);
       }
+    }
+
+    //get tutorial
+    function goTutorial() {
+      window.location.href = window.location.origin + '/helpCenter'
     }
 
     // go getip
@@ -148,8 +161,10 @@ export default {
       }
       const res = await getWhiteListFunc(params);
       if(+res.code === 0){
-        console.log(dateFormat(res.data));
         state.whiteIpData = res.data
+        state.switchVal = res.data.replace
+      } else {
+        $message.error('获取数据失败')
       }
     }
 
@@ -170,7 +185,9 @@ export default {
       editDialogRef, //edit&add dialog Ref
       removeDialogRef, //remove dialog Ref
 
+      getWhiteList, //get list
       switchChange, //switch Change
+      goTutorial, //go tutorial
       goGetIp, //go getip
       openWhiteListDialog, //remove WhiteList Ip
       openRemoveDialog, //open Remove Dialog

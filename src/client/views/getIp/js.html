@@ -1,9 +1,9 @@
 <!--
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: 提取ipjs
  * @Date: 2022-05-14 17:30:20
- * @LastEditTime: 2022-05-14 17:32:58
+ * @LastEditTime: 2022-05-16 14:40:06
 -->
 <script>
 $(function() {
@@ -815,10 +815,12 @@ $(function () {
     })
   }
 
-  let href = window.location.href.split('?')[1].split('&')
-  console.log(href.includes('wl'))
-  if(href.includes('wl')){
-    to()
+  let href = window.location.href.split('?')
+  if(href.length > 1){
+    let query = href[1].split('&')
+    if(query.includes('wl')){
+      to()
+    }
   }
 })
 </script>

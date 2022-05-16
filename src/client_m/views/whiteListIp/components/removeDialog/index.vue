@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-12 15:00:41
- * @LastEditTime: 2022-05-14 16:36:58
+ * @LastEditTime: 2022-05-16 11:48:02
 -->
 <template>
   <el-dialog
@@ -33,12 +33,21 @@ import DialogTitle from "components/DialogTitle"
 //func
 import { removeWhiteIpFunc } from "model/whiteList"
 
-import { reactive, toRefs } from "vue";
+import { inject, reactive, toRefs } from "vue";
 export default {
+  props:{
+    ok:{
+      type: Function,
+      required: true,
+      default: () => {},
+    }
+  },
   components:{
     DialogTitle,
   },
-  setup() {
+  setup(props) {
+    const $message = inject('message')
+
     const state = reactive({
       dialogVisible: false,
 
@@ -69,6 +78,13 @@ export default {
           ids : [state.id]
         }
         const res = await removeWhiteIpFunc(params)
+
+        if(+res.code === 0){
+          $message.success('删除成功')
+          props.ok()
+        } else {
+          $message.error('删除失败')
+        }
 
         /**条件判断 */
 

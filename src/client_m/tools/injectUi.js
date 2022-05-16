@@ -1,14 +1,14 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: 按需注入element-plus
  * @Date: 2022-04-26 14:41:46
- * @LastEditTime: 2022-05-13 15:41:08
+ * @LastEditTime: 2022-05-16 11:25:50
  */
 
 import {
   ElDialog,ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol, ElSwitch,
-  ElForm, ElFormItem,ElInput,ElDatePicker,
+  ElForm, ElFormItem,ElInput,ElDatePicker,ElMessage
 } from "element-plus";
 
 
@@ -31,6 +31,7 @@ const components = [
   ElDatePicker,
 ]
 const plugins = [
+  ElMessage,
   ElLoading,
 ]
 const installElement = (app) => {
@@ -41,6 +42,7 @@ const installElement = (app) => {
   plugins.forEach((plugin) => {
     app.use(plugin)
   })
+  app.provide('message', ElMessage);
 }
 
 export default installElement
