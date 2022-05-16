@@ -1,14 +1,14 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-14 11:18:18
+ * @LastEditTime: 2022-05-16 11:32:18
  */
 
 module.exports={
   'test':'/test',
-
+  'QUERY_ACTIVITY': '/activity/tab',  // 获取套餐tab优惠信息
   //友情链接
   'QUERY_LINK': '/link/queryList',
   //套餐购买

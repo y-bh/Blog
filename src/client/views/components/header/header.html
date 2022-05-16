@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-16 10:45:57
+ * @LastEditTime: 2022-05-16 14:08:01
 -->
 <link rel="stylesheet" href="/css/header.css">
 <div class="header">
@@ -31,12 +31,16 @@
             <!-- 子导航 -->
             <ul class="child-list flex-center">
               <li class="child-item">
-                <div class="title flex-center justify-around">
+                <div class="title flex-center justify-start">
                   <span class="meal-icon icon_first"></span>
                   <span class="title-type">余额套餐</span>
-                  <div class="activity">
-                    加赠40%
-                  </div>
+                  <% if(tab && tab.maxRechargeGift) { %>
+                    <div class="activity">
+                      加赠<%= tab.maxRechargeGift %>%
+                    </div>
+                    <% } else { %>
+                      <span></span>
+                      <% } %>
                 </div>
                 <span class="describe">
                   余额充值提取，自定义IP时效地区、数量
@@ -44,12 +48,16 @@
               </li>
 
               <li class="child-item">
-                <div class="title flex-center justify-around">
+                <div class="title flex-center justify-start">
                   <span class="meal-icon icon_second"></span>
                   <span class="title-type">包时套餐</span>
-                  <div class="activity">
-                    限时5折
-                  </div>
+                  <% if(tab && tab.minPurchaseRate) { %>
+                    <div class="activity">
+                      限时<%= tab.minPurchaseRate %>折
+                    </div>
+                    <% } else { %>
+                      <span></span>
+                      <% } %>
                 </div>
                 <span class="describe">
                   每日固定IP提取量，3 / 5 / 10 /15 分钟时效IP
@@ -206,7 +214,7 @@
     <div class="user btn">
       <% if(name) { %>
         <div class="default-btn button person-center">
-          个人中心
+          <a href="/manager/user" title="个人中心">个人中心</a>
         </div>
         <div class="bl-l-button button user-register">
           <span>退出</span>

@@ -1,14 +1,21 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+<<<<<<< Updated upstream
+ * @LastEditors: 秦琛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 09:54:40
+ * @LastEditTime: 2022-05-16 14:10:14
+=======
+ * @LastEditors: 秦琛
+ * @description: 路由控制层
+ * @Date: 2022-04-22 15:07:10
+ * @LastEditTime: 2022-05-16 13:48:46
+>>>>>>> Stashed changes
  */
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-
+const { renderTab } = require("service/header")
 const { getQueryLink } = require("service/footer")
 
 const fs = require("fs")
@@ -34,16 +41,16 @@ function Router(App) {
 
   //首页
   router.get("/", async (ctx) => {
-
-
-    //const res = await renderHome()
-    console.log(query_link);
-
-    return ctx.render("home/home", {
-      name: '住在我',
-      url: 2222,
-      link: query_link,
-    })
+    // const res = await renderHome()
+    const tabActivity = await renderTab();
+    
+    const homeData = {
+      name: '用户',
+      url: '/',
+      link: [],
+      tab: tabActivity || {}
+    }
+    return ctx.render("home/home", homeData)
   })
 
     //落地推广页面
@@ -62,7 +69,7 @@ function Router(App) {
     /**数据请求 */
    // console.log("套餐购买接口返回数据, await renderPackage())
     let packageObj = await renderPackage();
-    //console.log("ssssss",packageObj);
+    // console.log("ssssss",packageObj);
     return ctx.render("package/package", packageObj)
   })
 
