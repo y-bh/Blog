@@ -487,6 +487,12 @@
       }
     }
   }
+
+  .sevenRow {
+    > ul {
+      overflow: hidden;
+    }
+  }
   .eightRow {
     display: flex;
     justify-content: space-around;
