@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-13 13:04:26
+ * @LastEditTime: 2022-05-16 09:15:32
 -->
 <link rel="stylesheet" href="/css/header.css">
 <div class="header">
@@ -204,7 +204,13 @@
     </nav>
     <!-- 右侧按钮/登录信息 -->
     <div class="user">
-      <%=name %>
+      <% if(name) { %>
+        <span>
+          <%=name %>
+        </span>
+        <% } else { %>
+          <span>登录</span>
+          <% } %>
     </div>
   </div>
 </div>
