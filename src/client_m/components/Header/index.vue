@@ -6,7 +6,7 @@
  * @LastEditTime: 2022-05-11 18:46:15
 -->
 <template>
-  <header class="header">
+  <header class="header" v-if="false">
     这是头部
   </header>
 </template>
