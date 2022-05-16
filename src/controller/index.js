@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 22:18:49
+ * @LastEditTime: 2022-05-16 22:36:07
  */
 
 
@@ -12,6 +12,7 @@ const router = require("koa-router")();
 const { renderHome } = require("service/home")
 const { getHelpListS,getBlogDetailS,getKeyWordPageS } = require('service/helpCenter')
 const { data } = require('service/getIp')
+const { getBusinessData } = require('service/business')
  
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -89,10 +90,9 @@ function Router(App) {
   //业务场景-businessScene
   router.get("/businessScene", async (ctx) => {
     /**数据请求 */
-    return ctx.render("businessScene/businessScene", {
-      name: 'This is businessScene',
-      data: 'businessScene',
-    })
+    let res = getBusinessData()
+
+    return ctx.render("businessScene/businessScene", res)
   })
 
 
