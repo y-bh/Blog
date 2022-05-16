@@ -35,10 +35,16 @@
 }
 //背景效果图
 @mixin banner-background {
+  // width: 633px;
+  // height: 652px;
+  // position: absolute;
+  // top: 0;
+  // right: 0;
+  // background-size: 633px 937px;
   background: url("/images/home/backg-img.png") no-repeat;
-  background-position: -30px -30px;
-  -webkit-animation: bannerGo 3s steps(4) forwards;
-  animation: bannerGo 3s steps(4) forwards;
+  background-position: top right;
+  -webkit-animation: bannerGo 1s steps(4) forwards;
+  animation: bannerGo 1s steps(4) forwards;
 }
 @keyframes bannerGo {
   0% {
@@ -167,10 +173,19 @@
 .homeContent {
   max-width: 1400px;
   margin: 0 auto;
-
+  .banner-right {
+    // width: 633px;
+    // height: 652px;
+    // position: absolute;
+    // top: 0;
+    // right: 0;
+    //background: url("/images/home/backg-img.png") no-repeat;
+    background-position: right;
+    @include banner-background;
+  }
   .banner-board {
-    display: flex;
-    position: relative;
+    // display: flex;
+    // position: relative;
     .banner-left {
       .banner-title {
         img {
@@ -202,15 +217,6 @@
           color: #fc7019;
         }
       }
-    }
-    .banner-right {
-      width: 633px;
-      height: 652px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      //background: url("/images/home/backg-img.png") no-repeat;
-      @include banner-background;
     }
   }
   .secondRow {

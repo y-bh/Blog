@@ -3,9 +3,10 @@
  * @LastEditors: 陈昊天
  * @description: 关键词聚合页js
  * @Date: 2022-05-12 17:09:39
- * @LastEditTime: 2022-05-13 11:37:33
+ * @LastEditTime: 2022-05-16 10:37:42
 -->
 <script>
+  const total = 80;
   const leftBlogList = [
     {
       id: 1,
@@ -100,7 +101,7 @@
 
   //文章列表
   $.each(leftBlogList,(index,item) => {
-    $('.b_left').append(`<div class="blog_item flex justify-between align-center">
+    $('.b_left .blog_list').append(`<div class="blog_item flex justify-between align-center">
         <div class="blog_left grid">
           <div class="item_top text-blue flex justify-start align-start month">${item.day}</div>
           <div class="item_bottom">
@@ -141,6 +142,14 @@
     })
   }) 
 
+  //页码列表
+  let page = total % 8 === 0 ? total / 8 : total / 8 + 1
+  for(let i = 1; i <= page; i++) {
+    $('.pageList').append(`<li class="page-item pointer">
+      <a class="page-link href="#">${i}</a>
+    </li>`) 
+  }
+
   //查看详情
   $('.go_detail').on('click',function() {
     let currentGo = $(this)
@@ -158,4 +167,12 @@
     let currentBlog = $(this)
     window.location.href = "http://localhost:8080/helpDetails"
   })
+
+  //点击页码
+  $('.pageList .page-item').on('click',function() {
+    $(this).toggleClass('active').siblings().removeClass('active')
+  })
+
+  //默认展示第一页
+  $('.pageList .page-item').get(0).click();
 </script>

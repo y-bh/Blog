@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 关键词聚合页
  * @Date: 2022-05-12 17:07:37
- * @LastEditTime: 2022-05-13 13:13:34
+ * @LastEditTime: 2022-05-16 09:48:52
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +30,29 @@
       <span class="a_tag flex-center pointer">标签</span>
     </div>
     <div class="a_bottom grid">
-      <div class="b_left flex flex-column"></div>
+      <div class="b_left flex flex-column">
+        <div class="blog_list"></div>
+        <div class="page_box mt-60 flex justify-end mb-80">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true"><</span>
+                </a>
+              </li>
+              <div class="pageList flex"></div>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">></span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="goto flex-center ml-30">
+            前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="text">&nbsp;&nbsp;页
+          </div>
+        </div>
+      </div>
       <div class="b_right grid">
         <div class="same_blog grid box">
           <div class="c_top flex justify-between align-center">
