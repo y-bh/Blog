@@ -3,14 +3,14 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 20:14:51
+ * @LastEditTime: 2022-05-16 21:08:06
  */
 
 
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpListS } = require('service/helpCenter')
+const { getHelpListS,getBlogDetailS } = require('service/helpCenter')
  
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -116,14 +116,15 @@ function Router(App) {
   })
 
 
-  //帮助中心-helpCenter-details
+  //帮助中心详情-helpCenter-details
   router.get("/helpDetails", async (ctx) => {
     /**数据请求 */
-    const { id } = ctx.request.params
-    return ctx.render("help/detail/helpDetails", {
-      name: `This is ${id} article`,
-      data: 2222,
-    })
+    // const { id } = ctx.request.params
+
+    let helpDetail = await getBlogDetailS()
+    console.log('helpDetail:',helpDetail);
+
+    return ctx.render("help/detail/helpDetails", helpDetail)
   })
 
 

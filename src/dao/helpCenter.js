@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心数据层
  * @Date: 2022-05-16 16:30:24
- * @LastEditTime: 2022-05-16 16:36:53
+ * @LastEditTime: 2022-05-16 20:30:10
  */
 const { post } = require("utils/request")
 
@@ -20,6 +20,18 @@ const getHelpList = async () => {
   }
 }
 
+//文章详情
+const getBlogDetail = async (data) => {
+  const url = api.HELP_HELP_DETAILS
+  try {
+    const res = await post(url, data)
+    return res
+  } catch (error) {
+    console.error('getBlogDetail_Dao: ', error)
+  }
+}
+
 module.exports = {
   getHelpList,
+  getBlogDetail
 }
