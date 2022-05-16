@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 14:32:30
+ * @LastEditTime: 2022-05-16 18:10:13
  */
 
 const router = require("koa-router")();
@@ -26,41 +26,41 @@ async function getLink() {
 }
 getLink()
 
+
+
 function Router(App) {
   //用户管理
   // router.use("/user", user.routes(), user.allowedMethods());
 
   var ejs = require('ejs')
 
+
   //首页
   router.get("/", async (ctx) => {
-    // const res = await renderHome()
-    const tabActivity = await renderTab();
-    
+    console.log("获取顶部的数据:", ctx.state)
     const homeData = {
       name: '用户',
       url: '/',
       link: [],
-      tab: tabActivity || {}
     }
     return ctx.render("home/home", homeData)
   })
 
-    //落地推广页面
-    router.get("/promotion", async (ctx) => {
-      //const res = await renderHome()
-      //console.log("控制层:", res)
-      return ctx.render("promotion/index", {
-        name: '落地推广页面',
-        url: 2222
-      })
+  //落地推广页面
+  router.get("/promotion", async (ctx) => {
+    //const res = await renderHome()
+    //console.log("控制层:", res)
+    return ctx.render("promotion/index", {
+      name: '落地推广页面',
+      url: 2222
     })
+  })
 
 
   //购买页-package
   router.get("/package", async (ctx) => {
     /**数据请求 */
-   // console.log("套餐购买接口返回数据, await renderPackage())
+    // console.log("套餐购买接口返回数据, await renderPackage())
     let packageObj = await renderPackage();
     // console.log("ssssss",packageObj);
     return ctx.render("package/package", packageObj)
@@ -70,9 +70,6 @@ function Router(App) {
   router.get("/package/wxPay", async (ctx) => {
 
     /**数据请求 */
-
-
-
     return ctx.render("package/wxPay", {
       name: 'This is Wxpay',
       data: 'Please pay 300 yuan',
@@ -84,9 +81,6 @@ function Router(App) {
   router.get("/getIp", async (ctx) => {
 
     /**数据请求 */
-
-
-
     return ctx.render("getIp/getIp", {
       name: 'This is getIp',
       data: 2222,
@@ -94,14 +88,10 @@ function Router(App) {
   })
 
 
+
   //业务场景-businessScene
-
   router.get("/businessScene", async (ctx) => {
-
     /**数据请求 */
-
-
-
     return ctx.render("businessScene/businessScene", {
       name: 'This is businessScene',
       data: 'businessScene',
@@ -109,38 +99,30 @@ function Router(App) {
   })
 
 
-  //帮助中心
   //帮助中心-helpCenter
   router.get("/helpCenter", async (ctx) => {
-
     /**数据请求 */
-
-
-
     return ctx.render("help/helpCenter", {
       name: 'This is helpCenter',
       data: 2222,
     })
   })
 
+
   //帮助中心-关键词聚合页
   router.get("/keyWord", async (ctx) => {
-
     /**数据请求 */
-
     return ctx.render("help/keyWord/keyWord", {
       name: `This is 关键词聚合页`,
       data: `333`,
     })
   })
 
+
   //帮助中心-helpCenter-details
   router.get("/helpDetails", async (ctx) => {
-
     /**数据请求 */
     const { id } = ctx.request.params
-
-
     return ctx.render("help/detail/helpDetails", {
       name: `This is ${id} article`,
       data: 2222,
@@ -148,13 +130,10 @@ function Router(App) {
   })
 
 
+
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
-
     /**数据请求 */
-
-
-
     return ctx.render("firmsServer/firmsServer", {
       name: 'This is firmsServer',
       data: 2222,
@@ -162,34 +141,26 @@ function Router(App) {
   })
 
 
-  //用户操作中心
+
   //用户总页面-login-index
-  router.get("/login/index", async (ctx) => {
-
+  router.get("/login", async (ctx) => {
     /**数据请求 */
-
-
-
     return ctx.render("login/index", {
       name: 'This is main login',
       data: 2222,
     })
   })
 
+
   //用户协议-user-protocol
   router.get("/user/protocol", async (ctx) => {
-
     /**数据请求 */
-
-
-
     return ctx.render("user/protocol", {
       name: 'This is protocol window',
       data: 2222,
     })
   })
 
-  
 
   //个人中心
   let htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
@@ -204,11 +175,9 @@ function Router(App) {
 
   /** 404 */
   router.get("/404", async (ctx) => {
-
     return ctx.render("error/404", {
       name: 'This is 404',
     })
-
   })
 
 

@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: 朱占伟
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-05-11 17:15:20
+ * @LastEditTime: 2022-05-16 18:07:46
  */
 
 const Koa = require("koa");
@@ -11,7 +11,6 @@ const koa_static = require("koa-static");
 const koa_body = require("koa-body")
 const bodyParser = require("koa-bodyparser");
 const views = require("koa-views");
-
 
 //应用配置文件
 const config = require("./config/app.config")
@@ -52,6 +51,10 @@ app.use(bodyParser());
 
 //统一响应接口
 app.use(routerResponse());
+
+
+//设置全局数据
+require("utils/global_data")(app)
 
 //路由器
 Router(app);

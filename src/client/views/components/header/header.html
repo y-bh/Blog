@@ -1,9 +1,9 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: 朱占伟
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-16 14:08:01
+ * @LastEditTime: 2022-05-16 18:27:16
 -->
 <link rel="stylesheet" href="/css/header.css">
 <div class="header">
@@ -34,12 +34,12 @@
                 <div class="title flex-center justify-start">
                   <span class="meal-icon icon_first"></span>
                   <span class="title-type">余额套餐</span>
-                  <% if(tab && tab.maxRechargeGift) { %>
+                  <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.maxRechargeGift) { %>
                     <div class="activity">
-                      加赠<%= tab.maxRechargeGift %>%
+                      加赠<%= HEADER_ACTIVE_TAB.maxRechargeGift %>%
                     </div>
                     <% } else { %>
-                      <span></span>
+                      <span>333</span>
                       <% } %>
                 </div>
                 <span class="describe">
@@ -51,9 +51,9 @@
                 <div class="title flex-center justify-start">
                   <span class="meal-icon icon_second"></span>
                   <span class="title-type">包时套餐</span>
-                  <% if(tab && tab.minPurchaseRate) { %>
+                  <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate) { %>
                     <div class="activity">
-                      限时<%= tab.minPurchaseRate %>折
+                      限时<%= HEADER_ACTIVE_TAB.minPurchaseRate %>折
                     </div>
                     <% } else { %>
                       <span></span>
@@ -249,7 +249,7 @@
       logoWidth: 0,  // logo区域宽度
       navRightWidth: 0,  // 右侧登陆注册区域宽度
     }
-    function toggleHead () {
+    function toggleHead() {
       // 每次调用重置
       headerAttr = {
         allWidth: 0,
