@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-16 17:58:38
+ * @LastEditTime: 2022-05-16 18:19:27
 -->
 <template>
   <div class="container">
@@ -52,7 +52,7 @@
 
     <!-- 表格 -->
     <div class="table-wrap">
-      <el-table :data="tableData" v-loading="loading" @selection-change="handleSelectionChange">
+      <el-table :data="tableList" v-loading="loading" @selection-change="handleSelectionChange">
         <template v-slot:empty>
           <div>{{ emptyText }}</div>
         </template>
@@ -76,7 +76,7 @@
         <el-table-column align='center' label="提取密钥" prop="key" width="85"></el-table-column>
         <el-table-column align='center' label="账号" prop="authKey" v-if="userInfo && userInfo.isProxyAuthKey" width="70">
         </el-table-column>
-        <el-table-column align='center' label="密码" prop="key" v-if="userInfo && userInfo.isProxyAuthKey" width="70">
+        <el-table-column align='center' label="密码" prop="authSecret" v-if="userInfo && userInfo.isProxyAuthKey" width="70">
           <template #default="scope">
             <div class="repeat-wrap">
               <span class="repeat">{{ scope.row.authSecret ? scope.row.authSecret : '--' }}</span>
@@ -102,11 +102,10 @@
         </el-table-column>
         <el-table-column align='center' label="已提取" prop="used">
           <template #default="scope">
-            <!--                        {{ scope.row.used != null ? scope.row.used : 0 }}-->
             {{ scope.row.used ? scope.row.used : (scope.row.proxyType == '10' ? '--' : 0) }}
           </template>
         </el-table-column>
-        <el-table-column align='center' label="起止时间" prop="clientIP" show-overflow-tooltip sortable width="120px">
+        <el-table-column align='center' label="起止时间" prop="createTime" show-overflow-tooltip sortable width="120px">
           <template #default="scope">
             <div>
               {{ scope.row.createTime ? $formatTime(scope.row.createTime) : '— —' }}
@@ -142,9 +141,6 @@
             <el-dropdown v-if="scope.row">
               <span class="el-dropdown-link">
                 管理
-                <el-icon class="el-icon--right">
-                  <arrow-down />
-                </el-icon>
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
@@ -165,6 +161,7 @@
 </template>
 
 <script>
+import { $formatTime } from "tools/dateFormat"
 import { reactive, ref, toRefs, onMounted, inject } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
@@ -182,7 +179,10 @@ export default {
       3: '#f00',
       4: '#999'
     }
+
+    console.log($formatTime,'$formatTime');
     let state = reactive({
+      userInfo: null,
       // 查询表单
       searchForm: {
         sequence: null, // 套餐id
@@ -198,20 +198,32 @@ export default {
       loading: false,
       emptyText: '暂无数据'
     })
-
-    onMounted(() => { 
       state.tableList.push({
-
+        sequence: 123,
+        proxyType: 1,
+        key: '11',
+        authKey: '55',
+        authSecret: 'qq',
+        proxyTime: 1111111,
+        total: 100,
+        used: 20,
+        createTime: 12000,
+        endTime: 360000,
+        status: 1
       })
+    onMounted(() => { 
     });
     const methods = {
       handleSelectionChange () { }
     };
+
+    console.log(state.tableList,'state.tableList');
     return {
       ...methods,
       ...toRefs(state),
       ...enumerateData,
-      stateColor
+      stateColor,
+      $formatTime
     };
   },
 };

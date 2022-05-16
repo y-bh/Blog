@@ -3,12 +3,12 @@
  * @LastEditors: 秦琛
  * @description: 按需注入element-plus
  * @Date: 2022-04-26 14:41:46
- * @LastEditTime: 2022-05-16 15:10:52
+ * @LastEditTime: 2022-05-16 18:11:32
  */
 
 import {
   ElDialog,ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol, ElSwitch,
-  ElForm, ElFormItem,ElInput,ElDatePicker,ElMessage, ElSelect, ElOption
+  ElForm, ElFormItem,ElInput,ElDatePicker,ElMessage, ElSelect, ElOption, ElDropdown, ElDropdownMenu, ElDropdownItem
 } from "element-plus";
 
 
@@ -30,7 +30,10 @@ const components = [
   ElInput,
   ElDatePicker,
   ElSelect, 
-  ElOption
+  ElOption,
+  ElDropdown, 
+  ElDropdownMenu, 
+  ElDropdownItem
 ]
 const plugins = [
   ElMessage,
