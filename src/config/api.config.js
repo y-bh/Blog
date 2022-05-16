@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: 陈昊天
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-16 11:32:18
+ * @LastEditTime: 2022-05-16 16:35:25
  */
 
 module.exports={
@@ -31,4 +31,8 @@ module.exports={
 
   /* 个人中心修改用户信息 */
   'MANAGER_USER_UPDATE_INFO': "/user/update/info", //个人中心修改用户信息
+
+  /*帮助中心 */
+  'HELP_HELP':'/help/help', //获取首页的文章列表
+  'HELP_FIND_BY_ARTICLE_KEYWORD': '/help/findByArticleKeyword', //查看文章关键词聚合页
 }

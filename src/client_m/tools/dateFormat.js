@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 日期格式化
  * @Date: 2022-05-14 15:22:03
- * @LastEditTime: 2022-05-16 14:10:02
+ * @LastEditTime: 2022-05-16 18:14:35
  */
 export const dateFormat = (date_ms, fmt = 'YYYY-mm-dd HH:MM:SS') => {
   let date = new Date(date_ms)
@@ -49,3 +49,19 @@ export const dateFormatGift = (date_ms, fmt = "YYYY/mm/dd") => {
     }
     return fmt
 }
+
+export const $formatTime = (inputTime) => {
+  let date = new Date(inputTime * 1000);
+  let y = date.getFullYear();
+  let m = date.getMonth() + 1;
+  m = m < 10 ? ('0' + m) : m;
+  let d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  let h = date.getHours();
+  h = h < 10 ? ('0' + h) : h;
+  let minute = date.getMinutes();
+  let second = date.getSeconds();
+  minute = minute < 10 ? ('0' + minute) : minute;
+  second = second < 10 ? ('0' + second) : second;
+  return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+};
