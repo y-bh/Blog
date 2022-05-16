@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-16 18:19:27
+ * @LastEditTime: 2022-05-16 18:22:15
 -->
 <template>
   <div class="container">
@@ -148,8 +148,8 @@
                   <el-dropdown-item>api提取</el-dropdown-item>
                   <el-dropdown-item>补量</el-dropdown-item>
                   <el-dropdown-item>修改时效</el-dropdown-item>
-                  <el-dropdown-item divided>合并套餐</el-dropdown-item>
-                  <el-dropdown-item divided>变更记录</el-dropdown-item>
+                  <el-dropdown-item>合并套餐</el-dropdown-item>
+                  <el-dropdown-item>变更记录</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
