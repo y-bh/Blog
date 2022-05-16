@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 业务场景
  * @Date: 2022-05-14 18:25:11
- * @LastEditTime: 2022-05-14 18:29:27
+ * @LastEditTime: 2022-05-16 16:09:22
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +17,138 @@
   <title>业务场景</title>
   <%- include('../components/style.html'); %>
   <%- include('./style.html') %>
+  <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
-  <div class="container grid">
-    <div class="top"></div>
-    <div class="tab"></div>
-    <div class="proxy"></div>
-    <div class="menu"></div>
-    <div class="customer"></div>
+  <div class="container grid widthAll">
+    <div class="top grid">
+    </div>
+    <div class="tab">
+      <div class="fourthRow">
+        <div class="common-row-title">
+          <span class="model_title">优质的使用体验</span>
+          <i class="iconfont icon-title-zhuangshi"></i>
+        </div>
+        <div class="content mt-80">
+          <ul id="kernelBox" class="common-fadeInUp common-fadeInUp-fast-1 tab_box flex-center">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="proxy grid">
+      <div class="proxy_left common-slideInLeft"></div>
+      <div class="proxy_right flex-center flex-column common-slideInRight">
+        <span class="proxy_title model_title">企业级代理服务</span>
+        <span class="proxy_desc">高性能服务器、分布式集群架构，支持高并发调用</span>
+      </div>
+    </div>
+    <div class="menu grid">
+      <div class="menu_top flex-center">
+        <span class="model_title">灵活的计费方式，适配多种业务需求</span>
+        <i class="iconfont icon-title-zhuangshi"></i>
+      </div>
+      <div class="menu_bottom grid">
+        <div class="balance menu_box common-slideInLeft">
+          <span class="menu_title flex-center">余额套餐</span>
+          <div class="grid box_desc">
+            <ul class="timesRange mt-50">
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                <span class="ml-10">3分钟时效：0.005元/IP</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                <span class="ml-10">3分钟时效：0.005元/IP</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                <span class="ml-10">3分钟时效：0.005元/IP</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                <span class="ml-10">3分钟时效：0.005元/IP</span>
+              </li>
+            </ul>
+            <ul class="setMeal-limt">
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>套餐有效期：不限制</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>多机器调用：不限制</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>并发请求数量：不限制</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>支持协议：HTTP/HTTPS/SOCKS</span>
+              </li>
+            </ul>
+          </div>
+          <div class="know_more flex-center">
+            <button type="button" class="or-button know_btn">
+              <span>了解更多</span>
+            </button>
+          </div>
+        </div>
+        <div class="package menu_box common-slideInRight">
+          <span class="menu_title flex-center">包时套餐</span>
+          <div class="grid box_desc">
+            <ul class="package_time mt-50">
+              <li class="mb-20">
+                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                <span class="ml-10">IP时效：3/5/10/15分钟</span>
+              </li>
+              <li class="mb-20">
+                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                <span class="ml-10">套餐有效期：7/30/90/180/365天</span>
+              </li>
+            </ul>
+            <ul class="setMeal-limt">
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>API调用频率：1秒</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>多机器调用：不限制</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>并发请求数量：不限制</span>
+              </li>
+              <li>
+                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                <span>支持协议：HTTP/HTTPS/SOCKS</span>
+              </li>
+            </ul>
+          </div>
+          <div class="know_more flex-center">
+            <button type="button" class="or-button know_btn">
+              <span>了解更多</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="customer grid">
+      <div class="customer_top flex-center">
+        <span class="model_title">专属企业HTTP定制服务</span>
+        <i class="iconfont icon-title-zhuangshi"></i>
+      </div>
+      <div class="customer_bottom grid">
+        <div class="menu_list grid common-slideInLeft"></div>
+        <div class="module_create flex-center flex-column common-slideInRight">
+          <div class="module_img"></div>
+          <button class="or-button customer_btn mt-50" type="button">
+            <span>立即定制</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 <%- include('../components/js.html'); %>
