@@ -3,20 +3,22 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 14:32:30
+ * @LastEditTime: 2022-05-16 16:56:26
  */
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
 const { renderTab } = require("service/header")
 const { getQueryLink } = require("service/footer")
-
+const { getHelpListS } = require('service/helpCenter')
+ 
 const fs = require("fs")
 const config = require("../config/app.config")
 
 //套餐购买
 //const packageObj = require("./package.js")
 const { renderPackage } = require("service/package");
+const { log } = require("console");
 
 
 //友情链接
@@ -113,14 +115,10 @@ function Router(App) {
   //帮助中心-helpCenter
   router.get("/helpCenter", async (ctx) => {
 
-    /**数据请求 */
+    let res = await getHelpListS()
+    console.log('res:',res);
 
-
-
-    return ctx.render("help/helpCenter", {
-      name: 'This is helpCenter',
-      data: 2222,
-    })
+    return ctx.render("help/helpCenter", res)
   })
 
   //帮助中心-关键词聚合页
