@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 李云涛
+ * @LastEditors: dengxiujie
  * @description: 正则管理文件
  * @Date: 2021-08-12 17:00:14
- * @LastEditTime: 2022-05-12 17:36:02
+ * @LastEditTime: 2022-05-16 18:55:13
  */
 
 // 手机号码，包含排除号段
@@ -53,3 +53,6 @@ export const IP = /^((2(5[0-5]|[0-4]\d)|([1]\d{1,2})|([0-9]\d)|[1-9])(\.((2(5[0-
 
 // 正整数
 // export const positiveInt = /(^[1-9]\d*$)/
+
+//千分位加分号
+export const semicolon = /(\d)(?=(\d{3})+$)/g;

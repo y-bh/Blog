@@ -327,12 +327,15 @@
     .content-bg {
       display: flex;
       flex-wrap: wrap;
-      img {
-        width: 730px;
-        height: 441px;
+      > div {
+        max-width: 730px;
+        img {
+          height: 441px;
+        }
       }
+
       ul {
-        min-width: 470px;
+        width: 390px;
         .title {
           font-size: 35px;
           line-height: 50px;

@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-12 10:40:08
+ * @LastEditTime: 2022-05-16 18:56:38
  */
 
 // 弹窗消息提示
@@ -91,3 +91,28 @@ function getParams() {
     return JSON.parse(JSON.stringify(request));
 }
 
+/**
+  * 动态数字方法
+  * ID    => 对应ID
+  * speed => 递增速度 
+  * start:开始数字
+  * step：每次递增
+  */
+function numDynamic(id,start,end,step,speed){
+  var span = document.getElementById(id);
+  if(start<end){
+    var i = start;
+    var t = setInterval(function(){
+      i += step; // 设置每次增加的动态数字，可调整
+      
+      if(i >= end){
+        span.innerText = end;
+        clearInterval(t);
+      }else{
+        span.innerText = i;
+      }       
+    },speed);
+  }else{
+    span.innerText = start;
+  }
+}
