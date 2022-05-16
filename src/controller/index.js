@@ -3,14 +3,14 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 21:08:06
+ * @LastEditTime: 2022-05-16 21:24:08
  */
 
 
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpListS,getBlogDetailS } = require('service/helpCenter')
+const { getHelpListS,getBlogDetailS,getKeyWordPageS } = require('service/helpCenter')
  
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -109,10 +109,9 @@ function Router(App) {
   //帮助中心-关键词聚合页
   router.get("/keyWord", async (ctx) => {
     /**数据请求 */
-    return ctx.render("help/keyWord/keyWord", {
-      name: `This is 关键词聚合页`,
-      data: `333`,
-    })
+    let keyWordPageData = await getKeyWordPageS()
+
+    return ctx.render("help/keyWord/keyWord", keyWordPageData)
   })
 
 
@@ -122,7 +121,6 @@ function Router(App) {
     // const { id } = ctx.request.params
 
     let helpDetail = await getBlogDetailS()
-    console.log('helpDetail:',helpDetail);
 
     return ctx.render("help/detail/helpDetails", helpDetail)
   })
