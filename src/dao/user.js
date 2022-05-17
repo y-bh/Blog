@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 用户相关接口操作
  * @Date: 2022-05-17 17:04:35
- * @LastEditTime: 2022-05-17 18:56:04
+ * @LastEditTime: 2022-05-17 20:42:19
  */
 
 
@@ -45,4 +45,15 @@ const postResetDao = async (data) => {
     return error
   }
 }
-module.exports = { postRegisterDao, postResetDao }
+
+//登录
+const postLoginDao = async (data) => {
+  try {
+    const res = await post(api.POST_USER_LOGIN, data)
+    return res
+  } catch (error) {
+    return error
+  }
+}
+
+module.exports = { postRegisterDao, postResetDao, postLoginDao }

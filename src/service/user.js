@@ -3,13 +3,14 @@
  * @LastEditors: 朱占伟
  * @description: 用户相关服务
  * @Date: 2022-05-17 17:02:00
- * @LastEditTime: 2022-05-17 20:37:51
+ * @LastEditTime: 2022-05-17 20:44:04
  */
 
 
-const { postRegisterDao, postResetDao } = require('dao/user')
+const { postRegisterDao, postResetDao, postLoginDao } = require('dao/user')
 
 
+// 注册服务
 const registerService = async (data = null) => {
   //注册校验
 
@@ -33,6 +34,7 @@ const registerService = async (data = null) => {
 
 }
 
+// 重置密码服务
 const resetService = async (data = null) => {
 
   //1. 入参
@@ -57,4 +59,26 @@ const resetService = async (data = null) => {
 
 }
 
-module.exports = { registerService, resetService }
+
+// 登录服务
+const loginService = async (data = null) => {
+
+  //1. 入参
+  const params = {
+    phone: data.phone.trim(),
+    pwd: data.pwd.trim()
+  }
+
+  //2.校验 
+  console.log("登录参数:", params)
+
+  //3.获取数据
+  const res = await postLoginDao(params)
+  //处理注册数据
+  console.log("获取登录结果", res)
+  return res
+
+}
+
+
+module.exports = { registerService, resetService, loginService }

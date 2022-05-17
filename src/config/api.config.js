@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-17 20:40:04
+ * @LastEditTime: 2022-05-17 20:41:36
  */
 
 module.exports = {
@@ -47,7 +47,10 @@ module.exports = {
 
   //  用户相关接口
   'POST_USER_REGISTER': '/user/register', //用户注册
-  'POST_USER_RESET' : '/user/forget/password/update',
+  'POST_USER_RESET' : '/user/forget/password/update', //重置密码
+  'POST_USER_LOGIN' : '/auth/login', //登录
+
+
 
 
   /*企业服务*/
