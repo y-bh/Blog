@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 朱占伟
+ * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-16 18:59:17
+ * @LastEditTime: 2022-05-16 22:31:59
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -26,14 +26,20 @@
       <div class="extract_ip_left pd-20 grid justify-center">
         <span class="desc font-25 title">提取IP</span>
         <div class="anchor grid justify-center">
+          <% extractIp.forEach(function(item,index) { %>
+            <span class="pointer"><%= item.title %></span>
+          <% }) %>
         </div>
       </div>
       <div class="code_demo_left mt-20 pd-20 grid justify-center">
         <span class="desc font-25 title">代码demo</span>
-        <div class="demo grid justify-center"></div>
+        <div class="demo grid justify-center">
+          <% codeDemo.forEach(function(item,index) { %>
+            <span class="pointer"><%= item.title %></span>
+          <% }) %>
+        </div>
       </div>
     </div>
-    <!-- 右边主体内容 -->
     <div class="right grid">
       <!-- 提取IP -->
       <div class="head extract_ip_right">
@@ -42,6 +48,9 @@
           <label for="extractType" class="font-18 main-title-color label_lay">选择提取类型</label>
           <select id="extractType" class="extract_select form-control">
             <option selected>余额提取</option>
+            <% paidList.forEach(function(item,index) { %>
+              <option><%= item.desc %></option>
+            <% }) %>
           </select>
         </div>
         <!-- 已登录展示 -->
@@ -56,7 +65,19 @@
               <button class="right_btn">充值</button>
             </div>
           </div>
-          <div class="meal_box mt-30 grid"></div>
+          <div class="meal_box mt-30 grid">
+            <% mealBox.forEach(function(item,index) { %>
+              <div class="meal_item grid justify-center align-center">
+                <div class="desc flex justify-center pt-10 pb-10">
+                  <span class="font-15"><%= item.desc %></span>
+                </div>
+                <div class="num flex justify-center align-center">
+                  <span class="text-blue font-25"><%= item.num %></span>
+                  <span class="text-blue font-15">个</span>
+                </div>
+              </div>
+            <% }) %>
+          </div>
         </div>
         <!-- 未登录展示 -->
         <div class="not_login">
@@ -83,7 +104,18 @@
         </div>
         <div class="form-group mt-30 ip_use">
           <label class="font-18 main-title-color">IP使用时长</label>
-          <div class="ip_use_box grid justify-start align-center mt-45"></div>
+          <div class="ip_use_box grid justify-start align-center mt-45">
+            <% ipUse.forEach(function(item,index) { %>
+              <div class="ip_use_item flex flex-column align-center justify-center">
+                <div class="time_box">
+                  <span class="time_text font-25 font-bold main-title-color"><%= item.time %></span>
+                </div>
+                <div class="deal_box mt-15 pt-10 flex justify-center align-center pb-10 ">
+                  <span class="deal_text text-blue"><%= item.deal %></span>  
+                </div>
+              </div>
+            <% }) %>
+          </div>
         </div>
         <div class="flex flex-wrap align-center data_format_box mt-40">
           <label class="label_lay font-18 main-title-color">数据格式</label>
@@ -99,12 +131,29 @@
         <div class="isJSON">
           <div class="flex flex-wrap align-center choose_type_box mt-40">
             <label class="label_lay font-18 main-title-color">选择属性</label>
-            <div class="choose_type"></div>
+            <div class="choose_type">
+              <% chooseType.forEach(function(item,index) { %>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label pointer">
+                    <input class="form-check-input" type="checkbox" value="<%= item.status %>">
+                    <%= item.label %>
+                  </label>
+                </div>
+              <% }) %>
+            </div>
           </div>
         </div>
         <div class="flex flex-wrap align-center separator_box mt-40">
           <label class="label_lay font-18 main-title-color">分隔符</label>
-          <div class="separator flex"></div>
+          <div class="separator flex">
+            <% separator.forEach(function(item,index) { %>
+              <div class="narrow_box mr-40 flex justify-center align-center pointer">
+                <span class="font-15 main-title-color">
+                  <%= item.label %>
+                </span>
+              </div>
+            <% }) %>
+          </div>
         </div>
         <div class="choose_area_box mt-40">
           <label class="font-18 main-title-color">选择地区</label>
@@ -118,7 +167,16 @@
               </div>
             </div>
             <div class="isProvince">
-              <div class="bottom flex flex-wrap"></div>
+              <div class="bottom flex flex-wrap">
+                <% province.forEach(function(item,index) { %>
+                  <div class="form-check mr-20 mb-20">
+                    <label class="form-check-label pointer">
+                      <input class="form-check-input" type="checkbox" value="<%= item.status %>">
+                      <%= item.label %>
+                    </label>
+                  </div>
+                <% }) %>
+              </div>
             </div>
           </div>
         </div>
@@ -178,7 +236,13 @@
         <div class="note_box flex mt-40">
           <ul class="note_desc">
             <li class="top_li flex-center">属性</li>
-            <div class="extract_box"></div>
+            <div class="extract_box">
+              <% extractDesc.forEach(function(item,index) { %>
+                <li class="ele flex-center">
+                  <%= item.label %>
+                </li>
+              <% }) %>
+            </div>
           </ul>
           <ul class="note_content widthAll">
             <li class="top_li flex-center">内容</li>
@@ -197,7 +261,13 @@
                 utf-8
               </div>
             </li>
-            <li class="ele grid pt-20 pb-20 align-center params_desc"></li>
+            <li class="ele grid pt-20 pb-20 align-center params_desc">
+              <% paramsDesc.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
             <li class="ele flex-center flex-column pt-20 pb-20">
               <div class="li_item_box flex-center">
                 code: 错误编号
@@ -275,84 +345,127 @@
       </div>
       <!-- 白名单接口使用说明 -->
       <div class="head white_list" id="wl">
-          <span class="font-25 title">白名单接口使用说明</span>
-          <div class="note_box flex mt-40">
-            <ul class="note_desc">
-              <li class="top_li flex-center">属性</li>
-              <div class="white_box"></div>
-            </ul>
-            <ul class="note_content widthAll">
-              <li class="top_li flex-center">内容</li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center port">
-                  http://api.tianqiip.com/white/add?key=xxx&brand=2&sign=xxx&ip=xxx
-                </div>
-              </li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center port">
-                  http://api.tianqiip.com/white/delete?key=xxx&brand=2&sign=xxx&ip=xxx
-                </div>
-              </li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center port">
-                  http://api.tianqiip.com/white/fetch?key=xxx&brand=2&sign=xxx
-                </div>
-              </li>
-              <li class="ele flex-center pt-20 pb-20">
+        <span class="font-25 title">白名单接口使用说明</span>
+        <div class="note_box flex mt-40">
+          <ul class="note_desc">
+            <li class="top_li flex-center">属性</li>
+            <div class="white_box">
+              <% whiteDesc.forEach(function(item,index) { %>
+                <li class="ele flex-center">
+                  <%= item.label %>
+                </li>
+              <% }) %>
+            </div>
+          </ul>
+          <ul class="note_content widthAll">
+            <li class="top_li flex-center">内容</li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center port">
+                http://api.tianqiip.com/white/add?key=xxx&brand=2&sign=xxx&ip=xxx
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center port">
+                http://api.tianqiip.com/white/delete?key=xxx&brand=2&sign=xxx&ip=xxx
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center port">
+                http://api.tianqiip.com/white/fetch?key=xxx&brand=2&sign=xxx
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                GET
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                utf-8
+              </div>
+            </li>
+            <li class="ele grid pt-20 pb-20 align-center params_desc">
+              <% whiteParamsDesc.forEach(function(item,index) { %>
                 <div class="li_item_box flex-center">
-                  GET
+                  <%= item.label %>
                 </div>
-              </li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center">
-                  utf-8
-                </div>
-              </li>
-              <li class="ele grid pt-20 pb-20 align-center params_desc"></li>
-              <li class="ele flex-center flex-column pt-20 pb-20">
-                <div class="li_item_box flex-center">
-                  code: 错误编号
-                </div>
-                <div class="li_item_box flex-center mt-20">
-                  Msg: 描述信息
-                </div>
-              </li>
-              <li class="ele flex-center flex-column pt-20 pb-20">
-                <div class="li_item_box flex-center">
-                  code: 200
-                </div>
-                <div class="li_item_box flex-center mt-20">
-                  info: 描述信息
-                </div>
-              </li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center">
-                  200: 操作成功
-                </div>
-              </li>
-            </ul>
-          </div>
+              <% }) %>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                code: 错误编号
+              </div>
+              <div class="li_item_box flex-center mt-20">
+                Msg: 描述信息
+              </div>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                code: 200
+              </div>
+              <div class="li_item_box flex-center mt-20">
+                info: 描述信息
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                200: 操作成功
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
       <!-- 错误码 -->
       <div class="head error_code">
-          <span class="font-25 title">错误码</span>
-          <div class="note_box flex mt-40">
-            <ul class="note_desc">
-              <li class="top_li flex-center">错误码</li>
-              <div class="box"></div>
-            </ul>
-            <ul class="note_content widthAll">
-              <li class="top_li flex-center">说明</li>
-              <li class="ele flex-center flex-column pt-20 pb-20 extract"></li>
-              <li class="ele flex-center flex-column pt-20 pb-20 white"></li>
-              <li class="ele flex-center flex-column pt-20 pb-20 proxy"></li>
-            </ul>
-          </div>
+        <span class="font-25 title">错误码</span>
+        <div class="note_box flex mt-40">
+          <ul class="note_desc">
+            <li class="top_li flex-center">错误码</li>
+            <div class="box">
+              <% errorCodeContent.left_desc.forEach(function(item,index) { %>
+                <li class="ele flex-center">
+                  <%= item.label %>
+                </li>
+              <% }) %>
+            </div>
+          </ul>
+          <ul class="note_content widthAll">
+            <li class="top_li flex-center">说明</li>
+            <li class="ele flex-center flex-column pt-20 pb-20 extract">
+              <% errorCodeContent.extractError.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center mb-20 port">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20 white">
+              <% errorCodeContent.whiteError.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center mb-20 port">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20 proxy">
+              <% errorCodeContent.proxyError.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center mb-20 port">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+          </ul>
+        </div>
       </div>
       <!-- 代码demo -->
       <div class="head code_demo_right">
-          <span class="font-25 title">代码demo</span>
-          <div class="demo_box grid mt-40"></div>
+        <span class="font-25 title">代码demo</span>
+        <div class="demo_box grid mt-40">
+          <% codeDemo.forEach(function(item,index) { %>
+            <div class="demo_box_item flex-center flex-column">
+              <span class="demo_title mb-15"><%= item.title %></span>
+              <button type="button" class="download">立即下载</button>
+            </div>
+          <% }) %>
+        </div>
       </div>
     </div>
   </div>

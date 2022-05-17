@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-16 16:35:25
+ * @LastEditTime: 2022-05-16 20:22:46
  */
 
 module.exports={
@@ -35,4 +35,5 @@ module.exports={
   /*帮助中心 */
   'HELP_HELP':'/help/help', //获取首页的文章列表
   'HELP_FIND_BY_ARTICLE_KEYWORD': '/help/findByArticleKeyword', //查看文章关键词聚合页
+  'HELP_HELP_DETAILS': '/help/helpDetails', //文章详情
 }

@@ -1,16 +1,18 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 19:44:11
+ * @LastEditTime: 2022-05-16 22:36:07
  */
 
 
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpListS } = require('service/helpCenter')
+const { getHelpListS,getBlogDetailS,getKeyWordPageS } = require('service/helpCenter')
+const { data } = require('service/getIp')
+const { getBusinessData } = require('service/business')
  
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -79,10 +81,8 @@ function Router(App) {
   router.get("/getIp", async (ctx) => {
 
     /**数据请求 */
-    return ctx.render("getIp/getIp", {
-      name: 'This is getIp',
-      data: 2222,
-    })
+    let getIpData = await data()
+    return ctx.render("getIp/getIp", getIpData)
   })
 
 
@@ -90,41 +90,38 @@ function Router(App) {
   //业务场景-businessScene
   router.get("/businessScene", async (ctx) => {
     /**数据请求 */
-    return ctx.render("businessScene/businessScene", {
-      name: 'This is businessScene',
-      data: 'businessScene',
-    })
+    let res = getBusinessData()
+
+    return ctx.render("businessScene/businessScene", res)
   })
 
 
   //帮助中心-helpCenter
   router.get("/helpCenter", async (ctx) => {
 
-    let res = await getHelpListS()
-    console.log('res:',res);
+    let helpData = await getHelpListS()
 
-    return ctx.render("help/helpCenter", res)
+    return ctx.render("help/helpCenter", helpData)
   })
 
 
   //帮助中心-关键词聚合页
   router.get("/keyWord", async (ctx) => {
     /**数据请求 */
-    return ctx.render("help/keyWord/keyWord", {
-      name: `This is 关键词聚合页`,
-      data: `333`,
-    })
+    let keyWordPageData = await getKeyWordPageS()
+
+    return ctx.render("help/keyWord/keyWord", keyWordPageData)
   })
 
 
-  //帮助中心-helpCenter-details
+  //帮助中心详情-helpCenter-details
   router.get("/helpDetails", async (ctx) => {
     /**数据请求 */
-    const { id } = ctx.request.params
-    return ctx.render("help/detail/helpDetails", {
-      name: `This is ${id} article`,
-      data: 2222,
-    })
+    // const { id } = ctx.request.params
+
+    let helpDetail = await getBlogDetailS()
+
+    return ctx.render("help/detail/helpDetails", helpDetail)
   })
 
 
