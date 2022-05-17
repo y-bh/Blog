@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-17 18:22:47
+ * @LastEditTime: 2022-05-17 18:26:51
  */
 
 
@@ -228,13 +228,18 @@ async function sendCode(type = 'register') {
 
   //4. 获取结果
   let url = '/auth/registerCode'
+
+  if (type === 'reset') {
+    url = '/user/forget/password/getCode'
+  }
+  
   console.log("验证码类型:", type)
   const res = await ajax({
     url,
     query: params.phone
   })
 
-  console.log("res===========", res)
+
   if (res) {
     return $message.success({
       message: '请在手机端查看验证码',
