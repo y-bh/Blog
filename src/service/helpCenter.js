@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心业务代码
  * @Date: 2022-05-16 16:37:33
- * @LastEditTime: 2022-05-17 11:18:43
+ * @LastEditTime: 2022-05-17 13:40:17
  */
 const { getHelpList,getBlogDetail } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
@@ -22,21 +22,15 @@ const getHelpListS = async () => {
   const res = await getHelpList()
   try {
     if (+res.code === 200) {
-      res.data.articlePageRespDTO.data.map(e => {
-        e.title = csubstr(e.title,18)
-        e.createTime = dateFormat(e.createTime)
-        e.updateTime = dateFormat(e.updateTime)
+      res.data.articlePageRespDTO.map(e => {
+        e.articlePageRespDTO.data.map(i => {
+          i.title = csubstr(i.title,18)
+          i.createTime = dateFormat(i.createTime)
+          i.updateTime = dateFormat(i.updateTime)
+        })
       })
-      let total = res.data.articlePageRespDTO.totalSize
       const helpData = {
-        tabList: res.data.articleTypes,  //tab类型
-        articleList: res.data.articlePageRespDTO.data, //文章列表
-        alive: res.data.alive, //当前的文章类型
-        pageSize: res.data.articlePageRespDTO.pageSize,
-        pageNum: res.data.articlePageRespDTO.pageNum,
-        totalPage: res.data.articlePageRespDTO.totalPage,
-        totalSize: res.data.articlePageRespDTO.totalSize,
-        page: total % 8 === 0 ? total / 8 : total / 8 + 1 //页码计算
+        data: res.data,
       }
       return helpData;
     }

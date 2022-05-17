@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心
  * @Date: 2022-05-12 10:36:58
- * @LastEditTime: 2022-05-17 11:20:49
+ * @LastEditTime: 2022-05-17 13:56:40
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +24,12 @@
   <div class="container grid justify-center">
     <div class="flex-center">
       <ul class="nav nav-pills nav-fill ">
-        <% tabList.forEach(e => { %>
+        <% data.articlePageRespDTO.forEach(e => { %>
           <li class="nav-item flex-center">
             <a 
               href="<%= e.typeAlias %>" 
               class="nav-link flex-center widthAll pointer" 
               data-toggle="tab"
-              onclick="clickTab('<%=JSON.stringify(e)%>',this)"
             >
               <%= e.type %>
             </a>
@@ -40,16 +39,16 @@
     </div>
     <div class="common-fadeInUp">
       <div class="tab-content mt-60">
-        <% tabList.forEach(function(e,tab_index) { %>
+        <% data.articlePageRespDTO.forEach(function(e,tab_index) { %>
           <div class="tab-pane" id="<%= e.typeAlias %>">
             <div class="content grid">
-              <% articleList.forEach(function(i,blog_index) { %>
+              <% e.articlePageRespDTO.data.forEach(function(i,blog_index) { %>
                 <div class="blog_item flex justify-between align-center">
                   <div class="left grid">
-                    <div class="top text-blue flex justify-start align-start"><%= new Date(i.updateTime).getMonth()+1 %></div>
+                    <div class="top text-blue flex justify-start align-start"><%= new Date(i.createTime).getMonth()+1 %></div>
                     <div class="bottom">
                       <div class="line"></div>
-                      <span class="text-blue flex justify-end align-end"><%= new Date(i.updateTime).getDate() %></span>  
+                      <span class="text-blue flex justify-end align-end"><%= new Date(i.createTime).getDate() %></span>  
                     </div>
                   </div>
                   <div class="right grid">
@@ -62,29 +61,35 @@
                 </div>
               <% }) %>
             </div>
+            <!-- 分页 -->
+            <div class="page_box mt-60 flex justify-end mb-80">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true"><</span>
+                    </a>
+                  </li>
+                  <div class="pageList flex">
+                    <li class="page-item">
+                      <% for(let i = 0; i < e.totalPage; i++) { % }
+                        <a href="#" class="page-link"><%=i%></a>
+                      <% } %>
+                    </li>
+                  </div>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">></span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              <div class="goto flex-center ml-30">
+                前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="text">&nbsp;&nbsp;页
+              </div>
+            </div>  
           </div>
         <% }) %>
-      </div>
-      <div class="page_box mt-60 flex justify-end mb-80">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true"><</span>
-              </a>
-            </li>
-            <div class="pageList flex">
-            </div>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">></span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="goto flex-center ml-30">
-          前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="text">&nbsp;&nbsp;页
-        </div>
       </div>
     </div>
   </div>
