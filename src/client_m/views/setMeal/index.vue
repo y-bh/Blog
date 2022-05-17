@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-17 16:59:32
+ * @LastEditTime: 2022-05-17 18:32:08
 -->
 <template>
   <div class="container">
@@ -78,7 +78,9 @@
             {{ mealType[scope.row.proxyType] ? mealType[scope.row.proxyType] : null }}
           </template>
         </el-table-column>
-        <el-table-column align='center' label="提取密钥" prop="key" width="85"></el-table-column>
+        <el-table-column align='center' label="提取密钥" prop="key" width="85">
+          
+        </el-table-column>
         <el-table-column align='center' label="账号" prop="authKey" v-if="userInfo && userInfo.isProxyAuthKey" width="70">
         </el-table-column>
         <el-table-column align='center' label="密码" prop="authSecret" v-if="userInfo && userInfo.isProxyAuthKey"
@@ -86,7 +88,7 @@
           <template #default="scope">
             <div class="repeat-wrap">
               <span class="repeat">{{ scope.row.authSecret ? scope.row.authSecret : '--' }}</span>
-              <span class="repeat repeat_pwd" @click="repeat(scope.row)">
+              <span class="repeat repeat_pwd" @click="repeatPwd(scope.row)">
                 <i class="el-icon-refresh-left"></i>
               </span>
             </div>
@@ -165,9 +167,11 @@
         </el-table-column>
       </el-table>
     </div>
+    <reset-password ref="passwordRef"></reset-password>
     <renewal ref="renewalRef"></renewal>
     <supplement ref="supplementRef"></supplement>
     <modify ref="modifyRef"></modify>
+    <merge ref="mergeRef"></merge>
   </div>
 </template>
 
@@ -175,6 +179,7 @@
 import { dateFormat } from "tools/dateFormat"
 import { reactive, ref, toRefs, onMounted, inject } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import resetPassword from './components/resetPassword'
 import renewal from './components/renewal';
 import supplement from './components/supplement';
 import modify from './components/modify';
@@ -183,6 +188,7 @@ import changeLog from './components/changeLog'
 export default {
   name: "",
   components: { 
+    resetPassword,
     renewal,  // 续费
     supplement,  // 补量
     modify, // 修改时效
@@ -205,7 +211,9 @@ export default {
     }
     const renewalRef = ref(null);
     const supplementRef = ref(null);
-    const modifyRef = ref(null)
+    const modifyRef = ref(null);
+    const mergeRef = ref(null);
+    const passwordRef = ref(null);
     let state = reactive({
       userInfo: null,
       // 查询表单
@@ -259,6 +267,7 @@ export default {
           modifyRef.value.onOpen(1)
         } else if (command === 'merge') {
           console.log('合并套餐');
+          mergeRef.value.onOpen(1)
         } else if (command === 'extract') {
           console.log('api提取跳转');
         } else if (command === 'changeLog') {
@@ -270,7 +279,8 @@ export default {
           })
           return
         }
-      }
+      },
+      repeatPwd(){}
     };
 
     console.log(state.tableList, 'state.tableList');
@@ -280,9 +290,11 @@ export default {
       ...enumerateData,
       stateColor,
       dateFormat,
+      passwordRef,
       renewalRef,
       supplementRef,
-      modifyRef
+      modifyRef,
+      mergeRef
     };
   },
 };

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-17 17:43:19
+ * @LastEditTime: 2022-05-17 18:01:42
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -118,7 +118,7 @@ export default {
         const message = inject('message');
         //  响应式数据
         const state = reactive({
-            dialogVisible: true,
+            dialogVisible: false,
             // 续费表单
             mealForm: {
                 name: '套餐名称',
