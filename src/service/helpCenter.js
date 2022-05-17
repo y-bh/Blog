@@ -3,9 +3,10 @@
  * @LastEditors: 陈昊天
  * @description: 帮助中心业务代码
  * @Date: 2022-05-16 16:37:33
- * @LastEditTime: 2022-05-16 21:22:48
+ * @LastEditTime: 2022-05-17 11:18:43
  */
 const { getHelpList,getBlogDetail } = require("dao/helpCenter")
+const { dateFormat } = require("utils/dateFormat")
 
 //标题省略
 const csubstr = (str, len) => {
@@ -23,6 +24,8 @@ const getHelpListS = async () => {
     if (+res.code === 200) {
       res.data.articlePageRespDTO.data.map(e => {
         e.title = csubstr(e.title,18)
+        e.createTime = dateFormat(e.createTime)
+        e.updateTime = dateFormat(e.updateTime)
       })
       let total = res.data.articlePageRespDTO.totalSize
       const helpData = {
@@ -33,7 +36,7 @@ const getHelpListS = async () => {
         pageNum: res.data.articlePageRespDTO.pageNum,
         totalPage: res.data.articlePageRespDTO.totalPage,
         totalSize: res.data.articlePageRespDTO.totalSize,
-        page: total % 8 === 0 ? total / 8 : total / 8 + 1
+        page: total % 8 === 0 ? total / 8 : total / 8 + 1 //页码计算
       }
       return helpData;
     }

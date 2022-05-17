@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 22:36:07
+ * @LastEditTime: 2022-05-17 10:31:34
  */
 
 
@@ -100,6 +100,8 @@ function Router(App) {
   router.get("/helpCenter", async (ctx) => {
 
     let helpData = await getHelpListS()
+
+    console.log('helpData:',helpData);
 
     return ctx.render("help/helpCenter", helpData)
   })
