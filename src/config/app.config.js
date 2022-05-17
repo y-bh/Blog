@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: 朱占伟
  * @description: 应用配置文件
  * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-05-16 13:22:45
+ * @LastEditTime: 2022-05-17 19:02:53
  */
 
 const path = require("path")
@@ -26,7 +26,7 @@ var config = {
   appPort: '8080',
 
   //与java端通信地址
-  url: 'http://192.168.12.213:17001',
+  url: 'http://192.168.10.62:17001',
 
 
   //个人中心相关工程配置 带前缀 m

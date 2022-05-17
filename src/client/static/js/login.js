@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-17 18:26:51
+ * @LastEditTime: 2022-05-17 20:32:47
  */
 
 
@@ -170,7 +170,7 @@ function checkForm(params = null, type = 'login') {
 
 
 //登录/注册/重置密码
-function loginSubmit(type) {
+async function loginSubmit(type) {
 
   //获取参数
   const params = getParams(type)
@@ -180,6 +180,19 @@ function loginSubmit(type) {
   console.log("校验参数结果:", res)
   params.type = type
 
+
+  // const re = await ajax({
+  //   url:'/user/forget/password/update',
+  //   query: JSON.stringify({
+  //     phone: params.phone.trim(),
+  //     code: params.code.trim(),
+  //     newPassword: params.pwd.trim(),
+  //     checkPassword: params.cpwd.trim()
+  //   })
+  // })
+
+
+
   $.ajax({
     type: 'POST',
     url: "/api/login",
@@ -188,6 +201,13 @@ function loginSubmit(type) {
     contentType: 'application/json',
     success: (res) => {
       console.log("登录/注册结果:", res)
+      if(+res.code !==0){
+              return $message({
+            message: res.msg || '注册失败!请联系客服',
+            type: 'warning'
+          })
+        
+      }
     },
     error: (err) => {
       console.log("接口请求失败:", err)
@@ -232,7 +252,7 @@ async function sendCode(type = 'register') {
   if (type === 'reset') {
     url = '/user/forget/password/getCode'
   }
-  
+
   console.log("验证码类型:", type)
   const res = await ajax({
     url,
@@ -250,3 +270,4 @@ async function sendCode(type = 'register') {
 
 
 window.sendCode = debounce(sendCode, 300, true)
+window.loginSubmit = debounce(loginSubmit, 300, true)
