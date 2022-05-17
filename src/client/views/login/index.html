@@ -8,7 +8,9 @@
   <meta name="renderer" content="webkit">
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
-  <title>登录-天启http</title>
+  <title>
+    <%= title%>
+  </title>
   <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/login.css">
 </head>
@@ -31,20 +33,20 @@
 
                     <%# 手机号/账号 %>
                       <div class="flex justify-content-center form-input">
-                        <input type="text" placeholder='<%= pageType===' login' ? "请输入账号" : "请输入手机号" %>'>
+                        <input type="text" placeholder='<%= pageType===' login' ? "请输入账号" : "请输入手机号" %>' name="phone">
                       </div>
 
 
                       <%# 短信验证码 %>
                         <div class="mt-20 flex justify-content-center login-other  margin-auto form-input">
-                          <input type="password" placeholder="请输入短信验证码">
+                          <input type="password" placeholder="请输入短信验证码" name="code">
                           <input class="btn  btn-outline-code ml-30" type="button" value="获取验证码">
                         </div>
 
                         <%# 用户名 %>
                           <% if(pageType==='register' ){ %>
                             <div class="mt-20 flex justify-content-center form-input">
-                              <input type="text" placeholder="请设置用户名">
+                              <input type="text" placeholder="请设置用户名" name="userName">
                             </div>
                             <% } %>
 
@@ -52,14 +54,15 @@
 
                               <%# 密码 %>
                                 <div class="mt-20 flex justify-content-center form-input">
-                                  <input type="password" placeholder="<%= pageType==='login' ? '请输入密码' : '请设置登录密码'%> ">
+                                  <input name="pwd" type="password"
+                                    placeholder="<%= pageType==='login' ? '请输入密码' : '请设置登录密码'%> ">
                                 </div>
 
 
                                 <%# 确认密码 %>
                                   <% if(pageType==='reset' ){ %>
                                     <div class="mt-20 flex justify-content-center form-input">
-                                      <input type="password" placeholder="请确认登录密码">
+                                      <input name="cpwd" type="password" placeholder="请确认登录密码">
                                     </div>
                                     <% } %>
 
@@ -67,10 +70,11 @@
                                       <%# 协议 %>
                                         <% if(pageType==='register' ){ %>
                                           <div class="mt-20 flex justify-content-center">
-                                            <p>  
-                                              <input  type="checkbox" class="btn-group-vertical" >
-                                              我已阅读并同意 
-                                              <a href="" target="_blank">《天启HTTP用户协议》</a></p>
+                                            <p>
+                                              <input type="checkbox" class="btn-group-vertical" name="agreeMent">
+                                              我已阅读并同意
+                                              <a href="" target="_blank">《天启HTTP用户协议》</a>
+                                            </p>
                                           </div>
                                           <% } %>
 
@@ -107,5 +111,6 @@
 </body>
 <!-- 公共js -->
 <%- include('../components/js.html'); %>
+  <script src="/js/login.js" async defer></script>
 
 </html>

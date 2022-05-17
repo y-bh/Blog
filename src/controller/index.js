@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-17 14:32:39
+ * @LastEditTime: 2022-05-17 15:26:49
  */
 
 
@@ -149,9 +149,16 @@ function Router(App) {
 
 
     console.log("ddddddddddd", ctx.req.url)
+    let title = "登录页-天启HTTP"
+    if (pageType === 'reset') {
+      title = "重置密码-天启HTTP"
+    }
+    if (pageType === 'register') {
+      title = "注册用户-天启HTTP"
+    }
     return ctx.render("login/index", {
       name: 'This is main login',
-      data: 2222,
+      title,
       pageType //页面类型
     })
   })
