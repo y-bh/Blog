@@ -12,7 +12,6 @@
   "author": "zhuzhanwei",
   "license": "ISC",
   "dependencies": {
-    "async-request": "^1.2.0",
     "axios": "^0.21.1",
     "ejs": "^3.1.7",
     "element-plus": "^1.0.2-beta.70",
