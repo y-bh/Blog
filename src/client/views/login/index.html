@@ -22,85 +22,88 @@
         <div class="flex justify-content-between align-items-center flex-wrap ">
           <div class="login-banager"></div>
           <div class="login-box pb-40">
+            <form name="login" method="post">
+              <%# 表单标题 %>
+                <% if(pageType !=='reset' ){ %>
+                  <h3 class="pt-40 pb-40">天启HTTP会员<%= pageType==='login' ? "登录" : "注册" %>
+                  </h3>
+                  <% }else { %>
+                    <h3 class="pt-40 pb-40">重置密码</h3>
+                    <% } %>
 
-            <%# 表单标题 %>
-              <% if(pageType !=='reset' ){ %>
-                <h3 class="pt-40 pb-40">天启HTTP会员<%= pageType==='login' ? "登录" : "注册" %>
-                </h3>
-                <% }else { %>
-                  <h3 class="pt-40 pb-40">重置密码</h3>
-                  <% } %>
-
-                    <%# 手机号/账号 %>
-                      <div class="flex justify-content-center form-input">
-                        <input type="text" placeholder='<%= pageType===' login' ? "请输入账号" : "请输入手机号" %>' name="phone">
-                      </div>
-
-
-                      <%# 短信验证码 %>
-                        <div class="mt-20 flex justify-content-center login-other  margin-auto form-input">
-                          <input type="password" placeholder="请输入短信验证码" name="code">
-                          <input class="btn  btn-outline-code ml-30" type="button" value="获取验证码">
+                      <%# 手机号/账号 %>
+                        <div class="flex justify-content-center form-input">
+                          <input type="text" placeholder='<%= pageType===' login' ? "请输入账号" : "请输入手机号" %>' name="phone">
                         </div>
 
-                        <%# 用户名 %>
-                          <% if(pageType==='register' ){ %>
-                            <div class="mt-20 flex justify-content-center form-input">
-                              <input type="text" placeholder="请设置用户名" name="userName">
+
+                        <%# 短信验证码 %>
+                          <% if(pageType !=='login' ){ %>
+                            <div class="mt-20 flex justify-content-center login-other  margin-auto form-input">
+                              <input type="number" placeholder="请输入短信验证码" name="code">
+                              <input class="btn  btn-outline-code ml-30" type="button" value="获取验证码" onclick="sendCode('<%=pageType%>')">
                             </div>
                             <% } %>
+                              <%# 用户名 %>
+                                <% if(pageType==='register' ){ %>
+                                  <div class="mt-20 flex justify-content-center form-input">
+                                    <input type="text" placeholder="请设置用户名" name="userName">
+                                  </div>
+                                  <% } %>
 
 
 
-                              <%# 密码 %>
-                                <div class="mt-20 flex justify-content-center form-input">
-                                  <input name="pwd" type="password"
-                                    placeholder="<%= pageType==='login' ? '请输入密码' : '请设置登录密码'%> ">
-                                </div>
+                                    <%# 密码 %>
+                                      <div class="mt-20 flex justify-content-center form-input">
+                                        <input name="pwd" type="password"
+                                          placeholder="<%= pageType==='login' ? '请输入密码' : '请设置登录密码'%> ">
+                                      </div>
 
 
-                                <%# 确认密码 %>
-                                  <% if(pageType==='reset' ){ %>
-                                    <div class="mt-20 flex justify-content-center form-input">
-                                      <input name="cpwd" type="password" placeholder="请确认登录密码">
-                                    </div>
-                                    <% } %>
-
-
-                                      <%# 协议 %>
-                                        <% if(pageType==='register' ){ %>
-                                          <div class="mt-20 flex justify-content-center">
-                                            <p>
-                                              <input type="checkbox" class="btn-group-vertical" name="agreeMent">
-                                              我已阅读并同意
-                                              <a href="" target="_blank">《天启HTTP用户协议》</a>
-                                            </p>
+                                      <%# 确认密码 %>
+                                        <% if(pageType==='reset' ){ %>
+                                          <div class="mt-20 flex justify-content-center form-input">
+                                            <input name="cpwd" type="password" placeholder="请确认登录密码">
                                           </div>
                                           <% } %>
 
 
-
-                                            <div class="mt-30 flex justify-content-center form-input">
-                                              <input class="btn btn-primary" type="submit"
-                                                value="<%= pageType==='login' ? '登录' : (pageType==='reset' ? '保存' : '立即注册')%> ">
-                                            </div>
-
-                                            <%# 登录页独有 %>
-                                              <% if(pageType==='login' ){ %>
-                                                <div class="mt-20 flex justify-content-between login-other margin-auto">
-                                                  <p>还没有账号,<a href="/register">立即注册</a></p>
-                                                  <p><a href="/reset">忘记密码</a></p>
+                                            <%# 协议 %>
+                                              <% if(pageType==='register' ){ %>
+                                                <div class="mt-20 flex justify-content-center">
+                                                  <p>
+                                                    <input type="checkbox" class="btn-group-vertical" name="agreeMent">
+                                                    我已阅读并同意
+                                                    <a href="" target="_blank">《天启HTTP用户协议》</a>
+                                                  </p>
                                                 </div>
                                                 <% } %>
 
-                                                  <%# 注册页独有 %>
-                                                    <% if(pageType==='register' ){ %>
+
+
+                                                  <div class="mt-30 flex justify-content-center form-input">
+                                                    <input class="btn btn-primary" type="button"
+                                                      onclick="loginSubmit('<%=pageType%>')"
+                                                      value="<%= pageType==='login' ? '登录' : (pageType==='reset' ? '保存' : '立即注册')%> ">
+                                                  </div>
+
+                                                  <%# 登录页独有 %>
+                                                    <% if(pageType==='login' ){ %>
                                                       <div
-                                                        class="mt-20 flex justify-content-center login-other margin-auto">
-                                                        <p>已有账号,<a href="/login">立即登录</a></p>
+                                                        class="mt-20 flex justify-content-between login-other margin-auto">
+                                                        <p>还没有账号,<a href="/register">立即注册</a></p>
+                                                        <p><a href="/reset">忘记密码</a></p>
                                                       </div>
                                                       <% } %>
 
+                                                        <%# 注册页独有 %>
+                                                          <% if(pageType==='register' ){ %>
+                                                            <div
+                                                              class="mt-20 flex justify-content-center login-other margin-auto">
+                                                              <p>已有账号,<a href="/login">立即登录</a></p>
+                                                            </div>
+                                                            <% } %>
+            </form>
           </div>
         </div>
       </div>
