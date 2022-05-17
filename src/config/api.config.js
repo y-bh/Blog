@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 陈昊天
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-17 10:00:15
+ * @LastEditTime: 2022-05-17 14:07:18
  */
 
 module.exports={
@@ -38,4 +38,9 @@ module.exports={
   'HELP_HELP':'/help/help', //获取首页的文章列表
   'HELP_FIND_BY_ARTICLE_KEYWORD': '/help/findByArticleKeyword', //查看文章关键词聚合页
   'HELP_HELP_DETAILS': '/help/helpDetails', //文章详情
+
+  /*个人中心-购买记录 */
+  'ORDER_LIST':'/order/list', //获取订单列表
+  'ORDER_STATE':"/order/state", //获取订单状态
+  'ORDER_DODEL':'/order/doDel', //批量删除订单
 }

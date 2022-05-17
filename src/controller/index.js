@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-17 13:45:09
+ * @LastEditTime: 2022-05-17 14:39:00
  */
 
 
@@ -166,7 +166,13 @@ function Router(App) {
   const headerHtml = fs.readFileSync(`${config.templates}/components/header/header.html`, 'utf-8')
   const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
-    var headers = ejs.render(headerHtml, { name: 'zhuzhanwei' })
+    const homeData = {
+      name: '用户',
+      url: '/',
+      link: [],
+      HEADER_ACTIVE_TAB:"2222"
+    }
+    var headers = ejs.render(headerHtml, homeData)
     let res = htmls.replace(re, headers)
     ctx.response.body = res
   })
