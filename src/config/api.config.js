@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-17 15:15:22
+ * @LastEditTime: 2022-05-17 18:14:48
  */
 
 module.exports={
@@ -46,4 +46,8 @@ module.exports={
 
   /*企业服务*/
   'COMPANY_NEW':'/company/new', //提交企业服务
+
+  /*提取ip*/
+  'PROXY_API_CITY':'/proxy/api/city', //获取提取套餐城市列表
+  'PROXY_API_MENU':'/proxy/api/menu', //获取提取套餐下拉列表
 }
