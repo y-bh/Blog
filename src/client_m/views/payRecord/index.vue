@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-14 16:16:58
+ * @LastEditTime: 2022-05-17 14:36:45
 -->
 <template>
   <div class="container grid">
@@ -138,79 +138,50 @@
 </template>
 
 <script>
-import { reactive, ref, toRefs ,onMounted } from 'vue'
+import { reactive, ref, toRefs ,onMounted,inject } from 'vue'
 import { PAY_TYPE_MAP,ORDER_TYPE_MAP,STATE_MAP } from './data.js'
 import { dateFormat } from 'tools/dateFormat.js'
+import { getOrderList,batchDelOrder } from 'model/payRecord.js'
 export default {
   setup() {
     const payTypeMap = ref(PAY_TYPE_MAP)
     const orderTypeMap = ref(ORDER_TYPE_MAP)
     const stateMap = ref(STATE_MAP)
+    const message = inject('message')
     
     const state = reactive({
       searchForm: {
         mealName: '', //套餐名称
         orderNo: '',  //订单编号
-        pageNum: null,  //分页页码
-        pageSize: null, //分页大小
-        payEnd: null, //支付结束时间
-        payStart: null  //支付开始时间
+        pageNum: 0,  //分页页码
+        pageSize: 0, //分页大小
+        payEnd: 0, //支付结束时间
+        payStart: 0  //支付开始时间
       },
       timeList: [],
-      tableData: [
-        {
-          createTime: 1652509642040,
-          payTime: 1652509642040,
-          curAmount: null,
-          desc: 'dddddddddd',
-          mealName: '固定-5分钟-7天',
-          orderNo: 'TQ123456789123456789',
-          orderType: 2,
-          payType: 1,
-          preAmount: null,
-          price: 210,
-          sequence: '123456789123456789',
-          state: 2,
-        },
-        {
-          createTime: 1652509642040,
-          payTime: 1652509642040,
-          curAmount: null,
-          desc: 'dddddddddd',
-          mealName: '固定-5分钟-7天',
-          orderNo: 'TQ123456789123456789',
-          orderType: 1,
-          payType: 2,
-          preAmount: null,
-          price: 210,
-          sequence: '123456789123456789',
-          state: 1,
-        },
-        {
-          createTime: 1652509642040,
-          payTime: 1652509642040,
-          curAmount: null,
-          desc: 'dddddddddd',
-          mealName: '固定-5分钟-7天',
-          orderNo: 'TQ123456789123456789',
-          orderType: 3,
-          payType: 4,
-          preAmount: null,
-          price: 210,
-          sequence: '123456789123456789',
-          state: 4,
-        }
-      ],
+      tableData: [],
       countDown: null,
+      totalPage: 0,
+      totalSize: 0,
+      orderNoSet: [], //批量删除订单编号
     })
 
-    onMounted(() => {
+    onMounted(async() => {
+      // await getQueryList()
       countTime()
     })
 
     //获取列表数据
     const getQueryList = async () => {
-      /**接口处理 */
+      const res = await getOrderList(state.searchForm)
+      if (+res.code === 200) {
+        console.log('res:',res);
+        state.tableData = res.data.data || []
+        state.searchForm.pageNum = res.data.pageNum || 0
+        state.searchForm.pageSize = res.data.pageSize || 0
+        state.totalSize = res.data.totalSize || 0
+        state.totalPage = res.data.totalPage || 0
+      }
     }
 
     //重置
@@ -218,22 +189,32 @@ export default {
       state.searchForm = {
         mealName: '', //套餐名称
         orderNo: '',  //订单编号
-        pageNum: null,  //分页页码
-        pageSize: null, //分页大小
-        payEnd: null, //支付结束时间
-        payStart: null  //支付开始时间
+        pageNum: 0,  //分页页码
+        pageSize: 0, //分页大小
+        payEnd: 0, //支付结束时间
+        payStart: 0  //支付开始时间
       }
+      totalPage = 0
+      totalSize = 0
       state.timeList = []
     }
 
     //查询
-    const onSearch = () => {
-      console.log('查询');
+    const onSearch = async () => {
+      await getQueryList()
     }
 
     //批量删除
-    const batchDelete = () => {
-      console.log('批量删除');
+    const batchDelete = async () => {
+      const params = {
+        orderNoSet
+      }
+      const res = await batchDelOrder(params)
+      if (+res.code === 200) {
+        message.success('删除成功')
+      } else {
+        message.error('删除失败')
+      }
     }
 
     //更改时间
@@ -247,7 +228,9 @@ export default {
 
     //多选
     const handleSelectionChange = (val) => {
-      console.log('val:',val);
+      if (val) {
+        state.orderNoSet = val
+      }
     }
 
     //支付
@@ -309,7 +292,7 @@ export default {
 
 <style lang="scss" scoped>
   .container {
-    grid-template-rows: 190px 1fr;
+    grid-template-rows: auto 1fr;
     grid-row-gap: 40px;
     .top {
       box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
