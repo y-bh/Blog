@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 处理node 上下文全局数据
  * @Date: 2022-05-16 18:06:42
- * @LastEditTime: 2022-05-16 19:41:05
+ * @LastEditTime: 2022-05-16 19:46:04
  */
 
 const appKey = require("config/app.key.config")
@@ -13,7 +13,7 @@ const { renderTab, getQueryLink } = require("service/common")
 
 
 //需要获取全局数据的 url
-const URLS = ['/', '/login', '/getIp', '/package', '/businessScene', '/helpCenter', '/firmsServer']
+const URLS = ['/', '/login', '/getIp', '/package', '/businessScene', '/helpCenter', '/firmsServer','/helpDetails']
 module.exports = function (app) {
   app.use(async ({ req, res, state }, next) => {
     const { method, url } = req
