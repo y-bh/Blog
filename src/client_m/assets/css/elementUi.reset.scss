@@ -35,3 +35,38 @@
     border-bottom-right-radius: inherit;
   }
 }
+
+
+.customize_dialog {
+  &.dialog-alone, 
+  &.dialog-double{
+    width: 95% !important;
+    max-width: 500px;
+    min-width: 375px;
+    .dialog-title{
+      height: 60px;
+      .title-text{
+        line-height: 60px;
+      }
+    }
+
+    .el-form-item {
+      margin-right: 20px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .el-form-item__label{
+      color: #576b95;
+      font-size: 16px;
+      text-align: left;
+    }
+    
+  }
+
+  &.dialog-double {
+    max-width: 680px;
+    
+  }
+}

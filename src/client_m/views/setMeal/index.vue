@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-16 18:22:15
+ * @LastEditTime: 2022-05-17 16:59:32
 -->
 <template>
   <div class="container">
@@ -52,7 +52,7 @@
 
     <!-- 表格 -->
     <div class="table-wrap">
-      <el-table :data="tableList" v-loading="loading" @selection-change="handleSelectionChange">
+      <el-table :data="tableList" :row-style="rowClass" v-loading="loading" @selection-change="handleSelectionChange">
         <template v-slot:empty>
           <div>{{ emptyText }}</div>
         </template>
@@ -68,6 +68,11 @@
             </div>
           </template>
         </el-table-column>
+        <el-table-column align='center' label="套餐名称" prop="mealName" width="85">
+          <template #default="scope">
+            {{ scope.row.mealName || '--' }}
+          </template>
+        </el-table-column>
         <el-table-column align='center' label="套餐类型" prop="proxyType" width="85">
           <template #default="scope">
             {{ mealType[scope.row.proxyType] ? mealType[scope.row.proxyType] : null }}
@@ -76,7 +81,8 @@
         <el-table-column align='center' label="提取密钥" prop="key" width="85"></el-table-column>
         <el-table-column align='center' label="账号" prop="authKey" v-if="userInfo && userInfo.isProxyAuthKey" width="70">
         </el-table-column>
-        <el-table-column align='center' label="密码" prop="authSecret" v-if="userInfo && userInfo.isProxyAuthKey" width="70">
+        <el-table-column align='center' label="密码" prop="authSecret" v-if="userInfo && userInfo.isProxyAuthKey"
+          width="70">
           <template #default="scope">
             <div class="repeat-wrap">
               <span class="repeat">{{ scope.row.authSecret ? scope.row.authSecret : '--' }}</span>
@@ -86,7 +92,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column align='center' label="IP时效(s)" prop="proxyTime">
+        <el-table-column align='center' label="IP时效" prop="proxyTime">
           <template #default="scope">
             {{ scope.row.proxyTime ? scope.row.proxyTime : (scope.row.proxyType == '10' ? '不定' : 0) }}
           </template>
@@ -105,12 +111,12 @@
             {{ scope.row.used ? scope.row.used : (scope.row.proxyType == '10' ? '--' : 0) }}
           </template>
         </el-table-column>
-        <el-table-column align='center' label="起止时间" prop="createTime" show-overflow-tooltip sortable width="120px">
+        <el-table-column align='center' label="起止时间" prop="createTime" show-overflow-tooltip sortable width="180px">
           <template #default="scope">
             <div>
-              {{ scope.row.createTime ? $formatTime(scope.row.createTime) : '— —' }}
+              {{ scope.row.createTime ? dateFormat(scope.row.createTime) : '— —' }}
               <br>
-              {{ scope.row.endTime ? $formatTime(scope.row.endTime) : '— —' }}
+              {{ scope.row.endTime ? dateFormat(scope.row.endTime) : '— —' }}
             </div>
 
             <span
@@ -129,7 +135,9 @@
         </el-table-column>
         <el-table-column align='center' label="状态" prop="status">
           <template #default="scope">
-            <span v-if="scope.row.status" :style="{color: stateColor[scope.row.status]}">{{ mealState[scope.row.status] }}</span>
+            <span v-if="scope.row.status" :style="{ color: stateColor[scope.row.status] }">{{
+                mealState[scope.row.status]
+            }}</span>
             <span v-else style="color:#fff">--</span>
           </template>
         </el-table-column>
@@ -138,18 +146,18 @@
           <!-- proxyType   0: '包量'     1: '包时'       10: '计次'   20: '福利'  70: '不限量'-->
           <!-- iptype     10: '普通IP'   20: '优质IP'    30: '长效固定',  40: '长效静态'-->
           <template #default="scope">
-            <el-dropdown v-if="scope.row">
+            <el-dropdown v-if="scope.row" trigger="click" @command="handleCommand($event, scope.row)">
               <span class="el-dropdown-link">
                 管理
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>续费</el-dropdown-item>
-                  <el-dropdown-item>api提取</el-dropdown-item>
-                  <el-dropdown-item>补量</el-dropdown-item>
-                  <el-dropdown-item>修改时效</el-dropdown-item>
-                  <el-dropdown-item>合并套餐</el-dropdown-item>
-                  <el-dropdown-item>变更记录</el-dropdown-item>
+                  <el-dropdown-item command="renewal">续费</el-dropdown-item>
+                  <el-dropdown-item command="supplement">补量</el-dropdown-item>
+                  <el-dropdown-item command="modify">修改时效</el-dropdown-item>
+                  <el-dropdown-item command="merge">合并套餐</el-dropdown-item>
+                  <el-dropdown-item command="extract">api提取</el-dropdown-item>
+                  <el-dropdown-item command="changeLog">变更记录</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -157,18 +165,34 @@
         </el-table-column>
       </el-table>
     </div>
+    <renewal ref="renewalRef"></renewal>
+    <supplement ref="supplementRef"></supplement>
+    <modify ref="modifyRef"></modify>
   </div>
 </template>
 
 <script>
-import { $formatTime } from "tools/dateFormat"
+import { dateFormat } from "tools/dateFormat"
 import { reactive, ref, toRefs, onMounted, inject } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import renewal from './components/renewal';
+import supplement from './components/supplement';
+import modify from './components/modify';
+import merge from './components/merge';
+import changeLog from './components/changeLog'
 export default {
   name: "",
+  components: { 
+    renewal,  // 续费
+    supplement,  // 补量
+    modify, // 修改时效
+    merge,  // 合并套餐
+    changeLog  // 变更记录
+  },
   setup () {
     // 引入全局变量
     const global = inject('_global');
+    const message = inject('message');
     const enumerateData = {
       mealType: Object.freeze(global.$mealType),
       mealState: Object.freeze(global.$mealState)
@@ -179,8 +203,9 @@ export default {
       3: '#f00',
       4: '#999'
     }
-
-    console.log($formatTime,'$formatTime');
+    const renewalRef = ref(null);
+    const supplementRef = ref(null);
+    const modifyRef = ref(null)
     let state = reactive({
       userInfo: null,
       // 查询表单
@@ -198,79 +223,70 @@ export default {
       loading: false,
       emptyText: '暂无数据'
     })
-      state.tableList.push({
-        sequence: 123,
-        proxyType: 1,
-        key: '11',
-        authKey: '55',
-        authSecret: 'qq',
-        proxyTime: 1111111,
-        total: 100,
-        used: 20,
-        createTime: 12000,
-        endTime: 360000,
-        status: 1
-      })
-    onMounted(() => { 
+    state.tableList.push({
+      sequence: 123,
+      proxyType: 1,
+      key: '11',
+      authKey: '55',
+      authSecret: 'qq',
+      proxyTime: 1111111,
+      total: 100,
+      used: 20,
+      createTime: 12000,
+      endTime: 360000,
+      status: 1
+    })
+    onMounted(() => {
     });
     const methods = {
-      handleSelectionChange () { }
+      handleSelectionChange () { },
+      rowClass (val) {
+        if (val.row.status == 4) {
+          return { "color": "#999 !important" };
+        } else {
+          return { "color": "#000" }
+        }
+      },
+      // 操作
+      handleCommand (command, row) {
+        if (command === 'renewal') {
+          renewalRef.value.onOpen(1)
+        } else if (command === 'supplement') {
+          console.log('补量');
+          supplementRef.value.onOpen(1)
+        } else if (command === 'modify') {
+          console.log('修改时效');
+          modifyRef.value.onOpen(1)
+        } else if (command === 'merge') {
+          console.log('合并套餐');
+        } else if (command === 'extract') {
+          console.log('api提取跳转');
+        } else if (command === 'changeLog') {
+          console.log('变更记录');
+        } else {
+           message.error({
+            message: '操作异常!',
+            showClose: true
+          })
+          return
+        }
+      }
     };
 
-    console.log(state.tableList,'state.tableList');
+    console.log(state.tableList, 'state.tableList');
     return {
       ...methods,
       ...toRefs(state),
       ...enumerateData,
       stateColor,
-      $formatTime
+      dateFormat,
+      renewalRef,
+      supplementRef,
+      modifyRef
     };
   },
 };
 </script>
 <style lang="scss" scoped>
-.search-form {
-  margin-bottom: 40px;
-  ::v-deep(.el-form) {
-    color: red;
-    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
-    padding: 20px 12px;
-    box-sizing: border-box;
-
-    .el-form-item {
-      display: inline-flex;
-      margin: 0 10px;
-
-      .el-form-item__label {
-        width: 70px;
-        padding-right: 12px;
-      }
-
-      .el-input {
-        width: 180px;
-      }
-
-      .filter-item {
-        // width: 120px;
-      }
-    }
-
-    .reset-form-item {
-      display: inline-flex;
-
-      .el-form-item__label {
-        width: 0;
-        padding: 0;
-      }
-    }
-  }
-}
-
-
-.el-table {
-  ::v-deep(th) {
-    background: rgba(242, 247, 254, 0.39);
-    color: #333;
-  }
-}
+@import "./index.scss";
 </style>
