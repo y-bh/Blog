@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: 陈昊天
  * @description: 不走dao层的ajax接口封装
  * @Date: 2022-05-11 16:24:43
- * @LastEditTime: 2022-05-12 14:44:56
+ * @LastEditTime: 2022-05-17 17:07:04
  */
 
 /*
@@ -24,6 +24,7 @@ async function ajax(params) {
         $.ajax({
             type: params.type ? params.type : 'POST',
             url: 'http://192.168.10.62:17001/' + params.url,
+            // url: 'http://192.168.12.213:17001/' + params.url, //孙翔宇地址
             contentType: 'application/json',
             data: params.query,
             success: (res) => {

@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-17 14:07:18
+ * @LastEditTime: 2022-05-17 15:15:22
  */
 
 module.exports={
@@ -43,4 +43,7 @@ module.exports={
   'ORDER_LIST':'/order/list', //获取订单列表
   'ORDER_STATE':"/order/state", //获取订单状态
   'ORDER_DODEL':'/order/doDel', //批量删除订单
+
+  /*企业服务*/
+  'COMPANY_NEW':'/company/new', //提交企业服务
 }
