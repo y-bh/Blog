@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-17 15:31:21
+ * @LastEditTime: 2022-05-17 15:55:49
  */
 
 
@@ -23,7 +23,7 @@ const { renderPackage } = require("service/package");
 const { log } = require("console");
 
 
-
+const SelfApi = require("./selfApi")
 
 
 
@@ -34,6 +34,10 @@ function Router(App) {
 
   var ejs = require('ejs')
 
+
+  // 前端自定义api 处理部分
+  router.use("/api", SelfApi.routes(), SelfApi.allowedMethods())
+  
 
   //首页
   router.get("/", async (ctx) => {
