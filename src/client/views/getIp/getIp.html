@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-17 17:29:46
+ * @LastEditTime: 2022-05-17 17:59:12
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +62,9 @@
                 <label for="left_desc">当前账户余额(天启币)</label>
                 <span class="left_count ml-5" id="left_count">3333.3333</span>
               </div>
-              <button class="right_btn">充值</button>
+              <button class="right_btn or-button">
+                <span>充值</span>
+              </button>
             </div>
           </div>
           <div class="meal_box mt-30 grid">
@@ -88,8 +90,12 @@
                 登录查看当前账户余额，新用户可享新人福利
               </div>
               <div class="btn">
-                <button class="right_btn mr-20">登录</button>
-                <button class="right_btn">注册</button>
+                <button class="right_btn mr-20 or-button">
+                  <span>登录</span>
+                </button>
+                <button class="right_btn or-button">
+                  <span>注册</span>
+                </button>
               </div>
             </div>
           </div>
@@ -132,27 +138,45 @@
           <div class="flex flex-wrap align-center choose_type_box mt-40">
             <label class="label_lay font-18 main-title-color">选择属性</label>
             <div class="choose_type">
-              <% chooseType.forEach(function(item,index) { %>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label pointer">
-                    <input class="form-check-input" type="checkbox" value="<%= item.status %>">
-                    <%= item.label %>
-                  </label>
-                </div>
-              <% }) %>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label pointer">
+                  <input class="form-check-input" type="checkbox" value="1">
+                  城市
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label pointer">
+                  <input class="form-check-input" type="checkbox" value="2">
+                  运营商
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label pointer">
+                  <input class="form-check-input" type="checkbox" value="3">
+                  到期时间
+                </label>
+              </div>
             </div>
           </div>
         </div>
         <div class="flex flex-wrap align-center separator_box mt-40">
           <label class="label_lay font-18 main-title-color">分隔符</label>
           <div class="separator flex">
-            <% separator.forEach(function(item,index) { %>
-              <div class="narrow_box mr-40 flex justify-center align-center pointer">
-                <span class="font-15 main-title-color">
-                  <%= item.label %>
-                </span>
-              </div>
-            <% }) %>
+            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+              <span class="font-15 main-title-color">
+                回车换行(\r\n)
+              </span>
+            </div>
+            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+              <span class="font-15 main-title-color">
+                回车(\r)
+              </span>
+            </div>
+            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+              <span class="font-15 main-title-color">
+                换行(\n)
+              </span>
+            </div>
           </div>
         </div>
         <div class="choose_area_box mt-40">
@@ -210,14 +234,20 @@
         </div>
         <div class="mt-40 grid">
           <div class="flex align-center ">
-            <button class="create_api_url">生成API链接</button>
+            <button class="create_api_url bl-button">
+              <span>生成API链接</span>
+            </button>
             <span class="pointer ml-50">查看API文档</span>
           </div>
           <div class="input-group apiUrl_input_box mt-40">
             <input type="text" class="form-control apiUrl_input" placeholder="点击上方按钮，生成API链接" >
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary copy mr-20" type="button">复制链接</button>
-              <button class="btn btn-outline-secondary open" type="button">打开链接</button>
+              <button class="btn btn-outline-secondary copy mr-20 bl-button" type="button">
+                <span>复制链接</span>
+              </button>
+              <button class="btn btn-outline-secondary open or-button" type="button">
+                <span>打开链接</span>
+              </button>
             </div>
           </div>
         </div>
