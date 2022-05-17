@@ -235,6 +235,9 @@ body {
 .pt-30 {
   padding-top: 30px !important;
 }
+.pt-40 {
+  padding-top: 40px !important;
+}
 .pt-45 {
   padding-top: 45px !important;
 }
@@ -471,6 +474,17 @@ body {
 }
 .box-border {
   box-sizing: border-box !important;
+}
+.inline-flex {
+  display: inline-flex;
+}
+
+.margin-auto {
+  margin: 0 auto;
+}
+
+input::-webkit-input-placeholder {
+  color: #b2bccb;
 }
 
 // 弹窗提示

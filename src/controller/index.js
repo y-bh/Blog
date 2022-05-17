@@ -1,19 +1,19 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-17 13:45:09
+ * @LastEditTime: 2022-05-17 14:32:39
  */
 
 
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpListS,getBlogDetailS,getKeyWordPageS } = require('service/helpCenter')
+const { getHelpListS, getBlogDetailS, getKeyWordPageS } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
- 
+
 const fs = require("fs")
 const config = require("../config/app.config")
 
@@ -44,7 +44,7 @@ function Router(App) {
       link: [],
     }
     let homeObj = await renderHome();
-    console.log("==========返回home数据=====",homeObj);
+    console.log("==========返回home数据=====", homeObj);
     return ctx.render("home/home", homeData)
   })
 
@@ -103,7 +103,7 @@ function Router(App) {
 
     let helpData = await getHelpListS()
 
-    console.log('总页数:',helpData.data.articlePageRespDTO);
+    console.log('总页数:', helpData.data.articlePageRespDTO);
 
     return ctx.render("help/helpCenter", helpData)
   })
@@ -142,13 +142,29 @@ function Router(App) {
 
 
   //用户总页面-login-index
-  router.get("/login", async (ctx) => {
+  router.get(["/login", "/reset", "/register"], async (ctx) => {
     /**数据请求 */
+
+    let pageType = ctx.req.url.slice(1)
+
+
+    console.log("ddddddddddd", ctx.req.url)
     return ctx.render("login/index", {
       name: 'This is main login',
       data: 2222,
+      pageType //页面类型
     })
   })
+
+
+
+
+
+
+
+
+
+
 
 
   //用户协议-user-protocol
