@@ -88,6 +88,15 @@
         display: flex;
         justify-content: center;
         padding-top: 20px;
+        &.double-item {
+            justify-content: flex-end;
+            ::v-deep(.el-button) {
+                &:first-child {
+                    margin-right: 20px;
+                }
+            }
+            
+        }
     }
     .submit-btn {
         width: 200px;
