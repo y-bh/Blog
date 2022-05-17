@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: dengxiujie
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-16 20:22:46
+ * @LastEditTime: 2022-05-17 10:00:15
  */
 
 module.exports={
@@ -13,6 +13,8 @@ module.exports={
   'QUERY_LINK': '/link/queryList',
   //套餐购买
   proxyMealList:"/proxyMeal/list",
+  'articleType': "/article/getBottomArticleType",//资讯中心--获取文章类型
+  'getIndexArticles': "/article/getIndexArticles",//资讯中心--获取文章列表
   'REGISTER': "/user/register",
 
 

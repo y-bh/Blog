@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 陈昊天
+ * @LastEditors: dengxiujie
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-16 22:36:07
+ * @LastEditTime: 2022-05-17 09:55:03
  */
 
 
@@ -43,6 +43,8 @@ function Router(App) {
       url: '/',
       link: [],
     }
+    let homeObj = await renderHome();
+    console.log("==========返回home数据=====",homeObj);
     return ctx.render("home/home", homeData)
   })
 
