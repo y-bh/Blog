@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-17 18:12:53
+ * @LastEditTime: 2022-05-17 18:22:47
  */
 
 
@@ -203,10 +203,12 @@ function loginSubmit(type) {
 async function sendCode(type = 'register') {
   //1. 获取表单
   const form = document.forms['login']
+
   //2.参数
   const params = {
     phone: form.phone.value.trim() || '', //电话号码
   }
+
   //3.校验
   if (!params.phone) {
     return $message({
@@ -224,35 +226,21 @@ async function sendCode(type = 'register') {
     )
   }
 
-
   //4. 获取结果
-   let url = '/proxy/auth/registerCode'
-  // console.log("验证码类型:", type)
-  // const res = await ajax({
-  //   url,
-  //   query: params.phone
-  // })
+  let url = '/auth/registerCode'
+  console.log("验证码类型:", type)
+  const res = await ajax({
+    url,
+    query: params.phone
+  })
 
-  // console.log("res", res)
-
-
-  $.ajax({
-    type: 'POST',
-    url: url,
-    data: JSON.stringify(params),
-    dataType: 'json',
-    contentType: 'application/json',
-    success: (res) => {
-      console.log("发送验证码:", res)
-    },
-    error: (err) => {
-      console.log("接口请求失败:", err)
-    }
-  });
-
-
-
-
+  console.log("res===========", res)
+  if (res) {
+    return $message.success({
+      message: '请在手机端查看验证码',
+      showClose: true
+    })
+  }
 }
 
 
