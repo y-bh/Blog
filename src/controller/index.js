@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-17 10:31:34
+ * @LastEditTime: 2022-05-17 11:22:18
  */
 
 
@@ -43,6 +43,8 @@ function Router(App) {
       url: '/',
       link: [],
     }
+    let homeObj = await renderHome();
+    console.log("==========返回home数据=====",homeObj);
     return ctx.render("home/home", homeData)
   })
 
