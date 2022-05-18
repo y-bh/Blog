@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: node 端自定义API。
  * @Date: 2022-05-17 15:52:03
- * @LastEditTime: 2022-05-18 11:47:13
+ * @LastEditTime: 2022-05-18 15:40:30
  */
 const Router = require("koa-router");
 const router = new Router();
@@ -34,7 +34,11 @@ router.post("/login", async (ctx) => {
     console.log("java端处理结果", res)
   }
 
+  console.log("bbbbbbbbbbbbbbbbbbb", params,res)
 
+  if(!params.type){
+    return ctx.fail('请传入页面类型[login|reset|register]')
+  }
   //注册/登录/重置 成功后业务
   if (+res.code === 0) {
     let token = res.data.token
@@ -44,7 +48,7 @@ router.post("/login", async (ctx) => {
     ctx.cookies.set(appKey.userInfo, JSON.stringify(res.data))
   }
 
-  console.log("bbbbbbbbbbbbbbbbbbb", res)
+
   //return ctx.redirect('/manager');
   ctx.response.body = res
 });

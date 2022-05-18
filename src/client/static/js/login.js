@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-18 15:32:22
+ * @LastEditTime: 2022-05-18 15:47:20
  */
 
 
@@ -47,7 +47,7 @@ const rules = {
 }
 function checkForm(params = null, type = 'login') {
   if (!params) {
-    return 
+    return
   }
 
   const res = {
@@ -173,13 +173,13 @@ function checkForm(params = null, type = 'login') {
 async function loginSubmit(type) {
   //获取参数
   const params = getParams(type)
-  
+
   //校验参数
   const res = checkForm(params, type)
   if (!res.isPass) return Helper.$message({
     message: res.msg, type: 'warning'
   })
-  
+
   params.type = type
   $.ajax({
     type: 'POST',
@@ -188,7 +188,7 @@ async function loginSubmit(type) {
     dataType: 'json',
     contentType: 'application/json',
     success: (res) => {
-      
+
       if (+res.code !== 0) {
         return Helper.$message({
           message: res.msg || '注册失败!请联系客服',
@@ -200,7 +200,7 @@ async function loginSubmit(type) {
       window.open("/manager/user")
     },
     error: (err) => {
-      
+
     }
   });
 }
@@ -243,7 +243,7 @@ async function sendCode(type = 'register') {
     url = '/user/forget/password/getCode'
   }
 
-  
+
   const res = await ajax({
     url,
     query: params.phone
@@ -261,3 +261,16 @@ async function sendCode(type = 'register') {
 
 window.sendCode = debounce(sendCode, 300, true)
 window.loginSubmit = debounce(loginSubmit, 300, true)
+
+var docu = document.getElementsByTagName('document');
+
+
+
+document.onkeydown = function (e) {
+  const e1 = e || window.event;
+  if (e1.keyCode === 13) {
+    const path = window.location.pathname
+    window.loginSubmit(path.slice(1));
+  }
+};
+
