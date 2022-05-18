@@ -146,6 +146,7 @@
         margin: 0 5px 0 0;
         // 雪碧图每个icon间距为10px  每个icon宽18px
         background: transparent url(/images/head/head_child.png) scroll 50% 50% / auto;
+        background-size: 206px 35px;
       }
       .icon_first {
         //  x  y
@@ -303,6 +304,7 @@
         height: 80px;
         // 间距10px 图片58px
         background: transparent url(/images/head/head_business.png) scroll 0 50% / auto auto;
+        background-size: 418px 100px;
       }
       .nav_first {
         background-position: -10px;
