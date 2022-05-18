@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: node 端自定义API。
  * @Date: 2022-05-17 15:52:03
- * @LastEditTime: 2022-05-18 15:40:30
+ * @LastEditTime: 2022-05-18 16:00:28
  */
 const Router = require("koa-router");
 const router = new Router();
@@ -14,10 +14,10 @@ const { registerService, resetService, loginService } = require("service/user")
 //针对登录/注册/ 重置密码相关java 接口做转发
 router.post("/login", async (ctx) => {
   const params = ctx.request.body
-
-  console.log("获取传参:", params)
-
   let res = null
+  if (!params.type) {
+    return ctx.fail('请传入页面类型[login|reset|register]')
+  }
 
   //登录功能
   if (params.type === 'login') {
@@ -28,17 +28,12 @@ router.post("/login", async (ctx) => {
   if (params.type === 'reset') {
     res = await resetService(params)
   }
+
   //注册功能
   if (params.type === 'register') {
     res = await registerService(params)
-    console.log("java端处理结果", res)
   }
 
-  console.log("bbbbbbbbbbbbbbbbbbb", params,res)
-
-  if(!params.type){
-    return ctx.fail('请传入页面类型[login|reset|register]')
-  }
   //注册/登录/重置 成功后业务
   if (+res.code === 0) {
     let token = res.data.token
@@ -47,15 +42,12 @@ router.post("/login", async (ctx) => {
     ctx.cookies.set(appKey.token, token)
     ctx.cookies.set(appKey.userInfo, JSON.stringify(res.data))
   }
-
-
   //return ctx.redirect('/manager');
   ctx.response.body = res
 });
 
-//针对登录/注册/ 重置密码相关java 接口做转发
+//登出功能
 router.post("/layout", async (ctx) => {
-  console.log("退出登录:")
   ctx.cookies.set(appKey.token, '')
   ctx.cookies.set(appKey.userInfo, '')
   return ctx.success(null, '已退出登录');

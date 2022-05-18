@@ -3,11 +3,12 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-18 15:57:27
+ * @LastEditTime: 2022-05-18 16:12:16
  */
 
 
 // 获取相关参数
+let agreeMent = false
 function getParams(type = 'login') {
   //1. 获取表单
   const form = document.forms['login']
@@ -23,7 +24,7 @@ function getParams(type = 'login') {
     obj = Object.assign({}, obj, {
       code: form.code.value.trim(),
       userName: form.userName.value.trim(),
-      agreeMent: form.agreeMent.value
+      agreeMent
     })
   }
   //重置密码参数
@@ -35,6 +36,12 @@ function getParams(type = 'login') {
     })
   }
   return obj
+}
+
+//是否同意注册协议
+function agreeOn(){
+  agreeMent =!agreeMent
+   console.log("嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻",agreeMent)
 }
 
 //校验相关参数
@@ -152,6 +159,12 @@ function checkForm(params = null, type = 'login') {
     if (!rules.pwd.test(params.pwd)) {
       res.isPass = false
       res.msg = '请设置正确格式的登录密码![至少六位字符串]'
+      return res
+    }
+
+    if (!params.agreeMent) {
+      res.isPass = false
+      res.msg = '请先阅读并同意《天启HTTP用户协议》!'
       return res
     }
 

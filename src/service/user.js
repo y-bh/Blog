@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 用户相关服务
  * @Date: 2022-05-17 17:02:00
- * @LastEditTime: 2022-05-18 09:54:23
+ * @LastEditTime: 2022-05-18 16:14:18
  */
 
 
@@ -21,7 +21,7 @@ const registerService = async (data = null) => {
     from: '', //来源
     did: '', //短链
     code: data.code, //验证码
-    readProtocol: 1, // 是否阅读协议 0 否 1 是
+    readProtocol: data.agreeMent ? 1 : 0, // 是否阅读协议 0 否 1 是
   }
   console.log("注册校验", params)
   // 获取注册数据
