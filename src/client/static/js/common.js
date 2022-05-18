@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-18 14:45:36
+ * @LastEditTime: 2022-05-18 14:49:52
  */
 
 // 弹窗消息提示
@@ -123,9 +123,9 @@ Helper.$confirm = (msg = '确认此操作?', callback, options = {}
   }
 
   //注册回调
-  console.log("注册回调")
-  window[eventName] = callback
 
+  window[eventName] = callback
+  console.log("注册回调---",window[eventName],callback)
   $('#bootstrap-my-modal').modal('show')
 }
 
