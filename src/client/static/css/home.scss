@@ -130,9 +130,12 @@
     position: absolute;
     top: 0;
   }
+  .common-setMaxWt {
+    max-width: 1400px;
+    margin: auto;
+  }
 }
 .homeContent {
-  max-width: 1400px;
   margin: 0 auto;
   .banner-right {
     // width: 633px;
