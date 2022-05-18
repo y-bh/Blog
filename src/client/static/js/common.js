@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-18 13:01:23
+ * @LastEditTime: 2022-05-18 13:06:27
  */
 
 // 弹窗消息提示
@@ -302,8 +302,74 @@ $(function () {
   //1.自适应布局计算
   change()
 
+
+  //2.处理公共头部
+  let resizeTimer = null;
+  let headerAttr = {
+    allWidth: 0,
+    mainWidth: 0,  // 所有导航子元素加起来的宽度
+    itemWidth: 0,  // 导航子元素宽度 + padding + margin
+    logoWidth: 0,  // logo区域宽度
+    navRightWidth: 0,  // 右侧登陆注册区域宽度
+  }
+  function toggleHead() {
+    // 每次调用重置
+    headerAttr = {
+      allWidth: 0,
+      mainWidth: 0,  // 所有导航子元素加起来的宽度
+      itemWidth: 0,  // 导航子元素宽度 + padding + margin
+      logoWidth: 0,  // logo区域宽度
+      navRightWidth: 0,  // 右侧登陆注册区域宽度
+    }
+
+    let windowWidth = $(window).width();
+    headerAttr.logoWidth = $('.header-main .logo').outerWidth(true);
+    headerAttr.navRightWidth = $('.header-main .user').outerWidth(true);
+
+    const domTree = $('.header-main .nav-list .nav-item');
+    domTree.each(function (index) {
+      headerAttr.itemWidth = $(this).outerWidth(true);
+      headerAttr.mainWidth += headerAttr.itemWidth
+    })
+
+    headerAttr.allWidth = headerAttr.logoWidth + headerAttr.navRightWidth + headerAttr.mainWidth;
+    // 可视化区域小于内容区域总宽度
+    if (windowWidth <= headerAttr.allWidth) {
+      // 导航区域折叠
+      $('.nav-body').addClass('fold');
+      // 多态按钮显示
+      $('.nav-toggler').addClass('appear')
+    } else {
+      $('.nav-body').removeClass('fold')
+      $('.nav-toggler').removeClass('appear')
+    }
+  }
+  toggleHead();
+
+  $('.nav-toggler').click(function () {
+    if ($('.header-main .nav-body').hasClass('show')) {
+      $('.header-main .nav-body').removeClass('show')
+    } else {
+      $('.header-main .nav-body').addClass('show');
+      const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
+      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin)
+    }
+
+  })
+
+
   $(window).resize(debounce(() => {
+    //1. 重新计算布局
     change()
+
+    //处理header
+    if (resizeTimer) {
+      clearTimeout(resizeTimer);
+    }
+    // //再重新开始下一轮等待
+    resizeTimer = setTimeout(function () {
+      toggleHead();
+    }, 200);
   }, 500))
 
 })

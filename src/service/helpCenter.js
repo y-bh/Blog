@@ -1,11 +1,11 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 帮助中心业务代码
  * @Date: 2022-05-16 16:37:33
- * @LastEditTime: 2022-05-17 13:40:17
+ * @LastEditTime: 2022-05-18 13:34:34
  */
-const { getHelpList,getBlogDetail } = require("dao/helpCenter")
+const { getHelpList, getBlogDetail } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
 
 //标题省略
@@ -20,19 +20,21 @@ const csubstr = (str, len) => {
 //获取首页的文章列表
 const getHelpListS = async () => {
   const res = await getHelpList()
+  console.log("fffffffffffffffffffffffff", res)
   try {
-    if (+res.code === 200) {
-      res.data.articlePageRespDTO.map(e => {
-        e.articlePageRespDTO.data.map(i => {
-          i.title = csubstr(i.title,18)
-          i.createTime = dateFormat(i.createTime)
-          i.updateTime = dateFormat(i.updateTime)
-        })
+    if (+res.code === 0) {
+      const { articlePageRespDTO, articleTypes, alive, title } = res.data
+
+      //文章列表
+      articlePageRespDTO.data.map(i => {
+        i.title = csubstr(i.title, 18)
+        i.createTime = dateFormat(i.createTime)
+        i.updateTime = dateFormat(i.updateTime)
       })
-      const helpData = {
-        data: res.data,
-      }
-      return helpData;
+
+      return {
+        articlePageRespDTO:articlePageRespDTO, articleTypes, alive, title
+      };
     }
   } catch (error) {
     console.error("getHelpList_Service: ", error);
@@ -52,7 +54,7 @@ let tabList = [
       {
         id: 2,
         title: '标题2'
-      },   
+      },
     ]
   },
   {
@@ -94,7 +96,7 @@ let tabList = [
 ]
 
 //相关文章
-let sameBlog = [  
+let sameBlog = [
   {
     id: 1,
     title: '标题1'
@@ -122,14 +124,14 @@ let tagList = [
 ]
 const getBlogDetailS = async () => {
   try {
-      const helpDetail = {
-        tabList,
-        sameBlog,
-        tagList
-      }
-      return helpDetail
+    const helpDetail = {
+      tabList,
+      sameBlog,
+      tagList
+    }
+    return helpDetail
   } catch (error) {
-    console.error('getBlogDetail_Service:',error)
+    console.error('getBlogDetail_Service:', error)
   }
 }
 
@@ -171,7 +173,7 @@ let tabListKeyword = [
       {
         id: 2,
         title: '标题2'
-      },   
+      },
     ]
   },
   {
@@ -226,7 +228,7 @@ let sameBlogKeyword = [
     title: '标题3'
   },
 ]
-const getKeyWordPageS = async() => {
+const getKeyWordPageS = async () => {
   try {
     const keyWordPage = {
       leftBlogList,
@@ -236,7 +238,7 @@ const getKeyWordPageS = async() => {
     }
     return keyWordPage
   } catch (error) {
-    console.error('getKeyWordPage_Service:',error)
+    console.error('getKeyWordPage_Service:', error)
   }
 }
 

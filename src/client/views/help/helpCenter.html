@@ -1,12 +1,13 @@
 <!--
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 帮助中心
  * @Date: 2022-05-12 10:36:58
- * @LastEditTime: 2022-05-17 13:56:40
+ * @LastEditTime: 2022-05-18 13:45:51
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,84 +17,98 @@
   <meta name="description" content="天启http">
   <title>帮助中心</title>
   <%- include('../components/style.html'); %>
-  <%- include('./style.html') %>
+    <%- include('./style.html') %>
 </head>
+
 <body>
   <%- include('../components/header/header.html'); %>
-  <div class="banner"></div>
-  <div class="container grid justify-center">
-    <div class="flex-center">
-      <ul class="nav nav-pills nav-fill ">
-        <% data.articlePageRespDTO.forEach(e => { %>
-          <li class="nav-item flex-center">
-            <a 
-              href="<%= e.typeAlias %>" 
-              class="nav-link flex-center widthAll pointer" 
-              data-toggle="tab"
-            >
-              <%= e.type %>
-            </a>
-          </li>
-        <% }) %>
-      </ul>
-    </div>
-    <div class="common-fadeInUp">
-      <div class="tab-content mt-60">
-        <% data.articlePageRespDTO.forEach(function(e,tab_index) { %>
-          <div class="tab-pane" id="<%= e.typeAlias %>">
-            <div class="content grid">
-              <% e.articlePageRespDTO.data.forEach(function(i,blog_index) { %>
-                <div class="blog_item flex justify-between align-center">
-                  <div class="left grid">
-                    <div class="top text-blue flex justify-start align-start"><%= new Date(i.createTime).getMonth()+1 %></div>
-                    <div class="bottom">
-                      <div class="line"></div>
-                      <span class="text-blue flex justify-end align-end"><%= new Date(i.createTime).getDate() %></span>  
+    <div class="banner"></div>
+
+    <div class="container grid justify-center">
+
+      <!-- 栏目类型 -->
+      <div class="flex flex-wrap justify-center">
+        <ul class="nav nav-pills nav-fill ">
+          <% articleTypes.forEach(e=> { %>
+            <li class="nav-item flex-center">
+              <a href="javascript:void(0)" id="<%= e.typeAlias %>" class="nav-link flex-center widthAll pointer"
+                data-toggle="tab">
+                <%= e.type %>
+              </a>
+            </li>
+            <% }) %>
+        </ul>
+
+
+        <!-- 文章列表 -->
+        <div class="common-fadeInUp">
+          <div class="tab-content mt-60">
+            <div class="tab-pane">
+              <div class="content grid">
+                <% articlePageRespDTO.data.forEach(function(i,blog_index) { %>
+                  <div class="blog_item flex justify-between align-center">
+                    <div class="left grid">
+                      <div class="top text-blue flex justify-start align-start">
+                        <%= new Date(i.createTime).getMonth()+1 %>
+                      </div>
+                      <div class="bottom">
+                        <div class="line"></div>
+                        <span class="text-blue flex justify-end align-end">
+                          <%= new Date(i.createTime).getDate() %>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="right grid">
+                      <div class="right_top flex justify-between align-center">
+                        <span class="font-20 main-title-color">
+                          <%= i.title %>
+                        </span>
+                        <span class="go_detail pointer">查看详情>></span>
+                      </div>
+                      <p class="desc">
+                        <%= i.desc %>
+                      </p>
                     </div>
                   </div>
-                  <div class="right grid">
-                    <div class="right_top flex justify-between align-center">
-                      <span class="font-20 main-title-color"><%= i.title %></span>
-                      <span class="go_detail pointer">查看详情>></span>
-                    </div>
-                    <p class="desc"><%= i.desc %></p>  
-                  </div>
-                </div>
-              <% }) %>
-            </div>
-            <!-- 分页 -->
-            <div class="page_box mt-60 flex justify-end mb-80">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true"><</span>
-                    </a>
-                  </li>
-                  <div class="pageList flex">
-                    <li class="page-item">
-                      <% for(let i = 0; i < e.totalPage; i++) { % }
-                        <a href="#" class="page-link"><%=i%></a>
-                      <% } %>
-                    </li>
-                  </div>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">></span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-              <div class="goto flex-center ml-30">
-                前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="text">&nbsp;&nbsp;页
+                  <% }) %>
               </div>
-            </div>  
+              <!-- 分页 -->
+              <div class="page_box mt-60 flex justify-end mb-80">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&it; </span>
+                      </a>
+                    </li>
+                    <div class="pageList flex">
+                      <li class="page-item">
+                        <% for(let i=0; i < articlePageRespDTO.totalPage; i++) { %>
+                          <a href="#" class="page-link">
+                            <%=i%>
+                          </a>
+                          <% } %>
+                      </li>
+                    </div>
+                    <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+                <div class="goto flex-center ml-30">
+                  前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="text">&nbsp;&nbsp;页
+                </div>
+              </div>
+            </div>
           </div>
-        <% }) %>
+        </div>
       </div>
+
     </div>
-  </div>
 </body>
 <%- include('../components/js.html'); %>
-<script src="/js/helpCenter.js"></script>
+  <script src="/js/helpCenter.js"></script>
+
 </html>

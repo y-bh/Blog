@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-18 12:03:32
+ * @LastEditTime: 2022-05-18 13:28:52
  */
 
 
@@ -112,9 +112,9 @@ function Router(App) {
 
     let helpData = await getHelpListS()
 
-    console.log('总页数:', helpData.data.articlePageRespDTO);
-
-    return ctx.render("help/helpCenter", helpData)
+    console.log('总页数:', helpData);
+  // ctx.body=helpData
+    return ctx.render("help/helpCenter",helpData)
   })
 
 
