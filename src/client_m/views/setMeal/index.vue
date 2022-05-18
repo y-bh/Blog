@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-17 18:32:08
+ * @LastEditTime: 2022-05-18 09:57:42
 -->
 <template>
   <div class="container">
@@ -18,13 +18,13 @@
         <el-form-item label="套餐类型">
           <el-select v-model="searchForm.mealType" clearable placeholder="请选择" class="filter-item">
             <el-option label="全部" value=null></el-option>
-            <el-option v-for="(v, k) in mealType" :key="k" :label="v" :value="parseInt(k)">
+            <el-option v-for="(v, k) in mealType" :key="k" :label="v" :value="formatIntValue(k)">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="套餐状态">
           <el-select v-model="searchForm.status" clearable placeholder="请选择" class="filter-item">
-            <el-option v-for="(v, k) in mealState" :key="k" :label="v" :value="parseInt(k)" />
+            <el-option v-for="(v, k) in mealState" :key="k" :label="v" :value="formatIntValue(k)" />
           </el-select>
         </el-form-item>
         <el-form-item label="剩余天数">
@@ -199,6 +199,7 @@ export default {
     // 引入全局变量
     const global = inject('_global');
     const message = inject('message');
+    console.log(global,'global');
     const enumerateData = {
       mealType: Object.freeze(global.$mealType),
       mealState: Object.freeze(global.$mealState)
@@ -288,6 +289,7 @@ export default {
       ...methods,
       ...toRefs(state),
       ...enumerateData,
+      ...global.methods,
       stateColor,
       dateFormat,
       passwordRef,

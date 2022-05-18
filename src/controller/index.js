@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-18 11:20:46
+ * @LastEditTime: 2022-05-18 12:03:32
  */
 
 
@@ -13,6 +13,7 @@ const { renderHome } = require("service/home")
 const { getHelpListS, getBlogDetailS, getKeyWordPageS } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
+const { getProxyCityS,getProxyMenuS } = require('service/getIp')
 
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -82,7 +83,16 @@ function Router(App) {
   router.get("/getIp", async (ctx) => {
 
     /**数据请求 */
-    let getIpData = await data()
+    let staticData = await data()
+    let province = await getProxyCityS()
+    let menu = await getProxyMenuS()
+
+    let getIpData = {
+      staticData,
+      province,
+      menu
+    }
+
     return ctx.render("getIp/getIp", getIpData)
   })
 

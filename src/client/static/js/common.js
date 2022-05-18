@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-04-24 14:17:48
- * @LastEditTime: 2022-05-18 11:46:33
+ * @LastEditTime: 2022-05-18 12:03:13
  */
 
 let test = {
@@ -26,7 +26,6 @@ function debounce(func, delay) {
 //自适应css 
 function change() {
   var width = $(window).width();
-  console.log("计算自适应布局")
   //是否是小于425的小屏幕，供移动端导航使用
   window.isMobile = (width <= 575)
   window.viewWidth = width;
@@ -35,7 +34,11 @@ function change() {
     size = 8
   }
   size = Math.round(size)
-  document.documentElement.style.fontSize = `${size}px`
+  // 推广页方案与全局方案冲突,优先采用推广页自己的方案
+  if(window.location.pathname !== '/promotion'){
+    document.documentElement.style.fontSize = `${size}px`
+  }
+  
 }
 
 //退出登录

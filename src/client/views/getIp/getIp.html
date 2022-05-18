@@ -3,7 +3,7 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-17 18:30:57
+ * @LastEditTime: 2022-05-18 09:49:18
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -58,9 +58,6 @@
           <label for="extractType" class="font-18 main-title-color label_lay">选择提取类型</label>
           <select id="extractType" class="extract_select form-control">
             <option selected>余额提取</option>
-            <% paidList.forEach(function(item,index) { %>
-              <option><%= item.desc %></option>
-            <% }) %>
           </select>
         </div>
         <!-- 已登录展示 -->
@@ -78,7 +75,7 @@
             </div>
           </div>
           <div class="meal_box mt-30 grid">
-            <% mealBox.forEach(function(item,index) { %>
+            <% staticData.mealBox.forEach(function(item,index) { %>
               <div class="meal_item grid justify-center align-center">
                 <div class="desc flex justify-center pt-10 pb-10">
                   <span class="font-15"><%= item.desc %></span>
@@ -121,7 +118,7 @@
         <div class="form-group mt-30 ip_use">
           <label class="font-18 main-title-color">IP使用时长</label>
           <div class="ip_use_box grid justify-start align-center mt-45">
-            <% ipUse.forEach(function(item,index) { %>
+            <% staticData.ipUse.forEach(function(item,index) { %>
               <div class="ip_use_item flex flex-column align-center justify-center">
                 <div class="time_box">
                   <span class="time_text font-25 font-bold main-title-color"><%= item.time %></span>
@@ -277,7 +274,7 @@
           <ul class="note_desc">
             <li class="top_li flex-center">属性</li>
             <div class="extract_box">
-              <% extractDesc.forEach(function(item,index) { %>
+              <% staticData.extractDesc.forEach(function(item,index) { %>
                 <li class="ele flex-center">
                   <%= item.label %>
                 </li>
@@ -302,7 +299,7 @@
               </div>
             </li>
             <li class="ele grid pt-20 pb-20 align-center params_desc">
-              <% paramsDesc.forEach(function(item,index) { %>
+              <% staticData.paramsDesc.forEach(function(item,index) { %>
                 <div class="li_item_box flex-center">
                   <%= item.label %>
                 </div>
@@ -390,7 +387,7 @@
           <ul class="note_desc">
             <li class="top_li flex-center">属性</li>
             <div class="white_box">
-              <% whiteDesc.forEach(function(item,index) { %>
+              <% staticData.whiteDesc.forEach(function(item,index) { %>
                 <li class="ele flex-center">
                   <%= item.label %>
                 </li>
@@ -425,7 +422,7 @@
               </div>
             </li>
             <li class="ele grid pt-20 pb-20 align-center params_desc">
-              <% whiteParamsDesc.forEach(function(item,index) { %>
+              <% staticData.whiteParamsDesc.forEach(function(item,index) { %>
                 <div class="li_item_box flex-center">
                   <%= item.label %>
                 </div>
@@ -462,7 +459,7 @@
           <ul class="note_desc">
             <li class="top_li flex-center">错误码</li>
             <div class="box">
-              <% errorCodeContent.left_desc.forEach(function(item,index) { %>
+              <% staticData.errorCodeContent.left_desc.forEach(function(item,index) { %>
                 <li class="ele flex-center">
                   <%= item.label %>
                 </li>
@@ -472,21 +469,21 @@
           <ul class="note_content widthAll">
             <li class="top_li flex-center">说明</li>
             <li class="ele flex-center flex-column pt-20 pb-20 extract">
-              <% errorCodeContent.extractError.forEach(function(item,index) { %>
+              <% staticData.errorCodeContent.extractError.forEach(function(item,index) { %>
                 <div class="li_item_box flex-center mb-20 port">
                   <%= item.label %>
                 </div>
               <% }) %>
             </li>
             <li class="ele flex-center flex-column pt-20 pb-20 white">
-              <% errorCodeContent.whiteError.forEach(function(item,index) { %>
+              <% staticData.errorCodeContent.whiteError.forEach(function(item,index) { %>
                 <div class="li_item_box flex-center mb-20 port">
                   <%= item.label %>
                 </div>
               <% }) %>
             </li>
             <li class="ele flex-center flex-column pt-20 pb-20 proxy">
-              <% errorCodeContent.proxyError.forEach(function(item,index) { %>
+              <% staticData.errorCodeContent.proxyError.forEach(function(item,index) { %>
                 <div class="li_item_box flex-center mb-20 port">
                   <%= item.label %>
                 </div>
@@ -499,7 +496,7 @@
       <div class="head code_demo_right">
         <span class="font-25 title">代码demo</span>
         <div class="demo_box grid mt-40">
-          <% codeDemo.forEach(function(item,index) { %>
+          <% staticData.codeDemo.forEach(function(item,index) { %>
             <div class="demo_box_item flex-center flex-column">
               <span class="demo_title mb-15"><%= item.title %></span>
               <button type="button" class="download or-button">

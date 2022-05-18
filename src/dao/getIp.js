@@ -3,9 +3,9 @@
  * @LastEditors: 陈昊天
  * @description: 提取ip dao层
  * @Date: 2022-05-17 18:15:04
- * @LastEditTime: 2022-05-17 18:17:59
+ * @LastEditTime: 2022-05-18 10:09:46
  */
-const { post } = require("utils/request")
+const { post,get } = require("utils/request")
 
 const api = require("src/config/api.config.js")
 
@@ -24,7 +24,7 @@ const getProxyCity = async (params = null) => {
 const getProxyMenu = async () => {
   const url = api.PROXY_API_MENU
   try {
-    const res = await get(url, params)
+    const res = await get(url,null)
     return res
   } catch (error) {
     console.error('getProxyMenu_Dao: ', error);

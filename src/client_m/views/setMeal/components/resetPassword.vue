@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 重置密码
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-17 18:20:11
+ * @LastEditTime: 2022-05-18 09:55:39
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -26,14 +26,24 @@ export default {
     },
     setup (props, context) {
         const message = inject('message');
+        // 引入全局变量
+        const global = inject('_global');
+        console.log(global.methods.randomString(8),'随机字符串');
         const state = reactive({
             dialogVisible: true,
             mergeForm: {
-                mergeId: null,
+                id: null,
+                authSecret: null
             }
         });
         const methods = {
-            submitMerge(){}
+            onOpen(row){
+                state.mergeForm.id = row.id
+                state.mergeForm.authSecret = global.randomString(8)
+            },
+            submitMerge(){
+
+            }
         }
 
         return {
