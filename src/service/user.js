@@ -23,7 +23,7 @@ const registerService = async (data = null) => {
     code: data.code, //验证码
     readProtocol: data.agreeMent ? 1 : 0, // 是否阅读协议 0 否 1 是
   }
-  console.log("注册校验", params)
+  console.log("注册校验", data,params)
   // 获取注册数据
   const res = await postRegisterDao(params)
 
