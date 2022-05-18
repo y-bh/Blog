@@ -1,9 +1,9 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-17 11:30:47
+ * @LastEditTime: 2022-05-18 11:11:56
 -->
 <link rel="stylesheet" href="/css/header.css">
 <div class="header">
@@ -234,14 +234,14 @@
 
 <!-- controller manager部分 fs模块引入ejs %- 路径找不到，暂时解决办法 -->
 <!-- !!!   在这加模块 -->
-<!-- <script src="/lib/js/jquery-3.5.1.min.js"></script>
+<script src="/lib/js/jquery-3.5.1.min.js"></script>
 <script src="/lib/js/bootstrap.min.js"></script>
 <script src="/lib/js/popper.min.js"></script>
 <script src="/lib/js/utils.js"></script>
-<script src="/lib/js/ajax.js"></script> -->
+<script src="/lib/js/ajax.js"></script>
 <!-- IMPORT JS END -->
-<!-- <script src="./js.html"></script> -->
-<!-- <script>
+<!-- <script src="../js.html"></script> -->
+<script>
   $(function () {
     let resizeTimer = null;
     let headerAttr = {
@@ -251,7 +251,7 @@
       logoWidth: 0,  // logo区域宽度
       navRightWidth: 0,  // 右侧登陆注册区域宽度
     }
-    function toggleHead() {
+    function toggleHead () {
       // 每次调用重置
       headerAttr = {
         allWidth: 0,
@@ -272,8 +272,16 @@
       })
 
       headerAttr.allWidth = headerAttr.logoWidth + headerAttr.navRightWidth + headerAttr.mainWidth;
-      console.log(headerAttr.allWidth, 'headerAttr.allWidth');
-      console.log(headerAttr.mainWidth, '中间导航');
+      // 可视化区域小于内容区域总宽度
+      if (windowWidth <= headerAttr.allWidth) {
+        // 导航区域折叠
+        $('.nav-body').addClass('fold');
+        // 多态按钮显示
+        $('.nav-toggler').addClass('appear')
+      } else {
+        $('.nav-body').removeClass('fold')
+        $('.nav-toggler').removeClass('appear')
+      }
     }
     toggleHead();
 
@@ -282,7 +290,8 @@
         $('.header-main .nav-body').removeClass('show')
       } else {
         $('.header-main .nav-body').addClass('show');
-        $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", headerAttr.navRightWidth - 10)
+        const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
+        $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin)
       }
 
     })
@@ -297,4 +306,4 @@
       }, 200);
     }
   })
-</script> -->
+</script>
