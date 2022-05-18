@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-17 17:53:09
+ * @LastEditTime: 2022-05-18 17:34:27
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -13,7 +13,7 @@
         <div class="dialog-body">
             <span class="child-item meal-introduce" v-text="renewForm.desc"></span>
             <!-- 包时显示 -->
-            <div v-show="timeRenew" class="child-item">
+            <div v-show="isPackageTime" class="child-item">
                 <span class="label child-elem">增加时长</span>
                 <el-select v-model="renewForm.time" placeholder="选择时长" clearable collapse-tags
                     @change="changeTime($event)">
@@ -80,7 +80,7 @@ export default {
             dialogVisible: false,
             // 续费表单
             renewForm: {
-                time: null,
+                time: null,  // 增加时长
                 desc: '【固定-5分钟-7天】剩余可用时长：7天',
                 acturalprice: null, // 应付金额
                 mealType: null,  // 套餐类型  0 1 10 可以用红包  其他不展示
@@ -95,11 +95,15 @@ export default {
             packageTime: [],
             recordOption: [], // 红包数组
             isShowEnvelope: false,
-            timeRenew: true
+            isPackageTime: true,  // 是否是包时套餐
+            isCustomize: true,  // 是否是定制套餐
         });
         const methods = {
             onOpen (row) {
                 if (row) {
+                    console.log(row,'续费参数');
+                    state.isPackageTime = row.proxyType === 1;
+                    this.isCustomize = row.discount;  // 判断是不是定制
                     state.dialogVisible = true
                 }
             },

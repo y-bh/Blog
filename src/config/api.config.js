@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-18 17:08:46
+ * @LastEditTime: 2022-05-18 18:20:47
  */
 
 module.exports = {
@@ -52,6 +52,7 @@ module.exports = {
 
   // 我的套餐
   'QUERY_LIST': '/proxy/list',  // 获取套餐列表
+  'QUERY_RENEWINFO': 'proxy/getProxyRenewInfo',
   'QUERY_LOG': '/proxy/log',  // 变更记录
 
   /*企业服务*/

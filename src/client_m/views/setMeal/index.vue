@@ -3,12 +3,12 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-18 16:29:46
+ * @LastEditTime: 2022-05-18 18:02:14
 -->
 <template>
   <div class="container">
     <div class="search-form">
-      <el-form :inline="true" :model="searchForm" label-position="top" label-width="70px">
+      <el-form :inline="true" :model="searchForm" ref="searchFormRef" label-position="top" label-width="70px">
         <el-form-item label="套餐ID">
           <el-input v-model="searchForm.sequence" placeholder="请输入"></el-input>
         </el-form-item>
@@ -24,6 +24,7 @@
         </el-form-item>
         <el-form-item label="套餐状态">
           <el-select v-model="searchForm.proxyState" clearable placeholder="请选择" class="filter-item">
+            <el-option label="全部" value=null></el-option>
             <el-option v-for="(v, k) in mealState" :key="k" :label="v" :value="formatInt(k)" />
           </el-select>
         </el-form-item>
@@ -250,6 +251,7 @@ export default {
       3: '#f00',
       4: '#999'
     }
+    const searchFormRef = ref(null);
     const renewalRef = ref(null);
     const supplementRef = ref(null);
     const modifyRef = ref(null);
@@ -280,9 +282,10 @@ export default {
       // 处理查询参数
       initQuery(){
         let query = $route.query;
-        state.searchForm.sequence = query.sequence || '';
-        state.searchForm.name = query.name || '';
-        state.searchForm.mealType = formatInt(query.mealType) || null;
+        console.log(query.mealType, typeof query.mealType, formatInt(query.mealType));
+        state.searchForm.sequence = query.sequence || null;
+        state.searchForm.name = query.name || null;
+        state.searchForm.mealType = (query.mealType === 0 || query.mealType) ? formatInt(query.mealType) : null;
         state.searchForm.proxyState = formatInt(query.proxyState) || null;
         state.searchForm.remainDays = formatInt(query.remainDays) || null;
         state.searchForm.page = formatInt(query.pageNum) || 1;
@@ -291,6 +294,7 @@ export default {
       },
       async getList(){
         state.loading = true;
+        state.tableList = [];
         methods.initQuery();
         const params = deepCopy(state.searchForm);
         console.log($route.query.useTime,'$route.query.useTime');
@@ -299,9 +303,16 @@ export default {
         params.createTimeEnd = $route.query.useTime && formatInt($route.query.useTime[1]) || 
         (state.searchForm.useTime && formatInt(state.searchForm.useTime[1]))
         let res = await getTableList(params);
-        if(res.code === 0){
+        if(res && res.code === 0){
           state.tableList = res.data && res.data.data;
           console.log(state.tableList);
+        } else {
+          message.error({
+            message: '接口异常',
+            showClose: true
+          })
+          state.loading = false;
+          return
         }
         state.loading = false;
       },
@@ -312,8 +323,11 @@ export default {
         })
         methods.getList();
       },
-      onReset(){
-        $router.push({
+      async onReset(){
+        console.log(searchFormRef);
+        // 重置表单查询参数
+        searchFormRef.value.resetFields();
+        await $router.push({
           path: $route.path
         })
         methods.getList();
@@ -331,8 +345,9 @@ export default {
         if (command === 'renewal') {
           if(row.proxyType === 10){
             console.log('去套餐购买页');
+            location.href = '/buy.html'
           } else {
-            renewalRef.value.onOpen(1)
+            renewalRef.value.onOpen(row)
           }
         } else if (command === 'supplement') {
           console.log('补量');
@@ -383,6 +398,7 @@ export default {
       stateColor,
       dateFormat,
       passwordRef,
+      searchFormRef,
       renewalRef,
       supplementRef,
       modifyRef,
