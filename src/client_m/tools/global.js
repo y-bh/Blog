@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 全局变量方法
  * @Date: 2022-05-16 14:51:42
- * @LastEditTime: 2022-05-18 09:58:13
+ * @LastEditTime: 2022-05-18 16:07:19
  */
 export default {
     // 套餐类型
@@ -30,51 +30,6 @@ export default {
         3: '用完',
         4: '过期',
     },
-    methods: {
-        // 随机生成指定长度的字符串
-        randomString (num) {
-            let number = num || 8;
-            let str = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz0123456789";
-            let length = str.length;
-            let randomStr = "";
-            for (var i = 0; i < number; i++) randomStr += str.charAt(Math.floor(Math.random() * length));
-            return randomStr
-        },
-        // 校验是否为空
-        isEmpty (value) {
-            return value === undefined || value === null || value === ""
-        },
-        // 判断整数
-        isInt (value) {
-            let reg = /^-?\d+$/;
-            return reg.test(value);
-        },
-        // 判断浮点数
-        isFloat (value) {
-            let reg = /^(-?\d+)(\.\d+)?$/; //非负浮点数
-            return reg.test(value);
-        },
-        // 转成整数
-        formatIntValue (value, def = null) {
-            if (this.isEmpty(value)) {
-                return def;
-            } else if (this.isInt(value)) {
-                return parseInt(value);
-            } else {
-                return null;
-            }
-        },
-        // 转成浮点数
-        formatFloatValue (value, def = null) {
-            if (this.isEmpty(v)) {
-                return def;
-            } else if (this.isFloat(v)) {
-                return parseFloat(v);
-            } else {
-                return null;
-            }
-        }
-    }
 
 }
 

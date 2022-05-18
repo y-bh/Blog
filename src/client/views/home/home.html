@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 首页
  * @Date: 2022-04-22 15:15:09
- * @LastEditTime: 2022-05-18 11:06:42
+ * @LastEditTime: 2022-05-18 16:46:41
 -->
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
               </div>
             </div>
             <!-- <div class="banner-right"> -->
-              <!-- <img src="" alt=""> -->
+            <!-- <img src="" alt=""> -->
           </div>
           <!-- 第二栏 -->
           <ul class="secondRow pt-45 pb-45">
@@ -295,7 +295,7 @@
             <div class="title"><span>资讯中心</span></div>
           </div>
           <ul>
-            <li class="news1 pl-50 pr-50 pt-50 pb-50 ml-20 mr-20 mt-80">
+            <!-- <li class="news1 pl-50 pr-50 pt-50 pb-50 ml-20 mr-20 mt-80">
               <div class="common-arrow-title pb-10">
                 <div class="arrow arrow_left">
                   <i class="iconfont icon-jiantou1"></i>
@@ -330,9 +330,9 @@
                 </li>
               </ul>
               <div class="mt-40 queryBtn">查看全部<span>>></span></div>
-            </li>
+            </li> -->
 
-            <li class="news2 pl-50 pr-50 pt-50 pb-50 ml-20 mr-20 mt-80">
+           <!--  <li class="news2 pl-50 pr-50 pt-50 pb-50 ml-20 mr-20 mt-80">
               <div class="common-arrow-title pb-10">
                 <div class="arrow arrow_left">
                   <i class="iconfont icon-jiantou1"></i>
@@ -404,11 +404,37 @@
                 </li>
               </ul>
               <div class="mt-40 queryBtn">查看全部<span>>></span></div>
-            </li>
+            </li> -->
+
+            <% articleList.forEach(function(articleItem,index) { %>
+              <li class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80">
+                <div class="common-arrow-title pb-10">
+                  <div class="arrow arrow_left">
+                    <i class="iconfont icon-jiantou1"></i>
+                    <i class="iconfont icon-jiantou1"></i>
+                  </div>
+                  <div class="title"><span>
+                      <%= articleItem.type %>
+                    </span></div>
+                  <div class="arrow arrow_right">
+                    <i class="iconfont icon-jiantou2"></i>
+                    <i class="iconfont icon-jiantou2"></i>
+                  </div>
+                </div>
+                <ul class="content">
+                  <% articleItem.articleDetail.forEach(function(articleDetail,index) { %>
+                    <li class="mt-20">
+                      <!-- <span class="mr-30"><%= articleDetail.convertData %></span> -->
+                      <span class="mr-30"><%= articleDetail.convertData %></span>
+                      <span><%= articleDetail.title %></span>
+                    </li>
+                    <% }) %>
+                </ul>
+                <div class="mt-40 queryBtn">查看全部<span>>></span></div>
+              </li>
 
 
-
-
+              <% }) %>
           </ul>
 
 

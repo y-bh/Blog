@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-05-18 17:03:07
+ * @LastEditTime: 2022-05-18 17:08:14
  */
 const appConfig = require("config/app.config")
 import axios from 'axios';
@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 
 // 基础地址
 let baseURL = `${appConfig.url}`;
-
+console.log(baseURL,'baseURL');
 const service = axios.create({
   baseURL,
   withCredentials: true,
@@ -23,7 +23,6 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-  console.log("vvvvvvvvvvvvvv",config)
   return config;
 }, error => {
   
