@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-05-18 09:42:55
+ * @LastEditTime: 2022-05-18 17:03:07
  */
 const appConfig = require("config/app.config")
 import axios from 'axios';
@@ -23,9 +23,10 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+  console.log("vvvvvvvvvvvvvv",config)
   return config;
 }, error => {
-  console.log(error);
+  
   return Promise.reject(error);
 });
 
@@ -33,7 +34,7 @@ service.interceptors.request.use(config => {
 // 响应拦截器
 service.interceptors.response.use(response => {
   // 响应正确
-  console.log("response->>>>>>>>>>>>>>", response.data)
+  
   if (response.status >= 200 && response.status <= 210) {
     const data = response.data;
     if (+data.code === 200) {
@@ -51,7 +52,7 @@ service.interceptors.response.use(response => {
   return response.data;
 },
   error => {
-    console.log(error);
+    
     const status = error.response.status;
     const data = error.response.data;
 
@@ -76,7 +77,7 @@ function get(url, params = {}) {
       method: 'GET'
     });
   } catch (error) {
-    console.error('get:', error);
+    
   }
 }
 
@@ -94,7 +95,7 @@ function post(url, data = {}) {
       data: JSON.stringify(data)
     });
   } catch (error) {
-    console.error('post:', error);
+    
   }
 }
 
@@ -112,7 +113,7 @@ function post(url, data = {}) {
       data: JSON.stringify(data)
     });
   } catch (error) {
-    console.error('put:', error);
+    
   }
 }
 
@@ -132,7 +133,7 @@ function post(url, data = {}) {
       data: JSON.stringify(data)
     });
   } catch (error) {
-    console.error('delete:', error);
+    
   }
 }
 

@@ -4,7 +4,7 @@
  * @LastEditors: 朱占伟
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-05-06 20:23:12
+ * @LastEditTime: 2022-05-18 16:30:08
  */
 
 require('module-alias/register')
@@ -21,7 +21,7 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
     script: './start.js',
     env: { 'NODE_ENV': 'development' }
     , ext: 'js'
-    , ignore: ['./node_modules','./client','./client_m'],
+    , ignore: ['./node_modules', './client', './client_m'],
     "delay": 1000,
     stdout: true,
     done: done,
@@ -64,7 +64,22 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
 
 //生产环境打包任务 【官网seo页面 与 个人中心 同步构建】
 const prodServer = require("./src/build/gulp.build")
-exports.build = gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
+function buildCompile() {
+  return gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
+}
+
+//生产环境
+exports.build = buildCompile()
+
+//暂定 以后可能会用到
+exports["build:test"] = gulp.parallel(prodServer.setEnv('test'), buildCompile())
+
+
+
+
+
+
+
 
 
 

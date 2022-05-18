@@ -6,8 +6,15 @@
   "scripts": {
     "dev": "gulp develop",
     "build": "gulp build",
-    "local": "nodemon ./start.js",
-    "serve": "pm2 start ./start.js"
+    "build:test": "gulp build:test",
+    "local": "nodemon ./start.js --local",
+    "serve": "pm2 start ./start.js",
+    "local:test": "nodemon ./start.js  --test",
+    "local:develop": "nodemon ./start.js  --develop",
+    "local:production": "nodemon ./start.js  --production",
+    "serve:test": "pm2 start ./start.js --test",
+    "serve:develop": "pm2 start ./start.js --develop",
+    "serve:production": "pm2 start ./start.js --production"
   },
   "author": "zhuzhanwei",
   "license": "ISC",

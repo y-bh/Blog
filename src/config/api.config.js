@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-17 20:41:36
+ * @LastEditTime: 2022-05-18 17:04:52
  */
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
   'QUERY_LINK': '/link/queryList',
   //套餐购买
   proxyMealList: "/proxyMeal/list",
-  'articleType': "/article/getBottomArticleType",//资讯中心--获取文章类型
+  'articleType': "/article/getArticleType",//资讯中心--获取文章类型
   'getIndexArticles': "/article/getIndexArticles",//资讯中心--获取文章列表
   'REGISTER': "/user/register",
 

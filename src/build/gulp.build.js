@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 官网页面生产环境工程
  * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-04-26 15:49:10
+ * @LastEditTime: 2022-05-18 16:24:51
  */
 
 const gulp = require('gulp');
@@ -114,7 +114,23 @@ async function cleanDir() {
 }
 
 
+//设置环境变量任务
+function setEnv(env) {
+
+  console.log("设置环境白哦了:", env)
+
+  return function (cb) {
+    cb()
+  }
+}
+
+
+
+
+
+
+
 //打包前先删除
 shell.rm('-rf', localConfig.static);
 
-module.exports = { CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont }
+module.exports = { setEnv, CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont }

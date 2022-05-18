@@ -1,19 +1,20 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 朱占伟
  * @description: 首页数据层
  * @Date: 2022-04-25 10:33:13
- * @LastEditTime: 2022-05-18 10:23:16
+ * @LastEditTime: 2022-05-18 17:06:36
  */
 
 
-const { post } = require("utils/request")
+const { post,get } = require("utils/request")
 const api = require("src/config/api.config.js")
 
 const articleType = async () => {
-  const res = await post(api.articleType);
+  const res = await get(api.articleType);
   let data = [];
-  if (res.code == 200 && res.data.length > 0) {
+  console.log("res",res)
+  if (+res.code == 0 && res.data.length > 0) {
     data = res.data;
   }
   return data;
