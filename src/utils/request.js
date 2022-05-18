@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-05-17 20:38:52
+ * @LastEditTime: 2022-05-18 09:42:55
  */
 const appConfig = require("config/app.config")
 import axios from 'axios';
@@ -98,10 +98,43 @@ function post(url, data = {}) {
   }
 }
 
+/**
+ * 封装put请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+ function put(url, data = {}) {
+  try {
+    return service({
+      url,
+      method: 'PUT',
+      data: JSON.stringify(data)
+    });
+  } catch (error) {
+    console.error('put:', error);
+  }
+}
 
 
 
+/**
+ * 封装put请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+ function del(url, data = {}) {
+  try {
+    return service({
+      url,
+      method: 'DELETE',
+      data: JSON.stringify(data)
+    });
+  } catch (error) {
+    console.error('delete:', error);
+  }
+}
 
 
-
-module.exports = { post, get }
+module.exports = { post, get,put,del }

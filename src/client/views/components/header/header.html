@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-17 11:30:47
+ * @LastEditTime: 2022-05-18 11:32:49
 -->
 <link rel="stylesheet" href="/css/header.css">
 <div class="header">
@@ -213,20 +213,12 @@
     </nav>
     <!-- 右侧按钮/登录信息 -->
     <div class="user btn">
-      <% if(name) { %>
-        <div class="default-btn button person-center">
-          <a href="/manager/user" title="个人中心">个人中心</a>
-        </div>
-        <div class="bl-l-button button user-register">
-          <span>退出</span>
-        </div>
+      <% if(userInfo && userInfo.id) { %>
+        <a href="/manager/user" title="个人中心" class="default-btn button person-center">个人中心</a>
+        <a href="javascript:void(0)" class="bl-l-button button user-register" onclick="layout()"><span>退出</span></a>
         <% } else { %>
-          <div class="bl-button button user-login">
-            <span>登录</span>
-          </div>
-          <div class="or-button button user-register">
-            <span>注册</span>
-          </div>
+          <a href="/login" class="bl-button button user-login text-white"><span>登录</span></a>
+          <a href="/register" class="or-button button user-register text-white"><span>注册</span></a>
           <% } %>
     </div>
   </div>

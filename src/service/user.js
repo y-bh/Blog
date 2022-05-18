@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 用户相关服务
  * @Date: 2022-05-17 17:02:00
- * @LastEditTime: 2022-05-17 20:44:04
+ * @LastEditTime: 2022-05-18 09:54:23
  */
 
 
@@ -65,7 +65,7 @@ const loginService = async (data = null) => {
 
   //1. 入参
   const params = {
-    phone: data.phone.trim(),
+    username: data.phone.trim(),
     pwd: data.pwd.trim()
   }
 

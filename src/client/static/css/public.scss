@@ -451,7 +451,9 @@ body {
 .hightAll {
   height: 100%;
 }
-
+.text-white {
+  color: #fff;
+}
 .main-title-color {
   color: #091d43;
 }
@@ -549,7 +551,7 @@ input::-webkit-input-placeholder {
   height: 30px;
   background-color: #fc7019;
   overflow: hidden;
-  color: white;
+  color: white !important;
 
   transition-duration: 0.4s;
   /* transition-timing-function: cubic-bezier(0.4, 2, 0.3, -0); */

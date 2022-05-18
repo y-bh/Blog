@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-17 18:24:26
+ * @LastEditTime: 2022-05-18 11:20:46
  */
 
 
@@ -21,7 +21,7 @@ const config = require("../config/app.config")
 //const packageObj = require("./package.js")
 const { renderPackage } = require("service/package");
 const { log } = require("console");
-
+const appKey = require("config/app.key.config")
 
 const SelfApi = require("./selfApi")
 
@@ -188,7 +188,8 @@ function Router(App) {
   const headerHtml = fs.readFileSync(`${config.templates}/components/header/header.html`, 'utf-8')
   const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
-    var headers = ejs.render(headerHtml, { name: 'zhuzhanwei' })
+    let userInfo = ctx.cookies.get(appKey.userInfo)
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo) })
     // const homeData = {
     //   name: '用户',
     //   url: '/',

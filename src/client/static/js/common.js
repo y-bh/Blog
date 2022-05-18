@@ -3,11 +3,11 @@
  * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-04-24 14:17:48
- * @LastEditTime: 2022-05-17 14:02:42
+ * @LastEditTime: 2022-05-18 11:46:33
  */
 
 let test = {
-  name:'朱占伟22'
+  name: '朱占伟22'
 }
 
 //函数防抖
@@ -28,7 +28,7 @@ function change() {
   var width = $(window).width();
   console.log("计算自适应布局")
   //是否是小于425的小屏幕，供移动端导航使用
-  window.isMobile = (width<=575)
+  window.isMobile = (width <= 575)
   window.viewWidth = width;
   var size = `${(width / 1920) * 16}`
   if (size <= 8) {
@@ -38,6 +38,41 @@ function change() {
   document.documentElement.style.fontSize = `${size}px`
 }
 
+//退出登录
+function layout() {
+  console.log("退出登录!")
+
+  document.cookie = null
+
+  $.ajax({
+    type: 'POST',
+    url: "/api/layout",
+    data: null,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: (res) => {
+      console.log("退出登录结果:", res)
+      if (+res.code !== 0) {
+        return $message({
+          message: res.msg || '退出登录失败!',
+          type: 'warning'
+        })
+
+      }
+
+      $message({ message: '退出登录' })
+
+      return window.open("/login")
+    },
+    error: (err) => {
+      console.log("接口请求失败:", err)
+    }
+  });
+
+
+}
+
+window.layout = debounce(layout, 300, true)
 
 //初始化效果
 $(function () {

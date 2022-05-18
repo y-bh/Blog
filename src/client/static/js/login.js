@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-17 20:32:47
+ * @LastEditTime: 2022-05-18 11:47:40
  */
 
 
@@ -179,20 +179,6 @@ async function loginSubmit(type) {
   const res = checkForm(params, type)
   console.log("校验参数结果:", res)
   params.type = type
-
-
-  // const re = await ajax({
-  //   url:'/user/forget/password/update',
-  //   query: JSON.stringify({
-  //     phone: params.phone.trim(),
-  //     code: params.code.trim(),
-  //     newPassword: params.pwd.trim(),
-  //     checkPassword: params.cpwd.trim()
-  //   })
-  // })
-
-
-
   $.ajax({
     type: 'POST',
     url: "/api/login",
@@ -201,13 +187,15 @@ async function loginSubmit(type) {
     contentType: 'application/json',
     success: (res) => {
       console.log("登录/注册结果:", res)
-      if(+res.code !==0){
-              return $message({
-            message: res.msg || '注册失败!请联系客服',
-            type: 'warning'
-          })
-        
+      if (+res.code !== 0) {
+        return $message({
+          message: res.msg || '注册失败!请联系客服',
+          type: 'warning'
+        })
+
       }
+
+      window.open("/manager/user")
     },
     error: (err) => {
       console.log("接口请求失败:", err)

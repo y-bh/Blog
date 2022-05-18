@@ -17,6 +17,16 @@
       height: 515px;
       background: url("/images/login/banager.png") no-repeat;
       background-size: 100% 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .bg {
+        width: 330px;
+        height: 43px;
+        background-image: url("/images/login/bg.svg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
     }
 
     .login-box {
