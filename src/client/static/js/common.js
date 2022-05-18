@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-18 13:06:27
+ * @LastEditTime: 2022-05-18 14:45:36
  */
 
 // 弹窗消息提示
@@ -73,6 +73,83 @@ function $message(options = {}) {
     return $message(options)
   }
 })
+
+
+
+
+
+
+function Helper() {
+
+}
+Helper.$confirm = (msg = '确认此操作?', callback, options = {}
+) => {
+
+  const config = Object.assign({
+    callback, //回调函数处理
+    title: '提示',
+    cancelText: '取消',
+    okText: '确定',
+    ...options,
+  })
+
+  let eventName = +Date.now() + '_$confirm'
+
+  const htmls = `
+  <div class="modal" tabindex="-1" id="bootstrap-my-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">${config.title}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ${msg}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">${config.cancelText}</button>
+        <button type="button" class="btn btn-primary" onclick="window.$ok('${eventName}')">${config.okText}</button>
+      </div>
+    </div>
+  </div>
+</div>
+`
+
+
+  if (!$("#bootstrap-my-modal").html()) {
+    $(htmls).appendTo("body")
+  }
+
+  //注册回调
+  console.log("注册回调")
+  window[eventName] = callback
+
+  $('#bootstrap-my-modal').modal('show')
+}
+
+
+window.$ok = function (eventName) {
+  console.log("执行回调函数操作", eventName)
+  window[eventName]()
+  window[eventName] = null
+  $('#bootstrap-my-modal').modal('hide')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -264,32 +341,34 @@ function change() {
 //退出登录
 function layout() {
   console.log("退出登录!")
-  $.ajax({
-    type: 'POST',
-    url: "/api/layout",
-    data: null,
-    dataType: 'json',
-    contentType: 'application/json',
-    success: (res) => {
-      console.log("退出登录结果:", res)
-      if (+res.code !== 0) {
-        return $message({
-          message: res.msg || '退出登录失败!',
-          type: 'warning'
-        })
+  Helper.$confirm("确定退出登录?", function () {
+    console.log("我要做的操作")
+    $.ajax({
+      type: 'POST',
+      url: "/api/layout",
+      data: null,
+      dataType: 'json',
+      contentType: 'application/json',
+      success: (res) => {
+        console.log("退出登录结果:", res)
+        if (+res.code !== 0) {
+          return $message({
+            message: res.msg || '退出登录失败!',
+            type: 'warning'
+          })
 
+        }
+
+        $message({ message: '退出登录' })
+
+        return window.open("/login")
+      },
+      error: (err) => {
+        console.log("接口请求失败:", err)
       }
+    });
 
-      $message({ message: '退出登录' })
-
-      return window.open("/login")
-    },
-    error: (err) => {
-      console.log("接口请求失败:", err)
-    }
-  });
-
-
+  })
 }
 
 window.layout = debounce(layout, 300, true)
