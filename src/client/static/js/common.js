@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-18 15:29:06
+ * @LastEditTime: 2022-05-18 18:08:52
  */
 
 function Helper() { }
@@ -127,21 +127,6 @@ Helper.$message = (options = {}) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //客户端ajax二次 封装
 
 /*
@@ -155,14 +140,14 @@ async function ajax(params) {
     console.log(params.query, '接口参数');
     $.ajax({
       type: params.type ? params.type : 'POST',
-      url: 'http://192.168.10.62:17001/' + params.url,
+      url: '/proxy' + params.url,
       contentType: 'application/json',
       data: params.query,
       success: (res) => {
         if (res) {
           if (res) {
             console.log(res, 'res');
-            if (res.code !== 200) {
+            if (res.code !== 0) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
               })

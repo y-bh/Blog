@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 应用配置文件
  * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-05-18 17:08:41
+ * @LastEditTime: 2022-05-18 17:32:45
  */
 
 const path = require("path")
@@ -11,7 +11,7 @@ const resolve = (dir) => {
   return path.join(__dirname, "../" + dir);
 }
 
-const envConfig = require(`@/.env.${process.APP_ENV}`)
+const envConfig = require(`@/.env.${process.APP_ENV || 'local'}`)
 
 console.log("环境配置:", envConfig)
 

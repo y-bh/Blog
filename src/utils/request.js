@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-05-18 17:08:14
+ * @LastEditTime: 2022-05-18 17:59:07
  */
 const appConfig = require("config/app.config")
 import axios from 'axios';
@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 
 // 基础地址
 let baseURL = `${appConfig.url}`;
-console.log(baseURL,'baseURL');
+console.log(baseURL, 'baseURL');
 const service = axios.create({
   baseURL,
   withCredentials: true,
@@ -25,7 +25,7 @@ service.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
   return config;
 }, error => {
-  
+
   return Promise.reject(error);
 });
 
@@ -33,7 +33,7 @@ service.interceptors.request.use(config => {
 // 响应拦截器
 service.interceptors.response.use(response => {
   // 响应正确
-  
+
   if (response.status >= 200 && response.status <= 210) {
     const data = response.data;
     if (+data.code === 200) {
@@ -51,11 +51,31 @@ service.interceptors.response.use(response => {
   return response.data;
 },
   error => {
-    
+
     const status = error.response.status;
     const data = error.response.data;
 
   });
+
+
+
+/**
+ * 封装proxyAxios方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+function proxyAxios(url, method, params = {}) {
+  try {
+    return service({
+      url,
+      params,
+      method: method
+    });
+  } catch (error) {
+
+  }
+}
 
 
 
@@ -76,7 +96,7 @@ function get(url, params = {}) {
       method: 'GET'
     });
   } catch (error) {
-    
+
   }
 }
 
@@ -94,7 +114,7 @@ function post(url, data = {}) {
       data: JSON.stringify(data)
     });
   } catch (error) {
-    
+
   }
 }
 
@@ -104,7 +124,7 @@ function post(url, data = {}) {
  * @param data
  * @returns {Promise}
  */
- function put(url, data = {}) {
+function put(url, data = {}) {
   try {
     return service({
       url,
@@ -112,7 +132,7 @@ function post(url, data = {}) {
       data: JSON.stringify(data)
     });
   } catch (error) {
-    
+
   }
 }
 
@@ -124,7 +144,7 @@ function post(url, data = {}) {
  * @param data
  * @returns {Promise}
  */
- function del(url, data = {}) {
+function del(url, data = {}) {
   try {
     return service({
       url,
@@ -132,9 +152,9 @@ function post(url, data = {}) {
       data: JSON.stringify(data)
     });
   } catch (error) {
-    
+
   }
 }
 
 
-module.exports = { post, get,put,del }
+module.exports = { post, get, put, del,proxyAxios }
