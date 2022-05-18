@@ -348,14 +348,18 @@
 
     .button {
       display: inline-block;
-      width: auto;
+      width: 72px;
       height: 40px;
       line-height: 40px;
-      padding: 0 20px;
-      box-sizing: border-box;
+      padding: 0;
+      text-decoration: none;
       &:first-child {
         margin-right: 20px;
       }
+
+    }
+    a{
+      text-decoration: none;
     }
 
     .bl-l-button {
@@ -366,7 +370,9 @@
     }
 
     .person-center {
-      padding: 0 4px;
+      padding: 0;
+      width: auto;
+      text-align: center;
       transition: all 0.4s;
       a {
         color: initial;
@@ -378,6 +384,9 @@
           color: #1968fc;
         }
       }
+    }
+    .user-logout{
+      line-height: 40px;
     }
   }
 

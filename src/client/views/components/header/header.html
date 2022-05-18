@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-18 16:34:59
+ * @LastEditTime: 2022-05-18 17:00:34
 -->
 <link rel="stylesheet" href="/css/header.css">
 <div class="header">
@@ -215,7 +215,7 @@
     <div class="user btn">
       <% if(userInfo && userInfo.id) { %>
         <a href="/manager/user" title="个人中心" class="default-btn button person-center">个人中心</a>
-        <a href="javascript:void(0)" class="bl-l-button button user-register" onclick="layout()"><span>退出</span></a>
+        <a href="javascript:void(0)" class="bl-l-button button user-logout" onclick="layout()"><span>退出</span></a>
         <% } else { %>
           <a href="/login" class="bl-button button user-login text-white"><span>登录</span></a>
           <a href="/register" class="or-button button user-register text-white"><span>注册</span></a>
