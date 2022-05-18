@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-17 19:30:35
+ * @LastEditTime: 2022-05-18 09:57:52
 -->
 <template>
   <div class="updatePwdDialog">
@@ -47,7 +47,7 @@
 
 <script>
 import DialogTitle from "components/DialogTitle";
-import { ref, reactive, computed, toRefs, onMounted } from "vue";
+import { ref, reactive, computed, toRefs, onMounted,inject } from "vue";
 export default {
   name: "",
   components: {
@@ -61,6 +61,7 @@ export default {
   },
   setup(props, { emit }) {
     const vaildPwdRef = ref(null);
+    const message=inject('message');
     const validatePwd2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
@@ -79,7 +80,7 @@ export default {
         if (form.ruleForm.confirmPassword !== "") {
           if (!vaildPwdRef.value) return;
           vaildPwdRef.value.validateField("confirmPassword", (valid) => {
-            console.log(`${valid}***************************`);    
+            console.log(`${valid}***************************`);
           });
         }
         callback();
@@ -107,7 +108,7 @@ export default {
             pattern: /^[a-zA-Z0-9_!@#$%^&*.]{6,20}$/,
             message: "密码只能由字母，数字，特殊符号组成",
           },
-           { validator: validatePwd, trigger: "blur" },
+          { validator: validatePwd, trigger: "blur" },
         ],
         confirmPassword: [
           { required: true, message: "请再次输入密码", trigger: "blur" },
@@ -117,15 +118,21 @@ export default {
     });
     onMounted(() => {});
 
-    
     const onSubmit = (formName) => {
       console.log("=======修改密码数据======", form.ruleForm);
       // if (!formEl) return
       vaildPwdRef.value.validate(async (valid) => {
         if (valid) {
-          // emit("updateDialog", false);
+          //TODO
+          message({
+            message: "提交成功",
+            type: "success",
+          });
+          emit("updateDialog", false);
         } else {
           console.log("error submit!!");
+          message.error("提交失败!");
+          emit("updateDialog", false);
           return false;
         }
       });

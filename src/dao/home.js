@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 首页数据层
  * @Date: 2022-04-25 10:33:13
- * @LastEditTime: 2022-05-17 09:40:44
+ * @LastEditTime: 2022-05-18 10:23:16
  */
 
 
@@ -19,16 +19,15 @@ const articleType = async () => {
   return data;
 }
 const articleList = async (params) => {
+  console.log(33333333333,params)
   params = {
-    id: 0,
+     id: 0,
     ids: [8, 20, 10],
     typeId: 0,
    "pageNum": 1,
    "pageSize": 10,
  }
-  const res = await post(api.getIndexArticles, JSON.stringify(params),{
-    'Content-Type': 'application/json'
-  });
+  const res = await post(api.getIndexArticles, params);
   console.log("----文章列表2222222222----", res);
   let data = {};
   if (res.code == 200 && res.data) {

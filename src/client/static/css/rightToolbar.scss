@@ -14,6 +14,7 @@
   .toolbar-gift {
     height: 94px;
     background: url("/images/rightToolbar/give.png") no-repeat;
+    background-size: 100px 94px;
     animation: bounce 2s linear infinite;
     cursor: pointer;
   }
@@ -33,6 +34,7 @@
     height: 40px;
     margin: 0 auto;
     background: url("/images/rightToolbar/right.png") no-repeat;
+    background-size: 226px 89px;
   }
   .backg-1 {
     background-position: -8px -8px;
@@ -96,6 +98,7 @@
               width: 20px;
               height: 20px;
               background: url("/images/rightToolbar/right.png") no-repeat;
+              background-size: 226px 89px;
             }
             .QQ {
               background-position: -10px -60px;
