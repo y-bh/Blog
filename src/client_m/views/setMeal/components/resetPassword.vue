@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 重置密码
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-18 09:55:39
+ * @LastEditTime: 2022-05-18 13:10:57
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -20,6 +20,7 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
+import { formatInt, randomString } from "tools/utility"
 export default {
     components: {
         DialogTitle,
@@ -28,9 +29,9 @@ export default {
         const message = inject('message');
         // 引入全局变量
         const global = inject('_global');
-        console.log(global.methods.randomString(8),'随机字符串');
+        // console.log(global.methods.randomString(8),'随机字符串');
         const state = reactive({
-            dialogVisible: true,
+            dialogVisible: false,
             mergeForm: {
                 id: null,
                 authSecret: null
@@ -39,7 +40,7 @@ export default {
         const methods = {
             onOpen(row){
                 state.mergeForm.id = row.id
-                state.mergeForm.authSecret = global.randomString(8)
+                state.mergeForm.authSecret = randomString(8)
             },
             submitMerge(){
 

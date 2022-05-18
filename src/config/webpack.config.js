@@ -73,8 +73,9 @@ module.exports = {
 
     // 提取css
     new MiniCssExtractPlugin({
-      filename: 'manager/css/[name].[contenthash].css'
+      filename: 'manager/css/[name].css'
       // 'css/[name].[contenthash].css' // 输出的文件名字
+      // 'manager/css/[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),

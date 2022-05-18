@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: Ajax 封装
  * @Date: 2022-04-26 13:45:01
- * @LastEditTime: 2022-05-16 11:40:32
+ * @LastEditTime: 2022-05-18 14:59:17
  */
 
 import axios from 'axios';
@@ -24,7 +24,7 @@ const service = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(config => {
-  config.headers.xx_uid = '6585';  //uid 联调需要，可以删掉
+  config.headers.xx_uid = 7567;  //uid 联调需要，可以删掉
   config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
   return config;
 }, error => {

@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-05-18 09:42:55
+ * @LastEditTime: 2022-05-18 16:33:07
  */
 const appConfig = require("config/app.config")
 import axios from 'axios';
@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 
 // 基础地址
 let baseURL = `${appConfig.url}`;
-
+console.log(baseURL,'baseURL');
 const service = axios.create({
   baseURL,
   withCredentials: true,
@@ -23,6 +23,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+  config.headers['xx_uid'] = 7567;  //未登录需要拿数据
   return config;
 }, error => {
   console.log(error);
