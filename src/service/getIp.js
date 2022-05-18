@@ -3,22 +3,9 @@
  * @LastEditors: 陈昊天
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-16 21:33:40
+ * @LastEditTime: 2022-05-18 09:52:38
  */
-let extractIp = [
-  {
-    title: 'API获取',
-  },
-  {
-    title: '提取接口',
-  },
-  {
-    title: '白名单接口',
-  },
-  {
-    title: '错误码'
-  }
-]
+const { getProxyCity,getProxyMenu } = require("dao/getIp")
 
 let codeDemo = [
   {
@@ -59,16 +46,7 @@ let codeDemo = [
   },
 ]
 
-let paidList = [
-  {
-    id: 1,
-    desc: '已购套餐1'
-  },
-  {
-    id: 2,
-    desc: '已购套餐2'
-  }
-]
+let paidList = []
 
 let mealBox = [
   {
@@ -163,136 +141,7 @@ let separator = [
   },
 ]
 
-let province = [
-  {
-    status: false,
-    label: '北京市'
-  },
-  {
-    status: false,
-    label: '天津市'
-  },
-  {
-    status: false,
-    label: '上海市'
-  },
-  {
-    status: false,
-    label: '重庆市'
-  },
-  {
-    status: false,
-    label: '河北省'
-  },
-  {
-    status: false,
-    label: '山西省'
-  },
-  {
-    status: false,
-    label: '山东省'
-  },
-  {
-    status: false,
-    label: '辽宁省'
-  },
-  {
-    status: false,
-    label: '吉林省'
-  },
-  {
-    status: false,
-    label: '黑龙江省'
-  },
-  {
-    status: false,
-    label: '江苏省'
-  },
-  {
-    status: false,
-    label: '浙江省'
-  },
-  {
-    status: false,
-    label: '安徽省'
-  },
-  {
-    status: false,
-    label: '福建省'
-  },
-  {
-    status: false,
-    label: '江西省'
-  },
-  {
-    status: false,
-    label: '山东省'
-  },
-  {
-    status: false,
-    label: '河南省'
-  },
-  {
-    status: false,
-    label: '湖北省'
-  },
-  {
-    status: false,
-    label: '湖南省'
-  },
-  {
-    status: false,
-    label: '广东省'
-  },
-  {
-    status: false,
-    label: '河南省'
-  },
-  {
-    status: false,
-    label: '四川省'
-  },
-  {
-    status: false,
-    label: '贵州省'
-  },
-  {
-    status: false,
-    label: '云南省'
-  },
-  {
-    status: false,
-    label: '陕西省'
-  },
-  {
-    status: false,
-    label: '甘肃省'
-  },
-  {
-    status: false,
-    label: '青海省'
-  },
-  {
-    status: false,
-    label: '台湾省'
-  },
-  {
-    status: false,
-    label: '内蒙古自治区'
-  },
-  {
-    status: false,
-    label: '广西壮族自治区'
-  },
-  {
-    status: false,
-    label: '宁夏回族自治区'
-  },
-  {
-    status: false,
-    label: '新疆维吾尔自治区'
-  },
-]
+let province = []
 
 let paramsDesc = [
   {
@@ -512,17 +361,41 @@ let errorCodeContent = {
   ]
 }
 
+//获取提取套餐城市列表
+const getProxyCityS = async () => {
+  try {
+    const res = await getProxyCity()
+    if (+res.code === 200) {
+      province = res.data
+    }
+    return province
+  } catch (error) {
+    console.error("getProxyCity_service:",error);
+  }
+}
+
+//获取提取套餐下拉列表
+const getProxyMenuS = async () => {
+  try {
+    const res = await getProxyMenu()
+    if (+res.code === 200) {
+      paidList = res.data
+    }
+    return paidList
+  } catch (error) {
+    console.error('getProxyMenu_service:',error);
+  }
+}
+
+//静态数据
 const data = () => {
   try {
     const staticData = {
-      extractIp,
       codeDemo,
-      paidList,
       mealBox,
       ipUse,
       chooseType,
       separator,
-      province,
       paramsDesc,
       extractDesc,
       whiteDesc,
@@ -536,5 +409,7 @@ const data = () => {
 }
 
 module.exports = {
-  data
+  data,
+  getProxyCityS,
+  getProxyMenuS
 }
