@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-18 15:47:20
+ * @LastEditTime: 2022-05-18 15:57:27
  */
 
 
@@ -36,7 +36,6 @@ function getParams(type = 'login') {
   }
   return obj
 }
-
 
 //校验相关参数
 const rules = {
@@ -105,11 +104,6 @@ function checkForm(params = null, type = 'login') {
       return res
     }
   }
-
-
-
-
-
   if (type === 'reset') {
     if (!params.pwd) {
       res.isPass = false
@@ -135,8 +129,6 @@ function checkForm(params = null, type = 'login') {
     }
 
   }
-
-
   if (type === 'register') {
     if (!params.userName) {
       res.isPass = false
@@ -164,10 +156,8 @@ function checkForm(params = null, type = 'login') {
     }
 
   }
-
   return res
 }
-
 
 //登录/注册/重置密码
 async function loginSubmit(type) {
@@ -205,11 +195,9 @@ async function loginSubmit(type) {
   });
 }
 
-
-
-
-
 //发送注册验证码
+let timer = null //验证码定时器
+let count = 60 //定时时间
 async function sendCode(type = 'register') {
   //1. 获取表单
   const form = document.forms['login']
@@ -251,6 +239,22 @@ async function sendCode(type = 'register') {
 
 
   if (res) {
+    //开启倒计时 obn-code
+    clearInterval(timer)
+    timer = setInterval(() => {
+      if (count > 0) {
+        // console.log("sssssssss",$("#obn-code").val())
+        $("#obn-code").val(count--)
+        $("#obn-code").attr("disabled", true)
+      } else {
+        clearInterval(timer)
+        count = 60
+        $("#obn-code").val('发送验证码')
+        $("#obn-code").attr("disabled", false)
+      }
+    }, 1000)
+
+
     return Helper.$message.success({
       message: '请在手机端查看验证码',
       showClose: true
@@ -258,14 +262,11 @@ async function sendCode(type = 'register') {
   }
 }
 
-
 window.sendCode = debounce(sendCode, 300, true)
 window.loginSubmit = debounce(loginSubmit, 300, true)
 
+// 便捷登录
 var docu = document.getElementsByTagName('document');
-
-
-
 document.onkeydown = function (e) {
   const e1 = e || window.event;
   if (e1.keyCode === 13) {

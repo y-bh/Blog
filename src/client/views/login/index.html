@@ -46,7 +46,7 @@
                           <% if(pageType !=='login' ){ %>
                             <div class="mt-20 flex justify-content-center login-other  margin-auto form-input">
                               <input type="number" placeholder="请输入短信验证码" name="code">
-                              <input class="btn  btn-outline-code ml-30" type="button" value="获取验证码" onclick="sendCode('<%=pageType%>')">
+                              <input id="obn-code" class="btn  btn-outline-code ml-30" type="button" value="获取验证码" onclick="sendCode('<%=pageType%>')">
                             </div>
                             <% } %>
                               <%# 用户名 %>
