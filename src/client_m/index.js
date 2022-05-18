@@ -1,16 +1,17 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: 朱占伟
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-16 14:56:40
+ * @LastEditTime: 2022-05-18 18:13:50
  */
 
 import { createApp } from 'vue';
 
 import injectRouter from './routes'; //router
 import injectUI from 'tools/injectUI.js'; // ui组件
-import { get, post } from "tools/ajax"; //ajax 服务
+// import { get, post } from "tools/ajax"; //ajax 服务
+
 import $global from 'tools/global.js';  // 全局变量
 
 
@@ -24,6 +25,9 @@ import 'assets/css/public.scss';
 import * as re from 'config/re.config';
 
 const app = createApp(App);
+
+const { post, put, del, get } = require("utils/request.js")
+
 
 // 注入全局变量
 app.provide('_global', $global);
@@ -41,7 +45,10 @@ app.config.globalProperties.$get = get;
 app.provide('$get', get)
 app.config.globalProperties.$post = post;
 app.provide('$post', post)
-
+app.config.globalProperties.$get = get;
+app.provide('$put', put)
+app.config.globalProperties.$post = post;
+app.provide('$del', del)
 
 //注入正则表达式管理
 app.config.globalProperties.$re = re;
