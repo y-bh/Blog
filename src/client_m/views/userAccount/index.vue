@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-17 18:50:55
+ * @LastEditTime: 2022-05-18 16:03:55
 -->
 <template>
   <div class="userAccount">
@@ -16,7 +16,7 @@
           </div>
         </div>
         <div v-if="!isHasSale" class="group-btn ml-60">
-          <el-button type="primary">密钥</el-button>
+          <el-button type="primary" @click="openKey">密钥</el-button>
           <el-button type="warning" class="ml-20">联系销售</el-button>
         </div>
       </div>
@@ -31,7 +31,7 @@
         <div class="content mt-20">
           <div class="number"><span>188****0909</span></div>
           <div class="group-btn">
-            <el-button type="primary" plain>换绑手机</el-button>
+            <el-button type="primary" plain @click="updateMobile">换绑手机</el-button>
             <el-button type="warning" plain @click="dialogPwdVisible=true">修改密码</el-button>
           </div>
         </div>
@@ -103,24 +103,46 @@
       :dialogVisible="dialogPwdVisible"
       @updateDialog="updatePwdDialog"
     ></updatePwdDialog>
+
+    <!-- 换绑手机 -->
+    <UpdateMobile ref="updateMobileRef"></UpdateMobile>
+    <!-- 密匙 -->
+    <KeyDialog ref="keyRef"></KeyDialog>
+    <!-- 个人认证 -->
+    <PersonalAuth ref="perAuthREf" ></PersonalAuth>
+    <!-- 企业认证 -->
+    <companyAuth ref="companyAuthREf"></companyAuth>
+
   </div>
 </template>
 
 <script>
 import PersonalFormDialog from "./dialog/PersonalFormDialog";
 import updatePwdDialog from "./dialog/updatePwdDialog";
+import UpdateMobile from "./dialog/UpdateMobile";
+import KeyDialog from "./dialog/KeyDialog";
+import PersonalAuth from "./dialog/PersonalAuth";
+import companyAuth from "./dialog/companyAuth";
 import { ref, reactive, toRefs, onBeforeMount, onMounted } from "vue";
 export default {
   name: "",
   components: {
     PersonalFormDialog,
     updatePwdDialog,
+    UpdateMobile,
+    KeyDialog,
+    PersonalAuth,
+    companyAuth
   },
   props: {},
   setup() {
     let isHasSale = ref(false); //默认无销售
     const dialogPersonVisible = ref(false);
-    const dialogPwdVisible = ref(true);
+    const dialogPwdVisible = ref(false);
+    const updateMobileRef =  ref(null);
+    const keyRef = ref(null);
+    const perAuthREf = ref(null);
+    const companyAuthREf = ref(null);
 
     onBeforeMount(() => {});
     onMounted(() => {});
@@ -139,7 +161,13 @@ export default {
       //密码
       dialogPwdVisible.value = falg;
     };
-
+    const updateMobile = ()=>{
+      console.log(updateMobileRef.value.dialogVisible)
+      updateMobileRef.value.dialogVisible = true;
+    }
+    const openKey =()=>{
+        keyRef.value.dialogVisible = true;
+    }
     return {
       isHasSale,
       editPersonInfo,
@@ -147,6 +175,12 @@ export default {
       updatePersonDialog,
       dialogPwdVisible,
       updatePwdDialog,
+      updateMobile,
+      updateMobileRef,
+      keyRef,
+      openKey,
+      perAuthREf,
+      companyAuthREf
     };
   },
 };

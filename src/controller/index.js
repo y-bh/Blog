@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: dengxiujie
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-18 13:28:52
+ * @LastEditTime: 2022-05-18 16:58:48
  */
 
 
@@ -13,7 +13,7 @@ const { renderHome } = require("service/home")
 const { getHelpListS, getBlogDetailS, getKeyWordPageS } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
-const { getProxyCityS,getProxyMenuS } = require('service/getIp')
+const { getProxyCityS, getProxyMenuS } = require('service/getIp')
 
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -43,8 +43,9 @@ function Router(App) {
       url: '/',
       link: [],
     }
-    let homeObj = await renderHome();
-    console.log("==========返回home数据=====", homeObj);
+    let list = await renderHome();
+    homeData.articleList = list ? list : [];
+    console.log("==========返回home数据=====", homeData);
     return ctx.render("home/home", homeData)
   })
 
@@ -113,8 +114,8 @@ function Router(App) {
     let helpData = await getHelpListS()
 
     console.log('总页数:', helpData);
-  // ctx.body=helpData
-    return ctx.render("help/helpCenter",helpData)
+    // ctx.body=helpData
+    return ctx.render("help/helpCenter", helpData)
   })
 
 

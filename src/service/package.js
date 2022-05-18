@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-11 13:39:49
- * @LastEditTime: 2022-05-12 15:22:45
+ * @LastEditTime: 2022-05-18 13:59:27
  */
 const { getProxyMealList } = require("dao/package")
 
@@ -17,7 +17,7 @@ const renderPackage = async () => {
     proxyTimes: [],//选择IP时效
     mealDates: []//选择购买时长
   }
-  if (res.code && res.code == 200) {
+  if (res.code == 0) {
     let data = res.data ? res.data : {};
 
     //转换选择IP时效数据

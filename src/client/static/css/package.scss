@@ -186,6 +186,7 @@ $columnMt: 60px;
         .ipPrice {
           display: flex;
           flex-wrap: wrap;
+          position: relative;
           // border-radius: 8px;
           // border: 2px solid #ffffff;
           // box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
@@ -215,6 +216,9 @@ $columnMt: 60px;
 
           .ipPrice-markPng {
             margin-left: 20px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
             img {
               width: 156px;
               height: 111px;
@@ -534,11 +538,15 @@ $columnMt: 60px;
   .calculatModal {
     .modal-content {
       overflow-x: auto;
-    }
-    .modalContent {
+      background: #ffffff url(/images/package/calcutaDialog.png) no-repeat;
+      background-size: 800px 215px;
+      background-position: -16px -16px;
       width: 800px;
       height: 588px;
+    }
+    .modalContent {
       padding: 0;
+
       .tabContent {
         .orange {
           color: #fc7019;
