@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-18 14:44:29
+ * @LastEditTime: 2022-05-18 15:31:10
  */
 
 
@@ -171,12 +171,14 @@ function checkForm(params = null, type = 'login') {
 
 //登录/注册/重置密码
 async function loginSubmit(type) {
-
   //获取参数
   const params = getParams(type)
   console.log("登录相关参数", params)
   //校验参数
   const res = checkForm(params, type)
+  if (!res.isPass) return Helper.$message({
+    message: res.msg, type: 'warning'
+  })
   console.log("校验参数结果:", res)
   params.type = type
   $.ajax({
@@ -188,7 +190,7 @@ async function loginSubmit(type) {
     success: (res) => {
       console.log("登录/注册结果:", res)
       if (+res.code !== 0) {
-        return $message({
+        return Helper.$message({
           message: res.msg || '注册失败!请联系客服',
           type: 'warning'
         })
@@ -219,7 +221,7 @@ async function sendCode(type = 'register') {
 
   //3.校验
   if (!params.phone) {
-    return $message({
+    return Helper.$message({
       message: "请输入手机号码",
       type: 'warning'
     }
@@ -227,7 +229,7 @@ async function sendCode(type = 'register') {
   }
 
   if (!rules.phone.test(params.phone)) {
-    return $message({
+    return Helper.$message({
       message: "请输入正确格式的手机号码",
       type: 'warning'
     }
@@ -249,7 +251,7 @@ async function sendCode(type = 'register') {
 
 
   if (res) {
-    return $message.success({
+    return Helper.$message.success({
       message: '请在手机端查看验证码',
       showClose: true
     })

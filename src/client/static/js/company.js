@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 企业服务js
  * @Date: 2022-05-17 14:48:37
- * @LastEditTime: 2022-05-17 17:05:23
+ * @LastEditTime: 2022-05-18 15:29:28
  */
 $(function() {
   //表单校验
@@ -54,8 +54,8 @@ async function onSubmit () {
   }
   let res = await ajax(params);
   if (res) {
-    $message.success({ message: '提交成功' })
+    Helper.$message.success({ message: '提交成功' })
   } else {
-    $message.error({ message: '提交失败' })
+    Helper.$message.error({ message: '提交失败' })
   }
 }

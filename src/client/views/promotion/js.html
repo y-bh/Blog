@@ -1,9 +1,9 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-12 14:29:17
+ * @LastEditTime: 2022-05-18 15:29:55
 -->
 <script>
     function fingerprint2 () {
@@ -52,7 +52,7 @@
                 }
             }
         } catch (e) {
-            $message.error({
+            Helper.$message.error({
                 message: '推广链接有误，请联系客服',
                 showClose: true
             })
@@ -162,20 +162,20 @@
             let reg = /^[a-zA-Z0-9_@]{4,16}$/;
             let flag = reg.test(value);
             if (!value) {
-                $message.warning({
+                Helper.$message.warning({
                     message: "用户名不能为空",
                     showClose: true
                 })
                 return false;
             } else if (!flag) {
                 if (value.length < 4 || value.length > 16) {
-                    $message.warning({
+                    Helper.$message.warning({
                         message: "用户名长度在4到16个字符",
                         showClose: true
                     })
                     return false;
                 }
-                $message.warning({
+                Helper.$message.warning({
                     message: "用户名只能由字母，数字，_@组成",
                     showClose: true
                 })
@@ -193,13 +193,13 @@
             let reg = /^1[34589]\d{9}|17[2-9]\d{8}|16[0-1]\d{8}|16[3-4]\d{8}|166\d{8}|16[8-9]\d{8}$/;
             let flag = reg.test(value);
             if (!value) {
-                $message.warning({
+                Helper.$message.warning({
                     message: "请输入手机号",
                     showClose: true
                 })
                 return false;
             } else if (!flag) {
-                $message.error({
+                Helper.$message.error({
                     message: "请输入正确的手机号码",
                     showClose: true
                 })
@@ -215,7 +215,7 @@
             sameTime = 'true';
             let value = val;
             if (!value) {
-                $message.warning({
+                Helper.$message.warning({
                     message: "请输入短信验证码",
                     showClose: true
                 })
@@ -224,7 +224,7 @@
             let reg = /^[0-9]{6}$/;
             let flag = reg.test(value);
             if (!flag) {
-                $message.error({
+                Helper.$message.error({
                     message: "请输入正确的短信验证码",
                     showClose: true
                 })
@@ -240,7 +240,7 @@
             sameTime = 'true';
             let value = val;
             if (!value) {
-                $message.warning({
+                Helper.$message.warning({
                     message: "请输入登录密码",
                     showClose: true
                 })
@@ -250,13 +250,13 @@
             let flag = reg.test(value);
             if (!flag) {
                 if (value.length < 6 || value.length > 20) {
-                    $message.warning({
+                    Helper.$message.warning({
                         message: "密码长度在6到20个字符",
                         showClose: true
                     })
                     return false;
                 }
-                $message.warning({
+                Helper.$message.warning({
                     message: "密码只能由字母，数字，特殊符号组成",
                     showClose: true
                 })
@@ -377,7 +377,7 @@
                 btn.attr('disabled', false);
                 return;
             } else {
-                $message.success({
+                Helper.$message.success({
                     message: '获取成功',
                     showClose: true
                 })
@@ -420,7 +420,7 @@
                 btn.attr('disabled', false);
                 return;
             }
-            $message.success({
+            Helper.$message.success({
                 message: '获取成功',
                 showClose: true
             })
@@ -459,7 +459,7 @@
                 btn.attr('disabled', false);
                 return;
             }
-            $message.success({
+            Helper.$message.success({
                 message: '获取成功',
                 showClose: true
             })
@@ -520,7 +520,7 @@
             if (!resp) {
                 return false;
             } else {
-                $message.success({
+                Helper.$message.success({
                     message: '注册成功',
                     showClose: true
                 })
@@ -572,7 +572,7 @@
             if (!resp) {
                 return false;
             } else {
-                $message.success({
+                Helper.$message.success({
                     message: '注册成功',
                     showClose: true
                 })
@@ -623,7 +623,7 @@
             if (!resp) {
                 return false;
             } else {
-                $message.success({
+                Helper.$message.success({
                     message: '注册成功',
                     showClose: true
                 })

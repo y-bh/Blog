@@ -3,8 +3,60 @@
  * @LastEditors: 朱占伟
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-18 14:49:52
+ * @LastEditTime: 2022-05-18 15:29:06
  */
+
+function Helper() { }
+
+//确认操作框信息
+Helper.$confirm = (msg = '确认此操作?', callback, options = {}
+) => {
+  const config = Object.assign({
+    callback, //回调函数处理
+    title: '提示',
+    cancelText: '取消',
+    okText: '确定',
+    ...options,
+  })
+  const eventName = +Date.now() + '_$confirm'
+  const htmls = `
+  <div class="modal" tabindex="-1" id="bootstrap-my-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">${config.title}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ${msg}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">${config.cancelText}</button>
+        <button type="button" class="btn btn-primary" onclick="window.$ok('${eventName}')">${config.okText}</button>
+      </div>
+    </div>
+  </div>
+</div>
+`
+  if (!$("#bootstrap-my-modal").html()) {
+    $(htmls).appendTo("body")
+  }
+  //注册回调
+  window[eventName] = callback
+  console.log("注册回调---", window[eventName], callback)
+  $('#bootstrap-my-modal').modal('show')
+}
+
+
+window.$ok = function (eventName) {
+  console.log("执行回调函数操作", eventName)
+  window[eventName]()
+  window[eventName] = null
+  $('#bootstrap-my-modal').modal('hide')
+}
+
 
 // 弹窗消息提示
 /*
@@ -14,8 +66,7 @@
         type: 消息类型  success/warning/danger
         duration: 消息持续时间
 */
-
-function $message(options = {}) {
+Helper.$message = (options = {}) => {
   const msg = options.message ? options.message : '出现错误';
   const showClose = options.showClose;
   const type = options.type ? options.type : 'success';
@@ -68,74 +119,12 @@ function $message(options = {}) {
   }
 }
 ["success", "warning", "error"].forEach(type => {
-  $message[type] = options => {
+  Helper.$message[type] = options => {
     options.type = type;
-    return $message(options)
+    return Helper.$message(options)
   }
 })
 
-
-
-
-
-
-function Helper() {
-
-}
-Helper.$confirm = (msg = '确认此操作?', callback, options = {}
-) => {
-
-  const config = Object.assign({
-    callback, //回调函数处理
-    title: '提示',
-    cancelText: '取消',
-    okText: '确定',
-    ...options,
-  })
-
-  let eventName = +Date.now() + '_$confirm'
-
-  const htmls = `
-  <div class="modal" tabindex="-1" id="bootstrap-my-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">${config.title}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ${msg}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">${config.cancelText}</button>
-        <button type="button" class="btn btn-primary" onclick="window.$ok('${eventName}')">${config.okText}</button>
-      </div>
-    </div>
-  </div>
-</div>
-`
-
-
-  if (!$("#bootstrap-my-modal").html()) {
-    $(htmls).appendTo("body")
-  }
-
-  //注册回调
-
-  window[eventName] = callback
-  console.log("注册回调---",window[eventName],callback)
-  $('#bootstrap-my-modal').modal('show')
-}
-
-
-window.$ok = function (eventName) {
-  console.log("执行回调函数操作", eventName)
-  window[eventName]()
-  window[eventName] = null
-  $('#bootstrap-my-modal').modal('hide')
-}
 
 
 
@@ -174,7 +163,7 @@ async function ajax(params) {
           if (res) {
             console.log(res, 'res');
             if (res.code !== 200) {
-              $message.error({
+              Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
               })
               resolve(false)
@@ -352,14 +341,14 @@ function layout() {
       success: (res) => {
         console.log("退出登录结果:", res)
         if (+res.code !== 0) {
-          return $message({
+          return Helper.$message({
             message: res.msg || '退出登录失败!',
             type: 'warning'
           })
 
         }
 
-        $message({ message: '退出登录' })
+        Helper.$message({ message: '退出登录' })
 
         return window.open("/login")
       },

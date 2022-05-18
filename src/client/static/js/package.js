@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 朱占伟
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-13 13:26:38
+ * @LastEditTime: 2022-05-18 15:29:50
  */
 
 
@@ -27,7 +27,7 @@ function counterInputVaild(counterVal, minVal, maxVal) {
   let newVal = counterVal;
   if (!(positiveInt.test(counterVal) && (counterVal <= maxVal) && (counterVal >= minVal))) {
     if (counterVal > maxVal) {
-      $message.warning({ message: "预充更多金额联系平台客户经理" })
+      Helper.$message.warning({ message: "预充更多金额联系平台客户经理" })
       newVal = maxVal;
     }
     if (counterVal <= minVal) {
@@ -105,7 +105,7 @@ function counter(type, curVal, maxVal, minVal, step) {
   //减少
   if (type == 'decrease') {
     if (curVal < minVal) {
-      $message.warning({ message: '提取最少为' + minVal })
+      Helper.$message.warning({ message: '提取最少为' + minVal })
       return minVal;
     } else {
       let lastNumber = (curVal - step) > minVal ? curVal - step : minVal;
@@ -115,7 +115,7 @@ function counter(type, curVal, maxVal, minVal, step) {
   //加
   if (type == 'plus') {
     if (curVal > maxVal) {
-      $message.warning({ message: '提取最大为' + maxVal })
+      Helper.$message.warning({ message: '提取最大为' + maxVal })
       return maxVal;
     } else {
       let lastNumber = (curVal + step) > maxVal ? maxVal : curVal + step;
@@ -156,7 +156,7 @@ function convertMultiple(number, min, max) {
   }
   let remainder = curNum / Number(min);
   if (remainder) {
-    $message.warning({ message: "提取总数必须是2000的倍数" })
+    Helper.$message.warning({ message: "提取总数必须是2000的倍数" })
   }
   let multiple = parseInt(curNum / Number(min));
   return multiple * min;
@@ -482,7 +482,7 @@ function wxPayFun(res) {
       //TODO 接口
       // if(true){
       //   //扫码成功，跳转另一个页面
-      //   $message.success({ message: "支付成功" })
+      //   Helper.$message.success({ message: "支付成功" })
       //   $('#wxPayModal').modal('hide');
       //   parent.location.reload();
       // }

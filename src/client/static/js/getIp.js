@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-17 18:01:13
+ * @LastEditTime: 2022-05-18 15:29:34
  */
 let loginStatus = true  //是否登录
 
@@ -40,7 +40,7 @@ $(function() {
   const changeIpNum = (val,btn) => {
     let num = Number(val)
     if (btn === 'decrement' && val <= 1) {  //点击"-"并且数值为1
-      $message.warning({
+      Helper.$message.warning({
         message: '单次最小提取量为1',
         showClose: true
       })
