@@ -119,7 +119,7 @@ function Router(App) {
     }
     const { articleTypes, lists ,title} = await getHelpService(body)
 
-    console.log("cccccccc",params.typeAlias)
+    console.log("cccccccc",lists)
 
 
     return ctx.render("help/helpCenter", { articleTypes, lists ,title})
