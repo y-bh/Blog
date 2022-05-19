@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-18 18:08:52
+ * @LastEditTime: 2022-05-19 14:00:44
  */
 
 function Helper() { }
@@ -126,7 +126,44 @@ Helper.$message = (options = {}) => {
 })
 
 
+function getCookie (key, json) {
+  if (typeof document === 'undefined') {
+    return;
+  }
 
+  var jar = {};
+  // To prevent the for loop in the first place assign an empty array
+  // in case there are no cookies at all.
+  var cookies = document.cookie ? document.cookie.split('; ') : [];
+  var i = 0;
+
+  for (; i < cookies.length; i++) {
+    var parts = cookies[i].split('=');
+    var cookie = parts.slice(1).join('=');
+
+    if (!json && cookie.charAt(0) === '"') {
+      cookie = cookie.slice(1, -1);
+    }
+
+    try {
+      var name = decode(cookie);
+
+      if (json) {
+        try {
+          cookie = JSON.parse(cookie);
+        } catch (e) {}
+      }
+
+      jar[name] = cookie;
+
+      if (key === name) {
+        break;
+      }
+    } catch (e) {}
+  }
+
+  return key ? jar[key] : jar;
+}
 //客户端ajax二次 封装
 
 /*
@@ -424,5 +461,7 @@ $(function () {
       toggleHead();
     }, 200);
   }, 500))
-
 })
+
+getCookie('TQ_TOKEN')
+console.log("获取token22:",document.cookie)

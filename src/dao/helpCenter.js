@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 帮助中心数据层
  * @Date: 2022-05-16 16:30:24
- * @LastEditTime: 2022-05-19 13:18:52
+ * @LastEditTime: 2022-05-19 13:24:37
  */
 const service= require("utils/request")
 const api = require("src/config/api.config.js")
@@ -43,7 +43,7 @@ const postArticleDao = async (params = null) => {
 }
 
 
-
+//获取文章栏目类型
 const getArticleTypeDao = async () => {
   const res = await service.get(api.articleType);
   console.log("=====================文章类型============",res)

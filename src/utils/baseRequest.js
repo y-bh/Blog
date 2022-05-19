@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-19 13:10:33
+ * @LastEditTime: 2022-05-19 14:17:57
  */
 
 import axios from 'axios';
@@ -18,7 +18,6 @@ class Request {
     // 请求拦截器
     service.interceptors.request.use(config => {
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-      console.log("请求的接口和地址:", config.url,config.data)
       return config;
     }, error => {
 
