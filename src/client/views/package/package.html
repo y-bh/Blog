@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-19 16:16:25
+ * @LastEditTime: 2022-05-19 17:05:47
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -232,9 +232,9 @@
                           <% mealDate.list.forEach(function(item,index) { %>
                             <% var days=Number(item.time)/24/60/60 %>
                               <% if (index==0) { %>
-                                <li class="current" days="<%= days %>">
+                                <li class="current" days="<%= days %>" data-id="<%= item.id %>">
                                   <% } else { %>
-                                <li days="<%= days %>">
+                                <li days="<%= days %>" data-id="<%= item.id %>">
                                   <% } %>
 
                                     <!-- 获取当前数据的id映射至activityVoMap -->
@@ -355,7 +355,7 @@
               <div class="payMoney-number mr-30"><span id="discountPrice">0.00</span><span>元</span></div>
               <div class="payMoney-origin"><span>原价：</span><span id="totalPrice"
                   noRedPrice="0.00">0.00</span><span>元</span></div>
-              <div class="pay-button ml-40"  onclick="toPayMoney(2)"><span>立即支付</span></div>
+              <div class="pay-button ml-40" onclick="toPayMoney(2)"><span>立即支付</span></div>
             </div>
           </div>
         </div>

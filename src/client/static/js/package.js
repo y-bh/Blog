@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-19 16:45:45
+ * @LastEditTime: 2022-05-19 17:13:14
  */
 
 
@@ -483,10 +483,10 @@ async function toPayMoney(tabType) {
         resp = await ajax(ajaxData);
       }
     } else {
-      let meanId = $("#selectIPTimes").find("li.current").attr("data-id");
+      let meanId = $("#selectBuyDuration").find("ul.current").find("li.current").attr("data-id");
       let total = $("#counter-enter").val();
       if (payType === 'ali') {
-        window.open("/jumpTo/jumpTo?buyType=recharge&price=" + parseFloat(payPrice) + "&payType=" + payType + "&redRecordId=" + Number(redPacketId));
+        window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total)  + "&redRecordId=" + Number(redPacketId));
       } else {
         //调用后台接口生成二维码
         let parmas = {
@@ -495,7 +495,7 @@ async function toPayMoney(tabType) {
           total: Number(total),
           redRecordId: redPacketId ? redPacketId : null
         }
-        //充值接口
+        //购买套餐接口
         let ajaxData = {
           url: "/buyProxy",
           type: 'post',
