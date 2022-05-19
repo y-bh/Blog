@@ -108,31 +108,16 @@ function Router(App) {
   })
 
 
-  //帮助中心-helpCenter
+  //帮助中心-文章列表页
   router.get(["/help-center", "/help-center/:typeAlias/:pageNum"], async (ctx) => {
-
-    const { body, params, query } = ctx.request
-
-    console.log("帮助中心参数:", body)
-
+    const { body, params } = ctx.request
     if (params && params.pageNum) {
       body.pageNum = +params.pageNum.split('.')[0] || 1
     }
     if (params && params.typeAlias) {
       body.typeAlias = params.typeAlias
     }
-
-
-
     const { articleTypes, lists } = await getHelpService(body)
-
-
-    // let helpData = await getHelpListS()
-
-    // console.log('总页数:', helpData);
-    // ctx.body=helpData
-    //  return ctx.render("help/helpCenter", helpData)
-
     return ctx.render("help/helpCenter", { articleTypes, lists })
   })
 
