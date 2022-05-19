@@ -28,20 +28,21 @@
 
       <!-- 栏目类型 -->
       <div class="flex flex-wrap justify-center">
-        <ul class="nav nav-pills nav-fill ">
+        <ul class="flex flex-wrap justify-center nav nav-pills nav-fill">
           <% articleTypes.forEach(e=> { %>
             <li class="nav-item flex-center">
-              <a href="javascript:void(0)" id="<%= e.typeAlias %>" class="nav-link flex-center widthAll pointer"
-                data-toggle="tab">
+              <a href="/help-center/<%= e.typeAlias %>/1.html" id="<%= e.typeAlias %>"
+                class="nav-link flex-center widthAll pointer" data-toggle="tab">
                 <%= e.type %>
               </a>
             </li>
             <% }) %>
         </ul>
+      </div>
 
-
-        <!-- 文章列表 -->
-        <div class="common-fadeInUp">
+      <!-- 文章列表 -->
+      <% if(lists.data.length>0 ){ %>
+        <div class="flex justify-center common-fadeInUp">
           <div class="tab-content mt-60">
             <div class="tab-pane">
               <div class="content grid">
@@ -85,7 +86,7 @@
                       <li class="page-item">
                         <% for(let i=0; i < lists.totalPage; i++) { %>
                           <a href="#" class="page-link">
-                            <%=i%>
+                            <%=i+1%>
                           </a>
                           <% } %>
                       </li>
@@ -104,7 +105,11 @@
             </div>
           </div>
         </div>
-      </div>
+        <% }else {%>
+          <div class="flex justify-center empty-box">
+            
+          </div>
+          <% } %>
 
     </div>
 </body>

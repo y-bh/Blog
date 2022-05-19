@@ -18,7 +18,6 @@ class Request {
     // 请求拦截器
     service.interceptors.request.use(config => {
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-       console.log("请求的接口和地址:", config)
       return config;
     }, error => {
 

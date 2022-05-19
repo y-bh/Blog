@@ -109,18 +109,25 @@ function Router(App) {
 
 
   //帮助中心-helpCenter
-  router.get(["/helpCenter", "/helpCenter/:path"], async (ctx) => {
+  router.get(["/help-center", "/help-center/:typeAlias/:pageNum"], async (ctx) => {
 
-    const { body } = ctx.request
+    const { body, params, query } = ctx.request
 
     console.log("帮助中心参数:", body)
 
-
+    if (params && params.pageNum) {
+      body.pageNum = +params.pageNum.split('.')[0] || 1
+      console.log("ddddddddddddddddddddd", params, query.type)
+    }
+    if (params && params.typeAlias) {
+      body.typeAlias = params.typeAlias
+      console.log("ddddddddddddddddddddd", params, query.type)
+    }
 
 
 
     const { articleTypes, lists } = await getHelpService(body)
-    console.log("dddddddddddddddddddddddd", lists)
+
 
     // let helpData = await getHelpListS()
 

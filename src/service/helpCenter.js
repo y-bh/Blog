@@ -281,30 +281,31 @@ const getHelpService = async (data) => {
       }
     }
 
-    
-
-
-
     const params = {
       pageSize: data.pageSize || 10,
-      pageNum: data.pageNum || 0,
-      types:data.types || []
+      pageNum: data.pageNum || 1,
     }
-    if (!params.types.length) {
+
+    if (data.typeAlias) {
+      let tem = articleTypes.filter(({ typeAlias }) => typeAlias === data.typeAlias)
+      if (tem.length > 0) {
+        data.type = tem[0].id
+      }
+    }
+
+    if (!params.types) {
       params.types = [articleTypes[0].id]
     }
 
     //文章列表
     lists = await postArticleDao(params)
-    console.log("cccccccccccccccccccccccccc",lists)
-
 
     //兜底分页
     if (!lists.totalPage) {
       lists.totalPage = Math.ceil(lists.totalSize / params.pageSize)
     }
 
-
+ console.log("吧吧吧吧吧吧吧吧吧吧吧吧吧吧v ",lists)
 
     return {
       articleTypes,

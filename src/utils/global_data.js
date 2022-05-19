@@ -13,12 +13,12 @@ const { renderTab, getQueryLink } = require("service/common")
 
 
 //需要获取全局数据的 url
-const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/getIp?wl', '/package', '/businessScene', '/helpCenter', '/firmsServer', '/helpDetails']
+const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/getIp?wl', '/package', '/businessScene', '/firmsServer', '/helpDetails']
 module.exports = function (app) {
   app.use(async ({ req, res, state, cookies }, next) => {
     const { method, url } = req
     
-    if (method === 'GET' && (URLS.includes(url) || url.includes('manager'))) {
+    if (method === 'GET' && (URLS.includes(url) || url.includes('manager') || url.includes('help-center'))) {
       
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
