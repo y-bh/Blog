@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-19 14:00:44
+ * @LastEditTime: 2022-05-19 14:47:06
  */
 
 function Helper() { }
@@ -177,7 +177,7 @@ async function ajax(params) {
     console.log(params.query, '接口参数');
     $.ajax({
       type: params.type ? params.type : 'POST',
-      url: '/proxy' + params.url,
+      url: '/javaProxy' + params.url,
       contentType: 'application/json',
       data: params.query,
       success: (res) => {

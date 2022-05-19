@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 客户端接口跨域代理
  * @Date: 2022-05-18 17:24:02
- * @LastEditTime: 2022-05-19 14:39:27
+ * @LastEditTime: 2022-05-19 14:47:34
  */
 
 const service = require("utils/request")
@@ -15,7 +15,7 @@ module.exports = (option = {}) => {
   return async function (ctx, next) {
     const { url, method, body } = ctx.request
     if (option && !option.prex) {
-      option.prex = '/proxy'
+      option.prex = '/javaProxy'
     }
     if (!url.includes(option.prex)) {
       await next();
