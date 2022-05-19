@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: 朱占伟
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-18 18:20:47
+ * @LastEditTime: 2022-05-19 13:15:31
  */
 
 module.exports = {
@@ -12,9 +12,7 @@ module.exports = {
   //友情链接
   'QUERY_LINK': '/link/queryList',
   //套餐购买
-  proxyMealList: "/proxyMeal/list",
-  'articleType': "/article/getArticleType",//资讯中心--获取文章类型
-  'getIndexArticles': "/article/getIndexArticles",//资讯中心--获取文章列表
+  'proxyMealList': "/proxyMeal/list",
   'REGISTER': "/user/register",
 
 
@@ -35,9 +33,12 @@ module.exports = {
   'MANAGER_USER_UPDATE_INFO': "/user/update/info", //个人中心修改用户信息
 
   /*帮助中心 */
-  'HELP_HELP': '/help/help', //获取首页的文章列表
-  'HELP_FIND_BY_ARTICLE_KEYWORD': '/help/findByArticleKeyword', //查看文章关键词聚合页
-  'HELP_HELP_DETAILS': '/help/helpDetails', //文章详情
+  'articleType': "/article/getArticleType",//资讯中心--获取文章类型
+  'getIndexArticles': "/article/getIndexArticles",//资讯中心--获取文章列表
+  'POST_HELP_HELP': '/help/help', //获取首页的文章列表
+  'POST_HELP_FIND_BY_ARTICLE_KEYWORD': '/help/findByArticleKeyword', //查看文章关键词聚合页
+  'POST_HELP_HELP_DETAILS': '/help/helpDetails', //文章详情
+  'POST_HELP_ARTICLE_LIST':"/article/getArticles",
 
   /*个人中心-购买记录 */
   'ORDER_LIST': '/order/list', //获取订单列表

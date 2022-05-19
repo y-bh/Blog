@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-18 17:34:27
+ * @LastEditTime: 2022-05-19 13:13:22
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -68,6 +68,7 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
+import { getRenewList } from "model/meal.js";
 export default {
     emits: ['query'],
     components: {

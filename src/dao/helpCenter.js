@@ -1,16 +1,16 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 帮助中心数据层
  * @Date: 2022-05-16 16:30:24
- * @LastEditTime: 2022-05-19 12:55:22
+ * @LastEditTime: 2022-05-19 15:32:02
  */
 const service= require("utils/request")
 const api = require("src/config/api.config.js")
 
 //获取首页的文章列表
 const getHelpList = async (params = null) => {
-  const url = api.HELP_HELP
+  const url = api.POST_HELP_HELP
   try {
     const res = await service.post(url, params)
     return res
@@ -21,7 +21,7 @@ const getHelpList = async (params = null) => {
 
 //文章详情
 const getBlogDetail = async (params = null) => {
-  const url = api.HELP_HELP_DETAILS
+  const url = api.POST_HELP_HELP_DETAILS
   try {
     const res = await service.post(url, params)
     return res
@@ -33,7 +33,7 @@ const getBlogDetail = async (params = null) => {
 
 //文章列表
 const postArticleDao = async (params = null) => {
-  const url = api.HELP_ARTICLE_LIST
+  const url = api.POST_HELP_ARTICLE_LIST
   try {
     const res = await service.post(url, params)
     return res
@@ -43,8 +43,25 @@ const postArticleDao = async (params = null) => {
 }
 
 
-
-
+//获取文章栏目类型
+const getArticleTypeDao = async () => {
+  const res = await service.get(api.articleType);
+  console.log("=====================文章类型============",res)
+  let data = [];
+  if (res.code === 200 && res.data.length > 0) {
+    data = res.data;
+  }
+  return data;
+}
+const getArticleListDao = async () => {
+  const res = await service.get(api.getIndexArticles);
+  console.log("----文章列表2222222222----", res);
+  let data = {};
+  if (res.code === 200 && res.data) {
+    data = res.data;
+  }
+  return data;
+}
 
 
 
@@ -53,5 +70,7 @@ const postArticleDao = async (params = null) => {
 module.exports = {
   getHelpList,
   getBlogDetail,
-  postArticleDao
+  postArticleDao,
+  getArticleTypeDao,
+  getArticleListDao
 }

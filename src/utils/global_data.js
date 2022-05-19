@@ -17,14 +17,14 @@ const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/package', '/busi
 module.exports = function (app) {
   app.use(async ({ req, res, state, cookies }, next) => {
     const { method, url } = req
-    console.log("设置全局数据", url, method)
+    
     if (method === 'GET' && (URLS.includes(url) || url.includes('manager'))) {
-      console.log("设置全局数据", url)
+      
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
       state[appKey.active_tab] = tabActivity
 
-      console.log("獲取相關cookie:", cookies.get(appKey.userInfo))
+      
 
       //登录用户名
       let userInfo = cookies.get(appKey.userInfo)

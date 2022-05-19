@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-18 18:02:14
+ * @LastEditTime: 2022-05-19 15:31:26
 -->
 <template>
   <div class="container">
@@ -303,7 +303,7 @@ export default {
         params.createTimeEnd = $route.query.useTime && formatInt($route.query.useTime[1]) || 
         (state.searchForm.useTime && formatInt(state.searchForm.useTime[1]))
         let res = await getTableList(params);
-        if(res && res.code === 0){
+        if(res && res.code === 200){
           state.tableList = res.data && res.data.data;
           console.log(state.tableList);
         } else {

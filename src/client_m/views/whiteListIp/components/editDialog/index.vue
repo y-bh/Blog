@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-12 10:19:45
- * @LastEditTime: 2022-05-16 14:14:12
+ * @LastEditTime: 2022-05-19 15:31:46
 -->
 <template>
   <el-dialog
@@ -138,7 +138,7 @@ export default {
         res = (readonly&&await updateWhiteIpDescFunc(params)) || await addWhiteIpFunc(params)
 
         /**条件判断返回值 */
-        if(+res.code === 0){
+        if(+res.code === 200){
           $message.success('操作成功')
           props.ok()
         } else {

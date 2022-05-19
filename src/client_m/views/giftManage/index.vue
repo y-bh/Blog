@@ -1,9 +1,13 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:47:07
+<<<<<<< HEAD
  * @LastEditTime: 2022-05-19 13:38:35
+=======
+ * @LastEditTime: 2022-05-19 15:31:22
+>>>>>>> aa26c63bfbeea7e11e842d6940f888f5678ae5cd
 -->
 <template>
   <div class="gift-wrap">
@@ -74,7 +78,7 @@ export default {
       const res = await getGiftFunc();
 
       /**条件判断 */
-      if (+res.code === 0) {
+      if (+res.code === 200) {
         // state.giftList = res.data
       } else {
         $message.error(res.msg);

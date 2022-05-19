@@ -1,17 +1,17 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 朱占伟
  * @description: 业务层代码
  * @Date: 2022-04-25 11:06:41
- * @LastEditTime: 2022-05-18 16:50:47
+ * @LastEditTime: 2022-05-19 13:19:34
  */
 
 
-const { articleType, articleList } = require("dao/home")
+const { getArticleTypeDao, getArticleListDao } = require("dao/helpCenter")
 
 const renderHome = async () => {
   //文章类型
-  let typeList = await articleType();
+  let typeList = await getArticleTypeDao();
   let allTypeIds = [];
   if (typeList && typeList.length > 0) {
     // typeList.forEach(item => {
@@ -28,7 +28,7 @@ const renderHome = async () => {
       typeList = typeList.slice(0, 3)
     }
     //根据id获取文章列表
-    let articleDetail = await articleList();
+    let articleDetail = await getArticleListDao();
 
     //console.log("----文章列表----", articleDetail);
     typeList.forEach(item => {

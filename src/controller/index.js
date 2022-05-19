@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-19 11:10:06
+ * @LastEditTime: 2022-05-19 13:07:39
  */
 
 
@@ -110,12 +110,16 @@ function Router(App) {
 
   //帮助中心-helpCenter
   router.get(["/helpCenter", "/helpCenter/:path"], async (ctx) => {
+ 
+      const {body} = ctx.request
+   
+    console.log("帮助中心参数:",body)
 
 
     const params = {
-      
+      "pageNum": 0
     }
-    const res = await postArticleService()
+    const res = await postArticleService(params)
 
    // let helpData = await getHelpListS()
 

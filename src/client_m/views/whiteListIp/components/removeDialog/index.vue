@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-12 15:00:41
- * @LastEditTime: 2022-05-16 11:48:02
+ * @LastEditTime: 2022-05-19 15:31:50
 -->
 <template>
   <el-dialog
@@ -79,7 +79,7 @@ export default {
         }
         const res = await removeWhiteIpFunc(params)
 
-        if(+res.code === 0){
+        if(+res.code === 200){
           $message.success('删除成功')
           props.ok()
         } else {
