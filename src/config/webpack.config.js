@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: 朱占伟
  * @description: 个人中心工程配置文件
  * @Date: 2022-04-25 15:57:44
- * @LastEditTime: 2022-05-18 17:05:40
+ * @LastEditTime: 2022-05-19 12:44:40
  */
 
 const appConfig = require('config/app.config.js')
@@ -95,6 +95,7 @@ module.exports = {
     alias: {
       config: path.join(__dirname, "../config"),
       tools: path.join(config.client_m, '/tools'),
+      nodeUtils: path.join(__dirname, '../utils'),
       views: path.join(config.client_m, '/views'),
       model: path.join(config.client_m, '/model'),
       assets: path.join(config.client_m, '/assets'),

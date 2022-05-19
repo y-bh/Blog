@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-19 10:16:42
+ * @LastEditTime: 2022-05-19 12:53:24
  */
 
 import { createApp } from 'vue';
@@ -26,8 +26,8 @@ import * as re from 'config/re.config';
 
 const app = createApp(App);
 
-const { post, put, del, get } = require("src/utils/request.js")
 
+import service from "tools/ajax"
 
 // 注入全局变量
 app.provide('_global', $global);
@@ -41,14 +41,14 @@ const router = injectRouter(app);
 injectState(app);
 
 //注入ajax 服务
-app.config.globalProperties.$get = get;
-app.provide('$get', get)
-app.config.globalProperties.$post = post;
-app.provide('$post', post)
-app.config.globalProperties.$get = get;
-app.provide('$put', put)
-app.config.globalProperties.$post = post;
-app.provide('$del', del)
+// app.config.globalProperties.$get = service.get;
+// app.provide('$get', get)
+// app.config.globalProperties.$post = service.post;
+// app.provide('$post', post)
+// app.config.globalProperties.$del = service.del;
+// app.provide('$put', del)
+// app.config.globalProperties.$put = service.put;
+// app.provide('$del', put)
 
 //注入正则表达式管理
 app.config.globalProperties.$re = re;

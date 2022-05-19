@@ -1,11 +1,11 @@
 /*
  * @Author: liyuntao
- * @LastEditors: liyuntao
+ * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-05-14 11:14:10
- * @LastEditTime: 2022-05-14 11:16:14
+ * @LastEditTime: 2022-05-19 12:52:28
  */
-import { post } from 'tools/ajax.js';
+import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
 
 
@@ -20,7 +20,7 @@ const api = require("config/api.config.js")
  */
 export const submitTicketFunc = async (params = null) => {
   try {
-    const res = await post(api.MANAGER_SUBMIT_TICKET, params);
+    const res = await service.post(api.MANAGER_SUBMIT_TICKET, params);
     return res;
   } catch (error) {
     console.error('getTest', error);

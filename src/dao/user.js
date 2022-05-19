@@ -3,17 +3,17 @@
  * @LastEditors: 朱占伟
  * @description: 用户相关接口操作
  * @Date: 2022-05-17 17:04:35
- * @LastEditTime: 2022-05-18 09:53:10
+ * @LastEditTime: 2022-05-19 12:56:05
  */
 
 
-const { post, put } = require("utils/request")
+const service = require("utils/request")
 const api = require("src/config/api.config.js")
 
 //注册功能
 const postRegisterDao = async (data) => {
   try {
-    const res = await put(api.POST_USER_REGISTER, data)
+    const res = await service.put(api.POST_USER_REGISTER, data)
     return res
   } catch (error) {
     return error
@@ -23,7 +23,7 @@ const postRegisterDao = async (data) => {
 //重置功能
 const postResetDao = async (data) => {
   try {
-    const res = await post(api.POST_USER_RESET, data)
+    const res = await service.post(api.POST_USER_RESET, data)
     return res
   } catch (error) {
     return error
@@ -33,7 +33,7 @@ const postResetDao = async (data) => {
 //登录
 const postLoginDao = async (data) => {
   try {
-    const res = await post(api.POST_USER_LOGIN, data)
+    const res = await service.post(api.POST_USER_LOGIN, data)
     return res
   } catch (error) {
     return error

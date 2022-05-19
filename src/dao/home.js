@@ -3,15 +3,15 @@
  * @LastEditors: 朱占伟
  * @description: 首页数据层
  * @Date: 2022-04-25 10:33:13
- * @LastEditTime: 2022-05-18 17:08:31
+ * @LastEditTime: 2022-05-19 12:55:36
  */
 
 
-const { post, get} = require("utils/request")
+const service= require("utils/request")
 const api = require("src/config/api.config.js");
 
 const articleType = async () => {
-  const res = await get(api.articleType);
+  const res = await service.get(api.articleType);
   console.log("=====================文章类型============",res)
   let data = [];
   if (res.code === 0 && res.data.length > 0) {
@@ -20,7 +20,7 @@ const articleType = async () => {
   return data;
 }
 const articleList = async () => {
-  const res = await get(api.getIndexArticles);
+  const res = await service.get(api.getIndexArticles);
   console.log("----文章列表2222222222----", res);
   let data = {};
   if (res.code === 0 && res.data) {
