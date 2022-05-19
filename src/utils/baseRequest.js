@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
  * @LastEditors: 朱占伟
- * @description: page description
+ * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-19 12:57:13
+ * @LastEditTime: 2022-05-19 13:02:10
  */
 
 import axios from 'axios';
