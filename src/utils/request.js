@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-05-18 17:59:07
+ * @LastEditTime: 2022-05-19 10:42:08
  */
 const appConfig = require("config/app.config")
 import axios from 'axios';
@@ -23,6 +23,12 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+
+  if(globalThis.document){
+    console.log("个人中心ajax请求:", config.url)
+    config.baseURL = "/proxy"
+  }
+
   return config;
 }, error => {
 
@@ -52,8 +58,7 @@ service.interceptors.response.use(response => {
 },
   error => {
 
-    const status = error.response.status;
-    const data = error.response.data;
+  console.error("响应报错:",error)
 
   });
 

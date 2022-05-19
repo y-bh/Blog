@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-18 18:13:50
+ * @LastEditTime: 2022-05-19 10:16:42
  */
 
 import { createApp } from 'vue';
@@ -26,7 +26,7 @@ import * as re from 'config/re.config';
 
 const app = createApp(App);
 
-const { post, put, del, get } = require("utils/request.js")
+const { post, put, del, get } = require("src/utils/request.js")
 
 
 // 注入全局变量
