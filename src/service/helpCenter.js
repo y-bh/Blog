@@ -286,10 +286,12 @@ const getHelpService = async (data) => {
       pageNum: data.pageNum || 1,
     }
 
+    let title = null
     if (data.typeAlias) {
       let tem = articleTypes.filter(({ typeAlias }) => typeAlias === data.typeAlias)
       if (tem.length > 0) {
         data.type = tem[0].id
+        title = tem[0].type
       }
     }
 
@@ -307,9 +309,15 @@ const getHelpService = async (data) => {
 
     //属于的文章类型
     lists.typeAlias = data.typeAlias || articleTypes[0]['typeAlias']
+
+    //获取文章类型标题
+
+
+
     return {
       articleTypes,
-      lists
+      lists,
+      title
     }
   } catch (error) {
     console.error("getHelpService: ", error);

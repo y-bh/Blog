@@ -117,8 +117,12 @@ function Router(App) {
     if (params && params.typeAlias) {
       body.typeAlias = params.typeAlias
     }
-    const { articleTypes, lists } = await getHelpService(body)
-    return ctx.render("help/helpCenter", { articleTypes, lists })
+    const { articleTypes, lists ,title} = await getHelpService(body)
+
+    console.log("cccccccc",params.typeAlias)
+
+
+    return ctx.render("help/helpCenter", { articleTypes, lists ,title})
   })
 
 
