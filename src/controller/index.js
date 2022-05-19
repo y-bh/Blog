@@ -10,7 +10,7 @@
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpListS, getBlogDetailS, getKeyWordPageS ,postArticleService} = require('service/helpCenter')
+const { getHelpService, getBlogDetailS, getKeyWordPageS, postArticleService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
 const { getProxyCityS, getProxyMenuS } = require('service/getIp')
@@ -110,24 +110,25 @@ function Router(App) {
 
   //帮助中心-helpCenter
   router.get(["/helpCenter", "/helpCenter/:path"], async (ctx) => {
- 
-      const {body} = ctx.request
-   
-    console.log("帮助中心参数:",body)
+
+    const { body } = ctx.request
+
+    console.log("帮助中心参数:", body)
 
 
-    const params = {
-      "pageNum": 0
-    }
-    const res = await postArticleService(params)
 
-   // let helpData = await getHelpListS()
 
-   // console.log('总页数:', helpData);
+
+    const { articleTypes, lists } = await getHelpService(body)
+    console.log("dddddddddddddddddddddddd", lists)
+
+    // let helpData = await getHelpListS()
+
+    // console.log('总页数:', helpData);
     // ctx.body=helpData
-  //  return ctx.render("help/helpCenter", helpData)
+    //  return ctx.render("help/helpCenter", helpData)
 
-  ctx.body = '测试'
+    return ctx.render("help/helpCenter", { articleTypes, lists })
   })
 
 

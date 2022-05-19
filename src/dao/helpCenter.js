@@ -32,35 +32,51 @@ const getBlogDetail = async (params = null) => {
 
 
 //文章列表
+
+//文章列表
 const postArticleDao = async (params = null) => {
   const url = api.POST_HELP_ARTICLE_LIST
+  let data = null;
   try {
     const res = await service.post(url, params)
-    return res
+    if (res.code === 200) {
+      data = res.data;
+    }
+    return data;
   } catch (error) {
-    console.error('postArticleDao: ', error)
+    console.error('postArticleDao: ')
+    return Promise.resolve(data)
   }
 }
 
 
 //获取文章栏目类型
 const getArticleTypeDao = async () => {
-  const res = await service.get(api.articleType);
-  console.log("=====================文章类型============",res)
   let data = [];
-  if (res.code === 200 && res.data.length > 0) {
-    data = res.data;
+  try {
+    const res = await service.get(api.articleType);
+    if (res.code === 200 && res.data.length > 0) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    console.error('getArticleTypeDao: ')
+    return Promise.resolve(data)
   }
-  return data;
 }
+
 const getArticleListDao = async () => {
-  const res = await service.get(api.getIndexArticles);
-  console.log("----文章列表2222222222----", res);
-  let data = {};
-  if (res.code === 200 && res.data) {
-    data = res.data;
+  let data = [];
+  try {
+    const res = await service.get(api.getIndexArticles);
+    if (res.code === 200 && res.data.length > 0) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    console.error('getArticleListDao: ')
+    return Promise.resolve(data)
   }
-  return data;
 }
 
 

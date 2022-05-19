@@ -45,7 +45,7 @@
           <div class="tab-content mt-60">
             <div class="tab-pane">
               <div class="content grid">
-                <% articlePageRespDTO.data.forEach(function(i,blog_index) { %>
+                <% lists.data.forEach(function(i,blog_index) { %>
                   <div class="blog_item flex justify-between align-center">
                     <div class="left grid">
                       <div class="top text-blue flex justify-start align-start">
@@ -83,7 +83,7 @@
                     </li>
                     <div class="pageList flex">
                       <li class="page-item">
-                        <% for(let i=0; i < articlePageRespDTO.totalPage; i++) { %>
+                        <% for(let i=0; i < lists.totalPage; i++) { %>
                           <a href="#" class="page-link">
                             <%=i%>
                           </a>

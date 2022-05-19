@@ -5,7 +5,7 @@
  * @Date: 2022-05-16 16:37:33
  * @LastEditTime: 2022-05-19 15:32:24
  */
-const { getHelpList, getBlogDetail, postArticleDao } = require("dao/helpCenter")
+const { getHelpList, getArticleTypeDao, postArticleDao } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
 
 //标题省略
@@ -267,6 +267,59 @@ const postArticleService = async (data) => {
 
 
 
+const getHelpService = async (data) => {
+  let articleTypes = []
+  let lists = []
+  try {
+    //获取文章类型
+    const articleTypes = await getArticleTypeDao()
+
+    if (!articleTypes.length) {
+      return {
+        articleTypes,
+        lists
+      }
+    }
+
+    
+
+
+
+    const params = {
+      pageSize: data.pageSize || 10,
+      pageNum: data.pageNum || 0,
+      types:data.types || []
+    }
+    if (!params.types.length) {
+      params.types = [articleTypes[0].id]
+    }
+
+    //文章列表
+    lists = await postArticleDao(params)
+    console.log("cccccccccccccccccccccccccc",lists)
+
+
+    //兜底分页
+    if (!lists.totalPage) {
+      lists.totalPage = Math.ceil(lists.totalSize / params.pageSize)
+    }
+
+
+
+    return {
+      articleTypes,
+      lists
+    }
+  } catch (error) {
+    console.error("getHelpService: ", error);
+    return Promise.resolve(
+      {
+        articleTypes,
+        lists
+      }
+    )
+  }
+}
 
 
 
@@ -275,5 +328,6 @@ module.exports = {
   getHelpListS,
   getBlogDetailS,
   getKeyWordPageS,
-  postArticleService
+  postArticleService,
+  getHelpService
 }
