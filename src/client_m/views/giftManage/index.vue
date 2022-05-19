@@ -1,13 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
-<<<<<<< HEAD
- * @LastEditTime: 2022-05-19 13:38:35
-=======
- * @LastEditTime: 2022-05-19 15:31:22
->>>>>>> aa26c63bfbeea7e11e842d6940f888f5678ae5cd
+ * @LastEditTime: 2022-05-19 16:00:35
 -->
 <template>
   <div class="gift-wrap">
