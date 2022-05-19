@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-19 11:22:47
+ * @LastEditTime: 2022-05-19 17:05:47
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -147,7 +147,7 @@
             <div class="payMoney">
               <div class="payMoney-title mr-40"><span>支付金额</span></div>
               <div class="payMoney-number"><span id="rechargeMoney">0.00</span><span>元</span></div>
-              <div class="pay-button" id="payment1"><span>立即支付</span></div>
+              <div class="pay-button" onclick="toPayMoney(1)"><span>立即支付</span></div>
             </div>
           </div>
           <!-- 短效IP  tab内容-->
@@ -232,9 +232,9 @@
                           <% mealDate.list.forEach(function(item,index) { %>
                             <% var days=Number(item.time)/24/60/60 %>
                               <% if (index==0) { %>
-                                <li class="current" days="<%= days %>">
+                                <li class="current" days="<%= days %>" data-id="<%= item.id %>">
                                   <% } else { %>
-                                <li days="<%= days %>">
+                                <li days="<%= days %>" data-id="<%= item.id %>">
                                   <% } %>
 
                                     <!-- 获取当前数据的id映射至activityVoMap -->
@@ -335,7 +335,7 @@
             <div class="payType mt-50">
               <div class="payType-content">
                 <div class="payType-title mr-40"><span>选择支付方式</span></div>
-                <ul class="payMode">
+                <ul id="packagePayType" class="payMode">
                   <li class="aliPay mr-30 current" type="ali">
                     <img src="https://www.tianqiip.com/website/images/buy/ali.png" alt="支付宝">
                     <span class="ml-20">支付宝</span>
@@ -355,7 +355,7 @@
               <div class="payMoney-number mr-30"><span id="discountPrice">0.00</span><span>元</span></div>
               <div class="payMoney-origin"><span>原价：</span><span id="totalPrice"
                   noRedPrice="0.00">0.00</span><span>元</span></div>
-              <div class="pay-button ml-40"><span>立即支付</span></div>
+              <div class="pay-button ml-40" onclick="toPayMoney(2)"><span>立即支付</span></div>
             </div>
           </div>
         </div>
