@@ -117,11 +117,9 @@ function Router(App) {
 
     if (params && params.pageNum) {
       body.pageNum = +params.pageNum.split('.')[0] || 1
-      console.log("ddddddddddddddddddddd", params, query.type)
     }
     if (params && params.typeAlias) {
       body.typeAlias = params.typeAlias
-      console.log("ddddddddddddddddddddd", params, query.type)
     }
 
 

@@ -44,7 +44,7 @@
       <% if(lists.data.length>0 ){ %>
         <div class="flex justify-center common-fadeInUp">
           <div class="tab-content mt-60">
-            <div class="tab-pane">
+            <div class="tab-pane active">
               <div class="content grid">
                 <% lists.data.forEach(function(i,blog_index) { %>
                   <div class="blog_item flex justify-between align-center">
@@ -85,7 +85,7 @@
                     <div class="pageList flex">
                       <li class="page-item">
                         <% for(let i=0; i < lists.totalPage; i++) { %>
-                          <a href="#" class="page-link">
+                          <a href="/help-center/<%= lists.typeAlias %>/<%=i+1%>.html" class="page-link">
                             <%=i+1%>
                           </a>
                           <% } %>

@@ -305,8 +305,8 @@ const getHelpService = async (data) => {
       lists.totalPage = Math.ceil(lists.totalSize / params.pageSize)
     }
 
- console.log("吧吧吧吧吧吧吧吧吧吧吧吧吧吧v ",lists)
-
+    //属于的文章类型
+    lists.typeAlias = data.typeAlias || articleTypes[0]['typeAlias']
     return {
       articleTypes,
       lists
