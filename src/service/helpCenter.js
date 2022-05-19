@@ -3,9 +3,9 @@
  * @LastEditors: 朱占伟
  * @description: 帮助中心业务代码
  * @Date: 2022-05-16 16:37:33
- * @LastEditTime: 2022-05-18 13:34:34
+ * @LastEditTime: 2022-05-19 10:54:20
  */
-const { getHelpList, getBlogDetail } = require("dao/helpCenter")
+const { getHelpList, getBlogDetail, postArticleDao } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
 
 //标题省略
@@ -33,13 +33,14 @@ const getHelpListS = async () => {
       })
 
       return {
-        articlePageRespDTO:articlePageRespDTO, articleTypes, alive, title
+        articlePageRespDTO: articlePageRespDTO, articleTypes, alive, title
       };
     }
   } catch (error) {
     console.error("getHelpList_Service: ", error);
   }
 }
+
 
 //获取文章详情
 let tabList = [
@@ -242,8 +243,37 @@ const getKeyWordPageS = async () => {
   }
 }
 
+
+
+
+
+
+//获取帮助中心文章列表
+const postArticleService = async (data) => {
+
+
+
+  try {
+    const res = await postArticleDao()
+    console.log("获取帮助中心文章列表", res)
+  } catch (error) {
+    console.error("postArticleService: ", error);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
   getHelpListS,
   getBlogDetailS,
-  getKeyWordPageS
+  getKeyWordPageS,
+  postArticleService
 }

@@ -1,11 +1,11 @@
 /*
  * @Author: liyuntao
- * @LastEditors: liyuntao
+ * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-05-13 16:36:57
- * @LastEditTime: 2022-05-13 16:36:57
+ * @LastEditTime: 2022-05-19 12:52:37
  */
-import { post } from 'tools/ajax.js';
+import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
 
 
@@ -18,7 +18,7 @@ const api = require("config/api.config.js")
  */
 export const updateUserInfo = async (params = null) => {
   try {
-    const res = await post(api.MANAGER_USER_UPDATE_INFO, params);
+    const res = await service.post(api.MANAGER_USER_UPDATE_INFO, params);
     return res;
   } catch (error) {
     console.error('getTest', error);

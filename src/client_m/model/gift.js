@@ -1,11 +1,11 @@
 /*
  * @Author: liyuntao
- * @LastEditors: liyuntao
+ * @LastEditors: 朱占伟
  * @description: page description
  * @Date: 2022-05-14 11:17:13
- * @LastEditTime: 2022-05-14 11:18:32
+ * @LastEditTime: 2022-05-19 12:51:50
  */
-import { get } from 'tools/ajax.js';
+import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
 
 
@@ -20,7 +20,7 @@ const api = require("config/api.config.js")
  */
 export const getGiftFunc = async (params = null) => {
   try {
-    const res = await get(api.MANAGER_GET_GIFT, params);
+    const res = await service.get(api.MANAGER_GET_GIFT, params);
     return res;
   } catch (error) {
     console.error('getTest', error);

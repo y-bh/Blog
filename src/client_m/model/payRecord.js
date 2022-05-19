@@ -1,11 +1,11 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 购买记录
  * @Date: 2022-05-17 14:01:57
- * @LastEditTime: 2022-05-17 14:24:49
+ * @LastEditTime: 2022-05-19 12:52:18
  */
-import { post } from 'tools/ajax.js';
+import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
 
 /**
@@ -16,7 +16,7 @@ const api = require("config/api.config.js")
  */
 export const getOrderList = async (params = null) => {
   try {
-    const res = await post(api.ORDER_LIST, params)
+    const res = await service.post(api.ORDER_LIST, params)
     return res;
   } catch (error) {
     console.error('getOrderList:',error);
@@ -31,7 +31,7 @@ export const getOrderList = async (params = null) => {
  */
  export const batchDelOrder = async (params = null) => {
   try {
-    const res = await post(api.ORDER_DODEL, params)
+    const res = await service.post(api.ORDER_DODEL, params)
     return res;
   } catch (error) {
     console.error('batchDelOrder:',error);
