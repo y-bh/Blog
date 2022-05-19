@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: 朱占伟
  * @description: 帮助中心数据层
  * @Date: 2022-05-16 16:30:24
- * @LastEditTime: 2022-05-17 10:26:11
+ * @LastEditTime: 2022-05-19 10:51:30
  */
 const { post } = require("utils/request")
 
@@ -31,7 +31,28 @@ const getBlogDetail = async (params = null) => {
   }
 }
 
+
+//文章列表
+const postArticleDao = async (params = null) => {
+  const url = api.HELP_ARTICLE_LIST
+  try {
+    const res = await post(url, params)
+    return res
+  } catch (error) {
+    console.error('postArticleDao: ', error)
+  }
+}
+
+
+
+
+
+
+
+
+
 module.exports = {
   getHelpList,
-  getBlogDetail
+  getBlogDetail,
+  postArticleDao
 }

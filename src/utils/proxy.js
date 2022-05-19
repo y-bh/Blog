@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 客户端接口跨域代理
  * @Date: 2022-05-18 17:24:02
- * @LastEditTime: 2022-05-18 18:07:39
+ * @LastEditTime: 2022-05-19 10:44:30
  */
 
 const { proxyAxios } = require("utils/request")
@@ -20,7 +20,6 @@ module.exports = (option = {}) => {
     if (!url.includes(option.prex)) {
       await next();
     } else {
-      console.log("前端代理中间件:==============>", ctx.request.method)
       console.log("转达到java端", method, url)
       let tem = url.replace(option.prex, '')
       const res = await proxyAxios(tem, method, body)

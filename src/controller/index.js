@@ -1,16 +1,16 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 朱占伟
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-18 16:58:48
+ * @LastEditTime: 2022-05-19 11:10:06
  */
 
 
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpListS, getBlogDetailS, getKeyWordPageS } = require('service/helpCenter')
+const { getHelpListS, getBlogDetailS, getKeyWordPageS ,postArticleService} = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
 const { getProxyCityS, getProxyMenuS } = require('service/getIp')
@@ -109,13 +109,21 @@ function Router(App) {
 
 
   //帮助中心-helpCenter
-  router.get("/helpCenter", async (ctx) => {
+  router.get(["/helpCenter", "/helpCenter/:path"], async (ctx) => {
 
-    let helpData = await getHelpListS()
 
-    console.log('总页数:', helpData);
+    const params = {
+      
+    }
+    const res = await postArticleService()
+
+   // let helpData = await getHelpListS()
+
+   // console.log('总页数:', helpData);
     // ctx.body=helpData
-    return ctx.render("help/helpCenter", helpData)
+  //  return ctx.render("help/helpCenter", helpData)
+
+  ctx.body = '测试'
   })
 
 
@@ -127,7 +135,6 @@ function Router(App) {
     return ctx.render("help/keyWord/keyWord", keyWordPageData)
   })
 
-
   //帮助中心详情-helpCenter-details
   router.get("/helpDetails", async (ctx) => {
     /**数据请求 */
@@ -138,8 +145,6 @@ function Router(App) {
     return ctx.render("help/detail/helpDetails", helpDetail)
   })
 
-
-
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
     /**数据请求 */
@@ -148,8 +153,6 @@ function Router(App) {
       data: 2222,
     })
   })
-
-
 
   //用户总页面-login-index
   router.get(["/login", "/reset", "/register"], async (ctx) => {
@@ -172,17 +175,6 @@ function Router(App) {
       pageType //页面类型
     })
   })
-
-
-
-
-
-
-
-
-
-
-
 
   //用户协议-user-protocol
   router.get("/user/protocol", async (ctx) => {
