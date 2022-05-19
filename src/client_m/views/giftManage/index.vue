@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-16 14:22:01
+ * @LastEditTime: 2022-05-19 13:38:35
 -->
 <template>
   <div class="gift-wrap">
@@ -77,7 +77,7 @@ export default {
       if (+res.code === 0) {
         // state.giftList = res.data
       } else {
-        $message.eror(res.msg);
+        $message.error(res.msg);
       }
     }
 
