@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: dengxiujie
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-19 13:10:33
+ * @LastEditTime: 2022-05-19 14:33:48
  */
 
 import axios from 'axios';
@@ -18,7 +18,7 @@ class Request {
     // 请求拦截器
     service.interceptors.request.use(config => {
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-      console.log("请求的接口和地址:", config.url,config.data)
+      console.log("请求的接口和地址:", config)
       return config;
     }, error => {
 
@@ -45,7 +45,9 @@ class Request {
       return response.data;
     },
       error => {
-        console.error("响应报错:")
+
+        console.error("响应报错:", error)
+
       });
 
     this.service = service
@@ -59,12 +61,13 @@ class Request {
    * @param data
    * @returns {Promise}
    */
-  proxyAxios(url, method, params = {}) {
+  proxyAxios(url, method, params = {},headers) {
     try {
       return this.service({
         url,
         params,
-        method: method
+        method: method,
+        headers
       });
     } catch (error) {
 
