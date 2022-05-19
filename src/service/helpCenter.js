@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 帮助中心业务代码
  * @Date: 2022-05-16 16:37:33
- * @LastEditTime: 2022-05-19 10:54:20
+ * @LastEditTime: 2022-05-19 15:32:24
  */
 const { getHelpList, getBlogDetail, postArticleDao } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
@@ -22,7 +22,7 @@ const getHelpListS = async () => {
   const res = await getHelpList()
   console.log("fffffffffffffffffffffffff", res)
   try {
-    if (+res.code === 0) {
+    if (+res.code === 200) {
       const { articlePageRespDTO, articleTypes, alive, title } = res.data
 
       //文章列表
@@ -254,7 +254,7 @@ const postArticleService = async (data) => {
 
 
   try {
-    const res = await postArticleDao()
+    const res = await postArticleDao(data)
     console.log("获取帮助中心文章列表", res)
   } catch (error) {
     console.error("postArticleService: ", error);

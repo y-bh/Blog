@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: node 端自定义API。
  * @Date: 2022-05-17 15:52:03
- * @LastEditTime: 2022-05-18 16:00:28
+ * @LastEditTime: 2022-05-19 15:31:57
  */
 const Router = require("koa-router");
 const router = new Router();
@@ -35,7 +35,7 @@ router.post("/login", async (ctx) => {
   }
 
   //注册/登录/重置 成功后业务
-  if (+res.code === 0) {
+  if (+res.code === 200) {
     let token = res.data.token
     delete res.data.token
     //设置cookie 值

@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 服务端应用入口
  * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-05-18 18:07:55
+ * @LastEditTime: 2022-05-19 15:26:58
  */
 
 const Koa = require("koa");
@@ -46,11 +46,12 @@ app.use(views(config.templates, {
 //静态文件位置
 app.use(koa_static(config.static))
 
-//前端proxy 代理
-app.use(require("utils/proxy")());
 
 //解析入参
 app.use(bodyParser());
+
+//前端proxy 代理
+app.use(require("utils/proxy")());
 
 //统一响应接口
 app.use(routerResponse());

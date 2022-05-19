@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-18 18:08:52
+ * @LastEditTime: 2022-05-19 15:30:57
  */
 
 function Helper() { }
@@ -126,7 +126,44 @@ Helper.$message = (options = {}) => {
 })
 
 
+function getCookie (key, json) {
+  if (typeof document === 'undefined') {
+    return;
+  }
 
+  var jar = {};
+  // To prevent the for loop in the first place assign an empty array
+  // in case there are no cookies at all.
+  var cookies = document.cookie ? document.cookie.split('; ') : [];
+  var i = 0;
+
+  for (; i < cookies.length; i++) {
+    var parts = cookies[i].split('=');
+    var cookie = parts.slice(1).join('=');
+
+    if (!json && cookie.charAt(0) === '"') {
+      cookie = cookie.slice(1, -1);
+    }
+
+    try {
+      var name = decode(cookie);
+
+      if (json) {
+        try {
+          cookie = JSON.parse(cookie);
+        } catch (e) {}
+      }
+
+      jar[name] = cookie;
+
+      if (key === name) {
+        break;
+      }
+    } catch (e) {}
+  }
+
+  return key ? jar[key] : jar;
+}
 //客户端ajax二次 封装
 
 /*
@@ -140,14 +177,14 @@ async function ajax(params) {
     console.log(params.query, '接口参数');
     $.ajax({
       type: params.type ? params.type : 'POST',
-      url: '/proxy' + params.url,
+      url: '/javaProxy' + params.url,
       contentType: 'application/json',
       data: params.query,
       success: (res) => {
         if (res) {
           if (res) {
             console.log(res, 'res');
-            if (res.code !== 0) {
+            if (res.code !== 200) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
               })
@@ -325,7 +362,7 @@ function layout() {
       contentType: 'application/json',
       success: (res) => {
         console.log("退出登录结果:", res)
-        if (+res.code !== 0) {
+        if (+res.code !== 200) {
           return Helper.$message({
             message: res.msg || '退出登录失败!',
             type: 'warning'
@@ -424,5 +461,7 @@ $(function () {
       toggleHead();
     }, 200);
   }, 500))
-
 })
+
+getCookie('TQ_TOKEN')
+console.log("获取token22:",document.cookie)

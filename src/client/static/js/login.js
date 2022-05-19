@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-18 17:39:19
+ * @LastEditTime: 2022-05-19 15:31:07
  */
 
 
@@ -192,7 +192,7 @@ async function loginSubmit(type) {
     contentType: 'application/json',
     success: (res) => {
 
-      if (+res.code !== 0) {
+      if (+res.code !== 200) {
         return Helper.$message({
           message: res.msg || '注册失败!请联系客服',
           type: 'warning'

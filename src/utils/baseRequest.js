@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
- * @description: page description
+ * @LastEditors: 秦琛
+ * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-19 12:57:13
+ * @LastEditTime: 2022-05-19 15:29:48
  */
 
 import axios from 'axios';
@@ -18,7 +18,7 @@ class Request {
     // 请求拦截器
     service.interceptors.request.use(config => {
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-      console.log("请求的接口和地址:", config)
+       console.log("请求的接口和地址:", config)
       return config;
     }, error => {
 
@@ -27,12 +27,13 @@ class Request {
 
     // 响应拦截器
     service.interceptors.response.use(response => {
+      // console.log(response,'response***********');
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
         if (+data.code === 200) {
           return {
-            code: 0,
+            code: 200,
             data: data.data
           };
         } else {
@@ -61,12 +62,13 @@ class Request {
    * @param data
    * @returns {Promise}
    */
-  proxyAxios(url, method, params = {}) {
+  proxyAxios(url, method, data,headers) {
     try {
       return this.service({
         url,
-        params,
-        method: method
+        data,
+        method,
+        headers
       });
     } catch (error) {
 
