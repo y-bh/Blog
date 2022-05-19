@@ -6,13 +6,19 @@
   "scripts": {
     "dev": "gulp develop",
     "build": "gulp build",
-    "local": "nodemon ./start.js",
-    "serve": "pm2 start ./start.js"
+    "build:test": "gulp build:test",
+    "local": "nodemon ./start.js --local",
+    "serve": "pm2 start ./start.js",
+    "local:test": "nodemon ./start.js  --test",
+    "local:develop": "nodemon ./start.js  --develop",
+    "local:production": "nodemon ./start.js  --production",
+    "serve:test": "pm2 start ./start.js --test",
+    "serve:develop": "pm2 start ./start.js --develop",
+    "serve:production": "pm2 start ./start.js --production"
   },
   "author": "zhuzhanwei",
   "license": "ISC",
   "dependencies": {
-    "async-request": "^1.2.0",
     "axios": "^0.21.1",
     "ejs": "^3.1.7",
     "element-plus": "^1.0.2-beta.70",
@@ -22,6 +28,7 @@
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
     "koa-views": "^8.0.0",
+    "lru-cache": "^7.10.1",
     "module-alias": "^2.2.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.10",
@@ -67,6 +74,7 @@
     "@": ".",
     "src": "./src",
     "dao": "./src/dao",
+    "store": "./src/store",
     "service": "./src/service",
     "controller": "./src/controller",
     "utils": "./src/utils",

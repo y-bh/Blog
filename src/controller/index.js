@@ -1,58 +1,78 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: dengxiujie
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-06 20:24:06
+ * @LastEditTime: 2022-05-18 16:58:48
  */
+
+
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
+const { getHelpListS, getBlogDetailS, getKeyWordPageS } = require('service/helpCenter')
+const { data } = require('service/getIp')
+const { getBusinessData } = require('service/business')
+const { getProxyCityS, getProxyMenuS } = require('service/getIp')
+
 const fs = require("fs")
 const config = require("../config/app.config")
+
+//套餐购买
+//const packageObj = require("./package.js")
+const { renderPackage } = require("service/package");
+const { log } = require("console");
+const appKey = require("config/app.key.config")
+
+const SelfApi = require("./selfApi")
+
 function Router(App) {
-  //用户管理
-  // router.use("/user", user.routes(), user.allowedMethods());
 
   var ejs = require('ejs')
 
+
+  // 前端自定义api 处理部分
+  router.use("/api", SelfApi.routes(), SelfApi.allowedMethods())
+
+
   //首页
   router.get("/", async (ctx) => {
+    console.log("获取顶部的数据:", ctx.state)
+    const homeData = {
+      name: '用户',
+      url: '/',
+      link: [],
+    }
+    let list = await renderHome();
+    homeData.articleList = list ? list : [];
+    console.log("==========返回home数据=====", homeData);
+    return ctx.render("home/home", homeData)
+  })
 
-
+  //落地推广页面
+  router.get("/promotion", async (ctx) => {
     //const res = await renderHome()
-
-
     //console.log("控制层:", res)
-
-    return ctx.render("home/home", {
-      name: '住在我',
+    return ctx.render("promotion/index", {
+      name: '落地推广页面',
       url: 2222
     })
   })
 
 
-  //套餐购买
   //购买页-package
   router.get("/package", async (ctx) => {
-
     /**数据请求 */
-
-
-
-    return ctx.render("package/package", {
-      name: 'This is package',
-      data: 2222,
-    })
+    // console.log("套餐购买接口返回数据, await renderPackage())
+    let packageObj = await renderPackage();
+    // console.log("ssssss",packageObj);
+    return ctx.render("package/package", packageObj)
   })
 
   //购买页wx支付-package-Wxpay
   router.get("/package/wxPay", async (ctx) => {
 
     /**数据请求 */
-
-
-
     return ctx.render("package/wxPay", {
       name: 'This is Wxpay',
       data: 'Please pay 300 yuan',
@@ -60,83 +80,69 @@ function Router(App) {
   })
 
 
-  //提取API-getApi
-  router.get("/getApi", async (ctx) => {
+  //提取ip-getIp
+  router.get("/getIp", async (ctx) => {
 
     /**数据请求 */
+    let staticData = await data()
+    let province = await getProxyCityS()
+    let menu = await getProxyMenuS()
 
+    let getIpData = {
+      staticData,
+      province,
+      menu
+    }
 
-
-    return ctx.render("getApi/getApi", {
-      name: 'This is getApi',
-      data: 2222,
-    })
+    return ctx.render("getIp/getIp", getIpData)
   })
+
 
 
   //业务场景-businessScene
-
   router.get("/businessScene", async (ctx) => {
-
     /**数据请求 */
+    let res = getBusinessData()
 
-
-
-    return ctx.render("help/helpCenter", {
-      name: 'This is businessScene',
-      data: 'businessScene',
-    })
+    return ctx.render("businessScene/businessScene", res)
   })
 
 
-  //帮助中心
   //帮助中心-helpCenter
   router.get("/helpCenter", async (ctx) => {
 
-    /**数据请求 */
+    let helpData = await getHelpListS()
 
-
-
-    return ctx.render("help/helpCenter", {
-      name: 'This is helpCenter',
-      data: 2222,
-    })
+    console.log('总页数:', helpData);
+    // ctx.body=helpData
+    return ctx.render("help/helpCenter", helpData)
   })
 
-  //帮助中心-helpCenter-tab-page
-  router.get("/helpCenter/:alias/:page", async (ctx) => {
 
+  //帮助中心-关键词聚合页
+  router.get("/keyWord", async (ctx) => {
     /**数据请求 */
-    const { alias, page } = ctx.request.params
+    let keyWordPageData = await getKeyWordPageS()
 
-
-    return ctx.render("help/helpCenter", {
-      name: `This is helpCenter + ${alias} + ${page}`,
-      data: `333`,
-    })
+    return ctx.render("help/keyWord/keyWord", keyWordPageData)
   })
 
-  //帮助中心-helpCenter-details
-  router.get("/helpDetails/:id", async (ctx) => {
 
+  //帮助中心详情-helpCenter-details
+  router.get("/helpDetails", async (ctx) => {
     /**数据请求 */
-    const { id } = ctx.request.params
+    // const { id } = ctx.request.params
 
+    let helpDetail = await getBlogDetailS()
 
-    return ctx.render("help/helpDetails", {
-      name: `This is ${id} article`,
-      data: 2222,
-    })
+    return ctx.render("help/detail/helpDetails", helpDetail)
   })
+
 
 
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
-
     /**数据请求 */
-
-
-
     return ctx.render("firmsServer/firmsServer", {
       name: 'This is firmsServer',
       data: 2222,
@@ -144,41 +150,64 @@ function Router(App) {
   })
 
 
-  //用户操作中心
-  //用户总页面-login-index
-  router.get("/login/index", async (ctx) => {
 
+  //用户总页面-login-index
+  router.get(["/login", "/reset", "/register"], async (ctx) => {
     /**数据请求 */
 
+    let pageType = ctx.req.url.slice(1)
 
 
+    console.log("ddddddddddd", ctx.req.url)
+    let title = "登录页-天启HTTP"
+    if (pageType === 'reset') {
+      title = "重置密码-天启HTTP"
+    }
+    if (pageType === 'register') {
+      title = "注册用户-天启HTTP"
+    }
     return ctx.render("login/index", {
       name: 'This is main login',
-      data: 2222,
+      title,
+      pageType //页面类型
     })
   })
 
+
+
+
+
+
+
+
+
+
+
+
   //用户协议-user-protocol
   router.get("/user/protocol", async (ctx) => {
-
     /**数据请求 */
-
-
-
     return ctx.render("user/protocol", {
       name: 'This is protocol window',
       data: 2222,
     })
   })
 
-  
 
   //个人中心
   let htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
-  const headerHtml = fs.readFileSync(`${config.templates}/components/header.html`, 'utf-8')
+  const headerHtml = fs.readFileSync(`${config.templates}/components/header/header.html`, 'utf-8')
   const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
-    var headers = ejs.render(headerHtml, { name: 'zhuzhanwei' })
+    let userInfo = ctx.cookies.get(appKey.userInfo)
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo) })
+    // const homeData = {
+    //   name: '用户',
+    //   url: '/',
+    //   link: [],
+    //   HEADER_ACTIVE_TAB:"2222"
+    // }
+    // var headers = ejs.render(headerHtml, homeData)
     let res = htmls.replace(re, headers)
     ctx.response.body = res
   })
@@ -186,11 +215,9 @@ function Router(App) {
 
   /** 404 */
   router.get("/404", async (ctx) => {
-
     return ctx.render("error/404", {
       name: 'This is 404',
     })
-
   })
 
 

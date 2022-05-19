@@ -1,0 +1,675 @@
+$columnMt: 60px;
+//玻璃背景
+@mixin GlassBackg {
+  background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.4), #fff, #fff, #fff);
+  &.current {
+    background-image: linear-gradient(to bottom right, rgba(252, 112, 25, 0.1), #fff, #fff, #fff);
+  }
+}
+
+// 套餐第一栏布局
+@mixin IPParamsBox {
+  display: flex;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+}
+
+//第二栏布局
+@mixin itemBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+  cursor: pointer;
+  // &:nth-of-type(4n) {
+  //   margin-right: 0;
+  // }
+}
+
+@mixin counter-control {
+  display: flex;
+  .button {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 50px;
+    background: #f5f7fa;
+    color: #c0c4cc;
+    border: 1px solid #d8dce6;
+  }
+  .decrease {
+    border-radius: 4px 0px 0px 4px;
+    cursor: pointer;
+  }
+  .plus {
+    border-radius: 0px 4px 4px 0px;
+    cursor: pointer;
+  }
+  .enterVal input {
+    width: 130px;
+    height: 50px;
+    border: none;
+    text-align: center;
+    border-top: 1px solid #d8dce6;
+    border-bottom: 1px solid #d8dce6;
+    color: #1968fc;
+    cursor: pointer;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+.packageBuy {
+  .hide {
+    display: none !important;
+  }
+  .package-banner img {
+    width: 100%;
+  }
+  .redPacket {
+    display: flex;
+    align-items: center;
+    .redPacket-title {
+      color: #333333;
+      min-width: 140px;
+      font-size: 23px;
+    }
+    select {
+      width: 512px;
+      height: 60px;
+      border: 1px solid #e4e5eb;
+      border-radius: 4px;
+    }
+  }
+  .payType {
+    .payType-title {
+      color: #333333;
+      font-size: 23px;
+      min-width: 140px;
+      span {
+        font-weight: 400;
+      }
+    }
+    .payType-content {
+      display: flex;
+      align-items: center;
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          width: 200px;
+          height: 50px;
+          border: 2px solid #ffffff;
+          box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+          border-radius: 8px;
+          font-size: 16px;
+          color: #333333;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &.current {
+            border: 1px solid #fc7019;
+          }
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+    .payType-tip {
+      font-size: 14px;
+      color: #ff5f00;
+    }
+  }
+  .package-content {
+    max-width: 1440px;
+    margin: auto;
+    margin-bottom: 100px;
+    padding: 0 20px;
+    .changeTab {
+      display: flex;
+      width: fit-content;
+      margin: 80px auto 72px;
+      box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+      background: #ffffff;
+      .tab-header {
+        width: 300px;
+        height: 80px;
+        font-size: 18px;
+
+        line-height: 24px;
+        color: #4c5664;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        cursor: pointer;
+        span {
+          margin-left: 36px;
+          font-weight: bold;
+        }
+        i {
+          margin-left: 16px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &.current {
+          background: #1968fc;
+          color: #ffffff;
+          position: relative;
+          &::after {
+            display: inline-block;
+            content: "";
+            bottom: -26px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border: 13px solid #1968fc;
+            border-color: #1968fc transparent transparent transparent;
+          }
+        }
+      }
+    }
+    .tabContent {
+      .tab-balance {
+        .ipPrice {
+          display: flex;
+          flex-wrap: wrap;
+          position: relative;
+          // border-radius: 8px;
+          // border: 2px solid #ffffff;
+          // box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+          @include IPParamsBox();
+          .ipPrice-left {
+            font-weight: 400;
+            line-height: 21px;
+            padding: 40px;
+            color: #333333;
+            .ipPrice-title {
+              font-size: 18px;
+              line-height: 24px;
+              display: flex;
+              flex-flow: wrap;
+            }
+            .ipPrice-list {
+              display: flex;
+              flex-wrap: wrap;
+              font-size: 16px;
+              line-height: 21px;
+              margin-top: 20px;
+              li {
+                min-width: 180px;
+              }
+            }
+          }
+
+          .ipPrice-markPng {
+            margin-left: 20px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            img {
+              width: 156px;
+              height: 111px;
+            }
+          }
+        }
+        .rechargeAmount {
+          .rechargeAmount-title {
+            font-size: 23px;
+            line-height: 30px;
+          }
+          .amount-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -40px;
+            .amount-item {
+              width: 320px;
+              height: 205px;
+              margin: 30px 40px 0 0;
+              position: relative;
+              cursor: pointer;
+              @include GlassBackg;
+              @include itemBox;
+              &:after {
+                content: "";
+                -webkit-filter: blur(10px); /* Chrome, Opera */
+                -moz-filter: blur(10px);
+                -ms-filter: blur(10px);
+                filter: blur(10px);
+                filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
+              }
+              &.current {
+                border-color: #fc7019ff;
+
+                span {
+                  color: #fc7019ff;
+                }
+                .discount {
+                  background-color: #fff4edff;
+                }
+                .lastAmount {
+                  background-color: #fff4edff;
+                }
+              }
+              .discount {
+                position: absolute;
+                right: 0;
+                top: 0;
+                font-size: 16px;
+                color: #1968fc;
+                text-align: center;
+                line-height: 35px;
+                width: 94px;
+                height: 35px;
+                border-radius: 0 0 0 35px;
+                background: #c3d7fc;
+                span {
+                  font-weight: bold;
+                }
+              }
+              .rechargeAmount {
+                font-size: 40px;
+                line-height: 56px;
+                color: #333333;
+                font-weight: bold;
+                span {
+                  font-weight: bold;
+                }
+              }
+              .lastAmount {
+                width: 188px;
+                height: 44px;
+                font-size: 18px;
+                line-height: 44px;
+                color: #1968fc;
+                margin-top: 20px;
+                background: rgba(232, 240, 255);
+                border-radius: 30px;
+                span {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+
+        .payMoney {
+          margin-top: 50px;
+          display: flex;
+          align-items: center;
+          .payMoney-title {
+            font-size: 23px;
+            line-height: 30px;
+            color: #333333;
+            span {
+              font-weight: 400;
+            }
+          }
+          .payMoney-number span {
+            font-size: 23px;
+            color: #ff5f00;
+            font-weight: bold;
+          }
+          .pay-button {
+            width: 240px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 4px;
+            background-color: #1968fc;
+            margin-left: 38px;
+            text-align: center;
+            span {
+              font-size: 18px;
+              font-weight: 400;
+              color: #ffffff;
+            }
+          }
+        }
+      }
+      .tab-packageTime {
+        .package-params {
+          @include IPParamsBox();
+          padding: 30px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          li {
+            margin: 10px 0;
+            font-size: 16px;
+            margin-right: 70px;
+            &.wt-170 {
+              min-width: 175px;
+            }
+            &.wt-375 {
+              min-width: 375px;
+            }
+            &.wt-240 {
+              min-width: 240px;
+            }
+            span {
+              font-weight: 400;
+              line-height: 21px;
+              color: #333333;
+            }
+            .blue {
+              color: #3e6ae2;
+            }
+          }
+        }
+        .package-column {
+          margin-top: $columnMt;
+          .column-title span {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 30px;
+            color: #333333;
+          }
+          .column-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -50px;
+            li {
+              width: 230px;
+              height: 154px;
+              margin: 40px 50px 0 0;
+              position: relative;
+              @include GlassBackg;
+              @include itemBox;
+              .discount {
+                position: absolute;
+                right: 0;
+                top: 0;
+                font-size: 28px;
+                color: #ffffff;
+                text-align: center;
+                line-height: 35px;
+                width: 94px;
+                height: 35px;
+                border-radius: 20px 0 0 20px;
+                background: linear-gradient(90deg, #f6843c 0%, #e6491a 100%);
+                font-size: 16px;
+                span {
+                  font-weight: bold;
+                }
+              }
+              .times {
+                font-size: 28px;
+                line-height: 40px;
+                color: #333333;
+                margin-bottom: 14px;
+                span {
+                  font-weight: bold;
+                }
+              }
+              .amount {
+                width: 142px;
+                height: 40px;
+                line-height: 40px;
+                background: #e8f0ff;
+                border-radius: 30px;
+                span {
+                  font-size: 16px;
+                  font-weight: 400;
+                  color: #1968fc;
+                }
+              }
+              &.current {
+                border-color: #fc7019ff;
+                span {
+                  color: #fc7019ff;
+                }
+                .discount {
+                  //background-color: #fff4edff;
+
+                  span {
+                    color: #ffffff;
+                  }
+                }
+                .amount {
+                  background-color: #fff4edff;
+                }
+              }
+            }
+          }
+        }
+        .ipNumber {
+          // margin-top: $columnMt;
+          .column-title span {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 30px;
+            color: #333333;
+          }
+          .content {
+            display: flex;
+            align-items: center;
+            .realIpNum {
+              font-size: 24px;
+              color: #fc7019;
+            }
+            .myProgress {
+              .control-range {
+                width: 406px;
+              }
+            }
+            .number {
+              position: absolute;
+              display: flex;
+              justify-content: space-between;
+              width: 445px;
+              font-size: 18px;
+              color: #333333;
+            }
+            .counter-control {
+              @include counter-control;
+            }
+          }
+          /*横条样式*/
+          // input[type="range"] {
+          //   -webkit-appearance: none; /*清除系统默认样式*/
+          //   width: 100%;
+          //   background: #1968fc; /*设置左边颜色为#61bd12，右边颜色为#ddd*/
+          //   background-size: 75% 100%; /*设置左右宽度比例*/
+          //   height: 8px; /*横条的高度*/
+          // }
+          /*拖动块的样式*/
+          input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; /*清除系统默认样式*/
+            height: 14px; /*拖动块高度*/
+            width: 14px; /*拖动块宽度*/
+            background: #fff; /*拖动块背景*/
+            border-radius: 50%; /*外观设置为圆形*/
+            border: 2px solid #1968fc; /*设置边框*/
+          }
+        }
+
+        .payMoney {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          .payMoney-title {
+            font-size: 23px;
+            line-height: 30px;
+            color: #333333;
+            span {
+              font-weight: 400;
+            }
+          }
+          .payMoney-number span {
+            font-size: 24px;
+            color: #ff5f00;
+            font-weight: bold;
+          }
+          .payMoney-origin span {
+            font-size: 20px;
+            color: #677294;
+            text-decoration: line-through;
+          }
+          .pay-button {
+            width: 240px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 4px;
+            background-color: #1968fc;
+            text-align: center;
+            cursor: pointer;
+            span {
+              font-size: 18px;
+              font-weight: 400;
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+  }
+  .calculatModal {
+    .modal-content {
+      overflow-x: auto;
+      background: #ffffff url(/images/package/calcutaDialog.png) no-repeat;
+      background-size: 800px 215px;
+      background-position: -16px -16px;
+      width: 800px;
+      height: 588px;
+    }
+    .modalContent {
+      padding: 0;
+
+      .tabContent {
+        .orange {
+          color: #fc7019;
+        }
+        .tab-title {
+          font-size: 20px;
+          color: #404040;
+        }
+        ul {
+          li {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #4c5664;
+            .times {
+              width: 140px;
+            }
+            .counter-control {
+              @include counter-control;
+              .button {
+                width: 50px;
+                height: 40px;
+                line-height: 40px;
+                color: #606266;
+              }
+              .enterVal input {
+                color: #1968fc;
+                width: 84px;
+                height: 40px;
+              }
+            }
+          }
+        }
+        .result {
+          display: flex;
+          .title {
+            font-size: 20px;
+            color: #404040;
+          }
+          .deatail {
+            font-size: 18px;
+            color: #4c5664;
+          }
+        }
+        .enterMoney {
+          display: flex;
+          font-size: 20px;
+          color: #404040;
+          align-items: center;
+          input {
+            width: 330px;
+            height: 50px;
+            border: 1px solid #e4e5eb;
+            border-radius: 4px;
+          }
+        }
+        .table {
+          .table-title {
+            font-size: 20px;
+            color: #404040;
+          }
+          .table-list {
+            .table-row {
+              display: flex;
+              .colum {
+                width: 200px;
+                height: 40px;
+                border: 1px solid #e4e5eb;
+                text-align: center;
+                line-height: 40px;
+                color: #4c5664;
+              }
+            }
+          }
+        }
+      }
+      .modal-title {
+        font-size: 28px;
+        color: #037aff;
+      }
+      .tabHeader {
+        display: flex;
+        .button {
+          width: 200px;
+          height: 50px;
+          font-size: 18px;
+          color: #4c5664;
+          text-align: center;
+          line-height: 50px;
+          border: 1px solid #e4e5eb;
+          border-radius: 8px;
+
+          &.current {
+            background-color: #1968fc;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+  .wxPayModal {
+    .red {
+      color: #f8486f;
+    }
+    .modal-content {
+      width: 400px;
+    }
+    .wxPayContent {
+      padding: 0;
+      .content {
+        font-size: 20px;
+        color: #4c5664;
+        text-align: center;
+      }
+      img {
+        width: 100%;
+        height: 80px;
+      }
+      .qcCode {
+        width: 240px;
+        height: 240px;
+        margin: auto;
+      }
+    }
+  }
+}

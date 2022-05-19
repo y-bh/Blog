@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心开发环境配置
  * @Date: 2022-04-25 16:16:31
- * @LastEditTime: 2022-04-26 14:39:51
+ * @LastEditTime: 2022-05-18 16:53:22
  */
 
 const gulp = require('gulp');
@@ -35,7 +35,9 @@ async function webpackDev() {
           ...webpackConfig.plugins,
           //设置全局变量
           new webpack.DefinePlugin({
-            'process.env.common': appConfig.development_m
+            'process.env.common': appConfig.globalConfig,
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
           })
         ]
       }
@@ -56,7 +58,7 @@ async function webpackProd() {
           ...webpackConfig.plugins,
           //设置全局变量
           new webpack.DefinePlugin({
-            'process.env.common': appConfig.production_m
+            'process.env.common': appConfig.globalConfig
           })
         ]
 

@@ -3,15 +3,17 @@
  * @LastEditors: dengxiujie
  * @description: 按需注入element-plus
  * @Date: 2022-04-26 14:41:46
- * @LastEditTime: 2022-05-06 16:48:32
+ * @LastEditTime: 2022-05-17 13:38:47
  */
 
 import {
-  ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol
+  ElDialog,ElTable,ElButton,ElLoading,ElTableColumn, ElProgress, ElMenu,ElSubmenu,ElMenuItem,ElMenuItemGroup,ElRow,ElCol, ElSwitch,
+  ElForm, ElFormItem,ElInput,ElDatePicker,ElMessage, ElSelect, ElOption, ElDropdown, ElDropdownMenu, ElDropdownItem,ElTooltip
 } from "element-plus";
 
 
 const components = [
+  ElDialog,
   ElTableColumn,
   ElTable,
   ElButton,
@@ -21,9 +23,21 @@ const components = [
   ElMenuItem,
   ElMenuItemGroup,
   ElRow,
-  ElCol
+  ElCol,
+  ElSwitch,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElDatePicker,
+  ElSelect, 
+  ElOption,
+  ElDropdown, 
+  ElDropdownMenu, 
+  ElDropdownItem,
+  ElTooltip
 ]
 const plugins = [
+  ElMessage,
   ElLoading,
 ]
 const installElement = (app) => {
@@ -34,6 +48,7 @@ const installElement = (app) => {
   plugins.forEach((plugin) => {
     app.use(plugin)
   })
+  app.provide('message', ElMessage);
 }
 
 export default installElement

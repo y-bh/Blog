@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 个人中心工程配置文件
  * @Date: 2022-04-25 15:57:44
- * @LastEditTime: 2022-04-29 14:26:40
+ * @LastEditTime: 2022-05-18 17:05:40
  */
 
 const appConfig = require('config/app.config.js')
@@ -75,6 +75,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'manager/css/[name].[contenthash].css'
       // 'css/[name].[contenthash].css' // 输出的文件名字
+      // 'manager/css/[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),

@@ -3,34 +3,163 @@
  * @LastEditors: 朱占伟
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-04-25 11:25:59
+ * @LastEditTime: 2022-05-19 10:42:08
  */
-
-
-
-let request = require('async-request')
 const appConfig = require("config/app.config")
+import axios from 'axios';
 
-async function post(url, data = null, headers = null) {
-  let response;
-  try {
-    if (!url.includes('http')) {
-      url = `${appConfig.url}${url}`
+axios.defaults.withCredentials = true;
+
+// 基础地址
+let baseURL = `${appConfig.url}`;
+console.log(baseURL, 'baseURL');
+const service = axios.create({
+  baseURL,
+  withCredentials: true,
+  timeout: 10000
+});
+
+
+// 请求拦截器
+service.interceptors.request.use(config => {
+  config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+
+  if(globalThis.document){
+    console.log("个人中心ajax请求:", config.url)
+    config.baseURL = "/proxy"
+  }
+
+  return config;
+}, error => {
+
+  return Promise.reject(error);
+});
+
+
+// 响应拦截器
+service.interceptors.response.use(response => {
+  // 响应正确
+
+  if (response.status >= 200 && response.status <= 210) {
+    const data = response.data;
+    if (+data.code === 200) {
+      return {
+        code: 0,
+        data: data.data
+      };
+    } else {
+      return {
+        code: -1,
+        msg: data.message
+      };
     }
-    response = await request(url, {
-      method: 'POST',
-      data,
-      headers
-    });
-  } catch (e) {
-    console.error('post:', e)
   }
+  return response.data;
+},
+  error => {
 
-  //处理响应
-  if (response.statusCode === 200) {
-    return JSON.parse(response.body)
+  console.error("响应报错:",error)
+
+  });
+
+
+
+/**
+ * 封装proxyAxios方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+function proxyAxios(url, method, params = {}) {
+  try {
+    return service({
+      url,
+      params,
+      method: method
+    });
+  } catch (error) {
+
   }
-  return console.error('post', response)
 }
 
-module.exports = post
+
+
+
+
+
+/**
+ * 封装get方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+function get(url, params = {}) {
+  try {
+    return service({
+      url,
+      params,
+      method: 'GET'
+    });
+  } catch (error) {
+
+  }
+}
+
+/**
+ * 封装post请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+function post(url, data = {}) {
+  try {
+    return service({
+      url,
+      method: 'POST',
+      data: JSON.stringify(data)
+    });
+  } catch (error) {
+
+  }
+}
+
+/**
+ * 封装put请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+function put(url, data = {}) {
+  try {
+    return service({
+      url,
+      method: 'PUT',
+      data: JSON.stringify(data)
+    });
+  } catch (error) {
+
+  }
+}
+
+
+
+/**
+ * 封装put请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+function del(url, data = {}) {
+  try {
+    return service({
+      url,
+      method: 'DELETE',
+      data: JSON.stringify(data)
+    });
+  } catch (error) {
+
+  }
+}
+
+
+module.exports = { post, get, put, del,proxyAxios }

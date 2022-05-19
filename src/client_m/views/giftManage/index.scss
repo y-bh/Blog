@@ -1,0 +1,97 @@
+.gift-wrap{
+  display: grid;
+  gap: 30px 80px;
+  grid-template-columns: repeat(auto-fill, minmax(440px, auto));
+  justify-content: center;
+
+  padding-top: 40px;
+  .gift {
+    display: flex;
+    background: #F7F7F7;
+    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+    width: max-content;
+
+    .gift-header{
+      display: grid;
+      grid-template-rows: 65px 35px;
+      row-gap: 8px;
+      width: 140px;
+      height: 110px;
+      background: #1968FC;
+      border-radius: 4px 0 0 4px;
+      div{
+        color: #FFFFFF;
+        text-align: center;
+        &:first-child{
+          align-self: end;
+          font-size: 30px;
+          span{
+            display: inline-block;
+            width: 24px;
+            font-size: 22px;
+          }
+        }
+        &:nth-child(2){
+          font-size: 13px;
+        }
+      }
+
+      /* 裁剪div */ 
+      clip-path: path(
+        'M 0 0 L 140 0 L 140 2.75 A 1 1 0 0 0 140 8.25 L 140 13.75 A 1 1 0 0 0 140 19.25 L 140 24.75 A 1 1 0 0 0 140 30.25 L 140 35.75 A 1 1 0 0 0 140 41.25 L 140 46.75 A 1 1 0 0 0 140 52.25 L 140 57.75 A 1 1 0 0 0 140 63.25 L 140 68.75 A 1 1 0 0 0 140 74.25 L 140 79.75 A 1 1 0 0 0 140 85.25 L 140 90.75 A 1 1 0 0 0 140 96.25 L 140 101.75 A 1 1 0 0 0 140 107.25 L 140 110 L 0 150 L 0 65 A 1 1 0 0 0 0 45 z'
+      );
+    }
+
+    .gift-text{
+      display: grid;
+      grid-template-rows: 65px 35px;
+      padding: 0px 30px;
+      background: #FFFFFF;
+      div{
+        &:first-child {
+          align-self: center;
+          font-size: 18px;
+          color: #4C5664;
+        }
+        &:nth-child(2) {
+          font-size: 12px;
+          color: #677294;
+        }
+      }
+    }
+
+    .gift-use {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: min-content;
+      padding: 0px 15px;
+      border-left: 1px dashed #E5E5E5;
+      font-size: 14px;
+      color: #FF7D55;
+      background: #FFFFFF;
+      cursor: pointer;
+
+      clip-path: path(
+        'M 0 0 L 45 0 L 45 45 A 1 1 0 0 0 45 65 L 45 110 L 0 110 z'
+      );
+    }
+  }
+
+  .show-gift {
+    grid-column: 1 / span 2;
+    text-align: end;
+    font-size: 16px;
+    color: #1968FC;
+    cursor: pointer;
+  }
+
+  .gift.gift-used{
+    .gift-header{
+      background: #E4E5EB;
+    }
+    .gift-text>div,.gift-use{
+      color: #B2BCCB;
+    }
+  }
+}

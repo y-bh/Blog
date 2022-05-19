@@ -1,0 +1,514 @@
+<!--
+ * @Author: 李云涛
+ * @LastEditors: 陈昊天
+ * @description: 提取ip
+ * @Date: 2022-04-27 11:56:24
+ * @LastEditTime: 2022-05-18 09:49:18
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="force-rendering" content="webkit">
+  <meta name="renderer" content="webkit">
+  <meta name="keywords" content="天启http">
+  <meta name="description" content="天启http">
+  <title>提取IP</title>
+  <%- include('../components/style.html'); %>
+  <%- include('./style.html') %>
+</head>
+<body>
+  <%- include('../components/header/header.html'); %>
+  <div class="container grid mt-120">
+    <!-- 左边悬浮框 -->
+    <div class="left">
+      <div class="extract_ip_left pd-20 grid justify-center">
+        <span class="desc font-25 title">提取IP</span>
+        <div class="anchor grid justify-center">
+          <span class="pointer">API获取</span>
+          <span class="pointer">提取接口</span>
+          <span class="pointer">白名单接口</span>
+          <span class="pointer">错误码</span>
+        </div>
+      </div>
+      <div class="code_demo_left mt-20 pd-20 grid justify-center">
+        <span class="desc font-25 title">代码demo</span>
+        <div class="demo grid justify-center">
+          <span class="pointer">Python语言</span>
+          <span class="pointer">Go语言</span>
+          <span class="pointer">C#语言</span>
+          <span class="pointer">JavaScript语言</span>
+          <span class="pointer">Java语言</span>
+          <span class="pointer">Kotlin语言</span>
+          <span class="pointer">Php语言</span>
+          <span class="pointer">易语言</span>
+          <span class="pointer">C语言</span>
+          <span class="pointer">Phantomjs语言</span>
+          <span class="pointer">Selenium语言</span>
+          <span class="pointer">Node语言</span>
+        </div>
+      </div>
+    </div>
+    <div class="right grid">
+      <!-- 提取IP -->
+      <div class="head extract_ip_right">
+        <span class="font-25 title">提取IP</span>
+        <div class="extract_type_box flex flex-wrap align-center mt-40">
+          <label for="extractType" class="font-18 main-title-color label_lay">选择提取类型</label>
+          <select id="extractType" class="extract_select form-control">
+            <option selected>余额提取</option>
+          </select>
+        </div>
+        <!-- 已登录展示 -->
+        <div class="already_login">
+          <div class="form-group count mt-40">
+            <label class="font-18 main-title-color">账户概况</label>
+            <div class="count_box mt-20 flex justify-between align-center">
+              <div class="box_left">
+                <label for="left_desc">当前账户余额(天启币)</label>
+                <span class="left_count ml-5" id="left_count">3333.3333</span>
+              </div>
+              <button class="right_btn or-button">
+                <span>充值</span>
+              </button>
+            </div>
+          </div>
+          <div class="meal_box mt-30 grid">
+            <% staticData.mealBox.forEach(function(item,index) { %>
+              <div class="meal_item grid justify-center align-center">
+                <div class="desc flex justify-center pt-10 pb-10">
+                  <span class="font-15"><%= item.desc %></span>
+                </div>
+                <div class="num flex justify-center align-center">
+                  <span class="text-blue font-25"><%= item.num %></span>
+                  <span class="text-blue font-15">个</span>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        <!-- 未登录展示 -->
+        <div class="not_login">
+          <div class="form-group mt-40">
+            <label class="font-18 main-title-color">账户概况</label>
+            <div class="count_box mt-20 flex justify-between align-center">
+              <div class="box_left">
+                登录查看当前账户余额，新用户可享新人福利
+              </div>
+              <div class="btn">
+                <button class="right_btn mr-20 or-button">
+                  <span>登录</span>
+                </button>
+                <button class="right_btn or-button">
+                  <span>注册</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-30 extract_num flex flex-wrap align-center">
+          <label class="font-18 main-title-color label_lay">提取数量</label>
+          <div class="input-group extract_box flex-center">
+            <button class="decrement">-</button>
+            <input type="text" class="form-control extract_num_input text-center" value="1">
+            <button class="increment">+</button>
+          </div>
+        </div>
+        <div class="form-group mt-30 ip_use">
+          <label class="font-18 main-title-color">IP使用时长</label>
+          <div class="ip_use_box grid justify-start align-center mt-45">
+            <% staticData.ipUse.forEach(function(item,index) { %>
+              <div class="ip_use_item flex flex-column align-center justify-center">
+                <div class="time_box">
+                  <span class="time_text font-25 font-bold main-title-color"><%= item.time %></span>
+                </div>
+                <div class="deal_box mt-15 pt-10 flex justify-center align-center pb-10 ">
+                  <span class="deal_text text-blue"><%= item.deal %></span>  
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        <div class="flex flex-wrap align-center data_format_box mt-40">
+          <label class="label_lay font-18 main-title-color">数据格式</label>
+          <div class="data_format flex">
+            <div class="narrow_box data_text mr-40 flex-center pointer">
+              <span class="font-15 main-title-color">TEXT</span>
+            </div>
+            <div class="narrow_box data_json flex-center pointer">
+              <span class="font-15 main-title-color">JSON</span>
+            </div>
+          </div>
+        </div>
+        <div class="isJSON">
+          <div class="flex flex-wrap align-center choose_type_box mt-40">
+            <label class="label_lay font-18 main-title-color">选择属性</label>
+            <div class="choose_type">
+              <div class="form-check form-check-inline">
+                <label class="form-check-label pointer">
+                  <input class="form-check-input" type="checkbox" value="1">
+                  城市
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label pointer">
+                  <input class="form-check-input" type="checkbox" value="2">
+                  运营商
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label pointer">
+                  <input class="form-check-input" type="checkbox" value="3">
+                  到期时间
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap align-center separator_box mt-40">
+          <label class="label_lay font-18 main-title-color">分隔符</label>
+          <div class="separator flex">
+            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+              <span class="font-15 main-title-color">
+                回车换行(\r\n)
+              </span>
+            </div>
+            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+              <span class="font-15 main-title-color">
+                回车(\r)
+              </span>
+            </div>
+            <div class="narrow_box mr-40 flex justify-center align-center pointer">
+              <span class="font-15 main-title-color">
+                换行(\n)
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="choose_area_box mt-40">
+          <label class="font-18 main-title-color">选择地区</label>
+          <div class="choose_area grid mt-30">
+            <div class="top flex">
+              <div class="a_country narrow_box mr-40 flex-center pointer">
+                <span class="font-15 main-title-color">全国混拨</span>
+              </div>
+              <div class="a_province narrow_box flex-center pointer">
+                <span class="font-15 main-title-color">省份混拨</span>
+              </div>
+            </div>
+            <div class="isProvince">
+              <div class="bottom flex flex-wrap">
+                <% province.forEach(function(item,index) { %>
+                  <div class="form-check mr-20 mb-20">
+                    <label class="form-check-label pointer">
+                      <input class="form-check-input" type="checkbox" value="<%= item.status %>">
+                      <%= item.label %>
+                    </label>
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap align-center operator_box mt-40">
+          <label class="label_lay font-18 main-title-color">运营商</label>
+          <div class="operator_box flex">
+            <div class="narrow_box mr-40 flex-center pointer">
+              <span class="font-15 main-title-color">不限</span>
+            </div>
+            <div class="narrow_box mr-40 flex-center pointer">
+              <span class="font-15 main-title-color">电信</span>
+            </div>
+            <div class="narrow_box flex-center pointer">
+              <span class="font-15 main-title-color">联通</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap align-center ip_box mt-40">
+          <label class="label_lay font-18 main-title-color">IP协议</label>
+          <div class="ip_agreement flex">
+            <div class="narrow_box mr-40 flex-center pointer">
+              <span class="font-15 main-title-color">HTTP</span>
+            </div>
+            <div class="narrow_box mr-40 flex-center pointer">
+              <span class="font-15 main-title-color">HTTPS</span>
+            </div>
+            <div class="narrow_box flex-center pointer">
+              <span class="font-15 main-title-color">SOCKS5</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-40 grid">
+          <div class="flex align-center ">
+            <button class="create_api_url bl-button">
+              <span>生成API链接</span>
+            </button>
+            <span class="pointer ml-50">查看API文档</span>
+          </div>
+          <div class="input-group apiUrl_input_box mt-40">
+            <input type="text" class="form-control apiUrl_input" placeholder="点击上方按钮，生成API链接" >
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary copy mr-20 bl-button" type="button">
+                <span>复制链接</span>
+              </button>
+              <button class="btn btn-outline-secondary open or-button" type="button">
+                <span>打开链接</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="instructions_box mt-40">
+          <span class="font-18 main-title-color">使用说明</span>
+          <div class="note_bottom mt-20">
+            <p class="mb-10 font-15">* 生成API链接，调用GET请求即可返回所需的IP结果</p>
+            <p class="mb-10 font-15">* 您的所有访问操作均有日志保存，望遵纪守法</p>
+            <p class="font-15">* 请使用合理的频率去调用API接口，暴力调用将导致您的客户端IP被防火墙封禁</p>
+          </div>
+        </div>
+      </div>
+      <!-- 提取接口使用说明 -->
+      <div class="head extract_interface">
+        <span class="font-25 title">提取接口使用说明</span>
+        <div class="note_box flex mt-40">
+          <ul class="note_desc">
+            <li class="top_li flex-center">属性</li>
+            <div class="extract_box">
+              <% staticData.extractDesc.forEach(function(item,index) { %>
+                <li class="ele flex-center">
+                  <%= item.label %>
+                </li>
+              <% }) %>
+            </div>
+          </ul>
+          <ul class="note_content widthAll">
+            <li class="top_li flex-center">内容</li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                http://api.tianqiip.com/getip
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                GET
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                utf-8
+              </div>
+            </li>
+            <li class="ele grid pt-20 pb-20 align-center params_desc">
+              <% staticData.paramsDesc.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                code: 错误编号
+              </div>
+              <div class="li_item_box flex-center mt-20">
+                Msg: 描述信息
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="code flex-center">
+                <p>
+                  返回内容的标签或字段类型可在产品管理里通过设置提取格式来定制；<br/>
+                  类型为txt文本的定制标签如下：<br/>
+                  ip：port自定义分隔符；<br/>
+                  类型为json格式的响应字段如下：<br/>
+                  data：[<br/>
+                          {<br/>
+                            ip：IP<br/>
+                            port：端口<br/>
+                            expire：有效时间<br/>
+                            city：城市<br/>
+                            isp：运营商<br/>
+                          }<br/>
+                  ]
+                </p>
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                1000: 获取成功
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 提取接口返回结果实例 -->
+      <div class="extract_return">
+        <span class="font-25 title">提取接口返回结果实例</span>
+        <div class="box grid mt-40">
+          <div class="text_format container">
+            <div class="return_left">
+              <div class="top_title flex-center">TEXT格式</div>
+            </div>
+            <div class="return_right flex-center pb-30">
+              114.101.252.126.57577<br/>
+              114.101.252.126.57577<br/>
+              114.101.252.126.57577
+            </div>
+          </div>
+          <div class="json_format container">
+            <div class="return_left">
+              <div class="top_title flex-center">JSON格式</div>
+            </div>
+            <div class="return_right white-line flex-center pb-30">
+              {
+                "code": 200,<br/>
+                "data": [<br/>
+                  {<br/>
+                    "ip": "121.227.60.236",<br/>
+                    "port": "20252",<br/>
+                    "prov": "辽宁",<br/>
+                    "city": "鞍山"<br/>
+                  },<br/>
+                  {<br/>
+                    "ip": "121.227.60.236",<br/>
+                    "port": "20252",<br/>
+                    "prov": "辽宁",<br/>
+                    "city": "鞍山"<br/>
+                  },<br/>
+                ]<br/>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 白名单接口使用说明 -->
+      <div class="head white_list" id="wl">
+        <span class="font-25 title">白名单接口使用说明</span>
+        <div class="note_box flex mt-40">
+          <ul class="note_desc">
+            <li class="top_li flex-center">属性</li>
+            <div class="white_box">
+              <% staticData.whiteDesc.forEach(function(item,index) { %>
+                <li class="ele flex-center">
+                  <%= item.label %>
+                </li>
+              <% }) %>
+            </div>
+          </ul>
+          <ul class="note_content widthAll">
+            <li class="top_li flex-center">内容</li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center port">
+                http://api.tianqiip.com/white/add?key=xxx&brand=2&sign=xxx&ip=xxx
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center port">
+                http://api.tianqiip.com/white/delete?key=xxx&brand=2&sign=xxx&ip=xxx
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center port">
+                http://api.tianqiip.com/white/fetch?key=xxx&brand=2&sign=xxx
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                GET
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                utf-8
+              </div>
+            </li>
+            <li class="ele grid pt-20 pb-20 align-center params_desc">
+              <% staticData.whiteParamsDesc.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                code: 错误编号
+              </div>
+              <div class="li_item_box flex-center mt-20">
+                Msg: 描述信息
+              </div>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                code: 200
+              </div>
+              <div class="li_item_box flex-center mt-20">
+                info: 描述信息
+              </div>
+            </li>
+            <li class="ele flex-center pt-20 pb-20">
+              <div class="li_item_box flex-center">
+                200: 操作成功
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 错误码 -->
+      <div class="head error_code">
+        <span class="font-25 title">错误码</span>
+        <div class="note_box flex mt-40">
+          <ul class="note_desc">
+            <li class="top_li flex-center">错误码</li>
+            <div class="box">
+              <% staticData.errorCodeContent.left_desc.forEach(function(item,index) { %>
+                <li class="ele flex-center">
+                  <%= item.label %>
+                </li>
+              <% }) %>
+            </div>
+          </ul>
+          <ul class="note_content widthAll">
+            <li class="top_li flex-center">说明</li>
+            <li class="ele flex-center flex-column pt-20 pb-20 extract">
+              <% staticData.errorCodeContent.extractError.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center mb-20 port">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20 white">
+              <% staticData.errorCodeContent.whiteError.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center mb-20 port">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+            <li class="ele flex-center flex-column pt-20 pb-20 proxy">
+              <% staticData.errorCodeContent.proxyError.forEach(function(item,index) { %>
+                <div class="li_item_box flex-center mb-20 port">
+                  <%= item.label %>
+                </div>
+              <% }) %>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 代码demo -->
+      <div class="head code_demo_right">
+        <span class="font-25 title">代码demo</span>
+        <div class="demo_box grid mt-40">
+          <% staticData.codeDemo.forEach(function(item,index) { %>
+            <div class="demo_box_item flex-center flex-column">
+              <span class="demo_title mb-15"><%= item.title %></span>
+              <button type="button" class="download or-button">
+                <span>立即下载</span>
+              </button>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<%- include('../components/js.html'); %>
+<script src="/js/getIp.js"></script>
+</html>

@@ -1,0 +1,33 @@
+.ticket-wrap{
+  padding: 40px;
+  font-size: 16px;
+
+  .ticket-title{
+    color: #4C5664;
+  }
+
+  .ticket-desc{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #1968FC;
+  }
+
+  .ticket-input{
+    .el-textarea{
+      testarea{
+        resize: none;
+      }
+    }
+  }
+
+  .ticket-btn{
+    margin-top: 40px;
+    text-align: center;
+
+    .el-button{
+      width: 200px;
+      background-color: #1968FC;
+      color: #FFFFFF;
+    }
+  }
+}
