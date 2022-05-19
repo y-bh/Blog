@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 公共接口
  * @Date: 2022-05-16 19:16:37
- * @LastEditTime: 2022-05-17 20:31:28
+ * @LastEditTime: 2022-05-19 15:32:13
  */
 
 const { getQueryLinkData, getMealActivity } = require("dao/common")
@@ -26,7 +26,7 @@ const renderTab = async () => {
 
   //无数据 从接口获取
   const res = await getMealActivity();
-  if (+res.code === 0) {
+  if (+res.code === 200) {
     data = res.data
     setStore(active_tab, data)
   }
@@ -48,7 +48,7 @@ const getQueryLink = async () => {
 
   try {
     const res = await getQueryLinkData()
-    if (+res.code === 0) {
+    if (+res.code === 200) {
       let data = res.data || []
       arr = data.map(({ linkName, linkUrl, linkTarget }) => {
         return {

@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-16 14:29:14
+ * @LastEditTime: 2022-05-19 15:31:36
 -->
 <template>
   <div class="white-list-wrap">
@@ -123,7 +123,7 @@ export default {
         replace: val
       }
       const res = await updateUserInfo(params)
-      if(+res.code === 0){
+      if(+res.code === 200){
         $message.success('success')
       } else {
         $message.error('error')
@@ -160,7 +160,7 @@ export default {
         pageSize: 9999
       }
       const res = await getWhiteListFunc(params);
-      if(+res.code === 0){
+      if(+res.code === 200){
         state.whiteIpData = res.data
         state.switchVal = res.data.replace
       } else {

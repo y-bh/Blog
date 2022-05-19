@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-19 14:47:06
+ * @LastEditTime: 2022-05-19 15:30:57
  */
 
 function Helper() { }
@@ -184,7 +184,7 @@ async function ajax(params) {
         if (res) {
           if (res) {
             console.log(res, 'res');
-            if (res.code !== 0) {
+            if (res.code !== 200) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
               })
@@ -362,7 +362,7 @@ function layout() {
       contentType: 'application/json',
       success: (res) => {
         console.log("退出登录结果:", res)
-        if (+res.code !== 0) {
+        if (+res.code !== 200) {
           return Helper.$message({
             message: res.msg || '退出登录失败!',
             type: 'warning'

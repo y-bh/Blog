@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 帮助中心数据层
  * @Date: 2022-05-16 16:30:24
- * @LastEditTime: 2022-05-19 13:24:37
+ * @LastEditTime: 2022-05-19 15:32:02
  */
 const service= require("utils/request")
 const api = require("src/config/api.config.js")
@@ -48,7 +48,7 @@ const getArticleTypeDao = async () => {
   const res = await service.get(api.articleType);
   console.log("=====================文章类型============",res)
   let data = [];
-  if (res.code === 0 && res.data.length > 0) {
+  if (res.code === 200 && res.data.length > 0) {
     data = res.data;
   }
   return data;
@@ -57,7 +57,7 @@ const getArticleListDao = async () => {
   const res = await service.get(api.getIndexArticles);
   console.log("----文章列表2222222222----", res);
   let data = {};
-  if (res.code === 0 && res.data) {
+  if (res.code === 200 && res.data) {
     data = res.data;
   }
   return data;
