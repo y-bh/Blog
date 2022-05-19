@@ -3,7 +3,7 @@
  * @LastEditors: 朱占伟
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-19 12:53:24
+ * @LastEditTime: 2022-05-19 12:59:14
  */
 
 import { createApp } from 'vue';
@@ -41,8 +41,8 @@ const router = injectRouter(app);
 injectState(app);
 
 //注入ajax 服务
-// app.config.globalProperties.$get = service.get;
-// app.provide('$get', get)
+app.config.globalProperties.$service = service;
+app.provide('$service', service)
 // app.config.globalProperties.$post = service.post;
 // app.provide('$post', post)
 // app.config.globalProperties.$del = service.del;
