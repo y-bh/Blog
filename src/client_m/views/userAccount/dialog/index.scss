@@ -1,3 +1,60 @@
 .common-btnGroup {
   text-align: right;
 }
+.common-btnGroup.center {
+  text-align: center;
+}
+.formContent {
+  padding: 40px;
+  .remarks {
+    height: 48px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 29px;
+    color: #fc7019;
+  }
+  .vaildCode {
+    display: flex;
+  }
+}
+.authContent {
+  padding: 0 40px;
+  text-align: center;
+  .explain {
+    font-size: 16px;
+    line-height: 21px;
+    color: #677294;
+  }
+  .scan {
+    width: 240px;
+    height: 240px;
+    background: #fc7019;
+    margin: auto;
+    .qcCode {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .title {
+    line-height: 21px;
+    font-size: 16px;
+    color: #fc7019;
+  }
+  .erro {
+    color: #f8486f;
+  }
+}
+.tip {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #677294;
+  text-align: left;
+  span {
+    display: inline-block;
+  }
+}
+
+.ft-20 {
+  font-size: 20px;
+}
