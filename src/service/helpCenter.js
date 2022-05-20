@@ -282,7 +282,7 @@ const getHelpService = async (data) => {
     }
 
     const params = {
-      pageSize: data.pageSize || 10,
+      pageSize: data.pageSize || 2,
       pageNum: data.pageNum || 1,
     }
 
@@ -290,7 +290,7 @@ const getHelpService = async (data) => {
     if (data.typeAlias) {
       let tem = articleTypes.filter(({ typeAlias }) => typeAlias === data.typeAlias)
       if (tem.length > 0) {
-        data.type = tem[0].id
+        params.types = [tem[0].id]
         title = tem[0].type
       }
     }
@@ -299,6 +299,7 @@ const getHelpService = async (data) => {
       params.types = [articleTypes[0].id]
     }
 
+    console.log("paramsparamsparamsparams", params)
     //文章列表
     lists = await postArticleDao(params)
 
@@ -306,6 +307,9 @@ const getHelpService = async (data) => {
     if (!lists.totalPage) {
       lists.totalPage = Math.ceil(lists.totalSize / params.pageSize)
     }
+
+    //当前页
+    lists.pageNum = params.pageNum
 
     //属于的文章类型
     lists.typeAlias = data.typeAlias || articleTypes[0]['typeAlias']

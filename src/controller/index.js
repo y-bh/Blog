@@ -135,7 +135,7 @@ function Router(App) {
   })
 
   //帮助中心详情-helpCenter-details
-  router.get("/helpDetails", async (ctx) => {
+  router.get(["/help-details", "/help-details/:id"],async (ctx) => {
     /**数据请求 */
     // const { id } = ctx.request.params
 
