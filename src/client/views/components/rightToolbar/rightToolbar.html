@@ -3,11 +3,11 @@
  * @LastEditors: dengxiujie
  * @description: 右侧悬浮工具栏
  * @Date: 2022-05-06 17:31:00
- * @LastEditTime: 2022-05-18 10:16:58
+ * @LastEditTime: 2022-05-20 11:38:03
 -->
 <link rel="stylesheet" href="/css/rightToolbar.css">
 <ul class="rightToolbar mediaStyle">
-  <li class="toolbar-gift">
+  <li class="toolbar-gift" onclick="freeGift()" >
     <!-- <div class="">
 
     </div> -->
@@ -28,13 +28,13 @@
           <ul>
             <li class="mt-20">
               <div class="QQ image mr-15"></div>
-              <div class="number"><span>800183207</span></div>
-              <div class="ml-15 copy"><span>复制</span></div>
+              <div class="number"><span id="managerQQ">800183207</span></div>
+              <div class="ml-15 copy pointer"><span onclick="theCopy('managerQQ')">复制</span></div>
             </li>
             <li class="mt-20">
               <div class="telephone image mr-15"></div>
-              <div class="number"><span>13260755168</span></div>
-              <div class="ml-15 copy"><span>复制</span></div>
+              <div class="number"><span id="managerTelep">13260755168</span></div>
+              <div class="ml-15 copy pointer"><span onclick="theCopy('managerTelep')">复制</span></div>
             </li>
             <li class="mt-20">
               <div class="wx image mr-15"></div>
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="right">
+      <div class="right pointer">
         <div class="toolbar-backg backg-2"></div>
         <div class="mt-10"><span>商务合作</span></div>
       </div>
@@ -64,7 +64,7 @@
         </div>
 
       </div>
-      <div class="right">
+      <div class="right pointer">
         <div class="toolbar-backg backg-3"></div>
         <div class="mt-10"><span>公众号</span></div>
       </div>
@@ -77,6 +77,13 @@
     </a>
   </li>
 </ul>
+<div>
+  <textarea id="myTextArea" style="opacity: 0;"></textarea>
+</div>
+ <!-- WPA start -->
+ <script id="qd2355160769411743a87929e240233080d4010b0d10" src="https://wp.qiye.qq.com/qidian/2355160769/411743a87929e240233080d4010b0d10" charset="utf-8" async defer></script>
+ <!-- WPA end -->
 <script src="/lib/js/jquery-3.5.1.min.js"></script>
+<script src="/js/common.js"></script>
 <script src="/lib/js/utils.js"></script>
 <script src="/js/rightToolbar.js"></script>

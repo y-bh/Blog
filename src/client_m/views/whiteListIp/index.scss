@@ -29,10 +29,21 @@
       margin-left: 15px;
     }
     .tooltip-icon{
+      position: relative;
       width: 16px;
       height: 16px;
-      border: 1px solid black;
       vertical-align: top;
+      i{
+        position: absolute;
+      }
+      .icon-xianxing-wenhao{
+        color: #B2BCCB;
+        vertical-align: inherit;
+      }
+      .icon-mianxing-wenhao{
+        opacity: 0;
+        color: #1968FC;
+      }
     }
     .tooltip-text{
       display: flex;
@@ -65,6 +76,11 @@
       }
     }
     
+    .tooltip-icon:hover{
+      .icon-mianxing-wenhao{
+        opacity: 1;
+      }
+    }
     .tooltip-icon:hover + .tooltip-text{
       opacity: 1;
     }

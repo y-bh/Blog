@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: liyuntao
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-19 12:59:14
+ * @LastEditTime: 2022-05-19 16:15:39
  */
 
 import { createApp } from 'vue';
@@ -21,6 +21,7 @@ import App from './index.vue';
 import "element-plus/packages/theme-chalk/lib/index";
 import 'assets/css/elementUi.reset.scss';
 import 'assets/css/public.scss';
+import 'assets/css/iconfont.scss'
 
 import * as re from 'config/re.config';
 

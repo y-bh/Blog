@@ -3,16 +3,17 @@
  * @LastEditors: 秦琛
  * @description: 补量
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-17 16:59:43
+ * @LastEditTime: 2022-05-20 14:02:43
 -->
 <template>
     <!-- 支付弹窗 -->
     <el-dialog v-model="dialogVisible" destroy-on-close 
+        @closed="cancelForm"
         custom-class="customize_dialog dialog-alone">
         <DialogTitle title-content="补量" />
         <div class="dialog-body">
             <!-- 套餐名称 -->
-            <span class="child-item meal-introduce" v-text="mealData.desc"></span>
+            <span class="child-item meal-introduce" v-text="mealData.name"></span>
 
             <div class="child-item">
                 <span class="child-elem">每日提取上限:</span>
@@ -33,7 +34,7 @@
                     <div class="form-item-tip">
                         <span>补量后每日提取上限：</span>
                         <span>
-                            {{ parseInt(mealData.limitIp) + parseInt(mealData.sendIp) + parseInt(mealData.form.number)}}
+                            {{ formatInt(mealData.limitIp) + formatInt(mealData.sendIp) + formatInt(mealData.form.number)}}
                         </span>
                     </div>
                 </el-form-item>
@@ -63,12 +64,6 @@
             <div class="child-item tip">
                 友情提示：如遇微信支付异常，请使用支付宝付款或联系专属销售
             </div>
-            <div class="child-item money-wrap">
-                <span class="pay-intr child-elem">实付金额</span>
-                <span class="lighting child-elem">
-                    {{ mealData.payPrice ? parseFloat(mealData.payPrice, 2).toFixed(2) : '--'}}元
-                </span>
-            </div>
             
             <div class="dialog-footer child-item">
                 <el-button type="primary" @click="submitForm" class="submit-btn">支 付</el-button>
@@ -79,6 +74,8 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
+import { formatInt } from "tools/utility"
+import { getPrice } from "model/meal.js";
 export default {
     emits: ['query'],
     components: {
@@ -102,17 +99,18 @@ export default {
             dialogVisible: false,
             // 续费表单
             mealData: {
-                desc: '【固定-5分钟-7天】剩余可用时长：7天',
+                mealId: null,
+                name: '',  // 套餐名称
                 limitIp: null,  // 每日提取上限
                 sendIp: null, // 赠送ip
                 limitDays: null, // 套餐剩余天数
                 form: {
-                    number: null
+                    number: 1000
                 },
                 payMoney: null,  // 应付金额
                 payType: 'ali',  // 支付方式  ali  wx
-                payPrice: null,  // 实际支付价格
             },
+            univalent: null, // 单价
             form_rules: {
                 number: [
                     { required: true, message: '请输入每日补量', trigger: 'blur' },
@@ -123,21 +121,68 @@ export default {
         const methods = {
             onOpen (row) {
                 if (row) {
-                    state.dialogVisible = true
+                    console.log(row,'row=== ');
+                    state.mealData.name = row.name;
+                    state.mealData.limitIp = row.total;
+                    // 向上取整
+                    state.mealData.limitDays = row.endTime ? Math.ceil(((row.endTime) - (new Date().getTime() / 1000))  / 24 / 60 / 60) : 0;
+                    state.mealData.mealId = row.id;  // 获取该条数据的id
+                    // 赠送IP
+                    state.mealData.sendIp = row.sendIp ? row.sendIp : null;
+                    state.mealData.form.number = 1000;
+                    state.mealData.payType = 'ali';
+
+                    // 获取应付金额
+                    methods.getSupplementPrice();
+                     
                 }
             },
-            supplementPrice () { },
-            changeWays (mode) {
-                this.mealData.payType = mode;
+            async getSupplementPrice () { 
+                // 默认补量数量为1000  后期改动 找后端改下
+                let res = await getPrice(state.mealData.mealId);
+                if(res && res.code === 200){
+                    state.univalent = res.data && res.data.price || 0;   // 单价
+                    state.mealData.sendIp = res.data && res.data.sendCount || 0;
+                    state.mealData.payMoney = state.univalent * state.mealData.form.number;
+                    state.mealData.limitIp = res.data && formatInt(res.data.total) || 0;
+                    state.dialogVisible = true
+                } else {
+                    message.error({
+                        message: res.msg,
+                        showClose: true
+                    }) 
+                    state.dialogVisible = false
+                }
             },
-            cancelForm () { },
+            // 每日补量数量变化  重新计算价格
+            supplementPrice(val){
+                state.mealData.payMoney = state.univalent * val;
+            },
+            changeWays (mode) {
+                state.mealData.payType = mode;
+            },
+            cancelForm () { 
+               state.mealData = {
+                    mealId: null,
+                    name: '',  // 套餐名称
+                    limitIp: null,  // 每日提取上限
+                    sendIp: null, // 赠送ip
+                    limitDays: null, // 套餐剩余天数
+                    form: {
+                        number: 1000
+                    },
+                    payMoney: null,  // 应付金额
+                    payType: 'ali',  // 支付方式  ali  wx
+                };
+                state.univalent = null; 
+            },
             submitForm () { }
         }
-        console.log(props, 'props');
 
         return {
             ...methods,
-            ...toRefs(state)
+            ...toRefs(state),
+            formatInt
         }
     }
 }

@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: 朱占伟
+ * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-18 15:29:50
+ * @LastEditTime: 2022-05-20 13:19:03
  */
 
 
@@ -181,6 +181,25 @@ function changeTab(params, dom) {
   }
 }
 
+
+$(document).on("click", '#changeTab>div', function () {
+  let isCur = $(this).hasClass("current")
+  if (isCur) {
+    return;
+  }
+  $(this).addClass("current");
+  $(this).siblings().removeClass("current");
+  let type =  $(this).attr("type");
+  if (type == 1) {
+    $("#balancePackage").show();
+    $("#packageTime").hide();
+  }
+  if (type == 2) {
+    $("#balancePackage").hide();
+    $("#packageTime").show();
+  }
+})
+
 //切换头部modal的tab页面 1：余额 2：包时
 function changeModalTab(params, dom) {
   let isCur = $(dom).hasClass("current")
@@ -214,9 +233,10 @@ $(document).on("click", '#selectRechargeMeals li', function () {
   $that.siblings().removeClass("current");
   $that.addClass("current");
   //获取充值金额
-  let payMoney = Number($that.attr("price")).toFixed(2);
-  console.log(payMoney)
-  filterRedPacket(payMoney, 1);
+  //let payMoney = Number($that.attr("price")).toFixed(2);
+  //console.log(payMoney)
+  //filterRedPacket(payMoney, 1);
+  commonBalancePay();
 
 });
 
@@ -266,34 +286,45 @@ $(document).on("click", '.payMode li', function () {
 //套餐所有的数据
 let packageData = {
   allRedPacket: []//获取所有红包
-
 }
-
 
 //红包
 async function getRedPacket() {
-  let params = {
-    url: "redPackage/enabled",
-    type: 'get',
-    query: ""
-  };
-  let resp = await ajax(params);
-  packageData.allRedPacket = resp ? resp : [];
+  if (window.isLogin) {
+    let params = {
+      url: "/redPackage/enabled",
+      type: 'get',
+      query: null
+    };
+    let resp = await ajax(params);
+    packageData.allRedPacket = resp ? resp : [];
+  }
 }
 
-
-
-
-$(async function () {
-  await getRedPacket();
-  console.log(2222222, packageData.allRedPacket)
+//余额套餐计算统一处理
+async function commonBalancePay() {
   //余额套餐 -- 初始化选中的价格
   let initPayPice = $("#selectRechargeMeals").find("li.current").attr("price");
-  filterRedPacket(initPayPice, 1);
+  if (window.isLogin) {
+    filterRedPacket(initPayPice, 1);
+    //包时套餐--- 选中的价格
+    // getPackageTimesPrice();
+  } else {
+    computerBalancePay(initPayPice, 1, false)
+    $("#balanceRedPacketSelect").hide();
+  }
+}
 
-  //包时套餐--- 选中的价格
+$(async function () {
+  let curTab = sessionStorage.getItem("packageTab");
+  await getRedPacket();
+  console.log(2222222, packageData.allRedPacket);
+  commonBalancePay();
   getPackageTimesPrice();
-
+  //处理其他页面跳转过来tab
+  if (curTab && curTab == 2) {
+    $("#packageTab").click();
+  }
 })
 
 
@@ -332,7 +363,12 @@ function getPackageTimesPrice() {
   $("#totalPrice").html(totalPrice.toFixed(2));
   $("#totalPrice").attr("noredprice", discountPrice)
   //红包折扣后的价格,计算满减
-  filterRedPacket(discountPrice, 2);
+  if (window.isLogin) {
+    filterRedPacket(discountPrice, 2);
+  } else {
+    computerBalancePay(discountPrice, 2, false)
+    $("#packTimeRedPacketSelect").hide();
+  }
 }
 
 
@@ -346,6 +382,7 @@ function filterRedPacket(payPice, tabType) {
       if ((item.state == 3) && (parseInt(payPice) >= parseInt(item.doorsill)) && item.endTime) {
         let duration = parseInt(item.endTime) - parseInt(item.createTime);
         newArr.push({
+          id: item.id,
           redPackageName: item.redPackageName,
           doorsill: item.doorsill,//门槛
           money: item.money,
@@ -353,31 +390,33 @@ function filterRedPacket(payPice, tabType) {
         })
       }
     })
-    let redPacketDom = "";
-    if (newArr.length > 0) {
-      newArr.forEach(function (item) {
-        redPacketDom += `<option value="${item.money}">满${item.doorsill}减${item.money}</option>`;
-      })
-      if (tabType == 1) {
-        $("#balanceRedPacketSelect select").html(redPacketDom);
-        $("#balanceRedPacketSelect").show();
-      } else {
-        $("#packTimeRedPacketSelect select").html(redPacketDom);
-        $("#packTimeRedPacketSelect").show();
-      }
-      computerBalancePay(payPice, tabType, true)
-    } else {
-      redPacketDom = `<option value="0">暂无可用红包</option>`;
-      if (tabType == 1) {
-        $("#balanceRedPacketSelect select").html(redPacketDom);
-        $("#balanceRedPacketSelect").hide();
-      } else {
-        $("#packTimeRedPacketSelect select").html(redPacketDom);
-        $("#packTimeRedPacketSelect").hide();
-      }
-      computerBalancePay(payPice, tabType, false)
-    }
   }
+  let redPacketDom = "";
+  if (newArr.length > 0) {
+    newArr.forEach(function (item) {
+      //console.log(333333333333, item)
+      redPacketDom += `<option value="${item.money}" id="${item.id}">满${item.doorsill}减${item.money}</option>`;
+    })
+    if (tabType == 1) {
+      $("#balanceRedPacketSelect select").html(redPacketDom);
+      $("#balanceRedPacketSelect").show();
+    } else {
+      $("#packTimeRedPacketSelect select").html(redPacketDom);
+      $("#packTimeRedPacketSelect").show();
+    }
+    computerBalancePay(payPice, tabType, true)
+  } else {
+    redPacketDom = `<option value="0">暂无可用红包</option>`;
+    if (tabType == 1) {
+      $("#balanceRedPacketSelect select").html(redPacketDom);
+      $("#balanceRedPacketSelect").hide();
+    } else {
+      $("#packTimeRedPacketSelect select").html(redPacketDom);
+      $("#packTimeRedPacketSelect").hide();
+    }
+    computerBalancePay(payPice, tabType, false)
+  }
+
 }
 
 //计算余额套餐价格 payMoney:支付的价格 isHas：是否有红包 tabType:1余额套餐,2包时套餐
@@ -405,7 +444,7 @@ $(document).on("change", '#balanceRedPacketSelect select', function () {
   $("#rechargeMoney").html(lastPrice);
 })
 
-//余额套餐 --切换红包
+//包时套餐 --切换红包
 $(document).on("change", '#packTimeRedPacketSelect select', function () {
   console.log($(this).val());
   //获取充值金额
@@ -421,44 +460,83 @@ function payMore() {
   window.open("https://wpa1.qq.com/3ys7VwjZ?_type=wpa&qidian=true");
 }
 
-
-
-$('#payment1').click(function () {
-  let isLogin = true;
-  if (isLogin) {
+//tabType 1:余额 2.包时
+async function toPayMoney(tabType) {
+  if (window.isLogin) {
     //获取红包
-    let redPacketMoney = Number($("#balanceRedPacketSelect select").val());
-    if (!redPacketMoney) {
-      redPacketMoney = null;
-    }
-    console.log(1111111111111, redPacketMoney)
-    //获取支付价格
-    let payPrice = $("#rechargeMoney").text();
-    let payType = $("#balancePagPayType").find("li.current").attr("type");
-    if (payType === 'ali') {
-      window.open("/jumpTo/jumpTo?buyType=recharge&price=" + parseFloat(payPrice) + "&payType=" + payType + "&redRecordId=" + Number(redPacketMoney));
+    let redPacketId = Number($("#balanceRedPacketSelect select").val());
+
+    let payPrice = 0;
+    let payType = 2;
+    if (tabType == 1) {
+      //获取支付价格
+      redPacketId = Number($("#balanceRedPacketSelect option:selected").attr("id"));
+      payPrice = $("#rechargeMoney").text();
+      payType = $("#balancePagPayType").find("li.current").attr("type");
     } else {
-      ////调用后台接口生成二维码
-      //TODO
-      let parmas = {
-        payType: 2,
-        //price: parseFloat(sessionStorage.getItem('rechargePrice')),
-        //redRecordId: redRecordId && Number(redRecordId) ? Number(redRecordId) : null
-      }
-
-      wxPayFun();
-
-
+      redPacketId = Number($("#packTimeRedPacketSelect option:selected").attr("id"));
+      payPrice = $("#discountPrice").text();
+      payType = $("#packagePayType").find("li.current").attr("type");
     }
 
+    if (!redPacketId) {
+      redPacketId = null;
+    }
+    let resp = null;
+    if (tabType == 1) {
+      if (payType === 'ali') {
+        window.open("/jumpTo/jumpTo?buyType=recharge&price=" + parseFloat(payPrice) + "&payType=" + payType + "&redRecordId=" + Number(redPacketId));
+      } else {
+        //调用后台接口生成二维码
+        let parmas = {
+          payType: "2",//微信
+          price: Number(payPrice),
+          redRecordId: redPacketId ? redPacketId : null
+        }
+        //充值接口
+        let ajaxData = {
+          url: "/recharge",
+          type: 'post',
+          query: JSON.stringify(parmas)
+        };
+        resp = await ajax(ajaxData);
+      }
+    } else {
+      let meanId = $("#selectBuyDuration").find("ul.current").find("li.current").attr("data-id");
+      let total = $("#counter-enter").val();
+      if (payType === 'ali') {
+        window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total) + "&redRecordId=" + Number(redPacketId));
+      } else {
+        //调用后台接口生成二维码
+        let parmas = {
+          payType: "2",//微信
+          mealId: Number(meanId),
+          total: Number(total),
+          redRecordId: redPacketId ? redPacketId : null
+        }
+        //购买套餐接口
+        let ajaxData = {
+          url: "/buyProxy",
+          type: 'post',
+          query: JSON.stringify(parmas)
+        };
+        resp = await ajax(ajaxData);
+      }
+    }
+
+    console.log(222, resp)
+    if (resp && resp.payUrl) {
+      wxPayFun(resp);
+    }
 
   } else {
     // 记录界面路径，登录完回跳
     let $path = window.location.pathname;
     sessionStorage.setItem('_TQRoutePath', $path)
-    window.location.href = '/login/index.html'
+    window.location.href = '/login'
   }
-})
+}
+
 
 let timer = null;
 //微信支付
@@ -467,13 +545,15 @@ $('#wxPayModal').on('hidden.bs.modal', function (event) {
   //关闭定时器
   clearInterval(timer);
   timer = null;
+  $('#wxQcCode').html("");
 })
 
 function wxPayFun(res) {
   clearInterval(timer);
-  $("#time-flag").text(300);
   //1.生成定时器
-  let intTime = 10;
+  let intTime = 300;
+  $("#time-flag").text(intTime);
+
   timer = setInterval(function () {
     $("#time-flag").html(intTime);
     intTime--;
@@ -493,19 +573,18 @@ function wxPayFun(res) {
       //clearInterval(timer);
       //timer = null;
       $('#wxPayModal').modal('hide');
-
     }
 
   }, 1000);
-  // if (timer) {
-  //   $('#wxQcCode').qrcode({
-  //     width: 240,
-  //     height: 240,
-  //     text: "后台返回",
-  //     colorDark: "#000",
-  //     colorLight: "#fff"
-  //   });
-  // }
+  if (timer) {
 
+    $('#wxQcCode').qrcode({
+      width: 240,
+      height: 240,
+      text: res.payUrl,
+      colorDark: "#000",
+      colorLight: "#fff"
+    });
+  }
   $('#wxPayModal').modal('show');
 }

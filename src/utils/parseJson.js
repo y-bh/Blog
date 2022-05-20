@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 统一接口响应
  * @Date: 2022-04-22 15:03:50
- * @LastEditTime: 2022-04-22 16:13:39
+ * @LastEditTime: 2022-05-19 15:58:07
  */
 
 exports.routerResponse = (option = {}) => {
@@ -11,7 +11,7 @@ exports.routerResponse = (option = {}) => {
     ctx.success = function (data, msg) {
       ctx.type = option.type || "json";
       ctx.body = {
-        code: option.successCode || 0,
+        code: option.successCode || 200,
         msg: msg,
         data: data,
       };

@@ -1,225 +1,245 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-18 17:00:34
+ * @LastEditTime: 2022-05-20 12:09:30
 -->
-<link rel="stylesheet" href="/css/header.css">
-<div class="header">
-  <div class="header-main align-center">
-    <!-- logo -->
-    <div class="logo align-center mr-20">
-      <img src="/images/tq_logo.png" alt="天启HTTP" title="天启HTTP">
-      <span class="logo-title box-border ml-10">天启HTTP</span>
-    </div>
-    <!-- 中间导航 -->
-    <nav class="nav-wrap">
-      <div class="nav-body">
-        <ul class="nav-list">
-          <li class="nav-item box-border">
-            <a href="/" title="首页">首页</a>
-          </li>
-          <li class="nav-item box-border">
+
+<%# 判断是否登录 %>
+  <% if (userInfo && userInfo.id) { %>
+    <script>
+      window.isLogin = "<%= userInfo.username%>"
+    </script>
+    <% }else { %>
+      <script>
+        window.isLogin = false
+      </script>
+      <% } %>
+
+
+        <link rel="stylesheet" href="/css/header.css">
+        <div class="header">
+          <div class="header-main align-center">
+            <!-- logo -->
+            <div class="logo align-center mr-20">
+              <img src="/images/tq_logo.png" alt="天启HTTP" title="天启HTTP">
+              <span class="logo-title box-border ml-10">天启HTTP</span>
+            </div>
+            <!-- 中间导航 -->
+            <nav class="nav-wrap">
+              <div class="nav-body">
+                <ul class="nav-list">
+                  <li class="nav-item box-border" data-path="index">
+                    <a href="/" title="首页">首页</a>
+                  </li>
+                  <!-- 后期会配置红包礼券领取 根据活动时间动态显示-->
+                  <!-- <li class="nav-item box-border">
             <a href="/getIp" title="礼券管理">礼券管理</a>
-          </li>
-          <li class="nav-item box-border nav-meal">
-            <a href="/package" title="套餐购买">
-              <span>套餐购买</span>
-              <i class="iconfont icon-arrow-down"></i>
-            </a>
-            <!-- 子导航 -->
-            <ul class="child-list flex-center">
-              <li class="child-item">
-                <div class="title flex-center justify-start">
-                  <span class="meal-icon icon_first"></span>
-                  <span class="title-type">余额套餐</span>
-                  <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.maxRechargeGift) { %>
-                    <div class="activity">
-                      加赠<%= HEADER_ACTIVE_TAB.maxRechargeGift %>%
-                    </div>
-                    <% } else { %>
-                      <!-- 仅仅留作占位 -->
-                      <span></span>
-                      <% } %>
-                </div>
-                <span class="describe">
-                  余额充值提取，自定义IP时效地区、数量
-                </span>
-              </li>
+          </li> -->
+                  <li class="nav-item box-border nav-meal" data-path="package">
+                    <a href="/package" title="套餐购买">
+                      <span>套餐购买</span>
+                      <i class="iconfont icon-arrow-down"></i>
+                    </a>
+                    <!-- 子导航 -->
+                    <ul class="child-list flex-center">
+                      <li class="child-item">
+                        <div class="title flex-center justify-start">
+                          <span class="meal-icon icon_first"></span>
+                          <span class="title-type">余额套餐</span>
+                          <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.maxRechargeGift) { %>
+                            <div class="activity">
+                              加赠<%= HEADER_ACTIVE_TAB.maxRechargeGift %>%
+                            </div>
+                            <% } else { %>
+                              <!-- 仅仅留作占位 -->
+                              <span></span>
+                              <% } %>
+                        </div>
+                        <span class="describe">
+                          余额充值提取，自定义IP时效地区、数量
+                        </span>
+                      </li>
 
-              <li class="child-item">
-                <div class="title flex-center justify-start">
-                  <span class="meal-icon icon_second"></span>
-                  <span class="title-type">包时套餐</span>
-                  <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate) { %>
-                    <div class="activity">
-                      限时<%= HEADER_ACTIVE_TAB.minPurchaseRate %>折
-                    </div>
-                    <% } else { %>
-                      <span></span>
-                      <% } %>
-                </div>
-                <span class="describe">
-                  每日固定IP提取量，3 / 5 / 10 /15 分钟时效IP
-                </span>
-              </li>
-            </ul>
-          </li>
+                      <li class="child-item">
+                        <div class="title flex-center justify-start">
+                          <span class="meal-icon icon_second"></span>
+                          <span class="title-type">包时套餐</span>
+                          <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate) { %>
+                            <div class="activity">
+                              限时<%= HEADER_ACTIVE_TAB.minPurchaseRate %>折
+                            </div>
+                            <% } else { %>
+                              <span></span>
+                              <% } %>
+                        </div>
+                        <span class="describe">
+                          每日固定IP提取量，3 / 5 / 10 /15 分钟时效IP
+                        </span>
+                      </li>
+                    </ul>
+                  </li>
 
-          <li class="nav-item box-border nav-ip">
-            <a href="/getIp" title="提取IP">
-              <span>提取IP</span>
-              <i class="iconfont icon-arrow-down"></i>
-            </a>
+                  <li class="nav-item box-border nav-ip" data-path="getIp">
+                    <a href="/getIp" title="提取IP">
+                      <span>提取IP</span>
+                      <i class="iconfont icon-arrow-down"></i>
+                    </a>
 
-            <!-- 子导航 -->
-            <ul class="child-list flex-center child-vertical">
-              <li class="child-item">
-                <div class="title flex-center justify-start">
-                  <span class="meal-icon icon_third"></span>
-                  <span class="title-type">API提取</span>
-                </div>
-              </li>
+                    <!-- 子导航 -->
+                    <ul class="child-list flex-center child-vertical">
+                      <li class="child-item">
+                        <div class="title flex-center justify-start">
+                          <a href="/getIp">
+                            <span class="meal-icon icon_third"></span>
+                            <span class="title-type">API提取</span>
+                          </a>
+                        </div>
+                      </li>
 
-              <li class="child-item">
-                <div class="title flex-center justify-start">
-                  <span class="meal-icon icon_forth"></span>
-                  <span class="title-type">代码demo</span>
-                </div>
-              </li>
-            </ul>
-          </li>
+                      <li class="child-item">
+                        <div class="title flex-center justify-start">
+                          <a href="/getIp?a_id=cd">
+                            <span class="meal-icon icon_forth"></span>
+                            <span class="title-type">代码demo</span>
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
 
-          <li class="nav-item box-border nav-business">
-            <a href="/businessScene" title="业务场景">
-              <span>业务场景</span>
-              <i class="iconfont icon-arrow-down"></i>
-            </a>
+                  <li class="nav-item box-border nav-business" data-path="businessScene">
+                    <a href="/businessScene" title="业务场景">
+                      <span>业务场景</span>
+                      <i class="iconfont icon-arrow-down"></i>
+                    </a>
 
-            <!-- 子导航 -->
-            <ul class="child-list flex-center mixed-range">
-              <li class="child-item">
-                <div class="meal-icon nav_first"></div>
-                <div class="content">
-                  <span class="title-type">市场调查</span>
-                  <span class="describe">
-                    收集全网行业数据，
-                    了解竞争对手动态
-                  </span>
-                </div>
-              </li>
+                    <!-- 子导航 -->
+                    <ul class="child-list flex-center mixed-range">
+                      <li class="child-item">
+                        <div class="meal-icon nav_first"></div>
+                        <div class="content">
+                          <span class="title-type">市场调查</span>
+                          <span class="describe">
+                            收集全网行业数据，
+                            了解竞争对手动态
+                          </span>
+                        </div>
+                      </li>
 
-              <li class="child-item">
-                <div class="meal-icon nav_second"></div>
-                <div class="content">
-                  <span class="title-type">社交采集</span>
-                  <span class="describe">
-                    采集社交媒体数据，
-                    为企业提供支持
-                  </span>
-                </div>
-              </li>
+                      <li class="child-item">
+                        <div class="meal-icon nav_second"></div>
+                        <div class="content">
+                          <span class="title-type">社交采集</span>
+                          <span class="describe">
+                            采集社交媒体数据，
+                            为企业提供支持
+                          </span>
+                        </div>
+                      </li>
 
-              <li class="child-item">
-                <div class="meal-icon nav_third"></div>
-                <div class="content">
-                  <span class="title-type">品牌保护</span>
-                  <span class="describe">
-                    保护品牌商标打造，
-                    优质品牌形象
-                  </span>
-                </div>
-              </li>
+                      <li class="child-item">
+                        <div class="meal-icon nav_third"></div>
+                        <div class="content">
+                          <span class="title-type">品牌保护</span>
+                          <span class="describe">
+                            保护品牌商标打造，
+                            优质品牌形象
+                          </span>
+                        </div>
+                      </li>
 
-              <li class="child-item">
-                <div class="meal-icon nav_forth"></div>
-                <div class="content">
-                  <span class="title-type">SEO情报</span>
-                  <span class="describe">
-                    收集搜索引擎情报，
-                    提升品牌收益
-                  </span>
-                </div>
-              </li>
+                      <li class="child-item">
+                        <div class="meal-icon nav_forth"></div>
+                        <div class="content">
+                          <span class="title-type">SEO情报</span>
+                          <span class="describe">
+                            收集搜索引擎情报，
+                            提升品牌收益
+                          </span>
+                        </div>
+                      </li>
 
-              <li class="child-item">
-                <div class="meal-icon nav_fifth"></div>
-                <div class="content">
-                  <span class="title-type">电子商务</span>
-                  <span class="describe">
-                    淘宝、京东、拼多
-                    多等电商平台抢购
-                  </span>
-                </div>
-              </li>
+                      <li class="child-item">
+                        <div class="meal-icon nav_fifth"></div>
+                        <div class="content">
+                          <span class="title-type">电子商务</span>
+                          <span class="describe">
+                            淘宝、京东、拼多
+                            多等电商平台抢购
+                          </span>
+                        </div>
+                      </li>
 
-              <li class="child-item">
-                <div class="meal-icon nav_sixth"></div>
-                <div class="content">
-                  <span class="title-type">价格监控</span>
-                  <span class="describe">
-                    利用优质代理IP监
-                    控行业动态价格
-                  </span>
-                </div>
+                      <li class="child-item">
+                        <div class="meal-icon nav_sixth"></div>
+                        <div class="content">
+                          <span class="title-type">价格监控</span>
+                          <span class="describe">
+                            利用优质代理IP监
+                            控行业动态价格
+                          </span>
+                        </div>
 
-              </li>
-            </ul>
-          </li>
+                      </li>
+                    </ul>
+                  </li>
 
-          <li class="nav-item box-border nav-help">
-            <a href="/helpCenter" title="帮助中心">
-              <span>帮助中心</span>
-              <i class="iconfont icon-arrow-down"></i>
-            </a>
+                  <li class="nav-item box-border nav-help" data-path="help-center">
+                    <a href="/help-center" title="帮助中心">
+                      <span>帮助中心</span>
+                      <i class="iconfont icon-arrow-down"></i>
+                    </a>
 
-            <!-- 子导航 -->
-            <ul class="child-list flex-center child-vertical">
-              <li class="child-item">
-                <div class="title flex-center justify-around">
-                  <span class="meal-icon icon_fifth"></span>
-                  <span class="title-type">操作手册</span>
-                </div>
-              </li>
+                    <!-- 子导航 -->
+                    <ul class="child-list flex-center child-vertical">
+                      <li class="child-item">
+                        <div class="title flex-center justify-around">
+                          <span class="meal-icon icon_fifth"></span>
+                          <span class="title-type">操作手册</span>
+                        </div>
+                      </li>
 
-              <li class="child-item">
-                <div class="title flex-center justify-around">
-                  <span class="meal-icon icon_sixth"></span>
-                  <span class="title-type">产品介绍</span>
-                </div>
-              </li>
-              <li class="child-item">
-                <div class="title flex-center justify-around">
-                  <span class="meal-icon icon_seventh"></span>
-                  <span class="title-type">行业资讯</span>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item box-border">
-            <a href="/firmsServer" title="企业服务">
-              <span>企业服务</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+                      <li class="child-item">
+                        <div class="title flex-center justify-around">
+                          <span class="meal-icon icon_sixth"></span>
+                          <span class="title-type">产品介绍</span>
+                        </div>
+                      </li>
+                      <li class="child-item">
+                        <div class="title flex-center justify-around">
+                          <span class="meal-icon icon_seventh"></span>
+                          <span class="title-type">行业资讯</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="nav-item box-border" data-path="firmsServer">
+                    <a href="/firmsServer" title="企业服务">
+                      <span>企业服务</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
 
-      <!-- 双态icon -->
-      <div class="nav-toggler">
-        <span>显示</span>
-      </div>
-    </nav>
-    <!-- 右侧按钮/登录信息 -->
-    <div class="user btn">
-      <% if(userInfo && userInfo.id) { %>
-        <a href="/manager/user" title="个人中心" class="default-btn button person-center">个人中心</a>
-        <a href="javascript:void(0)" class="bl-l-button button user-logout" onclick="layout()"><span>退出</span></a>
-        <% } else { %>
-          <a href="/login" class="bl-button button user-login text-white"><span>登录</span></a>
-          <a href="/register" class="or-button button user-register text-white"><span>注册</span></a>
-          <% } %>
-    </div>
-  </div>
-</div>
+              <!-- 双态icon -->
+              <div class="nav-toggler">
+                <span>显示</span>
+              </div>
+            </nav>
+            <!-- 右侧按钮/登录信息 -->
+            <div class="user btn">
+              <% if(userInfo && userInfo.id) { %>
+                <a href="/manager/user" title="个人中心" class="default-btn button person-center">个人中心</a>
+                <a href="javascript:void(0)" class="bl-l-button button user-logout"
+                  onclick="layout()"><span>退出</span></a>
+                <% } else { %>
+                  <a href="/login" class="bl-button button user-login text-white"><span>登录</span></a>
+                  <a href="/register" class="or-button button user-register text-white"><span>注册</span></a>
+                  <% } %>
+            </div>
+          </div>
+        </div>

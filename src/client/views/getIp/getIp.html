@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-18 09:49:18
+ * @LastEditTime: 2022-05-20 11:56:48
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,37 +16,39 @@
   <meta name="description" content="天启http">
   <title>提取IP</title>
   <%- include('../components/style.html'); %>
-  <%- include('./style.html') %>
+  <link rel="stylesheet" href="/css/getIp.css">
 </head>
 <body>
   <%- include('../components/header/header.html'); %>
-  <div class="container grid mt-120">
+  <div class="getip-wrap grid mt-120">
     <!-- 左边悬浮框 -->
-    <div class="left">
-      <div class="extract_ip_left pd-20 grid justify-center">
-        <span class="desc font-25 title">提取IP</span>
-        <div class="anchor grid justify-center">
-          <span class="pointer">API获取</span>
-          <span class="pointer">提取接口</span>
-          <span class="pointer">白名单接口</span>
-          <span class="pointer">错误码</span>
+    <div class="left-wrap">
+      <div class="left">
+        <div class="extract_ip_left pd-20 grid justify-center">
+          <span class="desc font-25 title">提取IP</span>
+          <div class="anchor grid justify-center">
+            <span class="pointer">API获取</span>
+            <span class="pointer">提取接口</span>
+            <span class="pointer">白名单接口</span>
+            <span class="pointer">错误码</span>
+          </div>
         </div>
-      </div>
-      <div class="code_demo_left mt-20 pd-20 grid justify-center">
-        <span class="desc font-25 title">代码demo</span>
-        <div class="demo grid justify-center">
-          <span class="pointer">Python语言</span>
-          <span class="pointer">Go语言</span>
-          <span class="pointer">C#语言</span>
-          <span class="pointer">JavaScript语言</span>
-          <span class="pointer">Java语言</span>
-          <span class="pointer">Kotlin语言</span>
-          <span class="pointer">Php语言</span>
-          <span class="pointer">易语言</span>
-          <span class="pointer">C语言</span>
-          <span class="pointer">Phantomjs语言</span>
-          <span class="pointer">Selenium语言</span>
-          <span class="pointer">Node语言</span>
+        <div class="code_demo_left mt-20 pd-20 grid justify-center">
+          <span class="desc font-25 title">代码demo</span>
+          <div class="demo grid justify-center">
+            <span class="pointer">Python语言</span>
+            <span class="pointer">Go语言</span>
+            <span class="pointer">C#语言</span>
+            <span class="pointer">JavaScript语言</span>
+            <span class="pointer">Java语言</span>
+            <span class="pointer">Kotlin语言</span>
+            <span class="pointer">Php语言</span>
+            <span class="pointer">易语言</span>
+            <span class="pointer">C语言</span>
+            <span class="pointer">Phantomjs语言</span>
+            <span class="pointer">Selenium语言</span>
+            <span class="pointer">Node语言</span>
+          </div>
         </div>
       </div>
     </div>
@@ -241,7 +243,7 @@
         </div>
         <div class="mt-40 grid">
           <div class="flex align-center ">
-            <button class="create_api_url bl-button">
+            <button class="bl-button create_api_url">
               <span>生成API链接</span>
             </button>
             <span class="pointer ml-50">查看API文档</span>
@@ -493,7 +495,7 @@
         </div>
       </div>
       <!-- 代码demo -->
-      <div class="head code_demo_right">
+      <div class="head code_demo_right" id="cd">
         <span class="font-25 title">代码demo</span>
         <div class="demo_box grid mt-40">
           <% staticData.codeDemo.forEach(function(item,index) { %>

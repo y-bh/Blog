@@ -1,11 +1,11 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 帮助中心数据层
  * @Date: 2022-05-16 16:30:24
- * @LastEditTime: 2022-05-19 15:32:02
+ * @LastEditTime: 2022-05-20 13:38:55
  */
-const service= require("utils/request")
+const service = require("utils/request")
 const api = require("src/config/api.config.js")
 
 //获取首页的文章列表
@@ -32,40 +32,52 @@ const getBlogDetail = async (params = null) => {
 
 
 //文章列表
+
+//文章列表
 const postArticleDao = async (params = null) => {
   const url = api.POST_HELP_ARTICLE_LIST
+  let data = null;
   try {
     const res = await service.post(url, params)
-    return res
+    if (res.code === 200) {
+      data = res.data;
+    }
+    return data;
   } catch (error) {
-    console.error('postArticleDao: ', error)
+    console.error('postArticleDao: ')
+    return Promise.resolve(data)
   }
 }
 
 
 //获取文章栏目类型
 const getArticleTypeDao = async () => {
-  const res = await service.get(api.articleType);
-  console.log("=====================文章类型============",res)
   let data = [];
-  if (res.code === 200 && res.data.length > 0) {
-    data = res.data;
+  try {
+    const res = await service.get(api.articleType);
+    if (res.code === 200 && res.data.length > 0) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    console.error('getArticleTypeDao: ')
+    return Promise.resolve(data)
   }
-  return data;
 }
+
 const getArticleListDao = async () => {
-  const res = await service.get(api.getIndexArticles);
-  console.log("----文章列表2222222222----", res);
-  let data = {};
-  if (res.code === 200 && res.data) {
-    data = res.data;
+  let data = [];
+  try {
+    const res = await service.get(api.getIndexArticles);
+    if (res.code === 200 && res.data) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    console.error('getArticleListDao: ')
+    return Promise.resolve(data)
   }
-  return data;
 }
-
-
-
-
 
 module.exports = {
   getHelpList,

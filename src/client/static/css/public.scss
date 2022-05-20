@@ -461,7 +461,9 @@ body {
 .text-blue {
   color: #1968fc;
 }
-
+.text-desc {
+  color: #333;
+}
 .no-border {
   border: none;
 }
@@ -747,4 +749,9 @@ input::-webkit-input-placeholder {
   100% {
     transform: translateY(-10px);
   }
+}
+
+a:hover {
+  color: #0056b3;
+  text-decoration: none !important;
 }

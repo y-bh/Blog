@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 朱占伟
+ * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-18 15:29:34
+ * @LastEditTime: 2022-05-20 11:53:56
  */
 let loginStatus = true  //是否登录
 
@@ -168,8 +168,8 @@ $('.download').on('click',function() {
 
 //锚点
 $(function () {
-  function to() {
-    let bridge = $('#wl')[0];
+  function to(id) {
+    let bridge = $(`#${id}`)[0];
     let body = document.body;
     let height = 0;
 
@@ -181,7 +181,7 @@ $(function () {
     console.log(height);
 
     window.scrollTo({
-      top: height - 40,
+      top: height-100,
       behavior:"smooth",
     })
   }
@@ -189,8 +189,10 @@ $(function () {
   let href = window.location.href.split('?')
   if(href.length > 1){
     let query = href[1].split('&')
-    if(query.includes('wl')){
-      to()
+    for(let i of query){
+      if(i.indexOf('a_id') !== -1){
+        to(i.split('=')[1])
+      }
     }
   }
 })

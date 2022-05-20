@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-19 15:31:36
+ * @LastEditTime: 2022-05-19 16:27:26
 -->
 <template>
   <div class="white-list-wrap">
@@ -11,8 +11,10 @@
       <div class="white-list-count">
         已设/总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.count }}</span>
       </div>
-      <i ref="tooltipIconRef" class="tooltip tooltip-icon icon-xianxing-wenhao">
-      </i>
+      <div class="tooltip tooltip-icon">
+        <i class="iconfont icon-xianxing-wenhao"></i>
+        <i class="iconfont icon-mianxing-wenhao"></i>
+      </div>
       <div class="tooltip tooltip-text">
         <p>IP的使用和提取地址须同时在白名单内，该白名单功能仅针对长效IP</p>
       </div>

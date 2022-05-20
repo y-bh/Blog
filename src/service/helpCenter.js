@@ -5,7 +5,7 @@
  * @Date: 2022-05-16 16:37:33
  * @LastEditTime: 2022-05-19 15:32:24
  */
-const { getHelpList, getBlogDetail, postArticleDao } = require("dao/helpCenter")
+const { getHelpList, getArticleTypeDao, postArticleDao } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
 
 //标题省略
@@ -267,6 +267,72 @@ const postArticleService = async (data) => {
 
 
 
+const getHelpService = async (data) => {
+  let articleTypes = []
+  let lists = []
+  try {
+    //获取文章类型
+    const articleTypes = await getArticleTypeDao()
+
+    if (!articleTypes.length) {
+      return {
+        articleTypes,
+        lists
+      }
+    }
+
+    const params = {
+      pageSize: data.pageSize || 2,
+      pageNum: data.pageNum || 1,
+    }
+
+    let title = null
+    if (data.typeAlias) {
+      let tem = articleTypes.filter(({ typeAlias }) => typeAlias === data.typeAlias)
+      if (tem.length > 0) {
+        params.types = [tem[0].id]
+        title = tem[0].type
+      }
+    }
+
+    if (!params.types) {
+      params.types = [articleTypes[0].id]
+    }
+
+    console.log("paramsparamsparamsparams", params)
+    //文章列表
+    lists = await postArticleDao(params)
+
+    //兜底分页
+    if (!lists.totalPage) {
+      lists.totalPage = Math.ceil(lists.totalSize / params.pageSize)
+    }
+
+    //当前页
+    lists.pageNum = params.pageNum
+
+    //属于的文章类型
+    lists.typeAlias = data.typeAlias || articleTypes[0]['typeAlias']
+
+    //获取文章类型标题
+
+
+
+    return {
+      articleTypes,
+      lists,
+      title
+    }
+  } catch (error) {
+    console.error("getHelpService: ", error);
+    return Promise.resolve(
+      {
+        articleTypes,
+        lists
+      }
+    )
+  }
+}
 
 
 
@@ -275,5 +341,6 @@ module.exports = {
   getHelpListS,
   getBlogDetailS,
   getKeyWordPageS,
-  postArticleService
+  postArticleService,
+  getHelpService
 }
