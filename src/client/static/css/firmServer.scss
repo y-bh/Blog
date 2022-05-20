@@ -1,0 +1,30 @@
+.banner {
+  max-width: 100%;
+  height: 300px;
+  background: url('/images/companyServe/banner.png') no-repeat;
+  background-size: contain;
+}
+.require {
+  color: #fc7109;
+  display: block;
+}
+.form {
+  grid-row-gap: 35px;
+}
+.form_input{
+  width: 800px !important;
+  height: 80px !important;
+  border-radius: 8px !important;
+}
+.bottom_btn button {
+  width: 200px !important;
+  height: 40px !important;
+  color: #fff !important;
+  border: none !important;
+  background: #1968FC !important;
+  border-radius: 4px !important;
+}
+.error_msg {
+  position: relative;
+  left: 25%;
+}

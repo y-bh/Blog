@@ -2,11 +2,12 @@
   -webkit-animation: keyframe-kernel steps(1) forwards;
   animation: keyframe-kernel steps(1) forwards;
 }
-.container {
+.business-wrap {
   grid-template-rows: repeat(5,auto);
   grid-row-gap: 80px;
+  padding: 0px 270px;
 }
-.title {
+.businesstitle {
   font-size: 48px;
   font-weight: 800;
   color: #091D43;
