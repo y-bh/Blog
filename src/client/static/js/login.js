@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-19 15:31:07
+ * @LastEditTime: 2022-05-20 15:04:19
  */
 
 
@@ -192,7 +192,7 @@ async function loginSubmit(type) {
     contentType: 'application/json',
     success: (res) => {
 
-      if (+res.code !== 200) {
+      if (res && res.code !== 200) {
         return Helper.$message({
           message: res.msg || '注册失败!请联系客服',
           type: 'warning'
@@ -203,7 +203,7 @@ async function loginSubmit(type) {
       window.open("/manager/user")
     },
     error: (err) => {
-
+      console.log(err)
     }
   });
 }
@@ -274,7 +274,7 @@ async function sendCode(type = 'register') {
     })
   }
 }
-
+console.log(debounce,'debounce');
 window.sendCode = debounce(sendCode, 300, true)
 window.loginSubmit = debounce(loginSubmit, 300, true)
 
