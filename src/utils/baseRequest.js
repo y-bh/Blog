@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-19 15:29:48
+ * @LastEditTime: 2022-05-20 09:51:56
  */
 
 import axios from 'axios';
@@ -38,16 +38,14 @@ class Request {
         } else {
           return {
             code: -1,
-            msg: data.message
+            msg: data.msg || data.message || '接口异常'
           };
         }
       }
       return response.data;
     },
       error => {
-
         console.error("响应报错:", error)
-
       });
 
     this.service = service
