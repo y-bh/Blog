@@ -53,14 +53,16 @@
     // 每个导航元素
     .nav-item {
       position: relative;
+      width: auto;
       min-width: 64px;
       max-width: 96px;
-      height: 80px;
+      height: 80px !important;
       padding: 0 6px; // 底部线超出文字
       margin: 0 10px; // 导航文本元素间距
       text-align: center;
       line-height: 80px;
       white-space: nowrap; // 文本禁止换行
+
       a {
         display: block;
         height: inherit;
@@ -98,6 +100,15 @@
 
       &:last-child {
         margin-right: 0;
+      }
+
+
+      &.activated {
+        color: #1968fc;
+        &::after {
+          left: 0;
+          width: 100%;
+        }
       }
     }
     // 子导航  水平导航
@@ -144,11 +155,12 @@
         display: inline-block;
         width: 18px;
         height: 15px;
-        margin: 0 5px 0 0;
+        // margin: 0 5px 0 0;
         // 雪碧图每个icon间距为10px  每个icon宽18px
         background: transparent url(/images/head/head_child.png) scroll 50% 50% /
           auto;
         background-size: 206px 35px;
+        vertical-align: middle;
       }
       .icon_first {
         //  x  y

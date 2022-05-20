@@ -6,24 +6,48 @@
  * @LastEditTime: 2022-05-17 13:34:28
  */
 
-//默认显示第一个tab
-$('.nav .nav-item .nav-link').get(0).click();
-$('.tab-content .tab-pane').eq(0).addClass('active')
-
-//点击tab
-$('.nav .nav-item .nav-link').on('click',function() {
-  let index = $(this).parent().index()
-  $('.tab-content .tab-pane').eq(index).addClass('active').siblings().removeClass('active')
+const path = location.pathname
+$('.nav .nav-item .nav-link').each((index, item) => {
+  let id = $(item).attr("id")
+  if (path.includes(id)) {
+    $('.nav .nav-item .nav-link').get(index).click();
+  }
 })
+
+$('.nav .nav-item .nav-link').on('click', function () {
+  let href = $(this).attr("href")
+  location.href = href
+})
+
+
+//跳转页面
+function goPage(ev, page, type) {
+  let event = ev || window.Event
+
+  //点击跳转的目标页
+
+  if (+event.keyCode === 13) {
+    let id = event.target.value
+    if (id > page) {
+      id = page
+    }
+    if (id < 1) {
+      id = 1
+    }
+    if (id.includes(".")) {
+      id = parseInt(id)
+    }
+
+
+    location.href = `/help-center/${type}/${id}.html`
+  }
+
+
+}
+
+
 
 //查看详情
-$('.go_detail').on('click',function() {
-  window.location.href='http://localhost:8080/helpDetails'
+$('.go_detail').on('click', function () {
+  window.location.href = 'http://localhost:8080/helpDetails'
 })
-
-//点击页码
-$('.pageList .page-item').on('click',function() {
-  $(this).toggleClass('active').siblings().removeClass('active')
-})
-//默认展示第一页
-// $('.pageList .page-item').get(0).click();
