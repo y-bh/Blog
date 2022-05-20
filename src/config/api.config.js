@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-19 17:13:10
+ * @LastEditTime: 2022-05-20 09:34:28
  */
 
 module.exports = {
@@ -55,6 +55,7 @@ module.exports = {
   'QUERY_LIST': '/proxy/list',  // 获取套餐列表
   'QUERY_RENEWINFO': 'proxy/getProxyRenewInfo',
   'GET_REDPACKAGE': '/redPackage/enabled',  // 获取可用红包
+  'GET_SUPPLEMENTPRICE': '/proxyUpgrade/addTimes',  // 获取补量价格
   'QUERY_LOG': '/proxy/log',  // 变更记录
 
   /*企业服务*/

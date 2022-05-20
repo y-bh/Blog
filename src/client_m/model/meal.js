@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 我的套餐接口
  * @Date: 2022-05-18 13:26:26
- * @LastEditTime: 2022-05-19 17:15:22
+ * @LastEditTime: 2022-05-20 09:36:42
  */
 import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
@@ -38,6 +38,16 @@ export const getRenewList = async (params = null) => {
 export const getRedPackage = async (params = null) => {
   try {
     const res = await service.get(api.GET_REDPACKAGE, params);
+    return res;
+  } catch (error) {
+    return Promise.resolve(null);
+  }
+};
+
+// 获取补量价格
+export const getPrice = async (params = null) => {
+  try {
+    const res = await service.get(api.GET_SUPPLEMENTPRICE + '/' +  params);
     return res;
   } catch (error) {
     return Promise.resolve(null);

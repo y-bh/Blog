@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-19 17:48:47
+ * @LastEditTime: 2022-05-20 09:50:39
 -->
 <template>
   <div class="container">
@@ -350,7 +350,7 @@ export default {
             renewalRef.value.onOpen(row)
           }
         } else if (command === 'supplement') {
-          console.log('补量');
+          console.log(row,'补量');
           if(row.discount){
             message.warning({
               message: '定制套餐请联系您的专属销售修改补量',

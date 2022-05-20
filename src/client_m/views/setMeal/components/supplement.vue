@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 补量
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-20 09:10:16
+ * @LastEditTime: 2022-05-20 09:57:29
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -73,6 +73,7 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
+import { getPrice } from "model/meal.js";
 export default {
     emits: ['query'],
     components: {
@@ -124,14 +125,32 @@ export default {
                     // 向上取整
                     state.mealData.limitDays = row.endTime ? Math.ceil(((row.endTime) - (new Date().getTime() / 1000))  / 24 / 60 / 60) : 0;
                     state.mealData.mealId = row.id;  // 获取该条数据的id
-
+                    // 赠送IP
                     state.mealData.sendIp = row.sendIp ? row.sendIp : null;
                     state.mealData.form.number = 1000;
-                    state.mealData.payType = 'ali'
-                    state.dialogVisible = true
+                    state.mealData.payType = 'ali';
+
+                    // 获取应付金额
+                    methods.getSupplementPrice();
+                     state.dialogVisible = true
                 }
             },
-            supplementPrice () { },
+            async getSupplementPrice () { 
+                // 默认补量数量为1000  后期改动 找后端改下
+                let res = await getPrice(state.mealData.mealId);
+                if(res && res.code === 200){
+                    state.dialogVisible = true
+                } else {
+                    message.error({
+                        message: res.msg,
+                        showClose: true
+                    }) 
+                    // state.dialogVisible = false
+                }
+                console.log(res,'res=====');
+            },
+            // 每日补量数量变化  重新计算价格
+            supplementPrice(){},
             changeWays (mode) {
                 this.mealData.payType = mode;
             },
