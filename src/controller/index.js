@@ -10,7 +10,7 @@
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpService, getBlogDetailS, getKeyWordPageS, postArticleService } = require('service/helpCenter')
+const { getHelpService, getBlogDetailS, getKeyWordPageS, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
 const { getProxyCityS, getProxyMenuS } = require('service/getIp')
@@ -37,7 +37,7 @@ function Router(App) {
 
   //首页
   router.get("/", async (ctx) => {
-    console.log("获取顶部的数据:", ctx.state)
+
     const homeData = {
       name: '用户',
       url: '/',
@@ -45,14 +45,14 @@ function Router(App) {
     }
     let list = await renderHome();
     homeData.articleList = list ? list : [];
-    console.log("==========返回home数据=====", homeData);
+
     return ctx.render("home/home", homeData)
   })
 
   //落地推广页面
   router.get("/promotion", async (ctx) => {
     //const res = await renderHome()
-    //console.log("控制层:", res)
+    //
     return ctx.render("promotion/index", {
       name: '落地推广页面',
       url: 2222
@@ -63,9 +63,9 @@ function Router(App) {
   //购买页-package
   router.get("/package", async (ctx) => {
     /**数据请求 */
-    // console.log("套餐购买接口返回数据, await renderPackage())
+    // 
     let packageObj = await renderPackage();
-    // console.log("ssssss",packageObj);
+    // 
     return ctx.render("package/package", packageObj)
   })
 
@@ -117,12 +117,8 @@ function Router(App) {
     if (params && params.typeAlias) {
       body.typeAlias = params.typeAlias
     }
-    const { articleTypes, lists ,title} = await getHelpService(body)
-
-    console.log("cccccccc",lists)
-
-
-    return ctx.render("help/helpCenter", { articleTypes, lists ,title})
+    const { articleTypes, lists, title } = await getHelpService(body, ctx.state[appKey.cateTypes])
+    return ctx.render("help/helpCenter", { articleTypes, lists, title })
   })
 
 
@@ -135,13 +131,30 @@ function Router(App) {
   })
 
   //帮助中心详情-helpCenter-details
-  router.get(["/help-details", "/help-details/:id"],async (ctx) => {
+  router.get(["/help-details", "/help-details/:id"], async (ctx) => {
     /**数据请求 */
-    // const { id } = ctx.request.params
+    let { id } = ctx.request.params
 
-    let helpDetail = await getBlogDetailS()
+    if (!id) {
+      return ctx.fail('请传入文章id')
+    }
 
-    return ctx.render("help/detail/helpDetails", helpDetail)
+    if (id) {
+      id = id.replace(".html", '')
+    }
+
+
+
+
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx", id,)
+
+    let { articleKeyWords, prefix, suffix, related, articleDetailVO } = await getArticleDetailService(id)
+    console.log("111111", articleKeyWords)
+    console.log("222222", prefix)
+    console.log("33333", suffix)
+    console.log("44444", related)
+    console.log("55555555", articleDetailVO)
+    return ctx.render("help/detail/helpDetails", { articleKeyWords, prefix, suffix, related, articleDetailVO })
   })
 
   //企业服务-firmsServer
@@ -160,7 +173,7 @@ function Router(App) {
     let pageType = ctx.req.url.slice(1)
 
 
-    console.log("ddddddddddd", ctx.req.url)
+
     let title = "登录页-天启HTTP"
     if (pageType === 'reset') {
       title = "重置密码-天启HTTP"

@@ -10,6 +10,7 @@ const appKey = require("config/app.key.config")
 
 //顶部导航活动
 const { renderTab, getQueryLink } = require("service/common")
+const { getCateTypes } = require("service/helpCenter")
 
 
 //需要获取全局数据的 url
@@ -17,14 +18,20 @@ const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/getIp?wl', '/pac
 module.exports = function (app) {
   app.use(async ({ req, res, state, cookies }, next) => {
     const { method, url } = req
-    
+
     if (method === 'GET' && (URLS.includes(url) || url.includes('manager') || url.includes('help-center'))) {
-      
+
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
       state[appKey.active_tab] = tabActivity
 
-      
+      //顶部导航-帮助中心栏目文档
+      const articleTypes = await getCateTypes()
+      state[appKey.cateTypes] = articleTypes
+
+
+
+
 
       //登录用户名
       let userInfo = cookies.get(appKey.userInfo)

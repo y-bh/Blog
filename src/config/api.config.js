@@ -38,8 +38,8 @@ module.exports = {
   'POST_HELP_HELP': '/help/help', //获取首页的文章列表
   'POST_HELP_FIND_BY_ARTICLE_KEYWORD': '/help/findByArticleKeyword', //查看文章关键词聚合页
   'POST_HELP_HELP_DETAILS': '/help/helpDetails', //文章详情
-  'POST_HELP_ARTICLE_LIST':"/article/getArticles",
-
+  'POST_HELP_ARTICLE_LIST': "/article/getArticles",
+  'GET_HELP_ARTICLE_DETAIL': "/article/getArticleDetail",
   /*个人中心-购买记录 */
   'ORDER_LIST': '/order/list', //获取订单列表
   'ORDER_STATE': "/order/state", //获取订单状态
@@ -48,8 +48,8 @@ module.exports = {
 
   //  用户相关接口
   'POST_USER_REGISTER': '/user/register', //用户注册
-  'POST_USER_RESET' : '/user/forget/password/update', //重置密码
-  'POST_USER_LOGIN' : '/auth/login', //登录
+  'POST_USER_RESET': '/user/forget/password/update', //重置密码
+  'POST_USER_LOGIN': '/auth/login', //登录
 
   // 我的套餐
   'QUERY_LIST': '/proxy/list',  // 获取套餐列表
@@ -59,9 +59,9 @@ module.exports = {
   'QUERY_LOG': '/proxy/log',  // 变更记录
 
   /*企业服务*/
-  'COMPANY_NEW':'/company/new', //提交企业服务
+  'COMPANY_NEW': '/company/new', //提交企业服务
 
   /*提取ip*/
-  'PROXY_API_CITY':'/proxy/api/city', //获取提取套餐城市列表
-  'PROXY_API_MENU':'/proxy/api/menu', //获取提取套餐下拉列表
+  'PROXY_API_CITY': '/proxy/api/city', //获取提取套餐城市列表
+  'PROXY_API_MENU': '/proxy/api/menu', //获取提取套餐下拉列表
 }

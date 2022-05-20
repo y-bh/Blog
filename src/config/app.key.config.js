@@ -18,3 +18,8 @@ exports.token = 'TQ-TOKEN'
 
 //底部友情链接
 exports.links = 'FOOTER_LINKS'
+
+
+//帮助中心栏目类型
+exports.cateTypes = 'CATEGORY_TYPES'
+

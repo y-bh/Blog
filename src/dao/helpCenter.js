@@ -5,7 +5,7 @@
  * @Date: 2022-05-16 16:30:24
  * @LastEditTime: 2022-05-19 15:32:02
  */
-const service= require("utils/request")
+const service = require("utils/request")
 const api = require("src/config/api.config.js")
 
 //获取首页的文章列表
@@ -31,7 +31,6 @@ const getBlogDetail = async (params = null) => {
 }
 
 
-//文章列表
 
 //文章列表
 const postArticleDao = async (params = null) => {
@@ -80,6 +79,24 @@ const getArticleListDao = async () => {
 }
 
 
+//文章详情页
+const getArticleDetailDao = async (id) => {
+  const url = `${api.GET_HELP_ARTICLE_DETAIL}/${id}`
+  let data = null;
+  let { articleKeyWords, prefix, suffix, related, articleDetailVO } = [[], null, null, [], null]
+  try {
+    const res = await service.get(url);
+    if (res.code === 200) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    console.error('getArticleDetailDao: ')
+    return Promise.resolve({ articleKeyWords, prefix, suffix, related, articleDetailVO })
+  }
+}
+
+
 
 
 
@@ -88,5 +105,6 @@ module.exports = {
   getBlogDetail,
   postArticleDao,
   getArticleTypeDao,
-  getArticleListDao
+  getArticleListDao,
+  getArticleDetailDao
 }

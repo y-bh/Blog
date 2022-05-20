@@ -5,9 +5,10 @@
  * @Date: 2022-05-16 16:37:33
  * @LastEditTime: 2022-05-19 15:32:24
  */
-const { getHelpList, getArticleTypeDao, postArticleDao } = require("dao/helpCenter")
+const { getHelpList, getArticleTypeDao, postArticleDao, getArticleDetailDao } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
-
+const { cateTypes } = require("config/app.key.config")
+const { setStore, getStore } = require("store")
 //标题省略
 const csubstr = (str, len) => {
   if (str.length > len) {
@@ -264,16 +265,45 @@ const postArticleService = async (data) => {
 
 
 
+//cateTypes
 
 
-
-const getHelpService = async (data) => {
+//获取栏目类型
+const getCateTypes = async () => {
   let articleTypes = []
+  try {
+    //如果缓存有数据
+    if (getStore(cateTypes)) {
+      console.log("从缓存获取文章类型")
+      articleTypes = getStore(cateTypes)
+    } else {
+      //获取文章类型
+      console.log("从接口获取文章类型")
+      articleTypes = await getArticleTypeDao()
+      setStore(cateTypes, articleTypes, {
+        maxAge: 1000 * 3600 * 12,
+        ttl: 1000 * 3600 * 12,
+      })
+    }
+
+    return articleTypes
+  } catch (error) {
+    return Promise.resolve(articleTypes)
+  }
+}
+
+
+
+//获取帮助中心列表
+const getHelpService = async (data, articleTypes = []) => {
+
+  //1. 获取栏目类型
+  if (!articleTypes.length) {
+    articleTypes = await getCateTypes()
+  }
+
   let lists = []
   try {
-    //获取文章类型
-    const articleTypes = await getArticleTypeDao()
-
     if (!articleTypes.length) {
       return {
         articleTypes,
@@ -281,6 +311,7 @@ const getHelpService = async (data) => {
       }
     }
 
+    //2. 获取文章列表
     const params = {
       pageSize: data.pageSize || 2,
       pageNum: data.pageNum || 1,
@@ -299,7 +330,6 @@ const getHelpService = async (data) => {
       params.types = [articleTypes[0].id]
     }
 
-    console.log("paramsparamsparamsparams", params)
     //文章列表
     lists = await postArticleDao(params)
 
@@ -337,10 +367,33 @@ const getHelpService = async (data) => {
 
 
 
+//文章详情页
+const getArticleDetailService = async (id) => {
+  if (!id) return null
+
+
+  try {
+    let { articleKeyWords, prefix, suffix, related, articleDetailVO } = await getArticleDetailDao(id)
+    return {
+      articleKeyWords, prefix, suffix, related, articleDetailVO
+    }
+  } catch (error) {
+    console.error('getArticleDetailService:', error)
+    return Promise.resolve({
+      articleKeyWords, prefix, suffix, related, articleDetailVO
+    })
+  }
+}
+
+
+
+
 module.exports = {
   getHelpListS,
   getBlogDetailS,
   getKeyWordPageS,
   postArticleService,
-  getHelpService
+  getHelpService,
+  getArticleDetailService,
+  getCateTypes
 }

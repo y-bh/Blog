@@ -7,6 +7,7 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,10 +17,13 @@
   <meta name="description" content="天启http">
   <title>文章详情</title>
   <%- include('../../components/style.html'); %>
-  <%- include('./style.html') %>
+    <%- include('./style.html') %>
 </head>
+
 <body>
   <div class="container grid mt-80 mb-80">
+
+    <!-- 左侧文章详情 -->
     <div class="a_left grid grg-30">
       <div class="a_top flex justify-between align-center">
         <div class="a_top_left">
@@ -29,66 +33,85 @@
         </div>
         <span class="a_top_right">createTime</span>
       </div>
-      <div class="tag_container flex">
+      <div class="tag_container">
         <div class="tag_container_left flex align-center">
           <i class="mr-10 iconfont icon-biaoqian"></i>
           <span class="main-title-color">标签</span>
         </div>
-        <div class="tag_box ml-15 flex align-center">
-          <% tagList.forEach(function(keyWord,index) { %>
-            <span class="tag_item mr-20 flex-center pointer"><%= keyWord.tag%></span>
-          <% }) %>
+        <div class="tag_box ml-15">
+          <% articleKeyWords.forEach(function(keyWord,index) { %>
+            <span class="tag_item mr-20 flex-center pointer">
+              <%= keyWord.keyName%>
+            </span>
+            <% }) %>
         </div>
       </div>
-      <div class="content flex-center">content</div>
+      <div class="content flex-center">
+        <%= articleDetailVO.content %>
+      </div>
       <div class="btn flex justify-between">
-        <div class="btn_left">
-          <span class="text-blue">上一篇: </span>
-          <span class="last_title text-blue">上一篇title</span>
-        </div>
-        <div class="btn_right">
-          <span class="text-blue">下一篇: </span>
-          <span class="next_title text-blue">下一篇title</span>
-        </div>
+
+        <% if(prefix && prefix.title){%>
+          <div class="btn_left">
+            <span class="text-blue">上一篇: </span>
+            <span class="last_title text-blue">
+              <%=prefix.title %>
+            </span>
+          </div>
+          <% } %>
+
+
+            <% if(suffix && suffix.title){%>
+              <div class="btn_right">
+                <span class="text-blue">下一篇: </span>
+                <span class="next_title text-blue">
+                  <%=suffix.title %>
+                </span>
+              </div>
+              <% } %>
+
       </div>
     </div>
+
+
+    <!-- 右侧关联文章 -->
+
     <div class="a_right grid">
+      <!-- 相关文章 -->
       <div class="related_blogs grid grg-30 b_box">
         <div class="b_top font-18 font-bold main-title-color flex justify-between">
           相关文章
           <span class="text-blue font-16 look_more pointer">查看更多>></span>
         </div>
         <div class="b_bottom">
-          <% sameBlog.forEach(function(blog,index) { %>
+          <% related.forEach(function(blog,index) { %>
             <div class="flex justify-between mb-10 right_blog_title">
-              <div class="pointer"><%= blog.title%></div>
+              <div class="pointer">
+                <%= blog.title%>
+              </div>
               <i>></i>
             </div>
-          <% }) %>
-          <div class="flex"></div>
+            <% }) %>
+              <div class="flex"></div>
         </div>
       </div>
-      <div class="tab_blog grid">
-        <% tabList.forEach(function(tab,index) { %>
-          <div class="tav_same_blog grid b_box">
-            <div class="tab_top flex justify-between align-center">
-              <span class="right_blog_tab"><%= tab.typeAlias %></span>
-              <span class="look_more pointer">查看更多>></span>
-            </div>
-            <div class="tab_bottom" id="<%= tab.type %>">
-              <% tab.blogList.forEach(function(blog,index) { %>
-                <div class="flex justify-between align-center mb-10 right_blog_title pointer">
-                  <span><%= blog.title %></span>
-                  <i>></i>
-                </div>
-              <% }) %>
-            </div>
-          </div>
-        <% }) %>
-      </div>
+
+
+
+
+      <!-- 文章类型列表 -->
+
+
+
+
     </div>
+
+
+
+
   </div>
 </body>
 <%- include('../../components/js.html'); %>
-<%- include('./js.html') %>
+  <%- include('./js.html') %>
+
 </html>
