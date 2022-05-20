@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-20 14:25:23
+ * @LastEditTime: 2022-05-20 17:47:17
  */
 
 
@@ -34,6 +34,15 @@ function Router(App) {
   // 前端自定义api 处理部分
   router.use("/api", SelfApi.routes(), SelfApi.allowedMethods())
 
+
+  router.get("/payCenter", async (ctx) => {
+    const homeData = {
+      name: '用户',
+      url: '/',
+      link: [],
+    }
+    return ctx.render("payCenter/index", homeData)
+  })
 
   //首页
   router.get("/", async (ctx) => {

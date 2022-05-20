@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-19 17:47:17
+ * @LastEditTime: 2022-05-20 18:32:56
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -70,7 +70,7 @@
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt, deepCopy } from "tools/utility"
-import { getRenewList, getRedPackage } from "model/meal.js";
+import { getRenewList, getRedPackage, renewPay } from "model/meal.js";
 export default {
     emits: ['query'],
     components: {
@@ -234,7 +234,30 @@ export default {
                 state.isCustomize = false;
             },
             // 支付
-            submitForm () { }
+            async submitForm () { 
+                const reqData = {
+                    proxyId: state.renewForm.proxyId,
+                    payType: 1,
+                    mealId: state.renewForm.timeMealId,
+                    redRecordId: state.renewForm.redRecordId || null
+                }
+                let params = {
+                    url: "/renewProxy",
+                    type: 'post',
+                    query: JSON.stringify(reqData)
+                }
+       
+                window.open("/payCenter?payment=renew&params=" + JSON.stringify(params));
+                // return
+                // if(state.renewForm.payType === 'ali'){
+                //     params.payType = 1;
+                //     let res = await renewPay(params);
+                //     if(res && res.code === 200){
+                        
+                //     }
+                //     console.log(res,'res=支付宝支付');
+                // }
+            }
         }
    
 

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 我的套餐接口
  * @Date: 2022-05-18 13:26:26
- * @LastEditTime: 2022-05-20 15:24:16
+ * @LastEditTime: 2022-05-20 16:45:08
  */
 import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
@@ -16,7 +16,6 @@ const api = require("config/api.config.js")
  */
 export const getTableList = async (params = null) => {
   try {
-    console.log(params,'params$$$$$$$$');
     const res = await service.post(api.QUERY_LIST, params);
     return res;
   } catch (error) {
@@ -58,6 +57,16 @@ export const getPrice = async (params = null) => {
 export const getDuration = async (params = null) => {
   try {
     const res = await service.get(api.GET_DURATION + '/' +  params);
+    return res;
+  } catch (error) {
+    return Promise.resolve(null);
+  }
+};
+
+// 续费支付
+export const renewPay = async (params = null) => {
+  try {
+    const res = await service.post(api.POST_RENEWPAY, params);
     return res;
   } catch (error) {
     return Promise.resolve(null);

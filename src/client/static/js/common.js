@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-20 13:15:38
+ * @LastEditTime: 2022-05-20 18:35:38
  */
 
 function Helper() { }
@@ -174,7 +174,7 @@ function getCookie (key, json) {
 */
 async function ajax(params) {
   return new Promise(function (resolve, reject) {
-    console.log(params.query, '接口参数');
+    console.log(params, 'ajax接口参数');
     $.ajax({
       type: params.type ? params.type : 'POST',
       url: '/javaProxy' + params.url,
