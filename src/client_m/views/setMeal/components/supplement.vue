@@ -3,11 +3,12 @@
  * @LastEditors: 秦琛
  * @description: 补量
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-20 09:57:29
+ * @LastEditTime: 2022-05-20 14:02:43
 -->
 <template>
     <!-- 支付弹窗 -->
     <el-dialog v-model="dialogVisible" destroy-on-close 
+        @closed="cancelForm"
         custom-class="customize_dialog dialog-alone">
         <DialogTitle title-content="补量" />
         <div class="dialog-body">
@@ -33,7 +34,7 @@
                     <div class="form-item-tip">
                         <span>补量后每日提取上限：</span>
                         <span>
-                            {{ parseInt(mealData.limitIp) + parseInt(mealData.sendIp) + parseInt(mealData.form.number)}}
+                            {{ formatInt(mealData.limitIp) + formatInt(mealData.sendIp) + formatInt(mealData.form.number)}}
                         </span>
                     </div>
                 </el-form-item>
@@ -73,6 +74,7 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
+import { formatInt } from "tools/utility"
 import { getPrice } from "model/meal.js";
 export default {
     emits: ['query'],
@@ -132,36 +134,55 @@ export default {
 
                     // 获取应付金额
                     methods.getSupplementPrice();
-                     state.dialogVisible = true
+                     
                 }
             },
             async getSupplementPrice () { 
                 // 默认补量数量为1000  后期改动 找后端改下
                 let res = await getPrice(state.mealData.mealId);
                 if(res && res.code === 200){
+                    state.univalent = res.data && res.data.price || 0;   // 单价
+                    state.mealData.sendIp = res.data && res.data.sendCount || 0;
+                    state.mealData.payMoney = state.univalent * state.mealData.form.number;
+                    state.mealData.limitIp = res.data && formatInt(res.data.total) || 0;
                     state.dialogVisible = true
                 } else {
                     message.error({
                         message: res.msg,
                         showClose: true
                     }) 
-                    // state.dialogVisible = false
+                    state.dialogVisible = false
                 }
-                console.log(res,'res=====');
             },
             // 每日补量数量变化  重新计算价格
-            supplementPrice(){},
-            changeWays (mode) {
-                this.mealData.payType = mode;
+            supplementPrice(val){
+                state.mealData.payMoney = state.univalent * val;
             },
-            cancelForm () { },
+            changeWays (mode) {
+                state.mealData.payType = mode;
+            },
+            cancelForm () { 
+               state.mealData = {
+                    mealId: null,
+                    name: '',  // 套餐名称
+                    limitIp: null,  // 每日提取上限
+                    sendIp: null, // 赠送ip
+                    limitDays: null, // 套餐剩余天数
+                    form: {
+                        number: 1000
+                    },
+                    payMoney: null,  // 应付金额
+                    payType: 'ali',  // 支付方式  ali  wx
+                };
+                state.univalent = null; 
+            },
             submitForm () { }
         }
-        console.log(props, 'props');
 
         return {
             ...methods,
-            ...toRefs(state)
+            ...toRefs(state),
+            formatInt
         }
     }
 }
