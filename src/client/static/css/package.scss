@@ -67,6 +67,7 @@ $columnMt: 60px;
 }
 
 .packageBuy {
+  margin-top: 80px;
   .hide {
     display: none !important;
   }
@@ -115,6 +116,7 @@ $columnMt: 60px;
           display: flex;
           align-items: center;
           justify-content: center;
+          cursor: pointer;
           &.current {
             border: 1px solid #fc7019;
           }
@@ -222,6 +224,7 @@ $columnMt: 60px;
             img {
               width: 156px;
               height: 111px;
+              cursor: pointer;
             }
           }
         }
@@ -638,7 +641,7 @@ $columnMt: 60px;
           line-height: 50px;
           border: 1px solid #e4e5eb;
           border-radius: 8px;
-
+          cursor: pointer;
           &.current {
             background-color: #1968fc;
             color: #ffffff;

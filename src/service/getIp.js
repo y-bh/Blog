@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-18 09:52:38
+ * @LastEditTime: 2022-05-20 14:15:52
  */
 const { getProxyCity,getProxyMenu } = require("dao/getIp")
 
@@ -378,7 +378,7 @@ const getProxyCityS = async () => {
 const getProxyMenuS = async () => {
   try {
     const res = await getProxyMenu()
-    if (+res.code === 200) {
+    if (res && res.code === 200) {
       paidList = res.data
     }
     return paidList
