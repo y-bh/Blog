@@ -750,3 +750,8 @@ input::-webkit-input-placeholder {
     transform: translateY(-10px);
   }
 }
+
+a:hover {
+  color: #0056b3;
+  text-decoration: none !important;
+}

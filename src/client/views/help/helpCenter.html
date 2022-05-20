@@ -56,20 +56,20 @@
                           </div>
                           <div class="bottom">
                             <div class="line"></div>
-                            <span class="text-blue flex justify-content-end align-items-end">
+                            <span class="text-blue flex justify-content-end align-items-end month-box">
                               <%= new Date(i.createTime).getMonth()+1 %>
                             </span>
                           </div>
                         </div>
-                        <div class="right grid">
+                        <div class="right ml-30">
                           <div class="right_top flex justify-content-between align-center">
-                            <span class="font-20 main-title-color">
+                            <h3 class="font-20 main-title-color articlt-title">
                               <%= i.title %>
-                            </span>
-                            <span class="go_detail pointer">查看详情>></span>
+                            </h3>
+                            <span class="go_detail pointer text-right">查看详情>></span>
                           </div>
                           <p class="desc">
-                            <% console.log(i)%>
+                            <%= i.desc %>
                           </p>
                         </div>
                       </div>
@@ -89,7 +89,8 @@
                         <% } %>
                           <div class="pageList flex">
                             <% for(let i=0; i < lists.totalPage; i++) { %>
-                              <li class="page-item">
+                              <li class="page-item <%if(lists.pageNum === i+1){ %> page-active<%}%> ">
+                                
                                 <a href="/help-center/<%= lists.typeAlias %>/<%=i+1%>.html" class="page-link">
                                   <%=i+1%>
                                 </a>
@@ -108,7 +109,7 @@
                     </ul>
                   </nav>
                   <div class="goto flex justify-content-center align-items-center ml-30">
-                    前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="text">&nbsp;&nbsp;页
+                    前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number" onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')" id="pageInput">&nbsp;&nbsp;页
                   </div>
                 </div>
               </div>
