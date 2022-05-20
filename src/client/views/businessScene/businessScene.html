@@ -1,12 +1,13 @@
 <!--
  * @Author: 陈昊天
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 业务场景
  * @Date: 2022-05-14 18:25:11
- * @LastEditTime: 2022-05-20 12:05:31
+ * @LastEditTime: 2022-05-20 14:29:24
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,20 +17,22 @@
   <meta name="description" content="天启http">
   <title>业务场景</title>
   <%- include('../components/style.html'); %>
-  <link rel="stylesheet" href="/css/home.css">
-  <link rel="stylesheet" href="/css/businessScene.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/businessScene.css">
 </head>
+
 <body>
   <%- include('../components/header/header.html'); %>
-  <div class="container grid widthAll mt-150">
-    <div class="top grid">
-      
-      <% switch(currentId) { 
-          case 1: %>
+    <div class="container grid widthAll mt-150">
+      <div class="top grid">
+
+        <% switch(currentId) { case 1: %>
           <div class="flex-center common-slideInleft">
             <div class="left_text grid">
               <span class="title main-title-color">市场调查</span>
-              <p class="content">了解市场现状及其发展趋势，需要用科学的方法，有目的、系统地搜集、记录、整理行业相关信息。天启HTTP能帮您轻松收集全网数据和行业动态，为决策者制定计划提供客观、正确的参考依据，帮助企业率先占据行业优势。</p>
+              <p class="content">
+                了解市场现状及其发展趋势，需要用科学的方法，有目的、系统地搜集、记录、整理行业相关信息。天启HTTP能帮您轻松收集全网数据和行业动态，为决策者制定计划提供客观、正确的参考依据，帮助企业率先占据行业优势。
+              </p>
               <div class="bottom_btn flex justify-start align-center">
                 <button type="button" class="bl-button free mr-30">
                   <span>免费试用</span>
@@ -42,236 +45,248 @@
           </div>
           <img class="common-slideInRight" src="<%=imgUrl.market%>" alt="市场调查">
           <% break; %>
-          <% case 2: %>
-          <div class="flex-center common-slideInleft">
-            <div class="left_text grid">
-              <span class="title main-title-color">社交采集</span>
-              <p class="content">天启HTTP提供稳定可靠的代理解决方案，能帮您采集全网全渠道的社交媒体数据，包括微博、公众号、抖音、小红书等各类垂直平台，为企业分析产品口碑、活动走势、行业情报、竞品新闻等提供有效支持。</p>
-              <div class="bottom_btn flex justify-start align-center">
-                <button type="button" class="bl-button free mr-30">
-                  <span>免费试用</span>
-                </button>
-                <button type="button" class="or-l-button connect">
-                  <span>联系客服</span>
-                </button>
+            <% case 2: %>
+              <div class="flex-center common-slideInleft">
+                <div class="left_text grid">
+                  <span class="title main-title-color">社交采集</span>
+                  <p class="content">
+                    天启HTTP提供稳定可靠的代理解决方案，能帮您采集全网全渠道的社交媒体数据，包括微博、公众号、抖音、小红书等各类垂直平台，为企业分析产品口碑、活动走势、行业情报、竞品新闻等提供有效支持。</p>
+                  <div class="bottom_btn flex justify-start align-center">
+                    <button type="button" class="bl-button free mr-30">
+                      <span>免费试用</span>
+                    </button>
+                    <button type="button" class="or-l-button connect">
+                      <span>联系客服</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
+              <img class="common-slideInRight" src="<%=imgUrl.social%>" alt="社交采集">
+              <% break; %>
+                <% case 3: %>
+                  <div class="flex-center common-slideInleft">
+                    <div class="left_text grid">
+                      <span class="title main-title-color">品牌保护</span>
+                      <p class="content">
+                        打造一个牢固的品牌形象来之不易，天启HTTP能帮您识别网站内容，快速发现和防范来自各方面的侵权行为，以防止品牌被盗用、滥用，助力打造强势的品牌形象，增强用户对品牌的信任。</p>
+                      <div class="bottom_btn flex justify-start align-center">
+                        <button type="button" class="bl-button free mr-30">
+                          <span>免费试用</span>
+                        </button>
+                        <button type="button" class="or-l-button connect">
+                          <span>联系客服</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <img class="common-slideInRight" src="<%=imgUrl.brand%>" alt="品牌保护">
+                  <% break; %>
+                    <% case 4: %>
+                      <div class="flex-center common-slideInleft">
+                        <div class="left_text grid">
+                          <span class="title main-title-color">SEO情报</span>
+                          <p class="content">
+                            搜索引擎优化对每个网站经营者都至关重要，天启HTTP能帮您快速收集具备价值的搜索引擎情报和数据，进行关键词跟踪和广告验证，让您在搜索引擎竞争中占据优势，获得品牌收益。</p>
+                          <div class="bottom_btn flex justify-start align-center">
+                            <button type="button" class="bl-button free mr-30">
+                              <span>免费试用</span>
+                            </button>
+                            <button type="button" class="or-l-button connect">
+                              <span>联系客服</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <img class="common-slideInRight" src="<%=imgUrl.seo%>" alt="SEO情报">
+                      <% break; %>
+                        <% case 5: %>
+                          <div class="flex-center common-slideInleft">
+                            <div class="left_text grid">
+                              <span class="title main-title-color">电子商务</span>
+                              <p class="content">
+                                电子商务已广泛分布于全球贸易中，您可利用天启HTTP抢购淘宝、京东、拼多多等电商平台商品，获取全网电商平台信息，取得有利于自身的情报，从而及时调整运营策略，掌握行业风向。
+                              </p>
+                              <div class="bottom_btn flex justify-start align-center">
+                                <button type="button" class="bl-button free mr-30">
+                                  <span>免费试用</span>
+                                </button>
+                                <button type="button" class="or-l-button connect">
+                                  <span>联系客服</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <img class="common-slideInRight" src="<%=imgUrl.electronic%>" alt="电子商务">
+                          <% break; %>
+                            <% case 6: %>
+                              <div class="flex-center common-slideInleft">
+                                <div class="left_text grid">
+                                  <span class="title main-title-color">价格监控</span>
+                                  <p class="content">
+                                    使用天启HTTP优质代理IP监控行业价格，实时掌握机票、酒店、演唱会的价格变化，把控各个渠道的商品售价，监控竞争对手的调价行为，让企业能快速、稳定、快捷地采集价格数据。
+                                  </p>
+                                  <div class="bottom_btn flex justify-start align-center">
+                                    <button type="button" class="bl-button free mr-30">
+                                      <span>免费试用</span>
+                                    </button>
+                                    <button type="button" class="or-l-button connect">
+                                      <span>联系客服</span>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              <img class="common-slideInRight" src="<%=imgUrl.price%>" alt="价格监控">
+                              <% break; %>
+                                <% } %>
+      </div>
+      <div class="tab">
+        <div class="fourthRow">
+          <div class="common-row-title">
+            <span class="model_title">优质的使用体验</span>
+            <i class="iconfont icon-title-zhuangshi"></i>
           </div>
-          <img class="common-slideInRight" src="<%=imgUrl.social%>" alt="社交采集">
-          <% break; %>
-          <% case 3: %>
-          <div class="flex-center common-slideInleft">
-            <div class="left_text grid">
-              <span class="title main-title-color">品牌保护</span>
-              <p class="content">打造一个牢固的品牌形象来之不易，天启HTTP能帮您识别网站内容，快速发现和防范来自各方面的侵权行为，以防止品牌被盗用、滥用，助力打造强势的品牌形象，增强用户对品牌的信任。</p>
-              <div class="bottom_btn flex justify-start align-center">
-                <button type="button" class="bl-button free mr-30">
-                  <span>免费试用</span>
-                </button>
-                <button type="button" class="or-l-button connect">
-                  <span>联系客服</span>
-                </button>
-              </div>
-            </div>
+          <div class="content mt-80">
+            <ul id="kernelBox" class="common-fadeInUp common-fadeInUp-fast-1 tab_box flex-center">
+              <% tabList && tabList.forEach(function(item,index) { %>
+                <li class="ml-40 mr-40 pb-40">
+                  <div class="icon-img <%=item.icon %>"></div>
+                  <div class="mt-30">
+                    <span>
+                      <%=item.title %>
+                    </span>
+                  </div>
+                </li>
+                <% }) %>
+            </ul>
           </div>
-          <img class="common-slideInRight" src="<%=imgUrl.brand%>" alt="品牌保护">
-          <% break; %>
-          <% case 4: %>
-          <div class="flex-center common-slideInleft">
-            <div class="left_text grid">
-              <span class="title main-title-color">SEO情报</span>
-              <p class="content">搜索引擎优化对每个网站经营者都至关重要，天启HTTP能帮您快速收集具备价值的搜索引擎情报和数据，进行关键词跟踪和广告验证，让您在搜索引擎竞争中占据优势，获得品牌收益。</p>
-              <div class="bottom_btn flex justify-start align-center">
-                <button type="button" class="bl-button free mr-30">
-                  <span>免费试用</span>
-                </button>
-                <button type="button" class="or-l-button connect">
-                  <span>联系客服</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <img class="common-slideInRight" src="<%=imgUrl.seo%>" alt="SEO情报">
-          <% break; %>
-          <% case 5: %>
-          <div class="flex-center common-slideInleft">
-            <div class="left_text grid">
-              <span class="title main-title-color">电子商务</span>
-              <p class="content">电子商务已广泛分布于全球贸易中，您可利用天启HTTP抢购淘宝、京东、拼多多等电商平台商品，获取全网电商平台信息，取得有利于自身的情报，从而及时调整运营策略，掌握行业风向。</p>
-              <div class="bottom_btn flex justify-start align-center">
-                <button type="button" class="bl-button free mr-30">
-                  <span>免费试用</span>
-                </button>
-                <button type="button" class="or-l-button connect">
-                  <span>联系客服</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <img class="common-slideInRight" src="<%=imgUrl.electronic%>" alt="电子商务">
-          <% break; %>
-          <% case 6: %>
-          <div class="flex-center common-slideInleft">
-            <div class="left_text grid">
-              <span class="title main-title-color">价格监控</span>
-              <p class="content">使用天启HTTP优质代理IP监控行业价格，实时掌握机票、酒店、演唱会的价格变化，把控各个渠道的商品售价，监控竞争对手的调价行为，让企业能快速、稳定、快捷地采集价格数据。</p>
-              <div class="bottom_btn flex justify-start align-center">
-                <button type="button" class="bl-button free mr-30">
-                  <span>免费试用</span>
-                </button>
-                <button type="button" class="or-l-button connect">
-                  <span>联系客服</span>
-                </button>
-              </div>
-            </div>
-          </div>
-          <img class="common-slideInRight" src="<%=imgUrl.price%>" alt="价格监控">
-          <% break; %>
-      <% } %>
-    </div>
-    <div class="tab">
-      <div class="fourthRow">
-        <div class="common-row-title">
-          <span class="model_title">优质的使用体验</span>
+        </div>
+      </div>
+      <div class="proxy grid">
+        <div class="proxy_left common-slideInLeft"></div>
+        <div class="proxy_right flex-center flex-column common-slideInRight">
+          <span class="proxy_title model_title">企业级代理服务</span>
+          <span class="proxy_desc">高性能服务器、分布式集群架构，支持高并发调用</span>
+        </div>
+      </div>
+      <div class="menu grid">
+        <div class="menu_top flex-center">
+          <span class="model_title">灵活的计费方式，适配多种业务需求</span>
           <i class="iconfont icon-title-zhuangshi"></i>
         </div>
-        <div class="content mt-80">
-          <ul id="kernelBox" class="common-fadeInUp common-fadeInUp-fast-1 tab_box flex-center">
-            <% tabList.forEach(function(item,index) { %>
-              <li class="ml-40 mr-40 pb-40">
-                <div class="icon-img <%=item.icon %>"></div>
-                <div class="mt-30">
-                  <span><%=item.title %></span>  
-                </div>
-              </li>
-            <% }) %>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="proxy grid">
-      <div class="proxy_left common-slideInLeft"></div>
-      <div class="proxy_right flex-center flex-column common-slideInRight">
-        <span class="proxy_title model_title">企业级代理服务</span>
-        <span class="proxy_desc">高性能服务器、分布式集群架构，支持高并发调用</span>
-      </div>
-    </div>
-    <div class="menu grid">
-      <div class="menu_top flex-center">
-        <span class="model_title">灵活的计费方式，适配多种业务需求</span>
-        <i class="iconfont icon-title-zhuangshi"></i>
-      </div>
-      <div class="menu_bottom grid">
-        <div class="balance menu_box common-slideInLeft">
-          <span class="menu_title flex-center">余额套餐</span>
-          <div class="grid box_desc">
-            <ul class="timesRange mt-50">
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                <span class="ml-10">3分钟时效：0.005元/IP</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                <span class="ml-10">3分钟时效：0.005元/IP</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                <span class="ml-10">3分钟时效：0.005元/IP</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                <span class="ml-10">3分钟时效：0.005元/IP</span>
-              </li>
-            </ul>
-            <ul class="setMeal-limt">
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>套餐有效期：不限制</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>多机器调用：不限制</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>并发请求数量：不限制</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>支持协议：HTTP/HTTPS/SOCKS</span>
-              </li>
-            </ul>
-          </div>
-          <div class="know_more flex-center">
-            <button type="button" class="or-button know_btn">
-              <span>了解更多</span>
-            </button>
-          </div>
-        </div>
-        <div class="package menu_box common-slideInRight">
-          <span class="menu_title flex-center">包时套餐</span>
-          <div class="grid box_desc">
-            <ul class="package_time mt-50">
-              <li class="mb-20">
-                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                <span class="ml-10">IP时效：3/5/10/15分钟</span>
-              </li>
-              <li class="mb-20">
-                <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                <span class="ml-10">套餐有效期：7/30/90/180/365天</span>
-              </li>
-            </ul>
-            <ul class="setMeal-limt">
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>API调用频率：1秒</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>多机器调用：不限制</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>并发请求数量：不限制</span>
-              </li>
-              <li>
-                <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                <span>支持协议：HTTP/HTTPS/SOCKS</span>
-              </li>
-            </ul>
-          </div>
-          <div class="know_more flex-center">
-            <button type="button" class="or-button know_btn">
-              <span>了解更多</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="customer grid">
-      <div class="customer_top flex-center">
-        <span class="model_title">专属企业HTTP定制服务</span>
-        <i class="iconfont icon-title-zhuangshi"></i>
-      </div>
-      <div class="customer_bottom grid">
-        <div class="menu_list grid common-slideInLeft">
-          <% menuList.forEach(function(item,index) { %>
-            <div class="menu_item flex-center">
-              <div class="<%=item.className%> item-icon mr-30"></div>
-              <div class="font-16 main-title-color menu_item_title"><%= item.title %></div> 
+        <div class="menu_bottom grid">
+          <div class="balance menu_box common-slideInLeft">
+            <span class="menu_title flex-center">余额套餐</span>
+            <div class="grid box_desc">
+              <ul class="timesRange mt-50">
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                </li>
+              </ul>
+              <ul class="setMeal-limt">
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>套餐有效期：不限制</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>多机器调用：不限制</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>并发请求数量：不限制</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>支持协议：HTTP/HTTPS/SOCKS</span>
+                </li>
+              </ul>
             </div>
-          <% }) %>
+            <div class="know_more flex-center">
+              <button type="button" class="or-button know_btn">
+                <span>了解更多</span>
+              </button>
+            </div>
+          </div>
+          <div class="package menu_box common-slideInRight">
+            <span class="menu_title flex-center">包时套餐</span>
+            <div class="grid box_desc">
+              <ul class="package_time mt-50">
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">IP时效：3/5/10/15分钟</span>
+                </li>
+                <li class="mb-20">
+                  <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+                  <span class="ml-10">套餐有效期：7/30/90/180/365天</span>
+                </li>
+              </ul>
+              <ul class="setMeal-limt">
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>API调用频率：1秒</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>多机器调用：不限制</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>并发请求数量：不限制</span>
+                </li>
+                <li>
+                  <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+                  <span>支持协议：HTTP/HTTPS/SOCKS</span>
+                </li>
+              </ul>
+            </div>
+            <div class="know_more flex-center">
+              <button type="button" class="or-button know_btn">
+                <span>了解更多</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="module_create flex-center flex-column common-slideInRight">
-          <div class="module_img"></div>
-          <button class="or-button customer_btn mt-50" type="button">
-            <span>立即定制</span>
-          </button>
+      </div>
+      <div class="customer grid">
+        <div class="customer_top flex-center">
+          <span class="model_title">专属企业HTTP定制服务</span>
+          <i class="iconfont icon-title-zhuangshi"></i>
+        </div>
+        <div class="customer_bottom grid">
+          <div class="menu_list grid common-slideInLeft">
+            <% menuList && menuList.forEach(function(item,index) { %>
+              <div class="menu_item flex-center">
+                <div class="<%=item.className%> item-icon mr-30"></div>
+                <div class="font-16 main-title-color menu_item_title">
+                  <%= item.title %>
+                </div>
+              </div>
+              <% }) %>
+          </div>
+          <div class="module_create flex-center flex-column common-slideInRight">
+            <div class="module_img"></div>
+            <button class="or-button customer_btn mt-50" type="button">
+              <span>立即定制</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </body>
 <%- include('../components/js.html'); %>
-<script src="/js/business.js"></script>
+  <script src="/js/business.js"></script>
+
 </html>

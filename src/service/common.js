@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共接口
  * @Date: 2022-05-16 19:16:37
- * @LastEditTime: 2022-05-19 15:32:13
+ * @LastEditTime: 2022-05-20 14:25:52
  */
 
 const { getQueryLinkData, getMealActivity } = require("dao/common")
@@ -26,7 +26,7 @@ const renderTab = async () => {
 
   //无数据 从接口获取
   const res = await getMealActivity();
-  if (+res.code === 200) {
+  if (res && res.code === 200) {
     data = res.data
     setStore(active_tab, data)
   }

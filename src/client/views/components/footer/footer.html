@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-09 13:31:39
- * @LastEditTime: 2022-05-16 19:21:59
+ * @LastEditTime: 2022-05-20 14:26:52
 -->
 
 <link rel="stylesheet" href="/css/footer.css">
@@ -34,7 +34,7 @@
       友情链接
     </div>
     <div class="link-content">
-      <% links.forEach(function(item){ %>
+      <% links && links.forEach(function(item){ %>
         <a href="<%- item.link %>" target="<%- item.link || '_blank' %>">
           <%- item.title %>
         </a>
