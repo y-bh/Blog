@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-19 13:07:39
+ * @LastEditTime: 2022-05-20 14:25:23
  */
 
 
@@ -100,11 +100,13 @@ function Router(App) {
 
 
   //业务场景-businessScene
-  router.get("/businessScene", async (ctx) => {
+  router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
     /**数据请求 */
+    let { currentId = '1' } = ctx.request.params
     let res = getBusinessData()
+    let p = Object.assign(res, {currentId})
 
-    return ctx.render("businessScene/businessScene", res)
+    return ctx.render("businessScene/businessScene", p)
   })
 
 

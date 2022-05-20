@@ -137,6 +137,9 @@
 }
 .homeContent {
   margin: 0 auto;
+  .pointer {
+    cursor: pointer;
+  }
   .banner-right {
     // width: 633px;
     // height: 652px;
@@ -172,6 +175,7 @@
           background: rgba(25, 104, 252, 0.39);
           border-radius: 4px;
           color: #ffffff;
+          cursor: pointer;
         }
         .border-btn {
           width: 200px;
@@ -179,6 +183,7 @@
           border: 1px solid #fc7019;
           border-radius: 4px;
           color: #fc7019;
+          cursor: pointer;
         }
       }
     }

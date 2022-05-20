@@ -155,11 +155,12 @@
         display: inline-block;
         width: 18px;
         height: 15px;
-        margin: 0 5px 0 0;
+        // margin: 0 5px 0 0;
         // 雪碧图每个icon间距为10px  每个icon宽18px
         background: transparent url(/images/head/head_child.png) scroll 50% 50% /
           auto;
         background-size: 206px 35px;
+        vertical-align: middle;
       }
       .icon_first {
         //  x  y

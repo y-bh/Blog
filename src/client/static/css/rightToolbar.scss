@@ -55,10 +55,12 @@
     border-radius: 50px;
     padding: 15px 0;
     position: relative;
+    .pointer {
+      cursor: pointer;
+    }
     .toolbar-item {
       height: 80px;
       margin: 15px 0;
-      cursor: pointer;
       .right {
         text-align: center;
       }
@@ -151,4 +153,8 @@
       }
     }
   }
+}
+.class_qidian_wpa {
+  left: auto !important;
+  right: 36px !important;
 }

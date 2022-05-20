@@ -1,9 +1,9 @@
 <!--
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: dengxiujie
  * @description: 首页
  * @Date: 2022-04-22 15:15:09
- * @LastEditTime: 2022-05-19 14:40:44
+ * @LastEditTime: 2022-05-20 13:26:31
 -->
 
 <!DOCTYPE html>
@@ -41,8 +41,8 @@
                 <span>HTTP、HTTPS、SOCKS5协议，全方位支持大数据采集</span>
               </div>
               <div class="banner-btn mt-30 common-fadeInUp common-fadeInUp-delay-07">
-                <div class="backg-btn"><span>免费试用</span></div>
-                <div class="border-btn ml-30"><span>免费试用</span></div>
+                <div class="backg-btn" onclick="onFreeTry()"><span>免费试用</span></div>
+                <div class="border-btn ml-30" onclick="contactUs()"><span>联系客服</span></div>
               </div>
             </div>
             <!-- <div class="banner-right"> -->
@@ -75,21 +75,21 @@
             <div class="subTitle mt-20"><span>运营商正规授权资源,安全稳定的优质代理服务</span></div>
           </div>
           <ul class="mt-80">
-            <li class="common-fadeInUp common-fadeInUp-fast-1">
+            <li class="common-fadeInUp common-fadeInUp-fast-1 pointer">
               <div class="top">
                 <div class="title"><span>三大协议支持</span></div>
                 <div class="icon-img1"></div>
               </div>
               <div class="mt-30 bottom"><span>提供HTTP/HTTPS/SOCKS5协议，满足各类业务需求</span></div>
             </li>
-            <li class="mt-60 common-fadeInUp common-fadeInUp-fast-2">
+            <li class="mt-60 common-fadeInUp common-fadeInUp-fast-2 pointer">
               <div class="top">
                 <div class="title"><span>全国自建机房</span></div>
                 <div class="icon-img2"></div>
               </div>
               <div class="mt-30 bottom"><span>全国200+城市节点，自建机房纯净网络，掌握一手IP资源</span></div>
             </li>
-            <li class="mt-110 common-fadeInUp common-fadeInUp-fast-3">
+            <li class="mt-110 common-fadeInUp common-fadeInUp-fast-3 pointer">
               <div class="top">
                 <div class="title"><span>快捷极速响应</span></div>
                 <div class="icon-img3"></div>
@@ -106,27 +106,27 @@
           </div>
           <div class="content mt-80">
             <ul id="kernelBox" class="common-fadeInUp common-fadeInUp-fast-1">
-              <li class="ml-40 mr-40 pb-40 active">
+              <li class="ml-40 mr-40 pb-40 active pointer">
                 <div class="icon-img icon-img1"></div>
                 <div class="mt-30"><span>企业级代理服务</span></div>
               </li>
-              <li class="ml-40 mr-40 pb-40">
+              <li class="ml-40 mr-40 pb-40 pointer">
                 <div class="icon-img icon-img2"></div>
                 <div class="mt-30"><span>优质性能保证</span></div>
               </li>
-              <li class="ml-40 mr-40 pb-40">
+              <li class="ml-40 mr-40 pb-40 pointer">
                 <div class="icon-img icon-img3"></div>
                 <div class="mt-30"><span>资源自由去重</span></div>
               </li>
-              <li class="ml-40 mr-40 pb-40">
+              <li class="ml-40 mr-40 pb-40 pointer">
                 <div class="icon-img icon-img4"></div>
                 <div class="mt-30"><span>API快捷调用</span></div>
               </li>
-              <li class="ml-40 mr-40 pb-40">
+              <li class="ml-40 mr-40 pb-40 pointer">
                 <div class="icon-img icon-img5"></div>
                 <div class="mt-30"><span>终端使用授权</span></div>
               </li>
-              <li class="ml-40 mr-40 pb-40">
+              <li class="ml-40 mr-40 pb-40 pointer">
                 <div class="icon-img icon-img6"></div>
                 <div class="mt-30"><span>专业技术客服</span></div>
               </li>
@@ -149,7 +149,7 @@
             <div class="subTitle mt-20"><span>更灵活自由的计费方式，适配多种业务需求</span></div>
           </div>
           <ul class="setMeal mt-80">
-            <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50">
+            <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50 pointer">
               <div class="title"><span>余额套餐</span></div>
               <ul class="timesRange mt-50">
                 <li class="mb-20">
@@ -158,15 +158,15 @@
                 </li>
                 <li class="mb-20">
                   <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                  <span class="ml-10">5分钟时效：0.01元/IP</span>
                 </li>
                 <li class="mb-20">
                   <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                  <span class="ml-10">10分钟时效：0.002元/IP</span>
                 </li>
                 <li class="mb-20">
                   <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                  <span class="ml-10">3分钟时效：0.005元/IP</span>
+                  <span class="ml-10">15分钟时效：0.003元/IP</span>
                 </li>
               </ul>
               <ul class="setMeal-limt">
@@ -187,11 +187,11 @@
                   <span>支持协议：HTTP/HTTPS/SOCKS</span>
                 </li>
               </ul>
-              <div class="common-main-button mt-50">
-                <span>了解更多</span>
+              <div class="common-main-button mt-50" onclick="jumpPackage(1)">
+                <span >了解更多</span>
               </div>
             </li>
-            <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50">
+            <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50 pointer">
               <div class="title"><span>包时套餐</span></div>
               <ul class="timesRange mt-50">
                 <li class="mb-20">
@@ -221,7 +221,7 @@
                   <span>支持协议：HTTP/HTTPS/SOCKS</span>
                 </li>
               </ul>
-              <div class="common-main-button mt-50">
+              <div class="common-main-button mt-50" onclick="jumpPackage(2)">
                 <span>了解更多</span>
               </div>
             </li>
@@ -260,7 +260,7 @@
             </li>
             <li class="mr-50 ml-50 custom-made-bg">
               <div><img src="/images/home/custom-made-bg.png" alt=""></div>
-              <div class="common-main-button mt-40"><span>立即定制</span></div>
+              <div class="common-main-button mt-40 pointer" onclick="contactUs()"><span>立即定制</span></div>
             </li>
           </ul>
         </div>
@@ -285,8 +285,8 @@
           <div><img src="/images/home/regist.png" alt=""></div>
           <div class="desc"><span>现在注册，免费领取5000IP</span></div>
           <div class="btn">
-            <div class="bl-button button mr-40"><span>免费试用</span></div>
-            <div class="or-button button"><span>联系客服</span></div>
+            <div class="bl-button button mr-40" onclick="onFreeTry()"><span>免费试用</span></div>
+            <div class="or-button button" onclick="contactUs()"><span>联系客服</span></div>
           </div>
         </div>
         <!-- 资讯中心 -->
@@ -332,7 +332,7 @@
               <div class="mt-40 queryBtn">查看全部<span>>></span></div>
             </li> -->
 
-           <!--  <li class="news2 pl-50 pr-50 pt-50 pb-50 ml-20 mr-20 mt-80">
+            <!--  <li class="news2 pl-50 pr-50 pt-50 pb-50 ml-20 mr-20 mt-80">
               <div class="common-arrow-title pb-10">
                 <div class="arrow arrow_left">
                   <i class="iconfont icon-jiantou1"></i>
@@ -425,12 +425,16 @@
                   <% articleItem.articleDetail.forEach(function(articleDetail,index) { %>
                     <li class="mt-20">
                       <!-- <span class="mr-30"><%= articleDetail.convertData %></span> -->
-                      <span class="mr-30"><%= articleDetail.convertData %></span>
-                      <span><%= articleDetail.title %></span>
+                      <span class="mr-30">
+                        <%= articleDetail.convertData %>
+                      </span>
+                      <span>
+                        <%= articleDetail.title %>
+                      </span>
                     </li>
                     <% }) %>
                 </ul>
-                <div class="mt-40 queryBtn">查看全部<span>>></span></div>
+                <div class="mt-40 queryBtn pointer" onclick="queryAll()">查看全部<span>>></span></div>
               </li>
 
 
@@ -452,5 +456,7 @@
 <%- include('../components/js.html'); %>
   <script src="/lib/js/particles.min.js"></script>
   <script src="/js/particles-config.js"></script>
+
   <script src="/js/home.js"></script>
+
 </html>

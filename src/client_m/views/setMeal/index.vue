@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-20 09:50:39
+ * @LastEditTime: 2022-05-20 15:24:43
 -->
 <template>
   <div class="container">
@@ -68,8 +68,8 @@
           <template #default="{row}">
             <div>
               <!--定制套餐显示 标签-->
-              <el-button round type="primary" plain size="mini" v-if="row.discountPrice">定制</el-button>
-              <br v-if="row.discountPrice">
+              <el-button round type="primary" plain size="mini" v-if="row.discount">定制</el-button>
+              <br v-if="row.discount">
               <span>{{ row.sequence }}</span>
             </div>
           </template>
@@ -172,7 +172,7 @@
                     </template>
                     <template v-else>
                         <!-- 判断套餐状态  正常  用完-->
-                        <template v-if="row.state === 1 || row.state === 4">
+                        <template v-if="row.state === 1 || row.state === 3">
                             <!-- api购买 -->
                             <template v-if="row.preOrderPaid">
                               <el-dropdown-item command="extract" v-if="row.state !== 4">api提取</el-dropdown-item>
@@ -181,9 +181,9 @@
                             <template v-else>
                               <el-dropdown-item command="renewal">续费</el-dropdown-item>
                               <el-dropdown-item command="supplement" v-if="row.proxyType !== 0">补量</el-dropdown-item>
-                              <el-dropdown-item command="modify" v-if="row.state !== 4">修改时效</el-dropdown-item>
+                              <el-dropdown-item command="modify" v-if="row.state !== 3">修改时效</el-dropdown-item>
                               <el-dropdown-item command="merge" v-if="row.proxyType !== 1">合并套餐</el-dropdown-item>
-                              <el-dropdown-item command="extract" v-if="row.state !== 4">api提取</el-dropdown-item>
+                              <el-dropdown-item command="extract" v-if="row.state !== 3">api提取</el-dropdown-item>
                               <el-dropdown-item command="changeLog">变更记录</el-dropdown-item>
                             </template>
                         </template>
@@ -368,7 +368,7 @@ export default {
               showClose: true
             })
           } else {
-            modifyRef.value.onOpen(1)
+            modifyRef.value.onOpen(row)
           }
           
         } else if (command === 'merge') {
