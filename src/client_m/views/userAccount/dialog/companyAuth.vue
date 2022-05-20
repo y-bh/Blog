@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-19 10:33:47
+ * @LastEditTime: 2022-05-19 17:32:40
 -->
 <template>
   <div class="companyAuth">
@@ -184,7 +184,7 @@ export default {
   props: {},
   setup(props, { emit }) {
     //const
-    const dialogVisible = ref(true);
+    const dialogVisible = ref(false);
     const vaildIDCardRef = ref(null);
     const message = inject("message");
     const authCompanyStep = ref(8); //认证步骤

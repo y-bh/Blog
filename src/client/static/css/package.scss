@@ -115,6 +115,7 @@ $columnMt: 60px;
           display: flex;
           align-items: center;
           justify-content: center;
+          cursor: pointer;
           &.current {
             border: 1px solid #fc7019;
           }
@@ -222,6 +223,7 @@ $columnMt: 60px;
             img {
               width: 156px;
               height: 111px;
+              cursor: pointer;
             }
           }
         }

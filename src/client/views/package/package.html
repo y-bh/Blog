@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-19 17:05:47
+ * @LastEditTime: 2022-05-20 13:17:08
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -30,13 +30,13 @@
       </div>
       <div class="package-content">
         <!-- 切换tab头部 -->
-        <div class="changeTab mediaStyle">
-          <div class="tab-header current" onclick="changeTab(1,this)">
+        <div id="changeTab" class="changeTab mediaStyle">
+          <div class="tab-header current" type="1">
             <span>余额套餐</span>
             <i class="iconfont icon-24gl-questionCircle" data-toggle="tooltip" data-placement="top"
               title="可自定义提取不同时效、地区、数量的IP，适合大多数用户"></i>
           </div>
-          <div class="tab-header" onclick="changeTab(2,this)">
+          <div class="tab-header" type="2" id="packageTab">
             <span>包时套餐</span>
             <i class="iconfont icon-24gl-questionCircle" title="IP时效固定，可定制每日提取数量，适合每日IP需求固定的用户"></i>
           </div>

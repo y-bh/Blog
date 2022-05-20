@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-19 17:13:14
+ * @LastEditTime: 2022-05-20 13:19:03
  */
 
 
@@ -181,6 +181,25 @@ function changeTab(params, dom) {
   }
 }
 
+
+$(document).on("click", '#changeTab>div', function () {
+  let isCur = $(this).hasClass("current")
+  if (isCur) {
+    return;
+  }
+  $(this).addClass("current");
+  $(this).siblings().removeClass("current");
+  let type =  $(this).attr("type");
+  if (type == 1) {
+    $("#balancePackage").show();
+    $("#packageTime").hide();
+  }
+  if (type == 2) {
+    $("#balancePackage").hide();
+    $("#packageTime").show();
+  }
+})
+
 //切换头部modal的tab页面 1：余额 2：包时
 function changeModalTab(params, dom) {
   let isCur = $(dom).hasClass("current")
@@ -271,8 +290,7 @@ let packageData = {
 
 //红包
 async function getRedPacket() {
-  let isLogin = true;
-  if (isLogin) {
+  if (window.isLogin) {
     let params = {
       url: "/redPackage/enabled",
       type: 'get',
@@ -285,10 +303,9 @@ async function getRedPacket() {
 
 //余额套餐计算统一处理
 async function commonBalancePay() {
-  let isLogin = true;
   //余额套餐 -- 初始化选中的价格
   let initPayPice = $("#selectRechargeMeals").find("li.current").attr("price");
-  if (isLogin) {
+  if (window.isLogin) {
     filterRedPacket(initPayPice, 1);
     //包时套餐--- 选中的价格
     // getPackageTimesPrice();
@@ -299,11 +316,15 @@ async function commonBalancePay() {
 }
 
 $(async function () {
+  let curTab = sessionStorage.getItem("packageTab");
   await getRedPacket();
   console.log(2222222, packageData.allRedPacket);
   commonBalancePay();
   getPackageTimesPrice();
-
+  //处理其他页面跳转过来tab
+  if (curTab && curTab == 2) {
+    $("#packageTab").click();
+  }
 })
 
 
@@ -342,8 +363,7 @@ function getPackageTimesPrice() {
   $("#totalPrice").html(totalPrice.toFixed(2));
   $("#totalPrice").attr("noredprice", discountPrice)
   //红包折扣后的价格,计算满减
-  let isLogin = true;
-  if (isLogin) {
+  if (window.isLogin) {
     filterRedPacket(discountPrice, 2);
   } else {
     computerBalancePay(discountPrice, 2, false)
@@ -442,8 +462,7 @@ function payMore() {
 
 //tabType 1:余额 2.包时
 async function toPayMoney(tabType) {
-  let isLogin = true;
-  if (isLogin) {
+  if (window.isLogin) {
     //获取红包
     let redPacketId = Number($("#balanceRedPacketSelect select").val());
 
@@ -486,7 +505,7 @@ async function toPayMoney(tabType) {
       let meanId = $("#selectBuyDuration").find("ul.current").find("li.current").attr("data-id");
       let total = $("#counter-enter").val();
       if (payType === 'ali') {
-        window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total)  + "&redRecordId=" + Number(redPacketId));
+        window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total) + "&redRecordId=" + Number(redPacketId));
       } else {
         //调用后台接口生成二维码
         let parmas = {
@@ -513,8 +532,8 @@ async function toPayMoney(tabType) {
   } else {
     // 记录界面路径，登录完回跳
     let $path = window.location.pathname;
-    //sessionStorage.setItem('_TQRoutePath', $path)
-    window.location.href = '/login/index.html'
+    sessionStorage.setItem('_TQRoutePath', $path)
+    window.location.href = '/login'
   }
 }
 
