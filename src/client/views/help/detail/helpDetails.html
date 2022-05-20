@@ -17,98 +17,137 @@
   <meta name="description" content="天启http">
   <title>文章详情</title>
   <%- include('../../components/style.html'); %>
-    <%- include('./style.html') %>
+    <link rel="stylesheet" href="/css/helpDetail.css">
 </head>
 
 <body>
-  <div class="container grid mt-80 mb-80">
+  <div class="container">
 
-    <!-- 左侧文章详情 -->
-    <div class="a_left grid grg-30">
-      <div class="a_top flex justify-between align-center">
-        <div class="a_top_left">
-          <span class="pointer help_center">帮助中心</span>-
-          <span class="pointer go_tab">typeAlias</span>-
-          <span class="main-title-color">title</span>
-        </div>
-        <span class="a_top_right">createTime</span>
-      </div>
-      <div class="tag_container">
-        <div class="tag_container_left flex align-center">
-          <i class="mr-10 iconfont icon-biaoqian"></i>
-          <span class="main-title-color">标签</span>
-        </div>
-        <div class="tag_box ml-15">
-          <% articleKeyWords.forEach(function(keyWord,index) { %>
-            <span class="tag_item mr-20 flex-center pointer">
-              <%= keyWord.keyName%>
-            </span>
-            <% }) %>
-        </div>
-      </div>
-      <div class="content flex-center">
-        <%= articleDetailVO.content %>
-      </div>
-      <div class="btn flex justify-between">
 
-        <% if(prefix && prefix.title){%>
-          <div class="btn_left">
-            <span class="text-blue">上一篇: </span>
-            <span class="last_title text-blue">
-              <%=prefix.title %>
-            </span>
+
+
+
+    <div class="box  mt-80 mb-80">
+
+
+      <!-- 左侧文章详情 -->
+      <div class="a_left ">
+        <!-- 面包絮导航 -->
+        <div class="a_top flex justify-between align-center">
+          <div class="a_top_left">
+            <span class="pointer help_center">帮助中心</span>-
+            <span class="pointer go_tab">typeAlias</span>-
+            <span class="main-title-color">title</span>
           </div>
-          <% } %>
-
-
-            <% if(suffix && suffix.title){%>
-              <div class="btn_right">
-                <span class="text-blue">下一篇: </span>
-                <span class="next_title text-blue">
-                  <%=suffix.title %>
-                </span>
-              </div>
-              <% } %>
-
-      </div>
-    </div>
-
-
-    <!-- 右侧关联文章 -->
-
-    <div class="a_right grid">
-      <!-- 相关文章 -->
-      <div class="related_blogs grid grg-30 b_box">
-        <div class="b_top font-18 font-bold main-title-color flex justify-between">
-          相关文章
-          <span class="text-blue font-16 look_more pointer">查看更多>></span>
+          <div class="a_top_right">createTime</div>
         </div>
-        <div class="b_bottom">
-          <% related.forEach(function(blog,index) { %>
-            <div class="flex justify-between mb-10 right_blog_title">
-              <div class="pointer">
-                <%= blog.title%>
-              </div>
-              <i>></i>
+
+
+        <!-- 标签 -->
+        <div class="tag_container mt-30">
+          <div class="tag_container_left flex align-center mr-15">
+            <i class="mr-10 iconfont icon-biaoqian"></i>
+            <span class="main-title-color">标签</span>
+          </div>
+          <div class="tag_box">
+            <% articleKeyWords.forEach(function(keyWord,index) { %>
+              <span class="tag_item mr-20 flex-center pointer">
+                <%= keyWord.keyName%>
+              </span>
+              <% }) %>
+          </div>
+        </div>
+
+        <!-- 文章内容 -->
+        <div class="mt-30 overflow-hidden">
+          <%- articleDetailVO.content %>
+        </div>
+
+        <!-- 上一篇/下一篇-->
+        <div class="btn flex justify-between mt-30">
+          <% if(prefix && prefix.title){%>
+            <div class="btn_left">
+              <span class="text-blue">上一篇: </span>
+              <span class="last_title text-blue">
+                <%=prefix.title %>
+              </span>
             </div>
-            <% }) %>
-              <div class="flex"></div>
+            <% } %>
+
+
+              <% if(suffix && suffix.title){%>
+                <div class="btn_right">
+                  <span class="text-blue">下一篇: </span>
+                  <span class="next_title text-blue">
+                    <%=suffix.title %>
+                  </span>
+                </div>
+                <% } %>
+
         </div>
+      </div>
+
+
+      <!-- 右侧关联文章 -->
+      <div class="a_right ">
+        <!-- 相关文章 -->
+        <div class="related_blogs  b_box">
+          <div class="b_top font-18 font-bold main-title-color flex justify-between">
+            相关文章
+            <span class="text-blue font-16 look_more pointer">查看更多>></span>
+          </div>
+          <div class="b_bottom mt-30">
+            <% related.forEach(function(blog,index) { %>
+              <div class="flex justify-between mb-20">
+                <a href="" class="inline-flex align-items-center pointer right_blog_title">
+                  <span class="text-ellipsis">
+                    <%= blog.title%>
+                  </span>
+                  <i>&gt;</i>
+                </a>
+              </div>
+              <% }) %>
+                <div class="flex"></div>
+          </div>
+        </div>
+
+
+
+        <!-- 文章类型列表 -->
+        <% tabList.forEach(function(tab,index) { %>
+          <div class="related_blogs  b_box mt-40">
+            <div class="b_top font-18 font-bold main-title-color flex justify-between">
+              <%= tab.type %>
+                <span class="text-blue font-16 look_more pointer">查看更多>></span>
+            </div>
+            <div class="b_bottom mt-30">
+              <% tab.articleDetail.forEach(function(blog,index) { %>
+                <div class="flex justify-between mb-20">
+                  <a href="" class="inline-flex align-items-center pointer right_blog_title">
+                    <span class="text-ellipsis">
+                      <%= blog.title%>
+                    </span>
+                    <i>&gt;</i>
+                  </a>
+                </div>
+                <% }) %>
+                  <div class="flex"></div>
+            </div>
+          </div>
+
+          <% }) %>
+
+
+
+
+
+
       </div>
 
 
 
 
-      <!-- 文章类型列表 -->
-
-
-
-
     </div>
-
-
-
-
   </div>
 </body>
 <%- include('../../components/js.html'); %>

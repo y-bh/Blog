@@ -7,11 +7,14 @@
  */
 
 
-const { getArticleTypeDao, getArticleListDao } = require("dao/helpCenter")
+const { getArticleListDao } = require("dao/helpCenter")
+const { getCateTypes } = require("service/helpCenter")
+
 
 const renderHome = async () => {
   //文章类型
-  let typeList = await getArticleTypeDao();
+  let typeList = await getCateTypes();
+  console.log("cccccccccccccc",typeList)
   let allTypeIds = [];
   if (typeList && typeList.length > 0) {
     // typeList.forEach(item => {
@@ -29,7 +32,6 @@ const renderHome = async () => {
     }
     //根据id获取文章列表
     let articleDetail = await getArticleListDao();
-
     //console.log("----文章列表----", articleDetail);
     typeList.forEach(item => {
       let typeId = item.id + "";

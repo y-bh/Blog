@@ -145,18 +145,17 @@ function Router(App) {
       id = id.replace(".html", '')
     }
 
-
-
-
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx", id,)
-
     let { articleKeyWords, prefix, suffix, related, articleDetailVO } = await getArticleDetailService(id)
+
+    //各栏目推荐文章
+    let  tabList =  await renderHome() || [];
+    
     console.log("111111", articleKeyWords)
     console.log("222222", prefix)
     console.log("33333", suffix)
     console.log("44444", related)
     console.log("55555555", articleDetailVO)
-    return ctx.render("help/detail/helpDetails", { articleKeyWords, prefix, suffix, related, articleDetailVO })
+    return ctx.render("help/detail/helpDetails", { articleKeyWords, prefix, suffix, related, articleDetailVO,tabList })
   })
 
   //企业服务-firmsServer

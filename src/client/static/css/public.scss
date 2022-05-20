@@ -755,3 +755,10 @@ a:hover {
   color: #0056b3;
   text-decoration: none !important;
 }
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+}
