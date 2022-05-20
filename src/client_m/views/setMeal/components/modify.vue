@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-17 18:01:42
+ * @LastEditTime: 2022-05-20 16:18:41
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -21,12 +21,6 @@
                         <span>IP单价：</span>
                         <span>{{ mealForm.ipUnit || 0 }}元/IP</span>
                     </li>
-                    <li class="meal-item">
-                        <span v-if="mealForm.mealType == 0">IP总量：</span>
-                        <span v-else-if="mealForm.mealType == 1">每日提取上限：</span>
-                        每日提取上限：
-                        <span>{{ mealForm.ipCount }}（含赠送{{ mealForm.ipSend || 0 }},赠送IP不参与换算）</span>
-                    </li>
                     <!-- 包量 -->
                     <li class="meal-item" v-if="mealForm.mealType == 0">
                         <span>IP剩余量：</span>
@@ -38,6 +32,12 @@
                         <span>{{ mealForm.laveDays }}（含今日）</span>
                     </li>
                     <li class="meal-item">
+                        <span v-if="mealForm.mealType == 0">IP总量：</span>
+                        <span v-else-if="mealForm.mealType == 1">每日提取上限：</span>
+                        <span>{{ mealForm.ipCount }}（含赠送{{ mealForm.ipSend || 0 }}; 赠送IP不参与换算）</span>
+                    </li>
+                    
+                    <li class="meal-item">
                         <span>套餐余额：</span>
                         <span>{{ mealForm.balance }}元</span>
                     </li>
@@ -47,7 +47,11 @@
             <el-form :model="mealForm.changeForm" :inline="true" :rules="changeForm_rules" ref="changeFormRef"
                 label-width="120px">
                 <el-form-item label="选择IP时效" prop="ipAging">
-                    <el-select style="width: 160px;" v-model="mealForm.changeForm.ipAging" filterable placeholder="请选择"
+                    <el-select 
+                        style="width: 170px" 
+                        v-model="mealForm.changeForm.ipAging" 
+                        filterable 
+                        placeholder="请选择"
                         @change="changeIpAging($event)">
                         <el-option v-for="(item, index) in ipAgingOptions" :key="index" :label="item.content"
                             :value="item.id">
@@ -56,19 +60,31 @@
                 </el-form-item>
                 <!-- 不可小于对应时效的剩余IP总量 -->
                 <!--  -->
-                <el-form-item v-if="mealForm.mealType == 0" label="剩余IP总量"
-                    :prop="mealForm.mealType == 0 ? 'laveIp' : ''">
-                    <el-input style="width: 170px" :disabled="!mealForm.changeForm.ipAging"
+                <el-form-item 
+                     v-if="mealForm.mealType === 0" 
+                     label="剩余IP总量"
+                    :prop="mealForm.mealType === 0 ? 'laveIp' : ''">
+                    <el-input 
+                        style="width: 170px" 
+                        :disabled="!mealForm.changeForm.ipAging"
                         :placeholder="mealForm.changeForm.ipAging ? '请输入' : '请先选择IP时效'"
-                        v-model="mealForm.changeForm.laveIp" oninput="value=value.replace(/\D|^0/g,'')"
+                        v-model="mealForm.changeForm.laveIp" 
+                        oninput="value=value.replace(/\D|^0/g,'')"
                         @input="calculatePrice"></el-input>
                 </el-form-item>
                 <!-- 不可小于对应时效的提取上限 -->
-                <el-form-item v-if="mealForm.mealType !== 1" label-width="120px" label="每日提取上限"
-                    :prop="mealForm.mealType !== 1 ? 'limit' : ''">
-                    <el-input style="width: 160px" :disabled="!mealForm.changeForm.ipAging"
-                        :placeholder="mealForm.changeForm.ipAging ? '请输入' : '请先选择IP时效'" v-model="mealForm.changeForm.limit"
-                        @input="calculatePrice" oninput="value=value.replace(/\D|^0/g,'')">
+                <el-form-item 
+                    v-if="mealForm.mealType === 1" 
+                    label-width="120px" 
+                    label="每日提取上限"
+                    :prop="mealForm.mealType === 1 ? 'limit' : ''">
+                    <el-input 
+                        style="width: 170px" 
+                        :disabled="!mealForm.changeForm.ipAging"
+                        :placeholder="mealForm.changeForm.ipAging ? '请输入' : '请先选择IP时效'"
+                        v-model="mealForm.changeForm.limit" 
+                        @input="calculatePrice"
+                        oninput="value=value.replace(/\D|^0/g,'')">
 
                     </el-input>
                 </el-form-item>
@@ -108,13 +124,35 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
+import { formatInt } from "tools/utility"
+import { getDuration } from "model/meal.js";
 export default {
     emits: ['query'],
     components: {
         DialogTitle,
     },
     setup (props, context) {
+        var checkNumber = (rule, value, callback) => {
+            if (state.mealForm.changeTimeForm.laveIp) {
+                if (value < state.ipCountLimit) {
+                    callback(new Error("剩余IP总量不可小于" + state.ipCountLimit))
+                } else {
+                    callback();
+                }
+            } else {
+                callback();
+            }
+        };
 
+        var checkLimit = (rule, value, callback) => {
+            console.log(value, state.ipCountLimit, '=====-----$$$$$%%%%%');
+            if (value < state.ipCountLimit) {
+                callback(new Error("每日提取上限不可小于" + state.ipCountLimit))
+            } else {
+                callback();
+            }
+
+        };
         const message = inject('message');
         //  响应式数据
         const state = reactive({
@@ -122,12 +160,13 @@ export default {
             // 续费表单
             mealForm: {
                 name: '套餐名称',
+                mealId: null,
                 mealType: null,
                 ipAging: null, // IP时效
                 ipUnit: null,  // IP单价
                 ipCount: null,  // IP总量
-                laveNumber: null, // IP剩余量
                 ipSend: null,  // 赠送IP
+                laveNumber: null, // IP剩余量
                 laveDays: null, // 剩余天数
                 balance: null,  // 套餐余额
                 changeForm: {
@@ -158,30 +197,35 @@ export default {
             wxTimer: null,  // 定时器
             wxTime: 300, // 倒计时
         });
-        var checkNumber = (rule, value, callback) => {
-            if (state.mealForm.changeTimeForm.laveIp) {
-                if (value < state.ipCountLimit) {
-                    callback(new Error("剩余IP总量不可小于" + state.ipCountLimit))
-                } else {
-                    callback();
-                }
-            } else {
-                callback();
-            }
-        };
+        
 
-        var checkLimit = (rule, value, callback) => {
-            if (value < state.ipCountLimit) {
-                callback(new Error("每日提取上限不可小于" + state.ipCountLimit))
-            } else {
-                callback();
-            }
-
-        };
         const methods = {
-            onOpen (row) {
+            async onOpen (row) {
                 if (row) {
+                    console.log(row, 'row');
+                    state.mealForm.name = row.mealName;
+                    state.mealForm.mealId = row.id;
+                    state.mealForm.mealType = row.proxyType;
+                    state.mealForm.ipAging = row.proxyTime ? row.proxyTime / 60 : 0;   // IP时效
+                    state.mealForm.ipCount = row.total;
+                    state.mealForm.laveNumber = row.total - row.used;
+                    state.mealForm.payMode = state.mealForm.payMode ? state.mealForm.payMode : 'ali';  // 打开时默认是支付宝支付
+                    state.mealForm.laveDays = Math.ceil(((row.endTime ? row.endTime : 0) - (new Date().getTime() / 1000)) / 24 / 60 / 60);
+
+                    await methods.getModifyData(row)
+
                     state.dialogVisible = true
+                }
+            },
+            async getModifyData (row) {
+               
+                let res = await getDuration(formatInt(row.id));
+                if (res && res.code === 200) {
+                    console.log(res, 'res===修改时效');
+                    state.mealForm.ipUnit = res.data.oldUnitPrice;  // ip单价
+                    state.mealForm.ipSend = res.data.sendCount;
+                    state.mealForm.balance = res.data.balance;  // 套餐余额
+                    state.ipAgingOptions = res.data.list;
                 }
             },
             changeIpAging (val) {
@@ -199,15 +243,17 @@ export default {
 
                     if (item) {
                         state.ipCountLimit = item.total;   // 当前IP时效对应的剩余IP总量
-                        state.mealForm.changeTimeForm.laveIp = item.total;  // 剩余IP总量  包量
-                        state.mealForm.changeTimeForm.limit = item.total;  // 每日提取上限  包时
+                        state.mealForm.laveIp = item.total;  // 剩余IP总量  包量
+                        state.mealForm.limit = item.total;  // 每日提取上限  包时
                         state.unitPrice = item.unitPrice;   // 时效的单价
                     }
                 }
             },
             // 计算差价
             calculatePrice (val) {
-                state.mealForm.agio = (val - state.ipCountLimit) * state.unitPrice
+                if(val >= state.ipCountLimit){
+                    state.mealForm.agio = (val - state.ipCountLimit) * state.unitPrice
+                }
             },
             // 改变支付方式
             changeWays (mode) {
