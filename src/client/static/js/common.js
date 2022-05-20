@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-19 15:30:57
+ * @LastEditTime: 2022-05-20 11:46:06
  */
 
 function Helper() { }
@@ -388,6 +388,10 @@ window.layout = debounce(layout, 300, true)
 
 //初始化效果
 $(function () {
+  console.log(window.location,'window.location');
+  // 处理导航激活样式
+  let routePath = (window.location.pathname.replace(/\//g,'') || 'index');  // 路径
+  $(`[data-path=${routePath}]`).addClass('activated').siblings().removeClass('activated');
 
   //1.自适应布局计算
   change()
