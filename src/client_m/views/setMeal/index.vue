@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-19 15:31:26
+ * @LastEditTime: 2022-05-19 17:48:47
 -->
 <template>
   <div class="container">
@@ -357,7 +357,7 @@ export default {
               showClose: true
             })
           } else {
-            supplementRef.value.onOpen(1)
+            supplementRef.value.onOpen(row)
           }
           
         } else if (command === 'modify') {
