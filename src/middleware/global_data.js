@@ -13,14 +13,21 @@ const { renderTab, getQueryLink } = require("service/common")
 const { getCateTypes } = require("service/helpCenter")
 
 
-//需要获取全局数据的 url
-const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/package', '/businessScene', '/firmsServer'] 
+//需要获取全局数据【例如用户信息,公共底部的数据等必须配置路由权限】
+
+//静态路由配置【koa-router 固定路由】
+const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/package', '/businessScene', '/firmsServer', '/getIp']
+
+//动态路由配置【koa-router 动态路由】
+const changeURL = ['tags', 'manager', 'help-details', 'help-center', 'businessScene']
+
 module.exports = function (app) {
   app.use(async ({ req, res, state, cookies }, next) => {
     const { method, url } = req
-    
-    if (method === 'GET' && (URLS.includes(url)|| url.includes('businessScene') || url.includes('tags') || url.includes('getIp') || url.includes('manager') || url.includes('help-details') || url.includes('help-center'))) {
-      
+
+    const isPass = changeURL.some((item) => url.includes(item))
+
+    if (method === 'GET' && (URLS.includes(url) || isPass)) {
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
       state[appKey.active_tab] = tabActivity
@@ -29,13 +36,10 @@ module.exports = function (app) {
       const articleTypes = await getCateTypes()
       state[appKey.cateTypes] = articleTypes
 
-
-
-
-
       //登录用户名
       let userInfo = cookies.get(appKey.userInfo)
       state.userInfo = userInfo && JSON.parse(userInfo)
+      
       //友情链接
       state.links = await getQueryLink()
     }
