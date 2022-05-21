@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 支付宝支付中间数据处理
  * @Date: 2022-05-20 17:50:04
- * @LastEditTime: 2022-05-21 09:03:28
+ * @LastEditTime: 2022-05-21 13:54:32
  */
 
 /*
@@ -18,7 +18,7 @@ function getParams() {
   let url = decodeURI(params)
   let Request = new Object()
   if (url.indexOf("?") !== -1) {
-    var str = url.substr(1) //去掉?号
+    var str = url.slice(1) //去掉?号
     strs = str.split("&")
     for (var i = 0; i < strs.length; i++) {
       Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1])
@@ -30,11 +30,10 @@ function getParams() {
 $(async function () {
   let params = JSON.parse(getParams().params) // 获取付款参数
   // 个人中心/我的套餐/续费
-  if (payment === "renew" && ajax) {
-    console.log(params, "ajax======")
+  if (ajax) {
     let res = await ajax(params)
-    if (res && res.code === 200) {
-      let html = res.data && res.data.payUrl;
+    if (res) {
+      let html = res.payUrl;
       let dom = document.createElement("div")
       dom.innerHTML = html
       let htmlDom = dom.getElementsByTagName("form")[0]

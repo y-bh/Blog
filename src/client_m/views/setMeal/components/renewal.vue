@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-21 11:19:38
+ * @LastEditTime: 2022-05-21 13:41:32
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -243,18 +243,16 @@ export default {
                 }
                 
                 if(state.renewForm.payType === 'ali'){
-                    params.payType = 1;
-                    let res = await renewPay(params);
-                    if(res && res.code === 200){
-                        let params = {
-                            url: "/renewProxy",
-                            type: 'post',
-                            query: JSON.stringify(reqData)
-                        }
-                        window.open("/payCenter?params=" + JSON.stringify(params));
-                        return
+                    reqData.payType = 1;
+                    
+                    let params = {
+                        url: "/renewProxy",
+                        type: 'post',
+                        query: JSON.stringify(reqData)
                     }
-                    console.log(res,'res=支付宝支付');
+                    window.open("/payCenter?params=" + JSON.stringify(params));
+                    return
+                    
                 } else {
                     reqData.payType = 2;
                     let res = await renewPay(reqData);
@@ -265,9 +263,10 @@ export default {
                         if(res.data && res.data.payUrl){
                             const codeParams = {
                                 orderId: res.data.orderId,
-                                redRecordId: state.renewForm.redRecordId,
+                                redRecordId: state.renewForm.redRecordId || null,
                                 url: res.data.payUrl
                             }
+                            state.dialogVisible = false
                             ctx.emit('createCode', codeParams);
                             state.dialogVisible = false
                         } else {

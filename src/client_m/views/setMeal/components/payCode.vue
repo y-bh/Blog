@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 微信扫码支付
  * @Date: 2022-05-21 09:39:11
- * @LastEditTime: 2022-05-21 11:42:52
+ * @LastEditTime: 2022-05-21 13:40:12
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -21,12 +21,14 @@
             </div>
 
             <div class="code">
-                <img
+                <!-- <img
                     src="@/assets/images/common/wx.png"
                     alt="支付"
-                    class="code_img">
-                <div id="qrcode">
-                </div>
+                    class="code_img"> -->
+                    <div class="code-url">
+                        <qrcode-vue :value="codeUrl" :size="size" level="H" />
+                    </div>
+                
             </div>
 
             <!-- <div class="dialog-footer child-item">
@@ -40,10 +42,12 @@ import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { useRoute, useRouter } from "vue-router";
 import QRCode from "qrcode";
+import QrcodeVue from 'qrcode.vue'
 import { getState } from "model/meal.js";
 export default {
     components: {
         DialogTitle,
+        QrcodeVue
     },
     emits: ['updateMeal'],
     setup(props, context){
@@ -51,26 +55,20 @@ export default {
         const $router = useRouter();
         //  响应式数据
         const state = reactive({
-            dialogVisible: true,
+            dialogVisible: false,
+            codeUrl: '',
+            size: 250,
             timeFlag: null,  // 定时器
             time: 0,
         })
         const methods = {
             onOpen(code){
                 if(code){
-                    state.dialogVisible = true;
+                    console.log(code,'code===');
                     state.time = 300;
                     clearInterval(state.timeFlag);
-                    document.getElementById("qrcode").innerHTML = "";
-                    new QRCode("qrcode", {
-                        width: 250,
-                        height: 250,
-                        text: code.url,
-                        colorDark: "#000",
-                        colorLight: "#fff",
-                        redRecordId: code.redRecordId || null
-                    });
-
+                    state.codeUrl = code.url
+                    state.dialogVisible = true;
                     timeFlag = setInterval(async () => {
                         state.time--;
                         // 每隔3秒刷新一下订单状态
@@ -101,15 +99,15 @@ export default {
             clearCode(){
                 clearInterval(state.timeFlag);
                 //如果微信支付关闭，则清空二维码
-                let div = document.getElementById("qrcode");
-                div.removeChild(div.childNodes[1]);
-                div.removeChild(div.childNodes[0]);
-                context.emit('updateMeal', false)
+                state.codeUrl = '';
+                context.emit('updateMeal', false);
+                state.dialogVisible = false;
             }
         }
-        console.log(QRCode,'QRCode===');
+     
         return {
-            ...toRefs(state)
+            ...toRefs(state),
+            ...methods
         }
     }
 }
