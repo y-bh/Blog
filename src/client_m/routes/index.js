@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: 个人中心路由
  * @Date: 2022-04-25 16:06:50
- * @LastEditTime: 2022-04-28 11:15:44
+ * @LastEditTime: 2022-05-21 11:04:33
  */
 
 import { createRouter, createWebHistory } from 'vue-router';
@@ -19,7 +19,7 @@ export default function (app) {
   });
 
   router.beforeEach(async (to, from, next) =>{
-    console.log("路由访问了",to, from)
+    // console.log("路由访问了",to, from)
     next()
   })
   app.use(router);

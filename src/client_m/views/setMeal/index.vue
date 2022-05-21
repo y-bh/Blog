@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-20 15:24:43
+ * @LastEditTime: 2022-05-21 11:30:04
 -->
 <template>
   <div class="container">
@@ -206,10 +206,11 @@
       </el-table>
     </div>
     <reset-password ref="passwordRef"></reset-password>
-    <renewal ref="renewalRef"></renewal>
+    <renewal ref="renewalRef" @createCode="createCode($event)"></renewal>
     <supplement ref="supplementRef"></supplement>
     <modify ref="modifyRef"></modify>
     <merge ref="mergeRef"></merge>
+    <pay-code ref="codeRef" @updateMeal="updateMeal($event)"></pay-code>
   </div>
 </template>
 
@@ -225,6 +226,7 @@ import supplement from './components/supplement';
 import modify from './components/modify';
 import merge from './components/merge';
 import changeLog from './components/changeLog'
+import payCode from "./components/payCode.vue";
 export default {
   name: "",
   components: { 
@@ -233,7 +235,8 @@ export default {
     supplement,  // 补量
     modify, // 修改时效
     merge,  // 合并套餐
-    changeLog  // 变更记录
+    changeLog,  // 变更记录
+    payCode  // 扫码支付
   },
   setup () {
     // 引入全局变量
@@ -257,6 +260,7 @@ export default {
     const modifyRef = ref(null);
     const mergeRef = ref(null);
     const passwordRef = ref(null);
+    const codeRef = ref(null);
     let state = reactive({
       userInfo: null,
       // 查询表单
@@ -282,7 +286,6 @@ export default {
       // 处理查询参数
       initQuery(){
         let query = $route.query;
-        console.log(query.mealType, typeof query.mealType, formatInt(query.mealType));
         state.searchForm.sequence = query.sequence || null;
         state.searchForm.name = query.name || null;
         state.searchForm.mealType = (query.mealType === 0 || query.mealType) ? formatInt(query.mealType) : null;
@@ -290,14 +293,13 @@ export default {
         state.searchForm.remainDays = formatInt(query.remainDays) || null;
         state.searchForm.page = formatInt(query.pageNum) || 1;
         state.searchForm.size = formatInt(query.size) || 50;
-        console.log(query.useTime,'query时间');
+
       },
       async getList(){
         state.loading = true;
         state.tableList = [];
         methods.initQuery();
         const params = deepCopy(state.searchForm);
-        console.log($route.query.useTime,'$route.query.useTime');
         params.createTimeStart = $route.query.useTime && formatInt($route.query.useTime[0]) || 
         (state.searchForm.useTime && formatInt(state.searchForm.useTime[0]))
         params.createTimeEnd = $route.query.useTime && formatInt($route.query.useTime[1]) || 
@@ -305,7 +307,7 @@ export default {
         let res = await getTableList(params);
         if(res && res.code === 200){
           state.tableList = res.data && res.data.data;
-          console.log(state.tableList);
+          // console.log(state.tableList);
         } else {
           message.error({
             message: '接口异常',
@@ -386,10 +388,17 @@ export default {
           return
         }
       },
+      createCode(code){
+        console.log('创建二维码', code);
+        codeRef.value.onOpen(code)
+      },
+      updateMeal(){
+        // 刷新套餐列表
+        methods.getList()
+      },
       repeatPwd(){}
     };
 
-    console.log(state.tableList, 'state.tableList');
     return {
       ...toRefs(state),
       ...methods,
@@ -402,7 +411,8 @@ export default {
       renewalRef,
       supplementRef,
       modifyRef,
-      mergeRef
+      mergeRef,
+      codeRef
     };
   },
 };

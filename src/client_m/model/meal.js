@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 我的套餐接口
  * @Date: 2022-05-18 13:26:26
- * @LastEditTime: 2022-05-20 16:45:08
+ * @LastEditTime: 2022-05-21 11:23:07
  */
 import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
@@ -67,6 +67,16 @@ export const getDuration = async (params = null) => {
 export const renewPay = async (params = null) => {
   try {
     const res = await service.post(api.POST_RENEWPAY, params);
+    return res;
+  } catch (error) {
+    return Promise.resolve(null);
+  }
+};
+
+// GET_ORDERSTATE
+export const getState = async (params = null) => {
+  try {
+    const res = await service.get(api.GET_ORDERSTATE + '/' +  params);
     return res;
   } catch (error) {
     return Promise.resolve(null);

@@ -176,7 +176,14 @@ export default {
                 };
                 state.univalent = null; 
             },
-            submitForm () { }
+            submitForm () {
+                const reqData = {
+                    proxyId: state.renewForm.proxyId,
+                    payType: 1,
+                    mealId: state.renewForm.timeMealId,
+                    redRecordId: state.renewForm.redRecordId || null
+                }
+            }
         }
 
         return {

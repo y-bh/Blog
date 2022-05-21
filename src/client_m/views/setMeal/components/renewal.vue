@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-20 18:32:56
+ * @LastEditTime: 2022-05-21 13:41:32
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -47,7 +47,7 @@
                     </span>
                     <span class="pay-btn child-elem" @click="renewForm.payType = 'wx'"
                         :class="renewForm.payType === 'wx' ? 'checked' : ''">
-                        <img src="../../../assets/images/common/wx.png" alt="微信">
+                        <img src="@/assets/images/common/wx.png" alt="微信">
                         <span>微信</span>
                     </span>
                 </div>
@@ -72,12 +72,13 @@ import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt, deepCopy } from "tools/utility"
 import { getRenewList, getRedPackage, renewPay } from "model/meal.js";
 export default {
-    emits: ['query'],
+    emits: ['createCode'],
     components: {
-        DialogTitle,
+        DialogTitle
     },
-    setup (props, context) {
+    setup (props, ctx) {
         const message = inject('message');
+
         //  响应式数据
         const state = reactive({
             dialogVisible: false,
@@ -142,7 +143,6 @@ export default {
                         state.renewForm.price;
                 }
                 
-            
             },
             
             //包时套餐续费 改变时长  重新参与计算
@@ -241,22 +241,49 @@ export default {
                     mealId: state.renewForm.timeMealId,
                     redRecordId: state.renewForm.redRecordId || null
                 }
-                let params = {
-                    url: "/renewProxy",
-                    type: 'post',
-                    query: JSON.stringify(reqData)
-                }
-       
-                window.open("/payCenter?payment=renew&params=" + JSON.stringify(params));
-                // return
-                // if(state.renewForm.payType === 'ali'){
-                //     params.payType = 1;
-                //     let res = await renewPay(params);
-                //     if(res && res.code === 200){
+                
+                if(state.renewForm.payType === 'ali'){
+                    reqData.payType = 1;
+                    
+                    let params = {
+                        url: "/renewProxy",
+                        type: 'post',
+                        query: JSON.stringify(reqData)
+                    }
+                    window.open("/payCenter?params=" + JSON.stringify(params));
+                    return
+                    
+                } else {
+                    reqData.payType = 2;
+                    let res = await renewPay(reqData);
+                    if(res && res.code === 200){
+                        // 刷新获取红包接口
+                        await methods.getRedEnvelope()
+                        // 支付成功调取二维码弹窗
+                        if(res.data && res.data.payUrl){
+                            const codeParams = {
+                                orderId: res.data.orderId,
+                                redRecordId: state.renewForm.redRecordId || null,
+                                url: res.data.payUrl
+                            }
+                            state.dialogVisible = false
+                            ctx.emit('createCode', codeParams);
+                            state.dialogVisible = false
+                        } else {
+                            message.error({
+                                message: '二维码获取失败',
+                                showClose: true
+                            })
+                        }
                         
-                //     }
-                //     console.log(res,'res=支付宝支付');
-                // }
+                    } else {
+                        message.error({
+                            message: '二维码获取失败',
+                            showClose: true
+                        })
+                    }
+                    
+                }
             }
         }
    

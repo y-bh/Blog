@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-20 16:18:41
+ * @LastEditTime: 2022-05-21 11:06:30
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -100,12 +100,12 @@
                 <div class="child-elem btn-wrap">
                     <span class="pay-btn child-elem" @click="changeWays('ali')"
                         :class="mealForm.payType === 'ali' ? 'checked' : ''">
-                        <img src="@/assets/images/common/alipay.png" alt="微信">
+                        <img src="@/assets/images/common/alipay.png" alt="支付宝">
                         <span>支付宝</span>
                     </span>
                     <span class="pay-btn child-elem" @click="changeWays('wx')"
                         :class="mealForm.payType === 'wx' ? 'checked' : ''">
-                        <img src="../../../assets/images/common/wx.png" alt="微信">
+                        <img src="@/assets/images/common/wx.png" alt="微信">
                         <span>微信</span>
                     </span>
                 </div>
@@ -261,7 +261,6 @@ export default {
             },
             submitForm () { }
         }
-        console.log(props, 'props');
 
         return {
             ...methods,

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-20 16:24:05
+ * @LastEditTime: 2022-05-21 13:00:35
  */
 
 module.exports = {
@@ -59,6 +59,9 @@ module.exports = {
   'GET_DURATION' : '/proxyUpgrade/duration',
   'QUERY_LOG': '/proxy/log',  // 变更记录
   'POST_RENEWPAY': '/renewProxy',  // 续费支付
+  'POST_SUPPLEMENT': '/addTimes',  // 补量支付
+  'POST_CHANGEDATE': '/changeDate',  // 修改时效支付
+  'GET_ORDERSTATE': '/order/state',   // 获取订单状态
 
   /*企业服务*/
   'COMPANY_NEW': '/company/new', //提交企业服务
