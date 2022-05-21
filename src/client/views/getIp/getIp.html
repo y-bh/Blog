@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-20 14:32:07
+ * @LastEditTime: 2022-05-21 17:13:50
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -61,73 +61,82 @@
           <div class="extract_type_box flex flex-wrap align-center mt-40">
             <label for="extractType" class="font-18 main-title-color label_lay">选择提取类型</label>
             <select id="extractType" class="extract_select form-control">
-              <option selected>余额提取</option>
+              <% menu && menu.forEach(function(item) { %>
+                <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
+              <% }) %> 
             </select>
           </div>
           <!-- 已登录展示 -->
-          <div class="already_login">
-            <div class="form-group count mt-40">
-              <label class="font-18 main-title-color">账户概况</label>
-              <div class="count_box mt-20 flex justify-between align-center">
-                <div class="box_left">
-                  <label for="left_desc">当前账户余额(天启币)</label>
-                  <span class="left_count ml-5" id="left_count">3333.3333</span>
-                </div>
-                <button class="right_btn or-button">
-                  <span>充值</span>
-                </button>
-              </div>
-            </div>
-            <div class="meal_box mt-30 grid">
-              <% staticData && staticData.mealBox && staticData.mealBox.forEach(function(item,index) { %>
-                <div class="meal_item grid justify-center align-center">
-                  <div class="desc flex justify-center pt-10 pb-10">
-                    <span class="font-15">
-                      <%= item.desc %>
-                    </span>
+          <% if(userInfo && userInfo.id) { %> 
+            <div class="already_login">
+              <div class="form-group count mt-40">
+                <label class="font-18 main-title-color">账户概况</label>
+                <div class="count_box mt-20 flex justify-between align-center">
+                  <div class="box_left">
+                    <label for="left_desc">当前账户余额(天启币)</label>
+                    <span class="left_count ml-5" id="left_count">3333.3333</span>
                   </div>
-                  <div class="num flex justify-center align-center">
-                    <span class="text-blue font-25">
-                      <%= item.num %>
-                    </span>
-                    <span class="text-blue font-15">个</span>
-                  </div>
-                </div>
-                <% }) %>
-            </div>
-          </div>
-          <!-- 未登录展示 -->
-          <div class="not_login">
-            <div class="form-group mt-40">
-              <label class="font-18 main-title-color">账户概况</label>
-              <div class="count_box mt-20 flex justify-between align-center">
-                <div class="box_left">
-                  登录查看当前账户余额，新用户可享新人福利
-                </div>
-                <div class="btn">
-                  <button class="right_btn mr-20 or-button">
-                    <span>登录</span>
-                  </button>
                   <button class="right_btn or-button">
-                    <span>注册</span>
+                    <span>充值</span>
                   </button>
                 </div>
               </div>
+              <div class="meal_box mt-30 grid" style="display: none;">
+                <% staticData && staticData.mealBox && staticData.mealBox.forEach(function(item,index) { %>
+                  <div class="meal_item grid justify-center align-center">
+                    <div class="desc flex justify-center pt-10 pb-10">
+                      <span class="font-15">
+                        <%= item.desc %>
+                      </span>
+                    </div>
+                    <div class="num flex justify-center align-center">
+                      <span class="text-blue font-25">
+                        <%= item.num %>
+                      </span>
+                      <span class="text-blue font-15">个</span>
+                    </div>
+                  </div>
+                  <% }) %>
+              </div>
             </div>
-          </div>
+          <% } else { %> 
+          <!-- 未登录展示 -->
+            <div class="not_login">
+              <div class="form-group mt-40">
+                <label class="font-18 main-title-color">账户概况</label>
+                <div class="count_box mt-20 flex justify-between align-center">
+                  <div class="box_left">
+                    登录查看当前账户余额，新用户可享新人福利
+                  </div>
+                  <div class="btn">
+                    <a href="/login">
+                      <button class="right_btn mr-20 bl-button">
+                        <span>登录</span>
+                      </button>
+                    </a>
+                    <a href="/register">
+                      <button class="right_btn or-button">
+                        <span>注册</span>
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %> 
           <div class="mt-30 extract_num flex flex-wrap align-center">
             <label class="font-18 main-title-color label_lay">提取数量</label>
             <div class="input-group extract_box flex-center">
               <button class="decrement">-</button>
-              <input type="text" class="form-control extract_num_input text-center" value="1">
+              <input type="text" class="form-control extract_num_input text-center" value="10">
               <button class="increment">+</button>
             </div>
           </div>
-          <div class="form-group mt-30 ip_use">
+          <div class="form-group mt-30 ip_use" style="display: none">
             <label class="font-18 main-title-color">IP使用时长</label>
             <div class="ip_use_box grid justify-start align-center mt-45">
               <% staticData && staticData.ipUse && staticData.ipUse.forEach(function(item,index) { %>
-                <div class="ip_use_item flex flex-column align-center justify-center">
+                <div class="ip_use_item flex flex-column align-center justify-center" d-type="time" val=<%= item.val %> ">
                   <div class="time_box">
                     <span class="time_text font-25 font-bold main-title-color">
                       <%= item.time %>
@@ -144,12 +153,12 @@
           </div>
           <div class="flex flex-wrap align-center data_format_box mt-40">
             <label class="label_lay font-18 main-title-color">数据格式</label>
-            <div class="data_format flex">
-              <div class="narrow_box data_text mr-40 flex-center pointer">
-                <span class="font-15 main-title-color">TEXT</span>
+            <div class="data_format flex" d-type="type" >
+              <div class="narrow_box d_type_change mr-40 flex-center pointer narrow_box_choose" val="txt" >
+                <button class="font-15 main-title-color">TXT</button>
               </div>
-              <div class="narrow_box data_json flex-center pointer">
-                <span class="font-15 main-title-color">JSON</span>
+              <div class="narrow_box d_type_change flex-center pointer" val="json" >
+                <button class="font-15 main-title-color" >JSON</button>
               </div>
             </div>
           </div>
@@ -157,21 +166,21 @@
             <div class="flex flex-wrap align-center choose_type_box mt-40">
               <label class="label_lay font-18 main-title-color">选择属性</label>
               <div class="choose_type">
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label pointer">
-                    <input class="form-check-input" type="checkbox" value="1">
+                <div class="form-check form-check-inline" d-type="cs">
+                  <input id="cs" class="form-check-input" type="checkbox" value="1">
+                  <label for="cs" class="form-check-label pointer" >
                     城市
                   </label>
                 </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label pointer">
-                    <input class="form-check-input" type="checkbox" value="2">
+                <div class="form-check form-check-inline" d-type="ys">
+                  <input id="ys" class="form-check-input" type="checkbox" value="1">
+                  <label for="ys" class="form-check-label pointer" >
                     运营商
                   </label>
                 </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label pointer">
-                    <input class="form-check-input" type="checkbox" value="3">
+                <div class="form-check form-check-inline" d-type="ts">
+                  <input id="ts" class="form-check-input" type="checkbox" value="1">
+                  <label for="ts" class="form-check-label pointer" >
                     到期时间
                   </label>
                 </div>
@@ -180,41 +189,46 @@
           </div>
           <div class="flex flex-wrap align-center separator_box mt-40">
             <label class="label_lay font-18 main-title-color">分隔符</label>
-            <div class="separator flex">
-              <div class="narrow_box mr-40 flex justify-center align-center pointer">
-                <span class="font-15 main-title-color">
+            <div class="separator flex" d-type="lb">
+              <div class="narrow_box mr-40 flex justify-center align-center pointer narrow_box_choose" val=null>
+                <button class="font-15 main-title-color">
                   回车换行(\r\n)
-                </span>
+                </button>
               </div>
-              <div class="narrow_box mr-40 flex justify-center align-center pointer">
-                <span class="font-15 main-title-color">
+              <div class="narrow_box mr-40 flex justify-center align-center pointer" val='%5Cr'>
+                <button class="font-15 main-title-color">
                   回车(\r)
-                </span>
+                </button>
               </div>
-              <div class="narrow_box mr-40 flex justify-center align-center pointer">
-                <span class="font-15 main-title-color">
+              <div class="narrow_box mr-40 flex justify-center align-center pointer" val='%5Cn'>
+                <button class="font-15 main-title-color">
                   换行(\n)
-                </span>
+                </button>
+              </div>
+              <div class="narrow_box mr-40 flex justify-center align-center pointer" val='%5Ct'>
+                <button class="font-15 main-title-color">
+                  换行(\n)
+                </button>
               </div>
             </div>
           </div>
-          <div class="choose_area_box mt-40">
-            <label class="font-18 main-title-color">选择地区</label>
-            <div class="choose_area grid mt-30">
+          <div class="choose_area_box mt-40 flex">
+            <label class="label_lay font-18 main-title-color">选择地区</label>
+            <div class="choose_area grid">
               <div class="top flex">
-                <div class="a_country narrow_box mr-40 flex-center pointer">
-                  <span class="font-15 main-title-color">全国混拨</span>
+                <div class="a_country narrow_box mr-40 flex-center pointer narrow_box_choose">
+                  <button class="font-15 main-title-color">全国混拨</button>
                 </div>
                 <div class="a_province narrow_box flex-center pointer">
-                  <span class="font-15 main-title-color">省份混拨</span>
+                  <button class="font-15 main-title-color">省份混拨</button>
                 </div>
               </div>
               <div class="isProvince">
                 <div class="bottom flex flex-wrap">
                   <% province && province.forEach(function(item,index) { %>
-                    <div class="form-check mr-20 mb-20">
+                    <div class="form-check mr-20 mb-20" d-type="region">
+                      <input class="form-check-input" type="checkbox" value="<%= item.status %>">
                       <label class="form-check-label pointer">
-                        <input class="form-check-input" type="checkbox" value="<%= item.status %>">
                         <%= item.label %>
                       </label>
                     </div>
@@ -225,29 +239,29 @@
           </div>
           <div class="flex flex-wrap align-center operator_box mt-40">
             <label class="label_lay font-18 main-title-color">运营商</label>
-            <div class="operator_box flex">
-              <div class="narrow_box mr-40 flex-center pointer">
-                <span class="font-15 main-title-color">不限</span>
+            <div class="operator_box flex" d-type="yys">
+              <div class="narrow_box mr-40 flex-center pointer narrow_box_choose" val="不限">
+                <button class="font-15 main-title-color"  >不限</button>
               </div>
-              <div class="narrow_box mr-40 flex-center pointer">
-                <span class="font-15 main-title-color">电信</span>
+              <div class="narrow_box mr-40 flex-center pointer" val="电信">
+                <button class="font-15 main-title-color" >电信</button>
               </div>
-              <div class="narrow_box flex-center pointer">
-                <span class="font-15 main-title-color">联通</span>
+              <div class="narrow_box flex-center pointer" val="联通">
+                <button class="font-15 main-title-color">联通</button>
               </div>
             </div>
           </div>
           <div class="flex flex-wrap align-center ip_box mt-40">
             <label class="label_lay font-18 main-title-color">IP协议</label>
-            <div class="ip_agreement flex">
-              <div class="narrow_box mr-40 flex-center pointer">
-                <span class="font-15 main-title-color">HTTP</span>
+            <div class="ip_agreement flex" d-type="port">
+              <div class="narrow_box mr-40 flex-center pointer narrow_box_choose" val="1">
+                <button class="font-15 main-title-color">HTTP</button>
               </div>
-              <div class="narrow_box mr-40 flex-center pointer">
-                <span class="font-15 main-title-color">HTTPS</span>
+              <div class="narrow_box mr-40 flex-center pointer" val="2">
+                <button class="font-15 main-title-color">HTTPS</button>
               </div>
-              <div class="narrow_box flex-center pointer">
-                <span class="font-15 main-title-color">SOCKS5</span>
+              <div class="narrow_box flex-center pointer" val="3">
+                <button class="font-15 main-title-color">SOCKS5</button>
               </div>
             </div>
           </div>
@@ -259,7 +273,7 @@
               <span class="pointer ml-50">查看API文档</span>
             </div>
             <div class="input-group apiUrl_input_box mt-40">
-              <input type="text" class="form-control apiUrl_input" placeholder="点击上方按钮，生成API链接">
+              <input type="text" class="form-control apiUrl_input mr-20" placeholder="点击上方按钮，生成API链接">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary copy mr-20 bl-button" type="button">
                   <span>复制链接</span>
@@ -527,6 +541,10 @@
     </div>
 </body>
 <%- include('../components/js.html'); %>
+  <script>
+    let login = JSON.parse('<%-JSON.stringify(userInfo || 0) %>');
+    let loginStatus = Boolean(login && login.id) //登录态判断
+  </script>
   <script src="/js/getIp.js"></script>
 
 </html>

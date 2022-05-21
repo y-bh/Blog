@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-20 14:25:23
+ * @LastEditTime: 2022-05-21 15:54:05
  */
 
 
@@ -13,7 +13,7 @@ const { renderHome } = require("service/home")
 const { getHelpService, getBlogDetailS, getKeyWordPageS, postArticleService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
-const { getProxyCityS, getProxyMenuS } = require('service/getIp')
+const { getProxyCityService, getProxyMenuService } = require('service/getIp')
 
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -85,13 +85,14 @@ function Router(App) {
 
     /**数据请求 */
     let staticData = await data()
-    let province = await getProxyCityS()
-    let menu = await getProxyMenuS()
-
+    let province = await getProxyCityService()
+    let menu = await getProxyMenuService()
+    console.log(province);
+    
     let getIpData = {
       staticData,
       province,
-      menu
+      menu,
     }
 
     return ctx.render("getIp/getIp", getIpData)

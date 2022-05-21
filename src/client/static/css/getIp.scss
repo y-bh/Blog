@@ -66,7 +66,7 @@
   width: 80px !important;
   height: 40px !important;
   color: #fff;
-  background: #FC7019;
+  // background: #FC7019;
   border-radius: 4px;
 }
 .meal_box {
@@ -99,7 +99,9 @@
 .extract_box .decrement,.increment {
   width: 40px;
   height: 38px;
+  font-size: 18px;
   border: 1px solid #ced4da;
+  background-color: #F5F7FA;
 }
 .decrement {
   border-radius: 4px 0px 0px 4px;
@@ -328,3 +330,12 @@
 @media screen and (max-width: 1200px) {
 
 } 
+
+
+
+button{
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: unset;
+}

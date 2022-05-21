@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-20 16:44:06
+ * @LastEditTime: 2022-05-20 17:38:15
 -->
 <template>
   <div
@@ -13,7 +13,7 @@
     <div class="gift" v-for="item in giftList.valid" :key="item.id">
       <div class="gift-header">
         <div><span>￥</span>{{ item.money }}</div>
-        <div>{{ item.doorsill }}</div>
+        <div>满{{ item.doorsill }}元可用</div>
       </div>
       <div class="gift-text">
         <div>{{ item.redPackageName }}</div>
@@ -92,7 +92,7 @@ export default {
 
       /**条件判断 */
       if (+res.code === 200) {
-        // state.giftList = res.data
+        state.giftList = res.data
       } else {
         $message.error(res.msg);
       }
