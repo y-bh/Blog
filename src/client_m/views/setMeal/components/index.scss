@@ -52,6 +52,32 @@
         font-weight: 400;
         color: #FC7019;
     }
+
+    .pay-tip{
+        justify-content: center;
+    }
+    .countdown{
+        color: #f10215;
+    }
+
+    .code {
+        position: relative;
+        .code_img {
+            position: absolute;
+            z-index: 9999;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            transform: translate(-50%, -50%);
+        } 
+        #qrcode{
+            background: #333333;
+            width: 250px;
+            height: 250px;
+            margin: auto;
+        }
+    }
     
     .pay-btn {
         width: auto;

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-20 15:24:43
+ * @LastEditTime: 2022-05-21 09:46:58
 -->
 <template>
   <div class="container">
@@ -210,6 +210,7 @@
     <supplement ref="supplementRef"></supplement>
     <modify ref="modifyRef"></modify>
     <merge ref="mergeRef"></merge>
+    <pay-code ref="codeRef"></pay-code>
   </div>
 </template>
 
@@ -225,6 +226,7 @@ import supplement from './components/supplement';
 import modify from './components/modify';
 import merge from './components/merge';
 import changeLog from './components/changeLog'
+import payCode from "./components/payCode.vue";
 export default {
   name: "",
   components: { 
@@ -233,7 +235,8 @@ export default {
     supplement,  // 补量
     modify, // 修改时效
     merge,  // 合并套餐
-    changeLog  // 变更记录
+    changeLog,  // 变更记录
+    payCode  // 扫码支付
   },
   setup () {
     // 引入全局变量
@@ -257,6 +260,7 @@ export default {
     const modifyRef = ref(null);
     const mergeRef = ref(null);
     const passwordRef = ref(null);
+    const codeRef = ref(null);
     let state = reactive({
       userInfo: null,
       // 查询表单
@@ -402,7 +406,8 @@ export default {
       renewalRef,
       supplementRef,
       modifyRef,
-      mergeRef
+      mergeRef,
+      codeRef
     };
   },
 };

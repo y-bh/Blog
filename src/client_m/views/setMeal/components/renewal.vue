@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-21 09:20:33
+ * @LastEditTime: 2022-05-21 10:19:26
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -47,7 +47,7 @@
                     </span>
                     <span class="pay-btn child-elem" @click="renewForm.payType = 'wx'"
                         :class="renewForm.payType === 'wx' ? 'checked' : ''">
-                        <img src="../../../assets/images/common/wx.png" alt="微信">
+                        <img src="@/assets/images/common/wx.png" alt="微信">
                         <span>微信</span>
                     </span>
                 </div>
@@ -74,7 +74,7 @@ import { getRenewList, getRedPackage, renewPay } from "model/meal.js";
 export default {
     emits: ['query'],
     components: {
-        DialogTitle,
+        DialogTitle
     },
     setup (props, context) {
         const message = inject('message');
@@ -256,7 +256,11 @@ export default {
                     }
                     console.log(res,'res=支付宝支付');
                 } else {
-                    
+                    reqData.payType = 2;
+                    let res = await renewPay(reqData);
+                    if(res && res.code === 200){
+
+                    }
                 }
             }
         }
