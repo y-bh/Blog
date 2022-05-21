@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-16 15:45:31
+ * @LastEditTime: 2022-05-21 21:08:20
 -->
 <template>
   <div class="layout">
@@ -11,7 +11,9 @@
     <main class="layout-main" :style="{ 'min-height': defaultHeight + 'px' }">
       <SideBar></SideBar>
       <div class="main-right">
-        <router-view />
+        <el-config-provider :locale="locale">
+          <router-view />
+        </el-config-provider>
       </div>
     </main>
     <Footer></Footer>
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 import {
   ref,
   reactive,
@@ -67,6 +70,7 @@ export default {
     return {
       defaultHeight,
       headerRef,
+      locale: zhCn,
     };
   },
 };
