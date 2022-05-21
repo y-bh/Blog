@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 全局变量方法
  * @Date: 2022-05-16 14:51:42
- * @LastEditTime: 2022-05-18 16:07:19
+ * @LastEditTime: 2022-05-21 15:51:15
  */
 export default {
     // 套餐类型

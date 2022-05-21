@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-20 18:35:38
+ * @LastEditTime: 2022-05-21 14:33:51
  */
 
 function Helper() { }
@@ -200,6 +200,7 @@ async function ajax(params) {
         }
       },
       error: (err) => {
+        console.log("接口请求失败:", err)
         reject(err)
       }
     });

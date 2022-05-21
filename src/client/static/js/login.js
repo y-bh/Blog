@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-20 15:04:19
+ * @LastEditTime: 2022-05-21 15:18:13
  */
 
 
@@ -184,6 +184,7 @@ async function loginSubmit(type) {
   })
 
   params.type = type
+  console.log("params:",params)
   $.ajax({
     type: 'POST',
     url: "/api/login",
