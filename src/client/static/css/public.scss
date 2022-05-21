@@ -403,14 +403,6 @@ body {
   align-items: center;
 }
 
-.flex-wrap {
-  flex-wrap: wrap !important;
-}
-
-.flex-column {
-  flex-direction: column !important;
-}
-
 .grid {
   display: grid;
 }
@@ -441,6 +433,22 @@ body {
 
 .align-end {
   align-items: flex-end;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .pointer {
@@ -1416,60 +1424,6 @@ a:hover {
       }
     }
   }
-}
-
-.flex {
-  display: flex;
-}
-
-.grid {
-  display: grid;
-}
-
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-start {
-  justify-content: start;
-}
-
-.justify-end {
-  justify-content: end;
-}
-
-.align-start {
-  align-items: flex-start;
-}
-
-.align-end {
-  align-items: flex-end;
-}
-
-.justify-between {
-  justify-content: space-between !important;
-}
-
-.justify-around {
-  justify-content: space-around !important;
-}
-
-.flex-wrap {
-  flex-wrap: wrap !important;
-}
-
-.flex-column {
-  flex-direction: column !important;
-}
-
-.text-right {
-  text-align: right;
 }
 
 //蓝色按钮
