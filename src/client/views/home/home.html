@@ -27,7 +27,7 @@
 </head>
 
 <body style="margin-bottom: 20px">
-  <%- include('../components/header/header.html'); %>
+  <%- include('../components/header.html'); %>
     <div class="home">
       <div id="particles-js" class="particles-container" style="display:none;"></div>
       <div class="homeContent pt-80">
@@ -447,10 +447,11 @@
 
       </div>
     </div>
-    <%- include('../components/rightToolbar/rightToolbar.html'); %>
+    <%- include('../components/rightToolbar.html'); %>
 
-      <!-- footer -->
 
+ <%#公共底部  %> 
+ <%- include('../components/footer.html'); %>
 </body>
 <!-- 公共js -->
 <%- include('../components/js.html'); %>

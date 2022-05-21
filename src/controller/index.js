@@ -3,11 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
-<<<<<<< HEAD
- * @LastEditTime: 2022-05-21 15:54:05
-=======
  * @LastEditTime: 2022-05-20 17:47:17
->>>>>>> 899d0bf22665bb9e42689a01beb6fa5681d68d94
  */
 
 
@@ -224,7 +220,7 @@ function Router(App) {
 
   //个人中心
   let htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
-  const headerHtml = fs.readFileSync(`${config.templates}/components/header/header.html`, 'utf-8')
+  const headerHtml = fs.readFileSync(`${config.templates}/components/header.html`, 'utf-8')
   const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
     let userInfo = ctx.cookies.get(appKey.userInfo)
