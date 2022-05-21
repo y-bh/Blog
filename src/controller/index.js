@@ -160,7 +160,7 @@ function Router(App) {
     //各栏目推荐文章 以及当前栏目id下的信息
     let { typeList: tabList } = await renderHome() || [];
 
-    return ctx.render("help/keyWord/keyWord", { keyWordPageData, lists, tabList })
+    return ctx.render("help/keyWord", { keyWordPageData, lists, tabList })
   })
 
   //帮助中心详情-helpCenter-details
