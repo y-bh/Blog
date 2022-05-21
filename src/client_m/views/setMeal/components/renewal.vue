@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-21 10:19:26
+ * @LastEditTime: 2022-05-21 10:59:33
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -72,12 +72,13 @@ import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt, deepCopy } from "tools/utility"
 import { getRenewList, getRedPackage, renewPay } from "model/meal.js";
 export default {
-    emits: ['query'],
+    emits: ['createCode'],
     components: {
         DialogTitle
     },
-    setup (props, context) {
+    setup (props, ctx) {
         const message = inject('message');
+
         //  响应式数据
         const state = reactive({
             dialogVisible: false,
@@ -142,7 +143,6 @@ export default {
                         state.renewForm.price;
                 }
                 
-            
             },
             
             //包时套餐续费 改变时长  重新参与计算
@@ -259,8 +259,23 @@ export default {
                     reqData.payType = 2;
                     let res = await renewPay(reqData);
                     if(res && res.code === 200){
-
+                        // 支付成功调取二维码弹窗
+                        if(res.data && res.data.payUrl){
+                            ctx.emit('createCode', res.data.payUrl)
+                        } else {
+                            message.error({
+                                message: '二维码获取失败',
+                                showClose: true
+                            })
+                        }
+                        
+                    } else {
+                        message.error({
+                            message: '二维码获取失败',
+                            showClose: true
+                        })
                     }
+                    
                 }
             }
         }

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 微信扫码支付
  * @Date: 2022-05-21 09:39:11
- * @LastEditTime: 2022-05-21 10:27:53
+ * @LastEditTime: 2022-05-21 10:41:26
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -35,7 +35,7 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
-import QRCode from "qrcodejs2";
+import QRCode from "qrcode";
 export default {
     components: {
         DialogTitle,
@@ -48,7 +48,7 @@ export default {
             timeFlag: null,  // 定时器
             time: 0,
         })
-console.log(QRCode,'QRCode===');
+        console.log(QRCode,'QRCode===');
         return {
             ...toRefs(state)
         }

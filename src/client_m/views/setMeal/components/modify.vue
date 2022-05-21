@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-21 09:48:54
+ * @LastEditTime: 2022-05-21 11:06:30
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -261,7 +261,6 @@ export default {
             },
             submitForm () { }
         }
-        console.log(props, 'props');
 
         return {
             ...methods,

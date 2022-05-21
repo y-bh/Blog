@@ -3,18 +3,22 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-20 09:51:56
+ * @LastEditTime: 2022-05-21 11:09:52
  */
 
 import axios from 'axios';
+import { inject } from "vue";
 class Request {
-
+  
   constructor(baseURL, timeout = 10000) {
     let service = axios.create({
       baseURL,
       withCredentials: true,
       timeout
     });
+
+    let message = inject('message');
+
     // 请求拦截器
     service.interceptors.request.use(config => {
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
@@ -26,7 +30,7 @@ class Request {
 
     // 响应拦截器
     service.interceptors.response.use(response => {
-      // console.log(response,'response***********');
+      console.log(inject,'message******message');
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
@@ -36,6 +40,10 @@ class Request {
             data: data.data
           };
         } else {
+          message.error({
+            message: data.msg || data.message || '接口异常',
+            showClose: true
+          })
           return {
             code: -1,
             msg: data.msg || data.message || '接口异常'

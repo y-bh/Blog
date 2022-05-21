@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-21 09:46:58
+ * @LastEditTime: 2022-05-21 11:07:12
 -->
 <template>
   <div class="container">
@@ -206,7 +206,7 @@
       </el-table>
     </div>
     <reset-password ref="passwordRef"></reset-password>
-    <renewal ref="renewalRef"></renewal>
+    <renewal ref="renewalRef" @createCode="createCode($event)"></renewal>
     <supplement ref="supplementRef"></supplement>
     <modify ref="modifyRef"></modify>
     <merge ref="mergeRef"></merge>
@@ -286,7 +286,6 @@ export default {
       // 处理查询参数
       initQuery(){
         let query = $route.query;
-        console.log(query.mealType, typeof query.mealType, formatInt(query.mealType));
         state.searchForm.sequence = query.sequence || null;
         state.searchForm.name = query.name || null;
         state.searchForm.mealType = (query.mealType === 0 || query.mealType) ? formatInt(query.mealType) : null;
@@ -294,14 +293,13 @@ export default {
         state.searchForm.remainDays = formatInt(query.remainDays) || null;
         state.searchForm.page = formatInt(query.pageNum) || 1;
         state.searchForm.size = formatInt(query.size) || 50;
-        console.log(query.useTime,'query时间');
+
       },
       async getList(){
         state.loading = true;
         state.tableList = [];
         methods.initQuery();
         const params = deepCopy(state.searchForm);
-        console.log($route.query.useTime,'$route.query.useTime');
         params.createTimeStart = $route.query.useTime && formatInt($route.query.useTime[0]) || 
         (state.searchForm.useTime && formatInt(state.searchForm.useTime[0]))
         params.createTimeEnd = $route.query.useTime && formatInt($route.query.useTime[1]) || 
@@ -309,7 +307,7 @@ export default {
         let res = await getTableList(params);
         if(res && res.code === 200){
           state.tableList = res.data && res.data.data;
-          console.log(state.tableList);
+          // console.log(state.tableList);
         } else {
           message.error({
             message: '接口异常',
@@ -390,10 +388,12 @@ export default {
           return
         }
       },
+      createCode(val){
+        console.log('创建二维码', val);
+      },
       repeatPwd(){}
     };
 
-    console.log(state.tableList, 'state.tableList');
     return {
       ...toRefs(state),
       ...methods,
