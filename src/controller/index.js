@@ -53,7 +53,7 @@ function Router(App) {
       link: [],
     }
     let list = await renderHome();
-    homeData.articleList = list ? list : [];
+    homeData.articleList = list.typeList ? list.typeList : [];
 
     return ctx.render("home/home", homeData)
   })
@@ -113,7 +113,7 @@ function Router(App) {
     /**数据请求 */
     let { currentId = '1' } = ctx.request.params
     let res = getBusinessData()
-    let p = Object.assign(res, {currentId})
+    let p = Object.assign(res, { currentId })
 
     return ctx.render("businessScene/businessScene", p)
   })
@@ -154,17 +154,14 @@ function Router(App) {
       id = id.replace(".html", '')
     }
 
-    let { articleKeyWords, prefix, suffix, related, articleDetailVO } = await getArticleDetailService(id)
+    let { articleKeyWords, prefix, suffix, related, articleDetailVO, keywords } = await getArticleDetailService(id)
 
-    //各栏目推荐文章
-    let  tabList =  await renderHome() || [];
-    
+    //各栏目推荐文章 以及当前栏目id下的信息
+    let { tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
+
     console.log("111111", articleKeyWords)
-    console.log("222222", prefix)
-    console.log("33333", suffix)
-    console.log("44444", related)
-    console.log("55555555", articleDetailVO)
-    return ctx.render("help/detail/helpDetails", { articleKeyWords, prefix, suffix, related, articleDetailVO,tabList })
+    console.log("33333", typeObj)
+    return ctx.render("help/detail/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
   })
 
   //企业服务-firmsServer

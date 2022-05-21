@@ -1,10 +1,3 @@
-<!--
- * @Author: 李云涛
- * @LastEditors: 陈昊天
- * @description: 帮助中心详情页
- * @Date: 2022-04-27 14:22:18
- * @LastEditTime: 2022-05-16 21:09:04
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,33 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="force-rendering" content="webkit">
   <meta name="renderer" content="webkit">
-  <meta name="keywords" content="天启http">
-  <meta name="description" content="天启http">
-  <title>文章详情</title>
+  <meta name="keywords" content="<%=keywords%>">
+  <meta name="description" content="<%=articleDetailVO && articleDetailVO.desc%>">
+  <title>
+    <%=articleDetailVO && articleDetailVO.title + "-" %>
+      <%= articleDetailVO && articleDetailVO.type || '帮助中心' %>
+  </title>
   <%- include('../../components/style.html'); %>
     <link rel="stylesheet" href="/css/helpDetail.css">
 </head>
 
 <body>
   <div class="container">
-
-
-
-
-
     <div class="box  mt-80 mb-80">
-
-
       <!-- 左侧文章详情 -->
       <div class="a_left ">
         <!-- 面包絮导航 -->
         <div class="a_top flex justify-between align-center">
-          <div class="a_top_left">
-            <span class="pointer help_center">帮助中心</span>-
-            <span class="pointer go_tab">typeAlias</span>-
-            <span class="main-title-color">title</span>
+          <div class="flex align-items-center">
+            <a class="pointer help_center title mainHover" href="/help-center">帮助中心</span>-
+              <a class="pointer go_tab title mainHover" href="/help-center/<%=typeObj.typeAlias%> /1.html">
+                <%=typeObj.type%>
+              </a>-
+              <a class="nav-title text-ellipsis mainHover" href="/help-details/<%= articleDetailVO.id%>.html"
+                title="<%= articleDetailVO&&articleDetailVO.title%>">
+                <%= articleDetailVO&&articleDetailVO.title%>
+              </a>
           </div>
-          <div class="a_top_right">createTime</div>
+          <div class="a_top_right">
+            <%= articleDetailVO&&articleDetailVO.showTime%>
+          </div>
         </div>
 
 
@@ -50,7 +46,7 @@
             <span class="main-title-color">标签</span>
           </div>
           <div class="tag_box">
-            <% articleKeyWords.forEach(function(keyWord,index) { %>
+            <% articleKeyWords && articleKeyWords.forEach(function(keyWord,index) { %>
               <span class="tag_item mr-20 flex-center pointer">
                 <%= keyWord.keyName%>
               </span>
@@ -60,27 +56,34 @@
 
         <!-- 文章内容 -->
         <div class="mt-30 overflow-hidden">
-          <%- articleDetailVO.content %>
+          <% if(articleDetailVO){ %>
+            <%- articleDetailVO.content %>
+              <% }else{%>
+                <div>
+                  <div class="flex justify-content-center empty-box"></div>
+                  <p class="flex justify-content-center text-desc">暂无内容</p>
+                </div>
+                <% } %>
         </div>
 
         <!-- 上一篇/下一篇-->
         <div class="btn flex justify-between mt-30">
           <% if(prefix && prefix.title){%>
             <div class="btn_left">
-              <span class="text-blue">上一篇: </span>
-              <span class="last_title text-blue">
+              <a class="text-blue" href="/help-details/<%= prefix.id%>.html">上一篇: </a>
+              <a class="last_title text-blue" href="/help-details/<%= prefix.id%>.html" title="<%=prefix.title%>">
                 <%=prefix.title %>
-              </span>
+              </a>
             </div>
             <% } %>
 
 
               <% if(suffix && suffix.title){%>
                 <div class="btn_right">
-                  <span class="text-blue">下一篇: </span>
-                  <span class="next_title text-blue">
+                  <a class="text-blue" href="/help-details/<%= suffix.id%>.html">下一篇: </a>
+                  <a class="next_title text-blue" href="/help-details/<%= suffix.id%>.html" title="<%=suffix.title%>">
                     <%=suffix.title %>
-                  </span>
+                  </a>
                 </div>
                 <% } %>
 
@@ -94,12 +97,13 @@
         <div class="related_blogs  b_box">
           <div class="b_top font-18 font-bold main-title-color flex justify-between">
             相关文章
-            <span class="text-blue font-16 look_more pointer">查看更多>></span>
+            <a class="text-blue font-16 look_more pointer" href="/help-center/manual/1.html">查看更多>></a>
           </div>
           <div class="b_bottom mt-30">
-            <% related.forEach(function(blog,index) { %>
+            <% related && related.forEach(function(blog,index) { %>
               <div class="flex justify-between mb-20">
-                <a href="" class="inline-flex align-items-center pointer right_blog_title">
+                <a href="/help-details/<%= blog.id%>.html"
+                  class="inline-flex align-items-center pointer right_blog_title" title="<%=blog.title%>">
                   <span class="text-ellipsis">
                     <%= blog.title%>
                   </span>
@@ -114,39 +118,29 @@
 
 
         <!-- 文章类型列表 -->
-        <% tabList.forEach(function(tab,index) { %>
+        <% tabList && tabList.forEach(function(tab,index) { %>
           <div class="related_blogs  b_box mt-40">
             <div class="b_top font-18 font-bold main-title-color flex justify-between">
               <%= tab.type %>
-                <span class="text-blue font-16 look_more pointer">查看更多>></span>
+                <a class="text-blue font-16 look_more pointer"
+                  href="/help-center/<%= tab.typeAlias %>/1.html">查看更多>></a>
             </div>
             <div class="b_bottom mt-30">
-              <% tab.articleDetail.forEach(function(blog,index) { %>
-                <div class="flex justify-between mb-20">
-                  <a href="" class="inline-flex align-items-center pointer right_blog_title">
-                    <span class="text-ellipsis">
-                      <%= blog.title%>
-                    </span>
-                    <i>&gt;</i>
-                  </a>
-                </div>
+              <% tab.articleDetail && tab.articleDetail.forEach(function(blog,index) { %>
+
+                <a href="/help-details/<%= blog.id%>.html" title="<%=blog.title%>"
+                  class="flex justify-between mb-20 align-items-center pointer right_blog_title">
+                  <span class="text-ellipsis">
+                    <%= blog.title%>
+                  </span>
+                  <i>&gt;</i>
+                </a>
+
                 <% }) %>
-                  <div class="flex"></div>
             </div>
           </div>
-
           <% }) %>
-
-
-
-
-
-
       </div>
-
-
-
-
     </div>
   </div>
 </body>

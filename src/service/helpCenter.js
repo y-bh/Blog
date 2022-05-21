@@ -9,6 +9,12 @@ const { getHelpList, getArticleTypeDao, postArticleDao, getArticleDetailDao } = 
 const { dateFormat } = require("utils/dateFormat")
 const { cateTypes } = require("config/app.key.config")
 const { setStore, getStore } = require("store")
+
+
+
+
+
+
 //标题省略
 const csubstr = (str, len) => {
   if (str.length > len) {
@@ -42,88 +48,6 @@ const getHelpListS = async () => {
   }
 }
 
-
-//获取文章详情
-let tabList = [
-  {
-    type: 'detail',
-    typeAlias: '详情',
-    blogList: [
-      {
-        id: 1,
-        title: '标题1'
-      },
-      {
-        id: 2,
-        title: '标题2'
-      },
-    ]
-  },
-  {
-    type: 'news',
-    typeAlias: '新闻',
-    blogList: [
-      {
-        id: 1,
-        title: '标题1'
-      },
-      {
-        id: 2,
-        title: '标题2'
-      },
-      {
-        id: 3,
-        title: '标题3'
-      },
-    ]
-  },
-  {
-    type: 'note',
-    typeAlias: '说明',
-    blogList: [
-      {
-        id: 1,
-        title: '标题1'
-      },
-      {
-        id: 2,
-        title: '标题2'
-      },
-      {
-        id: 3,
-        title: '标题3'
-      },
-    ]
-  }
-]
-
-//相关文章
-let sameBlog = [
-  {
-    id: 1,
-    title: '标题1'
-  },
-  {
-    id: 2,
-    title: '标题2'
-  },
-  {
-    id: 3,
-    title: '标题3'
-  },
-]
-
-//标签
-let tagList = [
-  {
-    id: 1,
-    tag: '标签1'
-  },
-  {
-    id: 2,
-    tag: '标签2'
-  },
-]
 const getBlogDetailS = async () => {
   try {
     const helpDetail = {
@@ -251,9 +175,6 @@ const getKeyWordPageS = async () => {
 
 //获取帮助中心文章列表
 const postArticleService = async (data) => {
-
-
-
   try {
     const res = await postArticleDao(data)
     console.log("获取帮助中心文章列表", res)
@@ -261,12 +182,6 @@ const postArticleService = async (data) => {
     console.error("postArticleService: ", error);
   }
 }
-
-
-
-
-//cateTypes
-
 
 //获取栏目类型
 const getCateTypes = async () => {
@@ -291,7 +206,6 @@ const getCateTypes = async () => {
     return Promise.resolve(articleTypes)
   }
 }
-
 
 
 //获取帮助中心列表
@@ -374,8 +288,21 @@ const getArticleDetailService = async (id) => {
 
   try {
     let { articleKeyWords, prefix, suffix, related, articleDetailVO } = await getArticleDetailDao(id)
+
+    //详情页关键词
+    let keywords = related && related.map((item) => item.title)
+
+    //格式化详情页时间
+    articleDetailVO.showTime = dateFormat(articleDetailVO.createTime*1000)
+
+    
+
+
+
+
+
     return {
-      articleKeyWords, prefix, suffix, related, articleDetailVO
+      articleKeyWords, prefix, suffix, related, articleDetailVO, keywords: keywords.join(',')
     }
   } catch (error) {
     console.error('getArticleDetailService:', error)
