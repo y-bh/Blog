@@ -184,6 +184,9 @@
   padding: 30px;
   border: 1px solid #E4E5EB;
   border-radius: 8px;
+  input:read-only{
+    background-color: transparent;
+  }
 }
 .apiUrl_input {
   border: none;
@@ -268,13 +271,21 @@
 }
 .demo_box {
   grid-template-columns: repeat(auto-fit,231px);
-  grid-gap: 20px 30px;
+  grid-gap: 20px 50px;
 }
 .demo_box_item {
   width: 231px;
   height: 148px;
   border-radius: 8px;
   box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+  .download {
+    width: 135px;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    color: #1968FC !important;
+    background: #E8F0FF;
+  }
 }
 .demo_box_item:hover{
   width: 231px;
@@ -282,6 +293,9 @@
   border: 2px solid #FC7019;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.1);
+  .download{
+    color: white !important;
+  }
 }
 .demo_title {
   color: #333;
@@ -292,14 +306,6 @@
   color: #FC7019;
   font-size: 26px;
   font-weight: bold;
-}
-.download {
-  width: 135px;
-  height: 40px;
-  border: none;
-  border-radius: 30px;
-  color: #1968FC;
-  background: #E8F0FF;
 }
 .demo_box_item:hover .download {
   width: 135px;

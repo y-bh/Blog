@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-21 17:12:51
+ * @LastEditTime: 2022-05-21 20:09:46
  */
 const { getProxyCityDao,getProxyMenuDao } = require("dao/getIp")
 
@@ -311,9 +311,6 @@ let errorCodeContent = {
     },
     {
       label: '1008: ip地址不在服务范围'
-    },
-    {
-      label: '1009: 白名单中不存在指定的ip可以删除'
     },
     {
       label: '1009: 白名单中不存在指定的ip可以删除'
