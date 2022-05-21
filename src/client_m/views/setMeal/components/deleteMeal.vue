@@ -1,16 +1,15 @@
 <!--
  * @Author: 秦琛
  * @LastEditors: 秦琛
- * @description: 合并套餐
+ * @description: 批量删除
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-21 15:16:15
+ * @LastEditTime: 2022-05-21 16:38:07
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
-        <DialogTitle title-content="合并套餐" />
+        <DialogTitle title-content="温馨提示" />
         <div class="dialog-body">
-            <p class="child-item">您想要将此套餐合并到哪个套餐？请输入套餐ID</p>
-            <el-input class="child-item" v-model="mergeForm.sequence"></el-input>
+            <p class="child-item">确定删除吗？</p>
             <div class="dialog-footer child-item double-item">
                 <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="submitMerge()">确 定</el-button>
@@ -21,44 +20,46 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
-import { mergeMeal } from "model/meal.js";
-// mergeMeal
+import { formatInt} from "tools/utility"
+import { resetSecret } from "model/meal.js";
 export default {
     components: {
         DialogTitle,
     },
+    emits: ['updateTable'],
     setup (props, context) {
         const message = inject('message');
+
         const state = reactive({
             dialogVisible: false,
-            mergeForm: {
-                proxyId: null, // 原套餐id
-                sequence: null,  // 新套餐编号
-            }
+            deleteIds: []
         });
         const methods = {
-            onOpen(row){
-                if(row){
-                    state.mergeForm.proxyId = row.id;
-                    state.mergeForm.sequence = null;
-                    console.log(row,'row');
-                }
+            onOpen(ids){
+                state.deleteIds = ids
             },
-            async submitMerge(){
-                if(!mergeForm.sequence){
-                    message.warning({
-                        message: '请输入套餐ID',
+            async submitDelete(){
+                let res = await resetSecret(state.deleteIds);
+                if(res && res.code === 200){
+                    message.success({
+                        message: '删除成功',
                         showClose: true
                     })
+                    state.dialogVisible = false
+                    context.emit('updateTable', false)
                 } else {
-                    let res = await mergeMeal(state.mergeForm)
+                    message.error({
+                        message: '删除失败',
+                        showClose: true
+                    })
                 }
             }
         }
 
         return {
+            ...toRefs(state),
             ...methods,
-            ...toRefs(state)
+            
         }
     }
 }

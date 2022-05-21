@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 李云涛
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-11 18:40:38
+ * @LastEditTime: 2022-05-21 11:03:04
 -->
 <template>
   <aside class="sideBar">
@@ -41,7 +41,7 @@ export default {
 
     let routeList = [];
     let filterRouteList = [];
-    console.log("-------过滤前：", $router.options.routes);
+    // console.log("-------过滤前：", $router.options.routes);
     routeList = $router.options.routes;
     // 将子路由中ignore为true的路由过滤掉
     const filterRoute = (routeList, filterRouteList) => {
@@ -81,7 +81,7 @@ export default {
     watch(
       () => $route.path,
       (newValue, oldValue) => {
-        console.log("watch", newValue);
+        // console.log("watch", newValue);
       },
       { immediate: true }
     );

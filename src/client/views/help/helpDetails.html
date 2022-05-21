@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="force-rendering" content="webkit">
+  <meta name="renderer" content="webkit">
+  <meta name="keywords" content="<%=keywords%>">
+  <meta name="description" content="<%=articleDetailVO && articleDetailVO.desc%>">
+  <title>
+    <%=articleDetailVO && articleDetailVO.title + "-" %>
+      <%= articleDetailVO && articleDetailVO.type || '帮助中心' %>
+  </title>
+  <%- include('../components/style.html'); %>
+    <link rel="stylesheet" href="/css/helpDetail.css">
+</head>
+
+<body>
+  <%#公共头部  %> 
+  <%- include('../components/header/header.html'); %>
+
+  <%#正文部分  %> 
+    <div class="container mt-160">
+      <div class="box  mt-80 mb-80">
+        <!-- 左侧文章详情 -->
+        <div class="a_left ">
+          <!-- 面包絮导航 -->
+          <div class="a_top flex justify-between align-center">
+            <div class="flex align-items-center">
+              <a class="pointer help_center title mainHover" href="/help-center">帮助中心</span>-
+                <% if(typeObj){%>
+                  <a class="pointer go_tab title mainHover"
+                    href="/help-center/<%=typeObj && typeObj.typeAlias%> /1.html">
+                    <%=typeObj && typeObj.type%>
+                  </a>-
+                  <% } %>
+                    <% if(articleDetailVO){%>
+                      <a class="nav-title text-ellipsis mainHover" href="/help-details/<%= articleDetailVO.id%>.html"
+                        title="<%= articleDetailVO&&articleDetailVO.title%>">
+                        <%= articleDetailVO&&articleDetailVO.title%>
+                      </a>
+                      <% } %>
+            </div>
+            <div class="a_top_right">
+              <%= articleDetailVO&&articleDetailVO.showTime%>
+            </div>
+          </div>
+
+
+          <!-- 标签 -->
+          <div class="tag_container mt-30">
+            <div class="tag_container_left flex align-center mr-15">
+              <i class="mr-10 iconfont icon-biaoqian"></i>
+              <span class="main-title-color">标签</span>
+            </div>
+            <div class="tag_box">
+              <% articleKeyWords && articleKeyWords.forEach(function(keyWord,index) { %>
+                <a class="tag_item mr-20 flex-center pointer" href="/tags/<%=keyWord.keyAlias%>/1.html">
+                  <%= keyWord.keyName%>
+                </a>
+                <% }) %>
+            </div>
+          </div>
+
+          <!-- 文章内容 -->
+          <div class="mt-30 overflow-hidden">
+            <% if(articleDetailVO){ %>
+              <%- articleDetailVO.content %>
+                <% }else{%>
+                  <div>
+                    <div class="flex justify-content-center empty-box"></div>
+                    <p class="flex justify-content-center text-desc">暂无内容</p>
+                  </div>
+                  <% } %>
+          </div>
+
+          <!-- 上一篇/下一篇-->
+          <div class="btn flex justify-between mt-30">
+            <% if(prefix && prefix.title){%>
+              <div class="btn_left">
+                <a class="text-blue" href="/help-details/<%= prefix.id%>.html">上一篇: </a>
+                <a class="last_title text-blue" href="/help-details/<%= prefix.id%>.html" title="<%=prefix.title%>">
+                  <%=prefix.title %>
+                </a>
+              </div>
+              <% } %>
+
+
+                <% if(suffix && suffix.title){%>
+                  <div class="btn_right">
+                    <a class="text-blue" href="/help-details/<%= suffix.id%>.html">下一篇: </a>
+                    <a class="next_title text-blue" href="/help-details/<%= suffix.id%>.html" title="<%=suffix.title%>">
+                      <%=suffix.title %>
+                    </a>
+                  </div>
+                  <% } %>
+
+          </div>
+        </div>
+
+
+        <!-- 右侧关联文章 -->
+        <div class="a_right ">
+          <!-- 相关文章 -->
+          <div class="related_blogs  b_box">
+            <div class="b_top font-18 font-bold main-title-color flex justify-between">
+              相关文章
+              <a class="text-blue font-16 look_more pointer" href="/help-center/manual/1.html">查看更多>></a>
+            </div>
+            <div class="b_bottom mt-30">
+              <% related && related.forEach(function(blog,index) { %>
+                <div class="flex justify-between mb-20">
+                  <a href="/help-details/<%= blog.id%>.html"
+                    class="inline-flex align-items-center pointer right_blog_title" title="<%=blog.title%>">
+                    <span class="text-ellipsis">
+                      <%= blog.title%>
+                    </span>
+                    <i>&gt;</i>
+                  </a>
+                </div>
+                <% }) %>
+                  <div class="flex"></div>
+            </div>
+          </div>
+
+          <!-- 文章类型列表 -->
+          <% tabList && tabList.forEach(function(tab,index) { %>
+            <div class="related_blogs  b_box mt-40">
+              <div class="b_top font-18 font-bold main-title-color flex justify-between">
+                <%= tab.type %>
+                  <a class="text-blue font-16 look_more pointer"
+                    href="/help-center/<%= tab.typeAlias %>/1.html">查看更多>></a>
+              </div>
+              <div class="b_bottom mt-30">
+                <% tab.articleDetail && tab.articleDetail.forEach(function(blog,index) { %>
+
+                  <a href="/help-details/<%= blog.id%>.html" title="<%=blog.title%>"
+                    class="flex justify-between mb-20 align-items-center pointer right_blog_title">
+                    <span class="text-ellipsis">
+                      <%= blog.title%>
+                    </span>
+                    <i>&gt;</i>
+                  </a>
+
+                  <% }) %>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </div>
+    </div>
+
+
+ <%#公共底部  %> 
+ <%- include('../components/footer/footer.html'); %>
+</body>
+<%- include('../components/js.html'); %>
+
+</html>

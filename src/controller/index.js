@@ -1,16 +1,20 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
+<<<<<<< HEAD
  * @LastEditTime: 2022-05-21 15:54:05
+=======
+ * @LastEditTime: 2022-05-20 17:47:17
+>>>>>>> 899d0bf22665bb9e42689a01beb6fa5681d68d94
  */
 
 
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpService, getBlogDetailS, getKeyWordPageS, postArticleService } = require('service/helpCenter')
+const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
 const { getProxyCityService, getProxyMenuService } = require('service/getIp')
@@ -35,24 +39,33 @@ function Router(App) {
   router.use("/api", SelfApi.routes(), SelfApi.allowedMethods())
 
 
+  router.get("/payCenter", async (ctx) => {
+    const homeData = {
+      name: '用户',
+      url: '/',
+      link: [],
+    }
+    return ctx.render("payCenter/index", homeData)
+  })
+
   //首页
   router.get("/", async (ctx) => {
-    console.log("获取顶部的数据:", ctx.state)
+
     const homeData = {
       name: '用户',
       url: '/',
       link: [],
     }
     let list = await renderHome();
-    homeData.articleList = list ? list : [];
-    console.log("==========返回home数据=====", homeData);
+    homeData.articleList = list.typeList ? list.typeList : [];
+
     return ctx.render("home/home", homeData)
   })
 
   //落地推广页面
   router.get("/promotion", async (ctx) => {
     //const res = await renderHome()
-    //console.log("控制层:", res)
+    //
     return ctx.render("promotion/index", {
       name: '落地推广页面',
       url: 2222
@@ -63,9 +76,9 @@ function Router(App) {
   //购买页-package
   router.get("/package", async (ctx) => {
     /**数据请求 */
-    // console.log("套餐购买接口返回数据, await renderPackage())
+    // 
     let packageObj = await renderPackage();
-    // console.log("ssssss",packageObj);
+    // 
     return ctx.render("package/package", packageObj)
   })
 
@@ -105,7 +118,7 @@ function Router(App) {
     /**数据请求 */
     let { currentId = '1' } = ctx.request.params
     let res = getBusinessData()
-    let p = Object.assign(res, {currentId})
+    let p = Object.assign(res, { currentId })
 
     return ctx.render("businessScene/businessScene", p)
   })
@@ -120,32 +133,53 @@ function Router(App) {
     if (params && params.typeAlias) {
       body.typeAlias = params.typeAlias
     }
-    const { articleTypes, lists ,title} = await getHelpService(body)
-
-    console.log("cccccccc",lists)
-
-
-    return ctx.render("help/helpCenter", { articleTypes, lists ,title})
+    const { articleTypes, lists, title } = await getHelpService(body, ctx.state[appKey.cateTypes])
+    return ctx.render("help/helpCenter", { articleTypes, lists, title })
   })
 
 
   //帮助中心-关键词聚合页
-  router.get("/keyWord", async (ctx) => {
-    /**数据请求 */
-    let keyWordPageData = await getKeyWordPageS()
+  router.get(["/tags/:keyAlias/:pageNum"], async (ctx) => {
+    const { params, body } = ctx.request
+    //关键词别名
+    if (!params.keyAlias) {
+      return ctx.fail('请传入关键词别名!')
+    }
+    body.keyAlias = params.keyAlias
 
-    return ctx.render("help/keyWord/keyWord", keyWordPageData)
+    //获取当前分页
+    if (params.pageNum.includes(".html")) {
+      params.pageNum = params.pageNum.replace(".html", '')
+    }
+
+    body.pageNum = params.pageNum
+
+    //获取文章列表
+    const lists = await postKeywordsService(body)
+
+    //各栏目推荐文章 以及当前栏目id下的信息
+    let { typeList: tabList } = await renderHome() || [];
+    return ctx.render("help/keyWord", { lists, tabList })
   })
 
   //帮助中心详情-helpCenter-details
-  router.get(["/help-details", "/help-details/:id"],async (ctx) => {
-    /**数据请求 */
-    // const { id } = ctx.request.params
+  router.get(["/help-details", "/help-details/:id"], async (ctx) => {
+    let { id } = ctx.request.params
+    if (!id) {
+      return ctx.fail('请传入文章id')
+    }
+    if (id) {
+      id = id.replace(".html", '')
+    }
+    let { articleKeyWords, prefix, suffix, related, articleDetailVO, keywords } = await getArticleDetailService(id)
 
-    let helpDetail = await getBlogDetailS()
-
-    return ctx.render("help/detail/helpDetails", helpDetail)
+    console.log("articleKeyWords", articleKeyWords)
+    //各栏目推荐文章 以及当前栏目id下的信息
+    let { typeList: tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
+    return ctx.render("help/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
   })
+
+
 
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
@@ -163,7 +197,7 @@ function Router(App) {
     let pageType = ctx.req.url.slice(1)
 
 
-    console.log("ddddddddddd", ctx.req.url)
+
     let title = "登录页-天启HTTP"
     if (pageType === 'reset') {
       title = "重置密码-天启HTTP"

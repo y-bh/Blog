@@ -8,16 +8,6 @@
 const service = require("utils/request")
 const api = require("src/config/api.config.js")
 
-//获取首页的文章列表
-const getHelpList = async (params = null) => {
-  const url = api.POST_HELP_HELP
-  try {
-    const res = await service.post(url, params)
-    return res
-  } catch (error) {
-    console.error('getHelpList_Dao: ', error)
-  }
-}
 
 //文章详情
 const getBlogDetail = async (params = null) => {
@@ -26,12 +16,10 @@ const getBlogDetail = async (params = null) => {
     const res = await service.post(url, params)
     return res
   } catch (error) {
-    console.error('getBlogDetail_Dao: ', error)
+    
   }
 }
 
-
-//文章列表
 
 //文章列表
 const postArticleDao = async (params = null) => {
@@ -44,7 +32,7 @@ const postArticleDao = async (params = null) => {
     }
     return data;
   } catch (error) {
-    console.error('postArticleDao: ')
+    
     return Promise.resolve(data)
   }
 }
@@ -60,7 +48,7 @@ const getArticleTypeDao = async () => {
     }
     return data;
   } catch (error) {
-    console.error('getArticleTypeDao: ')
+    
     return Promise.resolve(data)
   }
 }
@@ -74,15 +62,60 @@ const getArticleListDao = async () => {
     }
     return data;
   } catch (error) {
-    console.error('getArticleListDao: ')
+    
     return Promise.resolve(data)
   }
 }
 
+//文章详情页
+const getArticleDetailDao = async (id) => {
+  const url = `${api.GET_HELP_ARTICLE_DETAIL}/${id}`
+  let data = null;
+  let { articleKeyWords, prefix, suffix, related, articleDetailVO } = [[], null, null, [], null]
+  try {
+    const res = await service.get(url);
+    if (res.code === 200) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    
+    return Promise.resolve({ articleKeyWords, prefix, suffix, related, articleDetailVO })
+  }
+}
+
+
+//获取关键词聚合页列表
+const postKeywordsDao = async (params) => {
+  let data = [];
+  try {
+    const res = await service.post(api.POST_KEYWORD_PAGE,params);
+    if (res.code === 200 && res.data) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    
+    return Promise.resolve(data)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
-  getHelpList,
   getBlogDetail,
   postArticleDao,
   getArticleTypeDao,
-  getArticleListDao
+  getArticleListDao,
+  getArticleDetailDao,
+  postKeywordsDao
 }

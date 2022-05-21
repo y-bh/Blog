@@ -3,11 +3,14 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-20 16:18:41
+ * @LastEditTime: 2022-05-21 14:56:29
 -->
 <template>
     <!-- 支付弹窗 -->
-    <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-double">
+    <el-dialog 
+        v-model="dialogVisible" 
+        destroy-on-close 
+        custom-class="customize_dialog dialog-double">
         <DialogTitle title-content="修改时效" />
         <div class="dialog-body">
             <div class="meal-introduce">
@@ -100,12 +103,12 @@
                 <div class="child-elem btn-wrap">
                     <span class="pay-btn child-elem" @click="changeWays('ali')"
                         :class="mealForm.payType === 'ali' ? 'checked' : ''">
-                        <img src="@/assets/images/common/alipay.png" alt="微信">
+                        <img src="@/assets/images/common/alipay.png" alt="支付宝">
                         <span>支付宝</span>
                     </span>
                     <span class="pay-btn child-elem" @click="changeWays('wx')"
                         :class="mealForm.payType === 'wx' ? 'checked' : ''">
-                        <img src="../../../assets/images/common/wx.png" alt="微信">
+                        <img src="@/assets/images/common/wx.png" alt="微信">
                         <span>微信</span>
                     </span>
                 </div>
@@ -125,9 +128,9 @@
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt } from "tools/utility"
-import { getDuration } from "model/meal.js";
+import { getDuration, modifyPay} from "model/meal.js";
 export default {
-    emits: ['query'],
+    emits: ['createCode'],
     components: {
         DialogTitle,
     },
@@ -154,6 +157,7 @@ export default {
 
         };
         const message = inject('message');
+        const changeFormRef = ref(null)
         //  响应式数据
         const state = reactive({
             dialogVisible: false,
@@ -259,13 +263,60 @@ export default {
             changeWays (mode) {
                 state.mealForm.payType = mode;
             },
-            submitForm () { }
+            submitForm () { 
+                const reqData = {
+                    proxyId: state.renewForm.mealId,
+                    payType: 1,
+                    mealId: state.mealForm.changeForm.ipAging,
+                    total: state.mealForm.mealType === 0 ? state.mealForm.changeForm.laveIp : state.mealForm.changeForm.limit 
+                }
+                changeFormRef.value.validate(async valid => {
+                    if(valid){
+                        if(state.mealForm.payType === 'ali'){
+                            reqData.payType = 1;
+                            
+                            let params = {
+                                url: "/changeDate",
+                                type: 'post',
+                                query: JSON.stringify(reqData)
+                            }
+                            window.open("/payCenter?params=" + JSON.stringify(params));
+                            return
+                        } else {
+                            reqData.payType = 2;
+                            let res = await modifyPay(reqData);
+                            if(res && res.code === 200){
+                                // 支付成功调取二维码弹窗
+                                if(res.data && res.data.payUrl){
+                                    const codeParams = {
+                                        orderId: res.data.orderId,
+                                        url: res.data.payUrl
+                                    }
+                                    state.dialogVisible = false
+                                    context.emit('createCode', codeParams);
+                                } else {
+                                    message.error({
+                                        message: '二维码获取失败',
+                                        showClose: true
+                                    })
+                                }
+                                
+                            } else {
+                                message.error({
+                                    message: '二维码获取失败',
+                                    showClose: true
+                                })
+                            }
+                        }
+                    }
+                })
+            }
         }
-        console.log(props, 'props');
 
         return {
             ...methods,
-            ...toRefs(state)
+            ...toRefs(state),
+            changeFormRef
         }
     }
 }
