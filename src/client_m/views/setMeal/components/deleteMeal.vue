@@ -1,15 +1,15 @@
 <!--
  * @Author: 秦琛
  * @LastEditors: 秦琛
- * @description: 重置密码
+ * @description: 批量删除
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-21 16:04:49
+ * @LastEditTime: 2022-05-21 16:38:07
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
-        <DialogTitle title-content="重置密码" />
+        <DialogTitle title-content="温馨提示" />
         <div class="dialog-body">
-            <p class="child-item">确定将您的套餐密码重置吗？</p>
+            <p class="child-item">确定删除吗？</p>
             <div class="dialog-footer child-item double-item">
                 <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="submitMerge()">确 定</el-button>
@@ -20,7 +20,7 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
-import { formatInt, randomString } from "tools/utility"
+import { formatInt} from "tools/utility"
 import { resetSecret } from "model/meal.js";
 export default {
     components: {
@@ -29,30 +29,27 @@ export default {
     emits: ['updateTable'],
     setup (props, context) {
         const message = inject('message');
-        // 引入全局变量
-        const global = inject('_global');
+
         const state = reactive({
             dialogVisible: false,
-            mergeForm: {
-                id: null
-            }
+            deleteIds: []
         });
         const methods = {
-            onOpen(row){
-                state.mergeForm.id = row.id
+            onOpen(ids){
+                state.deleteIds = ids
             },
-            async submitMerge(){
-                let res = await resetSecret(state.mergeForm.id);
+            async submitDelete(){
+                let res = await resetSecret(state.deleteIds);
                 if(res && res.code === 200){
                     message.success({
-                        message: '重置成功',
+                        message: '删除成功',
                         showClose: true
                     })
                     state.dialogVisible = false
                     context.emit('updateTable', false)
                 } else {
                     message.error({
-                        message: '重置失败',
+                        message: '删除失败',
                         showClose: true
                     })
                 }

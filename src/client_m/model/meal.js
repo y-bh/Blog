@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 我的套餐接口
  * @Date: 2022-05-18 13:26:26
- * @LastEditTime: 2022-05-21 15:02:34
+ * @LastEditTime: 2022-05-21 15:43:54
  */
 import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
@@ -104,10 +104,30 @@ export const getState = async (params = null) => {
 };
 
 
-// POST_MERGE
+//合并套餐
 export const mergeMeal = async (params = null) => {
   try {
     const res = await service.post(api.POST_MERGE, params);
+    return res;
+  } catch (error) {
+    return Promise.resolve(null);
+  }
+};
+
+// 重置密钥
+export const resetSecret = async (params = null) => {
+  try {
+    const res = await service.post(api.POST_MERGE + '/' + params);
+    return res;
+  } catch (error) {
+    return Promise.resolve(null);
+  }
+};
+
+// 变更记录
+export const getLogList = async (params = null) => {
+  try {
+    const res = await service.post(api.POST_MERGE,  params);
     return res;
   } catch (error) {
     return Promise.resolve(null);
