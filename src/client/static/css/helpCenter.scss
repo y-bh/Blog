@@ -138,3 +138,20 @@
 .article-detail {
   display: block;
 }
+
+// 关键词聚合页
+.tab-nav {
+  max-width: 350px;
+  .b_box {
+    height: 309px;
+    padding: 40px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+    background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.4), #fff, #fff, #fff, #fff);
+  }
+}
+.look_more {
+  color: #1968fc;
+  font-size: 14px;
+}

@@ -12,7 +12,7 @@
     <%=articleDetailVO && articleDetailVO.title + "-" %>
       <%= articleDetailVO && articleDetailVO.type || '帮助中心' %>
   </title>
-  <%- include('../../components/style.html'); %>
+  <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/helpDetail.css">
 </head>
 
@@ -25,13 +25,17 @@
         <div class="a_top flex justify-between align-center">
           <div class="flex align-items-center">
             <a class="pointer help_center title mainHover" href="/help-center">帮助中心</span>-
-              <a class="pointer go_tab title mainHover" href="/help-center/<%=typeObj.typeAlias%> /1.html">
-                <%=typeObj.type%>
-              </a>-
-              <a class="nav-title text-ellipsis mainHover" href="/help-details/<%= articleDetailVO.id%>.html"
-                title="<%= articleDetailVO&&articleDetailVO.title%>">
-                <%= articleDetailVO&&articleDetailVO.title%>
-              </a>
+              <% if(typeObj){%>
+                <a class="pointer go_tab title mainHover" href="/help-center/<%=typeObj && typeObj.typeAlias%> /1.html">
+                  <%=typeObj && typeObj.type%>
+                </a>-
+                <% } %>
+                  <% if(articleDetailVO){%>
+                    <a class="nav-title text-ellipsis mainHover" href="/help-details/<%= articleDetailVO.id%>.html"
+                      title="<%= articleDetailVO&&articleDetailVO.title%>">
+                      <%= articleDetailVO&&articleDetailVO.title%>
+                    </a>
+                    <% } %>
           </div>
           <div class="a_top_right">
             <%= articleDetailVO&&articleDetailVO.showTime%>
@@ -47,9 +51,9 @@
           </div>
           <div class="tag_box">
             <% articleKeyWords && articleKeyWords.forEach(function(keyWord,index) { %>
-              <span class="tag_item mr-20 flex-center pointer">
+              <a class="tag_item mr-20 flex-center pointer" href="/tags/<%=keyWord.id%>.html">
                 <%= keyWord.keyName%>
-              </span>
+              </a>
               <% }) %>
           </div>
         </div>
@@ -115,8 +119,6 @@
           </div>
         </div>
 
-
-
         <!-- 文章类型列表 -->
         <% tabList && tabList.forEach(function(tab,index) { %>
           <div class="related_blogs  b_box mt-40">
@@ -144,7 +146,5 @@
     </div>
   </div>
 </body>
-<%- include('../../components/js.html'); %>
-  <%- include('./js.html') %>
-
+<%- include('../components/js.html'); %>
 </html>

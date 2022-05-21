@@ -78,7 +78,6 @@ const getArticleListDao = async () => {
   }
 }
 
-
 //文章详情页
 const getArticleDetailDao = async (id) => {
   const url = `${api.GET_HELP_ARTICLE_DETAIL}/${id}`
@@ -97,6 +96,29 @@ const getArticleDetailDao = async (id) => {
 }
 
 
+//获取关键词聚合页列表
+const postKeywordsDao = async (params) => {
+  let data = [];
+  try {
+    const res = await service.post(api.POST_KEYWORD_PAGE,params);
+    if (res.code === 200 && res.data) {
+      data = res.data;
+    }
+    return data;
+  } catch (error) {
+    console.error('postKeywordsDao: ')
+    return Promise.resolve(data)
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,5 +128,6 @@ module.exports = {
   postArticleDao,
   getArticleTypeDao,
   getArticleListDao,
-  getArticleDetailDao
+  getArticleDetailDao,
+  postKeywordsDao
 }

@@ -5,7 +5,7 @@
  * @Date: 2022-05-16 16:37:33
  * @LastEditTime: 2022-05-19 15:32:24
  */
-const { getHelpList, getArticleTypeDao, postArticleDao, getArticleDetailDao } = require("dao/helpCenter")
+const { getHelpList, getArticleTypeDao, postArticleDao, getArticleDetailDao, postKeywordsDao } = require("dao/helpCenter")
 const { dateFormat } = require("utils/dateFormat")
 const { cateTypes } = require("config/app.key.config")
 const { setStore, getStore } = require("store")
@@ -168,21 +168,6 @@ const getKeyWordPageS = async () => {
   }
 }
 
-
-
-
-
-
-//获取帮助中心文章列表
-const postArticleService = async (data) => {
-  try {
-    const res = await postArticleDao(data)
-    console.log("获取帮助中心文章列表", res)
-  } catch (error) {
-    console.error("postArticleService: ", error);
-  }
-}
-
 //获取栏目类型
 const getCateTypes = async () => {
   let articleTypes = []
@@ -206,7 +191,6 @@ const getCateTypes = async () => {
     return Promise.resolve(articleTypes)
   }
 }
-
 
 //获取帮助中心列表
 const getHelpService = async (data, articleTypes = []) => {
@@ -279,30 +263,24 @@ const getHelpService = async (data, articleTypes = []) => {
 }
 
 
-
-
 //文章详情页
 const getArticleDetailService = async (id) => {
   if (!id) return null
-
 
   try {
     let { articleKeyWords, prefix, suffix, related, articleDetailVO } = await getArticleDetailDao(id)
 
     //详情页关键词
     let keywords = related && related.map((item) => item.title)
+    if (keywords) {
+      keywords = keywords.join(',')
+    }
 
     //格式化详情页时间
-    articleDetailVO.showTime = dateFormat(articleDetailVO.createTime*1000)
-
-    
-
-
-
-
+    articleDetailVO.showTime = dateFormat(articleDetailVO.createTime * 1000)
 
     return {
-      articleKeyWords, prefix, suffix, related, articleDetailVO, keywords: keywords.join(',')
+      articleKeyWords, prefix, suffix, related, articleDetailVO, keywords
     }
   } catch (error) {
     console.error('getArticleDetailService:', error)
@@ -313,6 +291,41 @@ const getArticleDetailService = async (id) => {
 }
 
 
+//获取关键词聚合页文章列表
+const postKeywordsService = async (data) => {
+
+  let lists = {
+    totalPage: null,
+    data: [],
+    pageNum: data.pageNum || 1
+  }
+  try {
+    if (!data.keywordId) {
+      return null
+    }
+    const params = {
+      pageSize: data.pageSize || 2,
+      pageNum: data.pageNum || 10,
+      keywordId: data.keywordId
+    }
+    console.log("传参数:", params)
+    const { pageRespDTO, recommendArticles } = await postKeywordsDao(params)
+    if (pageRespDTO && !pageRespDTO.totalPage) {
+      //兜底分页
+      lists.totalPage = Math.ceil(pageRespDTO.totalSize / params.pageSize)
+    }
+    if (recommendArticles) {
+      lists.data = recommendArticles
+    }
+    console.log("获取关键词聚合页文章列表", lists)
+    return lists
+  } catch (error) {
+    console.error("postKeywordsService: ", error);
+  }
+}
+
+
+
 
 
 
@@ -321,7 +334,7 @@ module.exports = {
   getHelpListS,
   getBlogDetailS,
   getKeyWordPageS,
-  postArticleService,
+  postKeywordsService,
   getHelpService,
   getArticleDetailService,
   getCateTypes

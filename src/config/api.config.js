@@ -40,6 +40,7 @@ module.exports = {
   'POST_HELP_HELP_DETAILS': '/help/helpDetails', //文章详情
   'POST_HELP_ARTICLE_LIST': "/article/getArticles",
   'GET_HELP_ARTICLE_DETAIL': "/article/getArticleDetail",
+  'POST_KEYWORD_PAGE': "/article/getArticleByKey",
   /*个人中心-购买记录 */
   'ORDER_LIST': '/order/list', //获取订单列表
   'ORDER_STATE': "/order/state", //获取订单状态

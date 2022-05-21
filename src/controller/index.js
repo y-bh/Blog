@@ -10,7 +10,7 @@
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpService, getBlogDetailS, getKeyWordPageS, getArticleDetailService } = require('service/helpCenter')
+const { getHelpService, postKeywordsService, getKeyWordPageS, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
 const { getProxyCityS, getProxyMenuS } = require('service/getIp')
@@ -134,35 +134,48 @@ function Router(App) {
 
 
   //帮助中心-关键词聚合页
-  router.get("/keyWord", async (ctx) => {
+  router.get(["/tags/:keywordId"], async (ctx) => {
     /**数据请求 */
     let keyWordPageData = await getKeyWordPageS()
 
-    return ctx.render("help/keyWord/keyWord", keyWordPageData)
+
+    const { params, body } = ctx.request
+    if (!params.keywordId) {
+      return ctx.fail('请传入关键词id')
+    }
+    if (params.keywordId.includes(".html")) {
+      params.keywordId = params.keywordId.replace(".html", '')
+    }
+    body.keywordId = params.keywordId
+
+    //获取文章列表
+    const lists = await postKeywordsService(body)
+
+    //各栏目推荐文章 以及当前栏目id下的信息
+    let { typeList:tabList } = await renderHome() || [];
+
+    console.log("cccccccccccc",tabList)
+    return ctx.render("help/keyWord/keyWord", { keyWordPageData, lists,tabList })
   })
 
   //帮助中心详情-helpCenter-details
   router.get(["/help-details", "/help-details/:id"], async (ctx) => {
-    /**数据请求 */
     let { id } = ctx.request.params
-
     if (!id) {
       return ctx.fail('请传入文章id')
     }
-
     if (id) {
       id = id.replace(".html", '')
     }
-
     let { articleKeyWords, prefix, suffix, related, articleDetailVO, keywords } = await getArticleDetailService(id)
 
+    console.log("articleKeyWords", articleKeyWords)
     //各栏目推荐文章 以及当前栏目id下的信息
-    let { tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
-
-    console.log("111111", articleKeyWords)
-    console.log("33333", typeObj)
-    return ctx.render("help/detail/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
+    let { typeList:tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
+    return ctx.render("help/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
   })
+
+
 
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
