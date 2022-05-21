@@ -3,14 +3,11 @@
  * @LastEditors: 秦琛
  * @description: 支付宝支付中间数据处理
  * @Date: 2022-05-20 17:50:04
- * @LastEditTime: 2022-05-21 14:01:27
+ * @LastEditTime: 2022-05-21 14:02:42
  */
 
 /*
  路由携带参数说明（required）:
-    payment:     支付的方式(官网/我的套餐续费、补量、修改失效等等)
-
-
     params  url:  接口地址   type: 接口类型  query（object）： 支付接口所需参数  传参前通过JSON.stringify()转一下
 */
 
