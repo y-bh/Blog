@@ -1,11 +1,25 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-18 15:29:55
+ * @LastEditTime: 2022-05-21 17:58:40
 -->
 <script>
+    //获取location 地址栏query查询参数
+    function getParams () {
+        var url = decodeURI(location.search);
+        var request = {};
+        if (url.indexOf("?") !== -1) {
+            var str = url.slice(1); //去掉?号
+            let strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                //unescape 被弃用  decodeURI来替代
+                request[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
+            }
+        }
+        return JSON.parse(JSON.stringify(request));
+    }
     function fingerprint2 () {
         //生成浏览器指纹
         Fingerprint2.get(function (components) {
@@ -371,8 +385,9 @@
                 type: 'post',
                 query: $('#phoneNumber').val().trim()
             };
+            console.log(params, 'params');
 
-            let resp = await ajax(params);
+            let resp = await ajax(params, 'text/plain');
             if (!resp) {
                 btn.attr('disabled', false);
                 return;
@@ -500,36 +515,59 @@
                 keyword = localStorage.getItem('keyword');
             }
 
+            const formData = {
+                userName: userName,
+                pwd: password,
+                phone: phone,
+                code: code,
+                from: form,
+                did: did,
+                keyword: keyword,
+                readProtocol: 1,   // 推广页默认阅读协议
+                agreeMent: true,
+                fingerPrint: localStorage.getItem("fingerPrint"),
+                type: 'register'
+            }
             let params = {
                 url: "/user/register",
                 type: 'put',
-                query: {
-                    username: userName,
-                    pwd: password,
-                    phone: phone,
-                    code: code,
-                    from: form,
-                    did: did,
-                    keyword: keyword,
-                    readProtocol: 1,   // 推广页默认阅读协议
-                    fingerPrint: localStorage.getItem("fingerPrint"),
-                }
+                query: JSON.stringify(formData)
             };
 
-            let resp = await ajax(params);
-            if (!resp) {
-                return false;
-            } else {
-                Helper.$message.success({
-                    message: '注册成功',
-                    showClose: true
-                })
-                let hasIframe = document.getElementsByTagName('body')[0];
-                $('#userName').val('');
-                $('#phoneNumber').val('');
-                $('#phoneCode').val('');
-                $('#password').val('');
-            }
+            $.ajax({
+                type: 'POST',
+                url: "/api/login",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: (res) => {
+                    if (res && res.code !== 200) {
+                        return Helper.$message({
+                            message: res.msg || '注册失败!请联系客服',
+                            type: 'warning'
+                        })
+                    }
+                },
+                error: (err) => {
+                    console.log(err)
+                }
+            });
+
+            // console.log(params, 'params===');
+            // let resp = await ajax(params);
+            // if (!resp || resp.code !== 200) {
+            //     return false;
+            // } else {
+            //     Helper.$message.success({
+            //         message: '注册成功',
+            //         showClose: true
+            //     })
+            //     let hasIframe = document.getElementsByTagName('body')[0];
+            //     $('#userName').val('');
+            //     $('#phoneNumber').val('');
+            //     $('#phoneCode').val('');
+            //     $('#password').val('');
+            // }
         })
 
         $('#register2').click(async function () {
@@ -569,7 +607,7 @@
                 }
             };
             let resp = await ajax(params);
-            if (!resp) {
+            if (!resp || resp.code !== 200) {
                 return false;
             } else {
                 Helper.$message.success({
