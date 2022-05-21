@@ -201,8 +201,6 @@
                     <a href="/help-center" title="帮助中心">
                       <span>帮助中心</span>
                       <i class="iconfont icon-arrow-down"></i>
-                      <!-- CATEGORY_TYPES -->
-
                     </a>
 
                     <!-- 子导航 -->
@@ -211,24 +209,11 @@
                         <li class="child-item">
                           <div class="title flex-center justify-around">
                             <span class="meal-icon icon_fifth"></span>
-                            <span class="title-type">
-                              <%= item %>
-                            </span>
+                            <a class="title-type" href="/help-center/<%= item.typeAlias%>/1.html">
+                              <%= item.type %>
+                            </a>
                           </div>
                         </li>
-
-                        <!-- <li class="child-item">
-                          <div class="title flex-center justify-around">
-                            <span class="meal-icon icon_sixth"></span>
-                            <span class="title-type">产品介绍</span>
-                          </div>
-                        </li>
-                        <li class="child-item">
-                          <div class="title flex-center justify-around">
-                            <span class="meal-icon icon_seventh"></span>
-                            <span class="title-type">行业资讯</span>
-                          </div>
-                        </li> -->
                         <% }) %>
                     </ul>
                   </li>
