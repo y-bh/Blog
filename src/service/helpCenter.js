@@ -211,7 +211,7 @@ const getHelpService = async (data, articleTypes = []) => {
 
     //2. 获取文章列表
     const params = {
-      pageSize: data.pageSize || 2,
+      pageSize: data.pageSize || 10,
       pageNum: +data.pageNum || 1,
     }
 
@@ -308,8 +308,8 @@ const postKeywordsService = async (data) => {
       return null
     }
     const params = {
-      pageSize: data.pageSize || 2,
-      pageNum: data.pageNum || 10,
+      pageSize: data.pageSize || 10,
+      pageNum: data.pageNum || 1,
       keywordAlias: data.keyAlias
     }
     console.log("传参数:", params)
