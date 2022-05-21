@@ -101,6 +101,7 @@ const postKeywordsDao = async (params) => {
   let data = [];
   try {
     const res = await service.post(api.POST_KEYWORD_PAGE,params);
+    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvv",res)
     if (res.code === 200 && res.data) {
       data = res.data;
     }

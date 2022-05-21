@@ -212,7 +212,7 @@ const getHelpService = async (data, articleTypes = []) => {
     //2. 获取文章列表
     const params = {
       pageSize: data.pageSize || 2,
-      pageNum: data.pageNum || 1,
+      pageNum: +data.pageNum || 1,
     }
 
     let title = null
@@ -296,27 +296,46 @@ const postKeywordsService = async (data) => {
 
   let lists = {
     totalPage: null,
-    data: [],
-    pageNum: data.pageNum || 1
+    data: [], //文章列表
+    keyWordsVO: null,//关键词数据
+    recommendArticles: [], //推荐文章
+    pageNum: data.pageNum || 1,
+    typeAlias: data.keyAlias
   }
+
   try {
-    if (!data.keywordId) {
+    if (!data.keyAlias) {
       return null
     }
     const params = {
       pageSize: data.pageSize || 2,
       pageNum: data.pageNum || 10,
-      keywordId: data.keywordId
+      keywordAlias: data.keyAlias
     }
     console.log("传参数:", params)
-    const { pageRespDTO, recommendArticles } = await postKeywordsDao(params)
+
+    const { pageRespDTO, recommendArticles, keyWordsVO } = await postKeywordsDao(params)
+
+    //兜底分页
     if (pageRespDTO && !pageRespDTO.totalPage) {
-      //兜底分页
       lists.totalPage = Math.ceil(pageRespDTO.totalSize / params.pageSize)
     }
-    if (recommendArticles) {
-      lists.data = recommendArticles
+
+    //文章列表
+    if (pageRespDTO && pageRespDTO.data) {
+      lists.data = pageRespDTO.data
     }
+
+    //推荐文章列表
+    if (recommendArticles) {
+      lists.recommendArticles = recommendArticles
+    }
+
+    //关键词信息
+    if (keyWordsVO) {
+      lists.keyWordsVO = keyWordsVO
+    }
+
     console.log("获取关键词聚合页文章列表", lists)
     return lists
   } catch (error) {

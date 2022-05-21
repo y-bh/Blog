@@ -134,28 +134,33 @@ function Router(App) {
 
 
   //帮助中心-关键词聚合页
-  router.get(["/tags/:keywordId"], async (ctx) => {
+  router.get(["/tags/:keyAlias/:pageNum"], async (ctx) => {
     /**数据请求 */
     let keyWordPageData = await getKeyWordPageS()
 
-
     const { params, body } = ctx.request
-    if (!params.keywordId) {
-      return ctx.fail('请传入关键词id')
+
+    //关键词别名
+    if (!params.keyAlias) {
+      return ctx.fail('请传入关键词别名!')
     }
-    if (params.keywordId.includes(".html")) {
-      params.keywordId = params.keywordId.replace(".html", '')
+    body.keyAlias = params.keyAlias
+
+
+    //获取当前分页
+    if (params.pageNum.includes(".html")) {
+      params.pageNum = params.pageNum.replace(".html", '')
     }
-    body.keywordId = params.keywordId
+
+    body.pageNum = params.pageNum
 
     //获取文章列表
     const lists = await postKeywordsService(body)
 
     //各栏目推荐文章 以及当前栏目id下的信息
-    let { typeList:tabList } = await renderHome() || [];
+    let { typeList: tabList } = await renderHome() || [];
 
-    console.log("cccccccccccc",tabList)
-    return ctx.render("help/keyWord/keyWord", { keyWordPageData, lists,tabList })
+    return ctx.render("help/keyWord/keyWord", { keyWordPageData, lists, tabList })
   })
 
   //帮助中心详情-helpCenter-details
@@ -171,7 +176,7 @@ function Router(App) {
 
     console.log("articleKeyWords", articleKeyWords)
     //各栏目推荐文章 以及当前栏目id下的信息
-    let { typeList:tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
+    let { typeList: tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
     return ctx.render("help/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
   })
 

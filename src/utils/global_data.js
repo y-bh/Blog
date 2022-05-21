@@ -14,12 +14,12 @@ const { getCateTypes } = require("service/helpCenter")
 
 
 //需要获取全局数据的 url
-const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/package', '/businessScene', '/firmsServer', '/helpDetails']
+const URLS = ['/', '/login', '/reset', '/register', '/getIp', '/package', '/businessScene', '/firmsServer'] 
 module.exports = function (app) {
   app.use(async ({ req, res, state, cookies }, next) => {
     const { method, url } = req
     
-    if (method === 'GET' && (URLS.includes(url)|| url.includes('businessScene') || url.includes('getIp') || url.includes('manager') || url.includes('help-center'))) {
+    if (method === 'GET' && (URLS.includes(url)|| url.includes('businessScene') || url.includes('tags') || url.includes('getIp') || url.includes('manager') || url.includes('help-details') || url.includes('help-center'))) {
       
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
