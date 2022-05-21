@@ -96,7 +96,7 @@ function Router(App) {
     let staticData = await data()
     let province = await getProxyCityService()
     let menu = await getProxyMenuService()
-    console.log(province);
+    
 
     let getIpData = {
       staticData,
@@ -169,7 +169,7 @@ function Router(App) {
     }
     let { articleKeyWords, prefix, suffix, related, articleDetailVO, keywords } = await getArticleDetailService(id)
 
-    console.log("articleKeyWords", articleKeyWords)
+    
     //各栏目推荐文章 以及当前栏目id下的信息
     let { typeList: tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
     return ctx.render("help/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
@@ -238,7 +238,7 @@ function Router(App) {
     //友情链接
     let links = ctx.state.links
 
-    console.log("xxxxxxxxxxxxxxxxxxxx",links)
+    
     //公共头部
     var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo), [appKey.cateTypes]: ctx.state[appKey.cateTypes] })
 
@@ -247,19 +247,14 @@ function Router(App) {
 
     var footer = ejs.render(footerHtml, { links })
 
-   // console.log("公共底部字符串:",footer)
+   // 
     
     //放置公共头部
     let res = htmls.replace(re, headers)
-
     //放置公共底部
    // res = htmls.replace(footRe, footer)
-
-  
    let mm = res.replace(footRe, footer)
-    console.log("qqqqqqqqqqqqqqq:",res)
-    console.log("llllllllllllllllllllllllll:",mm)
-
+  
     ctx.response.body = mm
   })
 
