@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-20 18:32:56
+ * @LastEditTime: 2022-05-21 09:20:33
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -241,22 +241,23 @@ export default {
                     mealId: state.renewForm.timeMealId,
                     redRecordId: state.renewForm.redRecordId || null
                 }
-                let params = {
-                    url: "/renewProxy",
-                    type: 'post',
-                    query: JSON.stringify(reqData)
+                
+                if(state.renewForm.payType === 'ali'){
+                    params.payType = 1;
+                    let res = await renewPay(params);
+                    if(res && res.code === 200){
+                        let params = {
+                            url: "/renewProxy",
+                            type: 'post',
+                            query: JSON.stringify(reqData)
+                        }
+                        window.open("/payCenter?params=" + JSON.stringify(params));
+                        return
+                    }
+                    console.log(res,'res=支付宝支付');
+                } else {
+                    
                 }
-       
-                window.open("/payCenter?payment=renew&params=" + JSON.stringify(params));
-                // return
-                // if(state.renewForm.payType === 'ali'){
-                //     params.payType = 1;
-                //     let res = await renewPay(params);
-                //     if(res && res.code === 200){
-                        
-                //     }
-                //     console.log(res,'res=支付宝支付');
-                // }
             }
         }
    
