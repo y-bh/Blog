@@ -507,9 +507,12 @@
       </div>
       <!-- 微信支付弹框 end -->
     </div>
-    <%- include('../components/js.html'); %>
+    <%#公共底部 %>
+      <%- include('../components/footer.html'); %>
+
 </body>
-<script src="/lib/js/qrcode.min.js"></script>
-<script src="/js/package.js"></script>
+<%- include('../components/js.html'); %>
+  <script src="/lib/js/qrcode.min.js"></script>
+  <script src="/js/package.js"></script>
 
 </html>
