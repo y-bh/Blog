@@ -10,7 +10,7 @@
 
 const router = require("koa-router")();
 const { renderHome } = require("service/home")
-const { getHelpService, postKeywordsService, getKeyWordPageS, getArticleDetailService } = require('service/helpCenter')
+const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
 const { getProxyCityS, getProxyMenuS } = require('service/getIp')
@@ -135,17 +135,12 @@ function Router(App) {
 
   //帮助中心-关键词聚合页
   router.get(["/tags/:keyAlias/:pageNum"], async (ctx) => {
-    /**数据请求 */
-    let keyWordPageData = await getKeyWordPageS()
-
     const { params, body } = ctx.request
-
     //关键词别名
     if (!params.keyAlias) {
       return ctx.fail('请传入关键词别名!')
     }
     body.keyAlias = params.keyAlias
-
 
     //获取当前分页
     if (params.pageNum.includes(".html")) {
@@ -159,8 +154,7 @@ function Router(App) {
 
     //各栏目推荐文章 以及当前栏目id下的信息
     let { typeList: tabList } = await renderHome() || [];
-
-    return ctx.render("help/keyWord", { keyWordPageData, lists, tabList })
+    return ctx.render("help/keyWord", { lists, tabList })
   })
 
   //帮助中心详情-helpCenter-details

@@ -16,7 +16,8 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>
-    <%=title %>-帮助中心
+    <% if(title){%>
+      <%=title%>-<% } %>帮助中心
   </title>
   <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/helpCenter.css">
@@ -25,7 +26,7 @@
 <body>
   <%- include('../components/header/header.html'); %>
     <div class="banner"></div>
-    <% if(articleTypes.length>0){ %>
+    <% if(articleTypes && articleTypes.length>0){ %>
       <div class="container grid justify-content-center">
         <!-- 栏目类型 -->
         <div class="flex flex-wrap justify-content-center">
@@ -90,7 +91,7 @@
                           <div class="pageList flex">
                             <% for(let i=0; i < lists.totalPage; i++) { %>
                               <li class="page-item <%if(lists.pageNum === i+1){ %> page-active<%}%> ">
-                                
+
                                 <a href="/help-center/<%= lists.typeAlias %>/<%=i+1%>.html" class="page-link">
                                   <%=i+1%>
                                 </a>
@@ -109,7 +110,9 @@
                     </ul>
                   </nav>
                   <div class="goto flex justify-content-center align-items-center ml-30">
-                    前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number" onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')" id="pageInput">&nbsp;&nbsp;页
+                    前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number"
+                      onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')"
+                      id="pageInput">&nbsp;&nbsp;页
                   </div>
                 </div>
               </div>
@@ -132,5 +135,4 @@
 </body>
 <%- include('../components/js.html'); %>
   <script src="/js/helpCenter.js"></script>
-
 </html>

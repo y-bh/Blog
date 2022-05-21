@@ -8,16 +8,6 @@
 const service = require("utils/request")
 const api = require("src/config/api.config.js")
 
-//获取首页的文章列表
-const getHelpList = async (params = null) => {
-  const url = api.POST_HELP_HELP
-  try {
-    const res = await service.post(url, params)
-    return res
-  } catch (error) {
-    console.error('getHelpList_Dao: ', error)
-  }
-}
 
 //文章详情
 const getBlogDetail = async (params = null) => {
@@ -26,10 +16,9 @@ const getBlogDetail = async (params = null) => {
     const res = await service.post(url, params)
     return res
   } catch (error) {
-    console.error('getBlogDetail_Dao: ', error)
+    
   }
 }
-
 
 
 //文章列表
@@ -43,7 +32,7 @@ const postArticleDao = async (params = null) => {
     }
     return data;
   } catch (error) {
-    console.error('postArticleDao: ')
+    
     return Promise.resolve(data)
   }
 }
@@ -59,7 +48,7 @@ const getArticleTypeDao = async () => {
     }
     return data;
   } catch (error) {
-    console.error('getArticleTypeDao: ')
+    
     return Promise.resolve(data)
   }
 }
@@ -73,7 +62,7 @@ const getArticleListDao = async () => {
     }
     return data;
   } catch (error) {
-    console.error('getArticleListDao: ')
+    
     return Promise.resolve(data)
   }
 }
@@ -90,7 +79,7 @@ const getArticleDetailDao = async (id) => {
     }
     return data;
   } catch (error) {
-    console.error('getArticleDetailDao: ')
+    
     return Promise.resolve({ articleKeyWords, prefix, suffix, related, articleDetailVO })
   }
 }
@@ -101,13 +90,12 @@ const postKeywordsDao = async (params) => {
   let data = [];
   try {
     const res = await service.post(api.POST_KEYWORD_PAGE,params);
-    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvv",res)
     if (res.code === 200 && res.data) {
       data = res.data;
     }
     return data;
   } catch (error) {
-    console.error('postKeywordsDao: ')
+    
     return Promise.resolve(data)
   }
 }
@@ -124,7 +112,6 @@ const postKeywordsDao = async (params) => {
 
 
 module.exports = {
-  getHelpList,
   getBlogDetail,
   postArticleDao,
   getArticleTypeDao,
