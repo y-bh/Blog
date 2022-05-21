@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 支付宝支付中间数据处理
  * @Date: 2022-05-20 17:50:04
- * @LastEditTime: 2022-05-21 13:54:32
+ * @LastEditTime: 2022-05-21 14:01:27
  */
 
 /*
@@ -13,19 +13,7 @@
 
     params  url:  接口地址   type: 接口类型  query（object）： 支付接口所需参数  传参前通过JSON.stringify()转一下
 */
-function getParams() {
-  let params = location.search
-  let url = decodeURI(params)
-  let Request = new Object()
-  if (url.indexOf("?") !== -1) {
-    var str = url.slice(1) //去掉?号
-    strs = str.split("&")
-    for (var i = 0; i < strs.length; i++) {
-      Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1])
-    }
-  }
-  return JSON.parse(JSON.stringify(Request))
-}
+
 
 $(async function () {
   let params = JSON.parse(getParams().params) // 获取付款参数
