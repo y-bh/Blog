@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-21 11:07:12
+ * @LastEditTime: 2022-05-21 11:30:04
 -->
 <template>
   <div class="container">
@@ -210,7 +210,7 @@
     <supplement ref="supplementRef"></supplement>
     <modify ref="modifyRef"></modify>
     <merge ref="mergeRef"></merge>
-    <pay-code ref="codeRef"></pay-code>
+    <pay-code ref="codeRef" @updateMeal="updateMeal($event)"></pay-code>
   </div>
 </template>
 
@@ -388,8 +388,13 @@ export default {
           return
         }
       },
-      createCode(val){
-        console.log('创建二维码', val);
+      createCode(code){
+        console.log('创建二维码', code);
+        codeRef.value.onOpen(code)
+      },
+      updateMeal(){
+        // 刷新套餐列表
+        methods.getList()
       },
       repeatPwd(){}
     };

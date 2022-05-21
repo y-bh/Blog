@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-21 10:59:33
+ * @LastEditTime: 2022-05-21 11:19:38
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -259,9 +259,17 @@ export default {
                     reqData.payType = 2;
                     let res = await renewPay(reqData);
                     if(res && res.code === 200){
+                        // 刷新获取红包接口
+                        await methods.getRedEnvelope()
                         // 支付成功调取二维码弹窗
                         if(res.data && res.data.payUrl){
-                            ctx.emit('createCode', res.data.payUrl)
+                            const codeParams = {
+                                orderId: res.data.orderId,
+                                redRecordId: state.renewForm.redRecordId,
+                                url: res.data.payUrl
+                            }
+                            ctx.emit('createCode', codeParams);
+                            state.dialogVisible = false
                         } else {
                             message.error({
                                 message: '二维码获取失败',
