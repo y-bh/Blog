@@ -1,13 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
-<<<<<<< HEAD
- * @LastEditTime: 2022-05-21 15:54:05
-=======
- * @LastEditTime: 2022-05-20 17:47:17
->>>>>>> 899d0bf22665bb9e42689a01beb6fa5681d68d94
+ * @LastEditTime: 2022-05-21 18:02:38
  */
 
 

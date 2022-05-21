@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-21 17:13:50
+ * @LastEditTime: 2022-05-21 20:53:42
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +59,7 @@
         <div class="head extract_ip_right">
           <span class="font-25 title">提取IP</span>
           <div class="extract_type_box flex flex-wrap align-center mt-40">
-            <label for="extractType" class="font-18 main-title-color label_lay">选择提取类型</label>
+            <label class="font-18 main-title-color label_lay">选择提取类型</label>
             <select id="extractType" class="extract_select form-control">
               <% menu && menu.forEach(function(item) { %>
                 <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
@@ -216,19 +216,19 @@
             <label class="label_lay font-18 main-title-color">选择地区</label>
             <div class="choose_area grid">
               <div class="top flex">
-                <div class="a_country narrow_box mr-40 flex-center pointer narrow_box_choose">
+                <div class="a_area narrow_box mr-40 flex-center pointer narrow_box_choose" d-area="country">
                   <button class="font-15 main-title-color">全国混拨</button>
                 </div>
-                <div class="a_province narrow_box flex-center pointer">
+                <div class="a_area narrow_box flex-center pointer" d-area="province">
                   <button class="font-15 main-title-color">省份混拨</button>
                 </div>
               </div>
-              <div class="isProvince">
+              <div class="isProvince" style="display: none">
                 <div class="bottom flex flex-wrap">
                   <% province && province.forEach(function(item,index) { %>
                     <div class="form-check mr-20 mb-20" d-type="region">
-                      <input class="form-check-input" type="checkbox" value="<%= item.status %>">
-                      <label class="form-check-label pointer">
+                      <input id="<%= item.value %>" class="form-check-input" type="checkbox" value="<%= item.value %>">
+                      <label for="<%= item.value %>" class="form-check-label pointer">
                         <%= item.label %>
                       </label>
                     </div>
@@ -265,15 +265,15 @@
               </div>
             </div>
           </div>
-          <div class="mt-40 grid">
+          <div class="mt-40 grid" >
             <div class="flex align-center ">
               <button class="bl-button create_api_url">
                 <span>生成API链接</span>
               </button>
-              <span class="pointer ml-50">查看API文档</span>
+              <span class="pointer ml-50"><a href="#sm">查看API文档</a></span>
             </div>
-            <div class="input-group apiUrl_input_box mt-40">
-              <input type="text" class="form-control apiUrl_input mr-20" placeholder="点击上方按钮，生成API链接">
+            <div class="input-group apiUrl_input_box mt-40" id="sm">
+              <input type="text" class="form-control apiUrl_input mr-20" placeholder="点击上方按钮，生成API链接" readonly>
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary copy mr-20 bl-button" type="button">
                   <span>复制链接</span>
@@ -347,13 +347,13 @@
                     ip：port自定义分隔符；<br />
                     类型为json格式的响应字段如下：<br />
                     data：[<br />
-                    {<br />
-                    ip：IP<br />
-                    port：端口<br />
-                    expire：有效时间<br />
-                    city：城市<br />
-                    isp：运营商<br />
-                    }<br />
+                        {<br />
+                            ip：IP<br />
+                            port：端口<br />
+                            expire：有效时间<br />
+                            city：城市<br />
+                            isp：运营商<br />
+                        }<br />
                     ]
                   </p>
                 </div>
@@ -386,21 +386,21 @@
               </div>
               <div class="return_right white-line flex-center pb-30">
                 {
-                "code": 200,<br />
-                "data": [<br />
-                {<br />
-                "ip": "121.227.60.236",<br />
-                "port": "20252",<br />
-                "prov": "辽宁",<br />
-                "city": "鞍山"<br />
-                },<br />
-                {<br />
-                "ip": "121.227.60.236",<br />
-                "port": "20252",<br />
-                "prov": "辽宁",<br />
-                "city": "鞍山"<br />
-                },<br />
-                ]<br />
+                    "code": 200,<br />
+                    "data": [<br />
+                        {<br />
+                            "ip": "121.227.60.236",<br />
+                            "port": "20252",<br />
+                            "prov": "辽宁",<br />
+                            "city": "鞍山"<br />
+                        },<br />
+                        {<br />
+                            "ip": "121.227.60.236",<br />
+                            "port": "20252",<br />
+                            "prov": "辽宁",<br />
+                            "city": "鞍山"<br />
+                        },<br />
+                    ]<br />
                 }
               </div>
             </div>
@@ -530,7 +530,7 @@
                 <span class="demo_title mb-15">
                   <%= item.title %>
                 </span>
-                <button type="button" class="download or-button">
+                <button type="button" class="or-button download ">
                   <span>立即下载</span>
                 </button>
               </div>

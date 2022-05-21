@@ -3,23 +3,23 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-21 17:34:10
+ * @LastEditTime: 2022-05-21 20:41:33
  */
 
 //点击定位
-$('.anchor span').on('click', function() {
+$('.anchor span').on('click', function () {
   let currentAnchor = $('.right .head').eq($(this).index()).offset().top
   $('body,html').stop().animate({
-    scrollTop: currentAnchor-120
+    scrollTop: currentAnchor - 120
   })
 })
-$('.demo span').on('click', function() {  //代码demo定位
+$('.demo span').on('click', function () {  //代码demo定位
   let currentDemo = $('.right div').last($(this).index()).offset().top
   $('body,html').stop().animate({
     scrollTop: currentDemo
   })
 })
-  
+
 // //点击IP使用时长
 // $('.ip_use_box .ip_use_item').on('click',function() {
 //   // deal_box,time_box为ip_use_item的子元素  time_text为time_box的子元素  deal_text为deal_box的子元素
@@ -30,37 +30,57 @@ $('.demo span').on('click', function() {  //代码demo定位
 // })
 
 //样式切换
-$('.narrow_box').on('click',function() {
+$('.narrow_box').on('click', function () {
   $(this).toggleClass('narrow_box_choose').siblings().removeClass('narrow_box_choose')
 })
 
 
 
 
-$(function() {
+$(function () {
+  let t = null
+
   //动态改变列表高度
-  const getContentHeight = () => {//获取内容列表每一行的高度
-    let heightList = []
-    $('.note_content .ele').each((index,item)=>{
-      heightList.push($(item).css('height'))
+  function resize(){
+    const getContentHeight = () => {//获取内容列表每一行的高度
+      let heightList = []
+      $('.note_content .ele').each((index, item) => {
+        heightList.push($(item).css('height'))
+      })
+      return heightList
+    }
+    let heightList = getContentHeight()
+    $('.note_desc .ele').each((i, e) => {
+      heightList.map((item, index) => {
+        if (i === index) {  //如果高度数组索引等于dom数组索引才进行高度赋值
+          $(e).css({
+            'height': item
+          })
+        }
+      })
     })
-    return heightList
   }
-  let heightList = getContentHeight()
-  $('.note_desc .ele').each((i,e)=>{
-    heightList.map((item,index) => {
-      if (i === index) {  //如果高度数组索引等于dom数组索引才进行高度赋值
-        $(e).css({
-          'height':item
-        })
-      }
-    })
+
+  //简单防抖，防止改变过快
+  window.addEventListener('resize', function () {
+    if(t) t = null;
+    t = setTimeout(()=>{
+      resize()
+      t = null
+    }, 750)
   })
+
+
+  //初始定时器改变大小
+  setTimeout(()=>{
+    resize()
+  }, 100)
+
 })
 
 
 //未登录点击"选择提取类型"跳转至登录页
-$('.extract_select').on('click',function() {
+$('.extract_select').on('click', function () {
   if (!loginStatus) {
     window.location.pathname = "/login"
   }
@@ -107,20 +127,20 @@ $('.extract_select').on('click',function() {
 $('.isJSON').hide()
 
 //复制链接
-$('.apiUrl_input_box .copy').on('click',function() {
+$('.apiUrl_input_box .copy').on('click', function () {
   let text = $('.apiUrl_input')
   text.select()
   document.execCommand('copy')
 })
 
 //打开链接
-$('.apiUrl_input_box .open').on('click',function() {
+$('.apiUrl_input_box .open').on('click', function () {
   let text = $('.apiUrl_input').val()
   window.location.href = text
 })
 
 //立即下载
-$('.download').on('click',function() {
+$('.download').on('click', function () {
   console.log('下载');
 })
 
@@ -131,24 +151,24 @@ $(function () {
     let body = document.body;
     let height = 0;
 
-    do{
+    do {
       height += bridge.offsetTop;
       bridge = bridge.offsetParent;
     } while (bridge !== body)
-    
+
     console.log(height);
 
     window.scrollTo({
-      top: height-100,
-      behavior:"smooth",
+      top: height - 100,
+      behavior: "smooth",
     })
   }
 
   let href = window.location.href.split('?')
-  if(href.length > 1){
+  if (href.length > 1) {
     let query = href[1].split('&')
-    for(let i of query){
-      if(i.indexOf('a_id') !== -1){
+    for (let i of query) {
+      if (i.indexOf('a_id') !== -1) {
         to(i.split('=')[1])
       }
     }
@@ -177,7 +197,7 @@ let apiParams = {
 
 
 //如果不为余额提取，隐藏数量
-$(function() {
+$(function () {
   let ipUseItem = $('.ip_use_item')
   function changeParams(type, val) {
     apiParams[type] = val
@@ -204,6 +224,7 @@ $(function() {
   }
   function firstRun(e = null) {
     selectTest.find("option:selected").attr('d-val') === '10' ? showS() : hideS()
+    apiParams.secret = selectTest.val()
   }
   selectTest.on('change', firstRun);
   firstRun()
@@ -214,37 +235,32 @@ $(function() {
 
 //动态修改api值
 $(function () {
-  function changeParams (type = null, val = null) {
+  function changeParams(type = null, val = null) {
     console.log(type, val)
-    if(!type){
+    if (!type) {
       return
     }
-    if(['cs', 'ys', 'ts'].includes(type)){
+    if (['cs', 'ys', 'ts'].includes(type)) {
       apiParams[type] = apiParams[type] === val ? null : val
-      return 
+      return
     }
-    if(type === 'region'){
-      if(apiParams.region.includes(val)){
+    if (type === 'region') {
+      if (apiParams.region.includes(val)) {
         let index = apiParams.region.indexOf(val)
         apiParams.region.splice(index, 1, '')
-      }else{
+      } else {
         apiParams.region.push(val)
       }
-      return 
+      return
     }
     apiParams[type] = val
   }
 
-  function addListener() {
-    $('.form-check').on('click', function (e) {
-      if ($(e.target).is("label"))
-        return;
-      changeParams($(this).attr('d-type'), $(this).children('input').val())
-    })
-  }
-  function removeListener() {
-    $('.form-check').off('click')
-  }
+  $('.form-check-input, .form-check-label').on('click', function (e) {
+    if ($(e.target).is("label"))
+      return;
+    changeParams($(this).parent().attr('d-type'), $(this).val())
+  })
 
   $('.narrow_box').on('click', function () {
     $(this).addClass('narrow_box_choose').siblings().removeClass('narrow_box_choose')
@@ -254,59 +270,107 @@ $(function () {
 
 
   //提取数量
-$(function() {
-  let numInput = $('.extract_num_input')
-  const changeIpNum = (val,btn) => {
-    let num = Number(val)
-    if (btn === 'decrement' && val <= 1) {  //点击"-"并且数值为1
-      Helper.$message.warning({
-        message: '单次最小提取量为1',
-        showClose: true
-      })
-      return null
-    } else {
-      if (btn === 'decrement') {
-        num-=5;
-        return num;
-      } else {
-        num+=5;
-        return num;
+  $(function () {
+    let numInput = $('.extract_num_input')
+
+    function changeNum(val) {
+      if (!val || val < 0) {
+        val = 1
+        Helper.$message.warning({
+          message: '单次最小提取量为1',
+          showClose: true
+        })
       }
+      if (val && val > 200) {
+        val = 200
+        Helper.$message.warning({
+          message: '单次最大提取量为200',
+          showClose: true
+        })
+      }
+      if (!/^\d+(\.\d+)?$/.test(val)) {
+        let index = val.match(/^['0','1','2','3','4','5','6','7','8','9']+/g)
+        console.log(val, index);
+        val = index
+        Helper.$message.warning({
+          message: '请输入数字！',
+          showClose: true
+        })
+      }
+      numInput.val(val)
+      apiParams.num = val
+    }
+
+    function btnNum(val, type) {
+      if (type === 'decrement') {
+        changeNum(val - 5)
+      } else {
+        changeNum(val + 5)
+      }
+    }
+
+    numInput.on('input change', function (e) {
+      changeNum(e.target.value)
+    })
+
+    $('.decrement,.increment').on('click', function () {
+      let val = $(this).siblings('.extract_num_input').val() //获取input值
+      let type = $(this).attr('class') //获取当前类名
+      btnNum(Number(val), type)
+    })
+  })
+
+
+  //改变数据格式回调函数更改参数
+  function changeDataTypeCallback(type) {
+    if(type === 'json'){
+      apiParams.lb = null
     }
   }
 
-  numInput.on('input', function (e) {
-    let res = Number(e.target.value) > 200 ? 200 : e.target.value
-    console.log(res);
-    numInput.val(res)
-    apiParams.num = res
-  })
 
-  $('.decrement,.increment').on('click',function() {
-    let currentVal = $(this).siblings('.extract_num_input').val() //获取input值
-    let currentEl = $(this).attr('class') //获取当前类名
-    let newVal = changeIpNum(currentVal,currentEl)
-    if (newVal !== null) {  //判断是否逻辑正确
-      $(this).siblings('.extract_num_input').val(newVal)
-    }
-  })
-})
-
-  
   //数据格式显示
-  $('.d_type_change').on('click',function() {
-    if($(this).attr('val') === 'json'){
-      $('.isJSON').show(0, addListener)
+  $('.d_type_change').on('click', function () {
+    if ($(this).attr('val') === 'json') {
+      $('.isJSON').show(0, changeDataTypeCallback)
       $('.separator_box').hide()
-    }else{
-      $('.isJSON').hide(0, removeListener)
+    } else {
+      $('.isJSON').hide()
       $('.separator_box').show()
     }
   })
 
 
+  //地区改变选择回调
+  function changeAreaCallback() {
+    apiParams.region = []
+  }
+
+  //地区改变监听
+  $('.a_area').on('click', function () {
+    let area = $(this).attr('d-area')
+    if(area === 'country'){
+      $('.isProvince').hide(0, changeAreaCallback)
+    }else if(area === 'province'){
+      $('.isProvince').show()
+    }
+  })
+
 
   $('.create_api_url').on('click', function () {
-    console.log(apiParams);
+    let url = "http://api.tianqiip.com/getip?"
+    for (let i in apiParams) {
+      if (apiParams[i] === null || apiParams[i].length === 0) {
+        continue;
+      }
+      if(i === 'region'){
+        url += `${i}=${apiParams[i].join(',')}&`
+      }else if(i == 'yys'){
+        url += `${i}=${encodeURI(apiParams[i])}&`
+      }else{
+        url += `${i}=${apiParams[i]}&`
+      }
+    }
+    $('.apiUrl_input').val(url.slice(0, -1))
   })
 })
