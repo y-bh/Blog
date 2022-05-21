@@ -55,7 +55,7 @@ export default {
       if(+res.code === 200){
         $message.success('提交成功')
       } else {
-        $message.error(res.msg)
+        $message.error(res.message)
       }
     } 
 

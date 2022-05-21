@@ -34,13 +34,17 @@ router.post("/login", async (ctx) => {
     res = await registerService(params)
   }
 
+  console.log("vvvvvvvvvvvvvvvvvvvvvv", res)
+
   //注册/登录/重置 成功后业务
   if (+res.code === 200) {
-    let token = res.data.token
-    delete res.data.token
-    //设置cookie 值
-    ctx.cookies.set(appKey.token, token)
-    ctx.cookies.set(appKey.userInfo, JSON.stringify(res.data))
+    if (res.data.token) {
+      let token = res.data.token
+      delete res.data.token
+      //设置cookie 值
+      ctx.cookies.set(appKey.token, token)
+      ctx.cookies.set(appKey.userInfo, JSON.stringify(res.data))
+    }
   }
   //return ctx.redirect('/manager');
   ctx.response.body = res

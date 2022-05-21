@@ -1,9 +1,9 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 公共头部导航
  * @Date: 2022-05-09 09:48:25
- * @LastEditTime: 2022-05-20 15:17:34
+ * @LastEditTime: 2022-05-21 19:20:25
 -->
 
 <%# 判断是否登录 %>
@@ -205,25 +205,16 @@
 
                     <!-- 子导航 -->
                     <ul class="child-list flex-center child-vertical">
-                      <li class="child-item">
-                        <div class="title flex-center justify-around">
-                          <span class="meal-icon icon_fifth"></span>
-                          <span class="title-type">操作手册</span>
-                        </div>
-                      </li>
-
-                      <li class="child-item">
-                        <div class="title flex-center justify-around">
-                          <span class="meal-icon icon_sixth"></span>
-                          <span class="title-type">产品介绍</span>
-                        </div>
-                      </li>
-                      <li class="child-item">
-                        <div class="title flex-center justify-around">
-                          <span class="meal-icon icon_seventh"></span>
-                          <span class="title-type">行业资讯</span>
-                        </div>
-                      </li>
+                      <% CATEGORY_TYPES && CATEGORY_TYPES.forEach(function(item) { %>
+                        <li class="child-item">
+                          <div class="title flex-center justify-around">
+                            <span class="meal-icon icon_fifth"></span>
+                            <a class="title-type" href="/help-center/<%= item.typeAlias%>/1.html">
+                              <%= item.type %>
+                            </a>
+                          </div>
+                        </li>
+                        <% }) %>
                     </ul>
                   </li>
 

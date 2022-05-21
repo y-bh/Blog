@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-21 18:02:38
+ * @LastEditTime: 2022-05-21 20:58:28
  */
 
 
@@ -220,11 +220,11 @@ function Router(App) {
 
   //个人中心
   let htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
-  const headerHtml = fs.readFileSync(`${config.templates}/components/header/header.html`, 'utf-8')
+  const headerHtml = fs.readFileSync(`${config.templates}/components/header.html`, 'utf-8')
   const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
     let userInfo = ctx.cookies.get(appKey.userInfo)
-    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo) })
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo),[appKey.cateTypes]:ctx.state[appKey.cateTypes] })
     // const homeData = {
     //   name: '用户',
     //   url: '/',

@@ -142,7 +142,7 @@ export default {
           $message.success('操作成功')
           props.ok()
         } else {
-          $message.error(res.msg)
+          $message.error(res.message)
         }
 
         return 

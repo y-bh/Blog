@@ -1,6 +1,10 @@
 .container {
   max-width: 1400px;
 }
+
+.article-content {
+  min-height: 150px;
+}
 .box {
   // grid-template-columns: minmax(600px, 3fr) 1fr;
   // grid-column-gap: 50px;
@@ -14,6 +18,7 @@
     border-radius: 8px;
     max-width: 990px;
     padding: 40px 60px;
+    flex: 1;
   }
 
   .a_right {
@@ -92,4 +97,8 @@
   display: inline-block;
   max-width: 500px;
   color: #091d43;
+}
+
+.article-title-next {
+  max-width: 150px;
 }

@@ -3,13 +3,13 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-21 14:33:51
+ * @LastEditTime: 2022-05-21 20:03:05
  */
 
 function Helper() { }
 
 //确认操作框信息
-Helper.$confirm = (msg = '确认此操作?', callback, options = {}
+Helper.$confirm = (msg = '确认此操作?', title = '', callback, options = {}
 ) => {
   const config = Object.assign({
     callback, //回调函数处理
@@ -21,37 +21,43 @@ Helper.$confirm = (msg = '确认此操作?', callback, options = {}
   const eventName = +Date.now() + '_$confirm'
   const htmls = `
   <div class="modal" tabindex="-1" id="bootstrap-my-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">${config.title}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ${msg}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">${config.cancelText}</button>
-        <button type="button" class="btn btn-primary" onclick="window.$ok('${eventName}')">${config.okText}</button>
-      </div>
+    <div class="modal-dialog login-out">
+        <div class="modal-content">
+          <div class="dialog-modal-title">
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="title-text">${title || config.title}</div>
+          </div>
+          <div class="modal-body">
+            ${msg}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary bl-button button" data-dismiss="modal">
+              <span>${config.cancelText} </span>
+            </button>
+            <button type="button" class="btn btn-primary or-button button" onclick="window.$ok('${eventName}')">
+              <span>${config.okText}</span>
+            </button>
+          </div>
+        </div>
     </div>
-  </div>
-</div>
+  </div>  
 `
   if (!$("#bootstrap-my-modal").html()) {
     $(htmls).appendTo("body")
   }
   //注册回调
   window[eventName] = callback
-  console.log("注册回调---", window[eventName], callback)
+  
   $('#bootstrap-my-modal').modal('show')
 }
 
 
 window.$ok = function (eventName) {
-  console.log("执行回调函数操作", eventName)
+  
   window[eventName]()
   window[eventName] = null
   $('#bootstrap-my-modal').modal('hide')
@@ -174,7 +180,7 @@ function getCookie (key, json) {
 */
 async function ajax(params) {
   return new Promise(function (resolve, reject) {
-    console.log(params, 'ajax接口参数');
+    
     $.ajax({
       type: params.type ? params.type : 'POST',
       url: '/javaProxy' + params.url,
@@ -183,7 +189,7 @@ async function ajax(params) {
       success: (res) => {
         if (res) {
           if (res) {
-            console.log(res, 'res');
+            
             if (res.code !== 200) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
@@ -200,7 +206,7 @@ async function ajax(params) {
         }
       },
       error: (err) => {
-        console.log("接口请求失败:", err)
+        
         reject(err)
       }
     });
@@ -286,7 +292,7 @@ function mdPhone(phone) {
 
 //防抖函数
 function debounce(fn, delay, once = false) {
-  console.log("经历了防抖")
+
   var timeout = null;
   var count = 0;
   return function (e) {
@@ -352,9 +358,7 @@ function change() {
 
 //退出登录
 function layout() {
-  console.log("退出登录!")
-  Helper.$confirm("确定退出登录?", function () {
-    console.log("我要做的操作")
+  Helper.$confirm("确定退出登录?", '退出', function () {
     $.ajax({
       type: 'POST',
       url: "/api/layout",
@@ -362,10 +366,10 @@ function layout() {
       dataType: 'json',
       contentType: 'application/json',
       success: (res) => {
-        console.log("退出登录结果:", res)
+        
         if (+res.code !== 200) {
           return Helper.$message({
-            message: res.msg || '退出登录失败!',
+            message: res.message || '退出登录失败!',
             type: 'warning'
           })
 
@@ -376,7 +380,7 @@ function layout() {
         return window.open("/login")
       },
       error: (err) => {
-        console.log("接口请求失败:", err)
+        
       }
     });
 
@@ -389,7 +393,7 @@ window.layout = debounce(layout, 300, true)
 
 //初始化效果
 $(function () {
-  console.log(window.location,'window.location');
+  
   // 处理导航激活样式
   let routePath = (window.location.pathname.replace(/\//g,'') || 'index');  // 路径
   if($(`[data-path=${routePath}]`)){
@@ -471,4 +475,3 @@ $(function () {
 })
 
 getCookie('TQ_TOKEN')
-console.log("获取token22:",document.cookie)

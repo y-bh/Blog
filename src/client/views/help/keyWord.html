@@ -29,7 +29,7 @@
 
 <body>
   <%#公共头部  %> 
-  <%- include('../components/header/header.html'); %>
+  <%- include('../components/header.html'); %>
     <div class="banner">
     </div>
     <div class="container grid mt-80 mb-80">
@@ -55,7 +55,7 @@
             <div class="content">
               <div>
                 <% lists.data.forEach(function(i,blog_index) { %>
-                  <a href="/help-details/<%= i.id%>.html" class="article-detail <%if(blog_index>0){%>mt-30<% } %> ">
+                  <a href="/help-details/<%= i.id%>.html" class="article-detail <%if(blog_index>0){%>mt-30<% } %>" title="<%=i.title  %> ">
                     <div class="blog_item flex justify-content-between align-items-center">
                       <div class="left grid">
                         <div class="top text-blue flex justify-content-start align-items-start">
@@ -182,7 +182,7 @@
 
     
  <%#公共底部  %> 
- <%- include('../components/footer/footer.html'); %>
+ <%- include('../components/footer.html'); %>
 </body>
  <%#公共js %> 
 <%- include('../components/js.html'); %>

@@ -80,6 +80,7 @@
     "service": "./src/service",
     "controller": "./src/controller",
     "utils": "./src/utils",
+    "middleware":"./src/middleware",
     "config": "./src/config",
     "client": "./src/client",
     "client_m": "./src/client_m"

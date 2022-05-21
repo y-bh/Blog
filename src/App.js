@@ -16,7 +16,7 @@ const views = require("koa-views");
 const config = require("./config/app.config")
 
 //统一接口响应中间件
-const { routerResponse } = require("utils/parseJson")
+const { routerResponse } = require("middleware/parseJson")
 
 //路由配置文件
 const Router = require("controller/index")
@@ -51,19 +51,19 @@ app.use(koa_static(config.static))
 app.use(bodyParser());
 
 //前端proxy 代理
-app.use(require("utils/proxy")());
+app.use(require("middleware/proxy")());
 
 //统一响应接口
 app.use(routerResponse());
 
 //设置全局数据
-require("utils/global_data")(app)
+require("middleware/global_data")(app)
 
 //路由器
 Router(app);
 
 //处理404
-app.use(require("utils/error_middleware.js")())
+app.use(require("middleware/error_middleware.js")())
 
 
 app.on("error", (err) => {

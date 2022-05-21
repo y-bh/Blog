@@ -17,11 +17,11 @@ const getCateTypes = async () => {
   try {
     //如果缓存有数据
     if (getStore(cateTypes)) {
-      console.log("从缓存获取文章类型")
+      
       articleTypes = getStore(cateTypes)
     } else {
       //获取文章类型
-      console.log("从接口获取文章类型")
+      
       articleTypes = await getArticleTypeDao()
       setStore(cateTypes, articleTypes, {
         maxAge: 1000 * 3600 * 12,
@@ -92,7 +92,7 @@ const getHelpService = async (data, articleTypes = []) => {
       title
     }
   } catch (error) {
-    console.error("getHelpService: ", error);
+    
     return Promise.resolve(
       {
         articleTypes,
@@ -124,7 +124,7 @@ const getArticleDetailService = async (id) => {
       articleKeyWords, prefix, suffix, related, articleDetailVO, keywords
     }
   } catch (error) {
-    console.error('getArticleDetailService:', error)
+    
     return Promise.resolve({
       articleKeyWords, prefix, suffix, related, articleDetailVO
     })
@@ -153,7 +153,7 @@ const postKeywordsService = async (data) => {
       pageNum: data.pageNum || 1,
       keywordAlias: data.keyAlias
     }
-    console.log("传参数:", params)
+    
 
     const { pageRespDTO, recommendArticles, keyWordsVO } = await postKeywordsDao(params)
 
@@ -177,10 +177,10 @@ const postKeywordsService = async (data) => {
       lists.keyWordsVO = keyWordsVO
     }
 
-    console.log("获取关键词聚合页文章列表", lists)
+    
     return lists
   } catch (error) {
-    console.error("postKeywordsService: ", error);
+    
   }
 }
 
