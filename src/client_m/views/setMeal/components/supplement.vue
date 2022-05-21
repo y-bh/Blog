@@ -149,7 +149,7 @@ export default {
                     state.dialogVisible = true
                 } else {
                     message.error({
-                        message: res.msg,
+                        message: res.message,
                         showClose: true
                     }) 
                     state.dialogVisible = false

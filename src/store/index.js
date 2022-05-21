@@ -15,7 +15,7 @@ const cache = new LRU(options);
 
 //设置缓存值
 function setStore(key, value, options = options) {
-  console.log("存取的数据:",key,options)
+  
 
   cache.set(key, value, options)
 }

@@ -543,7 +543,7 @@
                 success: (res) => {
                     if (res && res.code !== 200) {
                         return Helper.$message({
-                            message: res.msg || '注册失败!请联系客服',
+                            message: res.message || '注册失败!请联系客服',
                             type: 'warning'
                         })
                     }

@@ -94,7 +94,7 @@ export default {
       if (+res.code === 200) {
         state.giftList = res.data
       } else {
-        $message.error(res.msg);
+        $message.error(res.message);
       }
     }
 

@@ -3,11 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
-<<<<<<< HEAD
  * @LastEditTime: 2022-05-20 17:36:56
-=======
- * @LastEditTime: 2022-05-21 14:31:58
->>>>>>> 899d0bf22665bb9e42689a01beb6fa5681d68d94
  */
 
 import axios from 'axios';
@@ -35,7 +31,7 @@ class Request {
 
     // 响应拦截器
     service.interceptors.response.use(response => {
-      console.log(response,'message******message');
+      
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
@@ -45,20 +41,21 @@ class Request {
             data: data.data
           };
         } else {
-          message.error({
-            message: data.msg || data.message || '接口异常',
-            showClose: true
-          })
+          console.log("ccccccccc",data, data.message)
+          // message.error({
+          //   message: data.msg || data.message || '接口异常',
+          //   showClose: true
+          // })
           return {
             code: -1,
-            msg: data.msg || data.message || '接口异常'
+            message:  data.message || '接口异常'
           };
         }
       }
       return response && response.data || response;
     },
       error => {
-        console.error("响应报错:", error)
+        
       });
 
     this.service = service
@@ -73,6 +70,7 @@ class Request {
    * @returns {Promise}
    */
   proxyAxios(url, method, data,headers) {
+    
     try {
       return this.service({
         url,

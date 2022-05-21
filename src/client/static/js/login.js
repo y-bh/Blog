@@ -213,6 +213,7 @@ async function loginSubmit(type) {
 let timer = null //验证码定时器
 let count = 60 //定时时间
 async function sendCode(type = 'register') {
+  console.log("验证码类型:", type)
   //1. 获取表单
   const form = document.forms['login']
 
@@ -221,6 +222,7 @@ async function sendCode(type = 'register') {
     phone: form.phone.value.trim() || '', //电话号码
   }
 
+  console.log("验证码类型参数:", params)
   //3.校验
   if (!params.phone) {
     return Helper.$message({
@@ -248,7 +250,9 @@ async function sendCode(type = 'register') {
 
   const res = await ajax({
     url,
-    query: params.phone
+    query:JSON.stringify({
+      data: params.phone
+    })
   })
 
 
@@ -275,7 +279,25 @@ async function sendCode(type = 'register') {
     })
   }
 }
-console.log(debounce,'debounce');
+//防抖函数
+function debounce(fn, delay, once = false) {
+  console.log("经历了防抖")
+  var timeout = null;
+  var count = 0;
+  return function (e) {
+    if (once && count === 0) {
+
+      fn.apply(this, arguments);
+      count++
+      return
+    }
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fn.apply(this, arguments);
+      once && count++
+    }, delay);
+  };
+}
 window.sendCode = debounce(sendCode, 300, true)
 window.loginSubmit = debounce(loginSubmit, 300, true)
 

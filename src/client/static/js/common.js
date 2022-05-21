@@ -45,13 +45,13 @@ Helper.$confirm = (msg = '确认此操作?', callback, options = {}
   }
   //注册回调
   window[eventName] = callback
-  console.log("注册回调---", window[eventName], callback)
+  
   $('#bootstrap-my-modal').modal('show')
 }
 
 
 window.$ok = function (eventName) {
-  console.log("执行回调函数操作", eventName)
+  
   window[eventName]()
   window[eventName] = null
   $('#bootstrap-my-modal').modal('hide')
@@ -174,7 +174,7 @@ function getCookie (key, json) {
 */
 async function ajax(params) {
   return new Promise(function (resolve, reject) {
-    console.log(params, 'ajax接口参数');
+    
     $.ajax({
       type: params.type ? params.type : 'POST',
       url: '/javaProxy' + params.url,
@@ -183,7 +183,7 @@ async function ajax(params) {
       success: (res) => {
         if (res) {
           if (res) {
-            console.log(res, 'res');
+            
             if (res.code !== 200) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
@@ -200,7 +200,7 @@ async function ajax(params) {
         }
       },
       error: (err) => {
-        console.log("接口请求失败:", err)
+        
         reject(err)
       }
     });
@@ -286,7 +286,7 @@ function mdPhone(phone) {
 
 //防抖函数
 function debounce(fn, delay, once = false) {
-  console.log("经历了防抖")
+
   var timeout = null;
   var count = 0;
   return function (e) {
@@ -352,9 +352,9 @@ function change() {
 
 //退出登录
 function layout() {
-  console.log("退出登录!")
+  
   Helper.$confirm("确定退出登录?", function () {
-    console.log("我要做的操作")
+    
     $.ajax({
       type: 'POST',
       url: "/api/layout",
@@ -362,10 +362,10 @@ function layout() {
       dataType: 'json',
       contentType: 'application/json',
       success: (res) => {
-        console.log("退出登录结果:", res)
+        
         if (+res.code !== 200) {
           return Helper.$message({
-            message: res.msg || '退出登录失败!',
+            message: res.message || '退出登录失败!',
             type: 'warning'
           })
 
@@ -376,7 +376,7 @@ function layout() {
         return window.open("/login")
       },
       error: (err) => {
-        console.log("接口请求失败:", err)
+        
       }
     });
 
@@ -389,7 +389,7 @@ window.layout = debounce(layout, 300, true)
 
 //初始化效果
 $(function () {
-  console.log(window.location,'window.location');
+  
   // 处理导航激活样式
   let routePath = (window.location.pathname.replace(/\//g,'') || 'index');  // 路径
   if($(`[data-path=${routePath}]`)){
@@ -471,4 +471,3 @@ $(function () {
 })
 
 getCookie('TQ_TOKEN')
-console.log("获取token22:",document.cookie)
