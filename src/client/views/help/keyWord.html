@@ -55,7 +55,7 @@
             <div class="content">
               <div>
                 <% lists.data.forEach(function(i,blog_index) { %>
-                  <a href="/help-details/<%= i.id%>.html" class="article-detail <%if(blog_index>0){%>mt-30<% } %> ">
+                  <a href="/help-details/<%= i.id%>.html" class="article-detail <%if(blog_index>0){%>mt-30<% } %>" title="<%=i.title  %> ">
                     <div class="blog_item flex justify-content-between align-items-center">
                       <div class="left grid">
                         <div class="top text-blue flex justify-content-start align-items-start">

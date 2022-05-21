@@ -14,6 +14,7 @@
     border-radius: 8px;
     max-width: 990px;
     padding: 40px 60px;
+    flex: 1;
   }
 
   .a_right {
@@ -92,4 +93,8 @@
   display: inline-block;
   max-width: 500px;
   color: #091d43;
+}
+
+.article-title-next {
+  max-width: 150px;
 }

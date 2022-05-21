@@ -78,9 +78,9 @@
           <!-- 上一篇/下一篇-->
           <div class="btn flex justify-between mt-30">
             <% if(prefix && prefix.title){%>
-              <div class="btn_left">
+              <div class="flex align-items-center">
                 <a class="text-blue" href="/help-details/<%= prefix.id%>.html">上一篇: </a>
-                <a class="last_title text-blue" href="/help-details/<%= prefix.id%>.html" title="<%=prefix.title%>">
+                <a class="text-blue text-ellipsis d-inline-block article-title-next ml-10" href="/help-details/<%= prefix.id%>.html" title="<%=prefix.title%>">
                   <%=prefix.title %>
                 </a>
               </div>
@@ -88,9 +88,9 @@
 
 
                 <% if(suffix && suffix.title){%>
-                  <div class="btn_right">
-                    <a class="text-blue" href="/help-details/<%= suffix.id%>.html">下一篇: </a>
-                    <a class="next_title text-blue" href="/help-details/<%= suffix.id%>.html" title="<%=suffix.title%>">
+                  <div class="flex align-items-center">
+                    <a class="text-blue mr-10" href="/help-details/<%= suffix.id%>.html">下一篇: </a>
+                    <a class="text-blue text-ellipsis d-inline-block article-title-next" href="/help-details/<%= suffix.id%>.html" title="<%=suffix.title%>">
                       <%=suffix.title %>
                     </a>
                   </div>
