@@ -27,13 +27,16 @@ module.exports = function (app) {
 
     const isPass = changeURL.some((item) => url.includes(item))
 
+    console.log("vvvvvvvvvvvvvvvvvvvvvv",isPass)
     if (method === 'GET' && (URLS.includes(url) || isPass)) {
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
+      console.log("2222222222222222",tabActivity)
       state[appKey.active_tab] = tabActivity
 
       //顶部导航-帮助中心栏目文档
       const articleTypes = await getCateTypes()
+      console.log("33333333333",articleTypes)
       state[appKey.cateTypes] = articleTypes
 
       //登录用户名

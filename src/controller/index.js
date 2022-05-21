@@ -224,7 +224,7 @@ function Router(App) {
   const re = /(?<=\<body\>)/
   router.get(["/manager", "/manager/:path"], async (ctx) => {
     let userInfo = ctx.cookies.get(appKey.userInfo)
-    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo) })
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo),[appKey.cateTypes]:ctx.state[appKey.cateTypes] })
     // const homeData = {
     //   name: '用户',
     //   url: '/',
