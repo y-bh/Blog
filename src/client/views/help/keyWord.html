@@ -22,11 +22,13 @@
           关键词聚合页
           <% } %>
   </title>
+  <%#公共css  %> 
   <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/helpCenter.css">
 </head>
 
 <body>
+  <%#公共头部  %> 
   <%- include('../components/header/header.html'); %>
     <div class="banner">
     </div>
@@ -73,7 +75,7 @@
                           </h3>
                           <span class="go_detail pointer text-right">查看详情>></span>
                         </div>
-                        <p class="desc">
+                        <p class="desc mt-20">
                           <%= i.desc %>
                         </p>
                       </div>
@@ -115,11 +117,15 @@
 
                   </ul>
                 </nav>
+
+                <% if(lists && lists.pageNum>1) {%>
                 <div class="goto flex justify-content-center align-items-center ml-30">
                   前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number"
                     onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')"
                     id="pageInput">&nbsp;&nbsp;页
                 </div>
+                <% } %>
+
               </div>
             </div>
 
@@ -172,7 +178,13 @@
         </div>
       </div>
     </div>
+
+
+    
+ <%#公共底部  %> 
+ <%- include('../components/footer/footer.html'); %>
 </body>
+ <%#公共js %> 
 <%- include('../components/js.html'); %>
   <script src="/js/tag.js"></script>
 </html>
