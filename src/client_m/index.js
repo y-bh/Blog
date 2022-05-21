@@ -41,12 +41,7 @@ injectState(app);
 //注入ajax 服务
 app.config.globalProperties.$service = service;
 app.provide('$service', service)
-// app.config.globalProperties.$post = service.post;
-// app.provide('$post', post)
-// app.config.globalProperties.$del = service.del;
-// app.provide('$put', del)
-// app.config.globalProperties.$put = service.put;
-// app.provide('$del', put)
+
 
 //注入正则表达式管理
 app.config.globalProperties.$re = re;
