@@ -13,6 +13,7 @@ function getParams(type = 'login') {
   //1. 获取表单
   const form = document.forms['login']
 
+  console.log("获取参数:", form)
   //2. 公共的参数
   let obj = {
     phone: form.phone.value.trim() || '', //电话号码
@@ -39,9 +40,9 @@ function getParams(type = 'login') {
 }
 
 //是否同意注册协议
-function agreeOn(){
-  agreeMent =!agreeMent
-   console.log("嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻",agreeMent)
+function agreeOn() {
+  agreeMent = !agreeMent
+  console.log("嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻", agreeMent)
 }
 
 //校验相关参数
@@ -55,7 +56,7 @@ function checkForm(params = null, type = 'login') {
   if (!params) {
     return
   }
-
+  console.log("校验的参数:", params)
   const res = {
     isPass: true,
     msg: ''
@@ -129,7 +130,7 @@ function checkForm(params = null, type = 'login') {
       res.msg = '请确认登录密码!'
       return res
     }
-    if (rules.pwd !== params.cpwd) {
+    if (params.pwd !== params.cpwd) {
       res.isPass = false
       res.msg = '登录密码与确认密码不一致!'
       return res
@@ -183,8 +184,21 @@ async function loginSubmit(type) {
     message: res.msg, type: 'warning'
   })
 
+
+  let text = '登录'
+  switch (type) {
+    case 'reset':
+      text = '重置'
+      break;
+    case 'register':
+      text = '注册'
+      break
+    default:
+      text = '登录'
+  }
+
   params.type = type
-  console.log("params:",params)
+  console.log("params:", params)
   $.ajax({
     type: 'POST',
     url: "/api/login",
@@ -195,13 +209,17 @@ async function loginSubmit(type) {
 
       if (res && res.code !== 200) {
         return Helper.$message({
-          message: res.msg || '注册失败!请联系客服',
+          message: res.message || `${text}失败请联系客服`,
           type: 'warning'
         })
 
       }
 
-      window.open("/manager/user")
+      if (type === 'reset') {
+        window.open("/login")
+      } else {
+        window.open("/manager/user")
+      }
     },
     error: (err) => {
       console.log(err)
@@ -250,7 +268,7 @@ async function sendCode(type = 'register') {
 
   const res = await ajax({
     url,
-    query:JSON.stringify({
+    query: JSON.stringify({
       data: params.phone
     })
   })
@@ -318,18 +336,18 @@ document.onkeydown = function (e) {
 
 
 //测试接口代理
-$(async function(){
+$(async function () {
 
   let params = {
     url: "/article/getArticleType",
     type: 'get',
     query: null
-};
+  };
 
 
 
-let resp = await ajax(params);
-console.log("接口响应:",resp)
+  let resp = await ajax(params);
+  console.log("接口响应:", resp)
 
 
 
