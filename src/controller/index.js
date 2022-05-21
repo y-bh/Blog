@@ -96,7 +96,7 @@ function Router(App) {
     let staticData = await data()
     let province = await getProxyCityService()
     let menu = await getProxyMenuService()
-    
+
 
     let getIpData = {
       staticData,
@@ -169,7 +169,7 @@ function Router(App) {
     }
     let { articleKeyWords, prefix, suffix, related, articleDetailVO, keywords } = await getArticleDetailService(id)
 
-    
+
     //各栏目推荐文章 以及当前栏目id下的信息
     let { typeList: tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
     return ctx.render("help/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
@@ -188,12 +188,19 @@ function Router(App) {
 
   //用户总页面-login-index
   router.get(["/login", "/reset", "/register"], async (ctx) => {
-    /**数据请求 */
+    let { url ,query} = ctx.request
 
-    let pageType = ctx.req.url.slice(1)
+    //处理掉查询串情况
+    if (query && url.includes('?')) {
+      url = (url.split("?"))[0]
+    }
 
+    //处理掉hash 情况
+    if (url.includes('#')) {
+      url = (url.split("#"))[0]
+    }
 
-
+    let pageType = url.slice(1)
     let title = "登录页-天启HTTP"
     if (pageType === 'reset') {
       title = "重置密码-天启HTTP"
@@ -238,7 +245,7 @@ function Router(App) {
     //友情链接
     let links = ctx.state.links
 
-    
+
     //公共头部
     var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo), [appKey.cateTypes]: ctx.state[appKey.cateTypes] })
 
@@ -247,14 +254,14 @@ function Router(App) {
 
     var footer = ejs.render(footerHtml, { links })
 
-   // 
-    
+    // 
+
     //放置公共头部
     let res = htmls.replace(re, headers)
     //放置公共底部
-   // res = htmls.replace(footRe, footer)
-   let mm = res.replace(footRe, footer)
-  
+    // res = htmls.replace(footRe, footer)
+    let mm = res.replace(footRe, footer)
+
     ctx.response.body = mm
   })
 

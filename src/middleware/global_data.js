@@ -23,26 +23,36 @@ const changeURL = ['tags', 'manager', 'help-details', 'help-center', 'businessSc
 
 module.exports = function (app) {
   app.use(async ({ req, res, state, cookies }, next) => {
-    const { method, url } = req
+    let { method, url } = req
+    //处理掉带查询传情况
+    if (url.includes('?')) {
+      url = (url.split("?"))[0]
+    }
+
+    //处理掉hash 情况
+    if (url.includes('#')) {
+      url = (url.split("#"))[0]
+    }
 
     const isPass = changeURL.some((item) => url.includes(item))
 
-    console.log("vvvvvvvvvvvvvvvvvvvvvv",isPass)
+    console.log("ccccccccccccccccc",url)
+
     if (method === 'GET' && (URLS.includes(url) || isPass)) {
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
-      console.log("2222222222222222",tabActivity)
+
       state[appKey.active_tab] = tabActivity
 
       //顶部导航-帮助中心栏目文档
       const articleTypes = await getCateTypes()
-      console.log("33333333333",articleTypes)
+
       state[appKey.cateTypes] = articleTypes
 
       //登录用户名
       let userInfo = cookies.get(appKey.userInfo)
       state.userInfo = userInfo && JSON.parse(userInfo)
-      
+
       //友情链接
       state.links = await getQueryLink()
     }

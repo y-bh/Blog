@@ -7,9 +7,38 @@
  */
 
 
+/**************
+ * 
+ * 
+ * 暴露字段:
+ * from: 注册来源
+ * back: 登录后返回页面，没有则返回个人中心
+ * did: 注册短链
+ * 
+ *
+ */
+
+
+//获取 query 相关参数
+const query = getParams()
+
+//登录后返回的地址
+let back = null
+
+if(query && query.back){
+  back = query.back
+}
+
+
+console.log("query:",query)
+
+
+
+
+
 // 获取相关参数
 let agreeMent = false
-function getParams(type = 'login') {
+function getFuncParams(type = 'login') {
   //1. 获取表单
   const form = document.forms['login']
 
@@ -176,7 +205,7 @@ function checkForm(params = null, type = 'login') {
 //登录/注册/重置密码
 async function loginSubmit(type) {
   //获取参数
-  const params = getParams(type)
+  const params = getFuncParams(type)
 
   //校验参数
   const res = checkForm(params, type)
@@ -218,6 +247,12 @@ async function loginSubmit(type) {
       if (type === 'reset') {
         window.open("/login")
       } else {
+        //back
+        if(type === 'login' && back){
+          location.href="/"+back
+          return
+        }
+
         window.open("/manager/user")
       }
     },
