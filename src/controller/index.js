@@ -97,7 +97,7 @@ function Router(App) {
     let province = await getProxyCityService()
     let menu = await getProxyMenuService()
     console.log(province);
-    
+
     let getIpData = {
       staticData,
       province,
@@ -221,19 +221,46 @@ function Router(App) {
   //个人中心
   let htmls = fs.readFileSync(`${config.templates}/manager.html`, 'utf-8')
   const headerHtml = fs.readFileSync(`${config.templates}/components/header.html`, 'utf-8')
+  const footerHtml = fs.readFileSync(`${config.templates}/components/footer.html`, 'utf-8')
+
+  //放置公共头部正则
   const re = /(?<=\<body\>)/
+
+  //放置公共底部正则
+  const footRe = /(?=\<\/body\>)/
+
+
   router.get(["/manager", "/manager/:path"], async (ctx) => {
+
+    //用户信息
     let userInfo = ctx.cookies.get(appKey.userInfo)
-    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo),[appKey.cateTypes]:ctx.state[appKey.cateTypes] })
-    // const homeData = {
-    //   name: '用户',
-    //   url: '/',
-    //   link: [],
-    //   HEADER_ACTIVE_TAB:"2222"
-    // }
-    // var headers = ejs.render(headerHtml, homeData)
+
+    //友情链接
+    let links = ctx.state.links
+
+    console.log("xxxxxxxxxxxxxxxxxxxx",links)
+    //公共头部
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo), [appKey.cateTypes]: ctx.state[appKey.cateTypes] })
+
+
+    //公共底部
+
+    var footer = ejs.render(footerHtml, { links })
+
+   // console.log("公共底部字符串:",footer)
+    
+    //放置公共头部
     let res = htmls.replace(re, headers)
-    ctx.response.body = res
+
+    //放置公共底部
+   // res = htmls.replace(footRe, footer)
+
+  
+   let mm = res.replace(footRe, footer)
+    console.log("qqqqqqqqqqqqqqq:",res)
+    console.log("llllllllllllllllllllllllll:",mm)
+
+    ctx.response.body = mm
   })
 
 

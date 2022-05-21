@@ -20,9 +20,6 @@ import App from './index.vue';
 /** **************全局css管理 */
 import "element-plus/packages/theme-chalk/lib/index";
 import 'assets/css/elementUi.reset.scss';
-import 'assets/css/public.scss';
-import 'assets/css/iconfont.scss'
-
 import * as re from 'config/re.config';
 
 const app = createApp(App);

@@ -7,14 +7,12 @@
 -->
 <template>
   <div class="layout">
-    <Header ref="headerRef"></Header>
-    <main class="layout-main" :style="{ 'min-height': defaultHeight + 'px' }">
+    <main class="layout-main">
       <SideBar></SideBar>
       <div class="main-right">
         <router-view />
       </div>
     </main>
-    <Footer></Footer>
   </div>
 </template>
 
@@ -40,34 +38,31 @@ export default {
   },
   props: {},
   setup() {
-    let defaultHeight = ref(800);
-    const headerRef = ref(null);
-    const getMainHeight = () => {
-      //浏览器可视区域高度
-      //Internet Explorer、Chrome、Firefox、Opera 以及 Safari === window.innerHeight - 浏览器窗口的可见高度
-      //Internet Explorer 8、7、6、5：document.documentElement.clientHeight
-      let height =
-        window.innerHeight ||
-        document.documentElement.clientHeight ||
-        document.body.clientHeight;
-      //console.log("窗口的高度-----", height);
-      let headerH = headerRef.value.$el.clientHeight;
-      defaultHeight.value = height - headerH - 100;
-    };
+    // let defaultHeight = ref(800);
+    // const headerRef = ref(null);
+    // const getMainHeight = () => {
+    //   let height =
+    //     window.innerHeight ||
+    //     document.documentElement.clientHeight ||
+    //     document.body.clientHeight;
+    //   //console.log("窗口的高度-----", height);
+    //   let headerH = headerRef.value.$el.clientHeight;
+    //   defaultHeight.value = height - headerH - 100;
+    // };
 
-    onBeforeMount(() => {});
-    onMounted(() => {
-      //console.log(222222, headerRef.value);
-      getMainHeight();
-      window.addEventListener("resize", getMainHeight, false);
-    });
-    onBeforeUnmount(() => {
-      window.removeEventListener("resize", getMainHeight);
-    });
-    return {
-      defaultHeight,
-      headerRef,
-    };
+    // onBeforeMount(() => {});
+    // onMounted(() => {
+    //   //console.log(222222, headerRef.value);
+    //   getMainHeight();
+    //   window.addEventListener("resize", getMainHeight, false);
+    // });
+    // onBeforeUnmount(() => {
+    //   window.removeEventListener("resize", getMainHeight);
+    // });
+    // return {
+    //   defaultHeight,
+    //   headerRef,
+    // };
   },
 };
 </script>
@@ -78,7 +73,7 @@ export default {
     display: flex;
     max-width: 1400px;
     margin: 110px auto 40px;
-    min-height: 700px;
+    // min-height: 700px;
 
     .sideBar {
       width: 180px;
