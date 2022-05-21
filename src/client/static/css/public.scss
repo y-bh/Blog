@@ -461,6 +461,10 @@ body {
   color: #091d43;
 }
 
+.text-gray {
+  color: #4c5664;
+}
+
 .text-blue {
   color: #1968fc;
 }
@@ -755,7 +759,7 @@ input::-webkit-input-placeholder {
 }
 
 a:hover {
-  color: #0056b3;
+  color: #1968fc;
   text-decoration: none !important;
 }
 
@@ -1239,6 +1243,7 @@ a:hover {
       width: auto;
       text-align: center;
       transition: all 0.4s;
+
       a {
         color: initial;
         text-decoration: none;
