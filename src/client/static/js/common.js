@@ -3,13 +3,13 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-21 14:33:51
+ * @LastEditTime: 2022-05-21 20:03:05
  */
 
 function Helper() { }
 
 //确认操作框信息
-Helper.$confirm = (msg = '确认此操作?', callback, options = {}
+Helper.$confirm = (msg = '确认此操作?', title = '', callback, options = {}
 ) => {
   const config = Object.assign({
     callback, //回调函数处理
@@ -21,24 +21,30 @@ Helper.$confirm = (msg = '确认此操作?', callback, options = {}
   const eventName = +Date.now() + '_$confirm'
   const htmls = `
   <div class="modal" tabindex="-1" id="bootstrap-my-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">${config.title}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ${msg}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">${config.cancelText}</button>
-        <button type="button" class="btn btn-primary" onclick="window.$ok('${eventName}')">${config.okText}</button>
-      </div>
+    <div class="modal-dialog login-out">
+        <div class="modal-content">
+          <div class="dialog-modal-title">
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="bg"></div>
+            <div class="title-text">${title || config.title}</div>
+          </div>
+          <div class="modal-body">
+            ${msg}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary bl-button button" data-dismiss="modal">
+              <span>${config.cancelText} </span>
+            </button>
+            <button type="button" class="btn btn-primary or-button button" onclick="window.$ok('${eventName}')">
+              <span>${config.okText}</span>
+            </button>
+          </div>
+        </div>
     </div>
-  </div>
-</div>
+  </div>  
 `
   if (!$("#bootstrap-my-modal").html()) {
     $(htmls).appendTo("body")
@@ -352,9 +358,7 @@ function change() {
 
 //退出登录
 function layout() {
-  
-  Helper.$confirm("确定退出登录?", function () {
-    
+  Helper.$confirm("确定退出登录?", '退出', function () {
     $.ajax({
       type: 'POST',
       url: "/api/layout",

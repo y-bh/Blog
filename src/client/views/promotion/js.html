@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-21 17:58:40
+ * @LastEditTime: 2022-05-21 20:12:48
 -->
 <script>
     //获取location 地址栏query查询参数
@@ -380,14 +380,18 @@
             let btn = $('#getCode');
             //点击按钮就将其置为不可点击，等倒计时结束将其置为可点击
             btn.attr('disabled', true);
+
+            const phoneData = {
+                data: $('#phoneNumber').val().trim()
+            }
+
             let params = {
                 url: "/auth/registerCode",
                 type: 'post',
-                query: $('#phoneNumber').val().trim()
+                query: JSON.stringify(phoneData)
             };
-            console.log(params, 'params');
 
-            let resp = await ajax(params, 'text/plain');
+            let resp = await ajax(params);
             if (!resp) {
                 btn.attr('disabled', false);
                 return;
@@ -425,11 +429,18 @@
             let btn = $('#getCode2');
             //点击按钮就将其置为不可点击，等倒计时结束将其置为可点击
             btn.attr('disabled', true);
+
+
+            const phoneData = {
+                data: $('#phoneNumber2').val().trim()
+            }
+
             let params = {
                 url: "/auth/registerCode",
                 type: 'post',
-                query: $('#phoneNumber2').val().trim()
+                query: JSON.stringify(phoneData)
             };
+
             let resp = await ajax(params);
             if (resp === false) {
                 btn.attr('disabled', false);
@@ -464,11 +475,17 @@
             let btn = $('#getCode3');
             //点击按钮就将其置为不可点击，等倒计时结束将其置为可点击
             btn.attr('disabled', true);
+
+            const phoneData = {
+                data: $('#phoneNumber3').val().trim()
+            }
+
             let params = {
                 url: "/auth/registerCode",
                 type: 'post',
-                query: $('#phoneNumber3').val().trim()
+                query: JSON.stringify(phoneData)
             };
+
             let resp = await ajax(params);
             if (resp === false) {
                 btn.attr('disabled', false);
@@ -516,7 +533,7 @@
             }
 
             const formData = {
-                userName: userName,
+                username: userName,
                 pwd: password,
                 phone: phone,
                 code: code,
@@ -524,7 +541,6 @@
                 did: did,
                 keyword: keyword,
                 readProtocol: 1,   // 推广页默认阅读协议
-                agreeMent: true,
                 fingerPrint: localStorage.getItem("fingerPrint"),
                 type: 'register'
             }
@@ -534,40 +550,20 @@
                 query: JSON.stringify(formData)
             };
 
-            $.ajax({
-                type: 'POST',
-                url: "/api/login",
-                data: JSON.stringify(formData),
-                dataType: 'json',
-                contentType: 'application/json',
-                success: (res) => {
-                    if (res && res.code !== 200) {
-                        return Helper.$message({
-                            message: res.message || '注册失败!请联系客服',
-                            type: 'warning'
-                        })
-                    }
-                },
-                error: (err) => {
-                    console.log(err)
-                }
-            });
-
-            // console.log(params, 'params===');
-            // let resp = await ajax(params);
-            // if (!resp || resp.code !== 200) {
-            //     return false;
-            // } else {
-            //     Helper.$message.success({
-            //         message: '注册成功',
-            //         showClose: true
-            //     })
-            //     let hasIframe = document.getElementsByTagName('body')[0];
-            //     $('#userName').val('');
-            //     $('#phoneNumber').val('');
-            //     $('#phoneCode').val('');
-            //     $('#password').val('');
-            // }
+            let resp = await ajax(params);
+            if (!resp || resp.code !== 200) {
+                return false;
+            } else {
+                Helper.$message.success({
+                    message: '注册成功',
+                    showClose: true
+                })
+                let hasIframe = document.getElementsByTagName('body')[0];
+                $('#userName').val('');
+                $('#phoneNumber').val('');
+                $('#phoneCode').val('');
+                $('#password').val('');
+            }
         })
 
         $('#register2').click(async function () {
