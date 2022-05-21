@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 补量
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-20 14:02:43
+ * @LastEditTime: 2022-05-21 15:00:29
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -75,14 +75,15 @@
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt } from "tools/utility"
-import { getPrice } from "model/meal.js";
+import { getPrice, supplementPay } from "model/meal.js";
 export default {
-    emits: ['query'],
+    emits: ['createCode'],
     components: {
         DialogTitle,
     },
     setup (props, context) {
         const message = inject('message');
+        const formRef = ref(null);
         const checkIp = (rule, value, callback) => {
             if (value) {
                 if (value % 1000 !== 0) {
@@ -178,17 +179,60 @@ export default {
             },
             submitForm () {
                 const reqData = {
-                    proxyId: state.renewForm.proxyId,
+                    proxyId: state.mealData.mealId,
                     payType: 1,
-                    mealId: state.renewForm.timeMealId,
-                    redRecordId: state.renewForm.redRecordId || null
+                    total: state.mealData.form.number
                 }
+
+                formRef.value.validate(async (valid) => {
+                    if(valid){
+                        if(state.mealData.payType === 'ali'){
+                            reqData.payType = 1;
+                            let params = {
+                                url: "/payOrder/addTimes",
+                                type: 'post',
+                                query: JSON.stringify(reqData)
+                            }
+                            window.open("/payCenter?params=" + JSON.stringify(params));
+                            return
+                        } else {
+                            reqData.payType = 2;
+                            let res = await supplementPay(reqData);
+                            if(res && res.code === 200){
+                                // 支付成功调取二维码弹窗
+                                if(res.data && res.data.payUrl){
+                                    const codeParams = {
+                                        orderId: res.data.orderId,
+                                        url: res.data.payUrl
+                                    }
+                                    state.dialogVisible = false;
+                                    ctx.emit('createCode', codeParams);
+                                    state.dialogVisible = false
+                                } else {
+                                    message.error({
+                                        message: '二维码获取失败',
+                                        showClose: true
+                                    })
+                                }
+                                
+                            } else {
+                                message.error({
+                                    message: '二维码获取失败',
+                                    showClose: true
+                                })
+                            }
+                        }
+                    }
+                    
+                })
+                
             }
         }
 
         return {
             ...methods,
             ...toRefs(state),
+            formRef,
             formatInt
         }
     }

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-21 11:30:04
+ * @LastEditTime: 2022-05-21 15:06:12
 -->
 <template>
   <div class="container">
@@ -207,8 +207,8 @@
     </div>
     <reset-password ref="passwordRef"></reset-password>
     <renewal ref="renewalRef" @createCode="createCode($event)"></renewal>
-    <supplement ref="supplementRef"></supplement>
-    <modify ref="modifyRef"></modify>
+    <supplement ref="supplementRef" @createCode="createCode($event)"></supplement>
+    <modify ref="modifyRef" @createCode="createCode($event)"></modify>
     <merge ref="mergeRef"></merge>
     <pay-code ref="codeRef" @updateMeal="updateMeal($event)"></pay-code>
   </div>
@@ -375,7 +375,7 @@ export default {
           
         } else if (command === 'merge') {
           console.log('合并套餐');
-          mergeRef.value.onOpen(1)
+          mergeRef.value.onOpen(row)
         } else if (command === 'extract') {
           console.log('api提取跳转');
         } else if (command === 'changeLog') {
