@@ -39,6 +39,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
+    "auto-px2rem-loader": "^0.0.9",
     "babel-loader": "^8.2.5",
     "babel-plugin-import": "^1.13.5",
     "babel-polyfill": "^6.26.0",
@@ -80,7 +81,7 @@
     "service": "./src/service",
     "controller": "./src/controller",
     "utils": "./src/utils",
-    "middleware":"./src/middleware",
+    "middleware": "./src/middleware",
     "config": "./src/config",
     "client": "./src/client",
     "client_m": "./src/client_m"

@@ -46,6 +46,12 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           { loader: 'css-loader' },
+          {
+            loader: 'auto-px2rem-loader',
+            options: {
+              remUnit: 16
+            }
+          },
           { loader: 'sass-loader' },
           {
             loader: 'sass-resources-loader',
