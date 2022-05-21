@@ -6,9 +6,16 @@
  * @LastEditTime: 2022-05-17 13:34:28
  */
 
-const path = location.pathname
+let path = location.pathname
+
+
+let tems = (path.split("/")).filter((item)=>item)
 $('.nav .nav-item .nav-link').each((index, item) => {
   let id = $(item).attr("id")
+  if(tems.length<=1 && index ==0){
+    path = id
+  }
+  
   if (path.includes(id)) {
     $('.nav .nav-item .nav-link').get(index).click();
   }

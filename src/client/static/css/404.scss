@@ -1,0 +1,24 @@
+//404页
+.error {
+  width: 100vw;
+  height: 100vh;
+  background: url("/images/tq404.jpg") no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    font-size: 26px;
+    margin-top: 240px;
+  }
+  p {
+    margin-top: 30px;
+    font-size: 20px;
+  }
+  .ml-10 {
+    margin-left: 10px;
+  }
+  .mt-30 {
+    margin-top: 30px;
+  }
+}
