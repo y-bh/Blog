@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-22 12:46:34
+ * @LastEditTime: 2022-05-22 16:55:57
 -->
 <template>
   <div class="companyAuth">
@@ -140,7 +140,7 @@
           <span>授权支付宝安全认证，平台不会泄露您的认证信息</span>
         </div>
         <div class="bigGrey pb-40">
-          <span>*珊珊</span>|<span>341102********6427</span>
+          <span>{{userInfo.identityName}}</span>|<span>{{userInfo.identityNum}}</span>
         </div>
       </div>
 
@@ -254,7 +254,7 @@ export default {
             name: form.ruleForm.name,
             idCard: form.ruleForm.idCardNo,
           };
-          let res = await zfbAuthCompany(params);
+          let res = await zfbAuthCompany({ data: JSON.stringify(params) });
           console.log(2222222222222, res);
           if (res.code == 200) {
             let url = res.data && res.data.url;
@@ -269,7 +269,7 @@ export default {
             }
             authCompanyStep.value = 2;
           } else {
-            message.error("获取二维码失败："+res.msg);
+            message.error("获取二维码失败：" + res.msg);
           }
         } else {
           console.log("error submit!!");
@@ -318,15 +318,14 @@ export default {
       //转换成64位数
       let imgFileData = "";
       imgFileData = await getBase64(fileList[0].raw);
-      let res = await companyImg(imgFileData);
+      let res = await companyImg({data:imgFileData});
       console.log(444444444444, res);
-      // if (res.code != 200) {
-      //   message.error(res.msg);
-      //   dialogVisible.value = false;
-      // } else {
-      //   authCompanyStep.value = 4;
-      // }
-      authCompanyStep.value = 4;
+      if (res.code != 200) {
+        message.error(res.msg);
+        dialogVisible.value = false;
+      } else {
+        authCompanyStep.value = 4;
+      }
     };
     const getBase64 = async (file) => {
       return new Promise(function (resolve, reject) {

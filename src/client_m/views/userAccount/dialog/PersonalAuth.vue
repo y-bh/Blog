@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-22 12:43:42
+ * @LastEditTime: 2022-05-22 16:19:22
 -->
 <template>
   <div class="personalAuth">
@@ -151,7 +151,7 @@ export default {
             name: form.ruleForm.name,
             idCard: form.ruleForm.idCardNo,
           };
-          let res = await zfbAuth(params);
+          let res = await zfbAuth({data:JSON.stringify(params)});
           console.log(2222222222222, res);
           if (res.code == 200) {
             let url = res.data && res.data.url;
