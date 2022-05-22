@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-21 20:53:42
+ * @LastEditTime: 2022-05-22 15:43:09
 -->
 <!DOCTYPE html>
 <html>
@@ -16,8 +16,8 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>提取IP</title>
+  <link rel="stylesheet" href="/css/getIp.css">
   <%- include('../components/style.html'); %>
-    <link rel="stylesheet" href="/css/getIp.css">
 </head>
 
 <body>
@@ -128,7 +128,7 @@
             <label class="font-18 main-title-color label_lay">提取数量</label>
             <div class="input-group extract_box flex-center">
               <button class="decrement">-</button>
-              <input type="text" class="form-control extract_num_input text-center" value="10">
+              <input id="extract_num_input" type="text" class="form-control extract_num_input text-center" value="10">
               <button class="increment">+</button>
             </div>
           </div>

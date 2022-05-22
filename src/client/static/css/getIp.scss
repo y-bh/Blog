@@ -1,5 +1,6 @@
 .getip-wrap {
-  padding: 0px 270px;
+  width: 1400px;
+  margin: 0 auto;
   grid-template-columns: 250px auto;
 }
 .left {
@@ -92,7 +93,11 @@
   width: 184px;
   height: 40px;
 }
+.input-group{
+  width: auto !important;
+}
 .extract_box .extract_num_input {
+  width: 100px !important;
   border-left:"none";
   border-right:"none";
 }
@@ -189,7 +194,7 @@
   }
 }
 .apiUrl_input {
-  border: none;
+  border: none !important;
 }
 .apiUrl_input_box .copy {
   width: 120px !important;

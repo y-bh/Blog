@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 企业服务
  * @Date: 2022-04-27 14:30:33
- * @LastEditTime: 2022-05-20 14:35:19
+ * @LastEditTime: 2022-05-22 14:11:19
 -->
 <!DOCTYPE html>
 <html>
@@ -85,7 +85,7 @@
           id="mate_sell" 
           required
         >
-          <option>请选择您需要的用量</option>
+          <option value="">请选择您需要的用量</option>
           <option value="1">小于20万</option>
           <option value="2">20万-100万</option>
           <option value="3">100万-500万</option>
@@ -104,7 +104,9 @@
         >
       </div>
       <div class="bottom_btn flex-center">
-        <button type="button" class="submit btn btn-primary" onclick="onSubmit()">提交</button>
+        <button type="button" class="bl-button submit" onclick="onSubmit()">
+          <span>提交</span>
+        </button>
       </div>
     </form>
   </div>

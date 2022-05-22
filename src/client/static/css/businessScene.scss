@@ -4,7 +4,13 @@
 }
 .business-wrap {
   grid-row-gap: 80px;
-  padding: 0px 270px;
+  width: 1400px;
+  margin: 0 auto;
+  // padding: 0px 270px;
+}
+.common-slideInRight{
+  height: 445px;
+  object-fit: cover;
 }
 .businesstitle {
   font-size: 48px;
