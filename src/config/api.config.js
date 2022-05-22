@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-21 15:34:51
+ * @LastEditTime: 2022-05-22 15:50:44
  */
 
 module.exports = {
@@ -57,7 +57,7 @@ module.exports = {
   'QUERY_RENEWINFO': 'proxy/getProxyRenewInfo',
   'GET_REDPACKAGE': '/redPackage/enabled',  // 获取可用红包
   'GET_SUPPLEMENTPRICE': '/proxyUpgrade/addTimes',  // 获取补量单价/赠送ip量
-  'GET_DURATION' : '/proxyUpgrade/duration',
+  'GET_DURATION': '/proxyUpgrade/duration',
   'QUERY_LOG': '/proxy/log',  // 变更记录
   'POST_RENEWPAY': '/renewProxy',  // 续费支付
   'POST_SUPPLEMENT': '/payOrder/addTimes',  // 补量支付
@@ -72,4 +72,22 @@ module.exports = {
   /*提取ip*/
   'PROXY_API_CITY': '/proxy/api/city', //获取提取套餐城市列表
   'PROXY_API_MENU': '/proxy/api/menu', //获取提取套餐下拉列表
+
+
+  //个人账户
+  "POST_AUTH_GETMINEINFO": "/auth/getMineInfo",//获取登陆人信息
+  //企业认证上传
+  "POST_AUTH_COMPANYIMG": "/auth/companyImg",
+  //支付宝实名认证
+  "POST_AUTH_ZFBAUTH": "/auth/zfbAuth",
+  //支付宝认证结果
+  "GET_AUTH_GETAUTHRESULT": "/auth/getAuthResult",
+  //支付宝企业实名认证
+  "POST_AUTH_ZFBAUTHCOMPANY": "/auth/zfbAuthCompany",
+  //修改手机号码--获取验证码
+  "POST_USER_PHONEGETCODE": "/user/update/phone/getCode",
+  // 修改手机号码
+  "POST_USER_UPDATEPHONE": "/user/update/phone",
+  //修改密码
+  "POST_USER_UPDATEPWD": "/user/update/password",
 }

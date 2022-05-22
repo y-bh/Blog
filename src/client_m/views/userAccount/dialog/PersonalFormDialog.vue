@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-17 18:46:33
+ * @LastEditTime: 2022-05-22 13:58:57
 -->
 <template>
   <div class="personalFormDialog">
@@ -13,18 +13,20 @@
         <div class="title mb-30"><span>基本信息</span></div>
         <ul>
           <li class="mb-20">
-            <span class="name">用户名</span><span class="val">zhangxixi</span>
+            <span class="name">用户名</span
+            ><span class="val">{{ userInfo.username }}</span>
           </li>
           <li class="mb-20">
             <span class="name">注册手机号</span
-            ><span class="val">18809098787</span>
+            ><span class="val">{{ userInfo.phone }}</span>
           </li>
           <li class="mb-20">
-            <span class="name">身份证姓名</span><span class="val">*西西</span>
+            <span class="name">身份证姓名</span
+            ><span class="val">{{ userInfo.identityName }}</span>
           </li>
           <li class="mb-20">
             <span class="name">身份证号码</span
-            ><span class="val">340122********6789</span>
+            ><span class="val">{{ userInfo.identityNum }}</span>
           </li>
         </ul>
       </div>
@@ -61,7 +63,7 @@
           </el-form-item>
         </el-form>
         <div class="common-btnGroup pt-30 pb-40">
-          <el-button type="primary" plain>取消</el-button>
+          <el-button type="primary" plain @click="onCancel">取消</el-button>
           <el-button type="warning" @click="onSubmit">保存</el-button>
         </div>
       </div>
@@ -71,7 +73,17 @@
 
 <script>
 import DialogTitle from "components/DialogTitle";
-import { ref, reactive, computed, toRefs, onBeforeMount, onMounted } from "vue";
+import { updateUserInfo } from "model/user.js";
+import {
+  ref,
+  reactive,
+  computed,
+  toRefs,
+  onBeforeMount,
+  onMounted,
+  inject,
+  watch,
+} from "vue";
 export default {
   name: "",
   components: {
@@ -84,31 +96,57 @@ export default {
     },
   },
   setup(props, { emit }) {
-    console.log(1111111, props.dialogVisible);
-    //const { dialogVisible } = toRefs(props);
-    //console.log(1111111, dialogVisible);
-    const personForm = reactive({
-      wxNo: "",
-      QQNO: "",
-      emailNo: "",
-      business: "",
-      job: "",
+    const $message = inject("message");
+    let userInfoSon = inject("userInfoSon");
+    console.log(1111111, userInfoSon);
+    let personForm = reactive({
+      wxNo: userInfoSon.userInfo.wxNo,
+      QQNO: userInfoSon.userInfo.QQNo,
+      emailNo: userInfoSon.userInfo.enmail,
+      business: userInfoSon.userInfo.business,
+      job: userInfoSon.userInfo.profession,
       businessArr: [
         {
-          value: "Option1",
-          label: "Option1",
+          value: "采集数据",
+          label: "采集数据",
         },
         {
-          value: "Option2",
-          label: "Option2",
+          value: "网站流量",
+          label: "网站流量",
+        },
+        {
+          value: "养号",
+          label: "养号",
+        },
+        {
+          value: "其他",
+          label: "其他",
         },
       ],
     });
-    const onSubmit = () => {
+    onBeforeMount(async () => {});
+    const onSubmit = async () => {
       console.log("=======个人资料数据======", personForm);
+      let params = {
+        business: personForm.business,
+        email: personForm.emailNo,
+        profession: personForm.job,
+        qq: personForm.QQNO,
+        replace: false,
+        wechat: personForm.wxNo,
+      };
+      let res = await updateUserInfo(params);
+      console.log(333333, res);
+      if (res.code == 200 && res.data) {
+        $message.success("资料修改成功！");
+      } else {
+        $message.success("资料修改失败，请重试！");
+      }
       emit("updateDialog", false);
     };
-
+    const onCancel = async () => {
+      emit("updateDialog", false);
+    };
     const dialogVisibleFlag = computed({
       get() {
         return props.dialogVisible;
@@ -117,9 +155,18 @@ export default {
         emit("updateDialog", false);
       },
     });
+    watch(userInfoSon, () => {
+      personForm.wxNo = userInfoSon.userInfo.wxNo;
+      personForm.QQNO = userInfoSon.userInfo.QQNo;
+      personForm.emailNo = userInfoSon.userInfo.enmail;
+      personForm.business = userInfoSon.userInfo.business;
+      personForm.job = userInfoSon.userInfo.profession;
+    });
     return {
+      ...toRefs(userInfoSon),
       personForm,
       onSubmit,
+      onCancel,
       dialogVisibleFlag,
     };
   },
@@ -154,6 +201,5 @@ export default {
   .personForm {
     margin-left: -40px;
   }
-  
 }
 </style>

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-18 14:38:18
+ * @LastEditTime: 2022-05-22 15:38:11
 -->
 <template>
   <div class="updatePwdDialog">
@@ -36,7 +36,7 @@
             />
           </el-form-item>
           <div class="common-btnGroup pt-30 pb-40">
-            <el-button type="primary" plain>取消</el-button>
+            <el-button type="primary" plain @click="oncancel">取消</el-button>
             <el-button type="warning" @click="onSubmit">保存</el-button>
           </div>
         </el-form>
@@ -47,7 +47,8 @@
 
 <script>
 import DialogTitle from "components/DialogTitle";
-import { ref, reactive, computed, toRefs, onMounted,inject } from "vue";
+import { ref, reactive, computed, toRefs, onMounted, inject } from "vue";
+import { updatePassword } from "model/user.js";
 export default {
   name: "",
   components: {
@@ -61,7 +62,7 @@ export default {
   },
   setup(props, { emit }) {
     const vaildPwdRef = ref(null);
-    const message=inject('message');
+    const $message = inject("message");
     const validatePwd2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
@@ -70,7 +71,7 @@ export default {
       } else {
         callback();
       }
-      console.log(333333333333, form.ruleForm.newPassword);
+      //console.log(333333333333, form.ruleForm.newPassword);
       callback();
     };
     const validatePwd = (rule, value, callback) => {
@@ -112,27 +113,40 @@ export default {
         ],
         confirmPassword: [
           { required: true, message: "请再次输入密码", trigger: "blur" },
+          {
+            pattern: /^[a-zA-Z0-9_!@#$%^&*.]{4,16}$/,
+            message: "密码只能由4~16字母，数字，特殊符号组成",
+          },
           { validator: validatePwd2, trigger: "blur" },
         ],
       },
     });
-    onMounted(() => {});
-
+    const oncancel = (formName) => {
+      emit("updateDialog", false);
+      if (!vaildPwdRef.value) return;
+      vaildPwdRef.value.resetFields();
+    };
     const onSubmit = (formName) => {
       console.log("=======修改密码数据======", form.ruleForm);
       // if (!formEl) return
       vaildPwdRef.value.validate(async (valid) => {
         if (valid) {
-          //TODO
-          message({
-            message: "登录密码修改成功",
-            type: "success",
-          });
-          emit("updateDialog", false);
+          let params = {
+            originalPassword: form.ruleForm.originPassword,
+            newPassword: form.ruleForm.newPassword,
+            checkPassword: form.ruleForm.confirmPassword,
+          };
+          let res = await updatePassword({ data: JSON.stringify(params) });
+          if (res.code == 200) {
+            $message.success("登录密码修改成功");
+            emit("updateDialog", false);
+            if (!vaildPwdRef.value) return;
+            vaildPwdRef.value.resetFields();
+          } else {
+            $message.error("登录密码修改失败，请重试！:"+res.msg);
+          }
         } else {
           console.log("error submit!!");
-          message.error("登录密码修改失败，请重试！");
-          emit("updateDialog", false);
           return false;
         }
       });
@@ -148,6 +162,7 @@ export default {
     });
     return {
       ...toRefs(form),
+      oncancel,
       onSubmit,
       vaildPwdRef,
       dialogVisibleFlag,
