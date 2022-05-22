@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-21 16:41:06
+ * @LastEditTime: 2022-05-22 16:17:16
 -->
 <template>
   <div class="container">
@@ -54,8 +54,11 @@
     <!-- 表格 -->
     <div class="table-wrap">
       <el-table :data="tableList" :row-style="rowClass" v-loading="loading" @selection-change="handleSelectionChange">
-        <template v-slot:empty>
-          <div>{{ emptyText }}</div>
+        <template #empty>
+          <div>
+            <div class="flex justify-content-center empty-box"></div>
+            <p class="flex justify-content-center text-desc">暂无内容</p>
+          </div>
         </template>
 
         <el-table-column align="center" type="selection" width="50"></el-table-column>

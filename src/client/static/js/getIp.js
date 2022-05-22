@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-21 20:41:33
+ * @LastEditTime: 2022-05-22 16:24:15
  */
 
 //点击定位
@@ -147,6 +147,7 @@ $('.download').on('click', function () {
 //锚点
 $(function () {
   function to(id) {
+    console.log(id);
     let bridge = $(`#${id}`)[0];
     let body = document.body;
     let height = 0;
@@ -169,7 +170,9 @@ $(function () {
     let query = href[1].split('&')
     for (let i of query) {
       if (i.indexOf('a_id') !== -1) {
-        to(i.split('=')[1])
+        setTimeout(()=>{
+          to(i.split('=')[1].split('#')[0])
+        }, 150)
       }
     }
   }
