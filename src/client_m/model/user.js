@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-13 16:36:57
- * @LastEditTime: 2022-05-22 15:15:29
+ * @LastEditTime: 2022-05-22 16:31:41
  */
 import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
@@ -29,7 +29,7 @@ export const updateUserInfo = async (params = null) => {
 //查询用户信息
 export const getMineInfo = async (params = null) => {
   try {
-    const res = await service.post(api.POST_AUTH_GETMINEINFO, params);
+    const res = await service.post(api.POST_AUTH_GETMINEINFO);
     return res;
   } catch (error) {
     console.error('getMineInfo', error);
@@ -39,7 +39,7 @@ export const getMineInfo = async (params = null) => {
 //企业认证上传文件
 export const companyImg = async (params = null) => {
   try {
-    const res = await service.postText(api.POST_AUTH_COMPANYIMG, params);
+    const res = await service.post(api.POST_AUTH_COMPANYIMG, params);
     return res;
   } catch (error) {
     console.error('auth/companyImg', error);

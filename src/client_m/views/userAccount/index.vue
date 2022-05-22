@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-22 13:14:42
+ * @LastEditTime: 2022-05-22 17:19:47
 -->
 <template>
   <div class="userAccount">
@@ -113,7 +113,7 @@
         </div>
         <!--企业认证通过后如下显示  -->
         <div class="group-btn mt-20 alginRight" v-if="userInfo.companyAuth">
-          <el-button class="" type="primary" plain
+          <el-button class="" type="primary" plain @click="queryCompayStatus"
             >企业认证&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
@@ -126,7 +126,7 @@
             userInfo.verifyState == 'wait'
           "
         >
-          <el-button class="" type="warning" plain
+          <el-button class="" type="warning" plain @click="queryCompayStatus"
             >企业认证审核中&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
@@ -139,7 +139,7 @@
             userInfo.verifyState == 'fail'
           "
         >
-          <el-button class="" type="danger" plain
+          <el-button class="" type="danger" plain @click="queryCompayStatus"
             >企业认证失败&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
@@ -291,7 +291,27 @@ export default {
       await getUserInfo();
     });
     onMounted(() => {});
-
+    const queryCompayStatus = () => {
+      let auth = state.userInfo.companyAuth;
+      let status = state.userInfo.verifyState;
+      console.log("==========当前企业的状态====", status);
+      if (auth) {
+        companyAuthRef.value.title = "企业认证";
+        companyAuthRef.value.authCompanyStep = 6;
+        companyAuthRef.value.dialogVisible = true;
+        return;
+      }
+      if (!auth && status == "wait") {
+        companyAuthRef.value.title = "企业认证";
+        companyAuthRef.value.authCompanyStep = 5;
+        companyAuthRef.value.dialogVisible = true;
+      }
+      if (!auth && status == "fail") {
+        companyAuthRef.value.title = "企业认证";
+        companyAuthRef.value.authCompanyStep = 7;
+        companyAuthRef.value.dialogVisible = true;
+      }
+    };
     const getUserInfo = async () => {
       //TODO 通过cookie获取用户信息
       let res = await getMineInfo();
@@ -388,6 +408,7 @@ export default {
       companyAuthRef.value.dialogVisible = true;
     };
     return {
+      queryCompayStatus,
       personAuth,
       queryPersonAuth,
       companyAuth,
