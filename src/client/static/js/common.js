@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-21 20:03:05
+ * @LastEditTime: 2022-05-22 15:48:29
  */
 
 function Helper() { }
@@ -237,7 +237,7 @@ function getParams() {
   * start:开始数字
   * step：每次递增
   */
-function numDynamic(id, start, end, step, speed) {
+ function numDynamic(id, start, end, step, speed) {   
   var span = document.getElementById(id);
   if (start < end) {
     var i = start;
@@ -245,14 +245,14 @@ function numDynamic(id, start, end, step, speed) {
       i += step; // 设置每次增加的动态数字，可调整
 
       if (i >= end) {
-        span.innerText = end;
+        span.innerText = Number(end).toLocaleString();
         clearInterval(t);
       } else {
-        span.innerText = i;
+        span.innerText = Number(i).toLocaleString();
       }
     }, speed);
   } else {
-    span.innerText = start;
+    span.innerText = Number(start).toLocaleString();
   }
 }
 
