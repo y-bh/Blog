@@ -158,7 +158,7 @@ async function ajax(params) {
       url: '/javaProxy' + params.url,
       contentType: 'application/json',
       data: params.query,
-      
+
       beforeSend: function (request) {
         console.log("发送请求前判断token:", token)
         if (token) {
@@ -208,6 +208,7 @@ function getParams() {
   }
   return JSON.parse(JSON.stringify(request));
 }
+window.getParams = getParams
 
 //格式化人民币
 function moneyFormat(money) {
@@ -402,7 +403,7 @@ $(function () {
       getTabWidth()
     }
   }
-  
+
   toggleHead();
 
   $('.nav-toggler').click(function () {
@@ -413,26 +414,26 @@ $(function () {
       const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
       $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
       // getTabWidth()
-       
+
     }
     getTabWidth()
 
   })
 
 
-  function getTabWidth(){
+  function getTabWidth() {
     //  小屏获取导航元素
-    
+
     headerAttr.navWidth = [];
-    if($('.show')){
+    if ($('.show')) {
       let tabNav = $('.show .nav-item');
-      tabNav.each(function(index) {
-        if($(this)){
-           headerAttr.navWidth.push($(this).outerWidth(true))
+      tabNav.each(function (index) {
+        if ($(this)) {
+          headerAttr.navWidth.push($(this).outerWidth(true))
         }
       })
-  
-      headerAttr.navWidth.sort((a, b)=> {
+
+      headerAttr.navWidth.sort((a, b) => {
         return b - a
       })
       //  将每个一级导航宽度以最大子元素宽为准设置
