@@ -5,16 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "gulp develop",
-    "build": "gulp build",
+
+    "build:dev": "node ./env.build.js --develop",
     "build:test": "node ./env.build.js --test",
-    "local": "nodemon ./start.js --local",
-    "serve": "pm2 start ./start.js",
+    "build:prod": "node ./env.build.js --production",
+
     "local:test": "nodemon ./start.js  --test",
     "local:develop": "nodemon ./start.js  --develop",
-    "local:production": "nodemon ./start.js  --production",
+    "local:prod": "nodemon ./start.js  --production",
+
+    "serve:dev": "pm2 start ./start.js --  m:develop",
     "serve:test": "pm2 start ./start.js --  m:test",
-    "serve:develop": "pm2 start ./start.js --  m:develop",
-    "serve:production": "pm2 start ./start.js --  m:production"
+    "serve:prod": "pm2 start ./start.js --  m:production"
   },
   "author": "zhuzhanwei",
   "license": "ISC",
