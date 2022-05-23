@@ -377,7 +377,7 @@ function layout() {
 
         Helper.$message({ message: '退出登录' })
 
-        return window.open("/login")
+        return location.href="/login"
       },
       error: (err) => {
         
