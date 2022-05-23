@@ -2,28 +2,39 @@ html {
   font-size: 20px;
 }
 
+
+/******** moduleName:全局变量管理 *******/
+$empty: #fff;  // 无装饰图案背景色、卡片填充色
+$main: #1968FC;   // 主色 - 主要导航栏文字选中、用于按钮、重要内容
+$main_linear: linear-gradient(90deg, #2E90FA 0%, #1968FC 100%);
+$warning: #FC7019;  // 辅色 - 主要用于按钮、重要内容、提示性文案状态区分
+$warning_linear: linear-gradient(90deg, #FC8A19 0%, #FC7019 100%);
+$danger: #F8486F;  //  辅色 - 状态区分
+$danger_linear: linear-gradient(90deg, #ef6986 0%, #F8486F 100%);
+$success: #27ADC2;  //  辅色 - 状态区分
+
 //margin
 .ml-30{
   margin-left: 30px;
 }
 
-
+ 
 
 //弹窗
 //弹窗取消按钮
 .cancel-button {
   padding: 10px 10px;
   min-width: 100px;
-  border: 1px solid #1968FC;
-  color: #1968FC;
+  border: 1px solid $main;
+  color: $main;
   font-size: 16px;
 }
 //弹窗确定按钮
 .confirm-button {
   padding: 10px 10px;
   min-width: 100px;
-  background: #FC7019;
-  border: 1px solid #FC7019;
+  background: $warning;
+  border: 1px solid $warning;
   color: white;
   font-size: 16px;
 }
@@ -32,8 +43,8 @@ html {
 //表格删除按钮
 .table-delete-btn{
   padding: 10px 20px;
-  border: 1px solid #F8486F;
-  color: #F8486F;
+  border: 1px solid $danger;
+  color: $danger;
   font-size: 18px;
   &:hover{
     background-color: rgb(252, 205, 205);

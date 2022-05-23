@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-13 12:56:11
- * @LastEditTime: 2022-05-19 15:31:31
+ * @LastEditTime: 2022-05-23 11:46:40
 -->
 <template>
   <div class="ticket-wrap">
@@ -17,7 +17,7 @@
       <el-input v-model="content" type="textarea" placeholder="请输入您遇到的问题或者改进意见" rows="18" resize="none" />
     </div>
     <div class="ticket-btn">
-      <el-button @click="submitTicket">提交</el-button>
+      <el-button @click="submitTicket" type="primary">提交</el-button>
     </div>
   </div>
 </template>
