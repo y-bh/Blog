@@ -1,12 +1,14 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-23 09:57:37
+ * @LastEditTime: 2022-05-23 18:05:28
  */
 
 import axios from 'axios';
+import { AESAUTH, encrypt, decrypt} from "./AES";
+
 class Request {
 
   constructor(baseURL, timeout = 10000) {
@@ -17,12 +19,10 @@ class Request {
     });
 
 
-
     // 请求拦截器
     service.interceptors.request.use(config => {
       config.headers.xx_uid = 7567
-      config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-
+      
       try {
         //客户端使用 场景
         if (getCookie && document) {
@@ -36,6 +36,15 @@ class Request {
       } catch (error) {
 
       }
+
+      // 部分接口加密
+      if(AESAUTH[config.url] && process.env.NODE_ENV !== 'development'){
+        config.headers['Content-Type']='text/plain';
+        config.data = encrypt(config.data)
+      } else {
+        config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+      }
+
       return config;
     }, error => {
 
