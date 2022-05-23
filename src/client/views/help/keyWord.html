@@ -107,7 +107,7 @@
                             <% } %>
                         </div>
 
-                        <% if(lists && lists.totalPage>1) {%>
+                        <% if(lists.totalPage>lists.pageNum) {%>
                           <li class="page-item">
                             <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="goPagePreNext('next')">
                               <span aria-hidden="true">&gt;</span>
@@ -118,7 +118,7 @@
                   </ul>
                 </nav>
 
-                <% if(lists.totalPage>lists.pageNum) {%>
+                <% if(lists && lists.totalPage>1) {%>
                 <div class="goto flex justify-content-center align-items-center ml-30">
                   前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number"
                     onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')"
