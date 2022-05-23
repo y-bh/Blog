@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-21 20:58:28
+ * @LastEditTime: 2022-05-23 09:57:24
  */
 
 
@@ -13,7 +13,7 @@ const { renderHome } = require("service/home")
 const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getBusinessData } = require('service/business')
-const { getProxyCityService, getProxyMenuService } = require('service/getIp')
+const { getProxyCityService, getProxyMenuService, getWhiteListApiService } = require('service/getIp')
 
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -97,11 +97,14 @@ function Router(App) {
     let province = await getProxyCityService()
     let menu = await getProxyMenuService()
 
+    let apiL = await getWhiteListApiService({data:{pageNum: 1, pageSize: 9999}})
+
 
     let getIpData = {
       staticData,
       province,
       menu,
+      apiL,
     }
 
     return ctx.render("getIp/getIp", getIpData)

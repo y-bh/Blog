@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-22 16:24:15
+ * @LastEditTime: 2022-05-23 10:25:37
  */
 
 //点击定位
@@ -20,14 +20,6 @@ $('.demo span').on('click', function () {  //代码demo定位
   })
 })
 
-// //点击IP使用时长
-// $('.ip_use_box .ip_use_item').on('click',function() {
-//   // deal_box,time_box为ip_use_item的子元素  time_text为time_box的子元素  deal_text为deal_box的子元素
-//   $(this).toggleClass('ip_use_item_choose').siblings().removeClass('ip_use_item_choose')
-//   $(this).find('.time_text').toggleClass('time_text_choose').parent().parent().siblings().children().children().removeClass('time_text_choose')
-//   $(this).find('.deal_box').toggleClass('deal_box_choose').parent().siblings().children().removeClass('deal_box_choose')
-//   $(this).find('.deal_text').toggleClass('deal_text_choose').parent().parent().siblings().children().children().removeClass('deal_text_choose')
-// })
 
 //样式切换
 $('.narrow_box').on('click', function () {
@@ -86,48 +78,26 @@ $('.extract_select').on('click', function () {
   }
 })
 
-// //点击省份显示地区
-// $(function() {
-//   const showArea = () => {
-//     $('.choose_area_box .narrow_box').on('click',function() {
-//       let currentClass = $(this).attr('class').split(' ')[0]
-//       if (currentClass === 'a_province') {
-//         $('.isProvince').show()
-//       } else {
-//         $('.isProvince').hide()
-//       }
-//     })
-//   }
-
-//   // 地区展示登陆判断
-//   if (loginStatus) {
-//     $('.isProvince').show()
-//     showArea()
-//   } else {
-//     $('.isProvince').hide()
-//   }
-// })
-
-//默认选中第一个
-// let ipUseFirst = $('.ip_use_box .ip_use_item')[0] //ip使用时长
-// $(ipUseFirst).addClass('ip_use_item_choose')
-// $(ipUseFirst).find('.time_text').addClass('time_text_choose')
-// $(ipUseFirst).find('.deal_box').addClass('deal_box_choose')
-// $(ipUseFirst).find('.deal_text').addClass('deal_text_choose')
-// let dataFirst = $('.data_format .narrow_box')[0] //数据格式
-// $(dataFirst).addClass('narrow_box_choose')
-// let separatorFirst = $('.separator .narrow_box')[0] //分隔符
-// $(separatorFirst).addClass('narrow_box_choose')
-// let areaFirst = $('.choose_area_box .narrow_box')[0] //选择地区
-// $(areaFirst).addClass('narrow_box_choose')
-// let operatorFirst = $('.operator_box .narrow_box')[0] //运营商
-// $(operatorFirst).addClass('narrow_box_choose')
-// let ipFirst = $('.ip_box .narrow_box')[0] //IP协议
-// $(ipFirst).addClass('narrow_box_choose')
 $('.isJSON').hide()
+
+//判断是否生成
+function createUpi() {
+  if(!$('.apiUrl_input').val()){
+    Helper.$message.warning({
+      message: '请先生成API',
+      showClose: true
+    })
+    return true
+  }
+  return false
+}
 
 //复制链接
 $('.apiUrl_input_box .copy').on('click', function () {
+  let re = createUpi()
+  if(re){
+    return 
+  }
   let text = $('.apiUrl_input')
   text.select()
   document.execCommand('copy')
@@ -135,8 +105,12 @@ $('.apiUrl_input_box .copy').on('click', function () {
 
 //打开链接
 $('.apiUrl_input_box .open').on('click', function () {
+  let re = createUpi()
+  if(re){
+    return 
+  }
   let text = $('.apiUrl_input').val()
-  window.location.href = text
+  window.open(text)
 })
 
 //立即下载
@@ -184,7 +158,7 @@ let apiParams = {
   yys: null,   //ip运营商  不限 电信 联通
   type: 'txt',   //返回类型  txt json
   lb: null,  //如果选择txt 分隔符
-  region: [],   //区域编号  ,分割
+  region: null,   //区域编号  ,分割
   port: '1',   //IP协议  1 HTTP　2 Socks5  3 HTTPS
   time: null,   //按次提取必选： 使用时长 3 5 10 15
   ts: null,   //是否显示ip过期时间
@@ -192,10 +166,6 @@ let apiParams = {
   cs: null,   //是否显示位置
 }
 
-// //生成api链接
-// function getApi() {
-
-// }
 
 
 
@@ -250,7 +220,7 @@ $(function () {
     if (type === 'region') {
       if (apiParams.region.includes(val)) {
         let index = apiParams.region.indexOf(val)
-        apiParams.region.splice(index, 1, '')
+        apiParams.region.splice(index, 1)
       } else {
         apiParams.region.push(val)
       }
@@ -345,23 +315,35 @@ $(function () {
 
 
   //地区改变选择回调
-  function changeAreaCallback() {
+  function changeAreaPCallback() {
     apiParams.region = []
+  }
+  function changeAreaCCallback() {
+    apiParams.region = null
   }
 
   //地区改变监听
   $('.a_area').on('click', function () {
     let area = $(this).attr('d-area')
     if(area === 'country'){
-      $('.isProvince').hide(0, changeAreaCallback)
+      $('.isProvince').hide(0, changeAreaCCallback)
     }else if(area === 'province'){
-      $('.isProvince').show()
+      $('.isProvince').show(0, changeAreaPCallback)
     }
   })
 
 
   $('.create_api_url').on('click', function () {
     let url = "http://api.tianqiip.com/getip?"
+    console.log(apiParams.region);
+    if(apiParams.region && apiParams.region.length === 0){
+      Helper.$message.warning({
+        message: '请选择地区',
+        showClose: true
+      })
+      $('.apiUrl_input').val('')
+      return 
+    }
     for (let i in apiParams) {
       if (apiParams[i] === null || apiParams[i].length === 0) {
         continue;

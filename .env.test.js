@@ -8,5 +8,5 @@
 
 
 module.exports = {
-  "API": "http://uat-www.tianqiip.com"
+  "API": "http://dev-www.tianqiip.com"
 }

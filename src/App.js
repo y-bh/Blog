@@ -50,8 +50,16 @@ app.use(koa_static(config.static))
 //解析入参
 app.use(bodyParser());
 
-//前端proxy 代理
-app.use(require("middleware/proxy")());
+
+
+//本地开发环境 走前端proxy代理  | 服务端环境走nginx 代理
+if (process.env.APP_ENV === 'local') {
+  console.log("本地环境,使用node代理")
+  app.use(require("middleware/proxy")());
+}
+
+
+
 
 //统一响应接口
 app.use(routerResponse());

@@ -3,9 +3,9 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-21 20:09:46
+ * @LastEditTime: 2022-05-23 10:12:46
  */
-const { getProxyCityDao,getProxyMenuDao } = require("dao/getIp")
+const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao } = require("dao/getIp")
 
 let codeDemo = [
   {
@@ -368,6 +368,8 @@ const getProxyCityService = async () => {
     const res = await getProxyCityDao()
     if (+res.code === 200) {
       province = res.data
+    }else{
+      return []
     }
     return province
   } catch (error) {
@@ -381,8 +383,38 @@ const getProxyMenuService = async () => {
     const res = await getProxyMenuDao()
     if (res && res.code === 200) {
       paidList = res.data
+    }else{
+      return []
     }
     return paidList
+  } catch (error) {
+    console.error('getProxyMenu_service:',error);
+  }
+}
+
+
+/**
+ * @Date: 2022-05-23 09:48:01
+ * @LastEditTime: LiYuntao
+ * @description: 白名单接口
+ * @return {*}
+ */
+const getWhiteListApiService = async (params = null) => {
+  try {
+    const res = await getWhiteListApiDao(params)
+    console.log(res);
+    if (res && res.code === 200) {
+      let { whiteAdd = null, whiteDelete = null, whiteFetch = null } = res.data
+      return {
+        whiteAdd, whiteDelete, whiteFetch
+      }
+    }else{
+      return {
+        whiteAdd: '--',
+        whiteDelete: '--',
+        whiteFetch: '--',
+      }
+    }
   } catch (error) {
     console.error('getProxyMenu_service:',error);
   }
@@ -412,5 +444,6 @@ const data = () => {
 module.exports = {
   data,
   getProxyCityService,
-  getProxyMenuService
+  getProxyMenuService,
+  getWhiteListApiService
 }
