@@ -41,7 +41,7 @@ class Request {
             data: data.data
           };
         } else {
-          console.log("ccccccccc",data, data.message)
+          
           // message.error({
           //   message: data.msg || data.message || '接口异常',
           //   showClose: true

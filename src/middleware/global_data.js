@@ -36,7 +36,7 @@ module.exports = function (app) {
 
     const isPass = changeURL.some((item) => url.includes(item))
 
-    console.log("ccccccccccccccccc",url)
+    console.log("获取全局数据:",url)
 
     if (method === 'GET' && (URLS.includes(url) || isPass)) {
       //顶部导航 活动相关数据
