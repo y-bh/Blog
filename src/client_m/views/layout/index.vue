@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-21 21:08:20
+ * @LastEditTime: 2022-05-23 09:29:50
 -->
 <template>
   <div class="layout">
@@ -62,10 +62,11 @@ export default {
     // onBeforeUnmount(() => {
     //   window.removeEventListener("resize", getMainHeight);
     // });
-    // return {
-    //   defaultHeight,
-    //   headerRef,
-    // };
+    return {
+      // defaultHeight,
+      // headerRef,
+      locale: zhCn
+    };
   },
 };
 </script>
