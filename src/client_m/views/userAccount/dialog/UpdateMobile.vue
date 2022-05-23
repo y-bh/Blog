@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-18 15:39:53
+ * @LastEditTime: 2022-05-22 15:08:52
 -->
 <template>
   <div class="updateMobile">
@@ -54,8 +54,12 @@
             </div>
           </el-form-item>
           <div class="common-btnGroup pt-30 pb-40">
-            <el-button type="primary" plain>取消</el-button>
-            <el-button type="warning" @click="onSubmit">确定</el-button>
+            <el-button type="primary" plain @click="onCancel(vaildPhoneRef)"
+              >取消</el-button
+            >
+            <el-button type="warning" @click="onSubmit(vaildPhoneRef)"
+              >确定</el-button
+            >
           </div>
         </el-form>
       </div>
@@ -66,6 +70,7 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { ref, reactive, computed, toRefs, onMounted, inject } from "vue";
+import { phoneGetCode, updatePhone } from "model/user.js";
 export default {
   name: "",
   components: {
@@ -75,7 +80,7 @@ export default {
   setup(props, { emit }) {
     const dialogVisible = ref(false);
     const vaildPhoneRef = ref(null);
-    const message = inject("message");
+    const $message = inject("message");
     const counter = reactive({
       show: true,
       count: "",
@@ -110,7 +115,21 @@ export default {
         ],
       },
     });
-    const getVaildCode = () => {
+    const getVaildCode = async () => {
+      let vaildFlag = true;
+      vaildPhoneRef.value.validateField(
+        ["curPhone", "newPhone"],
+        async (errorMessage) => {
+          console.log(errorMessage);
+          if (errorMessage) {
+            vaildFlag = false;
+          }
+        }
+      );
+      if (!vaildFlag) {
+        return;
+      }
+      console.log(88888888888888);
       const TIME_COUNT = 60;
       if (!counter.timer) {
         counter.count = TIME_COUNT;
@@ -125,7 +144,24 @@ export default {
           }
         }, 1000);
       }
+      let params = {
+        newPhone: form.ruleForm.newPhone,
+        originalPhone: form.ruleForm.curPhone,
+      };
+      let res = await phoneGetCode(params);
+      if (res.code == 200) {
+        $message.success("获取验证码成功");
+      } else {
+        $message.success("获取验证码失败:" + res.msg);
+      }
     };
+    const onCancel = () => {
+      clearInterval(counter.timer);
+      dialogVisible.value = false;
+      if (!vaildPhoneRef.value) return;
+      vaildPhoneRef.value.resetFields();
+    };
+
     const onSubmit = (formName) => {
       console.log("=======修改密码数据======", form.ruleForm);
       if (counter.timer) {
@@ -135,16 +171,23 @@ export default {
       vaildPhoneRef.value.validate(async (valid) => {
         if (valid) {
           //TODO
-          message({
-            message: "手机号换绑成功！",
-            type: "success",
-          });
-          //跳转登录页面
-          dialogVisible.value = false;
+          let params = {
+            code: form.ruleForm.vaildCode,
+            newPhone: form.ruleForm.newPhone,
+            originalPhone: form.ruleForm.curPhone,
+          };
+          let res = await updatePhone(params);
+          if (res.code == 200) {
+            $message.success("手机号换绑成功！");
+            dialogVisible.value = false;
+            if (!vaildPhoneRef.value) return;
+            vaildPhoneRef.value.resetFields();
+          } else {
+            $message.error("手机号换绑失败，请重试！" + res.msg);
+          }
         } else {
           console.log("error submit!!");
-          message.error("手机号换绑失败，请重试！");
-          dialogVisible.value = false;
+          //$message.error("手机号换绑失败，请重试！");
         }
       });
     };
@@ -153,6 +196,7 @@ export default {
       ...toRefs(counter),
       ...toRefs(form),
       onSubmit,
+      onCancel,
       vaildPhoneRef,
       dialogVisible,
       getVaildCode,

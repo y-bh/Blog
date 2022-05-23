@@ -6,7 +6,8 @@
  * @LastEditTime: 2022-04-27 15:05:48
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -15,11 +16,57 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>404</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/404.css">
 </head>
+
 <body>
-  <h1>404</h1>
-  <div>
-    <%=name%>
+
+  <div class="error">
+
+    <div>
+      <h3>
+        你似乎来到了没有IP的沙漠~
+      </h3>
+      <p class="text-center">
+        <span id="timer">4</span> 秒后自动跳转到首页
+      </p>
+
+      <div class="obn flex justify-content-center text-center mt-30">
+        <a class="btn btn-primary" href="/">返回首页</a>
+        <a class="btn btn-secondary ml-10" href="javascript:void(0)" onclick="goBack()">上一步</a>
+      </div>
+    </div>
+
+
   </div>
 </body>
+<script src="/lib/js/jquery-3.5.1.min.js"></script>
+
+<script>
+  var timer = 4
+
+  var tem = setInterval(() => {
+    if (timer > 0) {
+      timer--
+      $("#timer").text(timer)
+    }
+    if (timer <= 0) {
+      clearInterval(tem)
+      location.href = "/"
+
+    }
+  }, 1000)
+
+
+  function goBack(){
+    window.history.back()
+  }
+
+
+
+
+</script>
+
 </html>

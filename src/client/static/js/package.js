@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-20 13:19:03
+ * @LastEditTime: 2022-05-22 17:16:10
  */
 
 
@@ -189,7 +189,7 @@ $(document).on("click", '#changeTab>div', function () {
   }
   $(this).addClass("current");
   $(this).siblings().removeClass("current");
-  let type =  $(this).attr("type");
+  let type = $(this).attr("type");
   if (type == 1) {
     $("#balancePackage").show();
     $("#packageTime").hide();
@@ -484,15 +484,23 @@ async function toPayMoney(tabType) {
     }
     let resp = null;
     if (tabType == 1) {
+      //调用后台接口生成二维码
+      let parmas = {
+        payType: "2",//微信
+        price: Number(payPrice),
+        redRecordId: redPacketId ? redPacketId : null
+      }
       if (payType === 'ali') {
-        window.open("/jumpTo/jumpTo?buyType=recharge&price=" + parseFloat(payPrice) + "&payType=" + payType + "&redRecordId=" + Number(redPacketId));
-      } else {
-        //调用后台接口生成二维码
-        let parmas = {
-          payType: "2",//微信
-          price: Number(payPrice),
-          redRecordId: redPacketId ? redPacketId : null
+        parmas.payType = "1";
+        let aliPayParams = {
+          url: "/recharge",
+          type: 'post',
+          query: JSON.stringify(parmas)
         }
+        window.open("/payCenter?params=" + JSON.stringify(aliPayParams));
+        // window.open("/jumpTo/jumpTo?buyType=recharge&price=" + parseFloat(payPrice) + "&payType=" + payType + "&redRecordId=" + Number(redPacketId));
+      } else {
+
         //充值接口
         let ajaxData = {
           url: "/recharge",
@@ -504,16 +512,25 @@ async function toPayMoney(tabType) {
     } else {
       let meanId = $("#selectBuyDuration").find("ul.current").find("li.current").attr("data-id");
       let total = $("#counter-enter").val();
+
+      let parmas = {
+        payType: "2",//微信
+        mealId: Number(meanId),
+        total: Number(total),
+        redRecordId: redPacketId ? redPacketId : null
+      }
       if (payType === 'ali') {
-        window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total) + "&redRecordId=" + Number(redPacketId));
+        parmas.payType ="1";
+        let aliPayParams = {
+          url: "/buyProxy",
+          type: 'post',
+          query: JSON.stringify(parmas)
+        }
+        window.open("/payCenter?params=" + JSON.stringify(aliPayParams));
+       // window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total) + "&redRecordId=" + Number(redPacketId));
       } else {
         //调用后台接口生成二维码
-        let parmas = {
-          payType: "2",//微信
-          mealId: Number(meanId),
-          total: Number(total),
-          redRecordId: redPacketId ? redPacketId : null
-        }
+        
         //购买套餐接口
         let ajaxData = {
           url: "/buyProxy",

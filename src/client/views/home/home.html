@@ -7,7 +7,7 @@
 -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -18,16 +18,13 @@
   <meta name="renderer" content="webkit">
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_3387842_6ekr9klr4z6.css">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_3386614_8yguai71dlg.css">
   <!-- 公共css -->
   <%- include('../components/style.html'); %>
-    <!-- <link rel="stylesheet" href="/lib/css/animate.min.css"> -->
     <link rel="stylesheet" href="/css/home.css">
 </head>
 
 <body style="margin-bottom: 20px">
-  <%- include('../components/header/header.html'); %>
+  <%- include('../components/header.html'); %>
     <div class="home">
       <div id="particles-js" class="particles-container" style="display:none;"></div>
       <div class="homeContent pt-80">
@@ -447,10 +444,11 @@
 
       </div>
     </div>
-    <%- include('../components/rightToolbar/rightToolbar.html'); %>
+    <%- include('../components/rightToolbar.html'); %>
 
-      <!-- footer -->
 
+ <%#公共底部  %> 
+ <%- include('../components/footer.html'); %>
 </body>
 <!-- 公共js -->
 <%- include('../components/js.html'); %>

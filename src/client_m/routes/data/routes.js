@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: 静态路由数据
  * @Date: 2022-04-27 13:26:51
- * @LastEditTime: 2022-05-13 15:10:48
+ * @LastEditTime: 2022-05-21 21:05:39
  */
 let prefix = '/manager';
 let path404 = `${prefix}/404`;
@@ -49,29 +49,11 @@ export const routes = [
         },
         component: () => import('views/userAccount'),
       },
-      {//资金明细
-        path: 'finance',
-        name: 'finance',
-        meta: { title: "资金明细",icon: ""},
-        component: () => import('views/finance'),
-      },
-      {//我的订单
-        path: "myOrder",
-        name: 'myOrder',
-        meta: {title: "我的订单", icon: ""},
-        component: () => import('views/myOrder'),
-      },
       {
         path: 'setMeal',
         name: 'setMeal',
         meta: {title: "我的套餐",icon: ""},
         component: () => import('views/setMeal'),
-      },
-      {
-        path: 'longIp',
-        name: 'longIp',
-        meta: {title: "我的长效IP",icon: ""},
-        component: () => import('views/longIp'),
       },
       {//IP白名单
         path: 'whiteListIp',

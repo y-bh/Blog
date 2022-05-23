@@ -1,12 +1,12 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: 企业服务
  * @Date: 2022-04-27 14:30:33
- * @LastEditTime: 2022-05-17 17:04:33
+ * @LastEditTime: 2022-05-22 14:11:19
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,10 +16,10 @@
   <meta name="description" content="天启http">
   <title>企业服务</title>
   <%- include('../components/style.html'); %>
-  <%- include('./style.html') %>
+  <link rel="stylesheet" href="/css/firmServer.css">
 </head>
 <body>
-  <%- include('../components/header/header.html'); %>
+  <%- include('../components/header.html'); %>
   <div class="banner"></div>
   <div class="container mt-80 mb-80">
     <form 
@@ -85,7 +85,7 @@
           id="mate_sell" 
           required
         >
-          <option>请选择您需要的用量</option>
+          <option value="">请选择您需要的用量</option>
           <option value="1">小于20万</option>
           <option value="2">20万-100万</option>
           <option value="3">100万-500万</option>
@@ -104,10 +104,15 @@
         >
       </div>
       <div class="bottom_btn flex-center">
-        <button type="button" class="submit btn btn-primary" onclick="onSubmit()">提交</button>
+        <button type="button" class="bl-button submit" onclick="onSubmit()">
+          <span>提交</span>
+        </button>
       </div>
     </form>
   </div>
+
+   <%#公共底部  %> 
+ <%- include('../components/footer.html'); %>
 </body>
 <%- include('../components/js.html'); %>
 <script src="/js/company.js"></script>

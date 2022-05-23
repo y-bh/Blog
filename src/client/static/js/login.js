@@ -3,16 +3,46 @@
  * @LastEditors: 秦琛
  * @description: 登录/注册/重置页功能
  * @Date: 2022-05-17 15:29:16
- * @LastEditTime: 2022-05-19 15:31:07
+ * @LastEditTime: 2022-05-21 15:18:13
  */
+
+
+/**************
+ * 
+ * 
+ * 暴露字段:
+ * from: 注册来源
+ * back: 登录后返回页面，没有则返回个人中心
+ * did: 注册短链
+ * 
+ *
+ */
+
+
+//获取 query 相关参数
+const query = getParams()
+
+//登录后返回的地址
+let back = null
+
+if(query && query.back){
+  back = query.back
+}
+
+
+console.log("query:",query)
+
+
+
 
 
 // 获取相关参数
 let agreeMent = false
-function getParams(type = 'login') {
+function getFuncParams(type = 'login') {
   //1. 获取表单
   const form = document.forms['login']
 
+  console.log("获取参数:", form)
   //2. 公共的参数
   let obj = {
     phone: form.phone.value.trim() || '', //电话号码
@@ -39,9 +69,9 @@ function getParams(type = 'login') {
 }
 
 //是否同意注册协议
-function agreeOn(){
-  agreeMent =!agreeMent
-   console.log("嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻",agreeMent)
+function agreeOn() {
+  agreeMent = !agreeMent
+  console.log("嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻", agreeMent)
 }
 
 //校验相关参数
@@ -55,7 +85,7 @@ function checkForm(params = null, type = 'login') {
   if (!params) {
     return
   }
-
+  console.log("校验的参数:", params)
   const res = {
     isPass: true,
     msg: ''
@@ -129,7 +159,7 @@ function checkForm(params = null, type = 'login') {
       res.msg = '请确认登录密码!'
       return res
     }
-    if (rules.pwd !== params.cpwd) {
+    if (params.pwd !== params.cpwd) {
       res.isPass = false
       res.msg = '登录密码与确认密码不一致!'
       return res
@@ -175,7 +205,7 @@ function checkForm(params = null, type = 'login') {
 //登录/注册/重置密码
 async function loginSubmit(type) {
   //获取参数
-  const params = getParams(type)
+  const params = getFuncParams(type)
 
   //校验参数
   const res = checkForm(params, type)
@@ -183,7 +213,21 @@ async function loginSubmit(type) {
     message: res.msg, type: 'warning'
   })
 
+
+  let text = '登录'
+  switch (type) {
+    case 'reset':
+      text = '重置'
+      break;
+    case 'register':
+      text = '注册'
+      break
+    default:
+      text = '登录'
+  }
+
   params.type = type
+  console.log("params:", params)
   $.ajax({
     type: 'POST',
     url: "/api/login",
@@ -192,18 +236,28 @@ async function loginSubmit(type) {
     contentType: 'application/json',
     success: (res) => {
 
-      if (+res.code !== 200) {
+      if (res && res.code !== 200) {
         return Helper.$message({
-          message: res.msg || '注册失败!请联系客服',
+          message: res.message || `${text}失败请联系客服`,
           type: 'warning'
         })
 
       }
 
-      window.open("/manager/user")
+      if (type === 'reset') {
+        window.open("/login")
+      } else {
+        //back
+        if(type === 'login' && back){
+          location.href="/"+back
+          return
+        }
+
+        window.open("/manager/user")
+      }
     },
     error: (err) => {
-
+      console.log(err)
     }
   });
 }
@@ -212,6 +266,7 @@ async function loginSubmit(type) {
 let timer = null //验证码定时器
 let count = 60 //定时时间
 async function sendCode(type = 'register') {
+  console.log("验证码类型:", type)
   //1. 获取表单
   const form = document.forms['login']
 
@@ -220,6 +275,7 @@ async function sendCode(type = 'register') {
     phone: form.phone.value.trim() || '', //电话号码
   }
 
+  console.log("验证码类型参数:", params)
   //3.校验
   if (!params.phone) {
     return Helper.$message({
@@ -247,7 +303,9 @@ async function sendCode(type = 'register') {
 
   const res = await ajax({
     url,
-    query: params.phone
+    query: JSON.stringify({
+      data: params.phone
+    })
   })
 
 
@@ -274,7 +332,25 @@ async function sendCode(type = 'register') {
     })
   }
 }
+//防抖函数
+function debounce(fn, delay, once = false) {
+  console.log("经历了防抖")
+  var timeout = null;
+  var count = 0;
+  return function (e) {
+    if (once && count === 0) {
 
+      fn.apply(this, arguments);
+      count++
+      return
+    }
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fn.apply(this, arguments);
+      once && count++
+    }, delay);
+  };
+}
 window.sendCode = debounce(sendCode, 300, true)
 window.loginSubmit = debounce(loginSubmit, 300, true)
 
@@ -295,18 +371,18 @@ document.onkeydown = function (e) {
 
 
 //测试接口代理
-$(async function(){
+$(async function () {
 
   let params = {
     url: "/article/getArticleType",
     type: 'get',
     query: null
-};
+  };
 
 
 
-let resp = await ajax(params);
-console.log("接口响应:",resp)
+  let resp = await ajax(params);
+  console.log("接口响应:", resp)
 
 
 

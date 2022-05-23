@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-19 16:27:26
+ * @LastEditTime: 2022-05-22 12:54:04
 -->
 <template>
   <div class="white-list-wrap">
@@ -45,11 +45,17 @@
         style="width: 100%"
         :header-cell-style="tableHeaderColor"
       >
+        <template #empty>
+          <div>
+            <div class="flex justify-content-center empty-box"></div>
+            <p class="flex justify-content-center text-desc">暂无内容</p>
+          </div>
+        </template>
         <el-table-column prop="clientIP" label="IP" align="center"></el-table-column>
         <el-table-column prop="desc" label="备注" align="center">
           <template #default="{ row }">
             {{ row.desc }}
-            <button @click="openWhiteListDialog('edit', row)">edit</button>
+            <i class="iconfont icon-bianji edit-desc" @click="openWhiteListDialog('edit', row)" />
           </template>
         </el-table-column>
         <el-table-column
@@ -147,12 +153,12 @@ export default {
 
     //get tutorial
     function goTutorial() {
-      window.location.href = window.location.origin + '/helpCenter'
+      // window.location.href = window.location.origin + '/helpCenter'
     }
 
     // go getip
     function goGetIp() {
-      window.location.href = window.location.origin + '/getIp' + `?wl`
+      window.location.href = window.location.origin + '/getIp' + `?a_id=wl`
     }
 
     //get white list

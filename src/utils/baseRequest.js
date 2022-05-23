@@ -1,22 +1,27 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-20 09:51:56
+ * @LastEditTime: 2022-05-21 20:58:27
  */
 
 import axios from 'axios';
+import { inject } from "vue";
 class Request {
-
+  
   constructor(baseURL, timeout = 10000) {
     let service = axios.create({
       baseURL,
       withCredentials: true,
       timeout
     });
+
+    let message = inject('message');
+
     // 请求拦截器
     service.interceptors.request.use(config => {
+      config.headers.xx_uid = 7567
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
       return config;
     }, error => {
@@ -26,7 +31,7 @@ class Request {
 
     // 响应拦截器
     service.interceptors.response.use(response => {
-      // console.log(response,'response***********');
+      
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
@@ -36,16 +41,21 @@ class Request {
             data: data.data
           };
         } else {
+          console.log("ccccccccc",data, data.message)
+          // message.error({
+          //   message: data.msg || data.message || '接口异常',
+          //   showClose: true
+          // })
           return {
             code: -1,
-            msg: data.msg || data.message || '接口异常'
+            message:  data.message || '接口异常'
           };
         }
       }
-      return response.data;
+      return response && response.data || response;
     },
       error => {
-        console.error("响应报错:", error)
+        
       });
 
     this.service = service
@@ -60,6 +70,7 @@ class Request {
    * @returns {Promise}
    */
   proxyAxios(url, method, data,headers) {
+    
     try {
       return this.service({
         url,

@@ -3,21 +3,27 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-20 09:53:28
+ * @LastEditTime: 2022-05-22 17:19:47
 -->
 <template>
   <div class="userAccount">
     <div class="account pt-40">
       <div class="left mb-10">
         <div class="user-info">
-          <span class="user-name mr-20">用户名</span><span>{{ username }}</span>
+          <span class="user-name mr-20">用户名</span
+          ><span>{{ userInfo.username }}</span>
           <div class="user-edit ml-30" @click="editPersonInfo">
             <img src="@/assets/images/edit.png" alt="" />
           </div>
         </div>
         <div class="group-btn ml-60">
-          <el-button type="primary" @click="openKey">密钥</el-button>
-          <el-button type="warning" v-if="!sale.sellerId" class="ml-20"
+          <el-button
+            type="primary"
+            @click="openKey"
+            v-if="userInfo.proxyApiOpend"
+            >密钥</el-button
+          >
+          <el-button type="warning" v-if="!userInfo.isHasSeller" class="ml-20"
             >联系销售</el-button
           >
         </div>
@@ -32,7 +38,7 @@
         <div class="name"><span>手机号码</span></div>
         <div class="content mt-20">
           <div class="number">
-            <span>{{ phone }}</span>
+            <span>{{ userInfo.phone }}</span>
           </div>
           <div class="group-btn">
             <el-button type="primary" plain @click="updateMobile"
@@ -59,9 +65,11 @@
           </span>
         </div>
         <div class="bottom mt-20">
-          <div class="amount"><span>300，987，222</span></div>
+          <div class="amount">
+            <span>{{ userInfo.balance }}</span>
+          </div>
           <div>
-            <el-button type="warning">
+            <el-button type="warning" @click="jumpToPackage">
               <span class="pl-20 pr-20">充值</span>
             </el-button>
           </div>
@@ -75,49 +83,83 @@
           >
         </div>
         <!-- 未认证 -->
-        <div class="group-btn mt-20 alginRight" v-if="authStates == 1">
-          <el-button type="primary" plain>个人认证</el-button>
-          <el-button class="customTip" type="primary" plain>企业认证</el-button>
+        <div
+          class="group-btn mt-20 alginRight"
+          v-if="
+            !userInfo.identityAuth &&
+            !userInfo.companyAuth &&
+            userInfo.verifyState == 'none'
+          "
+        >
+          <el-button type="primary" plain @click="personAuth"
+            >个人认证</el-button
+          >
+          <el-button class="customTip" type="primary" plain @click="companyAuth"
+            >企业认证</el-button
+          >
         </div>
         <!--个人认证通过后如下显示  -->
-        <div class="group-btn mt-20 alginRight" v-if="authStates == 2">
-          <el-button class="" type="primary" plain
+        <div
+          class="group-btn mt-20 alginRight"
+          v-if="
+            !userInfo.companyAuth &&
+            userInfo.identityAuth &&
+            userInfo.verifyState == 'none'
+          "
+        >
+          <el-button class="" type="primary" plain @click="queryPersonAuth"
             >个人认证&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
         <!--企业认证通过后如下显示  -->
-        <div class="group-btn mt-20 alginRight" v-if="authStates == 3">
-          <el-button class="" type="primary" plain
+        <div class="group-btn mt-20 alginRight" v-if="userInfo.companyAuth">
+          <el-button class="" type="primary" plain @click="queryCompayStatus"
             >企业认证&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
         <!--企业认证审核中  -->
-        <div class="group-btn mt-20 alginRight" v-if="authStates == 4">
-          <el-button class="" type="warning" plain
+        <div
+          class="group-btn mt-20 alginRight"
+          v-if="
+            !userInfo.companyAuth &&
+            userInfo.verifyState &&
+            userInfo.verifyState == 'wait'
+          "
+        >
+          <el-button class="" type="warning" plain @click="queryCompayStatus"
             >企业认证审核中&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
         <!--企业认证失败  -->
-        <div class="group-btn mt-20 alginRight" v-if="authStates == 5">
-          <el-button class="" type="danger" plain
+        <div
+          class="group-btn mt-20 alginRight"
+          v-if="
+            !userInfo.companyAuth &&
+            userInfo.verifyState &&
+            userInfo.verifyState == 'fail'
+          "
+        >
+          <el-button class="" type="danger" plain @click="queryCompayStatus"
             >企业认证失败&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
       </div>
       <!-- 有销售 -->
       <div
-        v-if="sale.sellerId"
+        v-if="userInfo.isHasSeller"
         class="operate-box operate-box-big ml-20 mr-20 mt-20 mb-20 saleBox"
       >
         <div class="saleInfo">
           <div class="name"><span>您的专属销售</span></div>
           <div class="sale-name mt-20">
-            <span>{{ sale.sellerName }}</span
-            ><span class="ml-15">{{ sale.profession }}</span>
+            <span>{{ userInfo.sale.sellerName }}</span
+            ><span class="ml-15">{{ userInfo.sale.profession }}</span>
           </div>
           <div class="telep mt-20">
-            <span>{{ sale.sellerPhone }}</span>
-            <span class="copyBtn ml-20">复制</span>
+            <span>{{ userInfo.sale.sellerPhone }}</span>
+            <span class="copyBtn ml-20" @click="copy(userInfo.sale.sellerPhone)"
+              >复制</span
+            >
           </div>
         </div>
         <div class="saleWX">
@@ -143,9 +185,9 @@
     <!-- 密匙 -->
     <KeyDialog ref="keyRef"></KeyDialog>
     <!-- 个人认证 -->
-    <PersonalAuth ref="perAuthREf"></PersonalAuth>
+    <PersonalAuth ref="perAuthRef"></PersonalAuth>
     <!-- 企业认证 -->
-    <companyAuth ref="companyAuthREf"></companyAuth>
+    <companyAuth ref="companyAuthRef"></companyAuth>
   </div>
 </template>
 
@@ -156,7 +198,20 @@ import UpdateMobile from "./dialog/UpdateMobile";
 import KeyDialog from "./dialog/KeyDialog";
 import PersonalAuth from "./dialog/PersonalAuth";
 import companyAuth from "./dialog/companyAuth";
-import { ref, reactive, toRefs, onBeforeMount, onMounted } from "vue";
+
+import { getMineInfo } from "model/user.js";
+
+import useClipboard from "vue-clipboard3";
+
+import {
+  ref,
+  reactive,
+  toRefs,
+  onBeforeMount,
+  onMounted,
+  inject,
+  provide,
+} from "vue";
 export default {
   name: "",
   components: {
@@ -169,17 +224,49 @@ export default {
   },
   props: {},
   setup() {
+    const $message = inject("message");
+    const { toClipboard } = useClipboard();
     let dialogPersonVisible = ref(false);
     let dialogPwdVisible = ref(false);
     const updateMobileRef = ref(null);
     const keyRef = ref(null);
-    const perAuthREf = ref(null);
-    const companyAuthREf = ref(null);
-    let authStates = ref(5); //1:未认证 2：个人认证通过  3：企业认证通过 4：企业认证审核中 5：企业认证审核未通过
-    let userInfo = null;
-    onBeforeMount(() => {});
-    onMounted(() => {});
-
+    const perAuthRef = ref(null);
+    const companyAuthRef = ref(null);
+    let authStates = ref(5);
+    let state = reactive({
+      //authStates: 5, //1:未认证 2：个人认证通过  3：企业认证通过 4：企业认证审核中 5：企业认证审核未通过
+      userInfo: {
+        username: "", //用户名
+        phone: "", //手机
+        balance: 0, //余额
+        companyAuth: false, //公司认证
+        verifyState: "none", //none:"未认证" wait“审核中” “fail”：失败
+        identityAuth: false, //个人认证
+        phoneNumAuth: false,
+        proxyApiOpend: false, //是否打开密匙
+        identityName: "",
+        identityNum: "",
+        keyInfo: {
+          //密匙
+          key: "",
+          value: "",
+        },
+        isHasSeller: false, //有无销售
+        sale: {
+          //销售信息
+          sellerName: "",
+          profession: "",
+          sellerPhone: "",
+          link: "", //二维码
+        },
+        wxNo: "",
+        QQNo: "",
+        enmail: "",
+        business: "",
+        profession: "",
+      },
+    });
+    provide("userInfoSon", state);
     const editPersonInfo = () => {
       //编辑个人信息
       console.log(3333, dialogPersonVisible);
@@ -200,38 +287,131 @@ export default {
     const openKey = () => {
       keyRef.value.dialogVisible = true;
     };
-
+    onBeforeMount(async () => {
+      await getUserInfo();
+    });
+    onMounted(() => {});
+    const queryCompayStatus = () => {
+      let auth = state.userInfo.companyAuth;
+      let status = state.userInfo.verifyState;
+      console.log("==========当前企业的状态====", status);
+      if (auth) {
+        companyAuthRef.value.title = "企业认证";
+        companyAuthRef.value.authCompanyStep = 6;
+        companyAuthRef.value.dialogVisible = true;
+        return;
+      }
+      if (!auth && status == "wait") {
+        companyAuthRef.value.title = "企业认证";
+        companyAuthRef.value.authCompanyStep = 5;
+        companyAuthRef.value.dialogVisible = true;
+      }
+      if (!auth && status == "fail") {
+        companyAuthRef.value.title = "企业认证";
+        companyAuthRef.value.authCompanyStep = 7;
+        companyAuthRef.value.dialogVisible = true;
+      }
+    };
     const getUserInfo = async () => {
       //TODO 通过cookie获取用户信息
-      let userInfoData = {
-        username: "rstq",
-        phone: "176****4041",
-        balance: 225000,
-
-        companyAuth: false,
-        identityAuth: false,
-        phoneNumAuth: false,
-        proxyApiOpend: true,
-        keyInfo: {
-          key: "7q45dEDYB7e5mSp9",
-          value: "isPuE5gU8H7gZDVI",
-        },
-        sale: {
-          sellerId: "10086", //有无销售
-          sellerName: "风清扬",
-          profession: "销售经理",
-          sellerPhone: "18809098787",
-          sellerAccount: null,
-        },
-      };
-      // if(){
-
-      // }
-      userInfo = reactive(userInfoData);
+      let res = await getMineInfo();
+      console.log(333333333333, res);
+      if (res && res.code == 200) {
+        let data = res.data ? res.data : {};
+        state.userInfo = {
+          username: data.username ? data.username : "", //用户名
+          phone: phoneFormat(data.phone), //手机
+          balance: data.balance ? Number(data.balance).toLocaleString() : 0, //余额
+          companyAuth: data.companyAuth ? data.companyAuth : false, //公司认证
+          verifyState: data.verifyState ? data.verifyState : "none", //cut:"未认证" wait“审核中” “fail”：失败
+          identityAuth: data.identityAuth ? data.identityAuth : false, //个人认证
+          proxyApiOpend: data.proxyApiOpend ? data.proxyApiOpend : false, //
+          identityName: data.identityName ? data.identityName : "",
+          identityNum: data.identityNum ? data.identityNum : "",
+          keyInfo: {
+            //密匙
+            key: data.proxyApiKey,
+            value: data.proxyApiIv,
+          },
+          isHasSeller:
+            data.sellerInfo &&
+            data.sellerInfo.vest &&
+            data.sellerInfo.vest.nickname
+              ? true
+              : false, //有无销售
+          sale: {
+            //销售信息
+            sellerName:
+              data.sellerInfo &&
+              data.sellerInfo.vest &&
+              data.sellerInfo.vest.nickname
+                ? data.sellerInfo.vest.nickname
+                : "--",
+            profession:
+              data.sellerInfo && data.sellerInfo.sellerLevel
+                ? data.sellerInfo.sellerLevel
+                : "--",
+            sellerPhone:
+              data.sellerInfo &&
+              data.sellerInfo.vest &&
+              data.sellerInfo.vest.phone
+                ? data.sellerInfo.vest.phone
+                : "--",
+            link:
+              data.sellerInfo &&
+              data.sellerInfo.vest &&
+              data.sellerInfo.vest.link
+                ? data.sellerInfo.vest.link
+                : null,
+          },
+          wxNo: data.wechat ? data.wechat : "",
+          QQNo: data.qq ? data.qq : "",
+          enmail: data.email ? data.email : "",
+          business: data.business ? data.business : "",
+          profession: data.profession ? data.profession : "",
+        };
+      }
     };
-    getUserInfo();
+    const phoneFormat = (value) => {
+      if (!value) return "";
+      const phoneFormat =
+        value.toString().substring(0, 3) +
+        "****" +
+        value.toString().substring(7, 11);
+      return phoneFormat;
+    };
+    const jumpToPackage = () => {
+      window.location.href = "/package";
+    };
 
+    const copy = async (val) => {
+      try {
+        await toClipboard(val);
+        $message.success("复制成功");
+      } catch (e) {
+        $message.error("复制成功");
+      }
+    };
+    const queryPersonAuth = () => {
+      companyAuthRef.value.title = "个人认证";
+      companyAuthRef.value.authCompanyStep = 8;
+      companyAuthRef.value.dialogVisible = true;
+    };
+    const personAuth = () => {
+      //perAuthRef.value.title = "个人认证"
+      perAuthRef.value.authPersonStep = 1;
+      perAuthRef.value.dialogVisible = true;
+    };
+    const companyAuth = () => {
+      companyAuthRef.value.title = "企业认证";
+      companyAuthRef.value.authCompanyStep = 1;
+      companyAuthRef.value.dialogVisible = true;
+    };
     return {
+      queryCompayStatus,
+      personAuth,
+      queryPersonAuth,
+      companyAuth,
       authStates,
       editPersonInfo,
       dialogPersonVisible,
@@ -242,9 +422,11 @@ export default {
       updateMobileRef,
       keyRef,
       openKey,
-      perAuthREf,
-      companyAuthREf,
-      ...toRefs(userInfo),
+      perAuthRef,
+      companyAuthRef,
+      jumpToPackage,
+      ...toRefs(state),
+      copy,
     };
   },
 };

@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 陈昊天
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 22:33:54
- * @LastEditTime: 2022-05-16 22:57:38
+ * @LastEditTime: 2022-05-20 13:52:33
  */
 let tabList = [
   {
@@ -74,7 +74,6 @@ const getBusinessData = () => {
     const data = {
       tabList,
       menuList,
-      currentId,
       imgUrl: {
         social,
         market,

@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description:本地开发环境配置
  * @Date: 2022-05-18 16:41:25
- * @LastEditTime: 2022-05-18 16:55:26
+ * @LastEditTime: 2022-05-20 16:46:04
  */
 
 module.exports = {

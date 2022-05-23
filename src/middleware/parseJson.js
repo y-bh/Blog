@@ -12,7 +12,7 @@ exports.routerResponse = (option = {}) => {
       ctx.type = option.type || "json";
       ctx.body = {
         code: option.successCode || 200,
-        msg: msg,
+        message: msg,
         data: data,
       };
     };
@@ -21,7 +21,7 @@ exports.routerResponse = (option = {}) => {
       ctx.type = option.type || "json";
       ctx.body = {
         code: code || option.failCode || 99,
-        msg: msg || option.successMsg || "fail",
+        message: msg || option.successMsg || "fail",
       };
     };
 

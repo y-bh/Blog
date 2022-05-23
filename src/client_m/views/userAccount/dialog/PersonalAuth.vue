@@ -3,11 +3,11 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-18 17:50:15
+ * @LastEditTime: 2022-05-22 16:19:22
 -->
 <template>
   <div class="personalAuth">
-    <el-dialog v-model=" dialogVisible">
+    <el-dialog v-model="dialogVisible">
       <DialogTitle title-content="个人认证" />
       <!-- 姓名身份证 -->
       <div class="formContent" v-show="authPersonStep == 1">
@@ -33,28 +33,32 @@
             />
           </el-form-item>
           <div class="common-btnGroup pt-30 pb-40">
-            <el-button type="primary" plain>取消</el-button>
-            <el-button type="warning" @click="onSubmit">确定</el-button>
+            <el-button type="primary" plain @click="cancel(vaildIDCardRef)"
+              >取消</el-button
+            >
+            <el-button type="warning" @click="onZFBSubmit">确定</el-button>
           </div>
         </el-form>
       </div>
       <!-- 姓名身份证 end-->
       <!-- 扫码 -->
       <div class="authContent" v-show="authPersonStep == 2">
-        <div class="explain">
+        <div class="explain pt-40">
           <span>请打开支付宝扫描下方二维码</span>
         </div>
         <div class="scan mt-30 mb-20">
-          <div id="qcCode"></div>
+          <div ref="qrcodeRef"></div>
         </div>
         <div class="explain">
           <span>您的信息由支付宝审核，本平台无法保留您的识别信息</span>
         </div>
         <div class="common-btnGroup center pt-30 pb-40">
-          <el-button type="primary" @click="authPersonStep == 1"
+          <el-button type="primary" @click="authPersonStep = 1"
             >返回上一步</el-button
           >
-          <el-button type="warning" @click="getAuthResult">查询结果</el-button>
+          <el-button type="warning" @click="getAuthResultDom"
+            >查询结果</el-button
+          >
         </div>
       </div>
 
@@ -62,10 +66,12 @@
       <div class="authContent" v-show="authPersonStep == 3">
         <div class="title mt-40"><span>恭喜您，实名认证成功！</span></div>
         <div class="common-btnGroup center pt-20 pb-40">
-          <el-button type="primary" @click="authPersonStep == 1"
-            >查看套餐</el-button
-          >
-          <el-button type="warning" @click="getAuthResult">提取IP</el-button>
+          <router-link class="mr-40" to="setMeal">
+            <el-button type="primary">查看套餐</el-button>
+          </router-link>
+          <a href="/getIp">
+            <el-button type="warning">提取IP</el-button>
+          </a>
         </div>
       </div>
 
@@ -81,7 +87,7 @@
           </div>
         </div>
         <div class="mt-30 pb-40">
-          <el-button type="primary" @click="authPersonStep == 5"
+          <el-button type="primary" @click="authPersonStep = 1"
             >重新认证</el-button
           >
         </div>
@@ -93,6 +99,8 @@
 <script>
 import DialogTitle from "components/DialogTitle";
 import { ref, reactive, computed, toRefs, onMounted, inject } from "vue";
+import { zfbAuth, getAuthResult } from "model/user.js";
+import QRCode from "qrcodejs2";
 export default {
   name: "",
   components: {
@@ -101,10 +109,12 @@ export default {
   props: {},
   setup(props, { emit }) {
     //const
-    const  dialogVisible = ref(false);
+    let certifyId = ref("");
+    const qrcodeRef = ref(null);
+    const dialogVisible = ref(false);
     const vaildIDCardRef = ref(null);
     const message = inject("message");
-    const authPersonStep = ref(4); //认证步骤
+    const authPersonStep = ref(1); //认证步骤1:姓名身份证验证 2:支付宝二维码 3：认证成功 4：认证失败
     const form = reactive({
       ruleForm: {
         name: "",
@@ -131,38 +141,67 @@ export default {
       },
     });
 
-    const onSubmit = (formName) => {
+    const onZFBSubmit = async (formName) => {
       console.log("=======修改密码数据======", form.ruleForm);
       // if (!formEl) return
       vaildIDCardRef.value.validate(async (valid) => {
         if (valid) {
-          //TODO
-          authPersonStep.value = 2;
-          //跳转登录页面
-          dialogVisible.value = false;
+          //TODO 后期需要加密
+          let params = {
+            name: form.ruleForm.name,
+            idCard: form.ruleForm.idCardNo,
+          };
+          let res = await zfbAuth({data:JSON.stringify(params)});
+          console.log(2222222222222, res);
+          if (res.code == 200) {
+            let url = res.data && res.data.url;
+            if (url) {
+              qrcodeRef.value.innerHTML = "";
+              certifyId = res.data.certifyId;
+              new QRCode(qrcodeRef.value, {
+                text: url, //扫描二维码
+                width: 240,
+                height: 240,
+              });
+            }
+            authPersonStep.value = 2;
+          } else {
+            message.error("获取二维码失败");
+          }
         } else {
           console.log("error submit!!");
         }
       });
     };
     //扫码认证结果
-    const getAuthResult = () => {
-      //
-      let result = true;
-      if (result) {
-        authPersonStep.value = 3;
-      } else {
-        authPersonStep.value = 4;
+    const getAuthResultDom = async () => {
+      console.log("获取认证结果--------", certifyId);
+      let res = await getAuthResult(certifyId);
+      if (res && res.code == 200) {
+        if (res.data) {
+          authPersonStep.value = 3;
+        } else {
+          //认证失败
+          // message.error("身份验证失败！");
+          authPersonStep.value = 4;
+        }
       }
     };
-
+    //取消
+    const cancel = (formEl) => {
+      dialogVisible.value = false;
+      if (!formEl) return;
+      formEl.resetFields();
+    };
     return {
+      cancel,
+      qrcodeRef,
       ...toRefs(form),
-      onSubmit,
+      onZFBSubmit,
       vaildIDCardRef,
-       dialogVisible,
+      dialogVisible,
       authPersonStep,
-      getAuthResult,
+      getAuthResultDom,
     };
   },
 };

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 重置密码
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-18 13:10:57
+ * @LastEditTime: 2022-05-21 16:04:49
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -21,35 +21,48 @@
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt, randomString } from "tools/utility"
+import { resetSecret } from "model/meal.js";
 export default {
     components: {
         DialogTitle,
     },
+    emits: ['updateTable'],
     setup (props, context) {
         const message = inject('message');
         // 引入全局变量
         const global = inject('_global');
-        // console.log(global.methods.randomString(8),'随机字符串');
         const state = reactive({
             dialogVisible: false,
             mergeForm: {
-                id: null,
-                authSecret: null
+                id: null
             }
         });
         const methods = {
             onOpen(row){
                 state.mergeForm.id = row.id
-                state.mergeForm.authSecret = randomString(8)
             },
-            submitMerge(){
-
+            async submitMerge(){
+                let res = await resetSecret(state.mergeForm.id);
+                if(res && res.code === 200){
+                    message.success({
+                        message: '重置成功',
+                        showClose: true
+                    })
+                    state.dialogVisible = false
+                    context.emit('updateTable', false)
+                } else {
+                    message.error({
+                        message: '重置失败',
+                        showClose: true
+                    })
+                }
             }
         }
 
         return {
+            ...toRefs(state),
             ...methods,
-            ...toRefs(state)
+            
         }
     }
 }

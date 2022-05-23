@@ -1,11 +1,11 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-20 14:15:52
+ * @LastEditTime: 2022-05-21 20:09:46
  */
-const { getProxyCity,getProxyMenu } = require("dao/getIp")
+const { getProxyCityDao,getProxyMenuDao } = require("dao/getIp")
 
 let codeDemo = [
   {
@@ -95,22 +95,26 @@ let ipUse = [
   {
     id: 1,
     time: '3分钟',
-    deal: '5天启币/IP'
+    deal: '5天启币/IP',
+    val: 3
   },
   {
     id: 2,
     time: '5分钟',
-    deal: '10天启币/IP'
+    deal: '10天启币/IP',
+    val: 5
   },
   {
     id: 3,
     time: '10分钟',
-    deal: '18天启币/IP'
+    deal: '18天启币/IP',
+    val: 10
   },
   {
     id: 4,
     time: '15分钟',
-    deal: '30天启币/IP'
+    deal: '30天启币/IP',
+    val: 15
   },
 ]
 
@@ -312,9 +316,6 @@ let errorCodeContent = {
       label: '1009: 白名单中不存在指定的ip可以删除'
     },
     {
-      label: '1009: 白名单中不存在指定的ip可以删除'
-    },
-    {
       label: '1101: 服务器内部错误'
     }
   ],
@@ -362,9 +363,9 @@ let errorCodeContent = {
 }
 
 //获取提取套餐城市列表
-const getProxyCityS = async () => {
+const getProxyCityService = async () => {
   try {
-    const res = await getProxyCity()
+    const res = await getProxyCityDao()
     if (+res.code === 200) {
       province = res.data
     }
@@ -375,9 +376,9 @@ const getProxyCityS = async () => {
 }
 
 //获取提取套餐下拉列表
-const getProxyMenuS = async () => {
+const getProxyMenuService = async () => {
   try {
-    const res = await getProxyMenu()
+    const res = await getProxyMenuDao()
     if (res && res.code === 200) {
       paidList = res.data
     }
@@ -410,6 +411,6 @@ const data = () => {
 
 module.exports = {
   data,
-  getProxyCityS,
-  getProxyMenuS
+  getProxyCityService,
+  getProxyMenuService
 }

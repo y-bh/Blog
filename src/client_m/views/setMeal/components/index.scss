@@ -1,4 +1,5 @@
 .customize_dialog {
+    
     .dialog-body {
         font-size: 16px;
         font-family: 'Microsoft YaHei';
@@ -51,6 +52,36 @@
         font-size: 14px;
         font-weight: 400;
         color: #FC7019;
+    }
+
+    .pay-tip{
+        color: #4C5664;
+        padding: 0;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+    .countdown{
+        margin: 0 4px;
+        color: #F8486F;
+    }
+
+    .code {
+        position: relative;
+        .code_img {
+            position: absolute;
+            z-index: 9999;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            transform: translate(-50%, -50%);
+        } 
+        .code-url{
+            // background: #333333;
+            width: 100%;
+            text-align: center;
+            margin: auto;
+        }
     }
     
     .pay-btn {

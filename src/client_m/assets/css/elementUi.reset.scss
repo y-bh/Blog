@@ -67,9 +67,25 @@
   &.dialog-double {
     max-width: 680px;
   }
+
+  &.dialog-pay{
+    max-width: 400px;
+  }
+
+  &.dialog-table {
+    max-width: 1200px;
+  }
 }
 
 .el-button--default {
   border-color: #1989fa;
   color: #1989fa;
+}
+
+
+.el-table {
+  th {
+      background: rgba(242, 247, 254, 0.39);
+      color: #333;
+  }
 }

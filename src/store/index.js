@@ -14,9 +14,10 @@ const options = {
 const cache = new LRU(options);
 
 //设置缓存值
-function setStore(key, value) {
+function setStore(key, value, options = options) {
+  
 
-  cache.set(key, value)
+  cache.set(key, value, options)
 }
 
 //获取缓存值
