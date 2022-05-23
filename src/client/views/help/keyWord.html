@@ -118,7 +118,7 @@
                   </ul>
                 </nav>
 
-                <% if(lists && lists.totalPage>1) {%>
+                <% if(lists.totalPage>lists.pageNum) {%>
                 <div class="goto flex justify-content-center align-items-center ml-30">
                   前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number"
                     onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')"

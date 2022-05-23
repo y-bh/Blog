@@ -55,7 +55,7 @@ const getHelpService = async (data, articleTypes = []) => {
 
     //2. 获取文章列表
     const params = {
-      pageSize: data.pageSize || 10,
+      pageSize: data.pageSize || 2,
       pageNum: +data.pageNum || 1,
     }
 

@@ -6,16 +6,16 @@
  * @LastEditTime: 2022-05-17 13:34:28
  */
 
+//当前网址路径
 let path = location.pathname
+let tems = (path.split("/")).filter((item) => item)
 
-
-let tems = (path.split("/")).filter((item)=>item)
 $('.nav .nav-item .nav-link').each((index, item) => {
   let id = $(item).attr("id")
-  if(tems.length<=1 && index ==0){
+  if (tems.length <= 1 && index == 0) {
     path = id
   }
-  
+
   if (path.includes(id)) {
     $('.nav .nav-item .nav-link').get(index).click();
   }
@@ -61,9 +61,42 @@ $('.go_detail').on('click', function () {
 
 
 //上一页 下一页
-function goPage(type = 'next'){
+function goPage(type = 'next') {
 
-  console.log("跳转上一页,下一页")
-  
+  let paths = JSON.parse(JSON.stringify(tems))
+
+  if (paths.length <= 2) {
+    return
+  }
+
+
+  let pageIndex = (paths[paths.length - 1])
+  if (pageIndex.includes(".html")) {
+    pageIndex = parseInt(pageIndex)
+  }
+
+  //返回上一页
+  if (type !== 'next') {
+    if (pageIndex > 1) {
+      pageIndex = pageIndex - 1
+    }
+  } else {
+    //返回下一页
+    pageIndex = pageIndex + 1
+  }
+
+  paths[paths.length - 1] = `${pageIndex}.html`
+
+  const url = paths.reduce((pre, item) => {
+    return `${pre}/${item}`
+  }, "")
+
+
+
+
+
+  console.log("跳转上一页,下一页", url)
+  location.href = url
+
 }
 
