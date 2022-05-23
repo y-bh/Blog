@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 企业服务js
  * @Date: 2022-05-17 14:48:37
- * @LastEditTime: 2022-05-23 17:41:07
+ * @LastEditTime: 2022-05-23 17:46:32
  */
 // $(function() {
 //   //表单校验
@@ -48,6 +48,7 @@ let minPHONE = /^1[3456789]\d{9}$/;
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
   .forEach(function (form) {
+    console.log(form);
     btn.addEventListener('click', function(event) {
       if (!form.checkValidity()) {
         event.preventDefault();

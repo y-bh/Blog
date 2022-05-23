@@ -4,7 +4,7 @@
  * @LastEditors: liyuntao
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-05-23 16:33:16
+ * @LastEditTime: 2022-05-23 17:51:59
  */
 
 require('module-alias/register')
@@ -70,7 +70,7 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
 //生产环境打包任务 【官网seo页面 与 个人中心 同步构建】
 const prodServer = require("./src/build/gulp.build")
 function buildCompile() {
-  return gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
+  return gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie,prodServer.DownloadZip)
 }
 
 //生产环境
