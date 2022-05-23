@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-22 16:17:16
+ * @LastEditTime: 2022-05-23 09:37:39
 -->
 <template>
   <div class="container">
@@ -322,7 +322,7 @@ export default {
           // console.log(state.tableList);
         } else {
           message.error({
-            message: '接口异常',
+            message: res && res.message || '接口异常',
             showClose: true
           })
           state.loading = false;
