@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "gulp develop",
     "build": "gulp build",
-    "build:test": "gulp build:test",
+    "build:test": "node ./env.build.js --test",
     "local": "nodemon ./start.js --local",
     "serve": "pm2 start ./start.js",
     "local:test": "nodemon ./start.js  --test",
@@ -23,7 +23,6 @@
     "ejs": "^3.1.7",
     "element-plus": "^1.0.2-beta.70",
     "koa": "^2.13.4",
-    "koa-body": "^5.0.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
