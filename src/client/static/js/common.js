@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-23 16:55:54
+ * @LastEditTime: 2022-05-23 17:53:32
  */
 
 function Helper() { }
@@ -158,7 +158,7 @@ async function ajax(params) {
       url: '/javaProxy' + params.url,
       contentType: 'application/json',
       data: params.query,
-
+      
       beforeSend: function (request) {
         console.log("发送请求前判断token:", token)
         if (token) {
@@ -207,32 +207,6 @@ function getParams() {
     }
   }
   return JSON.parse(JSON.stringify(request));
-}
-
-/**
-  * 动态数字方法
-  * ID    => 对应ID
-  * speed => 递增速度 
-  * start:开始数字
-  * step：每次递增
-  */
-function numDynamic(id, start, end, step, speed) {
-  var span = document.getElementById(id);
-  if (start < end) {
-    var i = start;
-    var t = setInterval(function () {
-      i += step; // 设置每次增加的动态数字，可调整
-
-      if (i >= end) {
-        span.innerText = Number(end).toLocaleString();
-        clearInterval(t);
-      } else {
-        span.innerText = Number(i).toLocaleString();
-      }
-    }, speed);
-  } else {
-    span.innerText = Number(start).toLocaleString();
-  }
 }
 
 //格式化人民币
