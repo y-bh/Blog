@@ -1,9 +1,10 @@
+
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: liyuntao
  * @description: 前端工程文件
  * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-05-18 16:30:08
+ * @LastEditTime: 2022-05-23 16:33:16
  */
 
 require('module-alias/register')
@@ -14,7 +15,7 @@ var nodemon = require('gulp-nodemon')
 
 //本地开发环境任务
 require("./src/build/gulp.dev");
-gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", 'HandleFont', webpackConfig.webpackDev, function (done) {
+gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", 'HandleFont', 'DownloadZip', webpackConfig.webpackDev, function (done) {
   console.info("开发环境工程编译完成,开启启动应用")
   var stream = nodemon({
     script: './start.js',
@@ -56,6 +57,11 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
     gulp.watch([
       'src/client/static/font/**'
     ], gulp.series('HandleFont'))
+
+    //监听下载zip 变化
+    gulp.watch([
+      'src/client/static/download/**'
+    ], gulp.series('DownloadZip'))
   })
 }
 ))
@@ -68,7 +74,7 @@ function buildCompile() {
 }
 
 //生产环境
-exports.build =  gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
+exports.build = buildCompile()
 
 //暂定 以后可能会用到
 exports["build:test"] = gulp.parallel(prodServer.setEnv('test'), buildCompile())
