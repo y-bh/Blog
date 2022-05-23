@@ -51,13 +51,13 @@ Helper.$confirm = (msg = '确认此操作?', title = '', callback, options = {}
   }
   //注册回调
   window[eventName] = callback
-  
+
   $('#bootstrap-my-modal').modal('show')
 }
 
 
 window.$ok = function (eventName) {
-  
+
   window[eventName]()
   window[eventName] = null
   $('#bootstrap-my-modal').modal('hide')
@@ -132,44 +132,16 @@ Helper.$message = (options = {}) => {
 })
 
 
-function getCookie (key, json) {
-  if (typeof document === 'undefined') {
-    return;
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
   }
-
-  var jar = {};
-  // To prevent the for loop in the first place assign an empty array
-  // in case there are no cookies at all.
-  var cookies = document.cookie ? document.cookie.split('; ') : [];
-  var i = 0;
-
-  for (; i < cookies.length; i++) {
-    var parts = cookies[i].split('=');
-    var cookie = parts.slice(1).join('=');
-
-    if (!json && cookie.charAt(0) === '"') {
-      cookie = cookie.slice(1, -1);
-    }
-
-    try {
-      var name = decode(cookie);
-
-      if (json) {
-        try {
-          cookie = JSON.parse(cookie);
-        } catch (e) {}
-      }
-
-      jar[name] = cookie;
-
-      if (key === name) {
-        break;
-      }
-    } catch (e) {}
-  }
-
-  return key ? jar[key] : jar;
+  return "";
 }
+
 //客户端ajax二次 封装
 
 /*
@@ -180,16 +152,23 @@ function getCookie (key, json) {
 */
 async function ajax(params) {
   return new Promise(function (resolve, reject) {
-    
+    let token = getCookie('TQ-TOKEN')
     $.ajax({
       type: params.type ? params.type : 'POST',
       url: '/javaProxy' + params.url,
       contentType: 'application/json',
       data: params.query,
+
+      beforeSend: function (request) {
+        console.log("发送请求前判断token:", token)
+        if (token) {
+          request.setRequestHeader("TOKEN", token);
+        }
+      },
       success: (res) => {
         if (res) {
           if (res) {
-            
+
             if (res.code !== 200) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
@@ -206,7 +185,7 @@ async function ajax(params) {
         }
       },
       error: (err) => {
-        
+
         reject(err)
       }
     });
@@ -237,7 +216,7 @@ function getParams() {
   * start:开始数字
   * step：每次递增
   */
- function numDynamic(id, start, end, step, speed) {   
+function numDynamic(id, start, end, step, speed) {
   var span = document.getElementById(id);
   if (start < end) {
     var i = start;
@@ -366,7 +345,7 @@ function layout() {
       dataType: 'json',
       contentType: 'application/json',
       success: (res) => {
-        
+
         if (+res.code !== 200) {
           return Helper.$message({
             message: res.message || '退出登录失败!',
@@ -377,10 +356,10 @@ function layout() {
 
         Helper.$message({ message: '退出登录' })
 
-        return location.href="/login"
+        return location.href = "/login"
       },
       error: (err) => {
-        
+
       }
     });
 
@@ -393,13 +372,13 @@ window.layout = debounce(layout, 300, true)
 
 //初始化效果
 $(function () {
-  
+
   // 处理导航激活样式
-  let routePath = (window.location.pathname.replace(/\//g,'') || 'index');  // 路径
-  if($(`[data-path=${routePath}]`)){
+  let routePath = (window.location.pathname.replace(/\//g, '') || 'index');  // 路径
+  if ($(`[data-path=${routePath}]`)) {
     $(`[data-path=${routePath}]`).addClass('activated').siblings().removeClass('activated');
   }
-  
+
   //1.自适应布局计算
   change()
 
@@ -474,4 +453,3 @@ $(function () {
   }, 500))
 })
 
-getCookie('TQ_TOKEN')
