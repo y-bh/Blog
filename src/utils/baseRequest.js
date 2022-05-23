@@ -55,7 +55,7 @@ class Request {
       return response && response.data || response;
     },
       error => {
-        
+        console.error("接口报错:",error)
       });
 
     this.service = service
