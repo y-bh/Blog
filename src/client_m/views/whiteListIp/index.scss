@@ -108,6 +108,10 @@
       color: #1968FC;
       cursor: pointer;
       line-height: 26px;
+      transition: transform 0.3s;
+      &:hover{
+        text-decoration: underline;
+      }
       &:last-child{
         margin-right: 0px;
       }

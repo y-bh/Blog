@@ -89,3 +89,7 @@
       color: #333;
   }
 }
+
+.el-switch.is-checked .el-switch__core .el-switch__action{
+  left: calc(100% - 1rem);
+}
