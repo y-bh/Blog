@@ -3,11 +3,11 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-22 15:08:52
+ * @LastEditTime: 2022-05-23 17:27:25
 -->
 <template>
   <div class="updateMobile">
-    <el-dialog v-model="dialogVisible">
+    <el-dialog v-model="dialogVisible" :before-close="beforeCloseFun">
       <DialogTitle title-content="换绑手机" />
       <div class="formContent">
         <div class="remarks">
@@ -131,6 +131,7 @@ export default {
       }
       console.log(88888888888888);
       const TIME_COUNT = 60;
+      counter.show =false;
       if (!counter.timer) {
         counter.count = TIME_COUNT;
         counter.show = false;
@@ -152,11 +153,12 @@ export default {
       if (res.code == 200) {
         $message.success("获取验证码成功");
       } else {
-        $message.success("获取验证码失败:" + res.msg);
+        $message.error("获取验证码失败:" + res.message);
       }
     };
     const onCancel = () => {
       clearInterval(counter.timer);
+      counter.show = true;
       dialogVisible.value = false;
       if (!vaildPhoneRef.value) return;
       vaildPhoneRef.value.resetFields();
@@ -165,6 +167,7 @@ export default {
     const onSubmit = (formName) => {
       console.log("=======修改密码数据======", form.ruleForm);
       if (counter.timer) {
+        counter.show = true;
         clearInterval(counter.timer);
       }
       // if (!formEl) return
@@ -191,7 +194,10 @@ export default {
         }
       });
     };
-
+    const beforeCloseFun = (done)=>{
+     // console.log("---------------关闭了-----------");
+      done()
+    }
     return {
       ...toRefs(counter),
       ...toRefs(form),
@@ -200,6 +206,7 @@ export default {
       vaildPhoneRef,
       dialogVisible,
       getVaildCode,
+      beforeCloseFun
     };
   },
 };

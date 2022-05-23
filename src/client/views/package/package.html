@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-20 13:17:08
+ * @LastEditTime: 2022-05-23 17:05:03
 -->
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,11 @@
   <%- include('../components/header.html'); %>
     <div class="packageBuy">
       <div class="package-banner">
-        <img src="/images/package/packageBanner.png" alt="套餐购买banner" />
+        <div class="button">
+          <a href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true" target="_blank">
+            <img src="/images/package/banner-button.png" alt="banner按钮" />
+          </a>
+        </div>
       </div>
       <div class="package-content">
         <!-- 切换tab头部 -->
@@ -377,8 +381,9 @@
                 <div class="enterMoney">
                   <div class="label "><span>输入金额</span></div>
                   <div>
-                    <input class="ml-30 mr-30" type="number" id="calculatorIPNumber" max="100000" min="1" />
+                    <input class="ml-30 mr-30" type="number" id="calculatorIPNumber" max="100000" min="1"/>
                     <span>元</span>
+                    <div class="closeIcon" onclick="closeIcon()"><span>X</span></div>
                   </div>
                 </div>
                 <div class="table mt-30">
