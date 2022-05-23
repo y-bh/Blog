@@ -61,7 +61,7 @@ $('.go_detail').on('click', function () {
 
 
 //上一页 下一页
-function goPage(type = 'next') {
+function goPagePreNext(type = 'next') {
 
   let paths = JSON.parse(JSON.stringify(tems))
 

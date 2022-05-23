@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-23 16:55:54
+ * @LastEditTime: 2022-05-23 18:22:26
  */
 
 function Helper() { }
@@ -208,32 +208,7 @@ function getParams() {
   }
   return JSON.parse(JSON.stringify(request));
 }
-
-/**
-  * 动态数字方法
-  * ID    => 对应ID
-  * speed => 递增速度 
-  * start:开始数字
-  * step：每次递增
-  */
-function numDynamic(id, start, end, step, speed) {
-  var span = document.getElementById(id);
-  if (start < end) {
-    var i = start;
-    var t = setInterval(function () {
-      i += step; // 设置每次增加的动态数字，可调整
-
-      if (i >= end) {
-        span.innerText = Number(end).toLocaleString();
-        clearInterval(t);
-      } else {
-        span.innerText = Number(i).toLocaleString();
-      }
-    }, speed);
-  } else {
-    span.innerText = Number(start).toLocaleString();
-  }
-}
+window.getParams = getParams
 
 //格式化人民币
 function moneyFormat(money) {
@@ -368,7 +343,10 @@ function layout() {
 
 window.layout = debounce(layout, 300, true)
 
-
+function jumpPackage(type) {
+  sessionStorage.setItem("packageTab", type);//1:余额 2：包时
+  window.location.href = "/package";
+}
 
 //初始化效果
 $(function () {
@@ -428,7 +406,7 @@ $(function () {
       getTabWidth()
     }
   }
-  
+
   toggleHead();
 
   $('.nav-toggler').click(function () {
@@ -439,26 +417,26 @@ $(function () {
       const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
       $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
       // getTabWidth()
-       
+
     }
     getTabWidth()
 
   })
 
 
-  function getTabWidth(){
+  function getTabWidth() {
     //  小屏获取导航元素
-    
+
     headerAttr.navWidth = [];
-    if($('.show')){
+    if ($('.show')) {
       let tabNav = $('.show .nav-item');
-      tabNav.each(function(index) {
-        if($(this)){
-           headerAttr.navWidth.push($(this).outerWidth(true))
+      tabNav.each(function (index) {
+        if ($(this)) {
+          headerAttr.navWidth.push($(this).outerWidth(true))
         }
       })
-  
-      headerAttr.navWidth.sort((a, b)=> {
+
+      headerAttr.navWidth.sort((a, b) => {
         return b - a
       })
       //  将每个一级导航宽度以最大子元素宽为准设置
