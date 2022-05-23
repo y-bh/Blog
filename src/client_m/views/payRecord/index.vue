@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-22 16:16:36
+ * @LastEditTime: 2022-05-23 14:12:18
 -->
 <template>
   <div class="container grid">
@@ -34,9 +34,9 @@
         </el-form-item>
 
         <div class="btn flex justify-end">
-          <el-button class="blue-btn" @click="onReset">重置</el-button>
-          <el-button class="blue-btn" @click="onSearch">查询</el-button>
-          <el-button class="blue-btn" @click="batchDelete">批量删除</el-button>
+          <el-button class="cancel-button" @click="onReset">重置</el-button>
+          <el-button class="cancel-button" @click="onSearch">查询</el-button>
+          <el-button class="cancel-button" @click="batchDelete">批量删除</el-button>
         </div>
       </el-form>
     </div>
