@@ -944,7 +944,8 @@ a:hover {
         color: inherit;
       }
       .iconfont {
-        font-size: 16px;
+        font-size: 18px;
+        font-weight: 600;
       }
       &:hover {
         cursor: pointer;
@@ -1348,9 +1349,9 @@ a:hover {
         align-items: center;
         .nav-item {
           margin: 0;
-          // width: 76px;
+          // width: 64px;
           width: auto;
-          min-width: 54px;
+          min-width: 64px;
           max-width: none;
         }
       }

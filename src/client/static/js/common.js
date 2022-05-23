@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-22 15:48:29
+ * @LastEditTime: 2022-05-23 16:55:54
  */
 
 function Helper() { }
@@ -412,7 +412,9 @@ $(function () {
     itemWidth: 0,  // 导航子元素宽度 + padding + margin
     logoWidth: 0,  // logo区域宽度
     navRightWidth: 0,  // 右侧登陆注册区域宽度
+    navWidth: [], // 子元素tab的宽度数组
   }
+
   function toggleHead() {
     // 每次调用重置
     headerAttr = {
@@ -440,11 +442,14 @@ $(function () {
       $('.nav-body').addClass('fold');
       // 多态按钮显示
       $('.nav-toggler').addClass('appear')
+      getTabWidth()
     } else {
       $('.nav-body').removeClass('fold')
       $('.nav-toggler').removeClass('appear')
+      getTabWidth()
     }
   }
+  
   toggleHead();
 
   $('.nav-toggler').click(function () {
@@ -453,10 +458,38 @@ $(function () {
     } else {
       $('.header-main .nav-body').addClass('show');
       const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
-      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin)
+      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
+      // getTabWidth()
+       
     }
+    getTabWidth()
 
   })
+
+
+  function getTabWidth(){
+    //  小屏获取导航元素
+    
+    headerAttr.navWidth = [];
+    if($('.show')){
+      let tabNav = $('.show .nav-item');
+      tabNav.each(function(index) {
+        if($(this)){
+           headerAttr.navWidth.push($(this).outerWidth(true))
+        }
+      })
+  
+      headerAttr.navWidth.sort((a, b)=> {
+        return b - a
+      })
+      //  将每个一级导航宽度以最大子元素宽为准设置
+      $('.show .nav-item').css("width", headerAttr.navWidth[0])
+    } else {
+      $('.nav-list .nav-item').css("width", auto)
+    }
+
+  }
+
 
 
   $(window).resize(debounce(() => {
