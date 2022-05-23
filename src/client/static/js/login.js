@@ -19,6 +19,16 @@
  */
 
 
+
+//校验相关参数
+const rules = {
+  phone: /^1[34589]\d{9}$|^17[2-9]\d{8}$|^16[0-1]\d{8}$|^16[3-4]\d{8}$|^166\d{8}$|^16[8-9]\d{8}$/,
+  pwd: /[a-zA-Z0-9@#$%^&*_]{6,20}$/,
+  userName: /[0-9a-zA-Z_@]{6,16}/,
+  code: /\d{6}/
+}
+
+
 //获取 query 相关参数
 const query = getParams()
 
@@ -74,13 +84,7 @@ function agreeOn() {
   console.log("嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻", agreeMent)
 }
 
-//校验相关参数
-const rules = {
-  phone: /^1[34589]\d{9}$|^17[2-9]\d{8}$|^16[0-1]\d{8}$|^16[3-4]\d{8}$|^166\d{8}$|^16[8-9]\d{8}$/,
-  pwd: /[a-zA-Z0-9@#$%^&*_]{6,20}$/,
-  userName: /[0-9a-zA-Z_@]{6,16}/,
-  code: /\d{6}/
-}
+
 function checkForm(params = null, type = 'login') {
   if (!params) {
     return
