@@ -25,12 +25,12 @@ const query = getParams()
 //登录后返回的地址
 let back = null
 
-if(query && query.back){
+if (query && query.back) {
   back = query.back
 }
 
 
-console.log("query:",query)
+console.log("query:", query)
 
 
 
@@ -99,7 +99,7 @@ function checkForm(params = null, type = 'login') {
       return res
     }
 
-    if (!rules.phone.test(params.phone) || !rules.userName.test(params.phone)) {
+    if (!rules.phone.test(params.phone) && !rules.userName.test(params.phone)) {
       res.isPass = false
       res.msg = '请输入用户名或手机号!'
       return res
@@ -245,15 +245,14 @@ async function loginSubmit(type) {
       }
 
       if (type === 'reset') {
-        window.open("/login")
+        location.href = "/login"
       } else {
         //back
-        if(type === 'login' && back){
-          location.href="/"+back
+        if (type === 'login' && back) {
+          location.href = "/" + back
           return
         }
-
-        window.open("/manager/user")
+        location.href = "/manager/user"
       }
     },
     error: (err) => {

@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-22 12:54:04
+ * @LastEditTime: 2022-05-23 13:31:10
 -->
 <template>
   <div class="white-list-wrap">
@@ -71,7 +71,7 @@
         </el-table-column>
         <el-table-column prop="operator" label="操作" align="center">
           <template #default="{ row }">
-            <el-button class="table-delete-btn" @click="openRemoveDialog(row)"
+            <el-button type="danger" @click="openRemoveDialog(row)"
               >移除</el-button
             >
           </template>

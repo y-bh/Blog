@@ -96,16 +96,21 @@
 // 全局按钮
 .layout {
   .el-button {
+    position: relative;
     min-height: auto;
     font-size: 16px;
     line-height: 16px;
     padding: 10px 20px;
     transition: all .3s;
+    &>span{
+      position: relative;
+      z-index: 2;
+    }
   }
 
   .el-button--default {
     &:focus,&:hover {
-      background: $main;
+      background-color: $main;
       border-color: $main;
       color: $empty;
       outline: 0;
@@ -116,11 +121,25 @@
     color: $empty;
     background: $main;
 
-    &:focus, &:hover {
+    &::after{
+      position: absolute;
+      content: '';
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
       background: $main_linear;
       border-color: $main;
       color: $empty;
       outline: 0;
+    }
+
+    &:focus, &:hover {
+
+      &::after{
+        opacity: 1;
+      }
     }
 
     &.is-plain {
@@ -143,11 +162,25 @@
     color: $empty;
     background: $warning;
 
-    &:focus, &:hover {
+
+    &::after{
+      position: absolute;
+      content: '';
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
       background: $warning_linear;
       border-color: $warning;
       color: $empty;
       outline: 0;
+    }
+
+    &:focus, &:hover {
+      &::after{
+        opacity: 1;
+      }
     }
 
     &.is-plain {
@@ -169,11 +202,25 @@
     color: $empty;
     background: $danger;
 
-    &:focus, &:hover {
+
+    &::after{
+      position: absolute;
+      content: '';
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
       background: $danger_linear;
       border-color: $danger;
       color: $empty;
       outline: 0;
+    }
+
+    &:focus, &:hover {
+      &::after{
+        opacity: 1;
+      }
     }
 
     &.is-plain {
