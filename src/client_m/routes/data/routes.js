@@ -17,19 +17,19 @@ export const routes = [
     ignore: true,
     component: () => import('views/home/index.vue'),
   },
-  { // 首页
-    path: '/manager/package',
-    name: 'package',
-    ignore: true,
-    component: () => import('views/package/index.vue')
-  },
-  {//领取关注福利
-    path: `${prefix}/wxLogin`,
-    name: 'wxLogin',
-    ignore: true,
-    component: () => import('views/wxLogin'),
-    meta: { ignore: true }
-  },
+//   { // 首页
+//     path: '/manager/package',
+//     name: 'package',
+//     ignore: true,
+//     component: () => import('views/package/index.vue')
+//   },
+//   {//领取关注福利
+//     path: `${prefix}/wxLogin`,
+//     name: 'wxLogin',
+//     ignore: true,
+//     component: () => import('views/wxLogin'),
+//     meta: { ignore: true }
+//   },
   {//个人中心
     path: `${prefix}`,
     name:"personCenter",

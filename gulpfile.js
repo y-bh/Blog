@@ -1,4 +1,3 @@
-
 /*
  * @Author: 朱占伟
  * @LastEditors: 朱占伟
@@ -69,7 +68,7 @@ function buildCompile() {
 }
 
 //生产环境
-exports.build = buildCompile()
+exports.build =  gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
 
 //暂定 以后可能会用到
 exports["build:test"] = gulp.parallel(prodServer.setEnv('test'), buildCompile())

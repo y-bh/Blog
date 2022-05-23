@@ -34,15 +34,23 @@ router.post("/login", async (ctx) => {
     res = await registerService(params)
   }
 
-  
+  console.log("登录|注册|重置接口响应", params, res)
   //注册/登录/重置 成功后业务
   if (+res.code === 200) {
     if (res.data.token) {
-      let token = res.data.token
-      delete res.data.token
+      const { token, username, id, phone, phoneNumAuth, firstDayLogin, companyAuth, identityAuth } = res.data
+
       //设置cookie 值
       ctx.cookies.set(appKey.token, token)
-      ctx.cookies.set(appKey.userInfo, JSON.stringify(res.data))
+
+      let userinfo = JSON.stringify({
+        username,
+        id, phoneNumAuth, firstDayLogin, companyAuth, identityAuth, phone
+      })
+
+      userinfo = encodeURIComponent(userinfo)
+      console.log("登录后用户信息:", userinfo)
+      ctx.cookies.set(appKey.userInfo, userinfo)
     }
   }
   //return ctx.redirect('/manager');
