@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: liyuntao
  * @description: 官网页面生产环境工程
  * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-05-18 16:24:51
+ * @LastEditTime: 2022-05-23 16:43:30
  */
 
 const gulp = require('gulp');
@@ -102,6 +102,16 @@ async function HandleFont() {
     return await gulp.src(localConfig.sourceDir + "/font/**").pipe(gulp.dest(localConfig.static + "/font", { sourcemaps: false }))
   } catch (error) {
     console.error("HandleFont:", error)
+  }
+}
+
+//处理下载文件
+async function HandleFont() {
+  console.info("处理下载文件")
+  try {
+    return await gulp.src(localConfig.sourceDir + "/download/**").pipe(gulp.dest(localConfig.static + "/download", { sourcemaps: false }))
+  } catch (error) {
+    console.error("DownloadZip:", error)
   }
 }
 

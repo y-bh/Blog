@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-23 16:21:48
+ * @LastEditTime: 2022-05-23 16:45:58
  */
 const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao } = require("dao/getIp")
 
@@ -36,26 +36,26 @@ let codeDemo = [
     title: 'Php语言',
     path: '/download/php.zip'
   },
-  {
-    title: '易语言',
-    path: '/download/python.zip'
-  },
-  {
-    title: 'C语言',
-    path: '/download/python.zip'
-  },
-  {
-    title: 'Phantomjs语言',
-    path: '/download/python.zip'
-  },
-  {
-    title: 'Selenium语言',
-    path: '/download/python.zip'
-  },
-  {
-    title: 'Node语言',
-    path: '/download/python.zip'
-  },
+  // {
+  //   title: '易语言',
+  //   path: '/download/python.zip'
+  // },
+  // {
+  //   title: 'C语言',
+  //   path: '/download/python.zip'
+  // },
+  // {
+  //   title: 'Phantomjs语言',
+  //   path: '/download/python.zip'
+  // },
+  // {
+  //   title: 'Selenium语言',
+  //   path: '/download/python.zip'
+  // },
+  // {
+  //   title: 'Node语言',
+  //   path: '/download/python.zip'
+  // },
 ]
 
 let paidList = []

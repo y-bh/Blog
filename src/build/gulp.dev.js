@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: liyuntao
  * @description: 官网页面开发环境工程
  * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-05-06 20:15:43
+ * @LastEditTime: 2022-05-23 16:39:56
  */
 
 
@@ -74,6 +74,11 @@ gulp.task('ImageComplie', function () {
 })
 
 
+//处理下载包
+gulp.task('DownloadZip', function () {
+  console.log("处理下载包")
+      return  gulp.src(localConfig.sourceDir + "/download/**").pipe(gulp.dest(localConfig.static + "/download", { sourcemaps: false }))
+})
 
 
 
@@ -88,6 +93,7 @@ gulp.task('HandleFont', function () {
   console.log("处理字体")
       return  gulp.src(localConfig.sourceDir + "/font/**").pipe(gulp.dest(localConfig.static + "/font", { sourcemaps: false }))
 })
+
 
 
 
