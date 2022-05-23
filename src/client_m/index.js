@@ -9,7 +9,7 @@
 import { createApp } from 'vue';
 
 import injectRouter from './routes'; //router
-import injectUI from 'tools/injectUI.js'; // ui组件
+import injectUI from 'tools/injectUi.js'; // ui组件
 // import { get, post } from "tools/ajax"; //ajax 服务
 
 import $global from 'tools/global.js';  // 全局变量
