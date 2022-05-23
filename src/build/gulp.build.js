@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 官网页面生产环境工程
  * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-05-23 16:43:30
+ * @LastEditTime: 2022-05-23 17:51:04
  */
 
 const gulp = require('gulp');
@@ -106,7 +106,7 @@ async function HandleFont() {
 }
 
 //处理下载文件
-async function HandleFont() {
+async function DownloadZip() {
   console.info("处理下载文件")
   try {
     return await gulp.src(localConfig.sourceDir + "/download/**").pipe(gulp.dest(localConfig.static + "/download", { sourcemaps: false }))
@@ -143,4 +143,4 @@ function setEnv(env) {
 //打包前先删除
 shell.rm('-rf', localConfig.static);
 
-module.exports = { setEnv, CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont }
+module.exports = { setEnv, CssComplie, JsComplie, ImageComplie, cleanDir, ThirdPlugin, HandleFont, DownloadZip }
