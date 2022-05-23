@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-22 16:55:57
+ * @LastEditTime: 2022-05-23 14:38:07
 -->
 <template>
   <div class="companyAuth">
@@ -140,7 +140,8 @@
           <span>授权支付宝安全认证，平台不会泄露您的认证信息</span>
         </div>
         <div class="bigGrey pb-40">
-          <span>{{userInfo.identityName}}</span>|<span>{{userInfo.identityNum}}</span>
+          <span>{{ userInfo.identityName }}</span
+          >|<span>{{ userInfo.identityNum }}</span>
         </div>
       </div>
 
@@ -152,14 +153,19 @@
         <div class="title erro"><span>企业认证失败</span></div>
         <div class="mt-15">
           <div class="reason smallGrey">
-            <span>失败原因：</span
-            ><span>
+            <span>失败原因：</span>
+            <span
+              v-if="!userInfo.companyAuth && userInfo.verifyState == 'fail'"
+            >
+              {{ userInfo.reason }}
+            </span>
+            <span v-else>
               认证结果由支付宝提供，请您仔细核对身份证信息，确认，并进行支付宝认证。
             </span>
           </div>
         </div>
         <div class="mt-30 pb-40">
-          <el-button type="primary" plain @click="authCompanyStep = 1"
+          <el-button type="primary" plain @click="authCompanyStep = 3"
             >重新认证</el-button
           >
         </div>
@@ -318,7 +324,7 @@ export default {
       //转换成64位数
       let imgFileData = "";
       imgFileData = await getBase64(fileList[0].raw);
-      let res = await companyImg({data:imgFileData});
+      let res = await companyImg({ data: imgFileData });
       console.log(444444444444, res);
       if (res.code != 200) {
         message.error(res.msg);
@@ -425,16 +431,19 @@ export default {
         content: "3000IP";
         color: #ffffff;
         font-size: 14px;
-        line-height: 35px;
+        line-height: 30px;
         width: 81px;
         height: 35px;
         border-radius: 15px 15px 15px 0;
         display: block;
         position: absolute;
         top: -3px;
-        left: 7px;
+        left: 10px;
       }
     }
+  }
+  .reason {
+    color: #677294;
   }
 }
 </style>

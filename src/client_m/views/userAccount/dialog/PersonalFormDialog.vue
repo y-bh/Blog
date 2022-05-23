@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-22 13:58:57
+ * @LastEditTime: 2022-05-23 13:43:54
 -->
 <template>
   <div class="personalFormDialog">
@@ -132,7 +132,6 @@ export default {
         email: personForm.emailNo,
         profession: personForm.job,
         qq: personForm.QQNO,
-        replace: false,
         wechat: personForm.wxNo,
       };
       let res = await updateUserInfo(params);
