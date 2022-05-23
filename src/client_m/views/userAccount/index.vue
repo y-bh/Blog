@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-22 17:19:47
+ * @LastEditTime: 2022-05-23 10:25:34
 -->
 <template>
   <div class="userAccount">
@@ -41,7 +41,7 @@
             <span>{{ userInfo.phone }}</span>
           </div>
           <div class="group-btn">
-            <el-button type="primary" plain @click="updateMobile"
+            <el-button type="default" plain @click="updateMobile"
               >换绑手机</el-button
             >
             <el-button type="warning" plain @click="dialogPwdVisible = true"
