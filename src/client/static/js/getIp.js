@@ -73,7 +73,7 @@ $(function () {
 
 //未登录点击"选择提取类型"跳转至登录页
 $('.extract_select').on('click', function () {
-  if (!loginStatus) {
+  if (!isLogin) {
     window.location.pathname = "/login"
   }
 })

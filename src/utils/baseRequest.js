@@ -22,6 +22,7 @@ class Request {
     service.interceptors.request.use(config => {
       config.headers.xx_uid = 7567
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+      console.log("cccccccccccccccc",config)
       return config;
     }, error => {
 

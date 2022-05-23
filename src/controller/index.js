@@ -243,15 +243,14 @@ function Router(App) {
   router.get(["/manager", "/manager/:path"], async (ctx) => {
 
     //用户信息
-    let userInfo = ctx.cookies.get(appKey.userInfo)
-    userInfo = decodeURIComponent(userInfo)
+    let token = ctx.cookies.get(appKey.token)
 
     //友情链接
     let links = ctx.state.links
 
 
     //公共头部
-    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], userInfo: userInfo && JSON.parse(userInfo), [appKey.cateTypes]: ctx.state[appKey.cateTypes] })
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], token, [appKey.cateTypes]: ctx.state[appKey.cateTypes] })
 
 
     //公共底部

@@ -1,7 +1,7 @@
 <%# 判断是否登录 %>
-  <% if (userInfo && userInfo.id) { %>
+  <% if (token) { %>
     <script>
-      window.isLogin = "<%= userInfo.username%>"
+      window.isLogin = true
     </script>
     <% }else { %>
       <script>
@@ -224,7 +224,7 @@
             </nav>
             <!-- 右侧按钮/登录信息 -->
             <div class="user btn">
-              <% if(userInfo && userInfo.id) { %>
+              <% if(token) { %>
                 <a href="/manager/user" title="个人中心" class="default-btn button person-center text-gray">个人中心</a>
                 <a href="javascript:void(0)" class="bl-l-button button user-logout text-center"
                   onclick="layout()"><span>退出</span></a>
