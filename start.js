@@ -16,8 +16,9 @@ require('module-alias/register')
 //获取当前环境
 
 const lists = process.argv
+console.log("ccccccccccccccccccccccccccccc",lists)
 let envs = lists[lists.length - 1].slice(2).trim()
-
+console.log("vvvvvvvvvvvvvvvvv",envs)
 //当前项目环境: 目前有 测试环境  开发环境【develop】 测试环境【test】 生产环境【production】
 const allEnvs = ['local', 'develop', 'test', 'production']
 
@@ -29,7 +30,7 @@ if (!envs || !allEnvs.includes(envs)) {
 
 process.APP_ENV = `${envs}`
 
-console.log("envs:", envs, process.APP_ENV)
+console.log("envs----------》:", envs, process.APP_ENV)
 
 
 

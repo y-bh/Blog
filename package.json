@@ -12,9 +12,9 @@
     "local:test": "nodemon ./start.js  --test",
     "local:develop": "nodemon ./start.js  --develop",
     "local:production": "nodemon ./start.js  --production",
-    "serve:test": "pm2 start ./start.js --test",
-    "serve:develop": "pm2 start ./start.js --develop",
-    "serve:production": "pm2 start ./start.js --production"
+    "serve:test": "pm2 start ./start.js --  m:test",
+    "serve:develop": "pm2 start ./start.js --  m:develop",
+    "serve:production": "pm2 start ./start.js --  m:production"
   },
   "author": "zhuzhanwei",
   "license": "ISC",
