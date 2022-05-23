@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-23 17:53:32
+ * @LastEditTime: 2022-05-23 18:22:26
  */
 
 function Helper() { }
@@ -343,7 +343,10 @@ function layout() {
 
 window.layout = debounce(layout, 300, true)
 
-
+function jumpPackage(type) {
+  sessionStorage.setItem("packageTab", type);//1:余额 2：包时
+  window.location.href = "/package";
+}
 
 //初始化效果
 $(function () {

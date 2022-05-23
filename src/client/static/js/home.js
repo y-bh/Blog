@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-14 13:51:32
- * @LastEditTime: 2022-05-23 13:19:44
+ * @LastEditTime: 2022-05-23 18:19:08
  */
 $("#kernelBox li").hover(function () {
   $(this).addClass("active")
@@ -28,10 +28,6 @@ function contactUs() {
   window.open("https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true", "_blank");
 }
 
-function jumpPackage(type) {
-  sessionStorage.setItem("packageTab", type);//1:余额 2：包时
-  window.location.href = "/package";
-}
 
 $(function () {
   numDynamic("cityNum", 0, 200, 2, 50)
