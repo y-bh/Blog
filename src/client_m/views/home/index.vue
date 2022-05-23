@@ -25,10 +25,10 @@ export default {
     const store = useStore();
     const test = async () => {
       const res = await getTest();
-      console.log("个人中心测试接口:",  res);
+      
     };
 
-    console.log("cccccccccccccccc", re, store.state);
+    
     test();
   },
 };
