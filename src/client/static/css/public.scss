@@ -951,6 +951,11 @@ a:hover {
         cursor: pointer;
         color: #1968fc;
         font-weight: 600;
+        .iconfont {
+          transition: all .4s;
+          display: inline-block;
+          transform: rotate(180deg);
+        }
       }
       &::after {
         position: absolute;
@@ -1019,6 +1024,7 @@ a:hover {
         &:hover {
           transition: all 0.8s;
           color: rgb(25, 104, 252);
+          
         }
       }
 
