@@ -62,7 +62,7 @@
             <label class="font-18 main-title-color label_lay">选择提取类型</label>
             <select id="extractType" class="extract_select form-control">
               <% menu && menu.forEach(function(item) { %>
-                <% if(userInfo && userInfo.id) {%> 
+                <% if(token) {%> 
                   <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
                 <% } else { %> 
                   <% if(item.proxyType === 10) {%> 
@@ -73,7 +73,7 @@
             </select>
           </div>
           <!-- 已登录展示 -->
-          <% if(userInfo && userInfo.id) { %> 
+          <% if(token) { %> 
             <div class="already_login">
               <div class="form-group count mt-40">
                 <label class="font-18 main-title-color">账户概况</label>
@@ -551,10 +551,6 @@
  <%- include('../components/footer.html'); %>
 </body>
 <%- include('../components/js.html'); %>
-  <script>
-    let login = JSON.parse('<%-JSON.stringify(userInfo || 0) %>');
-    let loginStatus = Boolean(login && login.id) //登录态判断
-  </script>
   <script src="/js/getIp.js"></script>
 
 </html>

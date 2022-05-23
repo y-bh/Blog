@@ -71,8 +71,25 @@ $columnMt: 60px;
   .hide {
     display: none !important;
   }
-  .package-banner img {
-    width: 100%;
+  input:focus-visible {
+    outline: none !important;
+  }
+  .package-banner {
+    height: 300px;
+    background: #ffffff url("/images/package/packageBanner.png") no-repeat;
+    background-size: 100% 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 12px;
+    .button {
+      margin-bottom: 12px;
+      text-align: center;
+      cursor: pointer;
+      img {
+        width: 250px;
+      }
+    }
   }
   .redPacket {
     display: flex;
@@ -566,6 +583,7 @@ $columnMt: 60px;
             color: #4c5664;
             .times {
               width: 140px;
+              white-space: nowrap;
             }
             .counter-control {
               @include counter-control;
@@ -594,6 +612,21 @@ $columnMt: 60px;
             color: #4c5664;
           }
         }
+        .closeIcon {
+          position: relative;
+          display: inline-block;
+          left: -100px;
+          top: 0;
+          width: 25px;
+          height: 25px;
+          border: 1px solid #e4e5eb;
+          font-size: 18px;
+          text-align: center;
+          border-radius: 50%;
+          line-height: 24px;
+          color: #e4e5eb;
+          cursor: pointer;
+        }
         .enterMoney {
           display: flex;
           font-size: 20px;
@@ -604,6 +637,7 @@ $columnMt: 60px;
             height: 50px;
             border: 1px solid #e4e5eb;
             border-radius: 4px;
+            padding: 0 10px;
           }
         }
         .table {
@@ -621,6 +655,7 @@ $columnMt: 60px;
                 text-align: center;
                 line-height: 40px;
                 color: #4c5664;
+                white-space: nowrap;
               }
             }
           }

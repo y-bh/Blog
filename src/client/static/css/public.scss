@@ -944,12 +944,18 @@ a:hover {
         color: inherit;
       }
       .iconfont {
-        font-size: 16px;
+        font-size: 18px;
+        font-weight: 600;
       }
       &:hover {
         cursor: pointer;
         color: #1968fc;
         font-weight: 600;
+        .iconfont {
+          transition: all .4s;
+          display: inline-block;
+          transform: rotate(180deg);
+        }
       }
       &::after {
         position: absolute;
@@ -1018,6 +1024,7 @@ a:hover {
         &:hover {
           transition: all 0.8s;
           color: rgb(25, 104, 252);
+          
         }
       }
 
@@ -1348,10 +1355,15 @@ a:hover {
         align-items: center;
         .nav-item {
           margin: 0;
-          // width: 76px;
+          // width: 64px;
           width: auto;
-          min-width: 54px;
+          min-width: 64px;
           max-width: none;
+
+        }
+
+        .iconfont{
+          display: none;
         }
       }
       .adjust_position {

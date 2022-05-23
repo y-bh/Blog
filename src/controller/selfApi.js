@@ -38,19 +38,10 @@ router.post("/login", async (ctx) => {
   //注册/登录/重置 成功后业务
   if (+res.code === 200) {
     if (res.data.token) {
-      const { token, username, id, phone, phoneNumAuth, firstDayLogin, companyAuth, identityAuth } = res.data
+      const { token } = res.data
 
       //设置cookie 值
-      ctx.cookies.set(appKey.token, token)
-
-      let userinfo = JSON.stringify({
-        username,
-        id, phoneNumAuth, firstDayLogin, companyAuth, identityAuth, phone
-      })
-
-      userinfo = encodeURIComponent(userinfo)
-      console.log("登录后用户信息:", userinfo)
-      ctx.cookies.set(appKey.userInfo, userinfo)
+      ctx.cookies.set(appKey.token, token,{httpOnly:false})
     }
   }
   //return ctx.redirect('/manager');
@@ -60,7 +51,6 @@ router.post("/login", async (ctx) => {
 //登出功能
 router.post("/layout", async (ctx) => {
   ctx.cookies.set(appKey.token, '')
-  ctx.cookies.set(appKey.userInfo, '')
   return ctx.success(null, '已退出登录');
 });
 

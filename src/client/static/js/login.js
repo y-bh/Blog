@@ -363,22 +363,3 @@ document.onkeydown = function (e) {
 
 
 
-
-
-//测试接口代理
-$(async function () {
-
-  let params = {
-    url: "/article/getArticleType",
-    type: 'get',
-    query: null
-  };
-
-
-
-  let resp = await ajax(params);
-  console.log("接口响应:", resp)
-
-
-
-})

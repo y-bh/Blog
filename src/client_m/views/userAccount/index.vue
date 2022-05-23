@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-23 10:25:34
+ * @LastEditTime: 2022-05-23 13:52:50
 -->
 <template>
   <div class="userAccount">
@@ -236,6 +236,7 @@ export default {
     let state = reactive({
       //authStates: 5, //1:未认证 2：个人认证通过  3：企业认证通过 4：企业认证审核中 5：企业认证审核未通过
       userInfo: {
+        reason:"",//失败原因
         username: "", //用户名
         phone: "", //手机
         balance: 0, //余额
@@ -319,11 +320,12 @@ export default {
       if (res && res.code == 200) {
         let data = res.data ? res.data : {};
         state.userInfo = {
+          reason:data.reason ? data.reason : "", //用户名
           username: data.username ? data.username : "", //用户名
           phone: phoneFormat(data.phone), //手机
           balance: data.balance ? Number(data.balance).toLocaleString() : 0, //余额
           companyAuth: data.companyAuth ? data.companyAuth : false, //公司认证
-          verifyState: data.verifyState ? data.verifyState : "none", //cut:"未认证" wait“审核中” “fail”：失败
+          verifyState: data.res ? data.res : "none", //cut:"未认证" wait“审核中” “fail”：失败
           identityAuth: data.identityAuth ? data.identityAuth : false, //个人认证
           proxyApiOpend: data.proxyApiOpend ? data.proxyApiOpend : false, //
           identityName: data.identityName ? data.identityName : "",

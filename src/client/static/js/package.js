@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-22 17:16:10
+ * @LastEditTime: 2022-05-23 17:23:22
  */
 
 
@@ -11,14 +11,26 @@
 //弹框--计算充值金额--计数器--start
 
 //弹框计算IP数量
-$("#calculatorIPNumber").change(function () {
-  let maxVal = 100000;
-  let minVal = 1;
-  let counterVal = Number($(this).val());
-  let newVal = counterInputVaild(counterVal, minVal, maxVal);
-  $(this).val(newVal);
-  iPConvertResult(newVal);
+let timerConter = null; // 定义一个全局的定时器对象变量
+$("#calculatorIPNumber").on("input", function () {
+  let $that = $(this);
+  clearTimeout(timerConter); // 清除上一个定时器
+  timerConter = setTimeout(function () {
+    let maxVal = 100000;
+    let minVal = 1;
+    let counterVal = Number($that.val());
+    let newVal = counterInputVaild(counterVal, minVal, maxVal);
+    $that.val(newVal);
+    iPConvertResult(newVal);
+  }, 500);
 })
+
+
+
+function closeIcon() {
+  $("#calculatorIPNumber").val("0");
+  iPConvertResult(0);
+}
 
 // 正整数
 const positiveInt = /(^[1-9]\d*$)/;
@@ -56,12 +68,13 @@ function iPConvertResult(inputMoney) {
 }
 
 //计算充值金额
-$("#rechargeAmountDialog .conterInput").change(function () {
+$("#rechargeAmountDialog .conterInput").on("input",function () {
   let maxVal = 100000;
   let minVal = 0;
   let counterVal = Number($(this).val());
   let newVal = counterInputVaild(counterVal, minVal, maxVal);
   $(this).val(newVal);
+  computerPrice(this,newVal);
 })
 
 function computerDialog(type, curDom) {
@@ -71,19 +84,26 @@ function computerDialog(type, curDom) {
   let minVal = 0;
   let lastNumber = counter(type, curVal, maxVal, minVal, 1);
   $currentInput.val(lastNumber);
+  computerPrice(curDom,lastNumber)
+}
+
+
+function computerPrice(curDom,lastNumber) {
   //天启币单价
   let unitPrice = Number($(curDom).closest("li").attr("unitPrice"));
   $(curDom).closest("li").find(".tianqiCoin").eq(0).html(unitPrice * 1000 * parseInt(lastNumber));
   //计算充值金额--总金额
   let allTQiIcoin = 0;
   $("#rechargeAmountDialog").find(".tianqiCoin").each(function (i, item) {
-    console.log(444444, item)
     let tianqiCoin = $(item).text() ? parseInt($(item).text()) : 0;
     allTQiIcoin += tianqiCoin
   })
   $("#all-tianqiCoin").html(allTQiIcoin);
   $("#rMBPay").html(allTQiIcoin / 1000);
 }
+
+
+
 
 //弹框--计算充值金额--计数器--end
 
@@ -190,6 +210,7 @@ $(document).on("click", '#changeTab>div', function () {
   $(this).addClass("current");
   $(this).siblings().removeClass("current");
   let type = $(this).attr("type");
+  sessionStorage.setItem("packageTab", type);//1:余额 2：包时
   if (type == 1) {
     $("#balancePackage").show();
     $("#packageTime").hide();
@@ -348,6 +369,7 @@ function getPackageTimesPrice() {
     if (activitytype == 2) {
       $("#realIpNum span").html(allNumber + (allNumber * rate / 100));
       $("#realIpNum").show();
+      $(".payMoney-origin").hide();
     } else {
       $("#realIpNum span").html(0);
       $("#realIpNum").hide();
@@ -358,7 +380,8 @@ function getPackageTimesPrice() {
   //实际价格
   let discountPrice = totalPrice;
   if (activitytype == 1) {
-    discountPrice = totalPrice - (totalPrice * rate / 100)
+    discountPrice = totalPrice - (totalPrice * rate / 100);
+    $(".payMoney-origin").show();
   }
   $("#totalPrice").html(totalPrice.toFixed(2));
   $("#totalPrice").attr("noredprice", discountPrice)
@@ -493,7 +516,7 @@ async function toPayMoney(tabType) {
       if (payType === 'ali') {
         parmas.payType = "1";
         let aliPayParams = {
-          url: "/recharge",
+          url: "/payOrder/recharge",
           type: 'post',
           query: JSON.stringify(parmas)
         }
@@ -503,7 +526,7 @@ async function toPayMoney(tabType) {
 
         //充值接口
         let ajaxData = {
-          url: "/recharge",
+          url: "/payOrder/recharge",
           type: 'post',
           query: JSON.stringify(parmas)
         };
@@ -520,20 +543,20 @@ async function toPayMoney(tabType) {
         redRecordId: redPacketId ? redPacketId : null
       }
       if (payType === 'ali') {
-        parmas.payType ="1";
+        parmas.payType = "1";
         let aliPayParams = {
-          url: "/buyProxy",
+          url: "/payOrder/buyProxy",
           type: 'post',
           query: JSON.stringify(parmas)
         }
         window.open("/payCenter?params=" + JSON.stringify(aliPayParams));
-       // window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total) + "&redRecordId=" + Number(redPacketId));
+        // window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total) + "&redRecordId=" + Number(redPacketId));
       } else {
         //调用后台接口生成二维码
-        
+
         //购买套餐接口
         let ajaxData = {
-          url: "/buyProxy",
+          url: "/payOrder/buyProxy",
           type: 'post',
           query: JSON.stringify(parmas)
         };

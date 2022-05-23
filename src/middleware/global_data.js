@@ -49,14 +49,10 @@ module.exports = function (app) {
 
       state[appKey.cateTypes] = articleTypes
 
-      //登录用户名
-      let userInfo = cookies.get(appKey.userInfo)
-      if (userInfo) {
-        userInfo = decodeURIComponent(userInfo)
-        state.userInfo = userInfo && JSON.parse(userInfo)
-      }else{
-        state.userInfo = null
-      }
+      //是否已登录
+      let token = cookies.get(appKey.token)
+      state.token =token || null
+
 
 
       //友情链接

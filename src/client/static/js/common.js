@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-22 15:48:29
+ * @LastEditTime: 2022-05-23 16:55:54
  */
 
 function Helper() { }
@@ -51,13 +51,13 @@ Helper.$confirm = (msg = '确认此操作?', title = '', callback, options = {}
   }
   //注册回调
   window[eventName] = callback
-  
+
   $('#bootstrap-my-modal').modal('show')
 }
 
 
 window.$ok = function (eventName) {
-  
+
   window[eventName]()
   window[eventName] = null
   $('#bootstrap-my-modal').modal('hide')
@@ -132,44 +132,16 @@ Helper.$message = (options = {}) => {
 })
 
 
-function getCookie (key, json) {
-  if (typeof document === 'undefined') {
-    return;
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
   }
-
-  var jar = {};
-  // To prevent the for loop in the first place assign an empty array
-  // in case there are no cookies at all.
-  var cookies = document.cookie ? document.cookie.split('; ') : [];
-  var i = 0;
-
-  for (; i < cookies.length; i++) {
-    var parts = cookies[i].split('=');
-    var cookie = parts.slice(1).join('=');
-
-    if (!json && cookie.charAt(0) === '"') {
-      cookie = cookie.slice(1, -1);
-    }
-
-    try {
-      var name = decode(cookie);
-
-      if (json) {
-        try {
-          cookie = JSON.parse(cookie);
-        } catch (e) {}
-      }
-
-      jar[name] = cookie;
-
-      if (key === name) {
-        break;
-      }
-    } catch (e) {}
-  }
-
-  return key ? jar[key] : jar;
+  return "";
 }
+
 //客户端ajax二次 封装
 
 /*
@@ -180,16 +152,23 @@ function getCookie (key, json) {
 */
 async function ajax(params) {
   return new Promise(function (resolve, reject) {
-    
+    let token = getCookie('TQ-TOKEN')
     $.ajax({
       type: params.type ? params.type : 'POST',
       url: '/javaProxy' + params.url,
       contentType: 'application/json',
       data: params.query,
+
+      beforeSend: function (request) {
+        console.log("发送请求前判断token:", token)
+        if (token) {
+          request.setRequestHeader("TQ-TOKEN", token);
+        }
+      },
       success: (res) => {
         if (res) {
           if (res) {
-            
+
             if (res.code !== 200) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
@@ -206,7 +185,7 @@ async function ajax(params) {
         }
       },
       error: (err) => {
-        
+
         reject(err)
       }
     });
@@ -237,7 +216,7 @@ function getParams() {
   * start:开始数字
   * step：每次递增
   */
- function numDynamic(id, start, end, step, speed) {   
+function numDynamic(id, start, end, step, speed) {
   var span = document.getElementById(id);
   if (start < end) {
     var i = start;
@@ -366,7 +345,7 @@ function layout() {
       dataType: 'json',
       contentType: 'application/json',
       success: (res) => {
-        
+
         if (+res.code !== 200) {
           return Helper.$message({
             message: res.message || '退出登录失败!',
@@ -377,10 +356,10 @@ function layout() {
 
         Helper.$message({ message: '退出登录' })
 
-        return location.href="/login"
+        return location.href = "/login"
       },
       error: (err) => {
-        
+
       }
     });
 
@@ -393,13 +372,13 @@ window.layout = debounce(layout, 300, true)
 
 //初始化效果
 $(function () {
-  
+
   // 处理导航激活样式
-  let routePath = (window.location.pathname.replace(/\//g,'') || 'index');  // 路径
-  if($(`[data-path=${routePath}]`)){
+  let routePath = (window.location.pathname.replace(/\//g, '') || 'index');  // 路径
+  if ($(`[data-path=${routePath}]`)) {
     $(`[data-path=${routePath}]`).addClass('activated').siblings().removeClass('activated');
   }
-  
+
   //1.自适应布局计算
   change()
 
@@ -412,7 +391,9 @@ $(function () {
     itemWidth: 0,  // 导航子元素宽度 + padding + margin
     logoWidth: 0,  // logo区域宽度
     navRightWidth: 0,  // 右侧登陆注册区域宽度
+    navWidth: [], // 子元素tab的宽度数组
   }
+
   function toggleHead() {
     // 每次调用重置
     headerAttr = {
@@ -440,11 +421,14 @@ $(function () {
       $('.nav-body').addClass('fold');
       // 多态按钮显示
       $('.nav-toggler').addClass('appear')
+      getTabWidth()
     } else {
       $('.nav-body').removeClass('fold')
       $('.nav-toggler').removeClass('appear')
+      getTabWidth()
     }
   }
+  
   toggleHead();
 
   $('.nav-toggler').click(function () {
@@ -453,10 +437,38 @@ $(function () {
     } else {
       $('.header-main .nav-body').addClass('show');
       const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
-      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin)
+      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
+      // getTabWidth()
+       
     }
+    getTabWidth()
 
   })
+
+
+  function getTabWidth(){
+    //  小屏获取导航元素
+    
+    headerAttr.navWidth = [];
+    if($('.show')){
+      let tabNav = $('.show .nav-item');
+      tabNav.each(function(index) {
+        if($(this)){
+           headerAttr.navWidth.push($(this).outerWidth(true))
+        }
+      })
+  
+      headerAttr.navWidth.sort((a, b)=> {
+        return b - a
+      })
+      //  将每个一级导航宽度以最大子元素宽为准设置
+      $('.show .nav-item').css("width", headerAttr.navWidth[0])
+    } else {
+      $('.nav-list .nav-item').css("width", auto)
+    }
+
+  }
+
 
 
   $(window).resize(debounce(() => {
@@ -474,4 +486,3 @@ $(function () {
   }, 500))
 })
 
-getCookie('TQ_TOKEN')

@@ -22,6 +22,20 @@ class Request {
     service.interceptors.request.use(config => {
       config.headers.xx_uid = 7567
       config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+
+      try {
+        //客户端使用 场景
+        if (getCookie && document) {
+          let token = getCookie('TQ-TOKEN')
+          if (token) {
+            config.headers['TQ-TOKEN'] = token;
+          }
+          console.log("客户端请求")
+
+        }
+      } catch (error) {
+
+      }
       return config;
     }, error => {
 
