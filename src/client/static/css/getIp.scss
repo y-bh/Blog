@@ -178,8 +178,8 @@
   grid-row-gap: 30px;
 }
 .create_api_url {
-  width: 240px;
-  height: 60px;
+  width: 240px !important;
+  height: 60px !important;
   border-radius: 4px;
   background: #1968FC;
   border: none;
@@ -272,7 +272,7 @@
   background: #1968FC;
 }
 .port {
-  width: 600px;
+  width: 900px;
 }
 .demo_box {
   grid-template-columns: repeat(auto-fit,231px);
