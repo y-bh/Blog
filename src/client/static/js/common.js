@@ -162,7 +162,7 @@ async function ajax(params) {
       beforeSend: function (request) {
         console.log("发送请求前判断token:", token)
         if (token) {
-          request.setRequestHeader("TOKEN", token);
+          request.setRequestHeader("TQ-TOKEN", token);
         }
       },
       success: (res) => {
