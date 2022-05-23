@@ -36,7 +36,7 @@ module.exports = function (app) {
 
     const isPass = changeURL.some((item) => url.includes(item))
 
-    console.log("获取全局数据:",url)
+    console.log("获取全局数据:", url)
 
     if (method === 'GET' && (URLS.includes(url) || isPass)) {
       //顶部导航 活动相关数据
@@ -51,7 +51,13 @@ module.exports = function (app) {
 
       //登录用户名
       let userInfo = cookies.get(appKey.userInfo)
-      state.userInfo = userInfo && JSON.parse(userInfo)
+      if (userInfo) {
+        userInfo = decodeURIComponent(userInfo)
+        state.userInfo = userInfo && JSON.parse(userInfo)
+      }else{
+        state.userInfo = null
+      }
+
 
       //友情链接
       state.links = await getQueryLink()

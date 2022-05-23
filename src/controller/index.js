@@ -244,6 +244,7 @@ function Router(App) {
 
     //用户信息
     let userInfo = ctx.cookies.get(appKey.userInfo)
+    userInfo = decodeURIComponent(userInfo)
 
     //友情链接
     let links = ctx.state.links
