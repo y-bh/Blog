@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 公共接口
  * @Date: 2022-05-16 19:16:37
- * @LastEditTime: 2022-05-20 14:25:52
+ * @LastEditTime: 2022-05-23 10:33:10
  */
 
 const { getQueryLinkData, getMealActivity } = require("dao/common")
@@ -50,7 +50,7 @@ const getQueryLink = async () => {
     const res = await getQueryLinkData()
     if (+res.code === 200) {
       let data = res.data || []
-      arr = data.map(({ linkName, linkUrl, linkTarget }) => {
+      arr = data.map(({ linkName = null, linkUrl = null, linkTarget = null }) => {
         return {
           link: linkUrl,
           title: linkName,
