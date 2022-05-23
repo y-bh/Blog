@@ -5,15 +5,22 @@
   background-size: contain;
   margin-top: 80px;
 }
+.firm-wrap{
+  width: 1400px;
+  margin: 0 auto;
+}
 .require {
   color: #fc7109;
   display: block;
 }
 .form {
-  grid-row-gap: 35px;
+  grid-row-gap: 15px;
+}
+.input-wrap{
+  width: 800px;
 }
 .form_input{
-  width: 800px !important;
+  width: 100% !important;
   height: 80px !important;
   border-radius: 8px !important;
 }
@@ -25,7 +32,17 @@
   background: #1968FC !important;
   border-radius: 4px !important;
 }
-.error_msg {
+
+.error-wrap{
+  height: 20px;
+  width: 100%;
+}
+.error {
   position: relative;
-  left: 25%;
+  font-size: 14px;
+  color: red;
+}
+
+.red-border{
+  border: 1px solid red !important;
 }

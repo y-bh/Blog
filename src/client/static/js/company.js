@@ -3,38 +3,51 @@
  * @LastEditors: liyuntao
  * @description: 企业服务js
  * @Date: 2022-05-17 14:48:37
- * @LastEditTime: 2022-05-23 17:46:32
+ * @LastEditTime: 2022-05-23 19:23:20
  */
-// $(function() {
-//   //表单校验
-//   window.addEventListener('load', function() {
-//     // 获取表单验证样式
-//     var forms = document.getElementsByClassName('needs-validation');
-//     let btn = document.querySelector('.submit')
-//     // 循环并禁止提交
-//     var validation = Array.prototype.filter.call(forms, function(form) {
-//       btn.addEventListener('click', function(event) {
-//         if (!form.checkValidity()) {
-//           event.preventDefault();
-//           event.stopPropagation();
-//         }
-//         form.classList.add('was-validated');
-//       }, false);
-//     });
-//   }, false);
-// })
+
 
 let minPHONE = /^1[3456789]\d{9}$/;
 
-(function () {
-  'use strict'
-  
-  let forms = document.querySelectorAll('.needs-validation')
+
+$(function () {
+
+  //校验不通过
+  function validateNo(e) {
+    e.addClass('red-border').siblings('.error-wrap').children().show()
+  }
+  //通过
+  function validateYes(e){
+    e.removeClass('red-border').siblings('.error-wrap').children().hide()
+  }
+
   let btn = document.querySelector('.submit')
+  console.log(btn);
 
 
   function validateFunc(params) {
-    let { company, contact, desc, name, useLevel } = params
+    let { company, name, contact, useLevel, desc } = params
+    let e = true
+
+    for(let i in params){
+      if(i === 'desc'){
+        continue
+      }
+      if(!params[i].trim()){
+
+        validateNo($(`#${i}`))
+        e = false
+      }else{
+        validateYes($(`#${i}`))
+      }
+    }
+
+    if(!e){
+      return {
+        content: 'k'
+      }
+    }
+
     if(!minPHONE.test(contact)){
       return {
         res: false,
@@ -46,34 +59,37 @@ let minPHONE = /^1[3456789]\d{9}$/;
 
   
   // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-  .forEach(function (form) {
-    console.log(form);
-    btn.addEventListener('click', function(event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
+  btn.addEventListener('click', function(event) {
 
-      else {
-        let params = $('#company_form').toJson()
-        let res = validateFunc(params);
 
-        if(res){
-          Helper.$message.warning({
-            message: res.content,
-            showClose: true
-          })
-          return
-        }
+    let params = $('#company_form').toJson()
+    let res = validateFunc(params);
+      
+    if(res){
+      if(res.content === 'k') return
+      Helper.$message.warning({
+        message: res.content,
+        showClose: true
+      })
+      return
+    }
 
-        onSubmit()
-      }
+    onSubmit()
   
-      form.classList.add('was-validated')
-    }, false)
+  }, false)
+
+
+
+  
+  $('.form_input').on('input', function (e) {
+    let event = $(this)
+    if(!e.target.value.trim()){
+      validateNo(event)
+    }else{
+      validateYes(event)
+    }
   })
-  })()
+})
 
 //ajax提交form表单转JSON格式
 $(function() {

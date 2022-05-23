@@ -3,10 +3,11 @@
  * @LastEditors: liyuntao
  * @description: 企业服务
  * @Date: 2022-04-27 14:30:33
- * @LastEditTime: 2022-05-23 17:27:40
+ * @LastEditTime: 2022-05-23 19:14:04
 -->
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,104 +17,82 @@
   <meta name="description" content="天启http">
   <title>企业服务</title>
   <%- include('../components/style.html'); %>
-  <link rel="stylesheet" href="/css/firmServer.css">
+    <link rel="stylesheet" href="/css/firmServer.css">
 </head>
+
 <body>
   <%- include('../components/header.html'); %>
-  <div class="banner"></div>
-  <div class="container mt-80 mb-80">
-    <form 
-      method="post" 
-      action=""
-      id="company_form"
-      class="grid justify-center form needs-validation" 
-      novalidate
-    >
-      <div class="form-group form-inline has-validation">
-        <label for="co_name" class="col-md-3 justify-end">
-          <span class="require mr-5">*</span>
-          <span class="main-title-color font-18">企业名称</span>  
-        </label>
-        <input 
-          type="text" 
-          name="company" 
-          class="form-control col-md-9 main-title-color form_input" 
-          id="co_name" 
-          placeholder="输入营业执照上的企业全称" 
-          required
-        >
-        <span class="error_msg invalid-feedback">请输入营业执照上的全名</span>
-      </div>
-      <div class="form-group form-inline">
-        <label for="mate_name" class="col-md-3 justify-end">
-          <span class="require mr-5">*</span>
-          <span class="main-title-color font-18">联系人姓名</span>  
-        </label>
-        <input 
-          type="text" 
-          name="name" 
-          class="form-control col-md-9 main-title-color form_input" 
-          id="mate_name" 
-          placeholder="输入联系人姓名" 
-          required
-        >
-        <span class="error_msg invalid-feedback">请输入您的姓名</span>
-      </div>
-      <div class="form-group form-inline">
-        <label for="mate_sell" class="col-md-3 justify-end">
-          <span class="require mr-5">*</span>
-          <span class="main-title-color font-18">联系人手机号码</span>  
-        </label>
-        <input 
-          type="text" 
-          name="contact" 
-          class="form-control col-md-9 main-title-color form_input" 
-          id="mate_sell" 
-          placeholder="输入联系人手机号码" 
-          required
-        >
-        <span class="error_msg invalid-feedback">请您输入手机号</span>
-      </div>
-      <div class="form-group form-inline">
-        <label for="mate_sell" class="col-md-3 justify-end">
-          <span class="require mr-5">*</span>
-          <span class="main-title-color font-18">每月需求用量</span>  
-        </label>
-        <select 
-          name="useLevel" 
-          class="form-control col-md-9 main-title-color form_input" 
-          id="mate_sell" 
-          required
-        >
-          <option value="">请选择您需要的用量</option>
-          <option value="1">小于20万</option>
-          <option value="2">20万-100万</option>
-          <option value="3">100万-500万</option>
-          <option value="4">大于500万</option>
-        </select>
-        <span class="error_msg invalid-feedback">请选择您的每月需求用量</span>
-      </div>
-      <div class="form-group form-inline">
-        <label for="mate_sell" class="col-md-3 justify-end main-title-color font-18">用途</label>
-        <input 
-          name="desc"
-          type="text" 
-          class="form-control col-md-9 main-title-color form_input forWhat" 
-          id="mate_sell" 
-          placeholder="例如: 网络爬虫"
-        >
-      </div>
-      <div class="bottom_btn flex-center">
-        <button type="button" class="bl-button submit">
-          <span>提交</span>
-        </button>
-      </div>
-    </form>
-  </div>
+    <div class="banner"></div>
+    <div class="firm-wrap mt-80 mb-80">
+      <form method="post" action="" id="company_form" class="grid form needs-validation" novalidate>
+        <div class="form-group form-inline">
+          <label for="company" class="col-md-3 justify-end">
+            <span class="require mr-5">*</span>
+            <span class="main-title-color font-18">企业名称</span>
+          </label>
+          <div class="input-wrap">
+            <input type="text" name="company" class="form-control main-title-color form_input" id="company"
+              placeholder="输入营业执照上的企业全称" required>
+            <div class="error-wrap"><span class="error" style="display: none;">请输入营业执照上的全名</span></div>
+          </div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="name" class="col-md-3 justify-end">
+            <span class="require mr-5">*</span>
+            <span class="main-title-color font-18">联系人姓名</span>
+          </label>
+          <div class="input-wrap">
+            <input type="text" name="name" class="form-control main-title-color form_input" id="name"
+              placeholder="输入联系人姓名" required>
+            <div class="error-wrap"><span class="error" style="display: none;">请输入您的姓名</span></div>
+          </div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="contact" class="col-md-3 justify-end">
+            <span class="require mr-5">*</span>
+            <span class="main-title-color font-18">联系人手机号码</span>
+          </label>
+          <div class="input-wrap">
+            <input type="text" name="contact" class="form-control main-title-color form_input" id="contact"
+              placeholder="输入联系人手机号码" required>
+            <div class="error-wrap"><span class="error" style="display: none;">请您输入手机号</span></div>
+          </div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="useLevel" class="col-md-3 justify-end">
+            <span class="require mr-5">*</span>
+            <span class="main-title-color font-18">每月需求用量</span>
+          </label>
+          <div class="input-wrap">
+            <select name="useLevel" class="form-control main-title-color form_input" id="useLevel" required>
+              <option value="">请选择您需要的用量</option>
+              <option value="1">小于20万</option>
+              <option value="2">20万-100万</option>
+              <option value="3">100万-500万</option>
+              <option value="4">大于500万</option>
+            </select>
+            <div class="error-wrap"><span class="error" style="display: none;">请选择您的每月需求用量</span></div>
+          </div>
+        </div>
+        <div class="form-group form-inline">
+          <label for="desc" class="col-md-3 justify-end main-title-color font-18">用途</label>
+          <div class="input-wrap">
+            <input name="desc" type="text" class="form-control main-title-color form_input forWhat" id="desc"
+              placeholder="例如: 网络爬虫">
+          </div>
+        </div>
+        <div class="bottom_btn flex-center">
+          <button type="button" class="bl-button submit">
+            <span>提交</span>
+          </button>
+        </div>
+      </form>
+    </div>
 
-   <%#公共底部  %> 
- <%- include('../components/footer.html'); %>
+    <%#公共底部 %>
+      <%- include('../components/footer.html'); %>
 </body>
 <%- include('../components/js.html'); %>
-<script src="/js/company.js"></script>
+  <script src="/js/company.js"></script>
+
 </html>
