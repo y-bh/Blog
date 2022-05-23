@@ -99,11 +99,7 @@ function checkForm(params = null, type = 'login') {
       return res
     }
 
-    if (!rules.phone.test(params.phone) && !rules.userName.test(params.phone)) {
-      res.isPass = false
-      res.msg = '请输入用户名或手机号!'
-      return res
-    }
+
 
     if (!params.pwd) {
       res.isPass = false
