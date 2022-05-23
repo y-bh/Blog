@@ -34,8 +34,7 @@ router.post("/login", async (ctx) => {
     res = await registerService(params)
   }
 
-  console.log("vvvvvvvvvvvvvvvvvvvvvv", res)
-
+  
   //注册/登录/重置 成功后业务
   if (+res.code === 200) {
     if (res.data.token) {

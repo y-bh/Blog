@@ -11,9 +11,9 @@ const resolve = (dir) => {
   return path.join(__dirname, "../" + dir);
 }
 
-const envConfig = require(`@/.env.${process.APP_ENV || 'local'}`)
+const envConfig = require(`@/.env.${process.env.APP_ENV || 'local'}`)
 
-console.log("环境配置:", envConfig)
+console.log("环境配置文件:", process.env.APP_ENV ,envConfig)
 
 var config = {
   //html模板目录

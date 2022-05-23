@@ -1,8 +1,8 @@
 /******** moduleName:ui框架重置 *******/
 //重置主体色
 :root {
-  --van-white: #fff;
-  --van-blue: #1989fa;
+  --van-white: $empty;
+  --van-blue: $main;
   --van-button-primary-color: #6153ff;
   --van-button-primary-background-color: var(--van-primary-color);
   --van-primary-color: #6153ff;
@@ -78,8 +78,8 @@
 }
 
 .el-button--default {
-  border-color: #1989fa;
-  color: #1989fa;
+  border-color: $main;
+  color: $main;
 }
 
 
@@ -92,4 +92,102 @@
 
 .el-switch.is-checked .el-switch__core .el-switch__action{
   left: calc(100% - 1rem);
+  
+// 全局按钮
+.layout {
+  .el-button {
+    min-height: auto;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 10px 20px;
+    transition: all .3s;
+  }
+
+  .el-button--default {
+    &:focus,&:hover {
+      background: $main;
+      border-color: $main;
+      color: $empty;
+      outline: 0;
+    }
+  }
+
+  .el-button--primary {
+    color: $empty;
+    background: $main;
+
+    &:focus, &:hover {
+      background: $main_linear;
+      border-color: $main;
+      color: $empty;
+      outline: 0;
+    }
+
+    &.is-plain {
+      color: $main;
+      border: 1px solid $main;
+      background: $empty;
+      &:focus, &:hover {
+        background: $main;
+        border-color: $main;
+        color: $empty;
+        outline: 0;
+      }
+    }
+
+    
+  }
+
+
+  .el-button--warning {
+    color: $empty;
+    background: $warning;
+
+    &:focus, &:hover {
+      background: $warning_linear;
+      border-color: $warning;
+      color: $empty;
+      outline: 0;
+    }
+
+    &.is-plain {
+      color: $warning;
+      border: 1px solid $warning;
+      background: $empty;
+      &:focus, &:hover {
+        background: $warning;
+        border-color: $warning;
+        color: $empty;
+        outline: 0;
+      }
+    }
+
+    
+  }
+
+  .el-button--danger {
+    color: $empty;
+    background: $danger;
+
+    &:focus, &:hover {
+      background: $danger_linear;
+      border-color: $danger;
+      color: $empty;
+      outline: 0;
+    }
+
+    &.is-plain {
+      color: $danger;
+      border: 1px solid $danger;
+      background: $empty;
+      &:focus, &:hover {
+        background: $danger;
+        border-color: $danger;
+        color: $empty;
+        outline: 0;
+      }
+    }
+
+  }
+
 }
