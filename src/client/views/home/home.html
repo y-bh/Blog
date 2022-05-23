@@ -185,7 +185,7 @@
                 </li>
               </ul>
               <div class="common-main-button mt-50" onclick="jumpPackage(1)">
-                <span >了解更多</span>
+                <span>了解更多</span>
               </div>
             </li>
             <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50 pointer">
@@ -421,17 +421,20 @@
                 <ul class="content">
                   <% articleItem.articleDetail.forEach(function(articleDetail,index) { %>
                     <li class="mt-20">
-                      <!-- <span class="mr-30"><%= articleDetail.convertData %></span> -->
-                      <span class="mr-30">
-                        <%= articleDetail.convertData %>
-                      </span>
-                      <span>
-                        <%= articleDetail.title %>
-                      </span>
+
+                      <a href="/help-details/<%= articleDetail.id%>.html" class="text-desc flex align-items-center">
+                        <span class="mr-30">
+                          <%= articleDetail.convertData %>
+                        </span>
+                        <span>
+                          <%= articleDetail.title %>
+                        </span>
+                      </a>
                     </li>
                     <% }) %>
                 </ul>
-                <div class="mt-40 queryBtn pointer" onclick="queryAll()">查看全部<span>>></span></div>
+                <a class="mt-40 queryBtn pointer d-block"
+                  href="/help-center/<%=articleItem.typeAlias%>/1.html">查看全部<span>>></span></a>
               </li>
 
 
@@ -447,8 +450,8 @@
     <%- include('../components/rightToolbar.html'); %>
 
 
- <%#公共底部  %> 
- <%- include('../components/footer.html'); %>
+      <%#公共底部 %>
+        <%- include('../components/footer.html'); %>
 </body>
 <!-- 公共js -->
 <%- include('../components/js.html'); %>

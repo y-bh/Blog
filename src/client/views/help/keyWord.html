@@ -90,7 +90,7 @@
                   <ul class="pagination">
                     <% if(lists && lists.pageNum>1) {%>
                       <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="goPage('pre')">
                           <span>&lt;</span>
                         </a>
                       </li>
@@ -109,7 +109,7 @@
 
                         <% if(lists && lists.totalPage>1) {%>
                           <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
+                            <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="goPage('next')">
                               <span aria-hidden="true">&gt;</span>
                             </a>
                           </li>
@@ -118,7 +118,7 @@
                   </ul>
                 </nav>
 
-                <% if(lists && lists.pageNum>1) {%>
+                <% if(lists && lists.totalPage>1) {%>
                 <div class="goto flex justify-content-center align-items-center ml-30">
                   前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number"
                     onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')"

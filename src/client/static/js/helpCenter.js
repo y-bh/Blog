@@ -58,3 +58,12 @@ function goPage(ev, page, type) {
 $('.go_detail').on('click', function () {
   window.location.href = 'http://localhost:8080/helpDetails'
 })
+
+
+//上一页 下一页
+function goPage(type = 'next'){
+
+  console.log("跳转上一页,下一页")
+  
+}
+
