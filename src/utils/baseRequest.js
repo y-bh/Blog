@@ -7,7 +7,6 @@
  */
 
 import axios from 'axios';
-import { inject } from "vue";
 class Request {
 
   constructor(baseURL, timeout = 10000) {
