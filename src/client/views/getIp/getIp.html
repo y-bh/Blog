@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-23 10:28:56
+ * @LastEditTime: 2022-05-23 16:16:10
 -->
 <!DOCTYPE html>
 <html>
@@ -337,7 +337,7 @@
                   </div>
                   <% }) %>
               </li>
-              <li class="ele flex-center flex-column pt-20 pb-20">
+              <li class="ele flex-column pt-20 pb-20">
                 <div class="li_item_box flex-center">
                   code: 错误编号
                 </div>
@@ -348,19 +348,19 @@
               <li class="ele flex-center pt-20 pb-20">
                 <div class="code flex-center">
                   <p>
-                    返回内容的标签或字段类型可在产品管理里通过设置提取格式来定制；<br />
-                    类型为txt文本的定制标签如下：<br />
-                    ip：port自定义分隔符；<br />
-                    类型为json格式的响应字段如下：<br />
-                    data：[<br />
-                        {<br />
-                            ip：IP<br />
-                            port：端口<br />
-                            expire：有效时间<br />
-                            city：城市<br />
-                            isp：运营商<br />
-                        }<br />
-                    ]
+                    <span>返回内容的标签或字段类型可在产品管理里通过设置提取格式来定制；</span><br />
+                    <span>类型为txt文本的定制标签如下：</span><br />
+                    <span>ip：port自定义分隔符；</span><br />
+                    <span>类型为json格式的响应字段如下：</span><br />
+                    <span>data：[</span><br />
+                        <span class="inline-block indent">{</span><br />
+                          <span class="inline-block indent2">ip：IP</span><br />
+                          <span class="inline-block indent2">port：端口</span><br />
+                          <span class="inline-block indent2">expire：有效时间</span><br />
+                          <span class="inline-block indent2">city：城市</span><br />
+                          <span class="inline-block indent2">isp：运营商</span><br />
+                        <span class="inline-block indent">}</span><br />
+                    <span>]</span>
                   </p>
                 </div>
               </li>
@@ -536,9 +536,11 @@
                 <span class="demo_title mb-15">
                   <%= item.title %>
                 </span>
-                <button type="button" class="or-button download ">
-                  <span>立即下载</span>
-                </button>
+                <a href="<%=item.path %>">
+                  <button type="button" class="or-button download ">
+                    <span>立即下载</span>
+                  </button>
+                </a>
               </div>
               <% }) %>
           </div>

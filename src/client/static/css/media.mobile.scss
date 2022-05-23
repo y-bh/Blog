@@ -68,5 +68,9 @@
     .left-wrap{
       display: none;
     }
+
+    .params_desc{
+      grid-template-columns: 1fr;
+    }
   }
 }

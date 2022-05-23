@@ -219,7 +219,7 @@
   border-right: 1px solid #E4E5EB;
 }
 .note_desc li{
-  width: 200px;
+  max-width: 200px;
   border-bottom: 1px solid #E4E5EB;
 }
 .note_desc li:last-child {
@@ -248,10 +248,11 @@
   background-color: rgba(208, 224, 255, 0.25);
 }
 .li_item_box {
-  width: 378px;
+  max-width: 380px;
   height: 44px;
   border-radius: 8px;
   background-color: rgba(208, 224, 255, 0.25);
+  margin: 0 auto;
 }
 .params_desc {
   grid-template-columns: repeat(2,1fr);
@@ -262,7 +263,6 @@
   width: 810px;
   border-radius: 8px;
   background-color: rgba(208, 224, 255, 0.25);
-  white-space: pre;
 }
 .top_title {
   width: 370px;
@@ -349,4 +349,15 @@ button{
   height: 100%;
   border: none;
   background-color: unset;
+}
+
+
+.indent{
+  text-indent: 1em;
+}
+.indent2{
+  text-indent: 2em;
+}
+.inline-block{
+  display: inline-block;
 }

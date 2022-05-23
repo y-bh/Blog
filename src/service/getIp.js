@@ -3,46 +3,58 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-23 10:12:46
+ * @LastEditTime: 2022-05-23 16:21:48
  */
 const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao } = require("dao/getIp")
 
 let codeDemo = [
   {
-    title: 'Python语言'
+    title: 'Python语言',
+    path: '/download/python.zip'
   },
   {
-    title: 'GO语言'
+    title: 'GO语言',
+    path: '/download/go.zip'
   },
   {
-    title: 'C#语言'
+    title: 'C#语言',
+    path: '/download/CSharp.zip'
   },
   {
-    title: 'JavaScript语言'
+    title: 'JavaScript语言',
+    path: '/download/node.zip'
   },
   {
-    title: 'Java语言'
+    title: 'Java语言',
+    path: '/download/java.zip'
   },
   {
-    title: 'Kotlin语言'
+    title: 'Kotlin语言',
+    path: '/download/kotlin.zip'
   },
   {
-    title: 'Php语言'
+    title: 'Php语言',
+    path: '/download/php.zip'
   },
   {
-    title: '易语言'
+    title: '易语言',
+    path: '/download/python.zip'
   },
   {
-    title: 'C语言'
+    title: 'C语言',
+    path: '/download/python.zip'
   },
   {
-    title: 'Phantomjs语言'
+    title: 'Phantomjs语言',
+    path: '/download/python.zip'
   },
   {
-    title: 'Selenium语言'
+    title: 'Selenium语言',
+    path: '/download/python.zip'
   },
   {
-    title: 'Node语言'
+    title: 'Node语言',
+    path: '/download/python.zip'
   },
 ]
 
