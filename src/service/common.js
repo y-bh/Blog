@@ -48,6 +48,7 @@ const getQueryLink = async () => {
 
   try {
     const res = await getQueryLinkData()
+    console.log("获取友情链接时间:",res)
     if (+res.code === 200) {
       let data = res.data || []
       arr = data.map(({ linkName = null, linkUrl = null, linkTarget = null }) => {
