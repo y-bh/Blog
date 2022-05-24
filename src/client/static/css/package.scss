@@ -278,6 +278,9 @@ $columnMt: 60px;
                 }
                 .discount {
                   background-color: #fff4edff;
+                  span {
+                    color: #ffffff;
+                  }
                 }
                 .lastAmount {
                   background-color: #fff4edff;
@@ -287,14 +290,14 @@ $columnMt: 60px;
                 position: absolute;
                 right: 0;
                 top: 0;
-                font-size: 16px;
-                color: #1968fc;
+                color: #ffffff;
                 text-align: center;
                 line-height: 35px;
                 width: 94px;
                 height: 35px;
-                border-radius: 0 0 0 35px;
-                background: #c3d7fc;
+                border-radius: 20px 0 0 20px;
+                background: linear-gradient(90deg, #f6843c 0%, #e6491a 100%);
+                font-size: 16px;
                 span {
                   font-weight: bold;
                 }
@@ -411,7 +414,6 @@ $columnMt: 60px;
                 position: absolute;
                 right: 0;
                 top: 0;
-                font-size: 28px;
                 color: #ffffff;
                 text-align: center;
                 line-height: 35px;
