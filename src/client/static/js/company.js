@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 企业服务js
  * @Date: 2022-05-17 14:48:37
- * @LastEditTime: 2022-05-23 19:23:20
+ * @LastEditTime: 2022-05-24 09:55:47
  */
 
 
@@ -114,10 +114,14 @@ $(function() {
 
 //提交
 async function onSubmit () {
+  let query = $('#company_form').toJson()
+  for(let i in query){
+    query[i] = query[i].trim()
+  }
   let params = {
     url: 'company/new',
     type: 'post',
-    query: JSON.stringify($('#company_form').toJson())
+    query: JSON.stringify(query)
   }
   let res = await ajax(params);
   if (res) {
