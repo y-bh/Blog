@@ -3,15 +3,19 @@
  * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
+<<<<<<< HEAD
  * @LastEditTime: 2022-05-24 17:30:02
+=======
+ * @LastEditTime: 2022-05-24 18:16:07
+>>>>>>> 020af12869c9a4c6598596c60ec6bce61c1e4518
  */
 
 import axios from 'axios';
-import { AESAUTH, encrypt, decrypt} from "./AES";
-
+import { AESAUTH, encrypt, decrypt } from "./AES";
+import { getCookie } from "./dateFormat"
 class Request {
 
-  constructor(baseURL, timeout = 10000) {
+  constructor(baseURL, timeout = 4000) {
     let service = axios.create({
       baseURL,
       withCredentials: true,
@@ -21,26 +25,20 @@ class Request {
 
     // 请求拦截器
     service.interceptors.request.use(config => {
-      // 去除所有空格
-      
+
+      config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
 
       // 部分接口加密  && process.env.NODE_ENV !== 'development'
-      if(AESAUTH[config.url] ){
-        // config.headers['Content-Type']='text/plain';
-
-        
-
-        if(typeof config.data === 'string'){
+      if (AESAUTH[config.url]) {
+        if (typeof config.data === 'string') {
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)
-          
         }
-        
         config.data.data = encrypt(config.data.data)
-        
-        
-      } else {
-        config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+      }
+
+      if (config.token) {
+        config.headers['TQ-TOKEN'] = config.token;
       }
 
       try {
@@ -50,13 +48,10 @@ class Request {
           if (token) {
             config.headers['TQ-TOKEN'] = token;
           }
-          
-
         }
       } catch (error) {
-
+        console.log(error)
       }
-      
       return config;
     }, error => {
 
@@ -68,7 +63,8 @@ class Request {
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
-        
+
+        console.log("服务端渲染数据:",data.data)
         if (+data.code === 200) {
           return {
             code: 200,
@@ -78,16 +74,16 @@ class Request {
 
           return {
             code: data.code || -1,
-            message: data.message || '接口异常'
+            message: JSON.stringify(data.message) || '接口异常'
           };
         }
       }
       return response && response.data || response;
     },
       error => {
-        console.log(error,'报错====………………………………--------');
+
         return Promise.resolve({
-          code: error.response && error.response.data && error.response.data.code ||-1,
+          code: error.response && error.response.data && error.response.data.code || -1,
           message: error
         })
       });
@@ -123,12 +119,13 @@ class Request {
    * @param data
    * @returns {Promise}
    */
-  get(url, params = {}) {
+  get(url, params = {}, token) {
     try {
       return this.service({
         url,
         params,
-        method: 'GET'
+        method: 'GET',
+        token
       });
     } catch (error) {
 

@@ -3,7 +3,11 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-24 17:21:02
+<<<<<<< HEAD
+ * @LastEditTime: 2022-05-24 18:21:02
+=======
+ * @LastEditTime: 2022-05-24 16:38:48
+>>>>>>> 020af12869c9a4c6598596c60ec6bce61c1e4518
  */
 
 
@@ -12,7 +16,6 @@ const router = require("koa-router")();
 const { renderHome } = require("service/home")
 const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
-const { getBusinessData } = require('service/business')
 const { getProxyCityService, getProxyMenuService, getWhiteListApiService } = require('service/getIp')
 
 const fs = require("fs")
@@ -21,7 +24,7 @@ const config = require("../config/app.config")
 //套餐购买
 //const packageObj = require("./package.js")
 const { renderPackage } = require("service/package");
-const { log } = require("console");
+// const { log } = require("console");
 const appKey = require("config/app.key.config")
 
 const SelfApi = require("./selfApi")
@@ -91,14 +94,13 @@ function Router(App) {
 
   //提取ip-getIp
   router.get("/getIp", async (ctx) => {
-
+    const token = ctx.cookies.get(appKey.token)
     /**数据请求 */
     let staticData = await data()
     let province = await getProxyCityService()
-    let menu = await getProxyMenuService()
+    let menu = await getProxyMenuService(token)
 
-    let apiL = await getWhiteListApiService({data:{pageNum: 1, pageSize: 9999}})
-    console.log(apiL);
+    let apiL = await getWhiteListApiService({ data: { pageNum: 1, pageSize: 9999 } })
 
 
     let getIpData = {
@@ -114,13 +116,10 @@ function Router(App) {
 
 
   //业务场景-businessScene
+  const getBusinessSceneRender = require("service/businessScene")
   router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
-    /**数据请求 */
-    let { currentId = '1' } = ctx.request.params
-    let res = getBusinessData()
-    let p = Object.assign(res, { currentId })
-
-    return ctx.render("businessScene/businessScene", p)
+    const { currentId, title } = getBusinessSceneRender(ctx.request.params)
+    return ctx.render("businessScene/businessScene", { currentId, title })
   })
 
 
@@ -192,7 +191,7 @@ function Router(App) {
 
   //用户总页面-login-index
   router.get(["/login", "/reset", "/register"], async (ctx) => {
-    let { url ,query} = ctx.request
+    let { url, query } = ctx.request
 
     //处理掉查询串情况
     if (query && url.includes('?')) {

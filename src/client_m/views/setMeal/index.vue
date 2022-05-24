@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-23 09:37:39
+ * @LastEditTime: 2022-05-24 16:07:58
 -->
 <template>
   <div class="container">
@@ -407,8 +407,8 @@ export default {
       handleCommand (command, row) {
         if (command === 'renewal') {
           if (row.proxyType === 10) {
-            console.log('去套餐购买页');
-            location.href = '/buy.html'
+            // console.log('去套餐购买页');
+            location.href = '/package.html'
           } else {
             renewalRef.value.onOpen(row)
           }
@@ -438,9 +438,11 @@ export default {
           console.log('合并套餐');
           mergeRef.value.onOpen(row)
         } else if (command === 'extract') {
-          console.log('api提取跳转');
+          // console.log('api提取跳转');
+          location.href='/getIp'
         } else if (command === 'changeLog') {
           console.log('变更记录');
+          logRef.value.onOpen(row)
         } else {
           message.error({
             message: '操作异常!',

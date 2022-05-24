@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-21 14:48:46
+ * @LastEditTime: 2022-05-24 15:39:57
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -246,11 +246,13 @@ export default {
                     reqData.payType = 1;
                     
                     let params = {
-                        url: "/renewProxy",
+                        url: "/payOrder/renewProxy",
                         type: 'post',
                         query: JSON.stringify(reqData)
                     }
-                    window.open("/payCenter?params=" + JSON.stringify(params));
+                    localStorage.setItem('TQParams', JSON.stringify(params))
+                    window.open("/payCenter");
+                    // window.open("/payCenter?params=" + JSON.stringify(params));
                     return
                     
                 } else {

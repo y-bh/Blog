@@ -201,7 +201,10 @@ async function ajax(params) {
   })
 }
 
-
+//跳转咨询
+function contactUs() {
+  window.open("https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true", "_blank");
+}
 
 //获取location 地址栏query查询参数
 function getParams() {

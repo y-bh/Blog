@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-21 14:56:29
+ * @LastEditTime: 2022-05-24 15:44:13
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -218,7 +218,6 @@ export default {
 
                     await methods.getModifyData(row)
 
-                    state.dialogVisible = true
                 }
             },
             async getModifyData (row) {
@@ -230,6 +229,12 @@ export default {
                     state.mealForm.ipSend = res.data.sendCount;
                     state.mealForm.balance = res.data.balance;  // 套餐余额
                     state.ipAgingOptions = res.data.list;
+                    state.dialogVisible = true
+                } else {
+                    message.error({
+                        message: res && res.message || '获取套餐信息异常',
+                        showClose: true
+                    })
                 }
             },
             changeIpAging (val) {
@@ -276,11 +281,13 @@ export default {
                             reqData.payType = 1;
                             
                             let params = {
-                                url: "/changeDate",
+                                url: "/payOrder/changeDate",
                                 type: 'post',
                                 query: JSON.stringify(reqData)
                             }
-                            window.open("/payCenter?params=" + JSON.stringify(params));
+                            localStorage.setItem('TQParams', JSON.stringify(params))
+                            window.open("/payCenter");
+                            // window.open("/payCenter?params=" + JSON.stringify(params));
                             return
                         } else {
                             reqData.payType = 2;

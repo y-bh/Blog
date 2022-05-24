@@ -34,7 +34,7 @@
           <div class="container grid justify-content-center">
             <!-- 栏目类型 -->
             <div class="flex flex-wrap justify-content-center">
-              <ul class="flex flex-wrap justify-center nav nav-pills nav-fill">
+              <ul class="flex flex-no-wrap justify-center nav nav-pills nav-fill">
                 <% articleTypes.forEach(e=> { %>
                   <li class="nav-item flex justify-content-center align-items-center">
                     <a href="/help-center/<%= e.typeAlias %>/1.html" id="<%= e.typeAlias %>"
@@ -73,7 +73,7 @@
                                 </h3>
                                 <span class="go_detail pointer text-right">查看详情>></span>
                               </div>
-                              <p class="desc mt-20">
+                              <p class="desc mt-20 two-line">
                                 <%= i.desc %>
                               </p>
                             </div>
