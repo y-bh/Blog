@@ -28,7 +28,6 @@ const rules = {
   code: /\d{6}/
 }
 
-
 //获取 query 相关参数
 const query = getParams()
 
@@ -39,6 +38,26 @@ if (query && query.back) {
   back = query.back
 }
 
+//注册页 生成浏览器指纹
+function fingerprint2() {
+
+  Fingerprint2.get(function (components) {
+    const values = components.map(function (component, index) {
+      if (index === 0) { //把微信浏览器里UA的wifi或4G等网络替换成空,不然切换网络会ID不一样
+        return component.value.replace(/\bNetType\/\w+\b/, '')
+      }
+      return component.value
+    });
+    // 生成最终id murmur
+    const murmur = Fingerprint2.x64hash128(values.join(''), 31);
+    localStorage.setItem('fingerPrint', murmur)
+  });
+
+}
+
+if (location.pathname.includes("register")) {
+  fingerprint2()
+}
 
 
 
@@ -82,6 +101,11 @@ function getFuncParams(type = 'login') {
 
     if (keyword) {
       obj.keyword = keyword
+    }
+
+    let fingerPrint = localStorage.getItem("fingerPrint") || null
+    if (fingerPrint) {
+      obj.fingerPrint = fingerPrint
     }
   }
   //重置密码参数
