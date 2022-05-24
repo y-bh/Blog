@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 15:00:24
+ * @LastEditTime: 2022-05-24 16:37:56
  */
 
 import axios from 'axios';
@@ -21,38 +21,33 @@ class Request {
 
     // 请求拦截器
     service.interceptors.request.use(config => {
-      // 去除所有空格
 
+      config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
 
       // 部分接口加密  && process.env.NODE_ENV !== 'development'
       if (AESAUTH[config.url]) {
-        // config.headers['Content-Type']='text/plain';
         if (typeof config.data === 'string') {
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)
-
         }
-
         config.data.data = encrypt(config.data.data)
+      }
 
-
+      if (config.token) {
+        config.headers['TQ-TOKEN'] = config.token;
       } else {
-        config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-      }
-
-      try {
-        //客户端使用 场景
-        if (document && getCookie) {
-          let token = getCookie('TQ-TOKEN')
-          if (token) {
-            config.headers['TQ-TOKEN'] = token;
+        try {
+          //客户端使用 场景
+          if (getCookie && document) {
+            let token = getCookie('TQ-TOKEN')
+            if (token) {
+              config.headers['TQ-TOKEN'] = token;
+            }
           }
-
+        } catch (error) {
+          console.log(error)
         }
-      } catch (error) {
-
       }
-
       return config;
     }, error => {
 
@@ -119,12 +114,13 @@ class Request {
    * @param data
    * @returns {Promise}
    */
-  get(url, params = {}) {
+  get(url, params = {}, token) {
     try {
       return this.service({
         url,
         params,
-        method: 'GET'
+        method: 'GET',
+        token
       });
     } catch (error) {
 

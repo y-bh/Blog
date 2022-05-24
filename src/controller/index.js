@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-23 09:57:24
+ * @LastEditTime: 2022-05-24 16:38:48
  */
 
 
@@ -20,7 +20,7 @@ const config = require("../config/app.config")
 //套餐购买
 //const packageObj = require("./package.js")
 const { renderPackage } = require("service/package");
-const { log } = require("console");
+// const { log } = require("console");
 const appKey = require("config/app.key.config")
 
 const SelfApi = require("./selfApi")
@@ -90,11 +90,11 @@ function Router(App) {
 
   //提取ip-getIp
   router.get("/getIp", async (ctx) => {
-
+    const token = ctx.cookies.get(appKey.token)
     /**数据请求 */
     let staticData = await data()
     let province = await getProxyCityService()
-    let menu = await getProxyMenuService()
+    let menu = await getProxyMenuService(token)
 
     let apiL = await getWhiteListApiService({ data: { pageNum: 1, pageSize: 9999 } })
 
