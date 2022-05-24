@@ -1,9 +1,9 @@
 <!--
  * @Author: 陈昊天
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-23 14:12:18
+ * @LastEditTime: 2022-05-24 19:45:19
 -->
 <template>
   <div class="container grid">
@@ -17,13 +17,12 @@
         </el-form-item>
         <el-form-item label="使用时间">
           <el-date-picker
-            v-model="timeList"
+            v-model="searchForm.timeList"
             type="daterange"
             value-format="YYYY-MM-DD"
             range-separator="至"
             start-placeholder="开始时间"
             end-placeholder="结束时间"
-            @change="changeTime"
           />
         </el-form-item>
         <el-form-item label="套餐名称">
@@ -68,6 +67,9 @@
           </template>
         </el-table-column>
         <el-table-column prop="mealName" label="套餐名称" align="center">
+          <template #default="{ row }">
+            <span> {{ row.mealName || "--" }}</span>
+          </template>
         </el-table-column>
         <el-table-column label="订单状态" align="center">
           <template #default="{ row }">
@@ -89,12 +91,12 @@
         </el-table-column>
         <el-table-column prop="payType" label="支付方式" align="center">
           <template #default="{ row }">
-            <span>{{ row.state ? payTypeMap.get(row.payType) : "--" }}</span>
+            <span>{{ row.payType ? payTypeMap.get(row.payType) : "--" }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="price" label="支付金额" align="center">
         </el-table-column>
-        <el-table-column label="交易前后余额(币)" align="center">
+        <el-table-column label="交易前后余额(币)" align="center" width="180px">
           <template #default="{ row }">
             <div class="box flex-center flex-column">
               <span>{{ row?.preAmount ?? "--" }}</span>
@@ -102,14 +104,14 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="创建|支付时间" align="center" sortable>
+        <el-table-column label="创建|支付时间" align="center" sortable width="180px">
           <template #default="{ row }">
             <div class="box flex-center flex-column">
               <span>{{
-                row.createTime ? dateFormat(new Date(row.createTime)) : "--"
+                row.createTime ? dateFormat(new Date(row.createTime * 1000)) : "--"
               }}</span>
               <span>{{
-                row.payTime ? dateFormat(new Date(row.payTime)) : "--"
+                row.payTime ? dateFormat(new Date(row.payTime  * 1000)) : "--"
               }}</span>
             </div>
           </template>
@@ -132,8 +134,10 @@
 
 <script>
 import { reactive, ref, toRefs, onMounted, inject } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { PAY_TYPE_MAP, ORDER_TYPE_MAP, STATE_MAP } from "./data.js";
 import { dateFormat } from "tools/dateFormat.js";
+import { formatInt, deepCopy } from "tools/utility"
 import { getOrderList, batchDelOrder } from "model/payRecord.js";
 export default {
   setup() {
@@ -141,17 +145,19 @@ export default {
     const orderTypeMap = ref(ORDER_TYPE_MAP);
     const stateMap = ref(STATE_MAP);
     const message = inject("message");
-
+    const $router = useRouter();
+    const $route = useRoute()
     const state = reactive({
       searchForm: {
-        mealName: "", //套餐名称
-        orderNo: "", //订单编号
-        pageNum: 0, //分页页码
-        pageSize: 0, //分页大小
-        payEnd: 0, //支付结束时间
-        payStart: 0, //支付开始时间
+        mealName: null, //套餐名称
+        orderNo: null, //订单编号
+        timeList: null,  // 时间
+        pageNum: 1, //分页页码
+        pageSize: 50, //分页大小
+        payEnd: null, //支付结束时间
+        payStart: null, //支付开始时间
       },
-      timeList: [],
+ 
       tableData: [],
       countDown: null,
       totalPage: 0,
@@ -160,20 +166,36 @@ export default {
     });
 
     onMounted(async () => {
-      // await getQueryList()
+      await getQueryList()
       countTime();
     });
 
+    const initQuery = () => {
+        let query = $route.query;
+        state.searchForm.mealName = query.mealName || null;
+        state.searchForm.orderNo = query.orderNo || null;
+        state.searchForm.pageNum = formatInt(query.pageNum) || 1;
+        state.searchForm.pageSize = formatInt(query.pageSize) || 50;
+    }
+
     //获取列表数据
     const getQueryList = async () => {
+      initQuery();
+      const params = deepCopy(state.searchForm);
+      params.payStart = $route.query.timeList && formatInt($route.query.timeList[0]) ||
+          (state.searchForm.timeList && formatInt(state.searchForm.timeList[0]))
+
+      params.payEnd = $route.query.timeList && formatInt($route.query.timeList[1]) ||
+          (state.searchForm.timeList && formatInt(state.searchForm.timeList[1]))
+
       const res = await getOrderList(state.searchForm);
-      if (+res.code === 200) {
-        console.log("res:", res);
-        state.tableData = res.data.data || [];
-        state.searchForm.pageNum = res.data.pageNum || 0;
-        state.searchForm.pageSize = res.data.pageSize || 0;
-        state.totalSize = res.data.totalSize || 0;
-        state.totalPage = res.data.totalPage || 0;
+      if (res && res.code === 200) {
+        console.log("res==订单", res);
+        state.tableData = res.data && res.data.data || [];
+        // state.searchForm.pageNum = res.data.pageNum || 0;
+        // state.searchForm.pageSize = res.data.pageSize || 0;
+        state.totalSize = res.data && res.data.totalSize || 0;
+        // state.totalPage = res.data.totalPage || 0;
       }
     };
 
@@ -184,8 +206,7 @@ export default {
         orderNo: "", //订单编号
         pageNum: 0, //分页页码
         pageSize: 0, //分页大小
-        payEnd: 0, //支付结束时间
-        payStart: 0, //支付开始时间
+        timeList: null
       };
       totalPage = 0;
       totalSize = 0;
@@ -210,14 +231,6 @@ export default {
       }
     };
 
-    //更改时间
-    const changeTime = (val) => {
-      if (val) {
-        state.searchForm.pageNum = 1;
-        state.searchForm.payStart = val[0];
-        state.searchForm.payEnd = val[1];
-      }
-    };
 
     //多选
     const handleSelectionChange = (val) => {
@@ -268,7 +281,6 @@ export default {
       onReset,
       onSearch,
       batchDelete,
-      changeTime,
       handleSelectionChange,
       onPay,
       countTime,
