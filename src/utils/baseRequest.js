@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 16:37:56
+ * @LastEditTime: 2022-05-24 18:16:07
  */
 
 import axios from 'axios';
@@ -35,18 +35,18 @@ class Request {
 
       if (config.token) {
         config.headers['TQ-TOKEN'] = config.token;
-      } else {
-        try {
-          //客户端使用 场景
-          if (getCookie && document) {
-            let token = getCookie('TQ-TOKEN')
-            if (token) {
-              config.headers['TQ-TOKEN'] = token;
-            }
+      }
+
+      try {
+        //客户端使用 场景
+        if (getCookie && document) {
+          let token = getCookie('TQ-TOKEN')
+          if (token) {
+            config.headers['TQ-TOKEN'] = token;
           }
-        } catch (error) {
-          console.log(error)
         }
+      } catch (error) {
+        console.log(error)
       }
       return config;
     }, error => {
