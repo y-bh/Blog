@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 企业服务js
  * @Date: 2022-05-17 14:48:37
- * @LastEditTime: 2022-05-24 09:55:47
+ * @LastEditTime: 2022-05-24 13:46:44
  */
 
 
@@ -83,6 +83,9 @@ $(function () {
   
   $('.form_input').on('input', function (e) {
     let event = $(this)
+    if(e.target.name === 'desc'){
+      return 
+    }
     if(!e.target.value.trim()){
       validateNo(event)
     }else{
