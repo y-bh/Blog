@@ -90,4 +90,11 @@ module.exports = {
   "POST_USER_UPDATEPHONE": "/user/update/phone",
   //修改密码
   "POST_USER_UPDATEPWD": "/user/update/password",
+
+  //注册验证码接口
+  "POST_USER_REGISTER_CODE": "/auth/registerCode",
+
+  //重置验证码接口
+    "POST_USER_RESET_CODE": "/user/forget/password/getCode",
+
 }

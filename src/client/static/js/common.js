@@ -159,12 +159,12 @@ function setCookie(cname, cvalue, exdays) {
         type: 接口类型, 默认post  get/post/put
         query: 参数
 */
-async function ajax(params) {
+async function ajax(params, prex = '/javaProxy') {
   return new Promise(function (resolve, reject) {
     let token = getCookie('TQ-TOKEN')
     $.ajax({
       type: params.type ? params.type : 'POST',
-      url: '/javaProxy' + params.url,
+      url: `${prex}/${params.url}`,
       contentType: 'application/json',
       data: params.query,
 

@@ -40,4 +40,27 @@ const postLoginDao = async (data) => {
   }
 }
 
-module.exports = { postRegisterDao, postResetDao, postLoginDao }
+
+//注册验证码
+const registerCodeDao = async (data) => {
+  try {
+    const res = await service.post(api.POST_USER_REGISTER_CODE, data)
+    return res
+  } catch (error) {
+    return error
+  }
+}
+
+
+//校验验证码
+const resetCodeDao = async (data) => {
+  try {
+    const res = await service.post(api.POST_USER_RESET_CODE, data)
+    return res
+  } catch (error) {
+    return error
+  }
+}
+
+
+module.exports = { postRegisterDao, postResetDao, postLoginDao, registerCodeDao, resetCodeDao }
