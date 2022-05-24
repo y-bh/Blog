@@ -1,11 +1,11 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-24 16:39:00
+ * @LastEditTime: 2022-05-24 19:56:40
  */
-const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao } = require("dao/getIp")
+const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao,getIconDao } = require("dao/getIp")
 
 let codeDemo = [
   {
@@ -411,9 +411,9 @@ const getProxyMenuService = async (token) => {
  * @description: 白名单接口
  * @return {*}
  */
-const getWhiteListApiService = async (params = null) => {
+const getWhiteListApiService = async (token, params = null) => {
   try {
-    const res = await getWhiteListApiDao(params)
+    const res = await getWhiteListApiDao(token, params)
     if (res && res.code === 200) {
       let { whiteAdd = null, whiteDelete = null, whiteFetch = null } = res.data
       return {
@@ -424,6 +424,25 @@ const getWhiteListApiService = async (params = null) => {
         whiteAdd: '--',
         whiteDelete: '--',
         whiteFetch: '--',
+      }
+    }
+  } catch (error) {
+    console.error('getProxyMenu_service:',error);
+  }
+}
+
+
+const getIconService = async(token) => {
+  try {
+    const res = await getIconDao(token)
+    if (res && res.code === 200) {
+      const { balance } = res.data
+      return {
+        balance
+      }
+    }else{
+      return {
+        balance: 0
       }
     }
   } catch (error) {
@@ -456,5 +475,6 @@ module.exports = {
   data,
   getProxyCityService,
   getProxyMenuService,
-  getWhiteListApiService
+  getWhiteListApiService,
+  getIconService
 }

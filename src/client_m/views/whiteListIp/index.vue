@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-23 13:31:10
+ * @LastEditTime: 2022-05-24 20:10:28
 -->
 <template>
   <div class="white-list-wrap">
@@ -132,9 +132,9 @@ export default {
       }
       const res = await updateUserInfo(params)
       if(+res.code === 200){
-        $message.success('success')
+        $message.success('操作成功')
       } else {
-        $message.error('error')
+        $message.error(res.message || '操作失败')
       }
     }
 
