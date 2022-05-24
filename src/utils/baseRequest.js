@@ -8,7 +8,7 @@
 
 import axios from 'axios';
 import { AESAUTH, encrypt, decrypt } from "./AES";
-
+import { getCookie } from "./dateFormat"
 class Request {
 
   constructor(baseURL, timeout = 4000) {
@@ -32,22 +32,21 @@ class Request {
           config.data = JSON.parse(config.data)
 
         }
-        
+
         config.data.data = encrypt(config.data.data)
 
-        
+
       } else {
         config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
       }
 
       try {
         //客户端使用 场景
-        if (getCookie && document) {
+        if (document && getCookie) {
           let token = getCookie('TQ-TOKEN')
           if (token) {
             config.headers['TQ-TOKEN'] = token;
           }
-
 
         }
       } catch (error) {
@@ -75,16 +74,16 @@ class Request {
 
           return {
             code: data.code || -1,
-            message: data.message || '接口异常'
+            message: JSON.stringify(data.message) || '接口异常'
           };
         }
       }
       return response && response.data || response;
     },
       error => {
-        
+
         return Promise.resolve({
-          code: error.response && error.response.data && error.response.data.code ||-1,
+          code: error.response && error.response.data && error.response.data.code || -1,
           message: error
         })
       });

@@ -32,7 +32,7 @@ module.exports = (option = {}) => {
       }
 
       const res = await service.proxyAxios(tem, method, body, headers)
-      console.log("代理接口返回的数据---------------->", res)
+     // console.log("代理接口返回的数据---------------->", res)
       ctx.body = res
     }
   };

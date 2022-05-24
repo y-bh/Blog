@@ -152,11 +152,6 @@ function checkForm(params = null, type = 'login') {
       return res
     }
 
-    if (!rules.pwd.test(params.pwd)) {
-      res.isPass = false
-      res.msg = '请输入正确的密码格式![至少六位字符串]'
-      return res
-    }
   } else {
     if (!params.phone) {
       res.isPass = false

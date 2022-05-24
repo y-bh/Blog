@@ -41,17 +41,23 @@ router.post("/login", async (ctx) => {
       const { token } = res.data
 
       //设置cookie 值
-      ctx.cookies.set(appKey.token, token,{httpOnly:false})
+      ctx.cookies.set(appKey.token, token, { httpOnly: false })
+
+      //用户信息
+      let user = JSON.stringify(res.data, ['id', 'balance'])
+      ctx.cookies.set(appKey.userInfo, user, { httpOnly: false })
     }
   }
   //return ctx.redirect('/manager');
   ctx.response.body = res
 });
 
+
+
 //登出功能
 router.post("/layout", async (ctx) => {
   ctx.cookies.set(appKey.token, '')
+  ctx.cookies.set(appKey.userInfo, '')
   return ctx.success(null, '已退出登录');
 });
-
 module.exports = router;
