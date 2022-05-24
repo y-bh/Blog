@@ -24,8 +24,7 @@
           <!-- 第一个banner -->
           <div class="banner-board">
             <div class="banner-left pt-140 mb-140">
-              <div class="banner-title common-fadeInUp common-fadeInUp-delay-05"><img src="/images/home/backg-title.svg"
-                  alt=""></div>
+              <div class="banner-title common-fadeInUp"><img src="/images/home/backg-title.svg" alt=""></div>
               <div class="banner-subTitle mt-30 common-fadeInUp common-fadeInUp-delay-06">
                 <span>HTTP、HTTPS、SOCKS5协议，全方位支持大数据采集</span>
               </div>
@@ -37,7 +36,7 @@
 
           </div>
           <!-- 第二栏 -->
-          <ul class="secondRow pt-45 pb-45">
+          <ul class="secondRow common-fadeInUp common-fadeInUp-delay-08 pt-45 pb-45">
             <li>
               <div class="number"><span id="cityNum">200</span><span>+</span></div>
               <div class="desc mt-30"><span>全国城市数量</span></div>
@@ -96,17 +95,19 @@
                 <div class="title"><span>合作企业</span></div>
                 <div class="subTitle mt-20"><span>忠诚合作,携手共赢</span></div>
               </div>
-              <ul class="mt-80">
-                <li>
+              <ul class="mt-80 common-fadeInUp">
+                <li class="common-scrollLeft">
+                  <img src="/images/home/enterprise-left.png" alt="合作企业">
                   <img src="/images/home/enterprise-left.png" alt="合作企业">
                 </li>
-                <div>
+                <li class="common-scrollRight">
                   <img src="/images/home/enterprise-right.png" alt="合作企业">
-                </div>
+                  <img src="/images/home/enterprise-right.png" alt="合作企业">
+                </li>
               </ul>
             </div>
             <!-- 现在注册，免费领取5000IP -->
-            <div class="eightRow regist pt-30 pb-40 mt-140">
+            <div class="eightRow regist pt-30 pb-40 mt-140  common-fadeInUp">
               <div><img src="/images/home/regist.png" alt=""></div>
               <div class="desc"><span>现在注册，免费领取5000IP</span></div>
               <div class="btn">
@@ -120,21 +121,22 @@
                 <div class="title"><span>资讯中心</span></div>
               </div>
               <ul>
-
-
                 <% articleList.forEach(function(articleItem,index) { %>
-                  <li class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80">
+                  <li
+                    class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80 common-fadeInUp common-fadeInUp-fast-<%= index+1 %>">
                     <div class="common-arrow-title pb-10">
-                      <div class="arrow arrow_left">
-                        <i class="iconfont icon-jiantou1"></i>
-                        <i class="iconfont icon-jiantou1"></i>
+                      <div class="arrow arrow_left mr-20">
+                        <i class="lightColour">&gt;</i>
+                        <i class="darkColour">&gt;</i>
                       </div>
-                      <div class="title"><span>
+                      <div class="title">
+                        <span>
                           <%= articleItem.type %>
-                        </span></div>
-                      <div class="arrow arrow_right">
-                        <i class="iconfont icon-jiantou2"></i>
-                        <i class="iconfont icon-jiantou2"></i>
+                        </span>
+                      </div>
+                      <div class="arrow arrow_right ml-20">
+                        <i class="darkColour">&lt;</i>
+                        <i class="lightColour">&lt;</i>
                       </div>
                     </div>
                     <ul class="content">

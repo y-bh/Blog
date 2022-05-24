@@ -3,12 +3,27 @@
  * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
+<<<<<<< HEAD
  * @LastEditTime: 2022-05-24 19:33:20
+=======
+ * @LastEditTime: 2022-05-24 18:16:07
+>>>>>>> 520e6ee169ead32c2de2a6e63f0a16c1b8cd8755
  */
 
 import axios from 'axios';
 import { AESAUTH, encrypt, decrypt } from "./AES";
-import { getCookie } from "./dateFormat"
+
+export const getCookie = function (cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
+
 class Request {
 
   constructor(baseURL, timeout = 4000) {
@@ -33,21 +48,23 @@ class Request {
         config.data.data = encrypt(config.data.data)
       }
 
-      if (config.token) {
-        config.headers['TQ-TOKEN'] = config.token;
-      }
-
       try {
         //客户端使用 场景
-        if (getCookie && document) {
+        if (document && getCookie) {
           let token = getCookie('TQ-TOKEN')
+          console.log("客户端cookie")
           if (token) {
             config.headers['TQ-TOKEN'] = token;
           }
         }
       } catch (error) {
         console.log(error)
+        if (config.token) {
+          console.log("服务端cookie")
+          config.headers['TQ-TOKEN'] = config.token;
+        }
       }
+
       return config;
     }, error => {
 
@@ -60,7 +77,7 @@ class Request {
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
 
-        console.log("服务端渲染数据:",data.data)
+        console.log("服务端渲染数据:", data.data)
         if (+data.code === 200) {
           return {
             code: 200,

@@ -1,10 +1,10 @@
 .rightToolbar {
   position: fixed;
-  top: 40%;
-  z-index: 99999;
+  bottom: 10%;
   border-radius: 4px;
   right: 46px;
   width: 100px;
+  z-index: 9999999999;
   a {
     color: #677294;
     &:hover {
@@ -59,8 +59,9 @@
       cursor: pointer;
     }
     .toolbar-item {
-      height: 80px;
+      height: 82px;
       margin: 15px 0;
+      position: relative;
       .right {
         text-align: center;
       }
@@ -74,10 +75,10 @@
       .cooperate-left {
         display: none;
         position: absolute;
-        left: -284px;
-        top: 90px;
+        right: 88px;
+        top: 0;
         .left-box {
-          height: 357px;
+          // height: 357px;
           background: rgba(255, 255, 255, 0.39);
           box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
           border-radius: 8px;
@@ -115,6 +116,7 @@
               font-size: 12px;
               color: #1968fc;
               cursor: pointer;
+              white-space: nowrap;
             }
           }
         }
@@ -129,11 +131,11 @@
       .publicNum-left {
         display: none;
         position: absolute;
-        left: -234px;
-        top: 210px;
+        top: 0;
+        right: 88px;
         padding-right: 30px;
         .left-box {
-          height: 262px;
+          // height: 262px;
           background: rgba(255, 255, 255, 0.39);
           box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
           border-radius: 8px;
@@ -148,6 +150,7 @@
           .desc {
             font-size: 14px;
             color: #677294;
+            white-space: nowrap;
           }
         }
       }

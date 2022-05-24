@@ -21,6 +21,52 @@
 //     transform: translateY(0);
 //   }
 // }
+
+.common-scrollLeft {
+  display: flex;
+  width: 100%;
+  height: 150px;
+  animation: tdryleft 24s linear infinite;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+  img {
+    width: 100%;
+    height: 150px;
+    flex-shrink: 0;
+  }
+}
+.common-scrollRight {
+  display: flex;
+  width: 100%;
+  height: 150px;
+  animation: tdryRight 24s linear infinite;
+  transform: translateX(-100%);
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+  img {
+    width: 100%;
+    height: 150px;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes tdryleft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes tdryRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
 .common-arrow-title {
   display: flex;
   align-items: center;
@@ -28,9 +74,31 @@
   line-height: 60px;
   justify-content: center;
   color: #091d43;
-
   .arrow {
-    font-size: 14px;
+    //   font-size: 24px;
+    //   i {
+    //     position: relative;
+    //   }
+    //   .darkColour {
+    //     left: -12px;
+    //   }
+    // }
+  }
+  .arrow_left {
+    display: flex;
+    position: relative;
+    left: -20px;
+    .lightColour {
+      margin-right: -10px;
+    }
+  }
+  .arrow_right {
+    display: flex;
+    position: relative;
+    left: 20px;
+    .lightColour {
+      margin-left: -8px;
+    }
   }
 }
 //背景效果图
@@ -172,10 +240,15 @@
         .backg-btn {
           width: 200px;
           height: 60px;
-          background: rgba(25, 104, 252, 0.39);
+          background: #1968fc;
           border-radius: 4px;
           color: #ffffff;
           cursor: pointer;
+          &:hover {
+            background: linear-gradient(45deg, #4e38c7, #1968fc);
+            // transform: translate(-101%);
+            transition: transform 0.5s;
+          }
         }
         .border-btn {
           width: 200px;
@@ -232,6 +305,18 @@
         align-items: center;
         padding: 0 48px;
         position: relative;
+        /*动画的过渡效果*/
+        transition: all 0.25s ease-in;
+        &:hover {
+          .icon-img1,
+          .icon-img2,
+          .icon-img3 {
+            transform: translate(8px, -8px);
+          }
+          span {
+            color: #1968fc;
+          }
+        }
         &:after {
           content: "";
           background: url("/images/home/particle-img.png") no-repeat;
@@ -391,6 +476,9 @@
         background-repeat: no-repeat;
         //background-image: linear-gradient(to bottom left, rgba(208, 224, 255, 0.6), #fff, #fff);
         background-image: radial-gradient(closest-side at 60%, rgba(208, 224, 255, 0.7), #ff000000);
+        &:hover {
+          transform: translateY(-30px);
+        }
         .timesRange {
           display: flex;
           flex-wrap: wrap;
@@ -444,6 +532,44 @@
             background: rgba(255, 255, 255, 0.39);
             border: 1px solid #d0e0ff;
             border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            &:hover {
+              span {
+                color: #1968fc;
+              }
+            }
+            // &::before,
+            // &::after {
+            //   content: "";
+            //   position: absolute;
+            //   top: -10px;
+            //   left: -10px;
+            //   right: -10px;
+            //   bottom: -10px;
+            //   border: 2px solid rgb(17, 36, 100);
+            //   transition: all 0.5s;
+            //   animation: clippath 8s forwards linear;
+            // }
+            // &::after {
+            //   animation: clippath 8s forwards -1.5s linear;
+            // }
+            @keyframes clippath {
+              0%,
+              100% {
+                clip-path: inset(0 0 98% 0);
+              }
+              25% {
+                clip-path: inset(0 98% 0 0);
+              }
+              50% {
+                clip-path: inset(98% 0 0 0);
+              }
+              75% {
+                clip-path: inset(0 0 0 98%);
+              }
+            }
 
             span {
               line-height: 21px;
@@ -482,6 +608,11 @@
   .sevenRow {
     > ul {
       overflow: hidden;
+      &:hover {
+        > li {
+          animation-play-state: paused;
+        }
+      }
     }
   }
   .eightRow {
@@ -522,6 +653,16 @@
         background: rgba(234, 252, 255, 0.39);
         box-shadow: 0px 20px 40px rgba(76, 86, 100, 0.1);
         border-radius: 8px;
+        .arrow {
+          opacity: 0;
+        }
+        &:hover {
+          .arrow {
+            transition: all 0.4s;
+            opacity: 1;
+            left: 0 !important;
+          }
+        }
         .content {
           font-size: 14px;
           color: #091d43;
@@ -558,6 +699,13 @@
         .title {
           border-bottom: 1px solid #84eafa;
         }
+        .lightColour {
+          color: #95d8e2;
+          opacity: 0.5;
+        }
+        .darkColour {
+          color: #27adc2;
+        }
       }
       .news2 {
         background: rgba(240, 243, 253, 0.39);
@@ -565,12 +713,26 @@
         .title {
           border-bottom: 1px solid #1968fc;
         }
+        .lightColour {
+          color: #89b1fd;
+          opacity: 0.5;
+        }
+        .darkColour {
+          color: #1968fc;
+        }
       }
       .news3 {
         background: rgba(255, 244, 237, 0.39);
         border-top: 1px solid #fc7019;
         .title {
           border-bottom: 1px solid #fc7019;
+        }
+        .lightColour {
+          color: #fdb88d;
+          opacity: 0.5;
+        }
+        .darkColour {
+          color: #fc7019;
         }
       }
     }
