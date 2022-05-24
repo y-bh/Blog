@@ -8,7 +8,18 @@
 
 import axios from 'axios';
 import { AESAUTH, encrypt, decrypt } from "./AES";
-import { getCookie } from "./dateFormat"
+
+export const getCookie = function (cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
+
 class Request {
 
   constructor(baseURL, timeout = 4000) {
@@ -33,21 +44,23 @@ class Request {
         config.data.data = encrypt(config.data.data)
       }
 
-      if (config.token) {
-        config.headers['TQ-TOKEN'] = config.token;
-      } else {
-        try {
-          //客户端使用 场景
-          if (getCookie && document) {
-            let token = getCookie('TQ-TOKEN')
-            if (token) {
-              config.headers['TQ-TOKEN'] = token;
-            }
+      // if (config.token) {
+      //   config.headers['TQ-TOKEN'] = config.token;
+      // } else {
+
+      console.log("请求接口:",getCookie('TQ-TOKEN'))
+      try {
+        //客户端使用 场景
+        if (getCookie && document) {
+          let token = getCookie('TQ-TOKEN')
+          if (token) {
+            config.headers['TQ-TOKEN'] = token;
           }
-        } catch (error) {
-          console.log(error)
         }
+      } catch (error) {
+        console.log(error)
       }
+
       return config;
     }, error => {
 
@@ -60,7 +73,7 @@ class Request {
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
 
-        console.log("服务端渲染数据:",data.data)
+        console.log("服务端渲染数据:", data.data)
         if (+data.code === 200) {
           return {
             code: 200,
