@@ -106,13 +106,12 @@ class Request {
   * @param data
   * @returns {Promise}
   */
-  post(url, data = {}, token) {
+  post(url, data = {}) {
     try {
       return this.service({
         url,
         method: 'POST',
-        data: JSON.stringify(data),
-        token
+        data: JSON.stringify(data)
       });
     } catch (error) {
 
