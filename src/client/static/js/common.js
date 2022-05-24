@@ -132,6 +132,7 @@ Helper.$message = (options = {}) => {
 })
 
 
+//获取cookie
 function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
@@ -140,6 +141,14 @@ function getCookie(cname) {
     if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
   }
   return "";
+}
+
+//设置cookie
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
 //客户端ajax二次 封装
@@ -447,6 +456,31 @@ $(function () {
 
   }
 
+
+
+  //关于注册短链
+  const query = getParams()
+  // 推过短链进入场景
+  const from = query.from || null
+  const keyword = query.keyword || null
+  const did = query.did || null
+
+  if (did) {
+    setCookie('did', did, 30)
+    localStorage.setItem('did', did)
+
+    if (from && from === 'seller') {
+      setCookie('from', 'seller', 30)
+      localStorage.setItem('from', from)
+    } else {
+      setCookie('from', '', 30)
+      localStorage.setItem('from', '')
+      if (keyword) {
+        setCookie('keyword', keyword, 30)
+        localStorage.setItem('keyword', keyword)
+      }
+    }
+  }
 
 
   $(window).resize(debounce(() => {

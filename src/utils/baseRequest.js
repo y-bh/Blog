@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-23 18:05:28
+ * @LastEditTime: 2022-05-24 15:00:24
  */
 
 import axios from 'axios';
@@ -21,8 +21,28 @@ class Request {
 
     // 请求拦截器
     service.interceptors.request.use(config => {
-      config.headers.xx_uid = 7567
+      // 去除所有空格
       
+
+      // 部分接口加密  && process.env.NODE_ENV !== 'development'
+      if(AESAUTH[config.url] ){
+        // config.headers['Content-Type']='text/plain';
+
+        
+
+        if(typeof config.data === 'string'){
+          config.data = config.data.trim()
+          config.data = JSON.parse(config.data)
+          
+        }
+        
+        config.data.data = encrypt(config.data.data)
+        
+        
+      } else {
+        config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+      }
+
       try {
         //客户端使用 场景
         if (getCookie && document) {
@@ -30,21 +50,13 @@ class Request {
           if (token) {
             config.headers['TQ-TOKEN'] = token;
           }
-          console.log("客户端请求")
+          
 
         }
       } catch (error) {
 
       }
-
-      // 部分接口加密
-      if(AESAUTH[config.url] && process.env.NODE_ENV !== 'development'){
-        config.headers['Content-Type']='text/plain';
-        config.data = encrypt(config.data)
-      } else {
-        config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-      }
-
+      
       return config;
     }, error => {
 
@@ -53,10 +65,10 @@ class Request {
 
     // 响应拦截器
     service.interceptors.response.use(response => {
-
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
+        
         if (+data.code === 200) {
           return {
             code: 200,
@@ -65,7 +77,7 @@ class Request {
         } else {
 
           return {
-            code: -1,
+            code: data.code || -1,
             message: data.message || '接口异常'
           };
         }
@@ -73,9 +85,9 @@ class Request {
       return response && response.data || response;
     },
       error => {
-        console.error("接口报错:", error)
+        console.log(error,'报错====………………………………--------');
         return Promise.resolve({
-          code: -1,
+          code: error.response && error.response.data && error.response.data.code ||-1,
           message: error
         })
       });

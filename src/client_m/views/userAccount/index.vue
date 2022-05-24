@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-23 13:52:50
+ * @LastEditTime: 2022-05-24 11:14:45
 -->
 <template>
   <div class="userAccount">
@@ -23,13 +23,23 @@
             v-if="userInfo.proxyApiOpend"
             >密钥</el-button
           >
-          <el-button type="warning" v-if="!userInfo.isHasSeller" class="ml-20"
-            >联系销售</el-button
+          <a
+            href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true"
+            target="_blank"
           >
+            <el-button
+              type="warning"
+              v-if="!userInfo.isHasSeller"
+              class="ml-20"
+            >
+              联系销售</el-button
+            >
+          </a>
         </div>
       </div>
       <div class="account-vipInfo">
-        第<span class="orange ml-15 mr-15">20000</span>位会员
+        第<span class="orange ml-15 mr-15">{{ vipNum }}</span
+        >位会员
       </div>
     </div>
     <!--  -->
@@ -224,6 +234,7 @@ export default {
   },
   props: {},
   setup() {
+    const vipNum = ref(0);
     const $message = inject("message");
     const { toClipboard } = useClipboard();
     let dialogPersonVisible = ref(false);
@@ -236,7 +247,8 @@ export default {
     let state = reactive({
       //authStates: 5, //1:未认证 2：个人认证通过  3：企业认证通过 4：企业认证审核中 5：企业认证审核未通过
       userInfo: {
-        reason:"",//失败原因
+        id: "", //用户的id
+        reason: "", //失败原因
         username: "", //用户名
         phone: "", //手机
         balance: 0, //余额
@@ -270,11 +282,11 @@ export default {
     provide("userInfoSon", state);
     const editPersonInfo = () => {
       //编辑个人信息
-      console.log(3333, dialogPersonVisible);
+      //console.log(3333, dialogPersonVisible);
       dialogPersonVisible.value = true;
     };
     const updatePersonDialog = (falg) => {
-      console.log(333333, falg);
+      //console.log(333333, falg);
       dialogPersonVisible.value = falg;
     };
     const updatePwdDialog = (falg) => {
@@ -282,7 +294,7 @@ export default {
       dialogPwdVisible.value = falg;
     };
     const updateMobile = () => {
-      console.log(updateMobileRef.value.dialogVisible);
+      //console.log(updateMobileRef.value.dialogVisible);
       updateMobileRef.value.dialogVisible = true;
     };
     const openKey = () => {
@@ -290,12 +302,28 @@ export default {
     };
     onBeforeMount(async () => {
       await getUserInfo();
+      //console.log(22222222, state.userInfo.id);
+      if (state.userInfo.id) {
+        let bigId = state.userInfo.id * 3 + 130000;
+        vipNum.value =
+          parseInt((bigId % 1000000) / 100000) +
+          "" +
+          parseInt((bigId % 100000) / 10000) +
+          "" +
+          parseInt((bigId % 10000) / 1000) +
+          "" +
+          parseInt((bigId % 1000) / 100) +
+          "" +
+          parseInt((bigId % 100) / 10) +
+          "" +
+          (bigId % 10);
+      }
     });
     onMounted(() => {});
     const queryCompayStatus = () => {
       let auth = state.userInfo.companyAuth;
       let status = state.userInfo.verifyState;
-      console.log("==========当前企业的状态====", status);
+      // console.log("==========当前企业的状态====", status);
       if (auth) {
         companyAuthRef.value.title = "企业认证";
         companyAuthRef.value.authCompanyStep = 6;
@@ -316,11 +344,12 @@ export default {
     const getUserInfo = async () => {
       //TODO 通过cookie获取用户信息
       let res = await getMineInfo();
-      console.log(333333333333, res);
+      //console.log(333333333333, res);
       if (res && res.code == 200) {
         let data = res.data ? res.data : {};
         state.userInfo = {
-          reason:data.reason ? data.reason : "", //用户名
+          id: data.id ? Number(data.id) : 0,
+          reason: data.reason ? data.reason : "", //失败原因
           username: data.username ? data.username : "", //用户名
           phone: phoneFormat(data.phone), //手机
           balance: data.balance ? Number(data.balance).toLocaleString() : 0, //余额
@@ -338,7 +367,7 @@ export default {
           isHasSeller:
             data.sellerInfo &&
             data.sellerInfo.vest &&
-            data.sellerInfo.vest.nickname
+            data.sellerInfo.vest.username
               ? true
               : false, //有无销售
           sale: {
@@ -346,8 +375,8 @@ export default {
             sellerName:
               data.sellerInfo &&
               data.sellerInfo.vest &&
-              data.sellerInfo.vest.nickname
-                ? data.sellerInfo.vest.nickname
+              data.sellerInfo.vest.username
+                ? data.sellerInfo.vest.username
                 : "--",
             profession:
               data.sellerInfo && data.sellerInfo.sellerLevel
@@ -410,6 +439,7 @@ export default {
       companyAuthRef.value.dialogVisible = true;
     };
     return {
+      vipNum,
       queryCompayStatus,
       personAuth,
       queryPersonAuth,

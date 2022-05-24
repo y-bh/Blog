@@ -9,6 +9,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { routes } from '@/routes/data/routes.js';
 
+import { getCookie } from "tools/dateFormat"
+
 export default function (app) {
   const router = createRouter({
     history: createWebHistory(),
@@ -18,8 +20,13 @@ export default function (app) {
     console.log('error:', handler);
   });
 
-  router.beforeEach(async (to, from, next) =>{
-    // console.log("路由访问了",to, from)
+  router.beforeEach(async (to, from, next) => {
+    //判断当前是否登录
+    const token = getCookie("TQ-TOKEN")
+    //未登录,跳转登录页
+    if (!token) {
+      return window.open(`/login?back=${to.fullPath}`, '_self')
+    }
     next()
   })
   app.use(router);
