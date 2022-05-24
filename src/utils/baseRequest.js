@@ -60,6 +60,7 @@ class Request {
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
 
+        console.log("服务端渲染数据:",data.data)
         if (+data.code === 200) {
           return {
             code: 200,
