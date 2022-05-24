@@ -413,6 +413,9 @@ body {
   display: flex;
 }
 
+.flex-no-wrap {
+  flex-wrap: nowrap !important;
+}
 .flex-center {
   display: flex;
   justify-content: center;
@@ -952,7 +955,7 @@ a:hover {
         color: #1968fc;
         font-weight: 600;
         .iconfont {
-          transition: all .4s;
+          transition: all 0.4s;
           display: inline-block;
           transform: rotate(180deg);
         }
@@ -1024,7 +1027,6 @@ a:hover {
         &:hover {
           transition: all 0.8s;
           color: rgb(25, 104, 252);
-          
         }
       }
 
@@ -1094,9 +1096,9 @@ a:hover {
     // 解开下面的注释  导航栏子菜单直接显示
     .nav-meal {
       .child-list {
-          // width: auto;
-          // height: 170px;
-          // opacity: 1;
+        // width: auto;
+        // height: 170px;
+        // opacity: 1;
       }
     }
 
@@ -1111,42 +1113,42 @@ a:hover {
 
     .nav-business {
       .child-list {
-          // height: auto;
-          // opacity: 1;
-          // width: 500px;
-          .child-link {
-            height: 80px;
-            margin: 0;
-            box-sizing: border-box;
-            
-            // 第一个到第二个
-            &:nth-child(-n+2) {
-              margin-top: 30px;
-            }
-            &:first-child {
-              margin-top: 0;
-            }
-            // 最后两个
-            &:nth-child(n+2) {
-              margin-bottom: 30px;
-            }
-            
-            // 偶数
-            &:nth-child(2n) {
-              margin-right: 30px;
-            }
+        // height: auto;
+        // opacity: 1;
+        // width: 500px;
+        .child-link {
+          height: 80px;
+          margin: 0;
+          box-sizing: border-box;
 
-            // 奇数
-            &:nth-child(2n - 1) {
-              margin-left: 30px;
-            }
+          // 第一个到第二个
+          &:nth-child(-n + 2) {
+            margin-top: 30px;
           }
+          &:first-child {
+            margin-top: 0;
+          }
+          // 最后两个
+          &:nth-child(n + 2) {
+            margin-bottom: 30px;
+          }
+
+          // 偶数
+          &:nth-child(2n) {
+            margin-right: 30px;
+          }
+
+          // 奇数
+          &:nth-child(2n - 1) {
+            margin-left: 30px;
+          }
+        }
       }
     }
 
     .nav-help {
       .child-list {
-          // height: 420px;
+        // height: 420px;
       }
     }
 
@@ -1174,7 +1176,6 @@ a:hover {
 
     // 混合导航
     .mixed-range {
-
       width: auto; // 为了动画效果  宽设为0
       overflow: auto;
       // padding: 10px 30px;
@@ -1245,42 +1246,39 @@ a:hover {
     }
 
     // 为了动画
-    .nav-item:hover  {
+    .nav-item:hover {
       .child-list {
         height: auto;
         opacity: 1;
       }
 
-      &.nav-meal{
+      &.nav-meal {
         .child-list {
           height: 170px;
           opacity: 1;
         }
       }
 
-      &.nav-ip{
+      &.nav-ip {
         .child-list {
           height: 122px;
           opacity: 1;
         }
       }
 
-      &.nav-business{
+      &.nav-business {
         .child-list {
           height: auto;
           opacity: 1;
         }
       }
 
-      &.nav-help{
+      &.nav-help {
         .child-list {
           height: auto;
           opacity: 1;
         }
       }
-      
- 
-      
 
       &.mixed-range {
         padding: 40px 50px;
@@ -1359,10 +1357,9 @@ a:hover {
           width: auto;
           min-width: 64px;
           max-width: none;
-
         }
 
-        .iconfont{
+        .iconfont {
           display: none;
         }
       }
@@ -1381,8 +1378,8 @@ a:hover {
             margin: 10px 0;
           }
         }
-  
-        &.nav-meal{
+
+        &.nav-meal {
           .child-list {
             height: auto;
             opacity: 1;
@@ -1392,12 +1389,11 @@ a:hover {
             }
             .child-item:last-child {
               margin-bottom: 20px;
-            
             }
           }
         }
-  
-        &.nav-ip{
+
+        &.nav-ip {
           .child-list {
             height: 122px;
             opacity: 1;
@@ -1406,8 +1402,8 @@ a:hover {
             }
           }
         }
-  
-        &.nav-business{
+
+        &.nav-business {
           .child-list {
             max-width: 1920px;
             height: auto;
@@ -1418,17 +1414,14 @@ a:hover {
             }
           }
         }
-  
-        &.nav-help{
+
+        &.nav-help {
           .child-list {
             height: auto;
             opacity: 1;
-            
           }
         }
-
       }
-
     }
 
     .nav-list {

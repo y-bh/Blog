@@ -97,7 +97,7 @@ function Router(App) {
     let province = await getProxyCityService()
     let menu = await getProxyMenuService()
 
-    let apiL = await getWhiteListApiService({data:{pageNum: 1, pageSize: 9999}})
+    let apiL = await getWhiteListApiService({ data: { pageNum: 1, pageSize: 9999 } })
 
 
     let getIpData = {
@@ -115,10 +115,13 @@ function Router(App) {
   //业务场景-businessScene
   router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
     /**数据请求 */
-    let { currentId = '1' } = ctx.request.params
+    let { currentId = '1.html' } = ctx.request.params
     let res = getBusinessData()
-    let p = Object.assign(res, { currentId })
 
+    if (currentId && currentId.includes(".html")) {
+      currentId = currentId.replace(".html", '')
+    }
+    let p = Object.assign(res, { currentId })
     return ctx.render("businessScene/businessScene", p)
   })
 
@@ -191,7 +194,7 @@ function Router(App) {
 
   //用户总页面-login-index
   router.get(["/login", "/reset", "/register"], async (ctx) => {
-    let { url ,query} = ctx.request
+    let { url, query } = ctx.request
 
     //处理掉查询串情况
     if (query && url.includes('?')) {

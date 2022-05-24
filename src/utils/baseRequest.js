@@ -11,7 +11,7 @@ import { AESAUTH, encrypt, decrypt } from "./AES";
 
 class Request {
 
-  constructor(baseURL, timeout = 10000) {
+  constructor(baseURL, timeout = 4000) {
     let service = axios.create({
       baseURL,
       withCredentials: true,
