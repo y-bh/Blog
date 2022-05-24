@@ -40,7 +40,7 @@ if (query && query.back) {
 }
 
 
-console.log("query:", query)
+
 
 
 
@@ -52,7 +52,7 @@ function getFuncParams(type = 'login') {
   //1. 获取表单
   const form = document.forms['login']
 
-  console.log("获取参数:", form)
+  
   //2. 公共的参数
   let obj = {
     phone: form.phone.value.trim() || '', //电话号码
@@ -81,7 +81,7 @@ function getFuncParams(type = 'login') {
 //是否同意注册协议
 function agreeOn() {
   agreeMent = !agreeMent
-  console.log("嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻", agreeMent)
+  
 }
 
 
@@ -89,7 +89,7 @@ function checkForm(params = null, type = 'login') {
   if (!params) {
     return
   }
-  console.log("校验的参数:", params)
+  
   const res = {
     isPass: true,
     msg: ''
@@ -227,7 +227,7 @@ async function loginSubmit(type) {
   }
 
   params.type = type
-  console.log("params:", params)
+  
   $.ajax({
     type: 'POST',
     url: "/api/login",
@@ -249,16 +249,20 @@ async function loginSubmit(type) {
       } else {
         //back
         if (type === 'login' && back) {
-          location.href = "/" + back
+          
+          let urls = `${back}`
+          if (urls & urls.charAt(0) != '/') {
+            urls = "/" + urls
+          }
+          location.href = `${back}`
           return
         }
-
-        console.log("登录成功!")
+        
         location.href = "/manager/user"
       }
     },
     error: (err) => {
-      console.log(err)
+      
     }
   });
 }
@@ -267,7 +271,7 @@ async function loginSubmit(type) {
 let timer = null //验证码定时器
 let count = 60 //定时时间
 async function sendCode(type = 'register') {
-  console.log("验证码类型:", type)
+  
   //1. 获取表单
   const form = document.forms['login']
 
@@ -276,7 +280,7 @@ async function sendCode(type = 'register') {
     phone: form.phone.value.trim() || '', //电话号码
   }
 
-  console.log("验证码类型参数:", params)
+  
   //3.校验
   if (!params.phone) {
     return Helper.$message({
@@ -315,7 +319,7 @@ async function sendCode(type = 'register') {
     clearInterval(timer)
     timer = setInterval(() => {
       if (count > 0) {
-        // console.log("sssssssss",$("#obn-code").val())
+        // 
         $("#obn-code").val(count--)
         $("#obn-code").attr("disabled", true)
       } else {
@@ -335,7 +339,7 @@ async function sendCode(type = 'register') {
 }
 //防抖函数
 function debounce(fn, delay, once = false) {
-  console.log("经历了防抖")
+  
   var timeout = null;
   var count = 0;
   return function (e) {
