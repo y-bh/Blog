@@ -10,6 +10,8 @@
 const { getArticleListDao } = require("dao/helpCenter")
 const { getCateTypes } = require("service/helpCenter")
 
+const {dateFormat} = require("utils/dateFormat")
+
 
 //获取文章给类型下的数据 以及某一文章类型对应的名字
 const renderHome = async (type = null) => {
@@ -41,7 +43,7 @@ const renderHome = async (type = null) => {
         articleDetail[typeId].forEach((articleItem) => {
           // console.log(3333, articleItem.createTime)
           let dateNum = new Date(parseInt(articleItem.createTime) * 1000)
-          articleItem.convertData = dateFormat1(dateNum);
+          articleItem.convertData = dateFormat(dateNum,'YYYY-mm-dd');
 
         })
         //console.log(4444444, articleDetail[typeId]);
@@ -56,21 +58,6 @@ const renderHome = async (type = null) => {
   return { typeList, typeObj };
 }
 
-const dateFormat1 = (datetime) => {
-  //datetime是拿到的时间戳
-  let date = new Date(datetime);//时间戳为10位需*1000，时间戳为13位的话不需乘1000 
-  let year = date.getFullYear(),
-    month = ("0" + (date.getMonth() + 1)).slice(-2),
-    sdate = ("0" + date.getDate()).slice(-2);
-  // hour = ("0" + date.getHours()).slice(-2),
-  // minute = ("0" + date.getMinutes()).slice(-2),
-  // second = ("0" + date.getSeconds()).slice(-2);
-  // 拼接
-  let result = year + "-" + month + "-" + sdate;
-  // 返回
-  return result;
-
-}
 
 
 module.exports = { renderHome }
