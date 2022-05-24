@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-24 16:07:58
+ * @LastEditTime: 2022-05-24 19:33:09
 -->
 <template>
   <div class="container">
@@ -408,7 +408,7 @@ export default {
         if (command === 'renewal') {
           if (row.proxyType === 10) {
             // console.log('去套餐购买页');
-            location.href = '/package.html'
+            location.href = '/package'
           } else {
             renewalRef.value.onOpen(row)
           }

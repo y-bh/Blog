@@ -122,7 +122,7 @@ async function onSubmit () {
     query[i] = query[i].trim()
   }
   let params = {
-    url: 'company/new',
+    url: '/company/new',
     type: 'post',
     query: JSON.stringify(query)
   }

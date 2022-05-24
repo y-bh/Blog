@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 18:16:07
+ * @LastEditTime: 2022-05-24 19:54:58
  */
 
 import axios from 'axios';
@@ -30,50 +30,11 @@ class Request {
     });
 
 
-    // 请求拦截器
-    service.interceptors.request.use(config => {
-
-      config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-
-      // 部分接口加密  && process.env.NODE_ENV !== 'development'
-      if (AESAUTH[config.url]) {
-        if (typeof config.data === 'string') {
-          config.data = config.data.trim()
-          config.data = JSON.parse(config.data)
-        }
-        config.data.data = encrypt(config.data.data)
-      }
-
-      try {
-        //客户端使用 场景
-        if (document && getCookie) {
-          let token = getCookie('TQ-TOKEN')
-          console.log("客户端cookie")
-          if (token) {
-            config.headers['TQ-TOKEN'] = token;
-          }
-        }
-      } catch (error) {
-        console.log(error)
-        if (config.token) {
-          console.log("服务端cookie")
-          config.headers['TQ-TOKEN'] = config.token;
-        }
-      }
-
-      return config;
-    }, error => {
-
-      return Promise.reject(error);
-    });
-
-    // 响应拦截器
+    // 客户端 | 服务端 响应拦截器
     service.interceptors.response.use(response => {
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
-
-        console.log("服务端渲染数据:", data.data)
         if (+data.code === 200) {
           return {
             code: 200,
@@ -128,13 +89,12 @@ class Request {
    * @param data
    * @returns {Promise}
    */
-  get(url, params = {}, token) {
+  get(url, params = {}) {
     try {
       return this.service({
         url,
         params,
-        method: 'GET',
-        token
+        method: 'GET'
       });
     } catch (error) {
 
