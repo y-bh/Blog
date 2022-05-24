@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-24 20:10:28
+ * @LastEditTime: 2022-05-24 20:36:34
 -->
 <template>
   <div class="white-list-wrap">
