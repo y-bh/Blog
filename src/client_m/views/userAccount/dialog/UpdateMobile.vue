@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-23 17:27:25
+ * @LastEditTime: 2022-05-24 10:40:04
 -->
 <template>
   <div class="updateMobile">
@@ -130,8 +130,8 @@ export default {
         return;
       }
       console.log(88888888888888);
-      const TIME_COUNT = 60;
-      counter.show =false;
+      const TIME_COUNT = 20;
+      counter.show = false;
       if (!counter.timer) {
         counter.count = TIME_COUNT;
         counter.show = false;
@@ -153,7 +153,7 @@ export default {
       if (res.code == 200) {
         $message.success("获取验证码成功");
       } else {
-        $message.error("获取验证码失败:" + res.message);
+        $message.error("获取验证码失败!" + res.message);
       }
     };
     const onCancel = () => {
@@ -166,10 +166,10 @@ export default {
 
     const onSubmit = (formName) => {
       console.log("=======修改密码数据======", form.ruleForm);
-      if (counter.timer) {
-        counter.show = true;
-        clearInterval(counter.timer);
-      }
+      // if (counter.timer) {
+      //   counter.show = true;
+      //   clearInterval(counter.timer);
+      // }
       // if (!formEl) return
       vaildPhoneRef.value.validate(async (valid) => {
         if (valid) {
@@ -182,11 +182,15 @@ export default {
           let res = await updatePhone(params);
           if (res.code == 200) {
             $message.success("手机号换绑成功！");
+            if (counter.timer) {
+              counter.show = true;
+              clearInterval(counter.timer);
+            }
             dialogVisible.value = false;
             if (!vaildPhoneRef.value) return;
             vaildPhoneRef.value.resetFields();
           } else {
-            $message.error("手机号换绑失败，请重试！" + res.msg);
+            $message.error("手机号换绑失败，请重试！");// + res.message
           }
         } else {
           console.log("error submit!!");
@@ -194,10 +198,10 @@ export default {
         }
       });
     };
-    const beforeCloseFun = (done)=>{
-     // console.log("---------------关闭了-----------");
-      done()
-    }
+    const beforeCloseFun = (done) => {
+      // console.log("---------------关闭了-----------");
+      done();
+    };
     return {
       ...toRefs(counter),
       ...toRefs(form),
@@ -206,7 +210,7 @@ export default {
       vaildPhoneRef,
       dialogVisible,
       getVaildCode,
-      beforeCloseFun
+      beforeCloseFun,
     };
   },
 };
