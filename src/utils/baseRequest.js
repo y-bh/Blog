@@ -7,7 +7,7 @@
  */
 
 import axios from 'axios';
-import { AESAUTH, encrypt, decrypt} from "./AES";
+import { AESAUTH, encrypt, decrypt } from "./AES";
 
 class Request {
 
@@ -22,23 +22,20 @@ class Request {
     // 请求拦截器
     service.interceptors.request.use(config => {
       // 去除所有空格
-      
+
 
       // 部分接口加密  && process.env.NODE_ENV !== 'development'
-      if(AESAUTH[config.url] ){
+      if (AESAUTH[config.url]) {
         // config.headers['Content-Type']='text/plain';
-
-        
-
-        if(typeof config.data === 'string'){
+        if (typeof config.data === 'string') {
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)
-          
+
         }
-        
+        console.log("加密前参数:", config.data.data)
         config.data.data = encrypt(config.data.data)
-        
-        
+
+        console.log("加密后参数:", config.data.data)
       } else {
         config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
       }
@@ -50,13 +47,13 @@ class Request {
           if (token) {
             config.headers['TQ-TOKEN'] = token;
           }
-          
+
 
         }
       } catch (error) {
 
       }
-      
+
       return config;
     }, error => {
 
@@ -68,7 +65,7 @@ class Request {
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
-        
+
         if (+data.code === 200) {
           return {
             code: 200,
@@ -85,9 +82,9 @@ class Request {
       return response && response.data || response;
     },
       error => {
-        
+
         return Promise.resolve({
-          code: data.code ||-1,
+          code: data.code || -1,
           message: error
         })
       });
