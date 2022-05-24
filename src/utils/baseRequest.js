@@ -7,7 +7,6 @@
  */
 
 import axios from 'axios';
-import { AESAUTH, encrypt, decrypt } from "./AES";
 
 export const getCookie = function (cname) {
   var name = cname + "=";
