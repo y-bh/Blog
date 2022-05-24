@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-24 11:14:45
+ * @LastEditTime: 2022-05-24 11:17:28
 -->
 <template>
   <div class="userAccount">
@@ -12,7 +12,7 @@
         <div class="user-info">
           <span class="user-name mr-20">用户名</span
           ><span>{{ userInfo.username }}</span>
-          <div class="user-edit ml-30" @click="editPersonInfo">
+          <div class="user-edit ml-30 pointer" @click="editPersonInfo">
             <img src="@/assets/images/edit.png" alt="" />
           </div>
         </div>

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-14 13:51:32
- * @LastEditTime: 2022-05-23 18:19:08
+ * @LastEditTime: 2022-05-24 13:20:52
  */
 $("#kernelBox li").hover(function () {
   $(this).addClass("active")
@@ -27,35 +27,53 @@ function queryAll() {
 
 
 
+
 $(function () {
-  numDynamic("cityNum", 0, 200, 2, 50)
-  numDynamic("ipTotalNum", 1800, 31974, 30, 5)
-  numDynamic("ipNum", 0, 200, 2, 50)
-  numDynamic("canUserNum", 0, 99, 1, 50)
+  let ipNumTotal = randomNum(2000000,2999999);
+  let ipNumUpdate = randomNum(7000000,1300000);
+  numDynamic("cityNum", 0, 200, 4, 50)
+  numDynamic("ipTotalNum", 100000, ipNumTotal, 50000, 50)
+  numDynamic("ipNum", 600000, ipNumUpdate, 80000, 50)
+  numDynamic("canUserNum", 8, 99, 2, 50)
 })
 
-/**
-  * 动态数字方法
-  * ID    => 对应ID
-  * speed => 递增速度 
-  * start:开始数字
-  * step：每次递增
-  */
-function numDynamic(id, start, end, step, speed) {
-  var span = document.getElementById(id);
-  if (start < end) {
-    var i = start;
-    var t = setInterval(function () {
-      i += step; // 设置每次增加的动态数字，可调整
-
-      if (i >= end) {
-        span.innerText = Number(end).toLocaleString();
-        clearInterval(t);
-      } else {
-        span.innerText = Number(i).toLocaleString();
-      }
-    }, speed);
-  } else {
-    span.innerText = Number(start).toLocaleString();
+//生成从minNum到maxNum的随机数
+function randomNum(minNum, maxNum) {
+  switch (arguments.length) {
+    case 1:
+      return parseInt(Math.random() * minNum + 1, 10);
+      break;
+    case 2:
+      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+      break;
+    default:
+      return 0;
+      break;
   }
 }
+
+  /**
+    * 动态数字方法
+    * ID    => 对应ID
+    * speed => 递增速度 
+    * start:开始数字
+    * step：每次递增
+    */
+  function numDynamic(id, start, end, step, speed) {
+    var span = document.getElementById(id);
+    if (start < end) {
+      var i = start;
+      var t = setInterval(function () {
+        i += step; // 设置每次增加的动态数字，可调整
+
+        if (i >= end) {
+          span.innerText = Number(end).toLocaleString();
+          clearInterval(t);
+        } else {
+          span.innerText = Number(i).toLocaleString();
+        }
+      }, speed);
+    } else {
+      span.innerText = Number(start).toLocaleString();
+    }
+  }
