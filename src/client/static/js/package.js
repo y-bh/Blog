@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-23 18:42:18
+ * @LastEditTime: 2022-05-24 15:26:55
  */
 
 
@@ -522,7 +522,10 @@ async function toPayMoney(tabType) {
           type: 'post',
           query: JSON.stringify(parmas)
         }
-        window.open("/payCenter?params=" + JSON.stringify(aliPayParams));
+
+        localStorage.setItem('TQParams', JSON.stringify(aliPayParams))
+        window.open("/payCenter");
+        // window.open("/payCenter?params=" + JSON.stringify(aliPayParams));
         // window.open("/jumpTo/jumpTo?buyType=recharge&price=" + parseFloat(payPrice) + "&payType=" + payType + "&redRecordId=" + Number(redPacketId));
       } else {
 
@@ -551,7 +554,9 @@ async function toPayMoney(tabType) {
           type: 'post',
           query: JSON.stringify(parmas)
         }
-        window.open("/payCenter?params=" + JSON.stringify(aliPayParams));
+        localStorage.setItem('TQParams', JSON.stringify(aliPayParams))
+        window.open("/payCenter");
+        // window.open("/payCenter?params=" + JSON.stringify(aliPayParams));
         // window.open("/jumpTo/jumpTo?buyType=buy&mealId=" + parseInt(meanId) + "&payType=" + payType + "&total=" + Number(total) + "&redRecordId=" + Number(redPacketId));
       } else {
         //调用后台接口生成二维码
