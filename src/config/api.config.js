@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-22 15:50:44
+ * @LastEditTime: 2022-05-24 15:38:30
  */
 
 module.exports = {
@@ -59,9 +59,9 @@ module.exports = {
   'GET_SUPPLEMENTPRICE': '/proxyUpgrade/addTimes',  // 获取补量单价/赠送ip量
   'GET_DURATION': '/proxyUpgrade/duration',
   'QUERY_LOG': '/proxy/log',  // 变更记录
-  'POST_RENEWPAY': '/renewProxy',  // 续费支付
+  'POST_RENEWPAY': '/payOrder/renewProxy',  // 续费支付
   'POST_SUPPLEMENT': '/payOrder/addTimes',  // 补量支付
-  'POST_CHANGEDATE': '/changeDate',  // 修改时效支付
+  'POST_CHANGEDATE': '/payOrder/changeDate',  // 修改时效支付
   'GET_ORDERSTATE': '/order/state',   // 获取订单状态
   'POST_MERGE': '/proxyUpgrade/merge',  // 合并套餐
   'POST_SECRET': '/proxy/secret',  // 重置密钥

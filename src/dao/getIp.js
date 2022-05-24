@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 提取ip dao层
  * @Date: 2022-05-17 18:15:04
- * @LastEditTime: 2022-05-23 09:55:24
+ * @LastEditTime: 2022-05-24 16:38:20
  */
 
 const service= require("utils/request")
@@ -21,10 +21,10 @@ const getProxyCityDao = async (params = null) => {
 }
 
 //获取提取套餐下拉列表
-const getProxyMenuDao = async () => {
+const getProxyMenuDao = async (token) => {
   const url = api.PROXY_API_MENU
   try {
-    const res = await service.get(url,null)
+    const res = await service.get(url,null, token)
     return res
   } catch (error) {
     console.error('getProxyMenu_Dao: ', error);

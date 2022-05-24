@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 变更记录
  * @Date: 2022-05-17 11:19:40
- * @LastEditTime: 2022-05-21 16:31:09
+ * @LastEditTime: 2022-05-24 16:06:27
 -->
 <template>
   <el-dialog
@@ -95,13 +95,15 @@ export default {
                     state.searchForm.sequence = row.sequence;
                     state.searchForm.page = 1;
                     state.searchForm.size = 20;
-                    methods.getTableList = [];
+                    state.tableData = [];
+                    methods.getTableList()
                     state.dialogVisible = true
                 }
             },
             async getTableList(){
                 let res = await getLogList(state.searchForm);
                 if(res && res.code === 200){
+                  console.log(res,'res==记录');
                     state.tableData = res.data && res.data.data || [];
                     state.total = res.data && res.data.totalSize || 0;
                 }
@@ -119,6 +121,7 @@ export default {
         }
         return {
             mealChangeType,
+            dateFormat,
             ...toRefs(state),
             ...methods
         }

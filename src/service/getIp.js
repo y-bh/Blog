@@ -1,9 +1,9 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-23 16:45:58
+ * @LastEditTime: 2022-05-24 16:39:00
  */
 const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao } = require("dao/getIp")
 
@@ -390,9 +390,9 @@ const getProxyCityService = async () => {
 }
 
 //获取提取套餐下拉列表
-const getProxyMenuService = async () => {
+const getProxyMenuService = async (token) => {
   try {
-    const res = await getProxyMenuDao()
+    const res = await getProxyMenuDao(token)
     if (res && res.code === 200) {
       paidList = res.data
     }else{
@@ -414,7 +414,6 @@ const getProxyMenuService = async () => {
 const getWhiteListApiService = async (params = null) => {
   try {
     const res = await getWhiteListApiDao(params)
-    console.log(res);
     if (res && res.code === 200) {
       let { whiteAdd = null, whiteDelete = null, whiteFetch = null } = res.data
       return {
