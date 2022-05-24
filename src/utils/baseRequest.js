@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 10:43:01
+ * @LastEditTime: 2022-05-24 12:41:15
  */
 
 import axios from 'axios';
@@ -22,14 +22,22 @@ class Request {
     // 请求拦截器
     service.interceptors.request.use(config => {
       // 去除所有空格
-      if(config.data && config.data.data && (typeof config.data.data === 'string' || typeof config.data.data === 'number')){
-        config.data = config.data.trim()
-      }
+      console.log(config.data,'参数');
 
-      // 部分接口加密
-      if(AESAUTH[config.url] && process.env.NODE_ENV !== 'development'){
+      // 部分接口加密  && process.env.NODE_ENV !== 'development'
+      if(AESAUTH[config.url] ){
         config.headers['Content-Type']='text/plain';
+
+        console.log(typeof config.data,'参数type值');
+
+        if(typeof config.data === 'string'){
+          config.data = config.data.trim()
+          config.data = JSON.parse(config.data)
+          console.log(config.data, '转格式data');
+        }
+        console.log(config.data.data,'转过格式data');
         config.data.data = encrypt(config.data.data)
+        console.log(config.data.data,'加密数据');
         
       } else {
         config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
@@ -48,7 +56,7 @@ class Request {
       } catch (error) {
 
       }
-
+      console.log(config.data.data,'=======');
       return config;
     }, error => {
 
@@ -57,11 +65,10 @@ class Request {
 
     // 响应拦截器
     service.interceptors.response.use(response => {
-
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
-        console.log(data,'相应拦截');
+        console.log(data,'响应');
         if (+data.code === 200) {
           return {
             code: 200,
