@@ -122,18 +122,21 @@
               </div>
               <ul>
                 <% articleList.forEach(function(articleItem,index) { %>
-                  <li class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80">
+                  <li
+                    class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80 common-fadeInUp common-fadeInUp-fast-<%= index+1 %>">
                     <div class="common-arrow-title pb-10">
-                      <div class="arrow arrow_left">
-                        <i class="iconfont icon-jiantou1"></i>
-                        <i class="iconfont icon-jiantou1"></i>
+                      <div class="arrow arrow_left mr-20">
+                        <i class="lightColour">&gt;</i>
+                        <i class="darkColour">&gt;</i>
                       </div>
-                      <div class="title"><span>
+                      <div class="title">
+                        <span>
                           <%= articleItem.type %>
-                        </span></div>
-                      <div class="arrow arrow_right">
-                        <i class="iconfont icon-jiantou2"></i>
-                        <i class="iconfont icon-jiantou2"></i>
+                        </span>
+                      </div>
+                      <div class="arrow arrow_right ml-20">
+                        <i class="darkColour">&lt;</i>
+                        <i class="lightColour">&lt;</i>
                       </div>
                     </div>
                     <ul class="content">
