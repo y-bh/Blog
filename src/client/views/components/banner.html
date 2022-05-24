@@ -1,0 +1,177 @@
+<%# 产品核心优势 | 多种套餐选择 | 定制企业HTTP服务 三模块ui组件 %>
+
+
+  <!-- 产品核心优势-->
+  <div class="fourthRow common-setMaxWt <%= from && from === 'home' ? 'mt-150' : ''   %> ">
+    <div class="common-row-title">
+      <div class="title"><span>
+          <%= title || '产品核心优势' %>
+        </span></div>
+      <% if(from && from==='home' ){ %>
+        <div class="subTitle mt-20"><span>以技术升级为核心,提供优质的使用体验</span></div>
+        <% } %>
+    </div>
+    <div class="content mt-80">
+      <ul id="kernelBox" class="common-fadeInUp common-fadeInUp-fast-1">
+        <li class="ml-40 mr-40 pb-40 active pointer">
+          <div class="icon-img icon-img1"></div>
+          <div class="mt-30"><span>企业级代理服务</span></div>
+        </li>
+        <li class="ml-40 mr-40 pb-40 pointer">
+          <div class="icon-img icon-img2"></div>
+          <div class="mt-30"><span>优质性能保证</span></div>
+        </li>
+        <li class="ml-40 mr-40 pb-40 pointer">
+          <div class="icon-img icon-img3"></div>
+          <div class="mt-30"><span>资源自由去重</span></div>
+        </li>
+        <li class="ml-40 mr-40 pb-40 pointer">
+          <div class="icon-img icon-img4"></div>
+          <div class="mt-30"><span>API快捷调用</span></div>
+        </li>
+        <li class="ml-40 mr-40 pb-40 pointer">
+          <div class="icon-img icon-img5"></div>
+          <div class="mt-30"><span>终端使用授权</span></div>
+        </li>
+        <li class="ml-40 mr-40 pb-40 pointer">
+          <div class="icon-img icon-img6"></div>
+          <div class="mt-30"><span>专业技术客服</span></div>
+        </li>
+      </ul>
+
+    </div>
+    <div class="content-bg mt-80 pl-40 pr-40">
+      <div class="common-slideInLeft common-fadeInUp-fast-1"><img src="/images/home/kernel-bg.png" alt="企业级代理服务">
+      </div>
+      <ul class="ml-120 common-slideInRight common-fadeInUp-fast-1">
+        <li class="title"><span>企业级代理服务</span></li>
+        <li class="subTitle mt-30"><span>采用高性能服务器和分布式集群架构，支持高并发调用，从容应对业务爆发性增长</span></li>
+      </ul>
+    </div>
+  </div>
+  <!-- 多种套餐选择 -->
+  <div class="fiveRow mt-140 common-setMaxWt">
+    <div class="common-row-title">
+      <div class="title"><span>多种套餐选择</span></div>
+      <% if(from && from==='home' ){ %>
+      <div class="subTitle mt-20"><span>更灵活自由的计费方式，适配多种业务需求</span></div>
+      <% } %> 
+    </div>
+    <ul class="setMeal mt-80">
+      <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50 pointer">
+        <div class="title"><span>余额套餐</span></div>
+        <ul class="timesRange mt-50">
+          <li class="mb-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+            <span class="ml-10">3分钟时效：0.005元/IP</span>
+          </li>
+          <li class="mb-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+            <span class="ml-10">5分钟时效：0.01元/IP</span>
+          </li>
+          <li class="mb-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+            <span class="ml-10">10分钟时效：0.002元/IP</span>
+          </li>
+          <li class="mb-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+            <span class="ml-10">15分钟时效：0.003元/IP</span>
+          </li>
+        </ul>
+        <ul class="setMeal-limt">
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>套餐有效期：不限制</span>
+          </li>
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>多机器调用：不限制</span>
+          </li>
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>并发请求数量：不限制</span>
+          </li>
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>支持协议：HTTP/HTTPS/SOCKS</span>
+          </li>
+        </ul>
+        <div class="common-main-button mt-50 hover" onclick="jumpPackage(1)">
+          <span>了解更多</span>
+        </div>
+      </li>
+      <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50 pointer">
+        <div class="title"><span>包时套餐</span></div>
+        <ul class="timesRange mt-50">
+          <li class="mb-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+            <span class="ml-10">IP时效：3/5/10/15分钟</span>
+          </li>
+          <li class="mb-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
+            <span class="ml-10">套餐有效期：7/30/90/180/365天</span>
+          </li>
+        </ul>
+        <ul class="setMeal-limt">
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>API调用频率：1秒</span>
+          </li>
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>多机器调用：不限制</span>
+          </li>
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>并发请求数量：不限制</span>
+          </li>
+          <li class="limit mt-20">
+            <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
+            <span>支持协议：HTTP/HTTPS/SOCKS</span>
+          </li>
+        </ul>
+        <div class="common-main-button mt-50 hover" onclick="jumpPackage(2)">
+          <span>了解更多</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- 定制企业HTTP服务 -->
+  <div class="sixRow mt-70 pt-70 pb-70">
+    <div class="common-row-title">
+      <div class="title"><span>定制企业HTTP服务</span></div>
+      <% if(from && from==='home' ){ %>
+      <div class="subTitle mt-20"><span>针对不同企业需求,提供专属定制服务</span></div>
+      <% } %> 
+    </div>
+    <ul class="mt-80">
+      <li class="mr-50 ml-50">
+        <ul>
+          <li class="custom-made-item mb-30">
+            <div class="item-icon item-icon-1 mr-30"></div>
+            <span>海量优质IP资源</span>
+          </li>
+          <li class="custom-made-item mb-30">
+            <div class="item-icon item-icon-2 mr-30"></div>
+            <span>200+城市地区</span>
+          </li>
+          <li class="custom-made-item mb-30">
+            <div class="item-icon item-icon-3 mr-30"></div>
+            <span>稳定的自建机房保障</span>
+          </li>
+          <li class="custom-made-item mb-30">
+            <div class="item-icon item-icon-4 mr-30"></div>
+            <span>不限制多机器调用</span>
+          </li>
+          <li class="custom-made-item mb-30">
+            <div class="item-icon item-icon-5 mr-30"></div>
+            <span>不限制并发请求数量</span>
+          </li>
+        </ul>
+      </li>
+      <li class="mr-50 ml-50 custom-made-bg">
+        <div><img src="/images/home/custom-made-bg.png" alt="" class="module_img"></div>
+        <div class="common-main-button mt-40 pointer" onclick="contactUs()"><span>立即定制</span></div>
+      </li>
+    </ul>
+  </div>

@@ -24,9 +24,7 @@ function queryAll() {
   window.location.href = "/help-center";
 }
 
-function contactUs() {
-  window.open("https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true", "_blank");
-}
+
 
 
 $(function () {

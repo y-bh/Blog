@@ -12,7 +12,6 @@ const router = require("koa-router")();
 const { renderHome } = require("service/home")
 const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
-const { getBusinessData } = require('service/business')
 const { getProxyCityService, getProxyMenuService, getWhiteListApiService } = require('service/getIp')
 
 const fs = require("fs")
@@ -116,13 +115,10 @@ function Router(App) {
   router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
     /**数据请求 */
     let { currentId = '1.html' } = ctx.request.params
-    let res = getBusinessData()
-
     if (currentId && currentId.includes(".html")) {
       currentId = currentId.replace(".html", '')
     }
-    let p = Object.assign(res, { currentId })
-    return ctx.render("businessScene/businessScene", p)
+    return ctx.render("businessScene/businessScene", { currentId })
   })
 
 

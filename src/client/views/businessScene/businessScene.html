@@ -56,7 +56,7 @@
                 </div>
               </div>
             </div>
-            <img class="common-slideInRight" src="<%=imgUrl.market%>" alt="市场调查">
+            <img class="common-slideInRight" src="/images/business/market_research.png" alt="市场调查">
             <% break; %>
               <% case '2' : %>
                 <div class="flex-center common-slideInleft">
@@ -86,7 +86,7 @@
                     </div>
                   </div>
                 </div>
-                <img class="common-slideInRight" src="<%=imgUrl.social%>" alt="社交采集">
+                <img class="common-slideInRight" src="/images/business/social_gathering.png" alt="社交采集">
                 <% break; %>
                   <% case '3' : %>
                     <div class="flex-center common-slideInleft">
@@ -116,7 +116,7 @@
                         </div>
                       </div>
                     </div>
-                    <img class="common-slideInRight" src="<%=imgUrl.brand%>" alt="品牌保护">
+                    <img class="common-slideInRight" src="/images/business/brand_protection.png" alt="品牌保护">
                     <% break; %>
                       <% case '4' : %>
                         <div class="flex-center common-slideInleft">
@@ -146,7 +146,7 @@
                             </div>
                           </div>
                         </div>
-                        <img class="common-slideInRight" src="<%=imgUrl.seo%>" alt="SEO情报">
+                        <img class="common-slideInRight" src="/images/business/SEO_information.png" alt="SEO情报">
                         <% break; %>
                           <% case '5' : %>
                             <div class="flex-center common-slideInleft">
@@ -177,7 +177,7 @@
                                 </div>
                               </div>
                             </div>
-                            <img class="common-slideInRight" src="<%=imgUrl.electronic%>" alt="电子商务">
+                            <img class="common-slideInRight" src="/images/business/electronic_commerce.png" alt="电子商务">
                             <% break; %>
                               <% case '6' : %>
                                 <div class="flex-center common-slideInleft">
@@ -209,7 +209,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <img class="common-slideInRight" src="<%=imgUrl.price%>" alt="价格监控">
+                                <img class="common-slideInRight" src="/images/business/price_monitoring.png" alt="价格监控">
                                 <% break; %>
                                   <% } %>
 
@@ -219,162 +219,9 @@
       <div class="tab">
         <div id="particles-js" class="particles-container" style="display:none;"></div>
         <div class="homeContent pt-80">
-          <!-- 产品核心优势-->
-          <div class="fourthRow common-setMaxWt">
-            <div class="common-row-title">
-              <div class="title"><span>优质使用体验</span></div>
-            </div>
-            <div class="content mt-80">
-              <ul id="kernelBox" class="common-fadeInUp common-fadeInUp-fast-1">
-                <li class="ml-40 mr-40 pb-40 active">
-                  <div class="icon-img icon-img1"></div>
-                  <div class="mt-30"><span>企业级代理服务</span></div>
-                </li>
-                <li class="ml-40 mr-40 pb-40">
-                  <div class="icon-img icon-img2"></div>
-                  <div class="mt-30"><span>优质性能保证</span></div>
-                </li>
-                <li class="ml-40 mr-40 pb-40">
-                  <div class="icon-img icon-img3"></div>
-                  <div class="mt-30"><span>资源自由去重</span></div>
-                </li>
-                <li class="ml-40 mr-40 pb-40">
-                  <div class="icon-img icon-img4"></div>
-                  <div class="mt-30"><span>API快捷调用</span></div>
-                </li>
-                <li class="ml-40 mr-40 pb-40">
-                  <div class="icon-img icon-img5"></div>
-                  <div class="mt-30"><span>终端使用授权</span></div>
-                </li>
-                <li class="ml-40 mr-40 pb-40">
-                  <div class="icon-img icon-img6"></div>
-                  <div class="mt-30"><span>专业技术客服</span></div>
-                </li>
-              </ul>
+          <%# 产品核心优势 | 多种套餐选择 | 定制企业HTTP服务 三模块ui组件 %>
+            <%- include('../components/banner.html',{title:'优质使用体验',from:'business-scene'}); %>
 
-            </div>
-            <div class="content-bg mt-80 pl-40 pr-40">
-              <div class="common-slideInLeft common-fadeInUp-fast-1"><img src="/images/home/kernel-bg.png"
-                  alt="企业级代理服务">
-              </div>
-              <ul class="ml-120 common-slideInRight common-fadeInUp-fast-1">
-                <li class="title"><span>企业级代理服务</span></li>
-                <li class="subTitle mt-30"><span>采用高性能服务器和分布式集群架构，支持高并发调用，从容应对业务爆发性增长</span></li>
-              </ul>
-            </div>
-          </div>
-          <!-- 多种套餐选择 -->
-          <div class="fiveRow mt-140 common-setMaxWt">
-            <div class="common-row-title">
-              <div class="title"><span>多种套餐选择</span></div>
-            </div>
-            <ul class="setMeal mt-80">
-              <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50">
-                <div class="title"><span>余额套餐</span></div>
-                <ul class="timesRange mt-50">
-                  <li class="mb-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                    <span class="ml-10">3分钟时效：0.005元/IP</span>
-                  </li>
-                  <li class="mb-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                    <span class="ml-10">3分钟时效：0.005元/IP</span>
-                  </li>
-                  <li class="mb-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                    <span class="ml-10">3分钟时效：0.005元/IP</span>
-                  </li>
-                  <li class="mb-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                    <span class="ml-10">3分钟时效：0.005元/IP</span>
-                  </li>
-                </ul>
-                <ul class="setMeal-limt">
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>套餐有效期：不限制</span>
-                  </li>
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>多机器调用：不限制</span>
-                  </li>
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>并发请求数量：不限制</span>
-                  </li>
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>支持协议：HTTP/HTTPS/SOCKS</span>
-                  </li>
-                </ul>
-                <div class="common-main-button mt-50" onclick="jumpPackage(1)">
-                  <span>了解更多</span>
-                </div>
-              </li>
-              <li class="mr-50 ml-50 pt-60 pb-60 pl-50 pr-50">
-                <div class="title"><span>包时套餐</span></div>
-                <ul class="timesRange mt-50">
-                  <li class="mb-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                    <span class="ml-10">IP时效：3/5/10/15分钟</span>
-                  </li>
-                  <li class="mb-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi1"></i>
-                    <span class="ml-10">套餐有效期：7/30/90/180/365天</span>
-                  </li>
-                </ul>
-                <ul class="setMeal-limt">
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>API调用频率：1秒</span>
-                  </li>
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>多机器调用：不限制</span>
-                  </li>
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>并发请求数量：不限制</span>
-                  </li>
-                  <li class="limit mt-20">
-                    <i class="iconfont icon-yuetaocan-zhuangshi2 mr-20"></i>
-                    <span>支持协议：HTTP/HTTPS/SOCKS</span>
-                  </li>
-                </ul>
-                <div class="common-main-button mt-50" onclick="jumpPackage(2)">
-                  <span>了解更多</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <!-- 定制企业HTTP服务 -->
-          <div class="sixRow mt-70 pt-70 pb-70">
-            <div class="common-row-title">
-              <div class="title"><span>定制企业HTTP服务</span></div>
-            </div>
-            <div class="customer_bottom grid mt-80">
-              <div class="menu_list grid common-slideInLeft">
-                <% menuList && menuList.length && menuList.forEach(function(item,index) { %>
-                  <div class="menu_item flex-center">
-                    <div class="<%=item.className%> item-icon mr-30"></div>
-                    <div class="font-16 main-title-color menu_item_title">
-                      <%= item.title %>
-                    </div>
-                  </div>
-                  <% }) %>
-              </div>
-              <div class="module_create flex-center flex-column common-slideInRight">
-                <div class="module_img"></div>
-                <a href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true" target="_black">
-                  <button class="or-button customer_btn mt-50" type="button">
-                    <span>立即定制</span>
-                  </button>
-                </a>
-              </div>
-              </ul>
-            </div>
-
-          </div>
         </div>
       </div>
     </div>
