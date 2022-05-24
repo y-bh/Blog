@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-24 10:40:04
+ * @LastEditTime: 2022-05-24 11:10:20
 -->
 <template>
   <div class="updateMobile">
@@ -130,7 +130,7 @@ export default {
         return;
       }
       console.log(88888888888888);
-      const TIME_COUNT = 20;
+      const TIME_COUNT = 60;
       counter.show = false;
       if (!counter.timer) {
         counter.count = TIME_COUNT;
@@ -153,7 +153,7 @@ export default {
       if (res.code == 200) {
         $message.success("获取验证码成功");
       } else {
-        $message.error("获取验证码失败!" + res.message);
+        $message.error("获取验证码失败!"); //+ res.message
       }
     };
     const onCancel = () => {
@@ -190,7 +190,7 @@ export default {
             if (!vaildPhoneRef.value) return;
             vaildPhoneRef.value.resetFields();
           } else {
-            $message.error("手机号换绑失败，请重试！");// + res.message
+            $message.error("手机号换绑失败，请重试！"); // + res.message
           }
         } else {
           console.log("error submit!!");
