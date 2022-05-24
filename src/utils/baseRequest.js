@@ -22,22 +22,22 @@ class Request {
     // 请求拦截器
     service.interceptors.request.use(config => {
       // 去除所有空格
-      console.log(config.data,'参数');
+      
 
       // 部分接口加密  && process.env.NODE_ENV !== 'development'
       if(AESAUTH[config.url] ){
-        config.headers['Content-Type']='text/plain';
+        // config.headers['Content-Type']='text/plain';
 
-        console.log(typeof config.data,'参数type值');
+        
 
         if(typeof config.data === 'string'){
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)
-          console.log(config.data, '转格式data');
+          
         }
-        console.log(config.data.data,'转过格式data');
+        
         config.data.data = encrypt(config.data.data)
-        console.log(config.data.data,'加密数据');
+        
         
       } else {
         config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
@@ -50,13 +50,13 @@ class Request {
           if (token) {
             config.headers['TQ-TOKEN'] = token;
           }
-          console.log("客户端请求")
+          
 
         }
       } catch (error) {
 
       }
-      console.log(config.data.data,'=======');
+      
       return config;
     }, error => {
 
@@ -68,7 +68,7 @@ class Request {
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
-        console.log(data,'响应');
+        
         if (+data.code === 200) {
           return {
             code: 200,
@@ -85,7 +85,7 @@ class Request {
       return response && response.data || response;
     },
       error => {
-        console.error("接口报错:", error)
+        
         return Promise.resolve({
           code: data.code ||-1,
           message: error

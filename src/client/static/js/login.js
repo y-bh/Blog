@@ -252,6 +252,8 @@ async function loginSubmit(type) {
           location.href = "/" + back
           return
         }
+
+        console.log("登录成功!")
         location.href = "/manager/user"
       }
     },
