@@ -3,11 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
-<<<<<<< HEAD
- * @LastEditTime: 2022-05-24 18:21:02
-=======
- * @LastEditTime: 2022-05-24 16:38:48
->>>>>>> 020af12869c9a4c6598596c60ec6bce61c1e4518
+ * @LastEditTime: 2022-05-24 18:36:55
  */
 
 
@@ -16,7 +12,7 @@ const router = require("koa-router")();
 const { renderHome } = require("service/home")
 const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
-const { getProxyCityService, getProxyMenuService, getWhiteListApiService } = require('service/getIp')
+const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService } = require('service/getIp')
 
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -100,6 +96,7 @@ function Router(App) {
     let province = await getProxyCityService()
     let menu = await getProxyMenuService(token)
 
+    let icon = await getIconService()
     let apiL = await getWhiteListApiService({ data: { pageNum: 1, pageSize: 9999 } })
 
 
@@ -108,6 +105,7 @@ function Router(App) {
       province,
       menu,
       apiL,
+      icon
     }
 
     return ctx.render("getIp/getIp", getIpData)

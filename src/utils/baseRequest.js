@@ -3,11 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
-<<<<<<< HEAD
- * @LastEditTime: 2022-05-24 17:30:02
-=======
- * @LastEditTime: 2022-05-24 18:16:07
->>>>>>> 020af12869c9a4c6598596c60ec6bce61c1e4518
+ * @LastEditTime: 2022-05-24 19:33:20
  */
 
 import axios from 'axios';

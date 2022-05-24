@@ -1,11 +1,11 @@
 /*
  * @Author: 陈昊天
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-24 16:39:00
+ * @LastEditTime: 2022-05-24 18:36:08
  */
-const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao } = require("dao/getIp")
+const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao,getIconDao } = require("dao/getIp")
 
 let codeDemo = [
   {
@@ -431,6 +431,25 @@ const getWhiteListApiService = async (params = null) => {
   }
 }
 
+
+const getIconService = async() => {
+  try {
+    const res = await getIconDao()
+    if (res && res.code === 200) {
+      console.log(res.data, 'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      return {
+        // whiteAdd, whiteDelete, whiteFetch
+      }
+    }else{
+      return {
+        icon: 0
+      }
+    }
+  } catch (error) {
+    console.error('getProxyMenu_service:',error);
+  }
+}
+
 //静态数据
 const data = () => {
   try {
@@ -456,5 +475,6 @@ module.exports = {
   data,
   getProxyCityService,
   getProxyMenuService,
-  getWhiteListApiService
+  getWhiteListApiService,
+  getIconService
 }
