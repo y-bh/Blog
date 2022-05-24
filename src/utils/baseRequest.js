@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-23 18:05:28
+ * @LastEditTime: 2022-05-24 10:35:09
  */
 
 import axios from 'axios';
@@ -21,8 +21,15 @@ class Request {
 
     // 请求拦截器
     service.interceptors.request.use(config => {
-      config.headers.xx_uid = 7567
-      
+      // 部分接口加密
+      if(AESAUTH[config.url] && process.env.NODE_ENV !== 'development'){
+        config.headers['Content-Type']='text/plain';
+        config.data.data = encrypt(config.data.data)
+        
+      } else {
+        config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
+      }
+
       try {
         //客户端使用 场景
         if (getCookie && document) {
@@ -37,14 +44,6 @@ class Request {
 
       }
 
-      // 部分接口加密
-      if(AESAUTH[config.url] && process.env.NODE_ENV !== 'development'){
-        config.headers['Content-Type']='text/plain';
-        config.data = encrypt(config.data)
-      } else {
-        config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
-      }
-
       return config;
     }, error => {
 
@@ -57,6 +56,7 @@ class Request {
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
+        console.log(data,'相应拦截');
         if (+data.code === 200) {
           return {
             code: 200,
