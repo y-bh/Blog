@@ -14,24 +14,37 @@ const { postRegisterDao, postResetDao, postLoginDao } = require('dao/user')
 const registerService = async (data = null) => {
   //注册校验
 
-  const params = {
-    "data": JSON.stringify({
-      username: data.userName, //用户名
-      pwd: data.pwd, //密码
-      phone: data.phone, //手机号
-      from: '', //来源
-      did: '', //短链
-      code: data.code, //验证码
-      readProtocol: data.agreeMent ? 1 : 0, // 是否阅读协议 0 否 1 是
-    })
+  const tem = {
+    username: data.userName, //用户名
+    pwd: data.pwd, //密码
+    phone: data.phone, //手机号
+    code: data.code, //验证码
+    readProtocol: data.agreeMent ? 1 : 0, // 是否阅读协议 0 否 1 是
+  }
+  //注册短链
+  if (data.did) {
+    tem.did = data.did
+  }
+  //来源
+  if (data.from) {
+    tem.from = data.from
+  }
+  //关键词
+  if (data.keyword) {
+    tem.keyword = data.keyword
   }
 
-  
+
+  const params = {
+    "data": JSON.stringify(tem)
+  }
+
+
   // 获取注册数据
   const res = await postRegisterDao(params)
 
   //处理注册数据
-  
+
 
   return res
 
@@ -72,7 +85,7 @@ const loginService = async (data = null) => {
   //2.获取数据
   const res = await postLoginDao(params)
   //处理注册数据
-  
+
   return res
 
 }

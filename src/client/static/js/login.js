@@ -52,7 +52,7 @@ function getFuncParams(type = 'login') {
   //1. 获取表单
   const form = document.forms['login']
 
-  
+
   //2. 公共的参数
   let obj = {
     phone: form.phone.value.trim() || '', //电话号码
@@ -66,6 +66,23 @@ function getFuncParams(type = 'login') {
       userName: form.userName.value.trim(),
       agreeMent
     })
+
+    //关于注册短链
+    let did = getCookie('did') || localStorage.getItem('did') || null
+    let from = getCookie('from') || localStorage.getItem('from') || null
+    let keyword = getCookie('keyword') || localStorage.getItem('keyword') || null
+
+    if (did) {
+      obj.did = did
+    }
+
+    if (from) {
+      obj.from = from
+    }
+
+    if (keyword) {
+      obj.keyword = keyword
+    }
   }
   //重置密码参数
   if (type === 'reset') {
@@ -81,7 +98,7 @@ function getFuncParams(type = 'login') {
 //是否同意注册协议
 function agreeOn() {
   agreeMent = !agreeMent
-  
+
 }
 
 
@@ -89,7 +106,7 @@ function checkForm(params = null, type = 'login') {
   if (!params) {
     return
   }
-  
+
   const res = {
     isPass: true,
     msg: ''
@@ -227,7 +244,7 @@ async function loginSubmit(type) {
   }
 
   params.type = type
-  
+
   $.ajax({
     type: 'POST',
     url: "/api/login",
@@ -249,7 +266,7 @@ async function loginSubmit(type) {
       } else {
         //back
         if (type === 'login' && back) {
-          
+
           let urls = `${back}`
           if (urls & urls.charAt(0) != '/') {
             urls = "/" + urls
@@ -257,12 +274,12 @@ async function loginSubmit(type) {
           location.href = `${back}`
           return
         }
-        
+
         location.href = "/manager/user"
       }
     },
     error: (err) => {
-      
+
     }
   });
 }
@@ -271,7 +288,7 @@ async function loginSubmit(type) {
 let timer = null //验证码定时器
 let count = 60 //定时时间
 async function sendCode(type = 'register') {
-  
+
   //1. 获取表单
   const form = document.forms['login']
 
@@ -280,7 +297,7 @@ async function sendCode(type = 'register') {
     phone: form.phone.value.trim() || '', //电话号码
   }
 
-  
+
   //3.校验
   if (!params.phone) {
     return Helper.$message({
@@ -339,7 +356,7 @@ async function sendCode(type = 'register') {
 }
 //防抖函数
 function debounce(fn, delay, once = false) {
-  
+
   var timeout = null;
   var count = 0;
   return function (e) {
