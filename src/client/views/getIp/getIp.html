@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-23 16:49:42
+ * @LastEditTime: 2022-05-24 14:10:13
 -->
 <!DOCTYPE html>
 <html>
@@ -315,22 +315,22 @@
             </ul>
             <ul class="note_content widthAll">
               <li class="top_li flex-center">内容</li>
-              <li class="ele flex-center pt-20 pb-20">
+              <li class="ele pt-20 pb-20">
                 <div class="li_item_box flex-center">
                   http://api.tianqiip.com/getip
                 </div>
               </li>
-              <li class="ele flex-center pt-20 pb-20">
+              <li class="ele pt-20 pb-20">
                 <div class="li_item_box flex-center">
                   GET
                 </div>
               </li>
-              <li class="ele flex-center pt-20 pb-20">
+              <li class="ele pt-20 pb-20">
                 <div class="li_item_box flex-center">
                   utf-8
                 </div>
               </li>
-              <li class="ele grid pt-20 pb-20 align-center params_desc">
+              <li class="ele grid pt-20 pb-20 params_desc">
                 <% staticData && staticData.paramsDesc && staticData.paramsDesc.forEach(function(item,index) { %>
                   <div class="li_item_box flex-center">
                     <%= item.label %>
@@ -429,17 +429,17 @@
             <ul class="note_content widthAll">
               <li class="top_li flex-center">内容</li>
               <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center port">
+                <div class="white_li_box flex-center port">
                   <%- apiL.whiteAdd %> 
                 </div>
               </li>
               <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center port">
+                <div class="white_li_box flex-center port">
                   <%- apiL.whiteDelete %> 
                 </div>
               </li>
               <li class="ele flex-center pt-20 pb-20">
-                <div class="li_item_box flex-center port">
+                <div class="white_li_box flex-center port">
                   <%- apiL.whiteFetch %> 
                 </div>
               </li>
@@ -491,7 +491,7 @@
           <div class="note_box flex mt-40">
             <ul class="note_desc">
               <li class="top_li flex-center">错误码</li>
-              <div class="box">
+              <div class="error_box">
                 <% staticData && staticData.errorCodeContent && staticData.errorCodeContent.left_desc &&
                   staticData.errorCodeContent.left_desc.forEach(function(item,index) { %>
                   <li class="ele flex-center">

@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 12:41:15
+ * @LastEditTime: 2022-05-24 15:00:24
  */
 
 import axios from 'axios';
@@ -82,9 +82,9 @@ class Request {
       return response && response.data || response;
     },
       error => {
-
+        console.log(error,'报错====………………………………--------');
         return Promise.resolve({
-          code: data.code || -1,
+          code: error.response && error.response.data && error.response.data.code ||-1,
           message: error
         })
       });
