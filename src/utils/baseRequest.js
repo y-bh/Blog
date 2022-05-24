@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 16:37:56
+ * @LastEditTime: 2022-05-24 18:16:07
  */
 
 import axios from 'axios';
@@ -44,21 +44,21 @@ class Request {
         config.data.data = encrypt(config.data.data)
       }
 
-      // if (config.token) {
-      //   config.headers['TQ-TOKEN'] = config.token;
-      // } else {
-
-      console.log("请求接口:",getCookie('TQ-TOKEN'))
       try {
         //客户端使用 场景
-        if (getCookie && document) {
+        if (document && getCookie) {
           let token = getCookie('TQ-TOKEN')
+          console.log("客户端cookie")
           if (token) {
             config.headers['TQ-TOKEN'] = token;
           }
         }
       } catch (error) {
         console.log(error)
+        if (config.token) {
+          console.log("服务端cookie")
+          config.headers['TQ-TOKEN'] = config.token;
+        }
       }
 
       return config;

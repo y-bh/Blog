@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-23 18:22:26
+ * @LastEditTime: 2022-05-24 18:18:17
  */
 
 function Helper() { }
@@ -177,7 +177,7 @@ async function ajax(params) {
       success: (res) => {
         if (res) {
           if (res) {
-
+            console.log(res, 'bbbbbbbbbbbbbbbbbb');
             if (res.code !== 200) {
               Helper.$message.error({
                 message: res.message ? res.message : '接口异常'
