@@ -15,7 +15,11 @@
   <meta name="renderer" content="webkit">
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
-  <title>业务场景</title>
+  <title>
+    <% if(title){ %>
+      <%= title %>-
+        <% } %> 业务场景
+  </title>
   <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/businessScene.css">

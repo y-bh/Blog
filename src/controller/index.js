@@ -112,13 +112,10 @@ function Router(App) {
 
 
   //业务场景-businessScene
+  const getBusinessSceneRender = require("service/businessScene")
   router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
-    /**数据请求 */
-    let { currentId = '1.html' } = ctx.request.params
-    if (currentId && currentId.includes(".html")) {
-      currentId = currentId.replace(".html", '')
-    }
-    return ctx.render("businessScene/businessScene", { currentId })
+    const { currentId, title } = getBusinessSceneRender(ctx.request.params)
+    return ctx.render("businessScene/businessScene", { currentId, title })
   })
 
 
