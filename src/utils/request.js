@@ -35,6 +35,7 @@ class ServiceAjax extends Requeset {
         config.headers['TQ-TOKEN'] = config.token;
       }
 
+      console.log("请求参数:",config.data)
       return config;
     }, error => {
       return Promise.reject(error);
