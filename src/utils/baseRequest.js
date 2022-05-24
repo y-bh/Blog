@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 10:35:09
+ * @LastEditTime: 2022-05-24 10:43:01
  */
 
 import axios from 'axios';
@@ -21,6 +21,11 @@ class Request {
 
     // 请求拦截器
     service.interceptors.request.use(config => {
+      // 去除所有空格
+      if(config.data && config.data.data && (typeof config.data.data === 'string' || typeof config.data.data === 'number')){
+        config.data = config.data.trim()
+      }
+
       // 部分接口加密
       if(AESAUTH[config.url] && process.env.NODE_ENV !== 'development'){
         config.headers['Content-Type']='text/plain';
