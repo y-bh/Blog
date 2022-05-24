@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-23 09:57:24
+ * @LastEditTime: 2022-05-24 17:21:02
  */
 
 
@@ -98,6 +98,7 @@ function Router(App) {
     let menu = await getProxyMenuService()
 
     let apiL = await getWhiteListApiService({data:{pageNum: 1, pageSize: 9999}})
+    console.log(apiL);
 
 
     let getIpData = {

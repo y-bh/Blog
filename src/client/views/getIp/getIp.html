@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-24 14:10:13
+ * @LastEditTime: 2022-05-24 18:11:13
 -->
 <!DOCTYPE html>
 <html>
@@ -61,15 +61,12 @@
           <div class="extract_type_box flex flex-wrap align-center mt-40">
             <label class="font-18 main-title-color label_lay">选择提取类型</label>
             <select id="extractType" class="extract_select form-control">
-              <% menu && menu.forEach(function(item) { %>
-                <% if(token) {%> 
+              <% if(token) {%> 
+                <% menu && menu.forEach(function(item) { %>
                   <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
-                <% } else { %> 
-                  <% if(item.proxyType === 10) {%> 
-                    <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
-                  <% } %> 
-                <% } %> 
-              <% }) %>
+              <% })} else { %> 
+                <option value='ovvrg05vry8lf21u' d-val="10"> 余额提取 </option>
+              <% } %> 
             </select>
           </div>
           <!-- 已登录展示 -->
@@ -273,9 +270,17 @@
           </div>
           <div class="mt-40 grid" >
             <div class="flex align-center ">
-              <button class="bl-button create_api_url">
-                <span>生成API链接</span>
-              </button>
+              <% if(token) { %> 
+                <button class="bl-button create_api_url">
+                  <span>生成API链接</span>
+                </button>
+              <% } else { %> 
+                <a href="/login">
+                  <button class="bl-button create_api_url">
+                    <span>生成API链接</span>
+                  </button>
+                </a>
+              <% } %> 
               <span class="pointer ml-50"><a href="#sm">查看API文档</a></span>
             </div>
             <div class="input-group apiUrl_input_box mt-40" id="sm">
@@ -428,21 +433,40 @@
             </ul>
             <ul class="note_content widthAll">
               <li class="top_li flex-center">内容</li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="white_li_box flex-center port">
-                  <%- apiL.whiteAdd %> 
-                </div>
-              </li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="white_li_box flex-center port">
-                  <%- apiL.whiteDelete %> 
-                </div>
-              </li>
-              <li class="ele flex-center pt-20 pb-20">
-                <div class="white_li_box flex-center port">
-                  <%- apiL.whiteFetch %> 
-                </div>
-              </li>
+              
+              <% if(token) { %>
+                <li class="ele flex-center pt-20 pb-20">
+                  <div class="white_li_box flex-center port">
+                    <%- apiL.whiteAdd %> 
+                  </div>
+                </li>
+                <li class="ele flex-center pt-20 pb-20">
+                  <div class="white_li_box flex-center port">
+                    <%- apiL.whiteDelete %> 
+                  </div>
+                </li>
+                <li class="ele flex-center pt-20 pb-20">
+                  <div class="white_li_box flex-center port">
+                    <%- apiL.whiteFetch %> 
+                  </div>
+                </li>
+              <% } else { %> 
+                <li class="ele flex-center pt-20 pb-20">
+                  <div class="white_li_box flex-center port">
+                    http://api.tianqiip.com/white/add?key=xxx&brand=2&sign=xxx&ip=xxx
+                  </div>
+                </li>
+                <li class="ele flex-center pt-20 pb-20">
+                  <div class="white_li_box flex-center port">
+                    http://api.tianqiip.com/white/delete?key=xxx&brand=2&sign=xxx&ip=xxx
+                  </div>
+                </li>
+                <li class="ele flex-center pt-20 pb-20">
+                  <div class="white_li_box flex-center port">
+                    http://api.tianqiip.com/white/fetch?key=xxx&brand=2&sign=xxx
+                  </div>
+                </li>
+              <% } %> 
               <li class="ele flex-center pt-20 pb-20">
                 <div class="li_item_box flex-center">
                   GET

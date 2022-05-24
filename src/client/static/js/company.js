@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 企业服务js
  * @Date: 2022-05-17 14:48:37
- * @LastEditTime: 2022-05-24 13:46:44
+ * @LastEditTime: 2022-05-24 18:19:14
  */
 
 
@@ -127,9 +127,8 @@ async function onSubmit () {
     query: JSON.stringify(query)
   }
   let res = await ajax(params);
+  console.log(res);
   if (res) {
     Helper.$message.success({ message: '提交成功' })
-  } else {
-    Helper.$message.error({ message: '提交失败' })
   }
 }
