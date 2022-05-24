@@ -32,10 +32,10 @@ class Request {
           config.data = JSON.parse(config.data)
 
         }
-        console.log("加密前参数:", config.data.data)
+        
         config.data.data = encrypt(config.data.data)
 
-        console.log("加密后参数:", config.data.data)
+        
       } else {
         config.headers['Content-Type'] = 'application/json';  //联调需要，可以删掉
       }
@@ -82,7 +82,7 @@ class Request {
       return response && response.data || response;
     },
       error => {
-        console.log(error,'报错====………………………………--------');
+        
         return Promise.resolve({
           code: error.response && error.response.data && error.response.data.code ||-1,
           message: error
