@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-13 12:56:11
- * @LastEditTime: 2022-05-23 11:46:40
+ * @LastEditTime: 2022-05-24 20:38:43
 -->
 <template>
   <div class="ticket-wrap">
@@ -49,11 +49,12 @@ export default {
         $message.error('请输入内容')
         return 
       }
-      /**暂未完成 */
+
       const res = await submitTicketFunc(params)
 
       if(+res.code === 200){
         $message.success('提交成功')
+        state.content = ''
       } else {
         $message.error(res.message)
       }
