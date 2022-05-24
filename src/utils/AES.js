@@ -1,10 +1,4 @@
-/*
- * @Author: 秦琛
- * @LastEditors: 秦琛
- * @description: page description
- * @Date: 2022-05-23 17:47:28
- * @LastEditTime: 2022-05-23 18:00:48
- */
+
 /*
  * @Author: 秦琛
  * @LastEditors: 秦琛
