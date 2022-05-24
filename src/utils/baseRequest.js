@@ -3,11 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
-<<<<<<< HEAD
- * @LastEditTime: 2022-05-24 19:33:20
-=======
- * @LastEditTime: 2022-05-24 18:16:07
->>>>>>> 520e6ee169ead32c2de2a6e63f0a16c1b8cd8755
+ * @LastEditTime: 2022-05-24 19:54:58
  */
 
 import axios from 'axios';
@@ -150,12 +146,13 @@ class Request {
   * @param data
   * @returns {Promise}
   */
-  post(url, data = {}) {
+  post(url, data = {}, token) {
     try {
       return this.service({
         url,
         method: 'POST',
-        data: JSON.stringify(data)
+        data: JSON.stringify(data),
+        token
       });
     } catch (error) {
 

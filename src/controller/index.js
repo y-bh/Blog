@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-24 18:36:55
+ * @LastEditTime: 2022-05-24 19:48:21
  */
 
 
@@ -96,8 +96,8 @@ function Router(App) {
     let province = await getProxyCityService()
     let menu = await getProxyMenuService(token)
 
-    let icon = await getIconService()
-    let apiL = await getWhiteListApiService({ data: { pageNum: 1, pageSize: 9999 } })
+    let icon = await getIconService(token)
+    let apiL = await getWhiteListApiService(token, { data: { pageNum: 1, pageSize: 9999 } })
 
 
     let getIpData = {

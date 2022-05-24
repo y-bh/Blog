@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-24 18:36:08
+ * @LastEditTime: 2022-05-24 19:56:40
  */
 const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao,getIconDao } = require("dao/getIp")
 
@@ -411,9 +411,9 @@ const getProxyMenuService = async (token) => {
  * @description: 白名单接口
  * @return {*}
  */
-const getWhiteListApiService = async (params = null) => {
+const getWhiteListApiService = async (token, params = null) => {
   try {
-    const res = await getWhiteListApiDao(params)
+    const res = await getWhiteListApiDao(token, params)
     if (res && res.code === 200) {
       let { whiteAdd = null, whiteDelete = null, whiteFetch = null } = res.data
       return {
@@ -432,17 +432,17 @@ const getWhiteListApiService = async (params = null) => {
 }
 
 
-const getIconService = async() => {
+const getIconService = async(token) => {
   try {
-    const res = await getIconDao()
+    const res = await getIconDao(token)
     if (res && res.code === 200) {
-      console.log(res.data, 'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      const { balance } = res.data
       return {
-        // whiteAdd, whiteDelete, whiteFetch
+        balance
       }
     }else{
       return {
-        icon: 0
+        balance: 0
       }
     }
   } catch (error) {
