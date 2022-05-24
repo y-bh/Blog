@@ -77,7 +77,7 @@ class Request {
         } else {
 
           return {
-            code: -1,
+            code: data.code || -1,
             message: data.message || '接口异常'
           };
         }
@@ -87,7 +87,7 @@ class Request {
       error => {
         console.error("接口报错:", error)
         return Promise.resolve({
-          code: -1,
+          code: data.code ||-1,
           message: error
         })
       });
