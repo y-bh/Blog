@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-24 11:09:25
+ * @LastEditTime: 2022-05-24 11:14:45
 -->
 <template>
   <div class="userAccount">
@@ -23,9 +23,18 @@
             v-if="userInfo.proxyApiOpend"
             >密钥</el-button
           >
-          <el-button type="warning" v-if="!userInfo.isHasSeller" class="ml-20"
-            >联系销售</el-button
+          <a
+            href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true"
+            target="_blank"
           >
+            <el-button
+              type="warning"
+              v-if="!userInfo.isHasSeller"
+              class="ml-20"
+            >
+              联系销售</el-button
+            >
+          </a>
         </div>
       </div>
       <div class="account-vipInfo">
@@ -293,7 +302,7 @@ export default {
     };
     onBeforeMount(async () => {
       await getUserInfo();
-      console.log(22222222,state.userInfo.id)
+      //console.log(22222222, state.userInfo.id);
       if (state.userInfo.id) {
         let bigId = state.userInfo.id * 3 + 130000;
         vipNum.value =
@@ -314,7 +323,7 @@ export default {
     const queryCompayStatus = () => {
       let auth = state.userInfo.companyAuth;
       let status = state.userInfo.verifyState;
-     // console.log("==========当前企业的状态====", status);
+      // console.log("==========当前企业的状态====", status);
       if (auth) {
         companyAuthRef.value.title = "企业认证";
         companyAuthRef.value.authCompanyStep = 6;
