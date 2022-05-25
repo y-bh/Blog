@@ -58,12 +58,12 @@
                           <div class="blog_item flex justify-content-between align-items-center">
                             <div class="left grid">
                               <div class="top text-blue flex justify-content-start align-items-start">
-                                <%= new Date(i.createTime).getDate()%>
+                                <%- (new Date(i.createTime * 1000).getDate()) <10 ? '0'+new Date(i.createTime * 1000).getDate() : new Date(i.createTime * 1000).getDate()%>
                               </div>
                               <div class="bottom">
                                 <div class="line"></div>
                                 <span class="text-blue flex justify-content-end align-items-end month-box">
-                                  <%= new Date(i.createTime).getMonth()+1 %>
+                                  <%- (new Date(i.createTime * 1000).getMonth()+1) < 10 ? '0' + (new Date(i.createTime * 1000).getMonth()+1) : new Date(i.createTime * 1000).getMonth()+1 %>
                                 </span>
                               </div>
                             </div>
@@ -145,9 +145,9 @@
             <% } %>
 
 
-            <%- include('../components/rightToolbar.html'); %>
-              <%#公共底部 %>
-                <%- include('../components/footer.html'); %>
+              <%- include('../components/rightToolbar.html'); %>
+                <%#公共底部 %>
+                  <%- include('../components/footer.html'); %>
 </body>
 <%- include('../components/js.html'); %>
   <script src="/js/helpCenter.js"></script>

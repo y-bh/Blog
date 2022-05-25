@@ -74,6 +74,8 @@ const getHelpService = async (data, articleTypes = []) => {
     //文章列表
     lists = await postArticleDao(params)
 
+    console.log("xxxxxxxxxxxxxxx",lists)
+
     //兜底分页
     if (!lists.totalPage) {
       lists.totalPage = Math.ceil(lists.totalSize / params.pageSize)
