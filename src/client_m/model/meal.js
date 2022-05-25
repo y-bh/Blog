@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 我的套餐接口
  * @Date: 2022-05-18 13:26:26
- * @LastEditTime: 2022-05-25 17:24:20
+ * @LastEditTime: 2022-05-25 17:41:43
  */
 import service from 'tools/ajax.js';
 const api = require("config/api.config.js")
@@ -137,7 +137,7 @@ export const getLogList = async (params = null) => {
 // 删除套餐
 export const deleteMeal = async (params = null) => {
   try {
-    const res = await service.post(api.QUERY_LOG,  params);
+    const res = await service.post(api.POST_DELETE,  params);
     return res;
   } catch (error) {
     return Promise.resolve(null);
