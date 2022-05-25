@@ -338,18 +338,6 @@ async function commonBalancePay() {
   }
 }
 
-$(async function () {
-  let curTab = sessionStorage.getItem("packageTab");
-  await getRedPacket();
-  console.log(2222222, packageData.allRedPacket);
-  commonBalancePay();
-  getPackageTimesPrice();
-  //处理其他页面跳转过来tab
-  if (curTab && curTab == 2) {
-    $("#packageTab").click();
-  }
-})
-
 
 //获取页面包时套餐--- 选中的总的价格
 function getPackageTimesPrice() {
@@ -637,3 +625,24 @@ function wxPayFun(res) {
   }
   $('#wxPayModal').modal('show');
 }
+
+
+
+  //动画
+   new WOW().init();
+//初始化
+$(async function () {
+  let curTab = sessionStorage.getItem("packageTab");
+  await getRedPacket();
+  console.log(2222222, packageData.allRedPacket);
+  commonBalancePay();
+  getPackageTimesPrice();
+  //处理其他页面跳转过来tab
+  if (curTab && curTab == 2) {
+    $("#packageTab").click();
+  }
+
+
+
+
+})

@@ -54,7 +54,7 @@
                     <div class="content grid">
                       <% lists.data.forEach(function(i,blog_index) { %>
                         <a href="/help-details/<%= i.id%>.html"
-                          class="article-detail wow <% if(blog_index%2 ===0){%> fadeInLeft <% }else{ %> fadeInRight <% }%>   animate__delay-<%-blog_index%3+1+'s'%>">
+                          class="article-detail wow <% if(blog_index%2 ===0){%> fadeInLeft <% }else{ %> fadeInRight <% }%>   animate__delay-<%-blog_index%4%>">
                           <div class="blog_item flex justify-content-between align-items-center">
                             <div class="left grid">
                               <div class="top text-blue flex justify-content-start align-items-start">
