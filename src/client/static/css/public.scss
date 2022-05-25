@@ -783,6 +783,18 @@ input::-webkit-input-placeholder {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
 
+.animate__delay-1s {
+  animation-delay: 0.5s;
+}
+
+.animate__delay-2s {
+  animation-delay: 0.8s;
+}
+
+.animate__delay-3s {
+  animation-delay: 1s;
+}
+
 @keyframes up-down {
   0% {
     transform: translateY(10px);
