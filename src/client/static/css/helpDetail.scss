@@ -90,7 +90,7 @@
 }
 
 .tag_box {
-  display: contents;
+  gap: 10px;
 }
 
 .nav-title {
@@ -101,4 +101,7 @@
 
 .article-title-next {
   max-width: 150px;
+}
+.tag_container_left {
+  min-width: 60px;
 }

@@ -50,14 +50,14 @@
 
 
               <!-- 标签 -->
-              <div class="tag_container">
+              <div class="tag_container mt-30">
                 <div class="tag_container_left flex align-center mr-15">
                   <i class="mr-10 iconfont icon-biaoqian"></i>
                   <span class="main-title-color">标签</span>
                 </div>
-                <div class="flex flex-wrap">
+                <div class="flex flex-wrap tag_box">
                   <% articleKeyWords && articleKeyWords.forEach(function(keyWord,index) { %>
-                    <a class="tag_item mt-30 mr-20 flex-center pointer" href="/tags/<%=keyWord.keyAlias%>/1.html">
+                    <a class="tag_item mr-20 flex-center pointer" href="/tags/<%=keyWord.keyAlias%>/1.html">
                       <%= keyWord.keyName%>
                     </a>
                     <% }) %>
