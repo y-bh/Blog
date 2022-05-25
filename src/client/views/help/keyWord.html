@@ -16,151 +16,133 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>
-    <% if(lists.keyWordsVO && lists.keyWordsVO.keyName){ %>
+    <% if(lists && lists.keyWordsVO && lists.keyWordsVO.keyName){ %>
       <%=lists.keyWordsVO.keyName %>
         <% }else { %>
           关键词聚合页
           <% } %>
   </title>
-  <%#公共css  %> 
-  <%- include('../components/style.html'); %>
-    <link rel="stylesheet" href="/css/helpCenter.css">
+  <%#公共css %>
+    <%- include('../components/style.html'); %>
+      <link rel="stylesheet" href="/css/helpCenter.css">
 </head>
 
 <body>
-  <%#公共头部  %> 
-  <%- include('../components/header.html'); %>
-    <div class="banner">
-    </div>
-    <div class="container grid mt-80 mb-80">
-      <div class="a_top flex align-center">
-        <div class="a_icon mr-20">
-          <i class="mr-10 iconfont icon-biaoqian"></i>
-          <span class="main-title-color">标签</span>
-        </div>
-        <% if(lists.keyWordsVO && lists.keyWordsVO.keyName){ %>
-          <span class="a_tag flex-center pointer">
-            <%=lists.keyWordsVO.keyName %>
-          </span>
-          <% } %>
+  <%#公共头部 %>
+    <%- include('../components/header.html'); %>
+      <div class="banner">
       </div>
-      <div class="a_bottom grid">
+      <div class="container grid mt-80 mb-80">
+        <div class="a_top flex align-center">
+          <div class="a_icon mr-20">
+            <i class="mr-10 iconfont icon-biaoqian"></i>
+            <span class="main-title-color">标签</span>
+          </div>
+          <% if(lists && lists.keyWordsVO && lists.keyWordsVO.keyName){ %>
+            <span class="a_tag flex-center pointer">
+              <%=lists.keyWordsVO.keyName %>
+            </span>
+            <% } %>
+        </div>
+        <div class="a_bottom grid">
 
-        <div class="blog_list">
+          <div class="blog_list">
 
-          <!-- 推荐文章列表 -->
+            <!-- 推荐文章列表 -->
 
-          <div class="tab-content mt-60 flex justify-content-between">
-            <!-- 文章列表 -->
-            <div class="content">
-              <div>
-                <% lists.data.forEach(function(i,blog_index) { %>
-                  <a href="/help-details/<%= i.id%>.html" class="article-detail <%if(blog_index>0){%>mt-30<% } %>" title="<%=i.title  %> ">
-                    <div class="blog_item flex justify-content-between align-items-center">
-                      <div class="left grid">
-                        <div class="top text-blue flex justify-content-start align-items-start">
-                          <%= new Date(i.createTime).getDate()%>
+            <div class="tab-content mt-60 flex justify-content-between">
+              <!-- 文章列表 -->
+              <div class="content">
+                <div>
+                  <% lists && lists.data.forEach(function(i,blog_index) { %>
+                    <a href="/help-details/<%= i.id%>.html"
+                      class="article-detail <%if(blog_index>0){%>mt-30<% } %>  wow  fadeInLeft   animate__delay-<%-blog_index < 4 ? blog_index : 'faster'%>"
+                      title="<%=i.title  %> ">
+                      <div class="blog_item flex justify-content-between align-items-center">
+                        <div class="left grid">
+                          <div class="top text-blue flex justify-content-start align-items-start">
+                            <%= new Date(i.createTime).getDate()%>
+                          </div>
+                          <div class="bottom">
+                            <div class="line"></div>
+                            <span class="text-blue flex justify-content-end align-items-end month-box">
+                              <%= new Date(i.createTime).getMonth()+1 %>
+                            </span>
+                          </div>
                         </div>
-                        <div class="bottom">
-                          <div class="line"></div>
-                          <span class="text-blue flex justify-content-end align-items-end month-box">
-                            <%= new Date(i.createTime).getMonth()+1 %>
-                          </span>
+                        <div class="right ml-30">
+                          <div class="right_top flex justify-content-between align-center">
+                            <h3 class="font-20 main-title-color articlt-title text-ellipsis">
+                              <%- i.title %>
+                            </h3>
+                            <span class="go_detail pointer text-right">查看详情>></span>
+                          </div>
+                          <p class="desc mt-20 two-line">
+                            <%- i.desc %>
+                          </p>
                         </div>
                       </div>
-                      <div class="right ml-30">
-                        <div class="right_top flex justify-content-between align-center">
-                          <h3 class="font-20 main-title-color articlt-title text-ellipsis">
-                            <%= i.title %>
-                          </h3>
-                          <span class="go_detail pointer text-right">查看详情>></span>
-                        </div>
-                        <p class="desc mt-20 two-line">
-                          <%= i.desc %>
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                  <% }) %>
-              </div>
-
-              <!-- 分页 -->
-              <div class="page_box mt-60 flex justify-content-end mb-80">
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination">
-                    <% if(lists && lists.pageNum>1) {%>
-                      <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="goPagePreNext('pre')">
-                          <span>&lt;</span>
-                        </a>
-                      </li>
-                      <% } %>
-
-                        <div class="pageList flex">
-                          <% for(let i=0; i < lists.totalPage; i++) { %>
-                            <li class="page-item <%if(+lists.pageNum === (+i+1)){ %> page-active<%}%> ">
-
-                              <a href="/tags/<%= lists.typeAlias %>/<%=i+1%>.html" class="page-link">
-                                <%=i+1%>
-                              </a>
-                            </li>
-                            <% } %>
-                        </div>
-
-                        <% if(lists.totalPage>lists.pageNum) {%>
-                          <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="goPagePreNext('next')">
-                              <span aria-hidden="true">&gt;</span>
-                            </a>
-                          </li>
-                          <% } %>
-
-                  </ul>
-                </nav>
-
-                <% if(lists && lists.totalPage>1) {%>
-                <div class="goto flex justify-content-center align-items-center ml-30">
-                  前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number"
-                    onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')"
-                    id="pageInput">&nbsp;&nbsp;页
-                </div>
-                <% } %>
-
-              </div>
-            </div>
-
-            <!-- 文章类型列表 -->
-            <div class="tab-nav">
-              <!-- 相关文章 -->
-              <div class="related_blogs  b_box mb-40">
-                <div class="b_top font-18 font-bold main-title-color flex justify-between">
-                  相关文章
-                  <a class="text-blue font-16 look_more pointer" href="/help-center/manual/1.html">查看更多>></a>
-                </div>
-                <div class="mt-30">
-                  <% lists.recommendArticles && lists.recommendArticles.forEach(function(blog,index) { %>
-                    <a href="/help-details/<%= blog.id%>.html" title="<%=blog.title%>"
-                      class="flex justify-between mb-20 align-items-center pointer right_blog_title">
-                      <span class="text-ellipsis">
-                        <%= blog.title%>
-                      </span>
-                      <i>&gt;</i>
                     </a>
                     <% }) %>
                 </div>
+
+                <!-- 分页 -->
+                <div class="page_box mt-60 flex justify-content-end mb-80">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <% if(lists && lists.pageNum>1) {%>
+                        <li class="page-item">
+                          <a class="page-link" href="javascript:void(0)" aria-label="Next"
+                            onclick="goPagePreNext('pre')">
+                            <span>&lt;</span>
+                          </a>
+                        </li>
+                        <% } %>
+
+                          <div class="pageList flex">
+                            <% for(let i=0; i < lists && lists.totalPage; i++) { %>
+                              <li class="page-item <%if(+lists.pageNum === (+i+1)){ %> page-active<%}%> ">
+
+                                <a href="/tags/<%= lists.typeAlias %>/<%=i+1%>.html" class="page-link">
+                                  <%=i+1%>
+                                </a>
+                              </li>
+                              <% } %>
+                          </div>
+
+                          <% if(lists && lists.totalPage>lists.pageNum) {%>
+                            <li class="page-item">
+                              <a class="page-link" href="javascript:void(0)" aria-label="Next"
+                                onclick="goPagePreNext('next')">
+                                <span aria-hidden="true">&gt;</span>
+                              </a>
+                            </li>
+                            <% } %>
+
+                    </ul>
+                  </nav>
+
+                  <% if(lists && lists.totalPage>1) {%>
+                    <div class="goto flex justify-content-center align-items-center ml-30">
+                      前往&nbsp;&nbsp;<input class="goto_input text-center text-blue" type="number"
+                        onkeydown="goPage(event,'<%= lists.totalPage%>','<%= lists.typeAlias%>')"
+                        id="pageInput">&nbsp;&nbsp;页
+                    </div>
+                    <% } %>
+
+                </div>
               </div>
 
-              <!-- 栏目类型 -->
-              <% tabList && tabList.forEach(function(tab,index) { %>
-                <div class="related_blogs  b_box mb-40">
+              <!-- 文章类型列表 -->
+              <div class="tab-nav">
+                <!-- 相关文章 -->
+                <div class="related_blogs  b_box mb-40 wow fadeInRight">
                   <div class="b_top font-18 font-bold main-title-color flex justify-between">
-                    <%= tab.type %>
-                      <a class="text-blue font-16 look_more pointer"
-                        href="/help-center/<%= tab.typeAlias %>/1.html">查看更多>></a>
+                    相关文章
+                    <a class="text-blue font-16 look_more pointer" href="/help-center/manual/1.html">查看更多>></a>
                   </div>
                   <div class="mt-30">
-                    <% tab.articleDetail && tab.articleDetail.forEach(function(blog,index) { %>
-
+                    <% lists && lists.recommendArticles && lists.recommendArticles.forEach(function(blog,index) { %>
                       <a href="/help-details/<%= blog.id%>.html" title="<%=blog.title%>"
                         class="flex justify-between mb-20 align-items-center pointer right_blog_title">
                         <span class="text-ellipsis">
@@ -168,24 +150,48 @@
                         </span>
                         <i>&gt;</i>
                       </a>
-
                       <% }) %>
                   </div>
                 </div>
-                <% }) %>
+
+                <!-- 栏目类型 -->
+                <% tabList && tabList.forEach(function(tab,index) { %>
+                  <div class="related_blogs  b_box mb-40 wow fadeInRight animate__delay-<%-index+1%>">
+                    <div class="b_top font-18 font-bold main-title-color flex justify-between">
+                      <%= tab.type %>
+                        <a class="text-blue font-16 look_more pointer"
+                          href="/help-center/<%= tab.typeAlias %>/1.html">查看更多>></a>
+                    </div>
+                    <div class="mt-30">
+                      <% tab.articleDetail && tab.articleDetail.forEach(function(blog,index) { %>
+
+                        <a href="/help-details/<%= blog.id%>.html" title="<%=blog.title%>"
+                          class="flex justify-between mb-20 align-items-center pointer right_blog_title">
+                          <span class="text-ellipsis">
+                            <%= blog.title%>
+                          </span>
+                          <i>&gt;</i>
+                        </a>
+
+                        <% }) %>
+                    </div>
+                  </div>
+                  <% }) %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
 
-  <%- include('../components/rightToolbar.html'); %>
-    
- <%#公共底部  %> 
- <%- include('../components/footer.html'); %>
+      <%- include('../components/rightToolbar.html'); %>
+
+        <%#公共底部 %>
+          <%- include('../components/footer.html'); %>
 </body>
- <%#公共js %> 
-<%- include('../components/js.html'); %>
-  <script src="/js/tag.js"></script>
+<%#公共js %>
+  <%- include('../components/js.html'); %>
+    <script src="/lib/js/wow.min.js"></script>
+    <script src="/js/tag.js"></script>
+
 </html>

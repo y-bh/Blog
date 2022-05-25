@@ -96,3 +96,6 @@ function goPagePreNext(type = 'next') {
 
 }
 
+
+//動畫
+new WOW().init();
