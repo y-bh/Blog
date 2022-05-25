@@ -710,91 +710,34 @@ input::-webkit-input-placeholder {
   transform: translate(0%);
 }
 /* 动态按钮 -- end */
-
-//ease-in-out== ease:于匀速，开始和结束都慢
-//linear：匀速
-//ease-in:开始慢，之后快
-//ease-out：开始块，结束慢
-//从左边划入效果
-.common-slideInLeft {
-  -webkit-animation: slideInLeft 0.8s ease-in-out;
-  animation: slideInLeft 0.8s ease-in-out;
-}
-.common-slideInRight {
-  -webkit-animation: slideInRight 0.8s ease-in-out;
-  animation: slideInRight 0.8s ease-in-out;
-}
-.common-fadeInUp {
-  -webkit-animation: fadeInUp 0.8s ease-out both;
-  animation: fadeInUp 0.8s ease-out both;
-}
-.common-fadeInUp-fast-1 {
-  -webkit-animation-delay: 0.25s;
-  animation-delay: 0.25s;
-}
-.common-fadeInUp-fast-2 {
-  -webkit-animation-delay: 0.5;
-  animation-delay: 0.5s;
-}
-.common-fadeInUp-fast-3 {
-  -webkit-animation-delay: 0.75s;
-  animation-delay: 0.75s;
-}
-.common-fadeInUp-fast-4 {
-  -webkit-animation-delay: 1s;
-  animation-delay: 1s;
-}
-.common-fadeInUp-fast-5 {
-  -webkit-animation-delay: 1.25s;
-  animation-delay: 1s;
-}
-.common-fadeInUp-fast-6 {
-  -webkit-animation-delay: 1.5s;
-  animation-delay: 1s;
-}
-// .common-fadeInUp-fast-5 {
-//   -webkit-animation-delay: 1s;
-//   animation-delay: 0.5s;
-// }
-.common-fadeInUp-delay-05 {
-  -webkit-animation-delay: 0.5;
-  animation-delay: 0.5s;
-}
-.common-fadeInUp-delay-06 {
-  -webkit-animation-delay: 0.6s;
-  animation-delay: 0.6s;
-}
-.common-fadeInUp-delay-07 {
-  -webkit-animation-delay: 0.7s;
-  animation-delay: 0.7s;
-}
-
-.common-fadeInUp-delay-08 {
-  -webkit-animation-delay: 0.8s;
-  animation-delay: 0.7s;
-}
-
-.common-fadeInUp-delay-09 {
-  -webkit-animation-delay: 0.9s;
-  animation-delay: 0.7s;
-}
-
 .common-up-down {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
 
-.animate__delay-1s {
+.animate__delay-faster {
+  animation-delay: 0.25s;
+}
+
+.animate__delay-0 {
+  animation-delay: 0.25s;
+}
+.animate__delay-1 {
   animation-delay: 0.5s;
 }
 
-.animate__delay-2s {
-  animation-delay: 0.8s;
+.animate__delay-2 {
+  animation-delay: 0.75s;
 }
 
-.animate__delay-3s {
+.animate__delay-3 {
   animation-delay: 1s;
 }
-
+.animate__delay-4 {
+  animation-delay: 1.25s;
+}
+.animate__delay-5 {
+  animation-delay: 1.5s;
+}
 @keyframes up-down {
   0% {
     transform: translateY(10px);

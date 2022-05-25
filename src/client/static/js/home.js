@@ -83,4 +83,8 @@ $(function () {
   numDynamic("ipTotalNum", 100000, +getCookie('ipNumTotal'), 50000, 50)
   numDynamic("ipNum", 600000, +getCookie('ipNumUpdate'), 80000, 50)
   numDynamic("canUserNum", 8, 99, 2, 50)
+
+
+    //动画
+    new WOW().init();
 })

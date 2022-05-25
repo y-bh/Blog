@@ -18,7 +18,6 @@
   <title>套餐页</title>
   <!-- 公共css -->
   <%- include('../components/style.html'); %>
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_3386614_sk6qt1fpubf.css">
     <link rel="stylesheet" href="/css/package.css">
 </head>
 
@@ -90,9 +89,9 @@
                 <!-- 选择预充值金额 -->
                 <% rechargeMeals.forEach(function(rate,index) { %>
                   <% if (index==0) { %>
-                    <li class="amount-item current" price="<%= rate.price %>">
+                    <li class="amount-item current wow zoomIn animate__delay-0" price="<%= rate.price %>">
                       <% } else { %>
-                    <li class="amount-item" price="<%= rate.price %>">
+                    <li class="amount-item wow zoomIn  animate__delay-<%-index%>" price="<%= rate.price %>">
                       <% } %>
 
                         <% if (rate.giftRate && Number(rate.giftRate)>0) { %>
@@ -102,27 +101,8 @@
                             <div class="lastAmount"><span>实到<%= rate.all %>元</span></div>
                     </li>
                     <% }) %>
-                      <!-- <li class="amount-item">
-                    <div class="discount"><span>赠5%</span></div>
-                    <div class="rechargeAmount"><span>￥300</span></div>
-                    <div class="lastAmount"><span>实到315元</span></div>
-                  </li>
-                  <li class="amount-item">
-                    <div class="discount"><span>赠10%</span></div>
-                    <div class="rechargeAmount"><span>￥500</span></div>
-                    <div class="lastAmount"><span>实到550元</span></div>
-                  </li>
-                  <li class="amount-item">
-                    <div class="discount"><span>赠10%</span></div>
-                    <div class="rechargeAmount"><span>￥500</span></div>
-                    <div class="lastAmount"><span>实到550元</span></div>
-                  </li>
-                  <li class="amount-item">
-                    <div class="discount"><span>赠10%</span></div>
-                    <div class="rechargeAmount"><span>￥500</span></div>
-                    <div class="lastAmount"><span>实到550元</span></div>
-                  </li>-->
-                      <li class="amount-item contactUs" onclick="payMore()">
+
+                      <li class="amount-item contactUs wow zoomIn  animate__delay-4" onclick="payMore()">
                         <div class="discount"><span>优惠+</span></div>
                         <div class="rechargeAmount"><span>预充更多金额</span></div>
                         <div class="lastAmount"><span>联系平台客户经理</span></div>
@@ -395,7 +375,7 @@
                 <div class="enterMoney">
                   <div class="label "><span>输入金额</span></div>
                   <div>
-                    <input class="ml-30 mr-30" type="number" id="calculatorIPNumber" max="100000" min="1"/>
+                    <input class="ml-30 mr-30" type="number" id="calculatorIPNumber" max="100000" min="1" />
                     <span>元</span>
                     <div class="closeIcon" onclick="closeIcon()"><span>X</span></div>
                   </div>
@@ -527,12 +507,13 @@
       <!-- 微信支付弹框 end -->
     </div>
     <%- include('../components/rightToolbar.html'); %>
-    <%#公共底部 %>
-      <%- include('../components/footer.html'); %>
+      <%#公共底部 %>
+        <%- include('../components/footer.html'); %>
 
 </body>
 <%- include('../components/js.html'); %>
   <script src="/lib/js/qrcode.min.js"></script>
+  <script src="/lib/js/wow.min.js"></script>
   <script src="/js/package.js" async defer></script>
 
 </html>

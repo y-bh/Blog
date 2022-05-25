@@ -106,7 +106,16 @@
       position: relative;
       z-index: 2;
     }
+
+    &:after {
+      border-radius: inherit;
+    }
   }
+
+  .el-button--small{
+    padding: 8px 14px;
+  }
+
 
   .el-button--default {
     &:focus,&:hover {
@@ -132,6 +141,7 @@
       background: $main_linear;
       border-color: $main;
       color: $empty;
+      border-radius: inherit;
       outline: 0;
     }
 

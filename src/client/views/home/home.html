@@ -24,19 +24,19 @@
           <!-- 第一个banner -->
           <div class="banner-board">
             <div class="banner-left pt-140 mb-140">
-              <div class="banner-title common-fadeInUp"><img src="/images/home/backg-title.svg" alt=""></div>
-              <div class="banner-subTitle mt-30 common-fadeInUp common-fadeInUp-delay-06">
+              <div class="banner-title fadeInUp"><img src="/images/home/backg-title.svg" alt=""></div>
+              <div class="banner-subTitle mt-30 fadeInUp animate__delay-1">
                 <span>HTTP、HTTPS、SOCKS5协议，全方位支持大数据采集</span>
               </div>
-              <div class="banner-btn mt-30 common-fadeInUp common-fadeInUp-delay-07">
-                <div class="backg-btn bl-button" onclick="onFreeTry()"><span>免费试用</span></div>
+              <div class="banner-btn mt-30 fadeInUp animate__delay-2">
+                <div class="backg-btn" onclick="onFreeTry()"><span>免费试用</span></div>
                 <div class="border-btn ml-30" onclick="contactUs()"><span>联系客服</span></div>
               </div>
             </div>
 
           </div>
           <!-- 第二栏 -->
-          <ul class="secondRow common-fadeInUp common-fadeInUp-delay-08 pt-45 pb-45">
+          <ul class="secondRow fadeInUp wow animate__delay-1 pt-45 pb-45">
             <li>
               <div class="number"><span id="cityNum">200</span><span>+</span></div>
               <div class="desc mt-30"><span>全国城市数量</span></div>
@@ -62,21 +62,21 @@
             <div class="subTitle mt-20"><span>运营商正规授权资源,安全稳定的优质代理服务</span></div>
           </div>
           <ul class="mt-80">
-            <li class="common-fadeInUp common-fadeInUp-fast-1 pointer">
+            <li class="wow fadeInUp animate__delay-0 pointer">
               <div class="top">
                 <div class="title"><span>三大协议支持</span></div>
                 <div class="icon-img1"></div>
               </div>
               <div class="mt-30 bottom"><span>提供HTTP/HTTPS/SOCKS5协议，满足各类业务需求</span></div>
             </li>
-            <li class="mt-60 common-fadeInUp common-fadeInUp-fast-2 pointer">
+            <li class="wow mt-60 fadeInUp animate__delay-1 pointer">
               <div class="top">
                 <div class="title"><span>全国自建机房</span></div>
                 <div class="icon-img2"></div>
               </div>
               <div class="mt-30 bottom"><span>全国200+城市节点，自建机房纯净网络，掌握一手IP资源</span></div>
             </li>
-            <li class="mt-110 common-fadeInUp common-fadeInUp-fast-3 pointer">
+            <li class="wow mt-110 fadeInUp animate__delay-2 pointer">
               <div class="top">
                 <div class="title"><span>快捷极速响应</span></div>
                 <div class="icon-img3"></div>
@@ -95,7 +95,7 @@
                 <div class="title"><span>合作企业</span></div>
                 <div class="subTitle mt-20"><span>忠诚合作,携手共赢</span></div>
               </div>
-              <ul class="mt-80 common-fadeInUp">
+              <ul class="mt-80 fadeInUp">
                 <li class="common-scrollLeft">
                   <img src="/images/home/enterprise-left.png" alt="合作企业">
                   <img src="/images/home/enterprise-left.png" alt="合作企业">
@@ -107,7 +107,7 @@
               </ul>
             </div>
             <!-- 现在注册，免费领取5000IP -->
-            <div class="eightRow regist pt-30 pb-40 mt-140  common-fadeInUp">
+            <div class="eightRow regist pt-30 pb-40 mt-140 wow fadeInUp">
               <div><img src="/images/home/regist.png" alt=""></div>
               <div class="desc"><span>现在注册，免费领取5000IP</span></div>
               <div class="btn">
@@ -123,7 +123,7 @@
               <ul>
                 <% articleList.forEach(function(articleItem,index) { %>
                   <li
-                    class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80 common-fadeInUp common-fadeInUp-fast-<%= index+1 %>">
+                    class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80 wow fadeInTopRight animate__delay-<%= index %>">
                     <div class="common-arrow-title pb-30">
                       <div class="arrow arrow_left mr-20">
                         <i class="lightColour">&gt;</i>
@@ -167,11 +167,11 @@
 
       </div>
     </div>
+
+    <%#右側廣告 %>
     <%- include('../components/rightToolbar.html'); %>
 
     <%- include('../components/homeDialog.html') %>
-
-
     <%#公共底部 %>
     <%- include('../components/footer.html'); %>
 </body>
@@ -186,4 +186,5 @@
   <script src="/js/home.js"></script>
   <script src="/js/homeDialog.js"></script>
 
+  <script src="/lib/js/wow.min.js"></script>
 </html>
