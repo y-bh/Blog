@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="force-rendering" content="webkit">
   <meta name="renderer" content="webkit">
-  <meta name="keywords" content="<%=keywords%>">
-  <meta name="description" content="<%=articleDetailVO && articleDetailVO.desc%>">
+  <meta name="keywords" content="<%=keywords || 'ip代理服务器,换ip软件，静态ip,HTTP代理ip,动态代理ip,代理ip免费试用'%>">
+  <meta name="description" content="<%=articleDetailVO && articleDetailVO.desc || '天启HTTP专注高品质IP代理服务,国内200+城市节点,自建机房,一手ip代理服务器资源,低延迟,高可用率,多种去重模式,静态ip动态ip多种代理IP组合可先试用再购买,为企业和开发者大数据采集赋能。'%>">
   <title>
     <%=articleDetailVO && articleDetailVO.title + "-" %>
-      <%= articleDetailVO && articleDetailVO.type || '帮助中心' %>
+      <%= articleDetailVO && articleDetailVO.type || '帮助中心-天启HTTP代理' %>
   </title>
   <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/helpDetail.css">
