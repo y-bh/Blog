@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-24 18:18:17
+ * @LastEditTime: 2022-05-25 09:45:38
  */
 
 function Helper() { }
@@ -160,11 +160,17 @@ function setCookie(cname, cvalue, exdays) {
         query: 参数
 */
 async function ajax(params, prex = '/javaProxy') {
+  let baseURL = '';
+  if(params.url && params.url.slice(0,1) !== "/"){
+    baseURL = '/' + params.url
+  } else {
+    baseURL =  params.url
+  }
   return new Promise(function (resolve, reject) {
     let token = getCookie('TQ-TOKEN')
     $.ajax({
       type: params.type ? params.type : 'POST',
-      url: `${prex}/${params.url}`,
+      url: `${prex}${params.url}`,
       contentType: 'application/json',
       data: params.query,
 
