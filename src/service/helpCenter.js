@@ -149,7 +149,7 @@ const postKeywordsService = async (data) => {
       return null
     }
     const params = {
-      pageSize: data.pageSize || 10,
+      pageSize: data.pageSize || 7,
       pageNum: data.pageNum || 1,
       keywordAlias: data.keyAlias
     }

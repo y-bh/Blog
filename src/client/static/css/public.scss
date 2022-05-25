@@ -718,18 +718,24 @@ input::-webkit-input-placeholder {
   animation-delay: 0.25s;
 }
 
+.animate__delay-0 {
+  animation-delay: 0.25s;
+}
 .animate__delay-1 {
   animation-delay: 0.5s;
 }
 
 .animate__delay-2 {
-  animation-delay: 1s;
+  animation-delay: 0.75s;
 }
 
 .animate__delay-3 {
-  animation-delay: 1.25s;
+  animation-delay: 1s;
 }
 .animate__delay-4 {
+  animation-delay: 1.25s;
+}
+.animate__delay-5 {
   animation-delay: 1.5s;
 }
 @keyframes up-down {
