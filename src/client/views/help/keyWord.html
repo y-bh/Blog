@@ -100,7 +100,7 @@
                         <% } %>
 
                           <div class="pageList flex">
-                            <% for(let i=0; i < lists && lists.totalPage; i++) { %>
+                            <% for(let i=0; i < lists.totalPage; i++) { %>
                               <li class="page-item <%if(+lists.pageNum === (+i+1)){ %> page-active<%}%> ">
 
                                 <a href="/tags/<%= lists.typeAlias %>/<%=i+1%>.html" class="page-link">
