@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-24 15:38:30
+ * @LastEditTime: 2022-05-25 17:00:47
  */
 
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
   'ORDER_LIST': '/order/list', //获取订单列表
   'ORDER_STATE': "/order/state", //获取订单状态
   'ORDER_DODEL': '/order/doDel', //批量删除订单
-
+  'POST_ORDER_PAY': '/payOrder/buyDiscountProxy',  // 订单支付
 
   //  用户相关接口
   'POST_USER_REGISTER': '/user/register', //用户注册
