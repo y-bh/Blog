@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-18 15:30:19
- * @LastEditTime: 2022-05-18 15:56:40
+ * @LastEditTime: 2022-05-25 17:19:41
 -->
 <template>
   <div class="keyDialog">
@@ -12,8 +12,8 @@
       <div class="content pt-40 pb-40">
         <div class="title"><span>请使用AES加密</span></div>
         <div class="keys mt-30">
-          <span><span class="addImpor">key:</span>7q45dEDYB7e5mSp9</span>
-          <span><span class="addImpor">iv:</span>isPuE5gU8H7gZDVI</span>
+          <span><span class="addImpor">key:</span>{{userInfo.keyInfo.key}}</span>
+          <span><span class="addImpor">iv:</span>{{userInfo.keyInfo.value}}</span>
         </div>
       </div>
     </el-dialog>
@@ -32,9 +32,11 @@ export default {
   setup() {
     const dialogVisible = ref(false);
     const message = inject("message");
+    let userInfoSon = inject("userInfoSon");
 
     return {
       dialogVisible,
+      ...toRefs(userInfoSon),
     };
   },
 };

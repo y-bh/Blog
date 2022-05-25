@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 合并套餐
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-21 15:16:15
+ * @LastEditTime: 2022-05-25 17:16:47
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -22,11 +22,11 @@
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { mergeMeal } from "model/meal.js";
-// mergeMeal
 export default {
     components: {
         DialogTitle,
     },
+    emits: ['updateTable'],
     setup (props, context) {
         const message = inject('message');
         const state = reactive({
@@ -41,7 +41,8 @@ export default {
                 if(row){
                     state.mergeForm.proxyId = row.id;
                     state.mergeForm.sequence = null;
-                    console.log(row,'row');
+                    state.dialogVisible = true;
+                    // console.log(row,'row');
                 }
             },
             async submitMerge(){
@@ -51,7 +52,19 @@ export default {
                         showClose: true
                     })
                 } else {
-                    let res = await mergeMeal(state.mergeForm)
+                    let res = await mergeMeal(state.mergeForm);
+                    if(res && res.code === 200){
+                        message.success({
+                            message: '合并套餐成功',
+                            showClose: true
+                        })
+                        context.emit('updateTable', false)
+                    } else {
+                        message.success({
+                            message: res && res.message || '合并失败',
+                            showClose: true
+                        })
+                    }
                 }
             }
         }

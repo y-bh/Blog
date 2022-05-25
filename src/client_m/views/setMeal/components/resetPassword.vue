@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 重置密码
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-21 16:04:49
+ * @LastEditTime: 2022-05-25 17:22:38
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -39,7 +39,8 @@ export default {
         });
         const methods = {
             onOpen(row){
-                state.mergeForm.id = row.id
+                state.mergeForm.id = row.id;
+                state.dialogVisible = true;
             },
             async submitMerge(){
                 let res = await resetSecret(state.mergeForm.id);
@@ -52,7 +53,7 @@ export default {
                     context.emit('updateTable', false)
                 } else {
                     message.error({
-                        message: '重置失败',
+                        message: res?.message || '重置失败',
                         showClose: true
                     })
                 }

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-24 20:12:44
+ * @LastEditTime: 2022-05-25 17:26:35
 -->
 <template>
   <div class="personalAuth">
@@ -178,13 +178,17 @@ export default {
       console.log("获取认证结果--------", certifyId);
       let res = await getAuthResult(certifyId);
       if (res && res.code == 200) {
-        if (res.data) {
+        if (res.data === null) {
+          return message.error("暂未获取到认证结果请稍后再试");
+        } else if (res.data) {
           authPersonStep.value = 3;
         } else {
           //认证失败
           // message.error("身份验证失败！");
           authPersonStep.value = 4;
         }
+      } else {
+        message.error(res.message || "系统异常");
       }
     };
     //取消
