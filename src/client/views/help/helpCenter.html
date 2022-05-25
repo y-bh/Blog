@@ -48,12 +48,13 @@
 
             <!-- 文章列表 -->
             <% if(lists.data && lists.data.length>0 ){ %>
-              <div class="flex justify-content-center common-fadeInUp">
+              <div class="flex justify-content-center">
                 <div class="tab-content mt-60">
                   <div class="tab-pane active">
                     <div class="content grid">
                       <% lists.data.forEach(function(i,blog_index) { %>
-                        <a href="/help-details/<%= i.id%>.html" class="article-detail">
+                        <a href="/help-details/<%= i.id%>.html"
+                          class="article-detail wow <% if(blog_index%2 ===0){%> fadeInLeft <% }else{ %> fadeInRight <% }%>   animate__delay-<%-blog_index%3+1+'s'%>">
                           <div class="blog_item flex justify-content-between align-items-center">
                             <div class="left grid">
                               <div class="top text-blue flex justify-content-start align-items-start">
@@ -87,7 +88,8 @@
                         <ul class="pagination">
                           <% if(lists.pageNum>1) {%>
                             <li class="page-item">
-                              <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="goPagePreNext('pre')">
+                              <a class="page-link" href="javascript:void(0)" aria-label="Next"
+                                onclick="goPagePreNext('pre')">
                                 <span>&lt;</span>
                               </a>
                             </li>
@@ -148,5 +150,9 @@
 </body>
 <%- include('../components/js.html'); %>
   <script src="/js/helpCenter.js"></script>
+  <script src="/lib/js/wow.min.js"></script>
+  <script>
+    new WOW().init();
+  </script>
 
 </html>
