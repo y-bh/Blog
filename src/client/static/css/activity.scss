@@ -54,6 +54,8 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+
+    animation: .5s cubic-bezier(0.5, 2.0, 0.4, 0.6) 0s 1 leftshow ;
   }
 
   // new act img
@@ -97,5 +99,17 @@
     &:hover{
       font-size: 30px;
     }
+  }
+}
+
+
+
+@keyframes leftshow {
+  from {
+    transform: translateX(-110%);
+  }
+
+  to {
+    transform: translateX(0);
   }
 }
