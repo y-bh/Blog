@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-25 15:08:32
+ * @LastEditTime: 2022-05-25 17:17:38
 -->
 <template>
   <div class="container">
@@ -212,7 +212,7 @@
     <renewal ref="renewalRef" @createCode="createCode($event)"></renewal>
     <supplement ref="supplementRef" @createCode="createCode($event)"></supplement>
     <modify ref="modifyRef" @createCode="createCode($event)"></modify>
-    <merge ref="mergeRef"></merge>
+    <merge ref="mergeRef" @updateTable="updateTable($event)"></merge>
     <pay-code ref="codeRef" @updateMeal="updateMeal($event)"></pay-code>
     <change-log ref="logRef"></change-log>
     <delete-meal ref="deleteRef" @updateTable="updateTable($event)"></delete-meal>
