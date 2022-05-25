@@ -13,9 +13,10 @@
   <!-- 公共css -->
   <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/activity.css">
 </head>
 
-<body style="margin-bottom: 20px">
+<body style="margin-bottom: 20px;">
   <%- include('../components/header.html'); %>
     <div class="home">
       <div id="particles-js" class="particles-container" style="display:none;"></div>
@@ -124,7 +125,7 @@
                 <% articleList.forEach(function(articleItem,index) { %>
                   <li
                     class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80 common-fadeInUp common-fadeInUp-fast-<%= index+1 %>">
-                    <div class="common-arrow-title pb-10">
+                    <div class="common-arrow-title pb-30">
                       <div class="arrow arrow_left mr-20">
                         <i class="lightColour">&gt;</i>
                         <i class="darkColour">&gt;</i>
@@ -141,7 +142,7 @@
                     </div>
                     <ul class="content">
                       <% articleItem.articleDetail.forEach(function(articleDetail,index) { %>
-                        <li class="mt-20">
+                        <li class="mb-20">
 
                           <a href="/help-details/<%= articleDetail.id%>.html" class="text-desc flex align-items-center">
                             <span class="mr-30">
@@ -154,7 +155,7 @@
                         </li>
                         <% }) %>
                     </ul>
-                    <a class="mt-40 queryBtn pointer d-block"
+                    <a class="mt-20 queryBtn pointer d-block"
                       href="/help-center/<%=articleItem.typeAlias%>/1.html">查看全部<span>>></span></a>
                   </li>
 
@@ -170,6 +171,18 @@
     <%- include('../components/rightToolbar.html'); %>
 
 
+    <!-- 弹窗部分 -->
+    <!-- <div class="home-dialog-wrap">
+      <div class="home-dialog-bg">
+        <div class="home-dialog">
+          <div>
+
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
       <%#公共底部 %>
         <%- include('../components/footer.html'); %>
 </body>
@@ -177,7 +190,6 @@
 <script id="qd2355160769411743a87929e240233080d4010b0d10"
   src="https://wp.qiye.qq.com/qidian/2355160769/411743a87929e240233080d4010b0d10" charset="utf-8" async defer></script>
 <!-- WPA end -->
-<script src="/js/rightToolbar.js"></script>
 <!-- 公共js -->
 <%- include('../components/js.html'); %>
   <script src="/lib/js/particles.min.js"></script>

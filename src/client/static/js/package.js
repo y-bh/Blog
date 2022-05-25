@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-24 15:26:55
+ * @LastEditTime: 2022-05-24 20:56:53
  */
 
 
@@ -68,13 +68,13 @@ function iPConvertResult(inputMoney) {
 }
 
 //计算充值金额
-$("#rechargeAmountDialog .conterInput").on("input",function () {
+$("#rechargeAmountDialog .conterInput").on("input", function () {
   let maxVal = 100000;
   let minVal = 0;
   let counterVal = Number($(this).val());
   let newVal = counterInputVaild(counterVal, minVal, maxVal);
   $(this).val(newVal);
-  computerPrice(this,newVal);
+  computerPrice(this, newVal);
 })
 
 function computerDialog(type, curDom) {
@@ -84,11 +84,11 @@ function computerDialog(type, curDom) {
   let minVal = 0;
   let lastNumber = counter(type, curVal, maxVal, minVal, 1);
   $currentInput.val(lastNumber);
-  computerPrice(curDom,lastNumber)
+  computerPrice(curDom, lastNumber)
 }
 
 
-function computerPrice(curDom,lastNumber) {
+function computerPrice(curDom, lastNumber) {
   //天启币单价
   let unitPrice = Number($(curDom).closest("li").attr("unitPrice"));
   $(curDom).closest("li").find(".tianqiCoin").eq(0).html(unitPrice * 1000 * parseInt(lastNumber));
@@ -147,7 +147,7 @@ function counter(type, curVal, maxVal, minVal, step) {
 //progress移动事件
 $('#formControlRange').change(function () {
   let progressVal = Number($(this).val());
-  let lastNumber = convertMultiple(progressVal, 2000, 5000000);
+  let lastNumber = convertMultiple(progressVal, 2000, 5000000, true);
   $("#counter-enter").val(lastNumber)
   $(this).val(lastNumber);
   //计算总价
@@ -167,15 +167,17 @@ $("#counter-enter").change(function () {
 
 
 // 转换为某个数字的倍数 是倍数
-function convertMultiple(number, min, max) {
+function convertMultiple(number, min, max, tip) {
   let curNum = Number(number)
   if (curNum < Number(min)) {
     return min;
   } else if (curNum > Number(max)) {
     return max;
   }
-  let remainder = curNum / Number(min);
-  if (remainder) {
+
+  let remainder = curNum % Number(min);
+  //console.log(43444444444444,remainder)
+  if (remainder && !tip) {
     Helper.$message.warning({ message: "提取总数必须是2000的倍数" })
   }
   let multiple = parseInt(curNum / Number(min));
@@ -374,7 +376,7 @@ function getPackageTimesPrice() {
       $("#realIpNum span").html(0);
       $("#realIpNum").hide();
     }
-  }else{
+  } else {
     $(".payMoney-origin").hide();
   }
   //总价

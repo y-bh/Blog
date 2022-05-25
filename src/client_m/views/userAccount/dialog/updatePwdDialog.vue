@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-22 15:38:11
+ * @LastEditTime: 2022-05-24 20:13:09
 -->
 <template>
   <div class="updatePwdDialog">
@@ -136,6 +136,7 @@ export default {
             newPassword: form.ruleForm.newPassword,
             checkPassword: form.ruleForm.confirmPassword,
           };
+          console.log(333333333333,params);
           let res = await updatePassword({ data: JSON.stringify(params) });
           if (res.code == 200) {
             $message.success("登录密码修改成功");
@@ -143,7 +144,9 @@ export default {
             if (!vaildPwdRef.value) return;
             vaildPwdRef.value.resetFields();
           } else {
-            $message.error("登录密码修改失败，请重试！:"+res.msg);
+            $message.error(
+              res.message ? res.message : "登录密码修改失败，请重试！"
+            );
           }
         } else {
           console.log("error submit!!");

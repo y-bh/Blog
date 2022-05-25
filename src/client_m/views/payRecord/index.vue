@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-24 19:45:19
+ * @LastEditTime: 2022-05-25 10:45:51
 -->
 <template>
   <div class="container grid">
@@ -83,9 +83,9 @@
               >
                 {{ row.state ? stateMap.get(row.state) : "--" }}
               </span>
-              <span v-show="row.state === 1" class="order_red">{{
-                countDown
-              }}</span>
+              <span v-show="row.state === 1" class="order_red">
+                {{countDown[row.orderNo]}}
+              </span>
             </div>
           </template>
         </el-table-column>
@@ -116,13 +116,13 @@
             </div>
           </template>
         </el-table-column>
+        <!-- class="pay-btn" -->
         <el-table-column label="操作" align="center">
           <template #default="{ row }">
             <el-button
               v-show="row.state === 1"
               @click="onPay"
               size="small"
-              class="pay-btn"
               >支付</el-button
             >
           </template>
@@ -139,6 +139,8 @@ import { PAY_TYPE_MAP, ORDER_TYPE_MAP, STATE_MAP } from "./data.js";
 import { dateFormat } from "tools/dateFormat.js";
 import { formatInt, deepCopy } from "tools/utility"
 import { getOrderList, batchDelOrder } from "model/payRecord.js";
+// 存放待支付订单剩余时间及其对应的定时器
+const awaitPay = new Map();
 export default {
   setup() {
     const payTypeMap = ref(PAY_TYPE_MAP);
@@ -159,7 +161,7 @@ export default {
       },
  
       tableData: [],
-      countDown: null,
+      countDown: {},  // 显示倒计时
       totalPage: 0,
       totalSize: 0,
       orderNoSet: [], //批量删除订单编号
@@ -167,7 +169,7 @@ export default {
 
     onMounted(async () => {
       await getQueryList()
-      countTime();
+      
     });
 
     const initQuery = () => {
@@ -192,12 +194,67 @@ export default {
       if (res && res.code === 200) {
         console.log("res==订单", res);
         state.tableData = res.data && res.data.data || [];
-        // state.searchForm.pageNum = res.data.pageNum || 0;
-        // state.searchForm.pageSize = res.data.pageSize || 0;
         state.totalSize = res.data && res.data.totalSize || 0;
-        // state.totalPage = res.data.totalPage || 0;
+
+        if(state.tableData && state.tableData.length){
+          state.tableData.forEach(elem => {
+            if(elem?.state === 1){
+              // 待支付订单显示倒计时 创建时间 订单编号
+              deadLine(elem.createTime, elem.orderNo);
+            }
+          });
+        }
+        
       }
     };
+
+    // 计算截止剩余时间
+    const deadLine = (createTime, id) => {
+      console.log(createTime, id);
+      // 创建时间精确到毫秒
+      const startTime = createTime && createTime * 1000 || null;
+      // 结束时间戳 延后24小时
+      const endTime = startTime && (startTime + 86400000) || null; 
+      // 计时器
+      const timer = setInterval(() => {
+        const nowTime = Date.parse(new Date()); // 当前时间时间戳 
+        console.log(endTime - nowTime, 'timeDiffer时间差');
+
+        const remainTime =
+          endTime - nowTime >= 0 ? (endTime - nowTime) / 1000 : 0; // 距离到期所剩时间(转成秒)
+        
+        const waitPay = {
+          timer,
+          remainTime
+        };
+        awaitPay.set(id, waitPay);
+        countTime(remainTime, id);
+      }, 1000);
+    };
+
+    // 超时24h的订单改为已取消
+    const countTime = (remainTime, id) => {
+      // 获取当前订单
+      const currentOrder = awaitPay.get(id);
+      if (remainTime <= 0) {
+        clearInterval(currentOrder.timer);
+        // 到期清除对应的订单时间戳
+        state.countDown && state.countDown[id] && state.countDown[id] = null;
+        /**超时接口处理 */
+        await getQueryList()
+      } else {
+        currentOrder.remainTime--;
+        const min = Math.floor(currentOrder.remainTime % 3600);
+        const time =
+          Math.floor(currentOrder.remainTime / 3600) +
+          ':' +
+          Math.floor(min / 60) +
+          ':' +
+          currentOrder.remainTime % 60;
+          state.countDown[id] = time;
+      }
+    };
+
 
     //重置
     const onReset = () => {
@@ -244,37 +301,7 @@ export default {
       console.log("支付");
     };
 
-    //每秒执行一次
-    const countTime = (createTime, id) => {
-      let countTime;
-      createTime = 1652509642040; //测试倒计时用的时间，获取接口数据后请删除
-      let deadline = createTime + 1000 * 60 * 60 * 24; //倒计时测试
-      let timer = setInterval(() => {
-        let now = Date.parse(new Date()); //当前时间时间戳
-        countTime = deadline - now >= 0 ? deadline - now : 0; //判断是否到期
-        let tem = {
-          timer,
-          countTime,
-          id,
-        };
-        getCountTime(tem);
-      }, 1000);
-    };
 
-    //倒计时
-    const getCountTime = (tem) => {
-      if (countTime <= 0) {
-        clearInterval(tem.timer);
-        /**超时接口处理 */
-      } else {
-        tem.countTime--;
-        let hour, min, second;
-        hour = Math.floor((tem.countTime / 1000 / 3600) % 24);
-        min = Math.floor((tem.countTime / 1000 / 60) % 60);
-        second = Math.floor((tem.countTime / 1000) % 60);
-        state.countDown = hour + ":" + min + ":" + second;
-      }
-    };
 
     return {
       ...toRefs(state),
@@ -284,7 +311,7 @@ export default {
       handleSelectionChange,
       onPay,
       countTime,
-      getCountTime,
+      deadLine,
       getQueryList,
       payTypeMap,
       orderTypeMap,

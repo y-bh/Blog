@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-24 19:56:40
+ * @LastEditTime: 2022-05-25 10:51:53
  */
 const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao,getIconDao } = require("dao/getIp")
 
@@ -63,44 +63,20 @@ let paidList = []
 let mealBox = [
   {
     desc: '3分钟的IP',
-    num: '40,000',
+    price: '0.005',
   },
   {
     desc: '5分钟的IP',
-    num: '20,000',
+    price: '0.01',
   },
   {
     desc: '10分钟的IP',
-    num: '11,111',
+    price: '0.02',
   },
   {
     desc: '15分钟的IP',
-    num: '6,666',
-  },
-  {
-    desc: '1~5分钟的IP',
-    num: '40,000',
-  },
-  {
-  desc: '5~25分钟的IP',
-    num: '20,000',
-  },
-  {
-    desc: '25分钟~3小时的IP',
-    num: '20,000',
-  },
-  {
-    desc: '3~6小时的IP',
-    num: '11,111',
-  },
-  {
-    desc: '6~12小时的IP',
-    num: '6,666',
-  },
-  {
-    desc: '12~24小时的IP',
-    num: '40,000',
-  },
+    price: '0.03',
+  }
 ]
 
 let ipUse = [

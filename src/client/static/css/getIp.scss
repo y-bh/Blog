@@ -71,7 +71,7 @@
   border-radius: 4px;
 }
 .meal_box {
-  grid-template-columns: repeat(auto-fit,190px);
+  grid-template-columns: repeat(auto-fit,minmax(190px, auto));
   grid-gap: 20px 30px;
 }
 .meal_item {
@@ -82,6 +82,7 @@
 .meal_item .desc {
   width: 140px;
   height: 40px;
+  margin: 0 auto;
   border-radius: 20px;
   background: rgba(208, 224, 255, 0.6);
 }

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-23 13:43:54
+ * @LastEditTime: 2022-05-24 20:52:37
 -->
 <template>
   <div class="personalFormDialog">
@@ -37,15 +37,17 @@
           :label-width="55"
           label-position="left"
           :model="personForm"
+          :rules="rules"
+          ref="perFormRefs"
           class="personForm"
         >
           <el-form-item label="微信" class="ml-40">
             <el-input v-model="personForm.wxNo" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="QQ" :label-width="84" class="ml-40">
+          <el-form-item label="QQ" :label-width="84" class="ml-40" prop="QQNO">
             <el-input v-model="personForm.QQNO" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="邮箱" class="ml-40">
+          <el-form-item label="邮箱" class="ml-40" prop="emailNo">
             <el-input v-model="personForm.emailNo" placeholder="请输入" />
           </el-form-item>
           <el-form-item label="业务方向" :label-width="84" class="ml-40">
@@ -98,7 +100,25 @@ export default {
   setup(props, { emit }) {
     const $message = inject("message");
     let userInfoSon = inject("userInfoSon");
+    let perFormRefs = ref(null);
     console.log(1111111, userInfoSon);
+    let rules = reactive({
+      QQNO: [
+        {
+          pattern: /^[1-9][0-9]{4,11}$/,
+          message: "QQ只能是5到12位数字组成",
+          trigger: "blur",
+        },
+      ],
+      emailNo: [
+        {
+          pattern:
+            /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/,
+          message: "请输入正确的邮箱格式",
+          trigger: "blur",
+        },
+      ],
+    });
     let personForm = reactive({
       wxNo: userInfoSon.userInfo.wxNo,
       QQNO: userInfoSon.userInfo.QQNo,
@@ -127,21 +147,30 @@ export default {
     onBeforeMount(async () => {});
     const onSubmit = async () => {
       console.log("=======个人资料数据======", personForm);
-      let params = {
-        business: personForm.business,
-        email: personForm.emailNo,
-        profession: personForm.job,
-        qq: personForm.QQNO,
-        wechat: personForm.wxNo,
-      };
-      let res = await updateUserInfo(params);
-      console.log(333333, res);
-      if (res.code == 200 && res.data) {
-        $message.success("资料修改成功！");
-      } else {
-        $message.success("资料修改失败，请重试！");
-      }
-      emit("updateDialog", false);
+      perFormRefs.value.validate(async (valid) => {
+        if (valid) {
+          let params = {
+            business: personForm.business,
+            email: personForm.emailNo,
+            profession: personForm.job,
+            qq: personForm.QQNO,
+            wechat: personForm.wxNo,
+          };
+          let res = await updateUserInfo(params);
+          console.log(333333, res);
+          if (res.code == 200 && res.data) {
+            $message.success("资料修改成功！");
+            emit("updateDialog", false);
+          } else {
+            $message.error(
+              res.message ? res.message : "资料修改失败，请重试！"
+            );
+          }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     };
     const onCancel = async () => {
       emit("updateDialog", false);
@@ -162,6 +191,8 @@ export default {
       personForm.job = userInfoSon.userInfo.profession;
     });
     return {
+      perFormRefs,
+      rules,
       ...toRefs(userInfoSon),
       personForm,
       onSubmit,
