@@ -214,12 +214,12 @@ function Router(App) {
     }
 
     let pageType = url.slice(1)
-    let title = "登录页-天启HTTP"
+    let title = "登录页-天启HTTP官网"
     if (pageType === 'reset') {
-      title = "重置密码-天启HTTP"
+      title = "重置密码-天启HTTP官网"
     }
     if (pageType === 'register') {
-      title = "注册用户-天启HTTP"
+      title = "注册用户-天启HTTP官网"
     }
     return ctx.render("login/index", {
       name: 'This is main login',
