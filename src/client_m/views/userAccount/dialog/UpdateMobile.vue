@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-24 15:50:15
+ * @LastEditTime: 2022-05-24 20:25:01
 -->
 <template>
   <div class="updateMobile">
@@ -132,6 +132,7 @@ export default {
       console.log(88888888888888);
       const TIME_COUNT = 60;
       counter.show = false;
+      console.log(3333333333333,counter.timer)
       if (!counter.timer) {
         counter.count = TIME_COUNT;
         counter.show = false;
@@ -153,11 +154,12 @@ export default {
       if (res.code == 200) {
         $message.success("获取验证码成功");
       } else {
-        $message.error(res.message); //"获取验证码失败!"+ res.message 
+        $message.error(res.message ? res.message : "获取验证码失败!"); //"获取验证码失败!"+ res.message
       }
     };
     const onCancel = () => {
       clearInterval(counter.timer);
+      counter.timer = null;
       counter.show = true;
       dialogVisible.value = false;
       if (!vaildPhoneRef.value) return;
@@ -185,12 +187,15 @@ export default {
             if (counter.timer) {
               counter.show = true;
               clearInterval(counter.timer);
+              counter.timer = null;
             }
             dialogVisible.value = false;
             if (!vaildPhoneRef.value) return;
             vaildPhoneRef.value.resetFields();
           } else {
-            $message.error(res.message); // + res.message
+            $message.error(
+              res.message ? res.message : "手机号换绑失败，请重试！"
+            ); // + res.message
           }
         } else {
           console.log("error submit!!");

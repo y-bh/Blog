@@ -644,12 +644,12 @@
   .nineRow {
     > ul {
       display: flex;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       margin: 0 -20px;
       > li {
-        min-width: 340px;
+        // min-width: 340px;
         // width: 340px;
-        min-height: 397px;
+        // height: 397px;
         background: rgba(234, 252, 255, 0.39);
         box-shadow: 0px 20px 40px rgba(76, 86, 100, 0.1);
         border-radius: 8px;
@@ -666,8 +666,9 @@
         .content {
           font-size: 14px;
           color: #091d43;
-          height: 200px;
-          min-width: 340px;
+          min-height: 220px;
+          // min-width: 340px;
+          width: 340px;
           li {
             min-width: 300px;
             display: flex;
@@ -679,8 +680,8 @@
               // width: 78px;
             }
             &:last-of-type {
-              min-width: 224px;
-              width: 224px;
+              // min-width: 220px;
+              width: 220px;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
@@ -717,7 +718,8 @@
           color: #89b1fd;
           opacity: 0.5;
         }
-        .darkColour {
+        .darkColour,
+        .queryBtn {
           color: #1968fc;
         }
       }
@@ -731,7 +733,8 @@
           color: #fdb88d;
           opacity: 0.5;
         }
-        .darkColour {
+        .darkColour,
+        .queryBtn {
           color: #fc7019;
         }
       }

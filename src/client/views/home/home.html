@@ -125,7 +125,7 @@
                 <% articleList.forEach(function(articleItem,index) { %>
                   <li
                     class="news<%= index+1 %> pl-50 pr-50 pt-50 pb-50 ml-20 mr-20  mt-80 common-fadeInUp common-fadeInUp-fast-<%= index+1 %>">
-                    <div class="common-arrow-title pb-10">
+                    <div class="common-arrow-title pb-30">
                       <div class="arrow arrow_left mr-20">
                         <i class="lightColour">&gt;</i>
                         <i class="darkColour">&gt;</i>
@@ -142,7 +142,7 @@
                     </div>
                     <ul class="content">
                       <% articleItem.articleDetail.forEach(function(articleDetail,index) { %>
-                        <li class="mt-20">
+                        <li class="mb-20">
 
                           <a href="/help-details/<%= articleDetail.id%>.html" class="text-desc flex align-items-center">
                             <span class="mr-30">
@@ -155,7 +155,7 @@
                         </li>
                         <% }) %>
                     </ul>
-                    <a class="mt-40 queryBtn pointer d-block"
+                    <a class="mt-20 queryBtn pointer d-block"
                       href="/help-center/<%=articleItem.typeAlias%>/1.html">查看全部<span>>></span></a>
                   </li>
 

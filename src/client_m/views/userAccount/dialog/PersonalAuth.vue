@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-22 16:19:22
+ * @LastEditTime: 2022-05-24 20:12:44
 -->
 <template>
   <div class="personalAuth">
@@ -151,7 +151,7 @@ export default {
             name: form.ruleForm.name,
             idCard: form.ruleForm.idCardNo,
           };
-          let res = await zfbAuth({data:JSON.stringify(params)});
+          let res = await zfbAuth({ data: JSON.stringify(params) });
           console.log(2222222222222, res);
           if (res.code == 200) {
             let url = res.data && res.data.url;
@@ -166,7 +166,7 @@ export default {
             }
             authPersonStep.value = 2;
           } else {
-            message.error("获取二维码失败");
+            message.error(res.message ? res.message : "获取二维码失败!");
           }
         } else {
           console.log("error submit!!");
