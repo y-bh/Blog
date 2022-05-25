@@ -38,7 +38,7 @@ const registerService = async (data = null) => {
   const params = {
     "data": JSON.stringify(tem)
   }
-
+  console.log("注冊傳參:",params)
 
   // 获取注册数据
   const res = await postRegisterDao(params)

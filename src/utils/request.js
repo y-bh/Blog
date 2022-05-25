@@ -19,7 +19,7 @@ class ServiceAjax extends Requeset {
     // 请求拦截器
     this.service.interceptors.request.use(config => {
       config.headers['Content-Type'] = 'application/json';
-
+      console.log("加密前注冊傳參:",config.url,config.data)
       //参数加密
       if (AESAUTH[config.url]) {
         if (typeof config.data === 'string') {
