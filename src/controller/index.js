@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 路由控制层
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-24 19:48:21
+ * @LastEditTime: 2022-05-25 15:34:53
  */
 
 
@@ -13,6 +13,9 @@ const { renderHome } = require("service/home")
 const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
 const { data } = require('service/getIp')
 const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService } = require('service/getIp')
+
+// activity urils func
+const { getTime } = require('utils/activityTime')
 
 const fs = require("fs")
 const config = require("../config/app.config")
@@ -54,6 +57,11 @@ function Router(App) {
     let list = await renderHome();
     homeData.articleList = list.typeList ? list.typeList : [];
 
+
+    //activity
+    const t = getTime()
+    homeData.actt = t
+
     return ctx.render("home/home", homeData)
   })
 
@@ -73,6 +81,10 @@ function Router(App) {
     /**数据请求 */
     // 
     let packageObj = await renderPackage();
+
+    //activity
+    const t = getTime()
+    packageObj.actt = t
     // 
     return ctx.render("package/package", packageObj)
   })

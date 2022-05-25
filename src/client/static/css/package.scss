@@ -82,7 +82,11 @@ $columnMt: 60px;
   input:focus-visible {
     outline: none !important;
   }
-  .package-banner {
+
+
+  //活动-start
+  // old
+  .package-banner-l {
     height: 300px;
     background: #ffffff url("/images/package/packageBanner.png") no-repeat;
     background-size: 100% 300px;
@@ -99,6 +103,28 @@ $columnMt: 60px;
       }
     }
   }
+
+  // new
+  .package-banner-f {
+    height: 300px;
+    background: #ffffff url("/images/package/packageBanner.png") no-repeat;
+    background-size: 100% 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 12px;
+    .button {
+      margin-bottom: 12px;
+      text-align: center;
+      cursor: pointer;
+      img {
+        width: 250px;
+      }
+    }
+  }
+  //活动-end
+
+
   .redPacket {
     display: flex;
     align-items: center;
