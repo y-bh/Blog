@@ -783,6 +783,9 @@ input::-webkit-input-placeholder {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
 
+.animate__delay-faster {
+  animation-delay: 0.25s;
+}
 .animate__delay-1s {
   animation-delay: 0.5s;
 }
