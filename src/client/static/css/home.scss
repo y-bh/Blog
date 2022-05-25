@@ -307,10 +307,18 @@
         position: relative;
         /*动画的过渡效果*/
         transition: all 0.25s ease-in;
+
+        .icon-img1,
+        .icon-img2,
+        .icon-img3 {
+          transition: all 0.3s;
+        }
+
         &:hover {
           .icon-img1,
           .icon-img2,
           .icon-img3 {
+            transition: all 0.3s;
             transform: translate(8px, -8px);
           }
           span {
