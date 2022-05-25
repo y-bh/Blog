@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-25 11:53:35
+ * @LastEditTime: 2022-05-25 13:26:47
 -->
 <template>
   <div class="container grid">
@@ -139,6 +139,7 @@ import { PAY_TYPE_MAP, ORDER_TYPE_MAP, STATE_MAP } from "./data.js";
 import { dateFormat } from "tools/dateFormat.js";
 import { formatInt, deepCopy, formatBit } from "tools/utility"
 import { getOrderList, batchDelOrder } from "model/payRecord.js";
+// import deleteMeal from "./components/deleteMeal.vue";
 // 存放待支付订单剩余时间及其对应的定时器
 const awaitPay = new Map();
 export default {
