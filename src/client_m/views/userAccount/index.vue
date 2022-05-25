@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-25 17:11:39
+ * @LastEditTime: 2022-05-25 18:03:58
 -->
 <template>
   <div class="userAccount">
@@ -370,7 +370,7 @@ export default {
       if (res && res.code == 200) {
         let data = res.data ? res.data : {};
         state.userInfo = {
-          isIntermediate: data.isIntermediate ? data.isIntermediate : false, //默认为false
+          isIntermediate: data.intermediate ? data.intermediate : false, //默认为false
           id: data.id ? Number(data.id) : 0,
           reason: data.reason ? data.reason : "", //失败原因
           username: data.username ? data.username : "", //用户名
