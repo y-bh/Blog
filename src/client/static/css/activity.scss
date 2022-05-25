@@ -3,31 +3,52 @@
   z-index: 1000;
   width: 100%;
   height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.3);
   top: 0;
   left: 0;
-  .home-dialog-bg{
-    width: inherit;
-    height: inherit;
-    background-color: rgba($color: #000000, $alpha: 0.3);
+  overflow: hidden;
 
-    .home-dialog{
-      width: 380px;
-      height: 400px;
-      margin: 0 auto;
-      transform: translate(0, 30vh);
-      background-color: red;
-    }
+  .home-dialog{
+    width: 380px;
+    height: 400px;
+    margin: 0 auto;
+    transform: translate(0, 28vh);
+    background-color: red;
   }
 
+}
+
+.left-dialog-wrap{
+  position: fixed;
+  top: 0;
+  width: 10%;
+  height: 10%;
+  transform: translate(3vh, 36vh);
+  background-color: skyblue;
+
+  .left-dialog{
+    width: 100%;
+    height: 100%;
+  }
+}
 
 
 
-  .close-dialog-btn{
-    text-align: center;
-    transform: translate(0, 31vh);
-    button{
-      display: inline-block;
-      // margin: 0 auto;
-    }
+
+.close-center-dialog-btn{
+  text-align: center;
+  transform: translate(0, 30.5vh);
+  button{
+    display: inline-block;
+    // margin: 0 auto;
+  }
+}
+
+.close-left-dialog-btn{
+  text-align: center;
+  transform: translate(0, 1vh);
+  button{
+    display: inline-block;
+    // margin: 0 auto;
   }
 }
