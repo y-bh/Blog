@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-25 09:45:38
+ * @LastEditTime: 2022-05-25 09:48:58
  */
 
 function Helper() { }
@@ -170,7 +170,7 @@ async function ajax(params, prex = '/javaProxy') {
     let token = getCookie('TQ-TOKEN')
     $.ajax({
       type: params.type ? params.type : 'POST',
-      url: `${prex}${params.url}`,
+      url: `${prex}${baseURL}`,
       contentType: 'application/json',
       data: params.query,
 
