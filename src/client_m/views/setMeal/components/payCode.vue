@@ -3,14 +3,14 @@
  * @LastEditors: 秦琛
  * @description: 微信扫码支付
  * @Date: 2022-05-21 09:39:11
- * @LastEditTime: 2022-05-21 13:40:12
+ * @LastEditTime: 2022-05-25 13:19:54
 -->
 <template>
     <!-- 支付弹窗 -->
     <el-dialog 
         v-model="dialogVisible" 
         destroy-on-close 
-        :close-on-click-modal="false"
+        :close-on-click-modal="true"
         :close-on-press-escape="false"
         custom-class="customize_dialog dialog-alone dialog-pay">
         <DialogTitle title-content="微信扫码付款" />
@@ -69,7 +69,7 @@ export default {
                     clearInterval(state.timeFlag);
                     state.codeUrl = code.url
                     state.dialogVisible = true;
-                    timeFlag = setInterval(async () => {
+                    state.timeFlag = setInterval(async () => {
                         state.time--;
                         // 每隔3秒刷新一下订单状态
                         if (state.time % 3 === 0) {
@@ -82,7 +82,6 @@ export default {
                                 });
                                 methods.clearCode();
                                 //  刷新用户信息
-                                // window.$mine = await this.$api('User.GetMineInfo', {});
                                 $router.push('/manager/index');
                             }
                         }
