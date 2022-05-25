@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 批量删除
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-21 16:38:07
+ * @LastEditTime: 2022-05-25 14:06:52
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -12,7 +12,7 @@
             <p class="child-item">确定删除吗？</p>
             <div class="dialog-footer child-item double-item">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="submitMerge()">确 定</el-button>
+                <el-button type="primary" @click="submitDelete()">确 定</el-button>
             </div>
         </div>
     </el-dialog>
@@ -21,7 +21,7 @@
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt} from "tools/utility"
-import { batchDelOrder } from "model/meal.js";
+import { batchDelOrder } from "model/payRecord.js";
 export default {
     components: {
         DialogTitle,
@@ -32,14 +32,20 @@ export default {
 
         const state = reactive({
             dialogVisible: false,
-            deleteIds: []
+            orderNoSet: []
         });
         const methods = {
             onOpen(ids){
-                state.deleteIds = ids
+                console.log(ids,'uds=====');
+                state.orderNoSet = ids;
+                state.dialogVisible = true;
             },
             async submitDelete(){
-                let res = await batchDelOrder(state.deleteIds);
+                const params = {
+                    orderNoSet: state.orderNoSet
+                }
+                const res = await batchDelOrder(params);
+            
                 if(res && res.code === 200){
                     message.success({
                         message: '删除成功',
@@ -49,7 +55,7 @@ export default {
                     context.emit('updateTable', false)
                 } else {
                     message.error({
-                        message: '删除失败',
+                        message: res && res.message || '删除失败',
                         showClose: true
                     })
                 }

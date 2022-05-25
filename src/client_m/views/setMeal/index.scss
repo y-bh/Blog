@@ -41,5 +41,19 @@
         background: rgba(242, 247, 254, 0.39);
         color: #333;
     }
+
+    ::v-deep(.discount_btn) {
+        width: 32px;
+        padding: 10px 8px 10px 6px;
+        margin-right: 6px;
+        span {
+            writing-mode: vertical-lr;  // 文字垂直
+        }
+    }
+    .sequence{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
 }
 

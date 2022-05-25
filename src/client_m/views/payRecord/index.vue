@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-25 13:26:47
+ * @LastEditTime: 2022-05-25 13:35:27
 -->
 <template>
   <div class="container grid">
@@ -130,6 +130,7 @@
       </el-table>
     </div>
   </div>
+  <delete-record ref="deleteRef" @updateTable="updateTable($event)"></delete-record>
 </template>
 
 <script>
@@ -139,17 +140,21 @@ import { PAY_TYPE_MAP, ORDER_TYPE_MAP, STATE_MAP } from "./data.js";
 import { dateFormat } from "tools/dateFormat.js";
 import { formatInt, deepCopy, formatBit } from "tools/utility"
 import { getOrderList, batchDelOrder } from "model/payRecord.js";
-// import deleteMeal from "./components/deleteMeal.vue";
+import deleteRecord from "./components/deleteRecord.vue";
 // 存放待支付订单剩余时间及其对应的定时器
 const awaitPay = new Map();
 export default {
+  components:{
+    deleteRecord
+  },
   setup() {
     const payTypeMap = ref(PAY_TYPE_MAP);
     const orderTypeMap = ref(ORDER_TYPE_MAP);
     const stateMap = ref(STATE_MAP);
     const message = inject("message");
     const $router = useRouter();
-    const $route = useRoute()
+    const $route = useRoute();
+    const deleteRef = ref(null);
     const state = reactive({
       searchForm: {
         mealName: null, //套餐名称
@@ -193,7 +198,7 @@ export default {
 
       const res = await getOrderList(state.searchForm);
       if (res && res.code === 200) {
-        console.log("res==订单", res);
+     
         state.tableData = res.data && res.data.data || [];
         state.totalSize = res.data && res.data.totalSize || 0;
 
@@ -211,7 +216,7 @@ export default {
 
     // 计算截止剩余时间
     const deadLine = (createTime, id) => {
-      console.log(createTime, id);
+      // console.log(createTime, id);
       // 创建时间精确到毫秒
       const startTime = createTime && createTime * 1000 || null;
       // 结束时间戳 延后24小时
@@ -219,7 +224,7 @@ export default {
       // 计时器
       const timer = setInterval(() => {
         const nowTime = Date.parse(new Date()); // 当前时间时间戳 
-        console.log(endTime - nowTime, 'timeDiffer时间差');
+        // console.log(endTime - nowTime, 'timeDiffer时间差');
 
         const remainTime =
           endTime - nowTime >= 0 ? (endTime - nowTime) / 1000 : 0; // 距离到期所剩时间(转成秒)
@@ -278,22 +283,20 @@ export default {
 
     //批量删除
     const batchDelete = async () => {
-      const params = {
-        orderNoSet: state.orderNoSet,
-      };
-      const res = await batchDelOrder(params);
-      if (+res.code === 200) {
-        message.success("删除成功");
+      if(!state.orderNoSet || !state.orderNoSet.length){
+        message.error("请先选择删除的数据");
       } else {
-        message.error("删除失败");
+         deleteRef.value.onOpen(state.orderNoSet)
       }
     };
 
-
+    const updateTable = async () => {
+      await getQueryList();
+    }
     //多选
     const handleSelectionChange = (val) => {
       state.orderNoSet = [];
-      console.log(val,'val');
+      // console.log(val,'val');
       if (val) {
         val.forEach(elem => {
           state.orderNoSet.push(elem.orderNo)
@@ -322,6 +325,8 @@ export default {
       orderTypeMap,
       stateMap,
       dateFormat,
+      deleteRef,
+      updateTable
     };
   },
 };
