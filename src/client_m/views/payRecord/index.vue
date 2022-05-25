@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-25 16:17:54
+ * @LastEditTime: 2022-05-25 16:51:53
 -->
 <template>
   <div class="container grid">
@@ -108,7 +108,7 @@
         <!-- class="pay-btn" -->
         <el-table-column label="操作" align="center">
           <template #default="{ row }">
-            <el-button v-show="row.state === 1" @click="onPay" size="small">支付</el-button>
+            <el-button v-show="row.state === 1" @click="onPay(row)" size="small">支付</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -119,6 +119,8 @@
       :page-size="searchForm.pageSize" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </div>
   <delete-record ref="deleteRef" @updateTable="updateTable($event)"></delete-record>
+  <payOrder ref="payRef" @createCode="createCode($event)"></payOrder>
+  <pay-code ref="codeRef" @updateMeal="updateMeal($event)"></pay-code>
 </template>
 
 <script>
@@ -129,11 +131,15 @@ import { dateFormat } from "tools/dateFormat.js";
 import { formatInt, deepCopy, formatBit } from "tools/utility"
 import { getOrderList, batchDelOrder } from "model/payRecord.js";
 import deleteRecord from "./components/deleteRecord.vue";
+import payOrder from "./components/payOrder.vue";
+import payCode from "./components/payCode.vue";
 // 存放待支付订单剩余时间及其对应的定时器
 const awaitPay = new Map();
 export default {
   components: {
-    deleteRecord
+    deleteRecord,
+    payOrder,
+    payCode
   },
   setup () {
     const payTypeMap = ref(PAY_TYPE_MAP);
@@ -144,6 +150,8 @@ export default {
     const $route = useRoute();
     const deleteRef = ref(null);
     const searchFormRef = ref(null);
+    const codeRef = ref(null);
+    const payRef = ref(null);
     const state = reactive({
       searchForm: {
         mealName: null, //套餐名称
@@ -317,10 +325,14 @@ export default {
     };
 
     //支付
-    const onPay = () => {
+    const onPay = (row) => {
       console.log("支付");
+      payRef.value.onOpen(row)
     };
-
+    const createCode = (code) => {
+      console.log('创建二维码', code);
+      codeRef.value.onOpen(code)
+    };
 
 
     return {
@@ -341,6 +353,9 @@ export default {
       dateFormat,
       deleteRef,
       searchFormRef,
+      payRef,
+      codeRef,
+      createCode,
       updateTable
     };
   },

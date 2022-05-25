@@ -54,7 +54,10 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+
+    animation: .5s cubic-bezier(0.5, 2.0, 0.4, 0.6) 0s 1 leftshow ;
   }
+
 
   // new act img
   .left-dialog-f{
@@ -88,8 +91,8 @@
 
 .close-left-dialog-btn{
   text-align: center;
-  transform: translate(0, 1vh);
   
+  animation: .5s cubic-bezier(0.5, 2.0, 0.4, 0.6) 0s 1 leftshow ;
   .close-i{
     color: rgba($color: #000000, $alpha: 0.3);
     font-size: 26px;
@@ -97,5 +100,17 @@
     &:hover{
       font-size: 30px;
     }
+  }
+}
+
+
+
+@keyframes leftshow {
+  from {
+    transform: translateX(-110%);
+  }
+
+  to {
+    transform: translateX(0);
   }
 }
