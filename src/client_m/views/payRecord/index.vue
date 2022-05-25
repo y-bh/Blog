@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-25 10:45:51
+ * @LastEditTime: 2022-05-25 11:53:35
 -->
 <template>
   <div class="container grid">
@@ -137,7 +137,7 @@ import { reactive, ref, toRefs, onMounted, inject } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { PAY_TYPE_MAP, ORDER_TYPE_MAP, STATE_MAP } from "./data.js";
 import { dateFormat } from "tools/dateFormat.js";
-import { formatInt, deepCopy } from "tools/utility"
+import { formatInt, deepCopy, formatBit } from "tools/utility"
 import { getOrderList, batchDelOrder } from "model/payRecord.js";
 // 存放待支付订单剩余时间及其对应的定时器
 const awaitPay = new Map();
@@ -233,24 +233,24 @@ export default {
     };
 
     // 超时24h的订单改为已取消
-    const countTime = (remainTime, id) => {
+    const countTime = async (remainTime, id) => {
       // 获取当前订单
       const currentOrder = awaitPay.get(id);
       if (remainTime <= 0) {
         clearInterval(currentOrder.timer);
         // 到期清除对应的订单时间戳
-        state.countDown && state.countDown[id] && state.countDown[id] = null;
+        state.countDown[id] = null;
         /**超时接口处理 */
         await getQueryList()
       } else {
         currentOrder.remainTime--;
         const min = Math.floor(currentOrder.remainTime % 3600);
         const time =
-          Math.floor(currentOrder.remainTime / 3600) +
+          formatBit(Math.floor(currentOrder.remainTime / 3600)) +
           ':' +
-          Math.floor(min / 60) +
+          formatBit(Math.floor(min / 60)) +
           ':' +
-          currentOrder.remainTime % 60;
+          formatBit(currentOrder.remainTime % 60);
           state.countDown[id] = time;
       }
     };
@@ -278,7 +278,7 @@ export default {
     //批量删除
     const batchDelete = async () => {
       const params = {
-        orderNoSet,
+        orderNoSet: state.orderNoSet,
       };
       const res = await batchDelOrder(params);
       if (+res.code === 200) {
@@ -291,8 +291,12 @@ export default {
 
     //多选
     const handleSelectionChange = (val) => {
+      state.orderNoSet = [];
+      console.log(val,'val');
       if (val) {
-        state.orderNoSet = val;
+        val.forEach(elem => {
+          state.orderNoSet.push(elem.orderNo)
+        })
       }
     };
 

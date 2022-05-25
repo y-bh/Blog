@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-24 19:33:09
+ * @LastEditTime: 2022-05-25 13:17:11
 -->
 <template>
   <div class="container">
@@ -205,9 +205,9 @@
       </el-table>
     </div>
     <!-- 分页 -->
-    <el-pagination v-model:currentPage="searchForm.page" class="text-right mt-30"
+    <el-pagination v-model:currentPage="searchForm.pageNum" class="text-right mt-30"
       layout="total, sizes, prev, pager, next, jumper" :total="total" :page-sizes="[20, 50, 100, 500]"
-      :page-size="searchForm.size" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+      :page-size="searchForm.pageSize" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     <reset-password ref="passwordRef" @updateTable="updateTable($event)"></reset-password>
     <renewal ref="renewalRef" @createCode="createCode($event)"></renewal>
     <supplement ref="supplementRef" @createCode="createCode($event)"></supplement>
@@ -280,8 +280,8 @@ export default {
         proxyState: null,
         useTime: null,
         remainDays: null,  // 剩余天数
-        page: 1,
-        size: 10
+        pageNum: 1,
+        pageSize: 10
       },
       multipleSelection: null,
       total: 0,
@@ -302,8 +302,8 @@ export default {
         state.searchForm.mealType = (query.mealType === 0 || query.mealType) ? formatInt(query.mealType) : null;
         state.searchForm.proxyState = formatInt(query.proxyState) || null;
         state.searchForm.remainDays = formatInt(query.remainDays) || null;
-        state.searchForm.page = formatInt(query.pageNum) || 1;
-        state.searchForm.size = formatInt(query.size) || 50;
+        state.searchForm.pageNum = formatInt(query.pageNum) || 1;
+        state.searchForm.pageSize = formatInt(query.pageSize) || 50;
 
       },
       async getList () {
@@ -348,12 +348,12 @@ export default {
       },
       // 表格显示条数改变事件
       handleSizeChange (pageSize) {
-        state.searchForm.size = pageSize;
+        state.searchForm.pageSize = pageSize;
         methods.handleCurrentChange(1)
       },
       // 页数改变事件
       async handleCurrentChange (page) {
-        state.searchForm.page = page;
+        state.searchForm.pageNum = page;
         await $router.push({
           path: $route.path,
           query: state.searchForm
