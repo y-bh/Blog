@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 全局变量方法
  * @Date: 2022-05-16 14:51:42
- * @LastEditTime: 2022-05-21 15:51:15
+ * @LastEditTime: 2022-05-25 13:15:33
  */
 export default {
     // 套餐类型
@@ -11,7 +11,7 @@ export default {
         0: '包量',
         1: '包时',
         10: '计次',
-        20: '福利',
+        60: '福利',
         70: '不限量'
     },
     // 套餐变更类型

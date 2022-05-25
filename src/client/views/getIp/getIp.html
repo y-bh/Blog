@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-25 10:53:46
+ * @LastEditTime: 2022-05-25 13:34:24
 -->
 <!DOCTYPE html>
 <html>
@@ -170,19 +170,19 @@
               <label class="label_lay font-18 main-title-color">选择属性</label>
               <div class="choose_type">
                 <div class="form-check form-check-inline" d-type="cs">
-                  <input id="cs" class="form-check-input" type="checkbox" value="1">
+                  <input id="cs" class="form-check-input json-check" type="checkbox" value="1">
                   <label for="cs" class="form-check-label pointer" >
                     城市
                   </label>
                 </div>
                 <div class="form-check form-check-inline" d-type="ys">
-                  <input id="ys" class="form-check-input" type="checkbox" value="1">
+                  <input id="ys" class="form-check-input json-check" type="checkbox" value="1">
                   <label for="ys" class="form-check-label pointer" >
                     运营商
                   </label>
                 </div>
                 <div class="form-check form-check-inline" d-type="ts">
-                  <input id="ts" class="form-check-input" type="checkbox" value="1">
+                  <input id="ts" class="form-check-input json-check" type="checkbox" value="1">
                   <label for="ts" class="form-check-label pointer" >
                     到期时间
                   </label>
@@ -230,7 +230,7 @@
                 <div class="bottom flex flex-wrap">
                   <% province && province.forEach(function(item,index) { %>
                     <div class="form-check mr-20 mb-20" d-type="region">
-                      <input id="<%= item.value %>" class="form-check-input" type="checkbox" value="<%= item.value %>">
+                      <input id="<%= item.value %>" class="form-check-input region-check" type="checkbox" value="<%= item.value %>">
                       <label for="<%= item.value %>" class="form-check-label pointer">
                         <%= item.label %>
                       </label>
@@ -286,10 +286,10 @@
             <div class="input-group apiUrl_input_box mt-40" id="sm">
               <input type="text" class="form-control apiUrl_input mr-20" placeholder="点击上方按钮，生成API链接" readonly>
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary copy mr-20 bl-button" type="button">
+                <button class="copy mr-20 bl-button" type="button">
                   <span>复制链接</span>
                 </button>
-                <button class="btn btn-outline-secondary open or-button" type="button">
+                <button class="open or-button" type="button">
                   <span>打开链接</span>
                 </button>
               </div>

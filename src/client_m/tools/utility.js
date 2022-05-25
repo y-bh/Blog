@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 常用工具函数封装
  * @Date: 2022-05-18 13:18:06
- * @LastEditTime: 2022-05-18 14:38:17
+ * @LastEditTime: 2022-05-25 10:49:11
  */
 export function isEmpty (v) {
     return v === undefined || v === null || v === "" || v === 'undefined' || v === 'null'
@@ -38,6 +38,12 @@ export function formatFloat (v, def = null) {
         return null;
     }
 }
+
+export function formatBit (val) {
+    val = +val;
+    return val > 9 ? val : '0' + val;
+};
+
 // 随机生成字符串函数  默认生成8位随机字符串
 export function randomString (num = 8) {
     let number = formatInt(num) || 8;

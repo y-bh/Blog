@@ -244,11 +244,11 @@
           border-radius: 4px;
           color: #ffffff;
           cursor: pointer;
-          &:hover {
-            background: linear-gradient(45deg, #4e38c7, #1968fc);
-            // transform: translate(-101%);
-            transition: transform 0.5s;
-          }
+          // &:hover {
+          //   background: linear-gradient(45deg, #4e38c7, #1968fc);
+          //   // transform: translate(-101%);
+          //   transition: transform 0.5s;
+          // }
         }
         .border-btn {
           width: 200px;

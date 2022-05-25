@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-24 11:17:28
+ * @LastEditTime: 2022-05-25 11:10:57
 -->
 <template>
   <div class="userAccount">
@@ -247,6 +247,7 @@ export default {
     let state = reactive({
       //authStates: 5, //1:未认证 2：个人认证通过  3：企业认证通过 4：企业认证审核中 5：企业认证审核未通过
       userInfo: {
+        isIntermediate: null, //企业实名认证结果
         id: "", //用户的id
         reason: "", //失败原因
         username: "", //用户名
@@ -348,6 +349,7 @@ export default {
       if (res && res.code == 200) {
         let data = res.data ? res.data : {};
         state.userInfo = {
+          isIntermediate: data.isIntermediate ? data.isIntermediate : false, //默认为false
           id: data.id ? Number(data.id) : 0,
           reason: data.reason ? data.reason : "", //失败原因
           username: data.username ? data.username : "", //用户名
