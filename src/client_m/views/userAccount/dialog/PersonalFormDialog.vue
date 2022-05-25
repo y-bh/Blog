@@ -3,29 +3,29 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-24 20:52:37
+ * @LastEditTime: 2022-05-25 14:32:00
 -->
 <template>
   <div class="personalFormDialog">
-    <el-dialog v-model="dialogVisibleFlag">
+    <el-dialog v-model="dialogVisibleFlag" custom-class="customClass">
       <DialogTitle title-content="个人资料" />
       <div class="personal-info ml-40 mr-40 mt-40">
         <div class="title mb-30"><span>基本信息</span></div>
         <ul>
           <li class="mb-20">
-            <span class="name">用户名</span
+            <span class="name mr-20">用户名</span
             ><span class="val">{{ userInfo.username }}</span>
           </li>
           <li class="mb-20">
-            <span class="name">注册手机号</span
+            <span class="name mr-20">注册手机号</span
             ><span class="val">{{ userInfo.phone }}</span>
           </li>
           <li class="mb-20">
-            <span class="name">身份证姓名</span
+            <span class="name mr-20">身份证姓名</span
             ><span class="val">{{ userInfo.identityName }}</span>
           </li>
           <li class="mb-20">
-            <span class="name">身份证号码</span
+            <span class="name mr-20">身份证号码</span
             ><span class="val">{{ userInfo.identityNum }}</span>
           </li>
         </ul>
@@ -44,13 +44,13 @@
           <el-form-item label="微信" class="ml-40">
             <el-input v-model="personForm.wxNo" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="QQ" :label-width="84" class="ml-40" prop="QQNO">
+          <el-form-item label="QQ" class="ml-40 bw" prop="QQNO">
             <el-input v-model="personForm.QQNO" placeholder="请输入" />
           </el-form-item>
           <el-form-item label="邮箱" class="ml-40" prop="emailNo">
             <el-input v-model="personForm.emailNo" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="业务方向" :label-width="84" class="ml-40">
+          <el-form-item label="业务方向" class="ml-40 bw">
             <el-select v-model="personForm.business" placeholder="请选择">
               <el-option
                 v-for="item in personForm.businessArr"
@@ -216,14 +216,17 @@ export default {
       display: flex;
       flex-wrap: wrap;
       li {
+        font-size: 16px;
         .name {
           display: inline-block;
           width: 80px;
           margin-right: 20px;
+          white-space: nowrap;
         }
         .val {
           display: inline-block;
           width: 155px;
+           white-space: nowrap;
         }
       }
     }
@@ -231,5 +234,24 @@ export default {
   .personForm {
     margin-left: -40px;
   }
+
+  ::v-deep .customClass {
+    width: 660px !important;
+    .el-form-item {
+      margin-right: 0;
+    }
+    .el-form-item__label {
+      width: 55px !important;
+      white-space: nowrap;
+    }
+  }
+  ::v-deep .el-form-item__content {
+    width: 200px;
+  }
+  ::v-deep .bw .el-form-item__label {
+    width: 78px !important;
+  }
 }
+</style>
+<style>
 </style>

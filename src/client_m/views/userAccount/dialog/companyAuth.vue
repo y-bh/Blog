@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-23 14:38:07
+ * @LastEditTime: 2022-05-25 14:21:06
 -->
 <template>
   <div class="companyAuth">
@@ -105,7 +105,7 @@
         </div>
         <div class="bootomTip pb-40">
           <span
-            >还没有营业执照？<span class="blue" @click="goPersonAuth"
+            >还没有营业执照？<span class="blue pointer" @click="goPersonAuth"
               >点击返回</span
             >个人认证</span
           >
@@ -165,7 +165,7 @@
           </div>
         </div>
         <div class="mt-30 pb-40">
-          <el-button type="primary" plain @click="authCompanyStep = 3"
+          <el-button type="primary" plain @click="reCompanyAuth"
             >重新认证</el-button
           >
         </div>
@@ -260,6 +260,7 @@ export default {
             name: form.ruleForm.name,
             idCard: form.ruleForm.idCardNo,
           };
+          
           let res = await zfbAuthCompany({ data: JSON.stringify(params) });
           console.log(2222222222222, res);
           if (res.code == 200) {
@@ -275,7 +276,7 @@ export default {
             }
             authCompanyStep.value = 2;
           } else {
-            message.error("获取二维码失败：" + res.msg);
+            message.error(res.message?res.message:"获取二维码失败!");
           }
         } else {
           console.log("error submit!!");
@@ -365,7 +366,16 @@ export default {
       title.value = "企业认证";
       authCompanyStep.value = 3;
     };
+    const reCompanyAuth = () => {
+      //企业认证成功
+      if (userInfoSon.userInfo.isIntermediate || userInfoSon.userInfo.identityAuth) {
+        authCompanyStep.value = 3;
+      } else {
+        authCompanyStep.value = 1;
+      }
+    };
     return {
+      reCompanyAuth,
       companyCancel,
       companyQrcodeRef,
       title,

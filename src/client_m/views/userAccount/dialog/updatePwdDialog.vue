@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-24 20:13:09
+ * @LastEditTime: 2022-05-25 13:40:40
 -->
 <template>
   <div class="updatePwdDialog">
@@ -98,24 +98,24 @@ export default {
           { required: true, message: "请输入原密码", trigger: "blur" },
           // { min: 6, max: 20, message: "长度在6到20个字符", trigger: "blur" },
           {
-            pattern: /^[a-zA-Z0-9_!@#$%^&*.]{4,16}$/,
-            message: "密码只能由4~16字母，数字，特殊符号组成",
+            pattern: /^[a-zA-Z0-9_!@#$%^&*.]{6,20}$/,
+            message: "密码只能由6~20字母，数字，特殊符号组成",
           },
         ],
         newPassword: [
           { required: true, message: "请输入新密码", trigger: "blur" },
           // { min: 6, max: 20, message: "长度在6到20个字符", trigger: "blur" },
           {
-            pattern: /^[a-zA-Z0-9_!@#$%^&*.]{4,16}$/,
-            message: "密码只能由4~16字母，数字，特殊符号组成",
+            pattern: /^[a-zA-Z0-9_!@#$%^&*.]{6,20}$/,
+            message: "密码只能由6~20字母，数字，特殊符号组成",
           },
           { validator: validatePwd, trigger: "blur" },
         ],
         confirmPassword: [
           { required: true, message: "请再次输入密码", trigger: "blur" },
           {
-            pattern: /^[a-zA-Z0-9_!@#$%^&*.]{4,16}$/,
-            message: "密码只能由4~16字母，数字，特殊符号组成",
+            pattern: /^[a-zA-Z0-9_!@#$%^&*.]{6,20}$/,
+            message: "密码只能由6~20字母，数字，特殊符号组成",
           },
           { validator: validatePwd2, trigger: "blur" },
         ],
