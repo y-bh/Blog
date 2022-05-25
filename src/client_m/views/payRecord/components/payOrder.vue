@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 支付
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-25 17:05:51
+ * @LastEditTime: 2022-05-25 17:17:09
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -119,7 +119,7 @@ export default {
                             ctx.emit('createCode', codeParams);
                         } else {
                             message.error({
-                                message: res?.data?.message || '二维码获取失败',
+                                message: res?.message || '二维码获取失败',
                                 showClose: true
                             })
                         }

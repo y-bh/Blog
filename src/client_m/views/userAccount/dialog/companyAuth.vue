@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-25 14:21:06
+ * @LastEditTime: 2022-05-25 17:23:03
 -->
 <template>
   <div class="companyAuth">
@@ -260,7 +260,7 @@ export default {
             name: form.ruleForm.name,
             idCard: form.ruleForm.idCardNo,
           };
-          
+
           let res = await zfbAuthCompany({ data: JSON.stringify(params) });
           console.log(2222222222222, res);
           if (res.code == 200) {
@@ -276,7 +276,7 @@ export default {
             }
             authCompanyStep.value = 2;
           } else {
-            message.error(res.message?res.message:"获取二维码失败!");
+            message.error(res.message ? res.message : "获取二维码失败!");
           }
         } else {
           console.log("error submit!!");
@@ -288,7 +288,9 @@ export default {
       console.log("获取认证结果--------", certifyId);
       let res = await getAuthResult(certifyId);
       if (res && res.code == 200) {
-        if (res.data) {
+        if (res.data === null) {
+          return message.error("暂未获取到认证结果请稍后再试");
+        } else if (res.data) {
           authCompanyStep.value = 3;
         } else {
           //认证失败
@@ -368,7 +370,10 @@ export default {
     };
     const reCompanyAuth = () => {
       //企业认证成功
-      if (userInfoSon.userInfo.isIntermediate || userInfoSon.userInfo.identityAuth) {
+      if (
+        userInfoSon.userInfo.isIntermediate ||
+        userInfoSon.userInfo.identityAuth
+      ) {
         authCompanyStep.value = 3;
       } else {
         authCompanyStep.value = 1;

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-25 17:05:25
+ * @LastEditTime: 2022-05-25 17:11:39
 -->
 <template>
   <div class="userAccount">
@@ -390,7 +390,7 @@ export default {
           isHasSeller:
             data.sellerInfo &&
             data.sellerInfo.vest &&
-            data.sellerInfo.vest.username
+            data.sellerInfo.vest.nickname
               ? true
               : false, //有无销售
           sale: {
@@ -398,8 +398,8 @@ export default {
             sellerName:
               data.sellerInfo &&
               data.sellerInfo.vest &&
-              data.sellerInfo.vest.username
-                ? data.sellerInfo.vest.username
+              data.sellerInfo.vest.nickname
+                ? data.sellerInfo.vest.nickname
                 : "--",
             profession:
               data.sellerInfo && data.sellerInfo.sellerLevel

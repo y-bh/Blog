@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 批量删除
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-21 16:38:07
+ * @LastEditTime: 2022-05-25 17:23:25
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -21,7 +21,7 @@
 import DialogTitle from "components/DialogTitle";
 import { reactive, ref, toRefs, inject } from 'vue'
 import { formatInt} from "tools/utility"
-import { resetSecret } from "model/meal.js";
+import { deleteMeal } from "model/meal.js";
 export default {
     components: {
         DialogTitle,
@@ -36,10 +36,11 @@ export default {
         });
         const methods = {
             onOpen(ids){
-                state.deleteIds = ids
+                state.deleteIds = ids;
+                state.dialogVisible = true;
             },
             async submitDelete(){
-                let res = await resetSecret(state.deleteIds);
+                let res = await deleteMeal(state.deleteIds);
                 if(res && res.code === 200){
                     message.success({
                         message: '删除成功',
