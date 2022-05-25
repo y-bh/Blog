@@ -22,7 +22,7 @@
 
 //校验相关参数
 const rules = {
-  phone: /^1[34589]\d{9}$|^17[2-9]\d{8}$|^16[0-1]\d{8}$|^16[3-4]\d{8}$|^166\d{8}$|^16[8-9]\d{8}$/,
+  phone: /^1\d{10}$/,
   pwd: /[a-zA-Z0-9@#$%^&*_]{6,20}$/,
   userName: /[0-9a-zA-Z_@]{6,16}/,
   code: /\d{6}/
@@ -141,6 +141,7 @@ function checkForm(params = null, type = 'login') {
     if (!params.phone) {
       res.isPass = false
       res.msg = '请输入账号!'
+      res.key = 'phone'
       return res
     }
 
@@ -149,31 +150,36 @@ function checkForm(params = null, type = 'login') {
     if (!params.pwd) {
       res.isPass = false
       res.msg = '请输入密码!'
+      res.key = 'pwd'
       return res
     }
 
   } else {
     if (!params.phone) {
       res.isPass = false
-      res.msg = '请输入手机号码!'
+      res.msg = '请输入手机号'
+      res.key = 'phone'
       return res
     }
 
     if (!rules.phone.test(params.phone)) {
       res.isPass = false
-      res.msg = '请输入正确格式的手机号码!'
+      res.msg = '请输入正确的手机号码!'
+      res.key = 'phone'
       return res
     }
 
     if (!params.code) {
       res.isPass = false
-      res.msg = '请输入验证码!'
+      res.msg = '请输入短信验证码!'
+      res.key = 'code'
       return res
     }
 
     if (!rules.code.test(params.code)) {
       res.isPass = false
-      res.msg = '请输入六位数字的验证码!'
+      res.msg = '请输入正确的短信验证码!'
+      res.key = 'code'
       return res
     }
   }
@@ -181,23 +187,27 @@ function checkForm(params = null, type = 'login') {
     if (!params.pwd) {
       res.isPass = false
       res.msg = '请设置登录密码!'
+      res.key = 'pwd'
       return res
     }
 
     if (!rules.pwd.test(params.pwd)) {
       res.isPass = false
-      res.msg = '请设置正确格式的登录密码![至少六位字符串]'
+      res.msg = '密码长度在6到20个字符密码只能由字母，数字，特殊符号组成'
+      res.key = 'pwd'
       return res
     }
 
     if (!params.cpwd) {
       res.isPass = false
       res.msg = '请确认登录密码!'
+      res.key = 'cpwd'
       return res
     }
     if (params.pwd !== params.cpwd) {
       res.isPass = false
       res.msg = '登录密码与确认密码不一致!'
+      res.key = 'cpwd'
       return res
     }
 
@@ -205,32 +215,37 @@ function checkForm(params = null, type = 'login') {
   if (type === 'register') {
     if (!params.userName) {
       res.isPass = false
-      res.msg = '请设置用户名!'
+      res.msg = '账号不能为空!'
+      res.key = 'userName'
       return res
     }
 
     if (!rules.userName.test(params.userName)) {
       res.isPass = false
-      res.msg = '请设置用户名![至少6位字符串]'
+      res.msg = '帐号只能由字母，数字，_@组成帐号长度在6到16个字符'
+      res.key = 'userName'
       return res
     }
 
 
     if (!params.pwd) {
       res.isPass = false
-      res.msg = '请设置登录密码!'
+      res.msg = '请输入登录密码!'
+      res.key = 'pwd'
       return res
     }
 
     if (!rules.pwd.test(params.pwd)) {
       res.isPass = false
-      res.msg = '请设置正确格式的登录密码![至少六位字符串]'
+      res.msg = '密码长度在6到20个字符密码只能由字母，数字，特殊符号组成'
+      res.key = 'pwd'
       return res
     }
 
     if (!params.agreeMent) {
       res.isPass = false
-      res.msg = '请先阅读并同意《天启HTTP用户协议》!'
+      res.msg = '请先勾选用户协议，点击用户协议打开新窗口到协议内容'
+      res.key = 'agreeMent'
       return res
     }
 
@@ -245,10 +260,12 @@ async function loginSubmit(type) {
 
   //校验参数
   const res = checkForm(params, type)
-  if (!res.isPass) return Helper.$message({
-    message: res.msg, type: 'warning'
-  })
-
+  if (!res.isPass) {
+    console.log("结构:", res)
+    $(".login-danger").hide()
+    $("#" + res.key).html(res.msg).show()
+    return
+  }
 
   let text = '登录'
   switch (type) {

@@ -41,6 +41,10 @@
                           <input type="text" placeholder='<%= pageType===' login' ? "请输入账号" : "请输入手机号" %>' name="phone">
                         </div>
 
+                        <div class="flex align-items-center ml-60 mt-10 login-danger" id="phone">
+                          请输入账号
+                        </div>
+
 
                         <%# 短信验证码 %>
                           <% if(pageType !=='login' ){ %>
@@ -49,11 +53,18 @@
                               <input id="obn-code" class="btn  btn-outline-code ml-30" type="button" value="获取验证码"
                                 onclick="sendCode('<%=pageType%>')">
                             </div>
+                            <div class="flex align-items-center ml-60 mt-10 login-danger" id="code">
+                              请输入验证码
+                            </div>
                             <% } %>
                               <%# 用户名 %>
                                 <% if(pageType==='register' ){ %>
                                   <div class="mt-20 flex justify-content-center form-input">
                                     <input type="text" placeholder="请设置用户名" name="userName">
+                                  </div>
+
+                                  <div class="flex align-items-center ml-60 mt-10 login-danger" id="userName">
+                                    请设置用户名
                                   </div>
                                   <% } %>
 
@@ -64,12 +75,17 @@
                                         <input name="pwd" type="password"
                                           placeholder="<%= pageType==='login' ? '请输入密码' : '请设置登录密码'%> ">
                                       </div>
-
+                                      <div class="flex align-items-center ml-60 mt-10 login-danger" id="pwd">
+                                        请设置登录密码
+                                      </div>
 
                                       <%# 确认密码 %>
                                         <% if(pageType==='reset' ){ %>
                                           <div class="mt-20 flex justify-content-center form-input">
                                             <input name="cpwd" type="password" placeholder="请确认登录密码">
+                                          </div>
+                                          <div class="flex align-items-center ml-60 mt-10 login-danger" id="cpwd">
+                                            请确认登录密码
                                           </div>
                                           <% } %>
 
@@ -83,6 +99,10 @@
                                                     我已阅读并同意
                                                     <a href="/user/protocol" target="_blank">《天启HTTP用户协议》</a>
                                                   </p>
+                                                </div>
+                                                <div class="flex align-items-center ml-60 mt-10 login-danger"
+                                                  id="agreeMent">
+                                                  请先勾选用户协议，点击用户协议打开新窗口到协议内容
                                                 </div>
                                                 <% } %>
 
