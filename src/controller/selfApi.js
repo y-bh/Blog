@@ -8,7 +8,7 @@
 const Router = require("koa-router");
 const router = new Router();
 const appKey = require("config/app.key.config")
-const { registerService, resetService, loginService } = require("service/user")
+const { registerService, resetService, loginService, registerCodeService, resetCodeService } = require("service/user")
 
 
 //针对登录/注册/ 重置密码相关java 接口做转发
@@ -34,7 +34,7 @@ router.post("/login", async (ctx) => {
     res = await registerService(params)
   }
 
-  console.log("登录|注册|重置接口响应", params, res)
+  
   //注册/登录/重置 成功后业务
   if (+res.code === 200) {
     if (res.data.token) {
@@ -53,6 +53,27 @@ router.post("/login", async (ctx) => {
 });
 
 
+//注册验证码
+router.post("/registerCode", async (ctx) => {
+
+  const { phone } = ctx.request.body
+  if (!phone) {
+    return ctx.fail("请输入手机号码!")
+  }
+  const res = await registerCodeService(phone)
+  ctx.response.body = res
+});
+
+
+//重置验证码
+router.post("/resetCode", async (ctx) => {
+  const { phone } = ctx.request.body
+  if (!phone) {
+    return ctx.fail("请输入手机号码!")
+  }
+  const res = await resetCodeService(phone)
+  ctx.response.body = res
+});
 
 //登出功能
 router.post("/layout", async (ctx) => {

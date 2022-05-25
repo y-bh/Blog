@@ -7,7 +7,7 @@
  */
 
 
-const { postRegisterDao, postResetDao, postLoginDao } = require('dao/user')
+const { postRegisterDao, postResetDao, postLoginDao,resetCodeDao,registerCodeDao } = require('dao/user')
 
 
 // 注册服务
@@ -91,4 +91,31 @@ const loginService = async (data = null) => {
 }
 
 
-module.exports = { registerService, resetService, loginService }
+// 注册验证码
+const registerCodeService = async (phone = null) => {
+  //1. 入参
+  const params = {
+    "data": phone
+  }
+
+  //2.获取数据
+  const res = await registerCodeDao(params)
+  return res
+}
+
+
+// 注册验证码
+const resetCodeService = async (phone = null) => {
+  //1. 入参
+  const params = {
+    "data": phone
+  }
+
+  //2.获取数据
+  const res = await resetCodeDao(params)
+  //处理注册数据
+  return res
+
+}
+
+module.exports = { registerService, resetService, loginService,registerCodeService,resetCodeService }

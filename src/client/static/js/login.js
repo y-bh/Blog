@@ -335,19 +335,25 @@ async function sendCode(type = 'register') {
   }
 
   //4. 获取结果
-  let url = '/auth/registerCode'
+  // let url = '/auth/registerCode'
+
+  // if (type === 'reset') {
+  //   url = '/user/forget/password/getCode'
+  // }
+
+  //注册验证码 【验证码 需要加密 在node 端接口转发】
+  let url = 'registerCode'
 
   if (type === 'reset') {
-    url = '/user/forget/password/getCode'
+    url = 'resetCode'
   }
-
-
   const res = await ajax({
     url,
     query: JSON.stringify({
-      data: params.phone
+      phone: params.phone
     })
-  })
+  }, '/api')
+
 
 
   if (res) {
