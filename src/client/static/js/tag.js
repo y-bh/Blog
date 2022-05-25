@@ -63,3 +63,8 @@ function goPagePreNext(type = 'next') {
   location.href = url
 
 }
+
+
+
+//動畫
+new WOW().init();

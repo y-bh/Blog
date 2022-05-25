@@ -17,11 +17,11 @@ const getCateTypes = async () => {
   try {
     //如果缓存有数据
     if (getStore(cateTypes)) {
-      
+
       articleTypes = getStore(cateTypes)
     } else {
       //获取文章类型
-      
+
       articleTypes = await getArticleTypeDao()
       setStore(cateTypes, articleTypes, {
         maxAge: 1000 * 3600 * 12,
@@ -74,7 +74,7 @@ const getHelpService = async (data, articleTypes = []) => {
     //文章列表
     lists = await postArticleDao(params)
 
-    console.log("xxxxxxxxxxxxxxx",lists)
+    
 
     //兜底分页
     if (!lists.totalPage) {
@@ -94,7 +94,7 @@ const getHelpService = async (data, articleTypes = []) => {
       title
     }
   } catch (error) {
-    
+
     return Promise.resolve(
       {
         articleTypes,
@@ -126,7 +126,7 @@ const getArticleDetailService = async (id) => {
       articleKeyWords, prefix, suffix, related, articleDetailVO, keywords
     }
   } catch (error) {
-    
+
     return Promise.resolve({
       articleKeyWords, prefix, suffix, related, articleDetailVO
     })
@@ -155,18 +155,13 @@ const postKeywordsService = async (data) => {
       pageNum: data.pageNum || 1,
       keywordAlias: data.keyAlias
     }
-    
+
 
     const { pageRespDTO, recommendArticles, keyWordsVO } = await postKeywordsDao(params)
 
     //兜底分页
     if (pageRespDTO && !pageRespDTO.totalPage) {
       lists.totalPage = Math.ceil(pageRespDTO.totalSize / params.pageSize)
-    }
-
-    //文章列表
-    if (pageRespDTO && pageRespDTO.data) {
-      lists.data = pageRespDTO.data
     }
 
     //推荐文章列表
@@ -179,10 +174,38 @@ const postKeywordsService = async (data) => {
       lists.keyWordsVO = keyWordsVO
     }
 
-    
+    //文章列表
+    if (pageRespDTO && pageRespDTO.data) {
+      lists.data = pageRespDTO.data
+
+      if (keyWordsVO && keyWordsVO.keyName) {
+        //替换的关键字规则
+        let re = new RegExp((`${keyWordsVO.keyName}`), 'g')
+
+        lists.data = pageRespDTO.data.map((item, index) => {
+
+          //替换标题
+          if (item.title && item.title.includes(keyWordsVO.keyName)) {
+            item.title = item.title.replace(re, function (content, $1) {
+              return `<span style='color:#FC7019'>${content}</span>`
+            })
+          }
+
+          //处理描述
+          if (item.desc && item.desc.includes(keyWordsVO.keyName)) {
+            item.desc = item.desc.replace(re, function (content, $1) {
+              return `<span style='color:#FC7019'>${content}</span>`
+            })
+          }
+          return item
+        })
+      }
+    }
+
+
     return lists
   } catch (error) {
-    
+
   }
 }
 

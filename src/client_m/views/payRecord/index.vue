@@ -3,53 +3,44 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-25 13:35:27
+ * @LastEditTime: 2022-05-25 16:17:54
 -->
 <template>
   <div class="container grid">
     <div class="top">
-      <el-form class="form flex flex-wrap">
+      <el-form class="form flex flex-wrap" ref="searchFormRef">
         <el-form-item label="订单编号">
-          <el-input
-            placeholder="请输入订单编号"
-            v-model="searchForm.orderNo"
-          ></el-input>
+          <el-input placeholder="请输入订单编号" v-model="searchForm.orderNo"></el-input>
         </el-form-item>
         <el-form-item label="使用时间">
-          <el-date-picker
-            v-model="searchForm.timeList"
-            type="daterange"
-            value-format="YYYY-MM-DD"
-            range-separator="至"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
-          />
+          <el-date-picker v-model="searchForm.timeList" type="datetimerange" value-format="X" range-separator="至"
+            start-placeholder="开始时间" end-placeholder="结束时间">
+          </el-date-picker>
         </el-form-item>
         <el-form-item label="套餐名称">
-          <el-input
-            placeholder="请输入套餐名称"
-            v-model="searchForm.mealName"
-          ></el-input>
+          <el-input placeholder="请输入套餐名称" v-model="searchForm.mealName"></el-input>
         </el-form-item>
 
-        <div class="btn flex justify-end">
-          <el-button class="cancel-button" @click="onReset">重置</el-button>
-          <el-button class="cancel-button" @click="onSearch">查询</el-button>
-          <el-button class="cancel-button" @click="batchDelete">批量删除</el-button>
-        </div>
+        <el-form-item class="reset-form-item">
+          <el-button class="filter-btn" type="default" @click="onReset">
+            重置
+          </el-button>
+          <el-button class="filter-btn" type="default" @click="onSearch">
+            查询
+          </el-button>
+          <el-button class="filter-btn" type="default" @click="batchDelete">
+            批量删除
+          </el-button>
+        </el-form-item>
       </el-form>
     </div>
     <div class="bottom">
-      <el-table
-        :data="tableData"
-        :header-cell-style="{
-          height: '80px',
-          background: '#F2F7FE',
-          color: '#333333',
-          fontSize: '14px',
-        }"
-        @selection-change="handleSelectionChange"
-      >
+      <el-table :data="tableData" :header-cell-style="{
+        height: '80px',
+        background: '#F2F7FE',
+        color: '#333333',
+        fontSize: '14px',
+      }" @selection-change="handleSelectionChange">
         <template #empty>
           <div>
             <div class="flex justify-content-center empty-box"></div>
@@ -62,7 +53,7 @@
         <el-table-column prop="orderType" label="订单类型" align="center">
           <template #default="{ row }">
             <span>{{
-              row.state ? orderTypeMap.get(row.orderType) : "--"
+                row.state ? orderTypeMap.get(row.orderType) : "--"
             }}</span>
           </template>
         </el-table-column>
@@ -74,17 +65,15 @@
         <el-table-column label="订单状态" align="center">
           <template #default="{ row }">
             <div class="flex-center flex-column">
-              <span
-                :class="{
-                  order_red: row.state === 1 || row.state === 6,
-                  order_green: row.state === 5,
-                  order_yellow: row.state === 4,
-                }"
-              >
+              <span :class="{
+                order_red: row.state === 1 || row.state === 6,
+                order_green: row.state === 5,
+                order_yellow: row.state === 4,
+              }">
                 {{ row.state ? stateMap.get(row.state) : "--" }}
               </span>
               <span v-show="row.state === 1" class="order_red">
-                {{countDown[row.orderNo]}}
+                {{ countDown[row.orderNo] }}
               </span>
             </div>
           </template>
@@ -108,10 +97,10 @@
           <template #default="{ row }">
             <div class="box flex-center flex-column">
               <span>{{
-                row.createTime ? dateFormat(new Date(row.createTime * 1000)) : "--"
+                  row.createTime ? dateFormat(new Date(row.createTime * 1000)) : "--"
               }}</span>
               <span>{{
-                row.payTime ? dateFormat(new Date(row.payTime  * 1000)) : "--"
+                  row.payTime ? dateFormat(new Date(row.payTime * 1000)) : "--"
               }}</span>
             </div>
           </template>
@@ -119,16 +108,15 @@
         <!-- class="pay-btn" -->
         <el-table-column label="操作" align="center">
           <template #default="{ row }">
-            <el-button
-              v-show="row.state === 1"
-              @click="onPay"
-              size="small"
-              >支付</el-button
-            >
+            <el-button v-show="row.state === 1" @click="onPay" size="small">支付</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
+
+    <el-pagination v-model:currentPage="searchForm.pageNum" class="text-right mt-30"
+      layout="total, sizes, prev, pager, next, jumper" :total="totalSize" :page-sizes="[20, 50, 100, 500]"
+      :page-size="searchForm.pageSize" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </div>
   <delete-record ref="deleteRef" @updateTable="updateTable($event)"></delete-record>
 </template>
@@ -144,10 +132,10 @@ import deleteRecord from "./components/deleteRecord.vue";
 // 存放待支付订单剩余时间及其对应的定时器
 const awaitPay = new Map();
 export default {
-  components:{
+  components: {
     deleteRecord
   },
-  setup() {
+  setup () {
     const payTypeMap = ref(PAY_TYPE_MAP);
     const orderTypeMap = ref(ORDER_TYPE_MAP);
     const stateMap = ref(STATE_MAP);
@@ -155,6 +143,7 @@ export default {
     const $router = useRouter();
     const $route = useRoute();
     const deleteRef = ref(null);
+    const searchFormRef = ref(null);
     const state = reactive({
       searchForm: {
         mealName: null, //套餐名称
@@ -165,7 +154,7 @@ export default {
         payEnd: null, //支付结束时间
         payStart: null, //支付开始时间
       },
- 
+
       tableData: [],
       countDown: {},  // 显示倒计时
       totalPage: 0,
@@ -175,15 +164,15 @@ export default {
 
     onMounted(async () => {
       await getQueryList()
-      
+
     });
 
     const initQuery = () => {
-        let query = $route.query;
-        state.searchForm.mealName = query.mealName || null;
-        state.searchForm.orderNo = query.orderNo || null;
-        state.searchForm.pageNum = formatInt(query.pageNum) || 1;
-        state.searchForm.pageSize = formatInt(query.pageSize) || 50;
+      let query = $route.query;
+      state.searchForm.mealName = query.mealName || null;
+      state.searchForm.orderNo = query.orderNo || null;
+      state.searchForm.pageNum = formatInt(query.pageNum) || 1;
+      state.searchForm.pageSize = formatInt(query.pageSize) || 50;
     }
 
     //获取列表数据
@@ -191,26 +180,26 @@ export default {
       initQuery();
       const params = deepCopy(state.searchForm);
       params.payStart = $route.query.timeList && formatInt($route.query.timeList[0]) ||
-          (state.searchForm.timeList && formatInt(state.searchForm.timeList[0]))
+        (state.searchForm.timeList && formatInt(state.searchForm.timeList[0]))
 
       params.payEnd = $route.query.timeList && formatInt($route.query.timeList[1]) ||
-          (state.searchForm.timeList && formatInt(state.searchForm.timeList[1]))
+        (state.searchForm.timeList && formatInt(state.searchForm.timeList[1]))
 
-      const res = await getOrderList(state.searchForm);
+      const res = await getOrderList(params);
       if (res && res.code === 200) {
-     
+
         state.tableData = res.data && res.data.data || [];
         state.totalSize = res.data && res.data.totalSize || 0;
 
-        if(state.tableData && state.tableData.length){
+        if (state.tableData && state.tableData.length) {
           state.tableData.forEach(elem => {
-            if(elem?.state === 1){
+            if (elem?.state === 1) {
               // 待支付订单显示倒计时 创建时间 订单编号
               deadLine(elem.createTime, elem.orderNo);
             }
           });
         }
-        
+
       }
     };
 
@@ -220,7 +209,7 @@ export default {
       // 创建时间精确到毫秒
       const startTime = createTime && createTime * 1000 || null;
       // 结束时间戳 延后24小时
-      const endTime = startTime && (startTime + 86400000) || null; 
+      const endTime = startTime && (startTime + 86400000) || null;
       // 计时器
       const timer = setInterval(() => {
         const nowTime = Date.parse(new Date()); // 当前时间时间戳 
@@ -228,7 +217,7 @@ export default {
 
         const remainTime =
           endTime - nowTime >= 0 ? (endTime - nowTime) / 1000 : 0; // 距离到期所剩时间(转成秒)
-        
+
         const waitPay = {
           timer,
           remainTime
@@ -257,36 +246,59 @@ export default {
           formatBit(Math.floor(min / 60)) +
           ':' +
           formatBit(currentOrder.remainTime % 60);
-          state.countDown[id] = time;
+        state.countDown[id] = time;
       }
     };
 
 
     //重置
-    const onReset = () => {
+    const onReset = async () => {
+      searchFormRef.value.resetFields();
+      await $router.push({
+        path: $route.path
+      })
       state.searchForm = {
-        mealName: "", //套餐名称
-        orderNo: "", //订单编号
-        pageNum: 0, //分页页码
-        pageSize: 0, //分页大小
-        timeList: null
+        mealName: null, //套餐名称
+        orderNo: null, //订单编号
+        timeList: null,  // 时间
+        pageNum: 1, //分页页码
+        pageSize: 50, //分页大小
+        payEnd: null, //支付结束时间
+        payStart: null, //支付开始时间
       };
-      totalPage = 0;
-      totalSize = 0;
-      state.timeList = [];
+      state.totalPage = 0;
+      state.totalSize = 0;
+      await getQueryList();
     };
 
     //查询
     const onSearch = async () => {
+      await $router.push({
+        path: $route.path,
+        query: state.searchForm
+      })
       await getQueryList();
     };
-
+    // 表格显示条数改变事件
+    const handleSizeChange = (pageSize) => {
+      state.searchForm.pageSize = pageSize;
+      handleCurrentChange(1)
+    };
+    // 页数改变事件
+    const handleCurrentChange = async (page) => {
+      state.searchForm.pageNum = page;
+      await $router.push({
+        path: $route.path,
+        query: state.searchForm
+      })
+      await getQueryList();
+    };
     //批量删除
     const batchDelete = async () => {
-      if(!state.orderNoSet || !state.orderNoSet.length){
+      if (!state.orderNoSet || !state.orderNoSet.length) {
         message.error("请先选择删除的数据");
       } else {
-         deleteRef.value.onOpen(state.orderNoSet)
+        deleteRef.value.onOpen(state.orderNoSet)
       }
     };
 
@@ -316,7 +328,9 @@ export default {
       onReset,
       onSearch,
       batchDelete,
+      handleSizeChange,
       handleSelectionChange,
+      handleCurrentChange,
       onPay,
       countTime,
       deadLine,
@@ -326,6 +340,7 @@ export default {
       stateMap,
       dateFormat,
       deleteRef,
+      searchFormRef,
       updateTable
     };
   },
@@ -333,25 +348,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  grid-template-rows: auto 1fr;
-  grid-row-gap: 40px;
-  .top {
-    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
-    border-radius: 4px;
-    padding: 40px 35px;
-  }
-  .form > .el-form-item {
-    margin-right: 50px;
-  }
-}
-.order_red {
-  color: #f8486f;
-}
-.order_green {
-  color: #27adc2;
-}
-.order_yellow {
-  color: #fc7019;
-}
+@import "./index.scss";
 </style>
