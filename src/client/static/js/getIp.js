@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-23 10:25:37
+ * @LastEditTime: 2022-05-25 11:41:46
  */
 
 //点击定位
@@ -209,7 +209,6 @@ $(function () {
 //动态修改api值
 $(function () {
   function changeParams(type = null, val = null) {
-    console.log(type, val)
     if (!type) {
       return
     }
@@ -263,7 +262,6 @@ $(function () {
       }
       if (!/^\d+(\.\d+)?$/.test(val)) {
         let index = val.match(/^['0','1','2','3','4','5','6','7','8','9']+/g)
-        console.log(val, index);
         val = index
         Helper.$message.warning({
           message: '请输入数字！',
@@ -298,17 +296,22 @@ $(function () {
   function changeDataTypeCallback(type) {
     if(type === 'json'){
       apiParams.lb = null
+      return 
     }
+    apiParams.ts = null
+    apiParams.ys = null
+    apiParams.cs = null
+    $('.json-check').prop('checked', false)
   }
 
 
   //数据格式显示
   $('.d_type_change').on('click', function () {
     if ($(this).attr('val') === 'json') {
-      $('.isJSON').show(0, changeDataTypeCallback)
+      $('.isJSON').show(0, changeDataTypeCallback('json'))
       $('.separator_box').hide()
     } else {
-      $('.isJSON').hide()
+      $('.isJSON').hide(0, changeDataTypeCallback)
       $('.separator_box').show()
     }
   })
@@ -320,6 +323,7 @@ $(function () {
   }
   function changeAreaCCallback() {
     apiParams.region = null
+    $('.region-check').prop('checked', false)
   }
 
   //地区改变监听
@@ -335,7 +339,6 @@ $(function () {
 
   $('.create_api_url').on('click', function () {
     let url = "http://api.tianqiip.com/getip?"
-    console.log(apiParams.region);
     if(apiParams.region && apiParams.region.length === 0){
       Helper.$message.warning({
         message: '请选择地区',
