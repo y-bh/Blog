@@ -307,10 +307,18 @@
         position: relative;
         /*动画的过渡效果*/
         transition: all 0.25s ease-in;
+
+        .icon-img1,
+        .icon-img2,
+        .icon-img3 {
+          transition: all 0.3s;
+        }
+
         &:hover {
           .icon-img1,
           .icon-img2,
           .icon-img3 {
+            transition: all 0.3s;
             transform: translate(8px, -8px);
           }
           span {
@@ -476,6 +484,8 @@
         background-repeat: no-repeat;
         //background-image: linear-gradient(to bottom left, rgba(208, 224, 255, 0.6), #fff, #fff);
         background-image: radial-gradient(closest-side at 60%, rgba(208, 224, 255, 0.7), #ff000000);
+        
+        transition: all .3s;
         &:hover {
           transform: translateY(-30px);
         }

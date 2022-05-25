@@ -1,9 +1,9 @@
 <!--
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: dengxiujie
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-25 15:39:43
+ * @LastEditTime: 2022-05-25 16:07:22
 -->
 <!DOCTYPE html>
 <html>
@@ -237,9 +237,8 @@
                                     <% var mealItemId=item.id %>
                                       <% if(activityVoMap && activityVoMap[mealItemId]){ %>
                                         <% var activityType=activityVoMap[mealItemId]["activityType"] %>
-                                          <% if(activityType){ %>
+                                          <% if(activityType && activityVoMap[mealItemId].rate !='100'){ %>
                                             <div class="discount" activityType="<%= activityType %>"
-                                              rate="<%= activityVoMap[mealItemId].rate%>"
                                               rate="<%= activityVoMap[mealItemId].rate%>">
                                               <% if(activityType==1){ %>
                                                 <span>
