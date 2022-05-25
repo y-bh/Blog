@@ -187,14 +187,14 @@ const postKeywordsService = async (data) => {
           //替换标题
           if (item.title && item.title.includes(keyWordsVO.keyName)) {
             item.title = item.title.replace(re, function (content, $1) {
-              return `<span style='color:#FC7019'>${content}</span>`
+              return `<strong style='color:#FC7019'>${content}</strong>`
             })
           }
 
           //处理描述
           if (item.desc && item.desc.includes(keyWordsVO.keyName)) {
             item.desc = item.desc.replace(re, function (content, $1) {
-              return `<span style='color:#FC7019'>${content}</span>`
+              return `<strong style='color:#FC7019'>${content}</strong>`
             })
           }
           return item
