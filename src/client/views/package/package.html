@@ -1,9 +1,9 @@
 <!--
  * @Author: 朱占伟
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: 套餐页
  * @Date: 2022-04-25 10:24:54
- * @LastEditTime: 2022-05-25 11:53:01
+ * @LastEditTime: 2022-05-25 15:39:43
 -->
 <!DOCTYPE html>
 <html>
@@ -24,13 +24,23 @@
 <body>
   <%- include('../components/header.html'); %>
     <div class="packageBuy">
-      <div class="package-banner">
-        <div class="button">
-          <a href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true" target="_blank">
-            <img src="/images/package/banner-button.png" alt="banner按钮" />
-          </a>
+      <% if(actt === 'l') { %>
+        <div class="package-banner-l">
+          <div class="button">
+            <a href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true" target="_blank">
+              <img src="/images/package/banner-button.png" alt="banner按钮" />
+            </a>
+          </div>
         </div>
-      </div>
+      <% } else if(actt === 'f') { %>
+        <div class="package-banner-f">
+          <div class="button">
+            <a href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true" target="_blank">
+              <img src="/images/package/banner-button.png" alt="banner按钮" />
+            </a>
+          </div>
+        </div>
+      <% } %>
       <div class="package-content">
         <!-- 切换tab头部 -->
         <div id="changeTab" class="changeTab mediaStyle">

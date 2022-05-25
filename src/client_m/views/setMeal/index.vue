@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-25 13:17:11
+ * @LastEditTime: 2022-05-25 15:08:32
 -->
 <template>
   <div class="container">
@@ -62,12 +62,12 @@
         </template>
 
         <el-table-column align="center" type="selection" width="50"></el-table-column>
-        <el-table-column align='center' label="套餐ID" prop="sequence" width="80" fixed>
+        <el-table-column align='center' label="套餐ID" prop="sequence" width="130" fixed>
           <template #default="{ row }">
-            <div>
+            <div class="sequence">
               <!--定制套餐显示 标签-->
-              <el-button round type="primary" plain size="mini" v-if="row.discount">定制</el-button>
-              <br v-if="row.discount">
+              <span class="discount_btn" v-if="!row.discount"></span>
+              <el-button round type="primary" class="discount_btn" plain size="mini" v-if="row.discount">定制</el-button>
               <span>{{ row.sequence }}</span>
             </div>
           </template>
@@ -405,6 +405,7 @@ export default {
       },
       // 操作
       handleCommand (command, row) {
+        console.log(row,'row===');
         if (command === 'renewal') {
           if (row.proxyType === 10) {
             // console.log('去套餐购买页');
