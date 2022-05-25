@@ -476,6 +476,8 @@
         background-repeat: no-repeat;
         //background-image: linear-gradient(to bottom left, rgba(208, 224, 255, 0.6), #fff, #fff);
         background-image: radial-gradient(closest-side at 60%, rgba(208, 224, 255, 0.7), #ff000000);
+        
+        transition: all .3s;
         &:hover {
           transform: translateY(-30px);
         }
