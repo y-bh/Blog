@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-25 11:10:57
+ * @LastEditTime: 2022-05-25 17:05:25
 -->
 <template>
   <div class="userAccount">
@@ -151,6 +151,19 @@
         >
           <el-button class="" type="danger" plain @click="queryCompayStatus"
             >企业认证失败&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
+          >
+        </div>
+        <!-- 企业已支付宝认证 且未上传图片 -->
+        <div
+          class="group-btn mt-20 alginRight"
+          v-if="
+            !userInfo.companyAuth &&
+            userInfo.verifyState &&
+            userInfo.verifyState == 'cut'
+          "
+        >
+          <el-button class="" type="primary" plain @click="queryCompayStatus"
+            >企业认证未完成&nbsp;&nbsp;|&nbsp;&nbsp;查看</el-button
           >
         </div>
       </div>
@@ -335,11 +348,19 @@ export default {
         companyAuthRef.value.title = "企业认证";
         companyAuthRef.value.authCompanyStep = 5;
         companyAuthRef.value.dialogVisible = true;
+        return;
       }
       if (!auth && status == "fail") {
         companyAuthRef.value.title = "企业认证";
         companyAuthRef.value.authCompanyStep = 7;
         companyAuthRef.value.dialogVisible = true;
+         return;
+      }
+      if (!auth && status == "cut") {
+        companyAuthRef.value.title = "企业认证";
+        companyAuthRef.value.authCompanyStep = 3;
+        companyAuthRef.value.dialogVisible = true;
+         return;
       }
     };
     const getUserInfo = async () => {
