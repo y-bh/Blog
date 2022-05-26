@@ -28,12 +28,6 @@ class ClientAjax extends Requeset {
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)
         }
-
-        //因为本地代理走node 代理，造成二次加密， 这边特殊处理下本地开发环境下
-        if (process.env.APP_ENV === 'local') {
-          return config
-        }
-
         config.data.data = encrypt(config.data.data)
       }
       return config;
