@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 14:35:35
+ * @LastEditTime: 2022-05-26 16:50:40
 -->
 <template>
   <div class="personalAuth">
@@ -177,8 +177,8 @@ export default {
     };
     //扫码认证结果
     const getAuthResultDom = async () => {
-      console.log("获取认证结果--------", certifyId);
-      let res = await getAuthResult(certifyId);
+      console.log("获取认证结果--------", certifyId.value);
+      let res = await getAuthResult(certifyId.value);
       if (res && res.code == 200) {
         if (res.data === null) {
           return message.error("暂未获取到认证结果请稍后再试");

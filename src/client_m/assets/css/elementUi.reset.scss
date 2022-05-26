@@ -19,6 +19,20 @@
   --van-nav-bar-height: 50px; //navbar高度
 }
 
+// 重置侧边导航
+.slide-affix {
+  width: 178.75px;
+  height: calc(100% - 84px);
+  margin-right: 40px;
+  .slide-affix--fixed{
+    position: fixed;
+    height: 2440.06px;
+    width: 178.75px;
+    top: 120px;
+    z-index: 100;
+  }
+}
+
 //个人中心重置弹框内边距
 .el-dialog {
   border-radius: 8px;

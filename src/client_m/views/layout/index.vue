@@ -3,18 +3,24 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-23 09:29:50
+ * @LastEditTime: 2022-05-26 17:11:07
 -->
 <template>
   <div class="layout">
-    <main class="layout-main">
-      <SideBar></SideBar>
+    <el-row class="main" :style="{ minHeight: defaultHeight + 'px'}">
+      <div class="slide-affix">
+        <div class="slide-affix--fixed">
+          <SideBar></SideBar>
+        </div>
+      </div>
+
+
       <div class="main-right">
         <el-config-provider :locale="locale">
           <router-view />
         </el-config-provider>
       </div>
-    </main>
+    </el-row>
   </div>
 </template>
 
@@ -41,30 +47,34 @@ export default {
   },
   props: {},
   setup() {
-    // let defaultHeight = ref(800);
-    // const headerRef = ref(null);
-    // const getMainHeight = () => {
-    //   let height =
-    //     window.innerHeight ||
-    //     document.documentElement.clientHeight ||
-    //     document.body.clientHeight;
-    //   //console.log("窗口的高度-----", height);
-    //   let headerH = headerRef.value.$el.clientHeight;
-    //   defaultHeight.value = height - headerH - 100;
-    // };
+    let defaultHeight = ref(800);
+    const headerRef = ref(null);
+    const getMainHeight = () => {
+      let height =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight;
+     
+      //console.log("窗口的高度-----header", height);
+      // let headerH = headerRef.value?.$el.clientHeight || 0;
+      let headerH = document.querySelector(".header").offsetHeight;
+      const footerHeight = document.querySelector("footer").offsetHeight;
+      console.log(headerH, footerHeight,'====');
+      defaultHeight.value = height - headerH - footerHeight - 80;
+  
+    };
 
-    // onBeforeMount(() => {});
-    // onMounted(() => {
-    //   //console.log(222222, headerRef.value);
-    //   getMainHeight();
-    //   window.addEventListener("resize", getMainHeight, false);
-    // });
-    // onBeforeUnmount(() => {
-    //   window.removeEventListener("resize", getMainHeight);
-    // });
+    onBeforeMount(() => {});
+    onMounted(() => {
+      getMainHeight();
+      window.addEventListener("resize", getMainHeight);
+    });
+    onBeforeUnmount(() => {
+      window.removeEventListener("resize", getMainHeight);
+    });
     return {
-      // defaultHeight,
-      // headerRef,
+      defaultHeight,
+      headerRef,
       locale: zhCn
     };
   },
@@ -73,11 +83,16 @@ export default {
 <style lang="scss" scoped>
 .layout {
   background: #fff;
-  .layout-main {
+  margin-top: 120px;
+  .main {
+    position: relative;
+    height: calc(100% - 84px);
+    overflow: auto;
+    font-size: 14px;
     display: flex;
-    max-width: 1400px;
-    margin: 110px auto 40px;
-    // min-height: 700px;
+    justify-content: start;
+    width: 1400px;
+    margin: 0 auto;
 
     .sideBar {
       width: 180px;
@@ -90,10 +105,10 @@ export default {
       }
     }
     .main-right {
-      // width: 1200px;
-      background: red;
-      width: 100%;
-      background: #fff;
+      flex: 1;
+      overflow: auto;
+      padding: 0;
+      margin-left: 0;
       // margin-left: 20px;
     }
   }
