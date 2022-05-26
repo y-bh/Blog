@@ -55,6 +55,9 @@
       &:last-child {
         margin-right: 0;
       }
+      .el-form-item__content{
+        width: 200px;
+      }
     }
 
     .el-form-item__label {
@@ -66,7 +69,7 @@
     .el-form-right {
       .el-form-item__label {
         text-align: right;
-        margin-right: 20px;
+        // margin-right: 20px;
       }
     }
   }

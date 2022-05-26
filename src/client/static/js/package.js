@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-25 15:46:48
+ * @LastEditTime: 2022-05-26 11:40:47
  */
 
 
@@ -313,6 +313,7 @@ let packageData = {
 
 //红包
 async function getRedPacket() {
+  packageData.allRedPacket = [];
   if (window.isLogin) {
     let params = {
       url: "/redPackage/enabled",
@@ -320,7 +321,19 @@ async function getRedPacket() {
       query: null
     };
     let resp = await ajax(params);
-    packageData.allRedPacket = resp ? resp : [];
+    let resArr = resp ? resp : [];
+    let allRedPackData = [];
+    resArr.forEach(function (item) {
+      if (item.state == 3) {
+        allRedPackData.push(item)
+      }
+    })
+    packageData.allRedPacket = allRedPackData;
+    // $("#balanceRedPacketSelect").show();
+    // $("#packTimeRedPacketSelect").show();
+  } else {
+    $("#balanceRedPacketSelect").hide();
+    $("#packTimeRedPacketSelect").hide();
   }
 }
 
@@ -338,6 +351,9 @@ async function commonBalancePay() {
   }
 }
 
+let discount = {
+  activitytype: 0,////0：表示没有 1，是折扣 2：增量
+}
 
 //获取页面包时套餐--- 选中的总的价格
 function getPackageTimesPrice() {
@@ -355,28 +371,29 @@ function getPackageTimesPrice() {
   let rate = 0;
   if ($discountDOM.length > 0) {
     activitytype = $discountDOM.attr("activitytype");
+    discount.activitytype = activitytype;
     rate = Number($discountDOM.attr("rate"));
     if (activitytype == 2) {
       $("#realIpNum span").html(allNumber + (allNumber * rate / 100));
       $("#realIpNum").show();
-      $(".payMoney-origin").hide();
+      //$(".payMoney-origin").hide();
     } else {
       $("#realIpNum span").html(0);
       $("#realIpNum").hide();
     }
   } else {
-    $(".payMoney-origin").hide();
+    //$(".payMoney-origin").hide();
   }
   //总价
   let totalPrice = unitPrice * allNumber * days;
   //实际价格
   let discountPrice = totalPrice;
   if (activitytype == 1) {
-    discountPrice = totalPrice * rate / 100;
-    $(".payMoney-origin").show();
+    discountPrice = totalPrice * rate / 10;
+    //$(".payMoney-origin").show();
   }
   $("#totalPrice").html(totalPrice.toFixed(2));
-  $("#totalPrice").attr("noredprice", discountPrice)
+  $("#totalPrice").attr("noredprice", discountPrice);
   //红包折扣后的价格,计算满减
   if (window.isLogin) {
     filterRedPacket(discountPrice, 2);
@@ -392,9 +409,10 @@ function getPackageTimesPrice() {
 function filterRedPacket(payPice, tabType) {
   let allData = packageData.allRedPacket;
   let newArr = [];
+  let redPacketDom = "";
   if (allData && allData.length) {
     allData.forEach(function (item) {
-      if ((item.state == 3) && (parseInt(payPice) >= parseInt(item.doorsill)) && item.endTime) {
+      if ((parseInt(payPice) >= parseInt(item.doorsill)) && item.endTime) {
         let duration = parseInt(item.endTime) - parseInt(item.createTime);
         newArr.push({
           id: item.id,
@@ -405,48 +423,78 @@ function filterRedPacket(payPice, tabType) {
         })
       }
     })
-  }
-  let redPacketDom = "";
-  if (newArr.length > 0) {
-    newArr.forEach(function (item) {
-      //console.log(333333333333, item)
-      redPacketDom += `<option value="${item.money}" id="${item.id}">满${item.doorsill}减${item.money}</option>`;
-    })
-    if (tabType == 1) {
-      $("#balanceRedPacketSelect select").html(redPacketDom);
-      $("#balanceRedPacketSelect").show();
+    console.log("筛选当前元素可用的红包-----", newArr);
+    if (newArr.length > 0) {
+      // redPacketDom = `<option value="0" minusPrice="0">暂无可用红包</option>`;
+      newArr.forEach(function (item) {
+        redPacketDom += `<option minusPrice="${item.money}" value="${item.id}" id="${item.id}">满${item.doorsill}减${item.money}</option>`;
+      })
+      let selectId = newArr[0].id ? newArr[0].id : "0";
+      if (tabType == 1) {
+        $("#balanceRedPacketSelect select").html(redPacketDom);
+        $("#balanceRedPacketSelect select").val(selectId);
+        $("#balanceRedPacketSelect").show();
+      } else {
+        $("#packTimeRedPacketSelect select").html(redPacketDom);
+        $("#packTimeRedPacketSelect select").val(selectId);
+        $("#packTimeRedPacketSelect").show();
+      }
+
+      computerBalancePay(payPice, tabType, true);
     } else {
-      $("#packTimeRedPacketSelect select").html(redPacketDom);
-      $("#packTimeRedPacketSelect").show();
+      redPacketDom = `<option value="0" minusPrice="0">暂无可用红包</option>`;
+      if (tabType == 1) {
+        $("#balanceRedPacketSelect select").html(redPacketDom);
+        // $("#balanceRedPacketSelect").hide();
+      } else {
+        $("#packTimeRedPacketSelect select").html(redPacketDom);
+        // $("#packTimeRedPacketSelect").hide();
+      }
+      computerBalancePay(payPice, tabType, false);
     }
-    computerBalancePay(payPice, tabType, true)
   } else {
-    redPacketDom = `<option value="0">暂无可用红包</option>`;
+    redPacketDom = `<option value="0" minusPrice="0">暂无可用红包</option>`;
     if (tabType == 1) {
       $("#balanceRedPacketSelect select").html(redPacketDom);
       $("#balanceRedPacketSelect").hide();
+      $(".payMoney-origin2").hide();
     } else {
       $("#packTimeRedPacketSelect select").html(redPacketDom);
       $("#packTimeRedPacketSelect").hide();
+      $(".payMoney-origin").hide();
     }
-    computerBalancePay(payPice, tabType, false)
+    computerBalancePay(payPice, tabType, false);
   }
-
 }
+
 
 //计算余额套餐价格 payMoney:支付的价格 isHas：是否有红包 tabType:1余额套餐,2包时套餐
 function computerBalancePay(payMoney, tabType, isHas) {
   let redPacketMoney = 0; //红包金额
   if (tabType == 1) {//余额套餐
     if (isHas) {
-      redPacketMoney = Number($("#balanceRedPacketSelect select").val())
+      redPacketMoney = Number($("#balanceRedPacketSelect select").find("option:selected").attr("minusPrice"));
+      $(".payMoney-origin2").show();
+    } else {
+      $(".payMoney-origin2").hide();
     }
     $("#rechargeMoney").html((payMoney - redPacketMoney).toFixed(2));
+    $("#totalPrice2").html(Number(payMoney).toFixed(2));
+    $("#totalPrice2").attr("noredprice", payMoney);
   } else {//包时套餐
     if (isHas) {
-      redPacketMoney = Number($("#packTimeRedPacketSelect select").val())
+      redPacketMoney = Number($("#packTimeRedPacketSelect select").find("option:selected").attr("minusPrice"));
+      $(".payMoney-origin").show();
+    } else {
+      if (!discount.activitytype) {
+        $(".payMoney-origin").hide();
+      } else {
+        $(".payMoney-origin").show();
+      }
     }
     $("#discountPrice").html((payMoney - redPacketMoney).toFixed(2));
+    // $("#totalPrice").html(Number(payMoney).toFixed(2));
+    // $("#totalPrice").attr("noredprice", payMoney);
   }
 }
 
@@ -455,8 +503,11 @@ $(document).on("change", '#balanceRedPacketSelect select', function () {
   console.log($(this).val());
   //获取充值金额
   let price = Number($("#selectRechargeMeals").find("li.current").attr("price"));
-  let lastPrice = (price - Number($(this).val())).toFixed(2);
+  let minusPrice = Number($("#balanceRedPacketSelect select").find("option:selected").attr("minusPrice"));
+  let lastPrice = (price - minusPrice).toFixed(2);
   $("#rechargeMoney").html(lastPrice);
+  $("#totalPrice2").html(price.toFixed(2));
+  $("#totalPrice2").attr("noredprice", minusPrice);
 })
 
 //包时套餐 --切换红包
@@ -466,7 +517,8 @@ $(document).on("change", '#packTimeRedPacketSelect select', function () {
   //getPackageTimesPrice();
   //未使用红包的价格
   let noRedPrice = Number($("#totalPrice").attr("noRedPrice"));
-  let lastPrice = (noRedPrice - Number($(this).val())).toFixed(2);
+  let minusPrice = Number($("#packTimeRedPacketSelect select").find("option:selected").attr("minusPrice"));
+  let lastPrice = (noRedPrice - minusPrice).toFixed(2);
   $("#discountPrice").html(lastPrice);
 })
 
@@ -479,7 +531,7 @@ function payMore() {
 async function toPayMoney(tabType) {
   if (window.isLogin) {
     //获取红包
-    let redPacketId = Number($("#balanceRedPacketSelect select").val());
+    let redPacketId = 0;
 
     let payPrice = 0;
     let payType = 2;
@@ -628,21 +680,17 @@ function wxPayFun(res) {
 
 
 
-  //动画
-   new WOW().init();
+//动画
+new WOW().init();
 //初始化
 $(async function () {
   let curTab = sessionStorage.getItem("packageTab");
   await getRedPacket();
-  console.log(2222222, packageData.allRedPacket);
+  console.log("有效的红包-----------", packageData.allRedPacket);
   commonBalancePay();
   getPackageTimesPrice();
   //处理其他页面跳转过来tab
   if (curTab && curTab == 2) {
     $("#packageTab").click();
   }
-
-
-
-
 })
