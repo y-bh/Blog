@@ -142,6 +142,20 @@
     }
   }
 
+  //业务场景
+  div.business-wrap {
+    border: 1px solid red;
+    width: auto;
+    .top {
+      display: flex;
+      flex-wrap: wrap-reverse;
+    }
+    .left_text {
+      grid-template-columns: minmax(min-content, 0.8fr);
+      grid-template-rows: repeat(3, auto);
+    }
+  }
+
   //.公共底部
   .getip-wrap {
     width: 90%;
@@ -237,6 +251,16 @@
     }
     .input-wrap {
       max-width: 410px;
+    }
+  }
+
+  //业务场景
+  div.business-wrap {
+    .top {
+      img {
+        width: 550px;
+        height: 360px;
+      }
     }
   }
 

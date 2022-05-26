@@ -23,6 +23,10 @@
 }
 .top {
   grid-template-columns: 8fr 4fr;
+  img {
+    width: 703px;
+    height: 444px;
+  }
 }
 .top .left_text {
   grid-template-rows: 58px 93px 60px;
