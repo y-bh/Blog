@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-26 14:49:24
+ * @LastEditTime: 2022-05-26 15:21:31
 -->
 <!DOCTYPE html>
 <html>
@@ -352,11 +352,11 @@
               <li class="ele flex-center pt-20 pb-20">
                 <div class="code flex-center">
                   <p>
-                    <span>返回内容的标签或字段类型可在产品管理里通过设置提取格式来定制；</span><br />
-                    <span>类型为txt文本的定制标签如下：</span><br />
-                    <span>ip：port自定义分隔符；</span><br />
-                    <span>类型为json格式的响应字段如下：</span><br />
-                    <span>data：[</span><br />
+                    <span class="inline-block">返回内容的标签或字段类型可在产品管理里通过设置提取格式来定制；</span><br />
+                    <span class="inline-block">类型为txt文本的定制标签如下：</span><br />
+                    <span class="inline-block">ip：port自定义分隔符；</span><br />
+                    <span class="inline-block">类型为json格式的响应字段如下：</span><br />
+                    <span class="inline-block">data：[</span><br />
                         <span class="inline-block indent">{</span><br />
                           <span class="inline-block indent2">ip：IP</span><br />
                           <span class="inline-block indent2">port：端口</span><br />
@@ -384,11 +384,11 @@
               <div class="return_left">
                 <div class="top_title flex-center">TEXT格式</div>
               </div>
-              <div class="return_right pb-30">
-                <div>
-                  <span>114.101.252.126.57577</span><br />
-                  <span>114.101.252.126.57577</span><br />
-                  <span>114.101.252.126.57577</span><br />
+              <div class="return_right pb-15">
+                <div class="mt-30">
+                  <span class="inline-block">114.101.252.126.57577</span><br />
+                  <span class="inline-block">114.101.252.126.57577</span><br />
+                  <span class="inline-block">114.101.252.126.57577</span><br />
                 </div>
               </div>
             </div>
@@ -397,7 +397,7 @@
                 <div class="top_title flex-center">JSON格式</div>
               </div>
               <div class="return_right pb-30">
-                <div>
+                <div class="mt-30">
                   <span>{</span><br />
                     <span class="inline-block indent">"code": 200,</span><br />
                     <span class="inline-block indent">"data": [</span><br />
@@ -557,7 +557,7 @@
         <!-- 代码demo -->
         <div class="head code_demo_right" id="cd">
           <span class="font-25 title">用户接入天启HTTP代码demo</span>
-          <div class="demo_box grid mt-40 mb-30">
+          <div class="demo_box grid mt-30 mb-30">
             <% staticData && staticData.codeDemo && staticData.codeDemo.forEach(function(item,index) { %>
               <div class="demo_box_item flex-center flex-column">
                 <span class="demo_title mb-15">
