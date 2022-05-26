@@ -3,10 +3,10 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-25 09:48:58
+ * @LastEditTime: 2022-05-26 18:44:10
  */
 
-function Helper() { }
+function Helper () { }
 
 //确认操作框信息
 Helper.$confirm = (msg = '确认此操作?', title = '', callback, options = {}
@@ -133,7 +133,7 @@ Helper.$message = (options = {}) => {
 
 
 //获取cookie
-function getCookie(cname) {
+function getCookie (cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
   for (var i = 0; i < ca.length; i++) {
@@ -144,7 +144,7 @@ function getCookie(cname) {
 }
 
 //设置cookie
-function setCookie(cname, cvalue, exdays) {
+function setCookie (cname, cvalue, exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
   var expires = "expires=" + d.toGMTString();
@@ -159,7 +159,7 @@ function setCookie(cname, cvalue, exdays) {
         type: 接口类型, 默认post  get/post/put
         query: 参数
 */
-async function ajax(params, prex = '/javaProxy') {
+async function ajax (params, prex = '/javaProxy') {
   let baseURL = '';
   if (params.url && params.url.slice(0, 1) !== "/") {
     baseURL = '/' + params.url
@@ -182,25 +182,19 @@ async function ajax(params, prex = '/javaProxy') {
       },
       success: (res) => {
         if (res) {
-          if (res) {
-            console.log(res, 'bbbbbbbbbbbbbbbbbb');
-            if (res.code !== 200) {
-              Helper.$message.error({
-                message: res.message ? res.message : '接口异常'
-              })
-              resolve(false)
-            } else {
-              resolve(res.data);
-            }
+          if (res.code !== 200) {
+            Helper.$message.error({
+              message: res.message ? res.message : '接口异常'
+            })
+            return Promise.resolve(res)
           } else {
-            reject('请求失败')
+            resolve(res.data);
           }
         } else {
           reject('请求失败')
         }
       },
       error: (err) => {
-
         reject(err)
       }
     });
@@ -208,12 +202,12 @@ async function ajax(params, prex = '/javaProxy') {
 }
 
 //跳转咨询
-function contactUs() {
+function contactUs () {
   window.open("https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true", "_blank");
 }
 
 //获取location 地址栏query查询参数
-function getParams() {
+function getParams () {
   var url = decodeURI(location.search);
   var request = {};
   if (url.indexOf("?") !== -1) {
@@ -229,7 +223,7 @@ function getParams() {
 window.getParams = getParams
 
 //格式化人民币
-function moneyFormat(money) {
+function moneyFormat (money) {
   return parseFloat(money)
     .toFixed(2)
     .toString()
@@ -245,7 +239,7 @@ function moneyFormat(money) {
 }
 
 //拖敏感处理手机号码
-function mdPhone(phone) {
+function mdPhone (phone) {
   if (!phone) return
   let tem = (phone.split(''))
   let inx = 0
@@ -263,7 +257,7 @@ function mdPhone(phone) {
 }
 
 //防抖函数
-function debounce(fn, delay, once = false) {
+function debounce (fn, delay, once = false) {
 
   var timeout = null;
   var count = 0;
@@ -283,7 +277,7 @@ function debounce(fn, delay, once = false) {
 }
 
 // 格式化时间
-function dateFormat(date, fmt = 'YYYY-mm-dd HH:MM:SS') {
+function dateFormat (date, fmt = 'YYYY-mm-dd HH:MM:SS') {
   if (Object.prototype.toString(date) !== '[object Date]') {
     date = new Date(date)
   }
@@ -311,7 +305,7 @@ function dateFormat(date, fmt = 'YYYY-mm-dd HH:MM:SS') {
 
 
 //自适应计算
-function change() {
+function change () {
   var width = $(window).width();
   //是否是小于425的小屏幕，供移动端导航使用
   window.isMobile = (width <= 575)
@@ -329,7 +323,7 @@ function change() {
 }
 
 //退出登录
-function layout() {
+function layout () {
   Helper.$confirm("确定退出登录?", '退出', function () {
     $.ajax({
       type: 'POST',
@@ -361,7 +355,7 @@ function layout() {
 
 window.layout = debounce(layout, 300, true)
 
-function jumpPackage(type) {
+function jumpPackage (type) {
   sessionStorage.setItem("packageTab", type);//1:余额 2：包时
   window.location.href = "/package";
 }
@@ -390,7 +384,7 @@ $(function () {
     navWidth: [], // 子元素tab的宽度数组
   }
 
-  function toggleHead() {
+  function toggleHead () {
     // 每次调用重置
     headerAttr = {
       allWidth: 0,
@@ -442,7 +436,7 @@ $(function () {
   })
 
 
-  function getTabWidth() {
+  function getTabWidth () {
     //  小屏获取导航元素
 
     headerAttr.navWidth = [];
