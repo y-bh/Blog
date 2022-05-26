@@ -7,7 +7,7 @@
  */
 
 
-const { getArticleListDao } = require("dao/helpCenter")
+const { getArticleListDao } = require("dao/helpCenterDao")
 const { getCateTypes } = require("service/helpCenter")
 
 const {dateFormat} = require("utils/dateFormat")

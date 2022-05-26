@@ -5,7 +5,7 @@
  * @Date: 2022-05-16 16:37:33
  * @LastEditTime: 2022-05-19 15:32:24
  */
-const { getArticleTypeDao, postArticleDao, getArticleDetailDao, postKeywordsDao } = require("dao/helpCenter")
+const { getArticleTypeDao, postArticleDao, getArticleDetailDao, postKeywordsDao } = require("dao/helpCenterDao")
 const { dateFormat } = require("utils/dateFormat")
 const { cateTypes } = require("config/app.key.config")
 const { setStore, getStore } = require("store")

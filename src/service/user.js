@@ -7,7 +7,7 @@
  */
 
 
-const { postRegisterDao, postResetDao, postLoginDao,resetCodeDao,registerCodeDao } = require('dao/user')
+const { postRegisterDao, postResetDao, postLoginDao,resetCodeDao,registerCodeDao } = require('dao/userDao')
 
 
 // 注册服务

@@ -5,7 +5,7 @@
  * @Date: 2022-05-11 13:39:49
  * @LastEditTime: 2022-05-19 15:32:28
  */
-const { getProxyMealList } = require("dao/package")
+const { getProxyMealList } = require("dao/packageDao")
 
 const renderPackage = async () => {
   const res = await getProxyMealList()
