@@ -80,9 +80,7 @@
 
   // 帮助中心详情页
   .helper-details {
-    border: 1px solid red;
     margin-top: 100px !important;
-
     .box {
       display: unset;
     }
@@ -140,6 +138,13 @@
           }
         }
       }
+    }
+  }
+
+  // 帮助中心详情页
+  .helper-details {
+    div.a_right {
+      grid-template-columns: repeat(1, 1fr);
     }
   }
 
