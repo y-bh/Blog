@@ -78,6 +78,28 @@
     }
   }
 
+  // 帮助中心详情页
+  .helper-details {
+    border: 1px solid red;
+    margin-top: 100px !important;
+
+    .box {
+      display: unset;
+    }
+
+    div.a_right {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: none;
+
+      .related_blogs {
+        margin-top: 0 !important;
+      }
+    }
+  }
+
   .getip-wrap {
     width: 90%;
     grid-template-columns: unset;
