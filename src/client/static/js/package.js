@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-26 14:24:21
+ * @LastEditTime: 2022-05-26 16:35:57
  */
 
 
@@ -368,6 +368,7 @@ function getPackageTimesPrice() {
   //活动 1：折扣 2 ：赠送
   let $discountDOM = $("#selectBuyDuration").find("ul.current").find("li.current .discount");
   let activitytype = 0;//0：表示没有 1，是折扣 2：增量
+  discount.activitytype = 0;
   let rate = 0;
   if ($discountDOM.length > 0) {
     activitytype = $discountDOM.attr("activitytype");
@@ -378,11 +379,13 @@ function getPackageTimesPrice() {
       $("#realIpNum").show();
       //$(".payMoney-origin").hide();
     } else {
-      $("#realIpNum span").html(0);
+      $("#realIpNum span").html(allNumber);
       $("#realIpNum").hide();
     }
   } else {
     //$(".payMoney-origin").hide();
+    $("#realIpNum span").html(allNumber);
+    $("#realIpNum").hide();
   }
   //总价
   let totalPrice = unitPrice * allNumber * days;
@@ -486,10 +489,10 @@ function computerBalancePay(payMoney, tabType, isHas) {
       redPacketMoney = Number($("#packTimeRedPacketSelect select").find("option:selected").attr("minusPrice"));
       $(".payMoney-origin").show();
     } else {
-      if (!discount.activitytype) {
-        $(".payMoney-origin").hide();
-      } else {
+      if (discount.activitytype == "1") {
         $(".payMoney-origin").show();
+      } else {
+        $(".payMoney-origin").hide();
       }
     }
     $("#discountPrice").html((payMoney - redPacketMoney).toFixed(2));
