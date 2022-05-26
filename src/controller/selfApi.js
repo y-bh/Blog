@@ -8,7 +8,7 @@
 const Router = require("koa-router");
 const router = new Router();
 const appKey = require("config/app.key.config")
-const { registerService, resetService, loginService, registerCodeService, resetCodeService } = require("service/user")
+const { registerService, resetService, loginService, registerCodeService, resetCodeService } = require("service/userService")
 
 
 //针对登录/注册/ 重置密码相关java 接口做转发

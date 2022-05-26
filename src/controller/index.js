@@ -9,10 +9,10 @@
 
 
 const router = require("koa-router")();
-const { renderHome } = require("service/home")
-const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
-const { data } = require('service/getIp')
-const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService } = require('service/getIp')
+const { getHelpService, postKeywordsService, getArticleDetailService,getInfoListService } = require('service/helpCenterService')
+const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService ,data} = require('service/getIpService')
+const { renderPackage } = require("service/packageService");
+
 
 // activity urils func
 const { getTime } = require('utils/activityTime')
@@ -22,7 +22,7 @@ const config = require("../config/app.config")
 
 //套餐购买
 //const packageObj = require("./package.js")
-const { renderPackage } = require("service/package");
+
 // const { log } = require("console");
 const appKey = require("config/app.key.config")
 
@@ -54,7 +54,7 @@ function Router(App) {
       url: '/',
       link: [],
     }
-    let list = await renderHome();
+    let list = await getInfoListService();
     homeData.articleList = list.typeList ? list.typeList : [];
 
 
@@ -67,8 +67,6 @@ function Router(App) {
 
   //落地推广页面
   router.get("/promotion", async (ctx) => {
-    //const res = await renderHome()
-    //
     return ctx.render("promotion/index", {
       name: '落地推广页面',
       url: 2222
@@ -126,7 +124,7 @@ function Router(App) {
 
 
   //业务场景-businessScene
-  const getBusinessSceneRender = require("service/businessScene")
+  const getBusinessSceneRender = require("service/businessSceneService")
   router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
     const { currentId, title } = getBusinessSceneRender(ctx.request.params)
     return ctx.render("businessScene/businessScene", { currentId, title })
@@ -167,7 +165,7 @@ function Router(App) {
     const lists = await postKeywordsService(body)
 
     //各栏目推荐文章 以及当前栏目id下的信息
-    let { typeList: tabList } = await renderHome() || [];
+    let { typeList: tabList } = await getInfoListService() || [];
     return ctx.render("help/keyWord", { lists, tabList })
   })
 
@@ -184,7 +182,7 @@ function Router(App) {
 
 
     //各栏目推荐文章 以及当前栏目id下的信息
-    let { typeList: tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
+    let { typeList: tabList, typeObj } = await getInfoListService(articleDetailVO.type) || [];
     return ctx.render("help/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
   })
 
