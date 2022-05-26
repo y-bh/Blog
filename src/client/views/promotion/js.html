@@ -3,11 +3,11 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-21 20:55:04
+ * @LastEditTime: 2022-05-26 14:20:04
 -->
 <script>
   //获取location 地址栏query查询参数
-  function getParams() {
+  function getParams () {
     var url = decodeURI(location.search);
     var request = {};
     if (url.indexOf("?") !== -1) {
@@ -20,7 +20,7 @@
     }
     return JSON.parse(JSON.stringify(request));
   }
-  function fingerprint2() {
+  function fingerprint2 () {
     //生成浏览器指纹
     Fingerprint2.get(function (components) {
       const values = components.map(function (component, index) {
@@ -78,13 +78,13 @@
 
 
   //获取手机验证码
-  async function getRegisterCode(phoneData) {
+  async function getRegisterCode (phoneData) {
 
     let url = 'registerCode'
     const res = await ajax({
       url,
       query: JSON.stringify({
-        phone: JSON.stringify(phoneData)
+        phone: phoneData
       })
     }, '/api')
     return res
@@ -95,7 +95,7 @@
 
 
   //注册代码
-  async function postRegister(params) {
+  async function postRegister (params) {
     if (!params) return
     let url = "/login"
     const res = await ajax({
@@ -207,7 +207,7 @@
     let timeout2 = 60;
     let timeout3 = 60;
     // 验证用户名输入
-    function usernameValidate(val) {
+    function usernameValidate (val) {
       let value = val;
       let reg = /^[a-zA-Z0-9_@]{4,16}$/;
       let flag = reg.test(value);
@@ -237,7 +237,7 @@
     }
 
     // 验证手机格式
-    function phoneValidate(val) {
+    function phoneValidate (val) {
       sameTime = 'true';
       let value = val;
       let reg = /^1[34589]\d{9}|17[2-9]\d{8}|16[0-1]\d{8}|16[3-4]\d{8}|166\d{8}|16[8-9]\d{8}$/;
@@ -261,7 +261,7 @@
     }
 
     // 验证手机验证码
-    function codeValidate(val) {
+    function codeValidate (val) {
       sameTime = 'true';
       let value = val;
       if (!value) {
@@ -286,7 +286,7 @@
     }
 
     // 验证密码
-    function passwordValidate(val) {
+    function passwordValidate (val) {
       sameTime = 'true';
       let value = val;
       if (!value) {

@@ -3,11 +3,11 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-25 17:26:35
+ * @LastEditTime: 2022-05-26 14:35:35
 -->
 <template>
   <div class="personalAuth">
-    <el-dialog v-model="dialogVisible">
+    <el-dialog v-model="dialogVisible"  @close ="closeDialog">
       <DialogTitle title-content="个人认证" />
       <!-- 姓名身份证 -->
       <div class="formContent" v-show="authPersonStep == 1">
@@ -115,6 +115,7 @@ export default {
     const vaildIDCardRef = ref(null);
     const message = inject("message");
     const authPersonStep = ref(1); //认证步骤1:姓名身份证验证 2:支付宝二维码 3：认证成功 4：认证失败
+    let isSubmitIdCard = ref(false); //是否已经提交用户信息
     const form = reactive({
       ruleForm: {
         name: "",
@@ -157,12 +158,13 @@ export default {
             let url = res.data && res.data.url;
             if (url) {
               qrcodeRef.value.innerHTML = "";
-              certifyId = res.data.certifyId;
+              certifyId.value = res.data.certifyId;
               new QRCode(qrcodeRef.value, {
                 text: url, //扫描二维码
                 width: 240,
                 height: 240,
               });
+              isSubmitIdCard.value = true;
             }
             authPersonStep.value = 2;
           } else {
@@ -197,7 +199,14 @@ export default {
       if (!formEl) return;
       formEl.resetFields();
     };
+    const closeDialog = function(){
+      //console.log("----------测试关闭-------------");
+      if(isSubmitIdCard.value){
+        emit("updateUserInfo");
+      }
+    }
     return {
+      closeDialog,
       cancel,
       qrcodeRef,
       ...toRefs(form),

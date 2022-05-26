@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 个人中心开发环境配置
  * @Date: 2022-04-25 16:16:31
- * @LastEditTime: 2022-05-18 16:53:22
+ * @LastEditTime: 2022-05-26 14:46:46
  */
 
 const gulp = require('gulp');
@@ -16,7 +16,7 @@ const webpackConfig = require("../config/webpack.config");
 const appConfig = require("config/app.config.js")
 
 //webpack 本地开发任务
-async function webpackDev() {
+async function webpackDev () {
   console.log("个人中心:本地开发环境构建任务")
   return await gulp.src('src/client_m/index.js')
 
@@ -33,6 +33,10 @@ async function webpackDev() {
         watch: true,
         plugins: [
           ...webpackConfig.plugins,
+          new webpack.DefinePlugin({
+            'process.env.APP_ENV': "'local'"
+          }),
+
           //设置全局变量
           new webpack.DefinePlugin({
             'process.env.common': appConfig.globalConfig,
@@ -47,7 +51,7 @@ async function webpackDev() {
 
 
 //webpack 生产打包任务
-async function webpackProd() {
+async function webpackProd () {
   console.log("个人中心:生产环境构建任务")
   return await gulp.src('src/client_m/index.js')
     .pipe(webpackStream(
