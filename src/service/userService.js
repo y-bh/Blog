@@ -7,7 +7,7 @@
  */
 
 
-const { postRegisterDao, postResetDao, postLoginDao,resetCodeDao,registerCodeDao } = require('dao/user')
+const { postRegisterDao, postResetDao, postLoginDao,resetCodeDao,registerCodeDao } = require('dao/userDao')
 
 
 // 注册服务
@@ -38,7 +38,7 @@ const registerService = async (data = null) => {
   const params = {
     "data": JSON.stringify(tem)
   }
-
+  console.log("注冊傳參:",params)
 
   // 获取注册数据
   const res = await postRegisterDao(params)

@@ -1,21 +1,24 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-25 13:40:40
+ * @LastEditTime: 2022-05-26 10:08:31
 -->
 <template>
   <div class="updatePwdDialog">
-    <el-dialog v-model="dialogVisibleFlag">
+    <el-dialog 
+      v-model="dialogVisibleFlag"
+      custom-class="customize_dialog dialog-alone"
+    >
       <DialogTitle title-content="修改密码" />
-      <div class="formContent">
+      <div class="formContent dialog-body">
         <el-form
           ref="vaildPwdRef"
           :model="ruleForm"
           :rules="rules"
           label-width="120px"
-          class="demo-ruleForm"
+          class="demo-ruleForm el-form-right"
         >
           <el-form-item label="原密码" prop="originPassword">
             <el-input
@@ -35,7 +38,7 @@
               placeholder="请输入确认密码"
             />
           </el-form-item>
-          <div class="common-btnGroup pt-30 pb-40">
+          <div class="dialog-footer child-item footer-double">
             <el-button type="primary" plain @click="oncancel">取消</el-button>
             <el-button type="warning" @click="onSubmit">保存</el-button>
           </div>

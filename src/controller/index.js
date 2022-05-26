@@ -1,7 +1,7 @@
 /*
  * @Author: 朱占伟
  * @LastEditors: liyuntao
- * @description: 路由控制层
+ * @description: 注册后端路由
  * @Date: 2022-04-22 15:07:10
  * @LastEditTime: 2022-05-25 15:34:53
  */
@@ -9,31 +9,29 @@
 
 
 const router = require("koa-router")();
-const { renderHome } = require("service/home")
-const { getHelpService, postKeywordsService, getArticleDetailService } = require('service/helpCenter')
-const { data } = require('service/getIp')
-const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService } = require('service/getIp')
-
-// activity urils func
-const { getTime } = require('utils/activityTime')
-
 const fs = require("fs")
-const config = require("../config/app.config")
+var ejs = require('ejs')
 
-//套餐购买
-//const packageObj = require("./package.js")
-const { renderPackage } = require("service/package");
-// const { log } = require("console");
+// 应用配置文件
+const config = require("../config/app.config")
+// 全局数据key 配置对象
 const appKey = require("config/app.key.config")
 
+//node 端自定义接口
 const SelfApi = require("./selfApi")
 
+const { getHelpService, postKeywordsService, getArticleDetailService, getInfoListService } = require('service/helpCenterService')
+const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService, data } = require('service/getIpService')
+const { renderPackage } = require("service/packageService");
+
+const { getTime } = require('utils/activityTime')
+
+
+
+//注册后端路由功能
 function Router(App) {
 
-  var ejs = require('ejs')
-
-
-  // 前端自定义api 处理部分
+  // node 端接口文件
   router.use("/api", SelfApi.routes(), SelfApi.allowedMethods())
 
 
@@ -46,48 +44,39 @@ function Router(App) {
     return ctx.render("payCenter/index", homeData)
   })
 
+
   //首页
   router.get("/", async (ctx) => {
+    const homeData = {}
+    //资讯中心数据
+    let list = await getInfoListService();
 
-    const homeData = {
-      name: '用户',
-      url: '/',
-      link: [],
-    }
-    let list = await renderHome();
     homeData.articleList = list.typeList ? list.typeList : [];
-
 
     //activity
     const t = getTime()
     homeData.actt = t
-
-    return ctx.render("home/home", homeData)
+    return ctx.render("home/index", homeData)
   })
+
 
   //落地推广页面
   router.get("/promotion", async (ctx) => {
-    //const res = await renderHome()
-    //
-    return ctx.render("promotion/index", {
-      name: '落地推广页面',
-      url: 2222
-    })
+    return ctx.render("promotion/index")
   })
 
 
   //购买页-package
   router.get("/package", async (ctx) => {
-    /**数据请求 */
-    // 
+    // 套餐数据
     let packageObj = await renderPackage();
 
     //activity
     const t = getTime()
     packageObj.actt = t
-    // 
-    return ctx.render("package/package", packageObj)
+    return ctx.render("package/index", packageObj)
   })
+
 
   //购买页wx支付-package-Wxpay
   router.get("/package/wxPay", async (ctx) => {
@@ -110,8 +99,6 @@ function Router(App) {
 
     let icon = await getIconService(token)
     let apiL = await getWhiteListApiService(token, { data: { pageNum: 1, pageSize: 9999 } })
-
-
     let getIpData = {
       staticData,
       province,
@@ -120,16 +107,15 @@ function Router(App) {
       icon
     }
 
-    return ctx.render("getIp/getIp", getIpData)
+    return ctx.render("getIp/index", getIpData)
   })
 
 
-
   //业务场景-businessScene
-  const getBusinessSceneRender = require("service/businessScene")
+  const getBusinessSceneRender = require("service/businessSceneService")
   router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
     const { currentId, title } = getBusinessSceneRender(ctx.request.params)
-    return ctx.render("businessScene/businessScene", { currentId, title })
+    return ctx.render("businessScene/index", { currentId, title })
   })
 
 
@@ -167,7 +153,7 @@ function Router(App) {
     const lists = await postKeywordsService(body)
 
     //各栏目推荐文章 以及当前栏目id下的信息
-    let { typeList: tabList } = await renderHome() || [];
+    let { typeList: tabList } = await getInfoListService() || [];
     return ctx.render("help/keyWord", { lists, tabList })
   })
 
@@ -184,19 +170,14 @@ function Router(App) {
 
 
     //各栏目推荐文章 以及当前栏目id下的信息
-    let { typeList: tabList, typeObj } = await renderHome(articleDetailVO.type) || [];
+    let { typeList: tabList, typeObj } = await getInfoListService(articleDetailVO.type) || [];
     return ctx.render("help/helpDetails", { typeObj, articleKeyWords, prefix, suffix, related, keywords, articleDetailVO, tabList })
   })
 
 
-
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
-    /**数据请求 */
-    return ctx.render("firmsServer/firmsServer", {
-      name: 'This is firmsServer',
-      data: 2222,
-    })
+    return ctx.render("firmsServer/index")
   })
 
   //用户总页面-login-index
@@ -222,7 +203,6 @@ function Router(App) {
       title = "注册用户-天启HTTP官网"
     }
     return ctx.render("login/index", {
-      name: 'This is main login',
       title,
       pageType //页面类型
     })
@@ -231,10 +211,7 @@ function Router(App) {
   //用户协议-user-protocol
   router.get("/user/protocol", async (ctx) => {
     /**数据请求 */
-    return ctx.render("user/protocol", {
-      name: 'This is protocol window',
-      data: 2222,
-    })
+    return ctx.render("user/protocol")
   })
 
 
@@ -248,7 +225,6 @@ function Router(App) {
 
   //放置公共底部正则
   const footRe = /(?=\<\/body\>)/
-
 
   router.get(["/manager", "/manager/:path"], async (ctx) => {
 
@@ -281,9 +257,7 @@ function Router(App) {
 
   /** 404 */
   router.get("/404", async (ctx) => {
-    return ctx.render("error/404", {
-      name: 'This is 404',
-    })
+    return ctx.render("error/404")
   })
 
 

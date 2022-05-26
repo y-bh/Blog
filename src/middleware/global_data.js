@@ -9,8 +9,8 @@
 const appKey = require("config/app.key.config")
 
 //顶部导航活动
-const { renderTab, getQueryLink } = require("service/common")
-const { getCateTypes } = require("service/helpCenter")
+const { renderTab, getQueryLink } = require("service/commonService")
+const { getCateTypes } = require("service/helpCenterService")
 
 
 //需要获取全局数据【例如用户信息,公共底部的数据等必须配置路由权限】

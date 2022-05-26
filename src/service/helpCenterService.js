@@ -1,11 +1,11 @@
 /*
  * @Author: 陈昊天
  * @LastEditors: 秦琛
- * @description: 帮助中心业务代码
+ * @description: 文章相关业务代码
  * @Date: 2022-05-16 16:37:33
  * @LastEditTime: 2022-05-19 15:32:24
  */
-const { getArticleTypeDao, postArticleDao, getArticleDetailDao, postKeywordsDao } = require("dao/helpCenter")
+const { getArticleTypeDao, postArticleDao, getArticleDetailDao, postKeywordsDao ,getArticleListDao} = require("dao/helpCenterDao")
 const { dateFormat } = require("utils/dateFormat")
 const { cateTypes } = require("config/app.key.config")
 const { setStore, getStore } = require("store")
@@ -35,7 +35,7 @@ const getCateTypes = async () => {
   }
 }
 
-//获取帮助中心列表
+//获取文章列表--帮助中心
 const getHelpService = async (data, articleTypes = []) => {
 
   //1. 获取栏目类型
@@ -106,7 +106,7 @@ const getHelpService = async (data, articleTypes = []) => {
 }
 
 
-//文章详情页
+//文章详情页--帮助中心
 const getArticleDetailService = async (id) => {
   if (!id) return null
 
@@ -134,7 +134,7 @@ const getArticleDetailService = async (id) => {
 }
 
 
-//获取关键词聚合页文章列表
+//关键词文章列表--关键词聚合页
 const postKeywordsService = async (data) => {
 
   let lists = {
@@ -209,9 +209,59 @@ const postKeywordsService = async (data) => {
   }
 }
 
+
+//资讯中心 -- 首页
+const getInfoListService = async (type = null) => {
+  //文章类型
+  let typeList = await getCateTypes();
+  let typeObj = null
+  if (typeList && typeList.length > 0) {
+    if (typeList.length > 3) {
+      typeList = typeList.slice(0, 3)
+    }
+    //根据id获取文章列表
+
+    let articleDetail = await getArticleListDao();
+    typeList.forEach(item => {
+      let typeId = item.id + "";
+
+      //获取传参对应栏目类型的数据
+      if (type && type === item.id) {
+        typeObj = {
+          id: item.id,
+          type: item.type,
+          typeAlias: item.typeAlias
+        }
+      }
+
+      item.articleDetail = [];
+      if (typeId && articleDetail[typeId]) {
+
+        articleDetail[typeId].forEach((articleItem) => {
+          // console.log(3333, articleItem.createTime)
+          let dateNum = new Date(parseInt(articleItem.createTime) * 1000)
+          articleItem.convertData = dateFormat(dateNum,'YYYY-mm-dd');
+
+        })
+        //console.log(4444444, articleDetail[typeId]);
+        if (articleDetail[typeId].length > 5) {
+          item.articleDetail = articleDetail[typeId].slice(0, 5);
+        } else {
+          item.articleDetail = articleDetail[typeId];
+        }
+      }
+    });
+  }
+  return { typeList, typeObj };
+}
+
+
+
+
 module.exports = {
   postKeywordsService,
   getHelpService,
   getArticleDetailService,
-  getCateTypes
+  getCateTypes,
+  getInfoListService
 }

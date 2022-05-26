@@ -67,6 +67,14 @@ $columnMt: 60px;
 }
 
 .packageBuy {
+  .payMoney-origin,
+  .payMoney-origin2 {
+    span {
+      font-size: 20px;
+      color: #677294;
+      text-decoration: line-through;
+    }
+  }
   margin-top: 80px;
   .icon-zhifubao {
     color: #579fff;
@@ -82,7 +90,6 @@ $columnMt: 60px;
   input:focus-visible {
     outline: none !important;
   }
-
 
   //活动-start
   // old
@@ -123,7 +130,6 @@ $columnMt: 60px;
     }
   }
   //活动-end
-
 
   .redPacket {
     display: flex;
@@ -568,11 +574,7 @@ $columnMt: 60px;
             color: #ff5f00;
             font-weight: bold;
           }
-          .payMoney-origin span {
-            font-size: 20px;
-            color: #677294;
-            text-decoration: line-through;
-          }
+
           .pay-button {
             width: 240px;
             height: 60px;

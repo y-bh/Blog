@@ -55,12 +55,22 @@
       &:last-child {
         margin-right: 0;
       }
+      .el-form-item__content{
+        width: 200px;
+      }
     }
 
     .el-form-item__label {
       color: #576b95;
       font-size: 16px;
       text-align: left;
+    }
+
+    .el-form-right {
+      .el-form-item__label {
+        text-align: right;
+        // margin-right: 20px;
+      }
     }
   }
 

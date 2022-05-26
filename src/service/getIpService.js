@@ -5,7 +5,7 @@
  * @Date: 2022-05-16 21:29:43
  * @LastEditTime: 2022-05-25 10:51:53
  */
-const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao,getIconDao } = require("dao/getIp")
+const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao,getIconDao } = require("dao/getIpDao")
 
 let codeDemo = [
   {

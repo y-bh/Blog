@@ -6,7 +6,7 @@
  * @LastEditTime: 2022-05-23 19:55:40
  */
 
-const { getQueryLinkData, getMealActivity } = require("dao/common")
+const { getQueryLinkData, getMealActivity } = require("dao/commonDao")
 
 
 const { active_tab, links } = require("config/app.key.config")
