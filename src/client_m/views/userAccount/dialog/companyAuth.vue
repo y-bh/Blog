@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 17:11:27
+ * @LastEditTime: 2022-05-26 17:23:48
 -->
 <template>
   <div class="companyAuth">
@@ -122,9 +122,9 @@
           <span>资料审核中，您可自由购买套餐或提取IP</span>
         </div>
         <div class="common-btnGroup center pt-20 pb-40">
-          <a href="/package" class="mr-40">
-            <el-button type="primary">购买套餐</el-button>
-          </a>
+          <el-button type="primary" class="mr-40" @click="goPackage"
+            >购买套餐</el-button
+          >
           <a href="/getIp">
             <el-button type="warning">提取IP</el-button>
           </a>
@@ -336,11 +336,11 @@ export default {
       let res = await companyImg({ data: imgFileData });
       //console.log(444444444444, res);
       if (res.code != 200) {
-        message.error(res&&res.message?res.message:"提交文件失败！");
+        message.error(res && res.message ? res.message : "提交文件失败！");
         dialogVisible.value = false;
       } else {
         authCompanyStep.value = 4;
-        isSubmitIdCard.value = true
+        isSubmitIdCard.value = true;
         
       }
     };
@@ -393,7 +393,12 @@ export default {
         emit("updateUserInfo");
       }
     };
+    const goPackage = function () {
+      sessionStorage.setItem("packageTab", 1); //1:余额 2：包时
+      window.location.href = "/package";
+    };
     return {
+      goPackage,
       closeDialog,
       reCompanyAuth,
       companyCancel,
