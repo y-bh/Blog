@@ -1,7 +1,7 @@
 /*
  * @Author: 朱占伟
  * @LastEditors: liyuntao
- * @description: 路由控制层
+ * @description: 注册后端路由
  * @Date: 2022-04-22 15:07:10
  * @LastEditTime: 2022-05-25 15:34:53
  */
@@ -9,31 +9,29 @@
 
 
 const router = require("koa-router")();
-const { getHelpService, postKeywordsService, getArticleDetailService,getInfoListService } = require('service/helpCenterService')
-const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService ,data} = require('service/getIpService')
-const { renderPackage } = require("service/packageService");
-
-
-// activity urils func
-const { getTime } = require('utils/activityTime')
-
 const fs = require("fs")
+var ejs = require('ejs')
+
+// 应用配置文件
 const config = require("../config/app.config")
-
-//套餐购买
-//const packageObj = require("./package.js")
-
-// const { log } = require("console");
+// 全局数据key 配置对象
 const appKey = require("config/app.key.config")
 
+//node 端自定义接口
 const SelfApi = require("./selfApi")
 
+const { getHelpService, postKeywordsService, getArticleDetailService, getInfoListService } = require('service/helpCenterService')
+const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService, data } = require('service/getIpService')
+const { renderPackage } = require("service/packageService");
+
+const { getTime } = require('utils/activityTime')
+
+
+
+//注册后端路由功能
 function Router(App) {
 
-  var ejs = require('ejs')
-
-
-  // 前端自定义api 处理部分
+  // node 端接口文件
   router.use("/api", SelfApi.routes(), SelfApi.allowedMethods())
 
 
@@ -46,46 +44,39 @@ function Router(App) {
     return ctx.render("payCenter/index", homeData)
   })
 
+
   //首页
   router.get("/", async (ctx) => {
-
-    const homeData = {
-      name: '用户',
-      url: '/',
-      link: [],
-    }
+    const homeData = {}
+    //资讯中心数据
     let list = await getInfoListService();
-    homeData.articleList = list.typeList ? list.typeList : [];
 
+    homeData.articleList = list.typeList ? list.typeList : [];
 
     //activity
     const t = getTime()
     homeData.actt = t
-
     return ctx.render("home/home", homeData)
   })
 
+
   //落地推广页面
   router.get("/promotion", async (ctx) => {
-    return ctx.render("promotion/index", {
-      name: '落地推广页面',
-      url: 2222
-    })
+    return ctx.render("promotion/index")
   })
 
 
   //购买页-package
   router.get("/package", async (ctx) => {
-    /**数据请求 */
-    // 
+    // 套餐数据
     let packageObj = await renderPackage();
 
     //activity
     const t = getTime()
     packageObj.actt = t
-    // 
     return ctx.render("package/package", packageObj)
   })
+
 
   //购买页wx支付-package-Wxpay
   router.get("/package/wxPay", async (ctx) => {
@@ -108,8 +99,6 @@ function Router(App) {
 
     let icon = await getIconService(token)
     let apiL = await getWhiteListApiService(token, { data: { pageNum: 1, pageSize: 9999 } })
-
-
     let getIpData = {
       staticData,
       province,
@@ -120,7 +109,6 @@ function Router(App) {
 
     return ctx.render("getIp/getIp", getIpData)
   })
-
 
 
   //业务场景-businessScene
@@ -187,14 +175,9 @@ function Router(App) {
   })
 
 
-
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
-    /**数据请求 */
-    return ctx.render("firmsServer/firmsServer", {
-      name: 'This is firmsServer',
-      data: 2222,
-    })
+    return ctx.render("firmsServer/firmsServer")
   })
 
   //用户总页面-login-index
@@ -229,10 +212,7 @@ function Router(App) {
   //用户协议-user-protocol
   router.get("/user/protocol", async (ctx) => {
     /**数据请求 */
-    return ctx.render("user/protocol", {
-      name: 'This is protocol window',
-      data: 2222,
-    })
+    return ctx.render("user/protocol")
   })
 
 
@@ -246,7 +226,6 @@ function Router(App) {
 
   //放置公共底部正则
   const footRe = /(?=\<\/body\>)/
-
 
   router.get(["/manager", "/manager/:path"], async (ctx) => {
 
@@ -279,9 +258,7 @@ function Router(App) {
 
   /** 404 */
   router.get("/404", async (ctx) => {
-    return ctx.render("error/404", {
-      name: 'This is 404',
-    })
+    return ctx.render("error/404")
   })
 
 
