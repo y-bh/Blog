@@ -161,10 +161,10 @@ function setCookie(cname, cvalue, exdays) {
 */
 async function ajax(params, prex = '/javaProxy') {
   let baseURL = '';
-  if(params.url && params.url.slice(0,1) !== "/"){
+  if (params.url && params.url.slice(0, 1) !== "/") {
     baseURL = '/' + params.url
   } else {
-    baseURL =  params.url
+    baseURL = params.url
   }
   return new Promise(function (resolve, reject) {
     let token = getCookie('TQ-TOKEN')
@@ -317,8 +317,8 @@ function change() {
   window.isMobile = (width <= 575)
   window.viewWidth = width;
   var size = `${(width / 1920) * 16}`
-  if (size <= 8) {
-    size = 8
+  if (width <= 775) {
+    size = 16
   }
   size = Math.round(size)
   // 推广页方案与全局方案冲突,优先采用推广页自己的方案

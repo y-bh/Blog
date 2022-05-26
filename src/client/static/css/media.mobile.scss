@@ -78,6 +78,71 @@
     }
   }
 
+  // 帮助中心详情页
+  .helper-details {
+    margin-top: 100px !important;
+    .box {
+      display: unset;
+    }
+
+    div.a_right {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: none;
+
+      .related_blogs {
+        margin-top: 0 !important;
+      }
+    }
+  }
+
+  //关键词聚合页
+  .tags {
+    max-width: none;
+    margin-bottom: 0px !important;
+    .tab-content {
+      display: unset;
+      .content {
+        margin-top: 30px;
+      }
+      .tab-nav {
+        max-width: none;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        justify-content: center;
+      }
+    }
+  }
+
+  //企业服务
+  div.firm-wrap {
+    width: auto;
+    .require {
+      display: inline;
+    }
+    .form {
+      max-width: 550px;
+      margin: 0 auto;
+    }
+    .input-wrap {
+      max-width: 500px;
+      margin-top: 10px;
+    }
+    .form-group {
+      margin-bottom: 0;
+    }
+    .label-key {
+      justify-content: flex-start !important;
+    }
+    .bottom_btn {
+      margin-top: 30px;
+    }
+  }
+
+  //.公共底部
   .getip-wrap {
     width: 90%;
     grid-template-columns: unset;
@@ -111,6 +176,11 @@
           .blog_item {
             width: 100%;
             .right {
+              .go_detail {
+                span {
+                  display: none;
+                }
+              }
               .desc {
                 width: auto;
               }
@@ -121,6 +191,56 @@
     }
   }
 
+  // 帮助中心详情页
+  .helper-details {
+    div.a_right {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  //关键词聚合页
+  .tags {
+    max-width: none;
+    margin-bottom: 0px !important;
+    margin-top: 40px !important;
+    .blog_item {
+      width: auto;
+
+      .right {
+        .desc {
+          width: auto;
+        }
+        .go_detail span {
+          display: none;
+        }
+      }
+    }
+
+    .tab-content {
+      display: unset;
+      .content {
+        margin-top: 30px;
+      }
+      .tab-nav {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        justify-content: center;
+      }
+    }
+  }
+
+  //企业服务
+  div.firm-wrap {
+    form.form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .input-wrap {
+      max-width: 410px;
+    }
+  }
+
+  // 公共底部
   .footer-wrap {
     .footer-main-content.mediaStyle {
       padding: 40px 0% 10px;
@@ -167,18 +287,25 @@
     }
     .blog_item {
       .right {
-        .go_detail {
-          span {
-            display: none;
-          }
-        }
         .desc {
           margin-top: 10px !important;
         }
       }
     }
   }
+
+  //企业服务
+  div.firm-wrap {
+    form.form {
+      max-width: 370px;
+      margin: 0 auto;
+    }
+    .input-wrap {
+      max-width: 370px;
+    }
+  }
 }
+
 @media screen and (max-width: 375px) {
   //帮助中心
   div.help-center {
