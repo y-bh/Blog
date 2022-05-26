@@ -622,7 +622,7 @@ async function toPayMoney(tabType) {
     // 记录界面路径，登录完回跳
     let $path = window.location.pathname;
     sessionStorage.setItem('_TQRoutePath', $path)
-    window.location.href = '/login'
+    window.location.href = '/login?back=package'
   }
 }
 
