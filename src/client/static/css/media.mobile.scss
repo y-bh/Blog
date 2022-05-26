@@ -98,6 +98,25 @@
     }
   }
 
+  //关键词聚合页
+  .tags {
+    max-width: none;
+    margin-bottom: 0px !important;
+    .tab-content {
+      display: unset;
+      .content {
+        margin-top: 30px;
+      }
+      .tab-nav {
+        max-width: none;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        justify-content: center;
+      }
+    }
+  }
+
   .getip-wrap {
     width: 90%;
     grid-template-columns: unset;
@@ -148,6 +167,38 @@
     }
   }
 
+  //关键词聚合页
+  .tags {
+    max-width: none;
+    margin-bottom: 0px !important;
+    margin-top: 40px !important;
+    .blog_item {
+      width: auto;
+
+      .right {
+        .desc {
+          width: auto;
+        }
+        .go_detail span {
+          display: none;
+        }
+      }
+    }
+
+    .tab-content {
+      display: unset;
+      .content {
+        margin-top: 30px;
+      }
+      .tab-nav {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        justify-content: center;
+      }
+    }
+  }
+
+  // 公共底部
   .footer-wrap {
     .footer-main-content.mediaStyle {
       padding: 40px 0% 10px;
@@ -206,6 +257,7 @@
     }
   }
 }
+
 @media screen and (max-width: 375px) {
   //帮助中心
   div.help-center {
