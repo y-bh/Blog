@@ -1,13 +1,13 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-25 17:23:03
+ * @LastEditTime: 2022-05-26 13:19:37
 -->
 <template>
   <div class="companyAuth">
-    <el-dialog v-model="dialogVisible">
+    <el-dialog v-model="dialogVisible" custom-class="customClass customize_dialog dialog-alone">
       <DialogTitle :title-content="title" />
       <!-- 姓名身份证 -->
       <div class="formContent" v-show="authCompanyStep == 1">

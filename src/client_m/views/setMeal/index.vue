@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-25 17:17:38
+ * @LastEditTime: 2022-05-26 13:27:44
 -->
 <template>
   <div class="container">
@@ -152,7 +152,7 @@
         </el-table-column>
         <el-table-column align='center' label="操作" fixed="right">
           <!-- mealPayType  1付费   3：测试 -->
-          <!-- proxyType 套餐类型   0: '包量'     1: '包时'       10: '计次'   20: '福利'  70: '不限量'-->
+          <!-- proxyType 套餐类型   0: '包量'     1: '包时'       10: '计次'   60: '福利'  70: '不限量'-->
           <!-- iptype     10: '普通IP'   20: '优质IP'    30: '长效固定',  40: '长效静态'-->
           <template #default="{ row }">
             <el-dropdown trigger="click" @command="handleCommand($event, row)">
@@ -164,9 +164,9 @@
                   <!--判断付费类型   付费 -->
                   <template v-if="row.mealPayType === 1">
                     <!--判断套餐类型    计次  福利 -->
-                    <template v-if="row.proxyType === 10 || row.proxyType === 20">
+                    <template v-if="row.proxyType === 10 || row.proxyType === 60">
                       <el-dropdown-item command="renewal">续费</el-dropdown-item>
-                      <el-dropdown-item command="extract" v-if="row.proxyType !== 10">api提取</el-dropdown-item>
+                      <el-dropdown-item command="extract" v-if="row.proxyType === 10">api提取</el-dropdown-item>
                     </template>
                     <template v-else>
                       <!-- 判断套餐状态  正常  用完-->
@@ -193,6 +193,7 @@
                       </template>
                     </template>
                   </template>
+                  <!-- 测试 -->
                   <template v-else>
                     <el-dropdown-item command="extract">api提取</el-dropdown-item>
                   </template>
