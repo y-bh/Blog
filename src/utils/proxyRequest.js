@@ -10,11 +10,6 @@
 const appConfig = require("config/app.config")
 import Requeset from "./baseRequest"
 let baseURL = `${appConfig.url}`;
-
-import { AESAUTH, encrypt, decrypt } from "./AES";
-
-const toString = Object.prototype.toString
-
 class proxyAjax extends Requeset {
   constructor(baseURL, timeout = 4000) {
     super(baseURL, timeout)
@@ -32,53 +27,7 @@ class proxyAjax extends Requeset {
     });
 
   }
-
-
-  /**
- * 封装get方法
- * @param url
- * @param data
- * @param token  登录后token
- * @returns {Promise}
- */
-  get(url, params = {}, token) {
-    try {
-      return this.service({
-        url,
-        params,
-        method: 'GET',
-        token
-      });
-    } catch (error) {
-
-    }
-
-  }
-
-
-
-  /**
-* 封装post请求
-* @param url
-* @param data
-* @param token  登录后token
-* @returns {Promise}
-*/
-  post(url, data = {}, token) {
-    try {
-      return this.service({
-        url,
-        method: 'POST',
-        data: JSON.stringify(data),
-        token
-      });
-    } catch (error) {
-
-    }
-  }
-
 }
-
 
 const service = new proxyAjax(baseURL)
 module.exports = service
