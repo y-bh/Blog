@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-25 11:41:46
+ * @LastEditTime: 2022-05-25 17:45:40
  */
 
 //点击定位
@@ -14,7 +14,7 @@ $('.anchor span').on('click', function () {
   })
 })
 $('.demo span').on('click', function () {  //代码demo定位
-  let currentDemo = $('.right div').last($(this).index()).offset().top
+  let currentDemo = $('.code_demo_right div').last($(this).index()).offset().top
   $('body,html').stop().animate({
     scrollTop: currentDemo
   })

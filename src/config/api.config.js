@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-25 17:00:47
+ * @LastEditTime: 2022-05-25 17:41:32
  */
 
 module.exports = {
@@ -65,6 +65,7 @@ module.exports = {
   'GET_ORDERSTATE': '/order/state',   // 获取订单状态
   'POST_MERGE': '/proxyUpgrade/merge',  // 合并套餐
   'POST_SECRET': '/proxy/secret',  // 重置密钥
+  'POST_DELETE': '/proxy/hidden',  // 删除套餐
 
   /*企业服务*/
   'COMPANY_NEW': '/company/new', //提交企业服务
@@ -95,6 +96,6 @@ module.exports = {
   "POST_USER_REGISTER_CODE": "/auth/registerCode",
 
   //重置验证码接口
-    "POST_USER_RESET_CODE": "/user/forget/password/getCode",
+  "POST_USER_RESET_CODE": "/user/forget/password/getCode",
 
 }
