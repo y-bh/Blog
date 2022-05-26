@@ -296,13 +296,11 @@ async function loginSubmit(type) {
         })
 
       }
-
-      if (type === 'reset') {
+      if (type !== 'login') {
         location.href = "/login"
       } else {
         //back
-        if (type === 'login' && back) {
-
+        if (back) {
           let urls = `${back}`
           if (urls & urls.charAt(0) != '/') {
             urls = "/" + urls
@@ -310,7 +308,6 @@ async function loginSubmit(type) {
           location.href = `${back}`
           return
         }
-
         location.href = "/manager/user"
       }
     },

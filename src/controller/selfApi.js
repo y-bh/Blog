@@ -34,12 +34,12 @@ router.post("/login", async (ctx) => {
     res = await registerService(params)
   }
 
-  
+
   //注册/登录/重置 成功后业务
   if (+res.code === 200) {
-    if (res.data.token) {
+    // 处理登录问题
+    if (res.data.token && params.type === 'login') {
       const { token } = res.data
-
       //设置cookie 值
       ctx.cookies.set(appKey.token, token, { httpOnly: false })
 
