@@ -1,26 +1,30 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-24 20:25:01
+ * @LastEditTime: 2022-05-26 10:14:44
 -->
 <template>
   <div class="updateMobile">
-    <el-dialog v-model="dialogVisible" :before-close="beforeCloseFun">
+    <el-dialog 
+      v-model="dialogVisible" 
+      :before-close="beforeCloseFun"
+      custom-class="customize_dialog dialog-alone"
+    >
       <DialogTitle title-content="换绑手机" />
-      <div class="formContent">
+      <div class="formContent dialog-body">
         <div class="remarks">
-          <span
-            >更换手机后，所有资金、订单、套餐等信息和权益都会转移到新手机号码下，原手机号需要重新注册才可登录</span
-          >
+          <span>
+            更换手机后，所有资金、订单、套餐等信息和权益都会转移到新手机号码下，原手机号需要重新注册才可登录
+          </span>        
         </div>
         <el-form
           ref="vaildPhoneRef"
           :model="ruleForm"
           :rules="rules"
           label-width="120px"
-          class="demo-ruleForm mt-30"
+          class="demo-ruleForm mt-30 el-form-right"
         >
           <el-form-item label="当前手机号" prop="curPhone">
             <el-input
@@ -53,13 +57,13 @@
               >
             </div>
           </el-form-item>
-          <div class="common-btnGroup pt-30 pb-40">
-            <el-button type="primary" plain @click="onCancel(vaildPhoneRef)"
-              >取消</el-button
-            >
-            <el-button type="warning" @click="onSubmit(vaildPhoneRef)"
-              >确定</el-button
-            >
+          <div class="dialog-footer child-item footer-double">
+            <el-button type="primary" plain @click="onCancel(vaildPhoneRef)">
+              取消
+            </el-button>
+            <el-button type="warning" @click="onSubmit(vaildPhoneRef)">
+              确定
+            </el-button>
           </div>
         </el-form>
       </div>
