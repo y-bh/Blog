@@ -191,9 +191,16 @@ function checkForm(params = null, type = 'login') {
       return res
     }
 
+    if ((params.pwd + '').length < 6) {
+      res.isPass = false
+      res.msg = '密码长度在6到20个字符!'
+      res.key = 'pwd'
+      return res
+    }
+
     if (!rules.pwd.test(params.pwd)) {
       res.isPass = false
-      res.msg = '密码长度在6到20个字符密码只能由字母，数字，特殊符号组成'
+      res.msg = '密码只能由字母，数字，特殊符号组成'
       res.key = 'pwd'
       return res
     }
@@ -220,9 +227,16 @@ function checkForm(params = null, type = 'login') {
       return res
     }
 
+    if (params.userName.length < 6) {
+      res.isPass = false
+      res.msg = '帐号长度在6到16个字符'
+      res.key = 'userName'
+      return res
+    }
+
     if (!rules.userName.test(params.userName)) {
       res.isPass = false
-      res.msg = '帐号只能由字母，数字，_@组成帐号长度在6到16个字符'
+      res.msg = '帐号只能由字母，数字，_@组成'
       res.key = 'userName'
       return res
     }
@@ -235,9 +249,16 @@ function checkForm(params = null, type = 'login') {
       return res
     }
 
+    if ((params.pwd + '').length < 6) {
+      res.isPass = false
+      res.msg = '密码长度在6到20个字符!'
+      res.key = 'pwd'
+      return res
+    }
+
     if (!rules.pwd.test(params.pwd)) {
       res.isPass = false
-      res.msg = '密码长度在6到20个字符密码只能由字母，数字，特殊符号组成'
+      res.msg = '密码只能由字母，数字，特殊符号组成'
       res.key = 'pwd'
       return res
     }
