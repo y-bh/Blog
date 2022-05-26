@@ -199,28 +199,58 @@
                                           <% var mealItemId=item.id %>
                                             <% if(activityVoMap && activityVoMap[mealItemId]){ %>
                                               <% var activityType=activityVoMap[mealItemId]["activityType"] %>
-                                                <% if(activityType && activityVoMap[mealItemId].rate !='100' ){ %>
+
+                                                <!-- <% if(activityType && activityVoMap[mealItemId].rate !='100' ){ %>
                                                   <div class="discount" activityType="<%= activityType %>"
                                                     rate="<%= activityVoMap[mealItemId].rate%>">
                                                     <% if(activityType==1){ %>
                                                       <span>
                                                         <%= activityVoMap[mealItemId].rate/10 %>折
                                                       </span>
-                                                      <% } %>
-                                                        <% if(activityType==2){ %>
-                                                          <span>赠<%= activityVoMap[mealItemId].rate%>%</span>
-                                                          <% } %>
-                                                  </div>
-                                                  <% } %>
                                                     <% } %>
 
-                                                      <div class="times mt-15"><span>
-                                                          <%= item.name %>
-                                                        </span></div>
+                                                    <% if(activityType==2){ %>
+                                                      <span>赠<%= activityVoMap[mealItemId].rate%>%</span>
+                                                    <% } %>
 
-                                                      <div class="amount"><span>
-                                                          <%= days %>天
-                                                        </span></div>
+
+                                                  </div>
+                                                <% } %> -->
+
+                                                <!--activityType==1：折扣  -->
+                                                <% if(activityType && activityType==1 && activityVoMap[mealItemId].rate
+                                                  !='100' ){ %>
+                                                  <div class="discount" activityType="<%= activityType %>"
+                                                    rate="<%= activityVoMap[mealItemId].rate%>">
+                                                    <span>
+                                                      <%= activityVoMap[mealItemId].rate/10 %>折
+                                                    </span>
+                                                  </div>
+                                                  <% } %>
+                                                    <!-- 1：折扣 end -->
+
+                                                    <!--activityType==2：增量  -->
+                                                    <% if(activityType && activityType==2 &&
+                                                      activityVoMap[mealItemId].rate !='0' ){ %>
+                                                      <div class="discount" activityType="<%= activityType %>"
+                                                        rate="<%= activityVoMap[mealItemId].rate%>">
+                                                        <span>赠<%= activityVoMap[mealItemId].rate%>%</span>
+                                                      </div>
+                                                      <% } %>
+                                                        <!-- 增量结束 -->
+
+                                                        <% } %>
+                                                          <div class="times mt-15">
+                                                            <span>
+                                                              <%= item.name %>
+                                                            </span>
+                                                          </div>
+
+                                                          <div class="amount">
+                                                            <span>
+                                                              <%= days %>天
+                                                            </span>
+                                                          </div>
                                       </li>
                                       <% }) %>
                             </ul>
