@@ -1,13 +1,17 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 13:19:37
+ * @LastEditTime: 2022-05-26 15:11:38
 -->
 <template>
   <div class="companyAuth">
-    <el-dialog v-model="dialogVisible" custom-class="customClass customize_dialog dialog-alone">
+    <el-dialog
+      v-model="dialogVisible"
+      custom-class="customClass customize_dialog dialog-alone"
+      @close="closeDialog"
+    >
       <DialogTitle :title-content="title" />
       <!-- 姓名身份证 -->
       <div class="formContent" v-show="authCompanyStep == 1">
@@ -213,6 +217,7 @@ export default {
     const message = inject("message");
     const authCompanyStep = ref(1); //认证步骤 1 1：姓名身份认证 2.扫支付宝 3：上传文件 4:提交后资料审核中 5：审核中 6：认证成功 7:认证失败 8：个人认证
     const title = ref("企业认证");
+    let isSubmitIdCard = ref(false); //是否已经提交用户信息
     // const userInfo = reactive({
     //   userName:"",
     //   idCardNo=""
@@ -273,6 +278,7 @@ export default {
                 width: 240,
                 height: 240,
               });
+              isSubmitIdCard.value = true;
             }
             authCompanyStep.value = 2;
           } else {
@@ -328,12 +334,14 @@ export default {
       let imgFileData = "";
       imgFileData = await getBase64(fileList[0].raw);
       let res = await companyImg({ data: imgFileData });
-      console.log(444444444444, res);
+      //console.log(444444444444, res);
       if (res.code != 200) {
-        message.error(res.msg);
+        message.error(res&&res.message?res.message:"提交文件失败！");
         dialogVisible.value = false;
       } else {
         authCompanyStep.value = 4;
+        isSubmitIdCard.value = true
+        
       }
     };
     const getBase64 = async (file) => {
@@ -362,6 +370,7 @@ export default {
     };
     const goPersonAuth = () => {
       title.value = "个人认证";
+      emit("updateUserInfo");
       authCompanyStep.value = 8;
     };
     const upgradeCompany = () => {
@@ -379,7 +388,13 @@ export default {
         authCompanyStep.value = 1;
       }
     };
+    const closeDialog = function () {
+      if (isSubmitIdCard.value) {
+        emit("updateUserInfo");
+      }
+    };
     return {
+      closeDialog,
       reCompanyAuth,
       companyCancel,
       companyQrcodeRef,

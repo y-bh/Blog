@@ -1,14 +1,15 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 10:08:31
+ * @LastEditTime: 2022-05-26 15:37:26
 -->
 <template>
   <div class="updatePwdDialog">
-    <el-dialog 
+    <el-dialog
       v-model="dialogVisibleFlag"
+      @close="closeDialog"
       custom-class="customize_dialog dialog-alone"
     >
       <DialogTitle title-content="修改密码" />
@@ -126,8 +127,8 @@ export default {
     });
     const oncancel = (formName) => {
       emit("updateDialog", false);
-      if (!vaildPwdRef.value) return;
-      vaildPwdRef.value.resetFields();
+      // if (!vaildPwdRef.value) return;
+      // vaildPwdRef.value.resetFields();
     };
     const onSubmit = (formName) => {
       console.log("=======修改密码数据======", form.ruleForm);
@@ -139,13 +140,13 @@ export default {
             newPassword: form.ruleForm.newPassword,
             checkPassword: form.ruleForm.confirmPassword,
           };
-          console.log(333333333333,params);
+         // console.log(333333333333, params);
           let res = await updatePassword({ data: JSON.stringify(params) });
           if (res.code == 200) {
             $message.success("登录密码修改成功");
             emit("updateDialog", false);
-            if (!vaildPwdRef.value) return;
-            vaildPwdRef.value.resetFields();
+            // if (!vaildPwdRef.value) return;
+            // vaildPwdRef.value.resetFields();
           } else {
             $message.error(
               res.message ? res.message : "登录密码修改失败，请重试！"
@@ -166,7 +167,12 @@ export default {
         dialogVisibleFlag, emit("updateDialog", false);
       },
     });
+    const closeDialog = () => {
+      if (!vaildPwdRef.value) return;
+      vaildPwdRef.value.resetFields();
+    };
     return {
+      closeDialog,
       ...toRefs(form),
       oncancel,
       onSubmit,
