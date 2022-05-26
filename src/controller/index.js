@@ -56,7 +56,7 @@ function Router(App) {
     //activity
     const t = getTime()
     homeData.actt = t
-    return ctx.render("home/home", homeData)
+    return ctx.render("home/index", homeData)
   })
 
 
@@ -74,7 +74,7 @@ function Router(App) {
     //activity
     const t = getTime()
     packageObj.actt = t
-    return ctx.render("package/package", packageObj)
+    return ctx.render("package/index", packageObj)
   })
 
 
@@ -107,7 +107,7 @@ function Router(App) {
       icon
     }
 
-    return ctx.render("getIp/getIp", getIpData)
+    return ctx.render("getIp/index", getIpData)
   })
 
 
@@ -115,7 +115,7 @@ function Router(App) {
   const getBusinessSceneRender = require("service/businessSceneService")
   router.get(["/businessScene", "/businessScene/:currentId"], async (ctx) => {
     const { currentId, title } = getBusinessSceneRender(ctx.request.params)
-    return ctx.render("businessScene/businessScene", { currentId, title })
+    return ctx.render("businessScene/index", { currentId, title })
   })
 
 
@@ -177,7 +177,7 @@ function Router(App) {
 
   //企业服务-firmsServer
   router.get("/firmsServer", async (ctx) => {
-    return ctx.render("firmsServer/firmsServer")
+    return ctx.render("firmsServer/index")
   })
 
   //用户总页面-login-index
@@ -203,7 +203,6 @@ function Router(App) {
       title = "注册用户-天启HTTP官网"
     }
     return ctx.render("login/index", {
-      name: 'This is main login',
       title,
       pageType //页面类型
     })
