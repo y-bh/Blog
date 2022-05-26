@@ -448,6 +448,9 @@
 
       ul {
         width: 390px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         .title {
           font-size: 35px;
           line-height: 50px;
@@ -484,8 +487,8 @@
         background-repeat: no-repeat;
         //background-image: linear-gradient(to bottom left, rgba(208, 224, 255, 0.6), #fff, #fff);
         background-image: radial-gradient(closest-side at 60%, rgba(208, 224, 255, 0.7), #ff000000);
-        
-        transition: all .3s;
+
+        transition: all 0.3s;
         &:hover {
           transform: translateY(-30px);
         }
@@ -665,7 +668,7 @@
         border-radius: 8px;
         .arrow {
           opacity: 0;
-          transition: all .3s;
+          transition: all 0.3s;
         }
         &:hover {
           .arrow {
