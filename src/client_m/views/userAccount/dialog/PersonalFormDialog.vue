@@ -1,13 +1,14 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-26 11:26:46
+ * @LastEditTime: 2022-05-26 14:36:38
 -->
 <template>
   <div class="personalFormDialog">
     <el-dialog 
+      @close ="closeDialog"
       v-model="dialogVisibleFlag" 
       custom-class="customClass customize_dialog dialog-double">
       <DialogTitle title-content="个人资料" />
@@ -197,7 +198,11 @@ export default {
       personForm.business = userInfoSon.userInfo.business;
       personForm.job = userInfoSon.userInfo.profession;
     });
+    const closeDialog = function(){
+     // console.log("----------测试关闭-------------");
+    }
     return {
+      closeDialog,
       perFormRefs,
       rules,
       ...toRefs(userInfoSon),

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-26 11:40:47
+ * @LastEditTime: 2022-05-26 14:24:21
  */
 
 
@@ -389,7 +389,7 @@ function getPackageTimesPrice() {
   //实际价格
   let discountPrice = totalPrice;
   if (activitytype == 1) {
-    discountPrice = totalPrice * rate / 10;
+    discountPrice = totalPrice * rate / 100;
     //$(".payMoney-origin").show();
   }
   $("#totalPrice").html(totalPrice.toFixed(2));

@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 10:14:44
+ * @LastEditTime: 2022-05-26 13:42:50
 -->
 <template>
   <div class="updateMobile">
@@ -193,6 +193,7 @@ export default {
               clearInterval(counter.timer);
               counter.timer = null;
             }
+            emit("updateUserInfo");
             dialogVisible.value = false;
             if (!vaildPhoneRef.value) return;
             vaildPhoneRef.value.resetFields();

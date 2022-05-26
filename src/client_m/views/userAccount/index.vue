@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-25 18:03:58
+ * @LastEditTime: 2022-05-26 13:41:53
 -->
 <template>
   <div class="userAccount">
@@ -204,13 +204,13 @@
     ></updatePwdDialog>
 
     <!-- 换绑手机 -->
-    <UpdateMobile ref="updateMobileRef"></UpdateMobile>
+    <UpdateMobile ref="updateMobileRef" @updateUserInfo="getUserInfo"></UpdateMobile>
     <!-- 密匙 -->
     <KeyDialog ref="keyRef"></KeyDialog>
     <!-- 个人认证 -->
-    <PersonalAuth ref="perAuthRef"></PersonalAuth>
+    <PersonalAuth ref="perAuthRef" @updateUserInfo="getUserInfo"></PersonalAuth>
     <!-- 企业认证 -->
-    <companyAuth ref="companyAuthRef"></companyAuth>
+    <companyAuth ref="companyAuthRef" @updateUserInfo="getUserInfo"></companyAuth>
   </div>
 </template>
 
@@ -306,6 +306,7 @@ export default {
     const updatePwdDialog = (falg) => {
       //密码
       dialogPwdVisible.value = falg;
+      //更新
     };
     const updateMobile = () => {
       //console.log(updateMobileRef.value.dialogVisible);
@@ -462,6 +463,7 @@ export default {
       companyAuthRef.value.dialogVisible = true;
     };
     return {
+      getUserInfo,
       vipNum,
       queryCompayStatus,
       personAuth,
