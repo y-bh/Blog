@@ -3,12 +3,12 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-25 16:51:53
+ * @LastEditTime: 2022-05-26 15:44:39
 -->
 <template>
   <div class="container grid">
-    <div class="top">
-      <el-form class="form flex flex-wrap" ref="searchFormRef">
+    <div class="search-form">
+      <el-form label-width="70px" ref="searchFormRef">
         <el-form-item label="订单编号">
           <el-input placeholder="请输入订单编号" v-model="searchForm.orderNo"></el-input>
         </el-form-item>
@@ -34,13 +34,8 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="bottom">
-      <el-table :data="tableData" :header-cell-style="{
-        height: '80px',
-        background: '#F2F7FE',
-        color: '#333333',
-        fontSize: '14px',
-      }" @selection-change="handleSelectionChange">
+    <!-- <div class="bottom"> -->
+      <el-table :data="tableData" @selection-change="handleSelectionChange">
         <template #empty>
           <div>
             <div class="flex justify-content-center empty-box"></div>
@@ -93,15 +88,12 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="创建|支付时间" align="center" sortable width="180px">
+        <el-table-column label="创建|支付时间" prop="createTime" align="center" sortable width="180px">
           <template #default="{ row }">
-            <div class="box flex-center flex-column">
-              <span>{{
-                  row.createTime ? dateFormat(new Date(row.createTime * 1000)) : "--"
-              }}</span>
-              <span>{{
-                  row.payTime ? dateFormat(new Date(row.payTime * 1000)) : "--"
-              }}</span>
+             <div>
+                {{row.createTime ? dateFormat(new Date(row.createTime * 1000)) : "--"}}
+               <br>
+                {{row.payTime ? dateFormat(new Date(row.payTime * 1000)) : "--"}}
             </div>
           </template>
         </el-table-column>
@@ -112,7 +104,7 @@
           </template>
         </el-table-column>
       </el-table>
-    </div>
+    <!-- </div> -->
 
     <el-pagination v-model:currentPage="searchForm.pageNum" class="text-right mt-30"
       layout="total, sizes, prev, pager, next, jumper" :total="totalSize" :page-sizes="[20, 50, 100, 500]"

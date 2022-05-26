@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 合并套餐
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-25 17:16:47
+ * @LastEditTime: 2022-05-26 15:18:28
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -46,7 +46,7 @@ export default {
                 }
             },
             async submitMerge(){
-                if(!mergeForm.sequence){
+                if(!state.mergeForm.sequence){
                     message.warning({
                         message: '请输入套餐ID',
                         showClose: true
