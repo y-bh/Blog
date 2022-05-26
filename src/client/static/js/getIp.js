@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-26 11:37:53
+ * @LastEditTime: 2022-05-26 18:16:04
  */
 
 //点击定位
@@ -228,7 +228,7 @@ $(function () {
     apiParams[type] = val
   }
 
-  $('.form-check-input, .form-check-label').on('click', function (e) {
+  $('.form-check-inp, .form-check-label').on('click', function (e) {
     if ($(e.target).is("label"))
       return;
     changeParams($(this).parent().attr('d-type'), $(this).val())
