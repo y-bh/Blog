@@ -1,6 +1,6 @@
 .rightToolbar {
   position: fixed;
-  bottom: 10%;
+  bottom: 14%;
   border-radius: 4px;
   right: 46px;
   width: 100px;
@@ -21,8 +21,8 @@
   .toolbar-toTop a {
     width: 100px;
     height: 129px;
-    background: rgba(255, 255, 255, 0.39);
-    box-shadow: 0px 10px 20px rgba(76, 86, 100, 0.1);
+    background: rgba(255, 255, 255);
+    box-shadow: 0px 10px 20px rgba(76, 86, 100);
     border-radius: 50px;
     display: flex;
     flex-direction: column;
@@ -50,8 +50,8 @@
   }
   .toolbar {
     height: 327px;
-    background: rgba(255, 255, 255, 0.39);
-    box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+    background: rgba(255, 255, 255);
+    box-shadow: 0px 0px 20px rgba(208, 224, 255);
     border-radius: 50px;
     padding: 15px 0;
     position: relative;
@@ -79,8 +79,8 @@
         top: 0;
         .left-box {
           // height: 357px;
-          background: rgba(255, 255, 255, 0.39);
-          box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+          background: #ffffff;
+          box-shadow: 0px 0px 20px rgba(208, 224, 255);
           border-radius: 8px;
           text-align: center;
           padding: 0 40px;
@@ -96,6 +96,7 @@
             display: flex;
             .number {
               width: 110px;
+              text-align: left;
             }
             .image {
               width: 20px;
@@ -136,8 +137,8 @@
         padding-right: 30px;
         .left-box {
           // height: 262px;
-          background: rgba(255, 255, 255, 0.39);
-          box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+          background: #ffffff;
+          box-shadow: 0px 0px 20px rgba(208, 224, 255);
           border-radius: 8px;
           text-align: center;
           padding: 0 16px;
