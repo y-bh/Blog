@@ -43,7 +43,7 @@ class Request {
 
           return {
             code: data.code || -1,
-            message: JSON.stringify(data.message) || '接口异常'
+            message:data.message || '接口异常'
           };
         }
       }
