@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-26 13:27:44
+ * @LastEditTime: 2022-05-26 15:43:37
 -->
 <template>
   <div class="container">
@@ -29,7 +29,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="剩余天数">
-          <el-input v-model="searchForm.remainDays" placeholder="请输入"></el-input>
+          <el-input v-model="searchForm.remainDays" placeholder="请输入" oninput="value=value.replace(/[^\d]/g,'')"></el-input>
         </el-form-item>
         <el-form-item label="使用时间">
           <el-date-picker v-model="searchForm.useTime" type="datetimerange" value-format="X" range-separator="至"
@@ -161,21 +161,23 @@
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <!--判断付费类型   付费 -->
+                  <!--判断付费类型   付费 第一步-->
                   <template v-if="row.mealPayType === 1">
-                    <!--判断套餐类型    计次  福利 -->
+                    <!--判断套餐类型    计次  福利 第二步-->
                     <template v-if="row.proxyType === 10 || row.proxyType === 60">
                       <el-dropdown-item command="renewal">续费</el-dropdown-item>
                       <el-dropdown-item command="extract" v-if="row.proxyType === 10">api提取</el-dropdown-item>
                     </template>
+                    <!-- 包时 包量   第二步-->
                     <template v-else>
-                      <!-- 判断套餐状态  正常  用完-->
+                      <!-- 判断套餐状态  正常 1  用完 3   第三步-->
                       <template v-if="row.state === 1 || row.state === 3">
-                        <!-- api购买 -->
+                        <!-- api购买  第四步-->
                         <template v-if="row.preOrderPaid">
                           <el-dropdown-item command="extract" v-if="row.state !== 4">api提取</el-dropdown-item>
                           <el-dropdown-item command="changeLog">变更记录</el-dropdown-item>
                         </template>
+                        <!-- 第四步 -->
                         <template v-else>
                           <el-dropdown-item command="renewal">续费</el-dropdown-item>
                           <el-dropdown-item command="supplement" v-if="row.proxyType !== 0">补量</el-dropdown-item>
@@ -185,15 +187,15 @@
                           <el-dropdown-item command="changeLog">变更记录</el-dropdown-item>
                         </template>
                       </template>
+                      <!--  2 禁用  4到期/过期   第三步-->
                       <template v-else>
-                        <!--  2 禁用  3 到期 -->
-                        <el-dropdown-item command="renewal" v-if="row.state === 2 && !row.preOrderPaid">续费
+                        <el-dropdown-item command="renewal" v-if="row.state === 4 && !row.preOrderPaid">续费
                         </el-dropdown-item>
                         <el-dropdown-item command="changeLog">变更记录</el-dropdown-item>
                       </template>
                     </template>
                   </template>
-                  <!-- 测试 -->
+                  <!-- 测试   第一步-->
                   <template v-else>
                     <el-dropdown-item command="extract">api提取</el-dropdown-item>
                   </template>
@@ -339,9 +341,9 @@ export default {
         methods.getList();
       },
       async onReset () {
-        console.log(searchFormRef);
         // 重置表单查询参数
         searchFormRef.value.resetFields();
+        state.searchForm.useTime = null;
         await $router.push({
           path: $route.path
         })

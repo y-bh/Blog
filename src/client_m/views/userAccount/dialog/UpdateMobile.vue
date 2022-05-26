@@ -3,13 +3,14 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 13:42:50
+ * @LastEditTime: 2022-05-26 15:36:59
 -->
 <template>
   <div class="updateMobile">
-    <el-dialog 
-      v-model="dialogVisible" 
+    <el-dialog
+      v-model="dialogVisible"
       :before-close="beforeCloseFun"
+      @close="closeDialog"
       custom-class="customize_dialog dialog-alone"
     >
       <DialogTitle title-content="换绑手机" />
@@ -17,7 +18,7 @@
         <div class="remarks">
           <span>
             更换手机后，所有资金、订单、套餐等信息和权益都会转移到新手机号码下，原手机号需要重新注册才可登录
-          </span>        
+          </span>
         </div>
         <el-form
           ref="vaildPhoneRef"
@@ -133,10 +134,10 @@ export default {
       if (!vaildFlag) {
         return;
       }
-      console.log(88888888888888);
+     // console.log(88888888888888);
       const TIME_COUNT = 60;
       counter.show = false;
-      console.log(3333333333333,counter.timer)
+     // console.log(3333333333333, counter.timer);
       if (!counter.timer) {
         counter.count = TIME_COUNT;
         counter.show = false;
@@ -160,14 +161,6 @@ export default {
       } else {
         $message.error(res.message ? res.message : "获取验证码失败!"); //"获取验证码失败!"+ res.message
       }
-    };
-    const onCancel = () => {
-      clearInterval(counter.timer);
-      counter.timer = null;
-      counter.show = true;
-      dialogVisible.value = false;
-      if (!vaildPhoneRef.value) return;
-      vaildPhoneRef.value.resetFields();
     };
 
     const onSubmit = (formName) => {
@@ -195,8 +188,8 @@ export default {
             }
             emit("updateUserInfo");
             dialogVisible.value = false;
-            if (!vaildPhoneRef.value) return;
-            vaildPhoneRef.value.resetFields();
+            // if (!vaildPhoneRef.value) return;
+            // vaildPhoneRef.value.resetFields();
           } else {
             $message.error(
               res.message ? res.message : "手机号换绑失败，请重试！"
@@ -212,7 +205,18 @@ export default {
       // console.log("---------------关闭了-----------");
       done();
     };
+    const onCancel = () => {
+      clearInterval(counter.timer);
+      counter.timer = null;
+      counter.show = true;
+      dialogVisible.value = false;
+    };
+    const closeDialog = () => {
+      if (!vaildPhoneRef.value) return;
+      vaildPhoneRef.value.resetFields();
+    };
     return {
+      closeDialog,
       ...toRefs(counter),
       ...toRefs(form),
       onSubmit,

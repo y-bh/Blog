@@ -1,31 +1,93 @@
 
-.container {
-    grid-template-rows: auto 1fr;
-    grid-row-gap: 40px;
-    .top {
-      box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
-      border-radius: 4px;
-      padding: 40px 35px;
-    }
-    .form > .el-form-item {
-      margin-right: 50px;
-    }
-  }
-  .order_red {
-    color: #f8486f;
-  }
-  .order_green {
-    color: #27adc2;
-  }
-  .order_yellow {
-    color: #fc7019;
-  }
+// .container {
+//     grid-template-rows: auto 1fr;
+//     grid-row-gap: 40px;
+//     .top {
+//       box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+//       border-radius: 4px;
+//       padding: 40px 35px;
+//     }
+//     .form > .el-form-item {
+//       margin-right: 50px;
+//     }
+//   }
+//   .order_red {
+//     color: #f8486f;
+//   }
+//   .order_green {
+//     color: #27adc2;
+//   }
+//   .order_yellow {
+//     color: #fc7019;
+//   }
   
-.reset-form-item {
-    display: inline-flex;
+// .reset-form-item {
+//     display: inline-flex;
 
-    .el-form-item__label {
-        width: 0;
-        padding: 0;
-    }
+//     .el-form-item__label {
+//         width: 0;
+//         padding: 0;
+//     }
+// }
+.search-form {
+  margin-bottom: 40px;
+
+  ::v-deep(.el-form) {
+      color: red;
+      box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+      padding: 20px 12px;
+      box-sizing: border-box;
+
+      .el-form-item {
+          display: inline-flex;
+          margin: 10px;
+
+          .el-form-item__label {
+              min-width: 70px;
+              padding-right: 12px;
+          }
+
+          .el-input {
+              width: 180px;
+          }
+
+          .filter-item {
+              // width: 120px;
+          }
+      }
+
+      .reset-form-item {
+          display: inline-flex;
+
+          .el-form-item__label {
+              width: 0;
+              padding: 0;
+          }
+          .el-form-item__content{
+            margin-left: 0 !important;
+          }
+      }
+  }
 }
+
+.el-table {
+  ::v-deep(th) {
+      background: rgba(242, 247, 254, 0.39);
+      color: #333;
+  }
+
+  ::v-deep(.discount_btn) {
+      width: 32px;
+      padding: 10px 8px 10px 6px;
+      margin-right: 6px;
+      span {
+          writing-mode: vertical-lr;  // 文字垂直
+      }
+  }
+  .sequence{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+  }
+}
+

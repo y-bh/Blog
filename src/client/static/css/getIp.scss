@@ -192,7 +192,7 @@
   width: 140px;
 }
 .label_lay {
-  width: 125px;
+  width: 120px;
 }
 .narrow_box {
   width: 200px;
@@ -313,15 +313,27 @@
   padding: 0px 20px;
 }
 .note_content .code {
+  padding: 12px 0;
   width: 810px;
   border-radius: 8px;
   background-color: rgba(208, 224, 255, 0.25);
+
+  p{
+    font-size: 14px;
+
+    span{
+      margin-bottom: 12px;
+    }
+  }
 }
 .return_right{
   font-size: 14px;
   &>div{
     width: fit-content;
     margin: 0 auto;
+    span{
+      margin-bottom: 12px;
+    }
   }
 }
 .top_title {
