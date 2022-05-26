@@ -1,56 +1,61 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-25 14:32:00
+ * @LastEditTime: 2022-05-26 11:26:46
 -->
 <template>
   <div class="personalFormDialog">
-    <el-dialog v-model="dialogVisibleFlag" custom-class="customClass">
+    <el-dialog 
+      v-model="dialogVisibleFlag" 
+      custom-class="customClass customize_dialog dialog-double">
       <DialogTitle title-content="个人资料" />
-      <div class="personal-info ml-40 mr-40 mt-40">
-        <div class="title mb-30"><span>基本信息</span></div>
-        <ul>
-          <li class="mb-20">
-            <span class="name mr-20">用户名</span
-            ><span class="val">{{ userInfo.username }}</span>
-          </li>
-          <li class="mb-20">
-            <span class="name mr-20">注册手机号</span
-            ><span class="val">{{ userInfo.phone }}</span>
-          </li>
-          <li class="mb-20">
-            <span class="name mr-20">身份证姓名</span
-            ><span class="val">{{ userInfo.identityName }}</span>
-          </li>
-          <li class="mb-20">
-            <span class="name mr-20">身份证号码</span
-            ><span class="val">{{ userInfo.identityNum }}</span>
-          </li>
-        </ul>
-      </div>
-      <div class="personal-other ml-40 mr-40 mt-20 mb-20">
-        <div class="title mb-20"><span>其他信息</span></div>
+      <div class="dialog-body">
+        <div class="person-introduce">
+          <p class="title"><span>基本信息</span></p>
+        
+          <ul class="person-cont">
+            <li class="person-item">
+              <span>用户名</span>
+              <span>{{ userInfo.username }}</span>
+            </li>
+            <li class="person-item">
+              <span>注册手机号</span>
+              <span>{{ userInfo.phone }}</span>
+            </li>
+            <li class="person-item">
+              <span>身份证姓名</span>
+              <span>{{ userInfo.identityName }}</span>
+            </li>
+            <li class="person-item">
+              <span>身份证号码</span>
+              <span>{{ userInfo.identityNum }}</span>
+            </li>
+          </ul>
+        </div>
+      
+
+        <div class="title"><span>其他信息</span></div>
         <el-form
           :inline="true"
-          :label-width="55"
+          label-width="85px"
           label-position="left"
           :model="personForm"
           :rules="rules"
           ref="perFormRefs"
-          class="personForm"
+          
         >
-          <el-form-item label="微信" class="ml-40">
+          <el-form-item label="微信">
             <el-input v-model="personForm.wxNo" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="QQ" class="ml-40 bw" prop="QQNO">
+          <el-form-item label="QQ" prop="QQNO">
             <el-input v-model="personForm.QQNO" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="邮箱" class="ml-40" prop="emailNo">
+          <el-form-item label="邮箱" prop="emailNo">
             <el-input v-model="personForm.emailNo" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="业务方向" class="ml-40 bw">
+          <el-form-item label="业务方向">
             <el-select v-model="personForm.business" placeholder="请选择">
               <el-option
                 v-for="item in personForm.businessArr"
@@ -60,14 +65,16 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="职业" class="ml-40">
+          <el-form-item label="职业">
             <el-input v-model="personForm.job" placeholder="请输入" />
           </el-form-item>
+
+          <div class="dialog-footer child-item footer-double">
+            <el-button type="primary" plain @click="onCancel">取消</el-button>
+            <el-button type="warning" @click="onSubmit">保存</el-button>
+          </div>
         </el-form>
-        <div class="common-btnGroup pt-30 pb-40">
-          <el-button type="primary" plain @click="onCancel">取消</el-button>
-          <el-button type="warning" @click="onSubmit">保存</el-button>
-        </div>
+        
       </div>
     </el-dialog>
   </div>
@@ -204,53 +211,50 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";
-.personalFormDialog {
+
+.dialog-body {
   .title {
     font-size: 20px;
     font-weight: 400;
-    line-height: 26px;
-    color: #4c5664;
+    color: #4C5664;
+    margin-bottom: 20px;
   }
-  .personal-info {
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      li {
-        font-size: 16px;
-        .name {
-          display: inline-block;
-          width: 80px;
-          margin-right: 20px;
-          white-space: nowrap;
-        }
-        .val {
-          display: inline-block;
-          width: 155px;
-           white-space: nowrap;
-        }
-      }
-    }
-  }
-  .personForm {
-    margin-left: -40px;
-  }
+}
 
-  ::v-deep .customClass {
-    width: 660px !important;
-    .el-form-item {
-      margin-right: 0;
+.person-introduce {
+    padding: 0 0 20px 0;
+    box-sizing: border-box;
+
+    .person-title {
+        margin: 0;
+        padding: 0 0 10px 0;
+        font-size: 16px;
+        font-weight: bold;
+        box-sizing: border-box;
     }
-    .el-form-item__label {
-      width: 55px !important;
-      white-space: nowrap;
+
+    .person-cont {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+
+        .person-item {
+            flex: 0 0 50%;
+            padding: 10px 0;
+            // margin-right: 25px;
+            box-sizing: border-box;
+            list-style: none;
+
+            span:first-child {
+              display: inline-block;
+              min-width: 80px;
+              margin-right: 6px;
+            }
+        }
     }
-  }
-  ::v-deep .el-form-item__content {
-    width: 200px;
-  }
-  ::v-deep .bw .el-form-item__label {
-    width: 78px !important;
-  }
 }
 </style>
 <style>
