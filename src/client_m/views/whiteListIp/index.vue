@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-24 20:36:34
+ * @LastEditTime: 2022-05-26 13:50:33
 -->
 <template>
   <div class="white-list-wrap">
@@ -153,7 +153,7 @@ export default {
 
     //get tutorial
     function goTutorial() {
-      // window.location.href = window.location.origin + '/helpCenter'
+      window.location.href = window.location.origin + '/help-details/188.html'
     }
 
     // go getip

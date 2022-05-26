@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-25 17:47:46
+ * @LastEditTime: 2022-05-26 13:31:21
 -->
 <!DOCTYPE html>
 <html>
@@ -16,8 +16,8 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>提取IP</title>
-  <link rel="stylesheet" href="/css/getIp.css">
   <%- include('../components/style.html'); %>
+  <link rel="stylesheet" href="/css/getIp.css">
 </head>
 
 <body>
@@ -53,16 +53,20 @@
         <!-- 提取IP -->
         <div class="head extract_ip_right">
           <span class="font-25 title">提取IP</span>
-          <div class="extract_type_box flex flex-wrap align-center mt-40">
-            <label class="font-18 main-title-color label_lay">选择提取类型</label>
-            <select id="extractType" class="extract_select form-control">
-              <% if(token) {%> 
-                <% menu && menu.forEach(function(item) { %>
-                  <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
-              <% })} else { %> 
-                <option value='ovvrg05vry8lf21u' d-val="10"> 余额提取 </option>
-              <% } %> 
-            </select>
+          <div class="flex flex-wrap align-center mt-40">
+            <label class="font-18 main-title-color label_lay_s">选择提取类型</label>
+            <div class="getip-select-wrap">
+              <select id="extractType" class="extract_select form-control">
+                <% if(token) {%> 
+                  <% menu && menu.forEach(function(item) { %>
+                    <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
+                <% })} else { %> 
+                  <option value='ovvrg05vry8lf21u' d-val="10"> 余额提取 </option>
+                <% } %> 
+              </select>
+
+            </div>
+            
           </div>
           <!-- 已登录展示 -->
           <% if(token) { %> 
@@ -132,7 +136,7 @@
           </div>
           <div class="form-group mt-30 ip_use" style="display: none">
             <label class="font-18 main-title-color">IP使用时长</label>
-            <div class="ip_use_box grid justify-start align-center mt-45">
+            <div class="ip_use_box grid justify-start align-center mt-20">
               <% staticData && staticData.ipUse && staticData.ipUse.forEach(function(item,index) { %>
                 <div class="ip_use_item flex flex-column align-center justify-center" d-type="time" val=<%= item.val %> ">
                   <div class="time_box">
@@ -149,7 +153,7 @@
                 <% }) %>
             </div>
           </div>
-          <div class="flex flex-wrap align-center data_format_box mt-40">
+          <div class="flex flex-wrap align-center data_format_box mt-30">
             <label class="label_lay font-18 main-title-color">数据格式</label>
             <div class="data_format flex" d-type="type" >
               <div class="narrow_box d_type_change mr-40 flex-center pointer narrow_box_choose" val="txt" >
@@ -161,23 +165,23 @@
             </div>
           </div>
           <div class="isJSON">
-            <div class="flex flex-wrap align-center choose_type_box mt-40">
+            <div class="flex flex-wrap align-center choose_type_box mt-40 pb-10">
               <label class="label_lay font-18 main-title-color">选择属性</label>
               <div class="choose_type">
                 <div class="form-check form-check-inline" d-type="cs">
-                  <input id="cs" class="form-check-input json-check" type="checkbox" value="1">
+                  <input id="cs" class="form-check-inp json-check" type="checkbox" value="1">
                   <label for="cs" class="form-check-label pointer" >
                     城市
                   </label>
                 </div>
                 <div class="form-check form-check-inline" d-type="ys">
-                  <input id="ys" class="form-check-input json-check" type="checkbox" value="1">
+                  <input id="ys" class="form-check-inp json-check" type="checkbox" value="1">
                   <label for="ys" class="form-check-label pointer" >
                     运营商
                   </label>
                 </div>
                 <div class="form-check form-check-inline" d-type="ts">
-                  <input id="ts" class="form-check-input json-check" type="checkbox" value="1">
+                  <input id="ts" class="form-check-inp json-check" type="checkbox" value="1">
                   <label for="ts" class="form-check-label pointer" >
                     到期时间
                   </label>
@@ -205,12 +209,12 @@
               </div>
               <div class="narrow_box mr-40 flex justify-center align-center pointer" val='%5Ct'>
                 <button class="font-15 main-title-color">
-                  换行(\n)
+                  Tab(\t)
                 </button>
               </div>
             </div>
           </div>
-          <div class="choose_area_box mt-40 flex">
+          <div class="choose_area_box align-center mt-40 flex">
             <label class="label_lay font-18 main-title-color">选择地区</label>
             <div class="choose_area grid">
               <div class="top flex">
@@ -225,7 +229,7 @@
                 <div class="bottom flex flex-wrap">
                   <% province && province.forEach(function(item,index) { %>
                     <div class="form-check mr-20 mb-20" d-type="region">
-                      <input id="<%= item.value %>" class="form-check-input region-check" type="checkbox" value="<%= item.value %>">
+                      <input id="<%= item.value %>" class="form-check-inp region-check" type="checkbox" value="<%= item.value %>">
                       <label for="<%= item.value %>" class="form-check-label pointer">
                         <%= item.label %>
                       </label>
@@ -548,7 +552,7 @@
         </div>
         <!-- 代码demo -->
         <div class="head code_demo_right" id="cd">
-          <span class="font-25 title">代码demo</span>
+          <span class="font-25 title">用户接入天启HTTP代码demo</span>
           <div class="demo_box grid mt-40 mb-30">
             <% staticData && staticData.codeDemo && staticData.codeDemo.forEach(function(item,index) { %>
               <div class="demo_box_item flex-center flex-column">

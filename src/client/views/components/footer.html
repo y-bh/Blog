@@ -5,7 +5,7 @@
 <footer class="footer-wrap">
   <div class="footer-main-content mediaStyle">
     <div class="title cooperate-title">
-      商务合作
+      <span>商务合作</span>
     </div>
     <div class="cooperate-content">
       <div>
@@ -30,7 +30,7 @@
     </div>
     <div class="link-content">
       <% links && links.forEach(function(item){ %>
-        <a href="<%- item.link %>" target="<%- item.link || '_blank' %>">
+        <a href="<%- item.link %>" target="<%- item.link || '_blank' %>" title="<%- item.title %>">
           <%- item.title %>
         </a>
         <% }) %>

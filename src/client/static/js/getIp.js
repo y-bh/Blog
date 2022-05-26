@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-25 17:45:40
+ * @LastEditTime: 2022-05-26 11:37:53
  */
 
 //点击定位
@@ -360,5 +360,25 @@ $(function () {
       }
     }
     $('.apiUrl_input').val(url.slice(0, -1))
+  })
+})
+
+
+
+
+
+
+
+
+
+// css样式改变函数
+$(function () {
+  //选择框箭头
+  $('.extract_select').on('focus', function () {
+    $('.getip-select-wrap').addClass('is-active-s')
+  })
+  $('.extract_select').on('blur change', function () {
+    $('.getip-select-wrap').removeClass('is-active-s')
+    $(this)[0].blur()
   })
 })
