@@ -33,10 +33,6 @@ async function webpackDev () {
         watch: true,
         plugins: [
           ...webpackConfig.plugins,
-          new webpack.DefinePlugin({
-            'process.env.APP_ENV': "'local'"
-          }),
-
           //设置全局变量
           new webpack.DefinePlugin({
             'process.env.common': appConfig.globalConfig,

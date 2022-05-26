@@ -6,7 +6,7 @@
  * @LastEditTime: 2022-05-19 15:26:32
  */
 
-const service = require("utils/request")
+const proxyAjax = require("utils/proxyRequest")
 const appKey = require("config/app.key.config");
 const { on } = require("koa");
 /****
@@ -31,7 +31,7 @@ module.exports = (option = {}) => {
         })
       }
 
-      const res = await service.proxyAxios(tem, method, body, headers)
+      const res = await proxyAjax.proxyAxios(tem, method, body, headers)
      // console.log("代理接口返回的数据---------------->", res)
       ctx.body = res
     }

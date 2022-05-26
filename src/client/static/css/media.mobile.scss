@@ -1,5 +1,8 @@
-
 @media screen and (max-width: 1200px) {
+  //帮助中心
+  .help-center {
+  }
+
   .rightToolbar.mediaStyle {
     top: 150px;
   }
@@ -39,8 +42,6 @@
   }
 }
 
-
-
 @media screen and (max-width: 900px) {
   .rightToolbar.mediaStyle {
     display: none;
@@ -54,9 +55,29 @@
   }
 }
 
-
-
 @media screen and (max-width: 775px) {
+  //帮助中心
+  .help-center {
+    .nav {
+      width: 700px;
+      margin: 0 auto;
+      .nav-item {
+        width: auto;
+        height: auto;
+        .active {
+          height: 60px;
+        }
+      }
+    }
+
+    .tab-pane {
+      .content {
+        grid-template-columns: repeat(1, 1fr);
+        justify-items: unset;
+      }
+    }
+  }
+
   .getip-wrap {
     width: 90%;
     grid-template-columns: unset;
@@ -70,9 +91,36 @@
   }
 }
 
-
-
 @media screen and (max-width: 575px) {
+  //帮助中心
+  div.help-center {
+    margin-top: 40px;
+    .nav {
+      width: 500px;
+      .nav-item {
+        .active {
+          height: 50px;
+        }
+      }
+    }
+
+    div.tab-content {
+      margin-top: 40px !important;
+      .tab-pane {
+        .content {
+          .blog_item {
+            width: 100%;
+            .right {
+              .desc {
+                width: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   .footer-wrap {
     .footer-main-content.mediaStyle {
       padding: 40px 0% 10px;
@@ -105,11 +153,37 @@
   }
 }
 
-
-
-
 @media screen and (max-width: 414px) {
+  //帮助中心
+  div.help-center {
+    .nav {
+      width: 370px;
+      .nav-item {
+        a {
+          font-size: 16px;
+          white-space: nowrap;
+        }
+      }
+    }
+    .blog_item {
+      .right {
+        .go_detail {
+          span {
+            display: none;
+          }
+        }
+        .desc {
+          margin-top: 10px !important;
+        }
+      }
+    }
+  }
 }
-
-
-
+@media screen and (max-width: 375px) {
+  //帮助中心
+  div.help-center {
+    .nav {
+      width: 350px;
+    }
+  }
+}
