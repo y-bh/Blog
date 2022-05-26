@@ -196,10 +196,10 @@
 
                       <!-- 子导航 -->
                       <ul class="child-list flex-center child-vertical align-start ">
-                        <% CATEGORY_TYPES && CATEGORY_TYPES.forEach(function(item) { %>
+                        <% CATEGORY_TYPES && CATEGORY_TYPES.forEach(function(item,index) { %>
                           <li class="child-item">
                             <div class="title flex-center justify-around">
-                              <span class="meal-icon icon_fifth"></span>
+                              <span class="meal-icon  <%- index%3 === 0 ? 'icon_fifth' : (index%3 === 1 ? 'icon_sixth' : 'icon_seventh') %> "></span>
                               <a class="title-type" href="/help-center/<%= item.typeAlias%>/1.html">
                                 <%= item.type %>
                               </a>
