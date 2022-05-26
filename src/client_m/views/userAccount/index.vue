@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-26 13:41:53
+ * @LastEditTime: 2022-05-26 17:12:04
 -->
 <template>
   <div class="userAccount">
@@ -29,7 +29,6 @@
           >
             <el-button
               type="warning"
-              v-if="!userInfo.isHasSeller"
               class="ml-20"
             >
               联系销售</el-button
