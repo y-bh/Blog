@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-26 17:59:03
+ * @LastEditTime: 2022-05-26 18:03:45
 -->
 <script>
   //获取location 地址栏query查询参数
@@ -558,7 +558,7 @@
         type: 'register'
       }
 
-      let resp = postRegister(formData)
+      let resp = await postRegister(formData)
 
       if (resp && resp.code === 200) {
         Helper.$message.success({
@@ -616,7 +616,7 @@
         type: 'register'
       }
 
-      let resp = postRegister(formData);
+      let resp = await postRegister(formData);
       if (resp && resp.code === 200) {
         Helper.$message.success({
           message: '注册成功',
@@ -672,7 +672,7 @@
         type: 'register'
       }
 
-      let resp = postRegister(formData);
+      let resp = await postRegister(formData);
       if (resp && resp.code === 200) {
         Helper.$message.success({
           message: '注册成功',
