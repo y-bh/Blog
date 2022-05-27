@@ -77,7 +77,10 @@
     text-align: end;
     font-size: 16px;
     color: #1968FC;
-    cursor: pointer;
+    span{
+      cursor: pointer;
+      width: min-content;
+    }
   }
 
   .gift.gift-used{

@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-27 16:27:43
+ * @LastEditTime: 2022-05-27 16:42:14
 -->
 <template>
   <div
@@ -26,7 +26,7 @@
       <div class="gift-use" @click="useGift"><span>立即使用</span></div>
     </div>
 
-    <div class="show-gift" @click="changeShowGift">隐藏过期/已用礼券</div>
+    <div class="show-gift"><span @click="changeShowGift">隐藏过期/已用礼券</span></div>
 
     <div
       class="gift gift-used"
@@ -47,9 +47,9 @@
         </div>
       </div>
       <div class="gift-use">
-        <span v-if="item.state === '1'">已禁用</span>
-        <span v-else-if="item.state === '2'">已使用</span>
-        <span v-else-if="item.state === '4'">已过期</span>
+        <span v-if="item.state === 1 || item.state === '1'">已禁用</span>
+        <span v-else-if="item.state === 2 || item.state === '2'">已使用</span>
+        <span v-else-if="item.state === 4 || item.state === '4'">已过期</span>
       </div>
     </div>
   </div>
