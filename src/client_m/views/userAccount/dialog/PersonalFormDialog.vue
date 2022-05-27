@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-27 10:56:59
+ * @LastEditTime: 2022-05-27 11:13:05
 -->
 <template>
   <div class="personalFormDialog">
@@ -46,7 +46,7 @@
           :rules="rules"
           ref="perFormRefs"
         >
-          <el-form-item label="微信">
+          <el-form-item label="微信" prop="wxNo">
             <el-input v-model="personForm.wxNo" placeholder="请输入" />
           </el-form-item>
           <el-form-item label="QQ" prop="QQNO">
@@ -111,8 +111,8 @@ export default {
     let rules = reactive({
       wxNo: [
         {
-          pattern: /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/,
-          message: "微信必须是以字母开头的6-20个子母、数字、下划线和减号组成,不能设置中文",
+          pattern: /^[-_a-zA-Z0-9]{6,20}$/,
+          message: "微信只能6到20位,不能设置中文",
           trigger: "blur",
         },
       ],
