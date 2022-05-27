@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-27 13:19:47
+ * @LastEditTime: 2022-05-27 15:11:57
  */
 
 function Helper() { }
@@ -513,3 +513,8 @@ $(function () {
   }, 500))
 })
 
+
+$(function (){
+  let path = window.location.pathname
+  $('a#user-login').attr('href', '/login' + `?back=${path}`)
+})
