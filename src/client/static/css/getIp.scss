@@ -4,7 +4,7 @@
   grid-template-columns: minmax(210px, 320px) auto;
 }
 .left {
-  // position: fixed;
+  position: fixed;
   // height: 86%;
   padding-bottom: 20px;
   // overflow-y: auto;
@@ -95,6 +95,7 @@
   border-radius: 8px;
 }
 .left_count {
+  font-family: "DIN Alternate";
   color: #4C5664;
   font-size: 20px;
 }
