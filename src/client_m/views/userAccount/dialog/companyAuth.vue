@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 17:23:48
+ * @LastEditTime: 2022-05-27 09:29:56
 -->
 <template>
   <div class="companyAuth">
@@ -341,7 +341,6 @@ export default {
       } else {
         authCompanyStep.value = 4;
         isSubmitIdCard.value = true;
-        
       }
     };
     const getBase64 = async (file) => {
@@ -392,6 +391,8 @@ export default {
       if (isSubmitIdCard.value) {
         emit("updateUserInfo");
       }
+      if (!vaildCompanyCardRef.value) return;
+      vaildCompanyCardRef.value.resetFields();
     };
     const goPackage = function () {
       sessionStorage.setItem("packageTab", 1); //1:余额 2：包时

@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 16:50:40
+ * @LastEditTime: 2022-05-27 09:29:16
 -->
 <template>
   <div class="personalAuth">
@@ -204,6 +204,8 @@ export default {
       if(isSubmitIdCard.value){
         emit("updateUserInfo");
       }
+      if (!vaildIDCardRef.value) return;
+      vaildIDCardRef.value.resetFields();
     }
     return {
       closeDialog,
