@@ -13,7 +13,7 @@
           <div class="header">
             <div class="header-main align-center">
               <!-- logo -->
-              <div class="logo align-center mr-20">
+              <div class="logo align-center">
                 <img src="/images/tq_logo.png" alt="天启HTTP" title="天启HTTP">
                 <span class="logo-title box-border ml-10">天启HTTP</span>
               </div>
@@ -199,7 +199,8 @@
                         <% CATEGORY_TYPES && CATEGORY_TYPES.forEach(function(item,index) { %>
                           <li class="child-item">
                             <div class="title flex-center justify-around">
-                              <span class="meal-icon  <%- index%3 === 0 ? 'icon_fifth' : (index%3 === 1 ? 'icon_sixth' : 'icon_seventh') %> "></span>
+                              <span
+                                class="meal-icon  <%- index%3 === 0 ? 'icon_fifth' : (index%3 === 1 ? 'icon_sixth' : 'icon_seventh') %> "></span>
                               <a class="title-type" href="/help-center/<%= item.typeAlias%>/1.html">
                                 <%= item.type %>
                               </a>

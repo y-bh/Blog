@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-26 18:44:10
+ * @LastEditTime: 2022-05-27 10:26:31
  */
 
 function Helper () { }
@@ -427,7 +427,7 @@ $(function () {
     } else {
       $('.header-main .nav-body').addClass('show');
       const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
-      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
+      // $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
       // getTabWidth()
 
     }
