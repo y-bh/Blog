@@ -52,7 +52,7 @@
                 <!-- 按次提取 tab内容 -->
                 <div id="balancePackage" class="tab-balance">
                   <!-- ip价格区域 -->
-                  <div class="ipPrice wow backInUp">
+                  <div class="ipPrice wow fadeInUp">
                     <div class="ipPrice-left">
                       <div class="ipPrice-title"><span>IP价格</span></div>
                       <ul class="ipPrice-list">
@@ -60,7 +60,7 @@
                           <li class="mr-40">
                             <span>
                               <%= countMeal.proxyTime %>
-                            </span>分钟：【<span>
+                            </span>分钟：【<span class="fontblod">
                               <%= countMeal.price %>
                             </span>元/IP】
                           </li>
@@ -69,13 +69,17 @@
                     </div>
                     <!-- Button trigger modal -->
                     <div class="ipPrice-markPng mt-15" data-toggle="modal" data-target="#calculatModal">
+                      <span style="display: none;" id="pointMeText">点我算一算</span>
+                      <div class="orText">
+                        <span  id="pointMe"></span>
+                      </div>
                       <img src="/images/package/calculator.png" alt="计算器">
                     </div>
                   </div>
 
                   <div class="rechargeAmount mt-60">
                     <div class="rechargeAmount-title mb-10"><span>选择预充值金额</span></div>
-                    <ul id="selectRechargeMeals" class="amount-list wow backInUp animate__delay-2">
+                    <ul id="selectRechargeMeals" class="amount-list wow fadeInUp animate__delay-2">
                       <!-- 选择预充值金额 -->
                       <% rechargeMeals.forEach(function(rate,index) { %>
                         <% if (index==0) { %>
@@ -88,14 +92,14 @@
                                 <div class="discount"><span>赠<%= rate.giftRate %>%</span></div>
                                 <% } %>
                                   <div class="rechargeAmount"><span>￥<%= rate.price %></span> </div>
-                                  <div class="lastAmount"><span>实到<%= rate.all %>元</span></div>
+                                  <div class="lastAmount"><span>实到<span class="moneyFont"><%= rate.all %></span>元</span></div>
                           </li>
                           <% }) %>
 
                             <li class="amount-item contactUs" onclick="payMore()">
                               <div class="discount"><span>优惠+</span></div>
-                              <div class="rechargeAmount"><span>预充更多金额</span></div>
-                              <div class="lastAmount"><span>联系平台客户经理</span></div>
+                              <div class="rechargeAmount"><span class="moneyFont moreMoney">预充更多金额</span></div>
+                              <div class="lastAmount"><span class="moneyFont">联系平台客户经理</span></div>
                             </li>
                     </ul>
                   </div>
@@ -132,7 +136,7 @@
                   <!-- 支付金额 -->
                   <div class="payMoney">
                     <div class="payMoney-title mr-40"><span>支付金额</span></div>
-                    <div class="payMoney-number mr-30"><span id="rechargeMoney">0.00</span><span>元</span></div>
+                    <div class="payMoney-number mr-30"><span id="rechargeMoney" class="moneyFont">0.00</span><span>元</span></div>
                     <div class="payMoney-origin2"><span>原价：</span><span id="totalPrice2"
                         noRedPrice="0.00">0.00</span><span>元</span></div>
                     <div class="pay-button pointer" onclick="toPayMoney(1)"><span>立即支付</span></div>
@@ -167,7 +171,7 @@
                                   <%= proxyTime.minute %>分钟
                                 </span></div>
                               <div class="amount"><span>
-                                  <%= proxyTime.price %>元/IP
+                                  <span class="moneyFont"><%= proxyTime.price %></span>元/IP
                                 </span></div>
                           </li>
                           <% }) %>
@@ -315,7 +319,7 @@
                   <!-- 支付金额 -->
                   <div class="payMoney mt-50">
                     <div class="payMoney-title mr-30"><span>支付金额</span></div>
-                    <div class="payMoney-number mr-30"><span id="discountPrice">0.00</span><span>元</span></div>
+                    <div class="payMoney-number mr-30"><span id="discountPrice" class="moneyFont">0.00</span><span>元</span></div>
                     <div class="payMoney-origin"><span>原价：</span><span id="totalPrice"
                         noRedPrice="0.00">0.00</span><span>元</span></div>
                     <div class="pay-button ml-40" onclick="toPayMoney(2)"><span>立即支付</span></div>

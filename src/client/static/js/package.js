@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-27 16:08:15
+ * @LastEditTime: 2022-05-27 17:43:58
  */
 
 
@@ -693,11 +693,23 @@ function getQueryVariable(variable) {
   }
   return (false);
 }
-
+function pointerMe() {
+  var page2Txt = document.getElementById('pointMeText'),
+    page2TxtShow = document.getElementById('pointMe'),
+    i = 0,
+    timer = setInterval(function () {
+      page2TxtShow.innerHTML = page2Txt.innerHTML.substring(0, i);
+      i++;
+      if (page2TxtShow.innerHTML == page2Txt.innerHTML) {
+        clearInterval(timer);
+      };
+    }, 300);
+}
 //动画
 new WOW().init();
 //初始化
 $(async function () {
+  pointerMe();
   await getRedPacket();
   console.log("有效的红包-----------", packageData.allRedPacket);
   commonBalancePay();
@@ -705,8 +717,8 @@ $(async function () {
   //处理其他页面跳转过来tab
   //let curTab = sessionStorage.getItem("packageTab");
   let params = getQueryVariable("type");
-  console.log("跳转过来的链接--------",params)
-  if(params && params=='package'){
+  console.log("跳转过来的链接--------", params)
+  if (params && params == 'package') {
     $("#packageTab").click();
   }
 })
