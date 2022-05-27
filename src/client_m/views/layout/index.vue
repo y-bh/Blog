@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-27 14:04:51
+ * @LastEditTime: 2022-05-27 18:36:55
 -->
 <template>
   <div class="layout">
@@ -100,9 +100,15 @@ export default {
       flex-shrink: 0;
       background: #ffffff;
       ::v-deep(.el-menu) {
+        padding: 20px 0;
         border: none;
         box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
+        
       }
+
+    
+
+    
     }
     .main-right {
       flex: 1;
