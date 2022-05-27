@@ -84,6 +84,13 @@
   }
 }
 
+.left_count,.num,.extract_num_input,.ip_use_item,.demo_title{
+  font-family: "DIN Alternate";
+}
+.num-dw{
+  transform: translateY(3px);
+}
+
 .count {
   padding-bottom: 30px;
   border-bottom: 1px solid #E4E5EB;
@@ -95,7 +102,6 @@
   border-radius: 8px;
 }
 .left_count {
-  font-family: "DIN Alternate";
   color: #4C5664;
   font-size: 20px;
 }
