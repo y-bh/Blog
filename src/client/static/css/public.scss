@@ -3,6 +3,11 @@
   src: url("/font/FZLTHJWGB10.TTF");
 }
 
+@font-face {
+  font-family: "DIN Alternate";
+  src: url("/font/DIN-RegularAlternate-2.otf");
+}
+
 html,
 body {
   width: 100%;
@@ -1134,7 +1139,7 @@ a:hover {
       // overflow: auto;
       // opacity: 1;
       flex-direction: column;
-      padding:  0;
+      padding: 0;
       min-height: 0;
       .child-item {
         max-width: 190px;
@@ -1461,7 +1466,7 @@ a:hover {
       align-items: start;
     }
 
-    .link-title{
+    .link-title {
       align-items: start;
     }
 
@@ -1469,9 +1474,9 @@ a:hover {
       display: grid;
       grid-template-columns: minmax(160px, 180px) minmax(300px, 1fr);
       align-content: start;
-      div{
+      div {
         padding-top: 3px;
-        color: #4C5664;
+        color: #4c5664;
       }
     }
 
@@ -1494,7 +1499,7 @@ a:hover {
       text-align: center;
       font-size: 20px;
       padding-left: 33px;
-      color: #4C5664;
+      color: #4c5664;
       p:first-child {
         margin-bottom: 10px;
       }
@@ -1513,7 +1518,7 @@ a:hover {
         display: block;
         color: inherit;
         align-self: end;
-        color: #4C5664;
+        color: #4c5664;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
