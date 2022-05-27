@@ -260,7 +260,7 @@ function checkForm(params = null, type = 'login') {
 
     if (!params.pwd) {
       res.isPass = false
-      res.msg = '请输入登录密码!'
+      res.msg = '请设置登录密码!'
       res.key = 'pwd'
       return res
     }
