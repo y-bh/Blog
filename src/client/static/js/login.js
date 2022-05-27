@@ -297,11 +297,14 @@ async function loginSubmit(type) {
 
   //校验参数
   const res = checkForm(params, type)
+
   if (!res.isPass) {
     console.log("结构:", res)
     $(".login-danger").hide()
     $("#" + res.key).html(res.msg).show()
     return
+  }else{
+    $(".login-danger").hide()
   }
 
   let text = '登录'
