@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-27 10:12:56
+ * @LastEditTime: 2022-05-27 16:08:15
  */
 
 
@@ -170,8 +170,10 @@ $("#counter-enter").change(function () {
 function convertMultiple(number, min, max, tip) {
   let curNum = Number(number)
   if (curNum < Number(min)) {
+    Helper.$message.warning({ message: "提取总数必须是2000的倍数" })
     return min;
   } else if (curNum > Number(max)) {
+    Helper.$message.warning({ message: "提取总数必须是2000的倍数" })
     return max;
   }
 
