@@ -55,5 +55,16 @@
         justify-content: flex-end;
         align-items: center;
     }
+    .repeat_pwd {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .table-icon{
+            font-weight: 600;
+            color: #1968fc;
+            cursor: pointer;
+        }
+    }
+    
 }
 

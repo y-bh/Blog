@@ -1,9 +1,9 @@
 <!--
  * @Author: 朱占伟
- * @LastEditors: 朱占伟
+ * @LastEditors: 秦琛
  * @description: 个人中心首页
  * @Date: 2022-04-25 16:08:31
- * @LastEditTime: 2022-04-25 17:36:45
+ * @LastEditTime: 2022-05-27 16:03:11
 -->
 
 <template>
@@ -11,11 +11,23 @@
 </template>
 
 <script>
+import { watch, nextTick } from 'vue'
+import { useRoute, useRouter} from 'vue-router'
 export default {
     name: 'App',
-data(){ 
-return {} 
-} 
+    setup(){
+      const $route = useRoute();
+      const $router = useRouter();
+      watch(
+        () => $route.path,
+        // 路由刷新回到页面顶部
+        async () => {
+          document.body.scrollTop = 0
+          document.documentElement.scrollTop = 0
+          await nextTick()
+        }
+      )
+    }
 }
 
 </script>
