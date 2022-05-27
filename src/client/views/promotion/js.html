@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-05-10 13:55:26
- * @LastEditTime: 2022-05-26 18:03:45
+ * @LastEditTime: 2022-05-27 13:14:17
 -->
 <script>
   //获取location 地址栏query查询参数
@@ -87,6 +87,7 @@
         phone: phoneData
       })
     }, '/api')
+    console.log(res, 'res====');
     return res
 
   }
@@ -209,7 +210,7 @@
     // 验证用户名输入
     function usernameValidate (val) {
       let value = val;
-      let reg = /^[a-zA-Z0-9_@]{4,16}$/;
+      let reg = /^[a-zA-Z0-9_@]{6,16}$/;
       let flag = reg.test(value);
       if (!value) {
         Helper.$message.warning({
@@ -218,9 +219,9 @@
         })
         return false;
       } else if (!flag) {
-        if (value.length < 4 || value.length > 16) {
+        if (value.length < 6 || value.length > 16) {
           Helper.$message.warning({
-            message: "用户名长度在4到16个字符",
+            message: "用户名长度在6到16个字符",
             showClose: true
           })
           return false;
@@ -418,9 +419,10 @@
       btn.attr('disabled', true);
 
       const phoneData = $('#phoneNumber').val().trim()
-
+      console.log('接口返回值');
       let resp = await getRegisterCode(phoneData)
-      if (resp === false) {
+      if (resp === false || (resp && resp.code && resp.code !== 200)) {
+        console.log(resp, '接口返回值');
         btn.attr('disabled', false);
         return;
       }
@@ -460,7 +462,7 @@
 
       const phoneData = $('#phoneNumber2').val().trim()
       let resp = await getRegisterCode(phoneData)
-      if (resp === false) {
+      if (resp === false || (resp && resp.code && resp.code !== 200)) {
         btn.attr('disabled', false);
         return;
       }
@@ -496,7 +498,7 @@
 
       const phoneData = $('#phoneNumber3').val().trim()
       let resp = await getRegisterCode(phoneData)
-      if (resp === false) {
+      if (resp === false || (resp && resp.code && resp.code !== 200)) {
         btn.attr('disabled', false);
         return;
       }
@@ -528,9 +530,9 @@
       let code = $('#phoneCode').val().trim();
       let password = $('#password').val().trim();
 
-      if (!usernameValidate(userName) || !phoneValidate(phone) || !passwordValidate(password) || !codeValidate(code)) {
-        return;
-      }
+      // if (!usernameValidate(userName) || !phoneValidate(phone) || !passwordValidate(password) || !codeValidate(code)) {
+      //   return;
+      // }
 
       let form = getCookie('from');
       let did = getCookie('did');
@@ -557,10 +559,14 @@
         fingerPrint: localStorage.getItem("fingerPrint"),
         type: 'register'
       }
+      console.log(99999999999);
 
       let resp = await postRegister(formData)
+      console.log(resp, 'resp=====');
 
-      if (resp && resp.code === 200) {
+      if (resp === false || (resp && resp.code && resp.code !== 200)) {
+        return false
+      } else {
         Helper.$message.success({
           message: '注册成功',
           showClose: true
@@ -570,12 +576,6 @@
         $('#phoneNumber').val('');
         $('#phoneCode').val('');
         $('#password').val('');
-      } else {
-        Helper.$message.error({
-          message: resp && (resp.message || resp.msg) || '注册失败',
-          showClose: true
-        })
-        return false
       }
     })
 
@@ -617,6 +617,7 @@
       }
 
       let resp = await postRegister(formData);
+      console.log(resp, 'resp===注册返回值');
       if (resp && resp.code === 200) {
         Helper.$message.success({
           message: '注册成功',
@@ -627,12 +628,24 @@
         $('#phoneCode2').val('');
         $('#password2').val('');
       } else {
-        Helper.$message.error({
-          message: resp && (resp.message || resp.msg) || '注册失败',
-          showClose: true
-        })
         return false
       }
+
+      if (resp === false || (resp && resp.code && resp.code !== 200)) {
+        return false
+      } else {
+        Helper.$message.success({
+          message: '注册成功',
+          showClose: true
+        })
+
+        $('#userName').val('');
+        $('#phoneNumber').val('');
+        $('#phoneCode').val('');
+        $('#password').val('');
+      }
+
+
     })
 
     $('#register3').click(async function () {
@@ -673,7 +686,7 @@
       }
 
       let resp = await postRegister(formData);
-      if (resp && resp.code === 200) {
+      if (resp === false || (resp && resp.code && resp.code !== 200)) {
         Helper.$message.success({
           message: '注册成功',
           showClose: true
@@ -683,10 +696,6 @@
         $('#phoneCode3').val('');
         $('#password3').val('');
       } else {
-        Helper.$message.error({
-          message: resp && (resp.message || resp.msg) || '注册失败',
-          showClose: true
-        })
         return false
       }
     })
