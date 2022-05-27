@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-27 10:26:31
+ * @LastEditTime: 2022-05-27 10:50:15
  */
 
 function Helper () { }
@@ -356,8 +356,13 @@ function layout () {
 window.layout = debounce(layout, 300, true)
 
 function jumpPackage (type) {
-  sessionStorage.setItem("packageTab", type);//1:余额 2：包时
-  window.location.href = "/package";
+  //sessionStorage.setItem("packageTab", type);//1:余额 2：包时
+  if(type && type ==2){
+    window.location.href = "/package?type=package";
+  }else{
+    window.location.href = "/package";
+  }
+  
 }
 
 //初始化效果
