@@ -223,8 +223,10 @@ $columnMt: 60px;
           // font-weight: bold;
           &:hover::after {
             position: absolute;
-            top: 25px;
-            left: 2px;
+            top: -58px;
+            left: 50%;
+            // transform: translateX(-50%);
+            z-index: 9999;
             content: attr(data-title);
             //在这里设内置好title出现的位容置就好了
             // width: 350px;
