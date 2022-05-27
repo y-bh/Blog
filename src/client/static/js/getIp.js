@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip js
  * @Date: 2022-05-17 17:10:06
- * @LastEditTime: 2022-05-27 13:54:28
+ * @LastEditTime: 2022-05-27 20:57:46
  */
 
 //点击定位
@@ -169,39 +169,7 @@ let apiParams = {
 
 
 
-//如果不为余额提取，隐藏数量
-$(function () {
-  let ipUseItem = $('.ip_use_item')
-  function changeParams(type, val) {
-    apiParams[type] = val
-  }
-  function ipUseOpenChange() {
-    ipUseItem.on('click', function () {
-      $(this).addClass('ip_use_item_choose').siblings().removeClass('ip_use_item_choose')
-      changeParams($(this).attr('d-type'), $(this).attr('val'))
-    });
-    ipUseItem[0].click()
-  }
-  function ipUseCloseChange() {
-    ipUseItem.off('click')
-  }
 
-  let selectTest = $('#extractType'); //select
-  function hideS() {
-    $('.meal_box, .ip_use').hide(0, ipUseCloseChange)
-    apiParams.time = null
-  }
-  function showS() {
-    $('.meal_box, .ip_use').show(0, ipUseOpenChange)
-    apiParams.time = '3'
-  }
-  function firstRun(e = null) {
-    selectTest.find("option:selected").attr('d-val') === '10' ? showS() : hideS()
-    apiParams.secret = selectTest.val()
-  }
-  selectTest.on('change', firstRun);
-  firstRun()
-})
 
 
 
@@ -323,7 +291,7 @@ $(function () {
   }
   function changeAreaCCallback() {
     apiParams.region = null
-    $('.region-check').prop('checked', false)
+    $('.form-check-inp').prop('checked', false)
   }
 
   //地区改变监听
@@ -396,4 +364,57 @@ $(function () {
       $('.left').show()
     }
   })
+})
+
+
+
+$(function () {
+  let option = $('.options')
+
+  let ipUseItem = $('.ip_use_item')
+
+  function changeParams(type, val) {
+    apiParams[type] = val
+  }
+  function ipUseOpenChange() {
+    ipUseItem.on('click', function () {
+      $(this).addClass('ip_use_item_choose').siblings().removeClass('ip_use_item_choose')
+      changeParams($(this).attr('d-type'), $(this).attr('val'))
+    });
+    ipUseItem[0].click()
+  }
+  function ipUseCloseChange() {
+    ipUseItem.off('click')
+  }
+
+  function hideS() {
+    $('.meal_box, .ip_use').hide(0, ipUseCloseChange)
+    apiParams.time = null
+  }
+  function showS() {
+    $('.meal_box, .ip_use').show(0, ipUseOpenChange)
+    apiParams.time = '3'
+  }
+
+
+  option.on('mousedown', function(e) {
+    let that = $(this)
+    console.log($(this).parent().siblings('input'));
+    that.parent().siblings('input').val(that[0].innerHTML)
+
+
+    that.attr('d-val') === '10' ? showS() : hideS()
+    console.log(that.attr('value'));
+    apiParams.secret = that.attr('value')
+  })
+
+  $(option[0]).mousedown()
+
+  
+
+})
+
+//如果不为余额提取，隐藏数量
+$(function () {
+  
 })

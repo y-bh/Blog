@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-27 15:38:53
+ * @LastEditTime: 2022-05-27 20:49:46
 -->
 <!DOCTYPE html>
 <html>
@@ -56,14 +56,15 @@
           <div class="flex flex-wrap align-center mt-40">
             <label class="font-18 main-title-color label_lay_s">选择提取类型</label>
             <div class="getip-select-wrap">
-              <select id="extractType" class="extract_select form-control">
+              <input id="extractType" class="extract_select form-control" value="" d-val-i placeholder="请选择套餐">
+              <ul>
                 <% if(token) {%> 
                   <% menu && menu.forEach(function(item) { %>
-                    <option value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </option>
+                    <li class="options" value='<%- item.key %>' d-val="<%- item.proxyType %>"> <%- item.sequence %> </li>
                 <% })} else { %> 
-                  <option value='ovvrg05vry8lf21u' d-val="10"> 余额提取 </option>
-                <% } %> 
-              </select>
+                  <li class="options" value='ovvrg05vry8lf21u' d-val="10"> 余额提取 </li>
+                <% } %>
+              </ul> 
 
             </div>
             
@@ -136,16 +137,16 @@
           </div>
           <div class="form-group mt-30 ip_use" style="display: none">
             <label class="font-18 main-title-color">IP使用时长</label>
-            <div class="ip_use_box grid justify-start align-center mt-20">
+            <div class=" grid justify-start align-center mt-20 ip_use_box">
               <% staticData && staticData.ipUse && staticData.ipUse.forEach(function(item,index) { %>
                 <div class="ip_use_item flex flex-column align-center justify-center" d-type="time" val=<%= item.val %> ">
                   <div class="time_box">
-                    <span class="time_text font-25 font-bold main-title-color">
+                    <span class="main-title-color time_text font-25 font-bold ">
                       <%= item.time %>
                     </span>
                   </div>
                   <div class="deal_box mt-15 pt-10 flex justify-center align-center pb-10 ">
-                    <span class="deal_text text-blue">
+                    <span class="text-blue deal_text ">
                       <%= item.deal %>
                     </span>
                   </div>
@@ -153,9 +154,9 @@
                 <% }) %>
             </div>
           </div>
-          <div class="flex flex-wrap align-center data_format_box mt-30">
+          <div class="flex flex-wrap align-center mt-30 data_format_box">
             <label class="label_lay font-18 main-title-color">数据格式</label>
-            <div class="data_format flex" d-type="type" >
+            <div class="data_format flex flex-wrap" d-type="type" >
               <div class="narrow_box d_type_change mr-40 flex-center pointer narrow_box_choose" val="txt" >
                 <button class="font-15 main-title-color">TXT</button>
               </div>
@@ -191,7 +192,7 @@
           </div>
           <div class="flex flex-wrap align-center separator_box mt-40">
             <label class="label_lay font-18 main-title-color">分隔符</label>
-            <div class="separator flex" d-type="lb">
+            <div class="separator flex flex-wrap" d-type="lb">
               <div class="narrow_box mr-40 flex justify-center align-center pointer narrow_box_choose" val=null>
                 <button class="font-15 main-title-color">
                   回车换行(\r\n)
@@ -214,10 +215,10 @@
               </div>
             </div>
           </div>
-          <div class="choose_area_box mt-40 flex">
+          <div class="mt-40 flex choose_area_box ">
             <label class="label_lay font-18 main-title-color">选择地区</label>
-            <div class="choose_area grid">
-              <div class="top flex">
+            <div class="grid choose_area ">
+              <div class="top flex flex-wrap">
                 <div class="a_area narrow_box mr-40 flex-center pointer narrow_box_choose" d-area="country">
                   <button class="font-15 main-title-color">全国混拨</button>
                 </div>
@@ -228,8 +229,8 @@
               <div class="isProvince" style="display: none">
                 <div class="bottom flex flex-wrap">
                   <% province && province.forEach(function(item,index) { %>
-                    <div class="form-check mr-20 mb-20" d-type="region">
-                      <input id="<%= item.value %>" class="form-check-inp region-check" type="checkbox" value="<%= item.value %>">
+                    <div class="form-check form-check-inline mr-20 mb-20" d-type="region">
+                      <input id="<%= item.value %>" class="form-check-inp" type="checkbox" value="<%= item.value %>">
                       <label for="<%= item.value %>" class="form-check-label pointer">
                         <%= item.label %>
                       </label>
@@ -239,9 +240,9 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-wrap align-center operator_box mt-40">
+          <div class="flex flex-wrap align-center operator_box_wrap mt-40">
             <label class="label_lay font-18 main-title-color">运营商</label>
-            <div class="operator_box flex" d-type="yys">
+            <div class="operator_box flex flex-wrap" d-type="yys">
               <div class="narrow_box mr-40 flex-center pointer narrow_box_choose" val=''>
                 <button class="font-15 main-title-color"  >不限</button>
               </div>
@@ -255,7 +256,7 @@
           </div>
           <div class="flex flex-wrap align-center ip_box mt-40">
             <label class="label_lay font-18 main-title-color">IP协议</label>
-            <div class="ip_agreement flex" d-type="port">
+            <div class="ip_agreement flex flex-wrap" d-type="port">
               <div class="narrow_box mr-40 flex-center pointer narrow_box_choose" val="1">
                 <button class="font-15 main-title-color">HTTP</button>
               </div>

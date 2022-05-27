@@ -46,6 +46,7 @@
   font-size: 15px;
 }
 .getip-select-wrap{
+  width: 660px;
   position: relative;
   &::after{
     position: absolute;
@@ -65,6 +66,33 @@
     // transform: rotate(180deg);
     pointer-events: none;
   }
+  
+  ul{
+    position: absolute;
+    display: none;
+    background-color: #f7f7f7;
+    width: inherit;
+    border: 1px solid #1968fc;
+    .options{
+      display: block;
+      width: inherit;
+      padding-left: 10px;
+      padding-top: 8px;
+      // white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      &:hover{
+        background: #1968fc;
+        color: white;
+      }
+    }
+  }
+  
+  &.is-active-s{
+    ul{
+      display: block;
+    }
+  }
 }
 
 .getip-select-wrap.is-active-s{
@@ -77,11 +105,14 @@
 
 .extract_select {
   border-radius: 4px;
-  width: 660px !important;
-  color: #1968FC;
+  color: #1968FC !important;
   &:focus{
-    color: #1968FC;
+    color: #1968FC !important;
   }
+}
+
+.box_left{
+  color: #4c5664;
 }
 
 .left_count,.num,.extract_num_input,.ip_use_item,.demo_title{
@@ -179,6 +210,17 @@
   border-radius: 8px;
   border: 1px solid #fc7019 !important;
   box-shadow: 0px 0px 10px rgba(51, 51, 51, 0.1);
+  color: #FC7019;
+  .time_text{
+    color: #FC7019;
+  }
+  .deal_box {
+    background-color: #fff4ed;
+    .deal_text{
+      color: #FC7019;
+    }
+  }
+  
 }
 .time_text_choose {
   color: #FC7019 !important;
@@ -250,19 +292,19 @@
 .find-api{
   color: #677294;
   &:hover{
-    color: inherit
+    color: #1968fc
   }
 }
 .apiUrl_input_box {
   padding: 24px 30px 24px 18px;
   border: 1px solid #E4E5EB;
   border-radius: 8px;
-  input:read-only{
-    background-color: transparent;
-  }
 }
 .apiUrl_input {
   border: none !important;
+}
+.apiUrl_input::-webkit-input-placeholder{
+  color: #b2bccb !important;
 }
 .apiUrl_input_box .copy {
   width: 120px !important;
@@ -282,7 +324,7 @@
 }
 .note_box {
   display: grid;
-  grid-template-columns: minmax(max-content, 180px) minmax(min-content, 870px);
+  grid-template-columns: 60px minmax(min-content, 870px);
   width: fit-content;
   box-sizing: border-box;
   border: 1px solid #E4E5EB;
@@ -341,7 +383,7 @@
 }
 .note_content .code {
   padding: 12px 0;
-  width: 810px;
+  width: 96%;
   border-radius: 8px;
   background-color: rgba(208, 224, 255, 0.25);
 
@@ -461,7 +503,45 @@ button{
 .region-check{
   transform: translateY(3px);
 }
-.form-check-inp:checked{
-  background: #FCDE11;
-        border: 2px solid #FCDE11;
+.form-check-inp:check{
+  background: #FCDE11 !important;
+  border: 2px solid #FCDE11;
+}
+
+
+.form-check-inp {
+     
+  cursor: pointer;
+  position: relative;
+  width: 15px;
+  height: 15px;
+  font-size: 14px;
+}
+
+.form-check-inp::after {
+
+  position: absolute;
+  top: 0;
+  color: #000;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  visibility: visible;
+  padding-left: 0px;
+  text-align: center;
+  content: ' ';
+  border-radius: 3px
+}
+
+.form-check-inp:checked::after {
+
+  content: "✓";
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #fc7019;
+  line-height: 16px;
+  border-radius: 2px
 }
