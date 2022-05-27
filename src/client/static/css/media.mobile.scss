@@ -156,16 +156,37 @@
     }
   }
 
-  //.公共底部
-  .getip-wrap {
-    width: 90%;
+  //提取ip
+  div.getip-wrap {
+    display: block;
+    width: auto;
     grid-template-columns: unset;
+    padding: 0 20px;
+    border: 1px solid red;
     .left-wrap {
       display: none;
     }
 
     .params_desc {
       grid-template-columns: 1fr;
+    }
+
+    .count_box {
+      width: auto;
+      max-width: none;
+    }
+    .extract_select {
+      width: auto;
+      min-width: 500px;
+    }
+
+    .meal_box {
+      grid-template-columns: repeat(2, minmax(min-content, 250px));
+    }
+
+    .demo_box {
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 }
