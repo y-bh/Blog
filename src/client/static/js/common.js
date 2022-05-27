@@ -362,22 +362,6 @@ function jumpPackage(type) {
   window.location.href = "/package";
 }
 
-//首页|业务场景  产品优势点击效果
-const lis = $(".coreAdvant")
-function kernelJump(index) {
-  lis.eq(index)
-    .find(".advance-left").eq(0).addClass('advanceWow fadeInLeft').parent()
-    .find(".advance-right").eq(0).addClass('advanceWow fadeInRight').parent()
-    .css('display', 'block')
-    .siblings('.coreAdvant').css('display', 'none')
-  new WOW({ boxClass: 'advanceWow' }).init()
-}
-
-$("#kernelBox li").hover(function () {
-  $(this).addClass("active")
-  $(this).siblings().removeClass("active");
-})
-
 //公共头部 导航切换效果
 let resizeTimer = null;
 let headerAttr = {
@@ -477,11 +461,7 @@ function handleParams() {
 }
 /**********************************************页面初始化**************************** */
 $(function () {
-
-  // 1.首页|业务场景  产品优势动画初始化
-  new WOW({ boxClass: 'advanceWow', }).init();
-
-  // 2.公共导航
+  // 1.公共导航
   let routePath = (window.location.pathname.replace(/\//g, '') || 'index');  // 路径
   if ($(`[data-path=${routePath}]`)) {
     $(`[data-path=${routePath}]`).addClass('activated').siblings().removeClass('activated');
@@ -506,11 +486,11 @@ $(function () {
   })
 
 
-  //3.自适应布局计算
+  //2.自适应布局计算
   change()
 
 
-  //4. 处理注册短链
+  //3. 处理注册短链
   handleParams()
 
 

@@ -69,9 +69,9 @@ function numDynamic(id, start, end, step, speed) {
 let event = null
 
 function diaJump() {
-  if(dia_token){
+  if (dia_token) {
     window.location.pathname = '/package'
-    return 
+    return
   }
   window.location.pathname = '/register'
 }
@@ -81,9 +81,9 @@ $('.center-dialog-jump').on('click', diaJump)
 $('.left-dialog-jump').on('click', diaJump)
 
 function removeClick(s = null) {
-  if(s){
+  if (s) {
     $('.center-dialog-jump').off('click')
-    return 
+    return
   }
   $('.left-dialog-jump').off('click')
 }
@@ -91,7 +91,7 @@ function removeClick(s = null) {
 function disableScroll() {
   document.documentElement.style.overflowY = 'hidden'
 }
-if(actt !== 'd'){
+if (actt !== 'd') {
   disableScroll()
 }
 
@@ -100,14 +100,28 @@ function openScroll() {
 }
 
 function closeDialog(e, s = null) {
-  if(s){
+  if (s) {
     $(`.${s}`).show(0, openScroll)
   }
   removeClick(s)
   $(`.${e}`).remove()
 }
 
+//首页|业务场景  产品优势点击效果
+const lis = $(".coreAdvant")
+function kernelJump(index) {
+  lis.eq(index)
+    .find(".advance-left").eq(0).addClass('advanceWow fadeInLeft').parent()
+    .find(".advance-right").eq(0).addClass('advanceWow fadeInRight').parent()
+    .css('display', 'block')
+    .siblings('.coreAdvant').css('display', 'none')
+  new WOW({ boxClass: 'advanceWow' }).init()
+}
 
+$("#kernelBox li").hover(function () {
+  $(this).addClass("active")
+  $(this).siblings().removeClass("active");
+})
 
 //初始化
 $(function () {
@@ -125,7 +139,8 @@ $(function () {
   numDynamic("ipNum", 600000, +getCookie('ipNumUpdate'), 80000, 50)
   numDynamic("canUserNum", 8, 99, 2, 50)
 
-
-    //动画
-    new WOW().init();
+  // 1.首页|业务场景  产品优势动画初始化
+  new WOW({ boxClass: 'advanceWow', }).init();
+  //动画
+  new WOW().init();
 })
