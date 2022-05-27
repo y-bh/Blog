@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-21 11:03:04
+ * @LastEditTime: 2022-05-27 14:14:24
 -->
 <template>
   <aside class="sideBar">
@@ -81,9 +81,11 @@ export default {
     watch(
       () => $route.path,
       (newValue, oldValue) => {
-        // console.log("watch", newValue);
+        //console.log("watch----------", newValue);
+        let newActivePath = newValue?newValue.replace("/manager/",""):"user";
+         activePath.value = newActivePath;
       },
-      { immediate: true }
+      { immediate: false }
     );
     return {
       isCollapse,
