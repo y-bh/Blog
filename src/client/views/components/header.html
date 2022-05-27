@@ -57,9 +57,14 @@
                           <div class="title flex-center justify-start">
                             <span class="meal-icon icon_second"></span>
                             <span class="title-type">包时套餐</span>
-                            <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate) { %>
+                            <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate ||
+                              HEADER_ACTIVE_TAB.maxPurchaseGift) { %>
                               <div class="activity">
-                                限时<%= HEADER_ACTIVE_TAB.minPurchaseRate %>折
+                                <% if(HEADER_ACTIVE_TAB.minPurchaseRate) { %>
+                                  限时<%= HEADER_ACTIVE_TAB.minPurchaseRate %>折
+                                    <% } else { %>
+                                      加赠<%= HEADER_ACTIVE_TAB.maxPurchaseGift %>%
+                                        <% } %>
                               </div>
                               <% } else { %>
                                 <span></span>
