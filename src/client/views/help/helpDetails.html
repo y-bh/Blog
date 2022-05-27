@@ -121,9 +121,9 @@
                 </div>
                 <div class="b_bottom mt-30">
                   <% related && related.forEach(function(blog,index) { %>
-                    <div class="flex justify-between mb-20">
+                    <div class="mb-20">
                       <a href="/help-details/<%= blog.id%>.html"
-                        class="inline-flex align-items-center pointer right_blog_title" title="<%=blog.title%>">
+                        class="flex justify-between mb-20 align-items-center pointer right_blog_title" title="<%=blog.title%>">
                         <span class="text-ellipsis">
                           <%= blog.title%>
                         </span>
