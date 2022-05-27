@@ -159,7 +159,7 @@
   //提取ip
   div.getip-wrap {
     display: block;
-    width: auto;
+    width: 96%;
     grid-template-columns: unset;
     padding: 0 20px;
     border: 1px solid red;
@@ -176,7 +176,7 @@
       max-width: none;
     }
     .extract_select {
-      width: auto;
+      width: auto  !important;
       min-width: 500px;
     }
 

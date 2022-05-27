@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-26 18:37:23
+ * @LastEditTime: 2022-05-27 11:28:04
 -->
 <!DOCTYPE html>
 <html>
@@ -16,8 +16,8 @@
   <meta name="keywords" content="天启http">
   <meta name="description" content="天启http">
   <title>提取IP</title>
-  <%- include('../components/style.html'); %>
   <link rel="stylesheet" href="/css/getIp.css">
+  <%- include('../components/style.html'); %>
 </head>
 
 <body>
@@ -26,18 +26,18 @@
       <!-- 左边悬浮框 -->
       <div class="left-wrap">
         <div class="left">
-          <div class="extract_ip_left pd-20 grid justify-center">
-            <span class="desc font-25 title">提取IP</span>
-            <div class="anchor grid justify-center">
+          <div class="extract_ip_left grid">
+            <span class="desc font-25 title-getip">提取IP</span>
+            <div class="anchor grid">
               <span class="pointer">API获取</span>
               <span class="pointer">提取接口</span>
               <span class="pointer">白名单接口</span>
               <span class="pointer">错误码</span>
             </div>
           </div>
-          <div class="code_demo_left mt-20 pd-20 grid justify-center">
-            <span class="desc font-25 title">代码demo</span>
-            <div class="demo grid justify-center">
+          <div class="code_demo_left mt-20 grid">
+            <span class="desc font-25 title-getip">代码demo</span>
+            <div class="demo grid">
               <span class="pointer">Python语言</span>
               <span class="pointer">Go语言</span>
               <span class="pointer">C#语言</span>
@@ -52,7 +52,7 @@
       <div class="right grid">
         <!-- 提取IP -->
         <div class="head extract_ip_right">
-          <span class="font-25 title">提取IP</span>
+          <span class="font-25 title-getip">提取IP</span>
           <div class="flex flex-wrap align-center mt-40">
             <label class="font-18 main-title-color label_lay_s">选择提取类型</label>
             <div class="getip-select-wrap">
@@ -305,7 +305,7 @@
         </div>
         <!-- 提取接口使用说明 -->
         <div class="head extract_interface">
-          <span class="font-25 title">提取接口使用说明</span>
+          <span class="font-25 title-getip">提取接口使用说明</span>
           <div class="note_box mt-30">
             <ul class="note_desc">
               <li class="top_li flex-center">属性</li>
@@ -378,9 +378,9 @@
         </div>
         <!-- 提取接口返回结果实例 -->
         <div class="extract_return">
-          <span class="font-25 title">提取接口返回结果实例</span>
+          <span class="font-25 title-getip">提取接口返回结果实例</span>
           <div class="box grid mt-40">
-            <div class="text_format container">
+            <div class="text_format c-wrap">
               <div class="return_left">
                 <div class="top_title flex-center">TEXT格式</div>
               </div>
@@ -392,7 +392,7 @@
                 </div>
               </div>
             </div>
-            <div class="json_format container">
+            <div class="json_format c-wrap">
               <div class="return_left">
                 <div class="top_title flex-center">JSON格式</div>
               </div>
@@ -422,8 +422,8 @@
         </div>
         <!-- 白名单接口使用说明 -->
         <div class="head white_list" id="wl">
-          <span class="font-25 title">白名单接口使用说明</span>
-          <div class="note_box flex mt-40">
+          <span class="font-25 title-getip">白名单接口使用说明</span>
+          <div class="note_box mt-40">
             <ul class="note_desc">
               <li class="top_li flex-center">属性</li>
               <div class="white_box">
@@ -514,8 +514,8 @@
         </div>
         <!-- 错误码 -->
         <div class="head error_code">
-          <span class="font-25 title">错误码</span>
-          <div class="note_box flex mt-40">
+          <span class="font-25 title-getip">错误码</span>
+          <div class="note_box mt-40">
             <ul class="note_desc">
               <li class="top_li flex-center">错误码</li>
               <div class="error_box">
@@ -556,7 +556,7 @@
         </div>
         <!-- 代码demo -->
         <div class="head code_demo_right" id="cd">
-          <span class="font-25 title">用户接入天启HTTP代码demo</span>
+          <span class="font-25 title-getip">用户接入天启HTTP代码demo</span>
           <div class="demo_box grid mt-30 mb-30">
             <% staticData && staticData.codeDemo && staticData.codeDemo.forEach(function(item,index) { %>
               <div class="demo_box_item flex-center flex-column">

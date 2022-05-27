@@ -86,6 +86,12 @@
     }
   }
 
+  .auto-replace, .api-text{
+    &>span{
+      color: #333333;
+    }
+  }
+
   .auto-replace, .api-text, .table-wrap {
     grid-column: 1 / span 4;
 
