@@ -373,6 +373,10 @@ function kernelJump(index) {
   new WOW({ boxClass: 'advanceWow' }).init()
 }
 
+$("#kernelBox li").hover(function () {
+  $(this).addClass("active")
+  $(this).siblings().removeClass("active");
+})
 
 //公共头部 导航切换效果
 let resizeTimer = null;
