@@ -219,7 +219,25 @@ $columnMt: 60px;
         i {
           margin-left: 16px;
           font-size: 16px;
-          font-weight: bold;
+          position: relative;
+          // font-weight: bold;
+          &:hover::after {
+            position: absolute;
+            top: 25px;
+            left: 2px;
+            content: attr(data-title);
+            //在这里设内置好title出现的位容置就好了
+            // width: 350px;
+            height: 30px;
+            background: rgba(232, 240, 255);
+            opacity: 1;
+            border-radius: 4px;
+            padding: 7px 10px;
+            font-size: 12px;
+            line-height: 16px;
+            color: #4c5664;
+            white-space: nowrap;
+          }
         }
         &.current {
           background: #1968fc;

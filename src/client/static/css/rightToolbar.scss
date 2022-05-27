@@ -15,7 +15,7 @@
     height: 94px;
     background: url("/images/rightToolbar/give.png") no-repeat;
     background-size: 100px 94px;
-    animation: bounce 2s linear infinite;
+    animation: bounce 4s linear infinite;
     cursor: pointer;
   }
   .toolbar-toTop a {
@@ -108,10 +108,10 @@
               background-position: -10px -60px;
             }
             .wx {
-              background-position: -40px -60px;
+              background-position: -70px -60px;
             }
             .telephone {
-              background-position: -70px -60px;
+              background-position: -40px -60px;
             }
             .copy {
               font-size: 12px;

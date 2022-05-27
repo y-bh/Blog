@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-26 15:43:37
+ * @LastEditTime: 2022-05-27 16:17:19
 -->
 <template>
   <div class="container">
@@ -85,15 +85,15 @@
         <el-table-column align='center' label="提取密钥" prop="key" width="85">
 
         </el-table-column>
-        <el-table-column align='center' label="账号" prop="authKey" v-if="userInfo && userInfo.isProxyAuthKey" width="70">
+        <el-table-column align='center' label="账号" prop="authKey" v-if="userInfo && userInfo.proxyApiOpend" width="70">
         </el-table-column>
-        <el-table-column align='center' label="密码" prop="authSecret" v-if="userInfo && userInfo.isProxyAuthKey"
+        <el-table-column align='center' label="密码" prop="authSecret" v-if="userInfo && userInfo.proxyApiOpend"
           width="70">
           <template #default="{ row }">
             <div class="repeat-wrap">
               <span class="repeat">{{ row.authSecret ? row.authSecret : '--' }}</span>
               <span class="repeat repeat_pwd" @click="repeatPwd(row)">
-                <i class="el-icon-refresh-left"></i>
+                <i class="table-icon el-icon-refresh-left"></i>
               </span>
             </div>
           </template>
@@ -223,7 +223,6 @@
 </template>
 
 <script>
-import { getTableList } from "model/meal.js";
 import { dateFormat } from "tools/dateFormat"
 import { formatInt, deepCopy } from "tools/utility"
 import { reactive, ref, toRefs, onMounted, inject } from "vue";
@@ -236,6 +235,8 @@ import merge from './components/merge';
 import changeLog from './components/changeLog'
 import payCode from "./components/payCode.vue";
 import deleteMeal from "./components/deleteMeal.vue";
+import { getTableList } from "model/meal.js";
+import { getMineInfo } from "model/user.js";
 export default {
   name: "",
   components: {
@@ -294,9 +295,19 @@ export default {
     })
 
     onMounted(async () => {
-      await methods.getList()
+      await methods.getUserData();
+      await methods.getList();
+      
     });
     const methods = {
+      async getUserData(){
+        let res = await getMineInfo();
+        if(res && res.code === 200){
+          state.userInfo = res.data || null;
+        }
+        console.log(state.userInfo,'state.userInfo');
+        
+      },
       // 处理查询参数
       initQuery () {
         let query = $route.query;

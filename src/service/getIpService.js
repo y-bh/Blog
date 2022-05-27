@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-16 21:29:43
- * @LastEditTime: 2022-05-25 10:51:53
+ * @LastEditTime: 2022-05-27 15:45:12
  */
 const { getProxyCityDao,getProxyMenuDao,getWhiteListApiDao,getIconDao } = require("dao/getIpDao")
 
@@ -95,7 +95,7 @@ let ipUse = [
   {
     id: 3,
     time: '10分钟',
-    deal: '18天启币/IP',
+    deal: '20天启币/IP',
     val: 10
   },
   {

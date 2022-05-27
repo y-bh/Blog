@@ -1,14 +1,14 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-28 09:43:56
- * @LastEditTime: 2022-04-28 09:43:57
+ * @LastEditTime: 2022-05-27 15:16:06
 -->
 <template>
     <div class="page-container">
         <top-nav></top-nav>
-        <p class="tip1">你似乎来到了没有IP的沙漠~</p>
+        <p class="tip1">哎呀！网页找不到了，你可以返回再试一次～</p>
         <p class="tip2">{{jumpTime}}秒后自动跳转到首页</p>
         <el-row class="click">
             <el-col :span="12">

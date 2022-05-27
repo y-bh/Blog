@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-27 13:30:29
+ * @LastEditTime: 2022-05-27 16:27:43
 -->
 <template>
   <div
@@ -51,21 +51,6 @@
         <span v-else-if="item.state === '2'">已使用</span>
         <span v-else-if="item.state === '4'">已过期</span>
       </div>
-    </div>
-    <div class="gift">
-      <div class="gift-header">
-        <div><span>￥</span>{{ 1 }}</div>
-        <div>满{{ 1 }}元可用</div>
-      </div>
-      <div class="gift-text">
-        <div>{{ 1 }}</div>
-        <div>
-          有效期: {{ 1}}-{{
-            1
-          }}
-        </div>
-      </div>
-      <div class="gift-use" @click="useGift"><span>立即使用</span></div>
     </div>
   </div>
   <div v-else>
