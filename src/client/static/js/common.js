@@ -6,7 +6,7 @@
  * @LastEditTime: 2022-05-26 18:44:10
  */
 
-function Helper () { }
+function Helper() { }
 
 //确认操作框信息
 Helper.$confirm = (msg = '确认此操作?', title = '', callback, options = {}
@@ -133,7 +133,7 @@ Helper.$message = (options = {}) => {
 
 
 //获取cookie
-function getCookie (cname) {
+function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
   for (var i = 0; i < ca.length; i++) {
@@ -144,7 +144,7 @@ function getCookie (cname) {
 }
 
 //设置cookie
-function setCookie (cname, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
   var expires = "expires=" + d.toGMTString();
@@ -159,7 +159,7 @@ function setCookie (cname, cvalue, exdays) {
         type: 接口类型, 默认post  get/post/put
         query: 参数
 */
-async function ajax (params, prex = '/javaProxy') {
+async function ajax(params, prex = '/javaProxy') {
   let baseURL = '';
   if (params.url && params.url.slice(0, 1) !== "/") {
     baseURL = '/' + params.url
@@ -202,12 +202,12 @@ async function ajax (params, prex = '/javaProxy') {
 }
 
 //跳转咨询
-function contactUs () {
+function contactUs() {
   window.open("https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true", "_blank");
 }
 
 //获取location 地址栏query查询参数
-function getParams () {
+function getParams() {
   var url = decodeURI(location.search);
   var request = {};
   if (url.indexOf("?") !== -1) {
@@ -223,7 +223,7 @@ function getParams () {
 window.getParams = getParams
 
 //格式化人民币
-function moneyFormat (money) {
+function moneyFormat(money) {
   return parseFloat(money)
     .toFixed(2)
     .toString()
@@ -239,7 +239,7 @@ function moneyFormat (money) {
 }
 
 //拖敏感处理手机号码
-function mdPhone (phone) {
+function mdPhone(phone) {
   if (!phone) return
   let tem = (phone.split(''))
   let inx = 0
@@ -257,7 +257,7 @@ function mdPhone (phone) {
 }
 
 //防抖函数
-function debounce (fn, delay, once = false) {
+function debounce(fn, delay, once = false) {
 
   var timeout = null;
   var count = 0;
@@ -277,7 +277,7 @@ function debounce (fn, delay, once = false) {
 }
 
 // 格式化时间
-function dateFormat (date, fmt = 'YYYY-mm-dd HH:MM:SS') {
+function dateFormat(date, fmt = 'YYYY-mm-dd HH:MM:SS') {
   if (Object.prototype.toString(date) !== '[object Date]') {
     date = new Date(date)
   }
@@ -305,7 +305,7 @@ function dateFormat (date, fmt = 'YYYY-mm-dd HH:MM:SS') {
 
 
 //自适应计算
-function change () {
+function change() {
   var width = $(window).width();
   //是否是小于425的小屏幕，供移动端导航使用
   window.isMobile = (width <= 575)
@@ -323,7 +323,7 @@ function change () {
 }
 
 //退出登录
-function layout () {
+function layout() {
   Helper.$confirm("确定退出登录?", '退出', function () {
     $.ajax({
       type: 'POST',
@@ -355,112 +355,99 @@ function layout () {
 
 window.layout = debounce(layout, 300, true)
 
-function jumpPackage (type) {
+
+//套餐页跳转
+function jumpPackage(type) {
   sessionStorage.setItem("packageTab", type);//1:余额 2：包时
   window.location.href = "/package";
 }
 
-//初始化效果
-$(function () {
+//首页|业务场景  产品优势点击效果
+const lis = $(".coreAdvant")
+function kernelJump(index) {
+  lis.eq(index)
+    .find(".advance-left").eq(0).addClass('advanceWow fadeInLeft').parent()
+    .find(".advance-right").eq(0).addClass('advanceWow fadeInRight').parent()
+    .css('display', 'block')
+    .siblings('.coreAdvant').css('display', 'none')
+  new WOW({ boxClass: 'advanceWow' }).init()
+}
 
-  // 处理导航激活样式
-  let routePath = (window.location.pathname.replace(/\//g, '') || 'index');  // 路径
-  if ($(`[data-path=${routePath}]`)) {
-    $(`[data-path=${routePath}]`).addClass('activated').siblings().removeClass('activated');
-  }
+$("#kernelBox li").hover(function () {
+  $(this).addClass("active")
+  $(this).siblings().removeClass("active");
+})
 
-  //1.自适应布局计算
-  change()
-
-
-  //2.处理公共头部
-  let resizeTimer = null;
-  let headerAttr = {
+//公共头部 导航切换效果
+let resizeTimer = null;
+let headerAttr = {
+  allWidth: 0,
+  mainWidth: 0,  // 所有导航子元素加起来的宽度
+  itemWidth: 0,  // 导航子元素宽度 + padding + margin
+  logoWidth: 0,  // logo区域宽度
+  navRightWidth: 0,  // 右侧登陆注册区域宽度
+  navWidth: [], // 子元素tab的宽度数组
+}
+function toggleHead() {
+  // 每次调用重置
+  headerAttr = {
     allWidth: 0,
     mainWidth: 0,  // 所有导航子元素加起来的宽度
     itemWidth: 0,  // 导航子元素宽度 + padding + margin
     logoWidth: 0,  // logo区域宽度
     navRightWidth: 0,  // 右侧登陆注册区域宽度
-    navWidth: [], // 子元素tab的宽度数组
   }
 
-  function toggleHead () {
-    // 每次调用重置
-    headerAttr = {
-      allWidth: 0,
-      mainWidth: 0,  // 所有导航子元素加起来的宽度
-      itemWidth: 0,  // 导航子元素宽度 + padding + margin
-      logoWidth: 0,  // logo区域宽度
-      navRightWidth: 0,  // 右侧登陆注册区域宽度
-    }
+  let windowWidth = $(window).width();
+  headerAttr.logoWidth = $('.header-main .logo').outerWidth(true);
+  headerAttr.navRightWidth = $('.header-main .user').outerWidth(true);
 
-    let windowWidth = $(window).width();
-    headerAttr.logoWidth = $('.header-main .logo').outerWidth(true);
-    headerAttr.navRightWidth = $('.header-main .user').outerWidth(true);
-
-    const domTree = $('.header-main .nav-list .nav-item');
-    domTree.each(function (index) {
-      headerAttr.itemWidth = $(this).outerWidth(true);
-      headerAttr.mainWidth += headerAttr.itemWidth
-    })
-
-    headerAttr.allWidth = headerAttr.logoWidth + headerAttr.navRightWidth + headerAttr.mainWidth;
-    // 可视化区域小于内容区域总宽度
-    if (windowWidth <= headerAttr.allWidth) {
-      // 导航区域折叠
-      $('.nav-body').addClass('fold');
-      // 多态按钮显示
-      $('.nav-toggler').addClass('appear')
-      getTabWidth()
-    } else {
-      $('.nav-body').removeClass('fold')
-      $('.nav-toggler').removeClass('appear')
-      getTabWidth()
-    }
-  }
-
-  toggleHead();
-
-  $('.nav-toggler').click(function () {
-    if ($('.header-main .nav-body').hasClass('show')) {
-      $('.header-main .nav-body').removeClass('show')
-    } else {
-      $('.header-main .nav-body').addClass('show');
-      const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
-      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
-      // getTabWidth()
-
-    }
-    getTabWidth()
-
+  const domTree = $('.header-main .nav-list .nav-item');
+  domTree.each(function (index) {
+    headerAttr.itemWidth = $(this).outerWidth(true);
+    headerAttr.mainWidth += headerAttr.itemWidth
   })
 
+  headerAttr.allWidth = headerAttr.logoWidth + headerAttr.navRightWidth + headerAttr.mainWidth;
+  // 可视化区域小于内容区域总宽度
+  if (windowWidth <= headerAttr.allWidth) {
+    // 导航区域折叠
+    $('.nav-body').addClass('fold');
+    // 多态按钮显示
+    $('.nav-toggler').addClass('appear')
+    getTabWidth()
+  } else {
+    $('.nav-body').removeClass('fold')
+    $('.nav-toggler').removeClass('appear')
+    getTabWidth()
+  }
+}
 
-  function getTabWidth () {
-    //  小屏获取导航元素
+function getTabWidth() {
+  //  小屏获取导航元素
+  headerAttr.navWidth = [];
+  if ($('.show')) {
+    let tabNav = $('.show .nav-item');
+    tabNav.each(function (index) {
+      if ($(this)) {
+        headerAttr.navWidth.push($(this).outerWidth(true))
+      }
+    })
 
-    headerAttr.navWidth = [];
-    if ($('.show')) {
-      let tabNav = $('.show .nav-item');
-      tabNav.each(function (index) {
-        if ($(this)) {
-          headerAttr.navWidth.push($(this).outerWidth(true))
-        }
-      })
-
-      headerAttr.navWidth.sort((a, b) => {
-        return b - a
-      })
-      //  将每个一级导航宽度以最大子元素宽为准设置
-      $('.show .nav-item').css("width", headerAttr.navWidth[0])
-    } else {
-      $('.nav-list .nav-item').css("width", auto)
-    }
-
+    headerAttr.navWidth.sort((a, b) => {
+      return b - a
+    })
+    //  将每个一级导航宽度以最大子元素宽为准设置
+    $('.show .nav-item').css("width", headerAttr.navWidth[0])
+  } else {
+    $('.nav-list .nav-item').css("width", auto)
   }
 
+}
 
 
+//初始化短链处理效果
+function handleParams() {
   //关于注册短链
   const query = getParams()
   // 推过短链进入场景
@@ -484,6 +471,47 @@ $(function () {
       }
     }
   }
+
+
+
+}
+/**********************************************页面初始化**************************** */
+$(function () {
+
+  // 1.首页|业务场景  产品优势动画初始化
+  new WOW({ boxClass: 'advanceWow', }).init();
+
+  // 2.公共导航
+  let routePath = (window.location.pathname.replace(/\//g, '') || 'index');  // 路径
+  if ($(`[data-path=${routePath}]`)) {
+    $(`[data-path=${routePath}]`).addClass('activated').siblings().removeClass('activated');
+  }
+
+  //切换导航效果
+  toggleHead();
+
+  //点击导航效果
+  $('.nav-toggler').click(function () {
+    if ($('.header-main .nav-body').hasClass('show')) {
+      $('.header-main .nav-body').removeClass('show')
+    } else {
+      $('.header-main .nav-body').addClass('show');
+      const margin = $('.header-main .user').width() + 12;  // 12: 右侧user区域的padding
+      $('.header-main .nav-body .nav-list').addClass('adjust_position').css("margin-right", margin);
+      // getTabWidth()
+
+    }
+    getTabWidth()
+
+  })
+
+
+  //3.自适应布局计算
+  change()
+
+
+  //4. 处理注册短链
+  handleParams()
 
 
   $(window).resize(debounce(() => {

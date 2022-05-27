@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: 套餐购买页面
  * @Date: 2022-05-10 11:01:57
- * @LastEditTime: 2022-05-26 16:35:57
+ * @LastEditTime: 2022-05-27 10:12:56
  */
 
 
@@ -212,7 +212,7 @@ $(document).on("click", '#changeTab>div', function () {
   $(this).addClass("current");
   $(this).siblings().removeClass("current");
   let type = $(this).attr("type");
-  sessionStorage.setItem("packageTab", type);//1:余额 2：包时
+  //sessionStorage.setItem("packageTab", type);//1:余额 2：包时
   if (type == 1) {
     $("#balancePackage").show();
     $("#packageTime").hide();
@@ -681,19 +681,30 @@ function wxPayFun(res) {
   $('#wxPayModal').modal('show');
 }
 
-
+// 获取url后面的参数
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) { return pair[1]; }
+  }
+  return (false);
+}
 
 //动画
 new WOW().init();
 //初始化
 $(async function () {
-  let curTab = sessionStorage.getItem("packageTab");
   await getRedPacket();
   console.log("有效的红包-----------", packageData.allRedPacket);
   commonBalancePay();
   getPackageTimesPrice();
   //处理其他页面跳转过来tab
-  if (curTab && curTab == 2) {
+  //let curTab = sessionStorage.getItem("packageTab");
+  let params = getQueryVariable("type");
+  console.log("跳转过来的链接--------",params)
+  if(params && params=='package'){
     $("#packageTab").click();
   }
 })
