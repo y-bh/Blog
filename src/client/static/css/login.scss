@@ -1,12 +1,11 @@
 // 定制顶部导航
-.header {
-  background-color: transparent !important;
-}
 
 .login {
   width: 100%;
   background-image: linear-gradient(170deg, #e2eafd, #fefeff 85%);
-
+  .header {
+    background-color: transparent;
+  }
   .login-page {
     padding: 170px 0;
     width: 66%;

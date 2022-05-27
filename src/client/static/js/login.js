@@ -471,4 +471,24 @@ document.onkeydown = function (e) {
 
 
 
+//控制表头背景色
+
+function showHeaderBg() {
+  console.log("滚动", document.documentElement.scrollTop)
+  if (document.documentElement.scrollTop > 50) {
+    $("body .header").css({
+      'backgroundColor': '#f4f7ff'
+    })
+  } else {
+    $("body .header").css({
+      'backgroundColor': ''
+    })
+  }
+}
+
+$(window).scroll(showHeaderBg)
+
+$(function(){
+  showHeaderBg()
+})
 
