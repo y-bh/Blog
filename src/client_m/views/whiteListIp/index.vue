@@ -1,43 +1,45 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-26 13:50:33
+ * @LastEditTime: 2022-05-27 18:05:57
 -->
 <template>
   <div class="white-list-wrap">
-    <div class="white-list-text">
-      <div class="white-list-count">
-        已设/总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.count }}</span>
+    <div class="list-head">
+      <div class="white-list-text">
+        <div class="white-list-count">
+          已设/总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.count }}</span>
+        </div>
+        <div class="tooltip tooltip-icon">
+          <i class="iconfont icon-xianxing-wenhao"></i>
+          <i class="iconfont icon-mianxing-wenhao"></i>
+        </div>
+        <div class="tooltip tooltip-text">
+          <p>IP的使用和提取地址须同时在白名单内，该白名单功能仅针对长效IP</p>
+        </div>
       </div>
-      <div class="tooltip tooltip-icon">
-        <i class="iconfont icon-xianxing-wenhao"></i>
-        <i class="iconfont icon-mianxing-wenhao"></i>
+      <div class="white-list-btn">
+        <el-button class="cancel-button" @click="goTutorial">查看教程</el-button>
+        <el-button class="cancel-button" @click="openWhiteListDialog('add')"
+          >添加IP白名单</el-button
+        >
       </div>
-      <div class="tooltip tooltip-text">
-        <p>IP的使用和提取地址须同时在白名单内，该白名单功能仅针对长效IP</p>
+      <div class="auto-replace list-space">
+        <span>提取IP自动替换</span>
+        <el-switch
+          v-model="switchVal"
+          class="auto-replace-switch"
+          @change="switchChange"
+        ></el-switch>
       </div>
-    </div>
-    <div class="white-list-btn">
-      <el-button class="cancel-button" @click="goTutorial">查看教程</el-button>
-      <el-button class="cancel-button" @click="openWhiteListDialog('add')"
-        >添加IP白名单</el-button
-      >
-    </div>
-    <div class="auto-replace">
-      <span>提取IP自动替换</span>
-      <el-switch
-        v-model="switchVal"
-        class="auto-replace-switch"
-        @change="switchChange"
-      ></el-switch>
-    </div>
-    <div class="api-text">
-      <span>Api接口</span>
-      <div class="api-link" @click="goGetIp">点击获取白名单添加接口</div>
-      <div class="api-link" @click="goGetIp">点击获取白名单删除接口</div>
-      <div class="api-link" @click="goGetIp">点击获取白名单查询接口</div>
+      <div class="api-text list-space">
+        <span>Api接口</span>
+        <div class="api-link" @click="goGetIp">点击获取白名单添加接口</div>
+        <div class="api-link" @click="goGetIp">点击获取白名单删除接口</div>
+        <div class="api-link" @click="goGetIp">点击获取白名单查询接口</div>
+      </div>
     </div>
     <div class="table-wrap">
       <el-table

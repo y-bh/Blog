@@ -124,7 +124,38 @@
     background-position-y: -2760px;
   }
 }
+//优质代理IP资源
+@mixin animation-proxy {
+  -webkit-animation: keyframe-proxy 3s steps(5) forwards;
+  animation: keyframe-proxy 3s steps(5) forwards;
+}
 
+@keyframes keyframe-proxy1 {
+  0% {
+    background-position-y: -25px;
+  }
+  100% {
+    background-position-y: -424px;
+  }
+}
+
+@keyframes keyframe-proxy2 {
+  0% {
+    background-position-y: -24px;
+  }
+  100% {
+    background-position-y: -473px;
+  }
+}
+
+@keyframes keyframe-proxy3 {
+  0% {
+    background-position-y: -25px;
+  }
+  100% {
+    background-position-y: -425px;
+  }
+}
 // 产品核心优势
 @mixin animation-kernel {
   -webkit-animation: keyframe-kernel steps(1) forwards;
@@ -143,11 +174,7 @@
 //优质代理IP资源
 @mixin proxyIconImg {
   width: 60px;
-  height: 60px;
-  // border: 1px solid;
-  background-position: -10px -25px;
-  // background-position: -30px -30px;
-  //animation: bannerGo 3s steps(4) forwards;
+  height: 65px;
 }
 
 .common-main-button {
@@ -312,15 +339,24 @@
         .icon-img1,
         .icon-img2,
         .icon-img3 {
-          transition: all 0.3s;
+          // transition: all 0.3s;
+          // border: 1px solid #cdbdbd;
         }
 
         &:hover {
-          .icon-img1,
-          .icon-img2,
+          .icon-img1 {
+            -webkit-animation: 0.5s keyframe-proxy1 steps(5) forwards;
+            animation: 0.5s keyframe-proxy1 steps(5) forwards;
+          }
+          .icon-img2 {
+            -webkit-animation: 0.5s keyframe-proxy2 steps(5) forwards;
+            animation: 0.5s keyframe-proxy2 steps(5) forwards;
+          }
           .icon-img3 {
-            transition: all 0.3s;
-            transform: translate(8px, -8px);
+            -webkit-animation: 0.5s keyframe-proxy3 steps(5) forwards;
+            animation: 0.5s keyframe-proxy3 steps(5) forwards;
+            //transition: all 0.3s;
+            //transform: translate(8px, -8px);
           }
           span {
             color: #1968fc;
@@ -350,16 +386,19 @@
           .icon-img1 {
             background: url("/images/home/proxy1.png") no-repeat;
             background-size: 82px 517px;
+            background-position: -10px -25px;
             @include proxyIconImg;
           }
           .icon-img2 {
             background: url("/images/home/proxy2.png") no-repeat;
             background-size: 82px 568px;
+            background-position: -16px -24px;
             @include proxyIconImg;
           }
           .icon-img3 {
             background: url("/images/home/proxy3.png") no-repeat;
             background-size: 82px 505px;
+            background-position: -10px -25px;
             @include proxyIconImg;
           }
         }

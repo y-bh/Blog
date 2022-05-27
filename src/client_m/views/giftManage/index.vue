@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-27 16:42:14
+ * @LastEditTime: 2022-05-27 18:10:04
 -->
 <template>
   <div
@@ -53,11 +53,11 @@
       </div>
     </div>
   </div>
-  <div v-else>
-    <div class="mt-100">
+  <div class="gift-container" v-else>
+    <!-- <div class="mt-100"> -->
       <div class="flex justify-content-center empty-box"></div>
       <p class="flex justify-content-center text-desc">暂无可用优惠券</p>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 

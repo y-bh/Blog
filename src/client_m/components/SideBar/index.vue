@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-27 14:14:24
+ * @LastEditTime: 2022-05-27 18:36:22
 -->
 <template>
   <aside class="sideBar">
@@ -102,12 +102,15 @@ export default {
   width: 200px;
   min-height: 200px;
   background: #dfd4bc;
-  // li {
-  //   border: 1px solid #ffffff;
-  //   padding: 5px;
-  //   &:hover {
-  //     background: #e3a6a6;
-  //   }
+
+  // :v-deep(.el-menu)  {
+  //   background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.5), rgba(208, 224, 255, 0.2), #fff, #fff, #fff);
+
+  //   // .el-menu-item {
+  //   //   padding: 0 !important;
+  //   //   text-align: center;
+  //   // }
   // }
+
 }
 </style>
