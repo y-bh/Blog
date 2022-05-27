@@ -1,9 +1,9 @@
 /*
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-26 18:44:10
+ * @LastEditTime: 2022-05-27 13:19:47
  */
 
 function Helper() { }
@@ -357,9 +357,13 @@ window.layout = debounce(layout, 300, true)
 
 
 //套餐页跳转
-function jumpPackage(type) {
-  sessionStorage.setItem("packageTab", type);//1:余额 2：包时
-  window.location.href = "/package";
+function jumpPackage (type) {
+  //sessionStorage.setItem("packageTab", type);//1:余额 2：包时
+  if(type && type ==2){
+    window.location.href = "/package?type=package";
+  }else{
+    window.location.href = "/package";
+  }
 }
 
 //公共头部 导航切换效果
