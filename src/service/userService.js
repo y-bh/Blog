@@ -15,7 +15,7 @@ const registerService = async (data = null) => {
   //注册校验
 
   const tem = {
-    username: data.userName, //用户名
+    username: data.userName.trim(), //用户名
     pwd: data.pwd, //密码
     phone: data.phone, //手机号
     code: data.code, //验证码

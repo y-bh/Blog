@@ -181,7 +181,7 @@ const postKeywordsService = async (data) => {
       if (keyWordsVO && keyWordsVO.keyName) {
         //替换的关键字规则
         let re = new RegExp((`${keyWordsVO.keyName}`), 'g')
-
+        let re2 = new RegExp((`${keyWordsVO.keyName}`))
         lists.data = pageRespDTO.data.map((item, index) => {
 
           //替换标题
@@ -193,7 +193,7 @@ const postKeywordsService = async (data) => {
 
           //处理描述
           if (item.desc && item.desc.includes(keyWordsVO.keyName)) {
-            item.desc = item.desc.replace(re, function (content, $1) {
+            item.desc = item.desc.replace(re2, function (content, $1) {
               return `<strong style='color:#FC7019'>${content}</strong>`
             })
           }

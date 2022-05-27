@@ -74,15 +74,15 @@ function getFuncParams(type = 'login') {
 
   //2. 公共的参数
   let obj = {
-    phone: form.phone.value.trim() || '', //电话号码
-    pwd: form.pwd.value.trim() || ''  // 密码
+    phone: form.phone.value || '', //电话号码
+    pwd: form.pwd.value || ''  // 密码
   }
   //3. 独有的参数
   //注册用户参数
   if (type === 'register') {
     obj = Object.assign({}, obj, {
-      code: form.code.value.trim(),
-      userName: form.userName.value.trim(),
+      code: form.code.value,
+      userName: form.userName.value,
       agreeMent
     })
 
@@ -112,7 +112,7 @@ function getFuncParams(type = 'login') {
   if (type === 'reset') {
     obj = Object.assign({}, obj, {
       code: form.code.value.trim(),
-      cpwd: form.cpwd.value.trim()
+      cpwd: form.cpwd.value
 
     })
   }
@@ -136,42 +136,34 @@ function checkForm(params = null, type = 'login') {
     msg: ''
   }
 
-  //校验手机号/账户
-  if (type === 'login') {
+  //登录与重置共用  校验手机号/账户
+  if (type == 'login') {
     if (!params.phone) {
       res.isPass = false
-      res.msg = '请输入账号!'
+      res.msg = '请输入注册的账号!'
       res.key = 'phone'
       return res
     }
 
-
-
     if (!params.pwd) {
       res.isPass = false
-      res.msg = '请输入密码!'
+      res.msg = '请输入注册时设置的密码!'
       res.key = 'pwd'
       return res
     }
 
-  } else {
+  }
+  if (type === 'reset') {
     if (!params.phone) {
       res.isPass = false
-      res.msg = '请输入手机号'
-      res.key = 'phone'
-      return res
-    }
-
-    if (!rules.phone.test(params.phone)) {
-      res.isPass = false
-      res.msg = '请输入正确的手机号码!'
+      res.msg = '请输入注册时填写的手机号!'
       res.key = 'phone'
       return res
     }
 
     if (!params.code) {
       res.isPass = false
-      res.msg = '请输入短信验证码!'
+      res.msg = '请输入手机收到的验证码!'
       res.key = 'code'
       return res
     }
@@ -182,8 +174,13 @@ function checkForm(params = null, type = 'login') {
       res.key = 'code'
       return res
     }
-  }
-  if (type === 'reset') {
+
+    if (!params.pwd) {
+      res.isPass = false
+      res.msg = '请输入注册时设置的密码!'
+      res.key = 'pwd'
+      return res
+    }
     if (!params.pwd) {
       res.isPass = false
       res.msg = '请设置登录密码!'
@@ -207,19 +204,44 @@ function checkForm(params = null, type = 'login') {
 
     if (!params.cpwd) {
       res.isPass = false
-      res.msg = '请确认登录密码!'
+      res.msg = '请把刚刚设置的登录密码重新再输一次!'
       res.key = 'cpwd'
       return res
     }
     if (params.pwd !== params.cpwd) {
       res.isPass = false
-      res.msg = '登录密码与确认密码不一致!'
+      res.msg = '两次输入的密码不一致!'
       res.key = 'cpwd'
       return res
     }
 
   }
   if (type === 'register') {
+    if (!params.phone) {
+      res.isPass = false
+      res.msg = '请输入手机号'
+      res.key = 'phone'
+      return res
+    }
+
+    if (!rules.phone.test(params.phone)) {
+      res.isPass = false
+      res.msg = '请输入正确的手机号码!'
+      res.key = 'phone'
+      return res
+    }
+    if (!params.code) {
+      res.isPass = false
+      res.msg = '请输入短信验证码'
+      res.key = 'code'
+      return res
+    }
+    if (!rules.code.test(params.code)) {
+      res.isPass = false
+      res.msg = '请输入正确的短信验证码!'
+      res.key = 'code'
+      return res
+    }
     if (!params.userName) {
       res.isPass = false
       res.msg = '账号不能为空!'
@@ -348,7 +370,7 @@ async function sendCode(type = 'register') {
 
   //2.参数
   const params = {
-    phone: form.phone.value.trim() || '', //电话号码
+    phone: form.phone.value || '', //电话号码
   }
 
 
