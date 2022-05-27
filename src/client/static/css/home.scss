@@ -437,16 +437,18 @@
       }
     }
     .content-bg {
-      display: flex;
-      flex-wrap: wrap;
-      > div {
+      // display: flex;
+      // flex-wrap: wrap;
+      .advance-left {
         max-width: 730px;
+        float: left;
         img {
           height: 441px;
         }
       }
 
-      ul {
+      .advance-right {
+        float: right;
         width: 390px;
         display: flex;
         flex-direction: column;

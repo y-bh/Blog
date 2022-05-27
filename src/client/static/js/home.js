@@ -5,10 +5,6 @@
  * @Date: 2022-05-14 13:51:32
  * @LastEditTime: 2022-05-24 13:20:52
  */
-$("#kernelBox li").hover(function () {
-  $(this).addClass("active")
-  $(this).siblings().removeClass("active");
-})
 
 function onFreeTry() {
   if (window.isLogin) {
