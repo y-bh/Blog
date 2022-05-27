@@ -9,7 +9,8 @@
   <meta name="force-rendering" content="webkit">
   <meta name="renderer" content="webkit">
   <meta name="keywords" content="ip代理服务器,换ip软件，静态ip,HTTP代理ip,动态代理ip,代理ip免费试用">
-  <meta name="description" content="天启HTTP专注高品质IP代理服务,国内200+城市节点,自建机房,一手ip代理服务器资源,低延迟,高可用率,多种去重模式,静态ip动态ip多种代理IP组合可先试用再购买,为企业和开发者大数据采集赋能。">
+  <meta name="description"
+    content="天启HTTP专注高品质IP代理服务,国内200+城市节点,自建机房,一手ip代理服务器资源,低延迟,高可用率,多种去重模式,静态ip动态ip多种代理IP组合可先试用再购买,为企业和开发者大数据采集赋能。">
   <!-- 公共css -->
   <%- include('../components/style.html'); %>
     <link rel="stylesheet" href="/css/home.css">
@@ -24,7 +25,8 @@
           <!-- 第一个banner -->
           <div class="banner-board">
             <div class="banner-left pt-140 mb-140">
-              <div class="banner-title fadeInUp wow"><img src="/images/home/backg-title.svg" alt="HTTP、HTTPS、SOCKS5协议，全方位支持大数据采集"></div>
+              <div class="banner-title fadeInUp wow"><img src="/images/home/backg-title.svg"
+                  alt="HTTP、HTTPS、SOCKS5协议，全方位支持大数据采集"></div>
               <div class="banner-subTitle mt-30 fadeInUp wow animate__delay-1">
                 <span>HTTP、HTTPS、SOCKS5协议，全方位支持大数据采集</span>
               </div>
@@ -107,12 +109,14 @@
               </ul>
             </div>
             <!-- 现在注册，免费领取5000IP -->
-            <div class="eightRow regist pt-30 pb-40 mt-140 wow fadeInUp">
-              <div><img src="/images/home/regist.png" alt="现在注册，免费领取5000IP"></div>
-              <div class="desc"><span>现在注册，免费领取5000IP</span></div>
-              <div class="btn">
-                <div class="bl-button button mr-40" onclick="onFreeTry()"><span>免费试用</span></div>
-                <div class="or-button button" onclick="contactUs()"><span>联系客服</span></div>
+            <div class="eightRow regist wow fadeInUp">
+              <div class="egihtWidth pt-30 pb-40 mt-140">
+                <div><img src="/images/home/regist.png" alt="现在注册，免费领取5000IP"></div>
+                <div class="desc"><span>现在注册，免费领取5000IP</span></div>
+                <div class="btn pr-10">
+                  <div class="bl-button button mr-40" onclick="onFreeTry()"><span>免费试用</span></div>
+                  <div class="or-button button" onclick="contactUs()"><span>联系客服</span></div>
+                </div>
               </div>
             </div>
             <!-- 资讯中心 -->
@@ -169,20 +173,21 @@
     </div>
 
     <%#右側廣告 %>
-    <%- include('../components/rightToolbar.html'); %>
+      <%- include('../components/rightToolbar.html'); %>
 
-    <%- include('../components/homeDialog.html') %>
-    <%#公共底部 %>
-    <%- include('../components/footer.html'); %>
+        <%- include('../components/homeDialog.html') %>
+          <%#公共底部 %>
+            <%- include('../components/footer.html'); %>
 </body>
 <!-- WPA start -->
 <script id="qd2355160769411743a87929e240233080d4010b0d10"
   src="https://wp.qiye.qq.com/qidian/2355160769/411743a87929e240233080d4010b0d10" charset="utf-8" async defer></script>
 <!-- WPA end -->
 <!-- 公共js -->
-  <%- include('../components/js.html'); %>
+<%- include('../components/js.html'); %>
   <script src="/lib/js/particles.min.js"></script>
   <script src="/js/particles-config.js"></script>
   <script src="/lib/js/wow.min.js"></script>
   <script src="/js/home.js"></script>
+
 </html>

@@ -225,7 +225,7 @@
       .banner-title {
         img {
           width: 640px;
-          height: 86px;
+          height: 65px;
         }
       }
       .banner-subTitle {
@@ -328,13 +328,14 @@
         }
         &:after {
           content: "";
-          background: url("/images/home/particle-img.png") no-repeat;
+          background: url("/images/home/proxy-particle.png") no-repeat;
+          background-size: 30px 30px;
           display: block;
           width: 30px;
           height: 30px;
           position: absolute;
-          bottom: -23px;
-          right: -20px;
+          bottom: -14px;
+          right: -6px;
         }
         .top {
           display: flex;
@@ -492,6 +493,9 @@
         background-image: radial-gradient(closest-side at 60%, rgba(208, 224, 255, 0.7), #ff000000);
 
         transition: all 0.3s;
+        &:nth-of-type(2) {
+          background-image: radial-gradient(closest-side at 60%, rgba(252, 112, 25, 0.2), #ff000000);
+        }
         &:hover {
           transform: translateY(-30px);
         }
@@ -632,28 +636,32 @@
     }
   }
   .eightRow {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-items: center;
     background: linear-gradient(90deg, #e7eefd 0%, #f3fafb 47%, #f0fcff 100%);
-    img {
-      width: 247px;
-      height: 127px;
-    }
-    .desc span {
-      font-size: 32px;
-      font-weight: 400;
-      line-height: 42px;
-      color: #091d43;
-    }
-    .btn {
+    .egihtWidth {
       display: flex;
-      .button {
-        width: 200px;
-        height: 50px;
-        line-height: 50px;
-        font-size: 20px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      max-width: 1400px;
+      margin: auto;
+      img {
+        width: 247px;
+        height: 127px;
+      }
+      .desc span {
+        font-size: 32px;
+        font-weight: 400;
+        line-height: 42px;
+        color: #091d43;
+      }
+      .btn {
+        display: flex;
+        .button {
+          width: 200px;
+          height: 50px;
+          line-height: 50px;
+          font-size: 20px;
+        }
       }
     }
   }
