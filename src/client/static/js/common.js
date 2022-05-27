@@ -258,6 +258,7 @@ function mdPhone(phone) {
 
 //防抖函数
 function debounce(fn, delay, once = false) {
+
   var timeout = null;
   var count = 0;
   return function (e) {
@@ -301,6 +302,7 @@ function dateFormat(date, fmt = 'YYYY-mm-dd HH:MM:SS') {
   }
   return fmt
 }
+
 
 //自适应计算
 function change() {
@@ -350,6 +352,7 @@ function layout() {
 
   })
 }
+
 window.layout = debounce(layout, 300, true)
 
 
@@ -358,7 +361,6 @@ function jumpPackage(type) {
   sessionStorage.setItem("packageTab", type);//1:余额 2：包时
   window.location.href = "/package";
 }
-
 
 //首页|业务场景  产品优势点击效果
 const lis = $(".coreAdvant")
@@ -370,10 +372,7 @@ function kernelJump(index) {
     .siblings('.coreAdvant').css('display', 'none')
   new WOW({ boxClass: 'advanceWow' }).init()
 }
-$("#kernelBox li").hover(function () {
-  $(this).addClass("active")
-  $(this).siblings().removeClass("active");
-})
+
 
 //公共头部 导航切换效果
 let resizeTimer = null;
@@ -422,7 +421,6 @@ function toggleHead() {
 
 function getTabWidth() {
   //  小屏获取导航元素
-
   headerAttr.navWidth = [];
   if ($('.show')) {
     let tabNav = $('.show .nav-item');
@@ -479,12 +477,12 @@ $(function () {
   // 1.首页|业务场景  产品优势动画初始化
   new WOW({ boxClass: 'advanceWow', }).init();
 
-
   // 2.公共导航
   let routePath = (window.location.pathname.replace(/\//g, '') || 'index');  // 路径
   if ($(`[data-path=${routePath}]`)) {
     $(`[data-path=${routePath}]`).addClass('activated').siblings().removeClass('activated');
   }
+
   //切换导航效果
   toggleHead();
 
