@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-26 17:11:07
+ * @LastEditTime: 2022-05-27 14:04:51
 -->
 <template>
   <div class="layout">
@@ -83,7 +83,7 @@ export default {
 <style lang="scss" scoped>
 .layout {
   background: #fff;
-  margin-top: 120px;
+  margin-top: 80px;
   .main {
     position: relative;
     height: calc(100% - 84px);
@@ -91,12 +91,12 @@ export default {
     font-size: 14px;
     display: flex;
     justify-content: start;
-    width: 1400px;
+    width: 1420px;
     margin: 0 auto;
 
     .sideBar {
       width: 180px;
-      margin-right: 40px;
+      margin-right: 20px;
       flex-shrink: 0;
       background: #ffffff;
       ::v-deep(.el-menu) {
@@ -108,7 +108,11 @@ export default {
       flex: 1;
       overflow: auto;
       padding: 0;
+      // 设置padding为了显示阴影
+      padding: 40px 20px 20px 20px;
       margin-left: 0;
+      // margin-right: -20px;
+      box-sizing: border-box;
       // margin-left: 20px;
     }
   }

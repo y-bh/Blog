@@ -1443,6 +1443,8 @@ a:hover {
 // 公共底部
 .footer-wrap {
   // background-color: rgba(245, 247, 255, 0.39);
+  position: relative;
+  z-index: 2;
   background-image: url(/images/footer/bg.png);
   background-size: cover;
   .footer-main-content {

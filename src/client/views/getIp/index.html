@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 提取ip
  * @Date: 2022-04-27 11:56:24
- * @LastEditTime: 2022-05-27 11:28:04
+ * @LastEditTime: 2022-05-27 11:47:16
 -->
 <!DOCTYPE html>
 <html>
@@ -76,7 +76,7 @@
                 <div class="count_box mt-20 flex justify-between align-center">
                   <div class="box_left">
                     <label for="left_desc">当前账户余额(天启币)</label>
-                    <span class="left_count ml-5" id="left_count"><%= icon.balance %> </span>
+                    <span class="left_count ml-5" id="left_count"> <%= parseFloat(icon.balance.toFixed(2)).toLocaleString() %> </span>
                   </div>
                   <button class="right_btn or-button" onclick="jumpPackage(1)">
                     <span>充值</span>

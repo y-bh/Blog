@@ -57,13 +57,19 @@
                           <div class="title flex-center justify-start">
                             <span class="meal-icon icon_second"></span>
                             <span class="title-type">包时套餐</span>
-                            <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate) { %>
-                              <div class="activity">
-                                限时<%= HEADER_ACTIVE_TAB.minPurchaseRate %>折
-                              </div>
-                              <% } else { %>
-                                <span></span>
-                                <% } %>
+                            <%= HEADER_ACTIVE_TAB.maxPurchaseGift %>
+                              <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate ||
+                                HEADER_ACTIVE_TAB.maxPurchaseGift) { %>
+                                <div class="activity">
+                                  <% if(HEADER_ACTIVE_TAB.minPurchaseRate) { %>
+                                    限时<%= HEADER_ACTIVE_TAB.minPurchaseRate / 10 %>折
+                                      <% } else { %>
+                                        加赠<%= HEADER_ACTIVE_TAB.maxPurchaseGift %>%
+                                          <% } %>
+                                </div>
+                                <% } else { %>
+                                  <span></span>
+                                  <% } %>
                           </div>
                           <span class="describe">
                             每日固定IP提取量，3 / 5 / 10 /15 分钟时效IP
