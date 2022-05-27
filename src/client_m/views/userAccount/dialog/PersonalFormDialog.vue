@@ -3,19 +3,20 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-26 14:36:38
+ * @LastEditTime: 2022-05-27 10:56:59
 -->
 <template>
   <div class="personalFormDialog">
-    <el-dialog 
-      @close ="closeDialog"
-      v-model="dialogVisibleFlag" 
-      custom-class="customClass customize_dialog dialog-double">
+    <el-dialog
+      @close="closeDialog"
+      v-model="dialogVisibleFlag"
+      custom-class="customClass customize_dialog dialog-double"
+    >
       <DialogTitle title-content="个人资料" />
       <div class="dialog-body">
         <div class="person-introduce">
           <p class="title"><span>基本信息</span></p>
-        
+
           <ul class="person-cont">
             <li class="person-item">
               <span>用户名</span>
@@ -35,7 +36,6 @@
             </li>
           </ul>
         </div>
-      
 
         <div class="title"><span>其他信息</span></div>
         <el-form
@@ -45,7 +45,6 @@
           :model="personForm"
           :rules="rules"
           ref="perFormRefs"
-          
         >
           <el-form-item label="微信">
             <el-input v-model="personForm.wxNo" placeholder="请输入" />
@@ -75,7 +74,6 @@
             <el-button type="warning" @click="onSubmit">保存</el-button>
           </div>
         </el-form>
-        
       </div>
     </el-dialog>
   </div>
@@ -111,6 +109,13 @@ export default {
     let perFormRefs = ref(null);
     console.log(1111111, userInfoSon);
     let rules = reactive({
+      wxNo: [
+        {
+          pattern: /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/,
+          message: "微信必须是以字母开头的6-20个子母、数字、下划线和减号组成,不能设置中文",
+          trigger: "blur",
+        },
+      ],
       QQNO: [
         {
           pattern: /^[1-9][0-9]{4,11}$/,
@@ -198,9 +203,9 @@ export default {
       personForm.business = userInfoSon.userInfo.business;
       personForm.job = userInfoSon.userInfo.profession;
     });
-    const closeDialog = function(){
-     // console.log("----------测试关闭-------------");
-    }
+    const closeDialog = function () {
+      // console.log("----------测试关闭-------------");
+    };
     return {
       closeDialog,
       perFormRefs,
@@ -221,45 +226,45 @@ export default {
   .title {
     font-size: 20px;
     font-weight: 400;
-    color: #4C5664;
+    color: #4c5664;
     margin-bottom: 20px;
   }
 }
 
 .person-introduce {
-    padding: 0 0 20px 0;
+  padding: 0 0 20px 0;
+  box-sizing: border-box;
+
+  .person-title {
+    margin: 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
     box-sizing: border-box;
+  }
 
-    .person-title {
-        margin: 0;
-        padding: 0 0 10px 0;
-        font-size: 16px;
-        font-weight: bold;
-        box-sizing: border-box;
+  .person-cont {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+
+    .person-item {
+      flex: 0 0 50%;
+      padding: 10px 0;
+      // margin-right: 25px;
+      box-sizing: border-box;
+      list-style: none;
+
+      span:first-child {
+        display: inline-block;
+        min-width: 80px;
+        margin-right: 6px;
+      }
     }
-
-    .person-cont {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 0;
-        margin: 0;
-
-        .person-item {
-            flex: 0 0 50%;
-            padding: 10px 0;
-            // margin-right: 25px;
-            box-sizing: border-box;
-            list-style: none;
-
-            span:first-child {
-              display: inline-block;
-              min-width: 80px;
-              margin-right: 6px;
-            }
-        }
-    }
+  }
 }
 </style>
 <style>
