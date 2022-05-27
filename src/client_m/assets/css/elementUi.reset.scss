@@ -19,6 +19,10 @@
   --van-nav-bar-height: 50px; //navbar高度
 }
 
+.el-menu {
+  background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.5), rgba(208, 224, 255, 0.2), #fff, #fff, #fff);
+}
+
 // 重置侧边导航
 .slide-affix {
   width: 178.75px;
