@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/login.css">
 </head>
 
-<body  class="login">
+<body class="login">
   <%- include('../components/header.html'); %>
     <div class="login">
       <div class="login-page">
@@ -38,7 +38,7 @@
 
                       <%# 手机号/账号 %>
                         <div class="flex justify-content-center form-input">
-                          <input type="text" placeholder='<%= pageType==='login' ? "请输入账号" : "请输入手机号" %>' name="phone">
+                          <input type="text" placeholder='<%= pageType===' login' ? "请输入账号" : "请输入手机号" %>' name="phone">
                         </div>
 
                         <div class="flex align-items-center ml-60 mt-10 login-danger" id="phone">
@@ -50,8 +50,10 @@
                           <% if(pageType !=='login' ){ %>
                             <div class="mt-20 flex justify-content-center login-other  margin-auto form-input">
                               <input type="number" placeholder="请输入短信验证码" name="code">
-                              <input id="obn-code" class="btn  btn-outline-code ml-30" type="button" value="获取验证码"
-                                onclick="sendCode('<%=pageType%>')">
+                              <div id="obn-code" class="btn  btn-outline-code ml-30 or-l-button  border-btn"
+                                type="button" onclick="sendCode('<%=pageType%>')">
+                                <span>获取验证码</span>
+                              </div>
                             </div>
                             <div class="flex align-items-center ml-60 mt-10 login-danger" id="code">
                               请输入验证码
@@ -92,7 +94,7 @@
 
                                             <%# 协议 %>
                                               <% if(pageType==='register' ){ %>
-                                                <div class="mt-20 flex justify-content-center">
+                                                <div class="mt-20 flex form-checkout-agree">
                                                   <p>
                                                     <input type="checkbox" class="btn-group-vertical" name="agreeMent"
                                                       onclick="agreeOn()">
@@ -109,9 +111,13 @@
 
 
                                                   <div class="mt-30 flex justify-content-center form-input">
-                                                    <input class="btn btn-primary" type="button"
-                                                      onclick="loginSubmit('<%=pageType%>')"
-                                                      value="<%= pageType==='login' ? '登录' : (pageType==='reset' ? '保存' : '立即注册')%> ">
+                                                    <div class="bl-button button user-login text-white"
+                                                      onclick="loginSubmit('<%=pageType%>')">
+                                                      <span>
+                                                        <%= pageType==='login' ? '登录' : (pageType==='reset' ? '保存'
+                                                          : '立即注册' )%>
+                                                      </span>
+                                                    </div>
                                                   </div>
 
                                                   <%# 登录页独有 %>
@@ -127,7 +133,8 @@
                                                           <% if(pageType==='register' ){ %>
                                                             <div
                                                               class="mt-20 flex justify-content-center login-other margin-auto">
-                                                              <p>已有账号,<a href="/login">立即登录</a></p>
+                                                              <p class="title">已有账号,<a href="/login"
+                                                                  class="text-blue">立即登录</a></p>
                                                             </div>
                                                             <% } %>
             </form>

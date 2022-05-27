@@ -177,12 +177,6 @@ function checkForm(params = null, type = 'login') {
 
     if (!params.pwd) {
       res.isPass = false
-      res.msg = '请输入注册时设置的密码!'
-      res.key = 'pwd'
-      return res
-    }
-    if (!params.pwd) {
-      res.isPass = false
       res.msg = '请设置登录密码!'
       res.key = 'pwd'
       return res
@@ -204,7 +198,7 @@ function checkForm(params = null, type = 'login') {
 
     if (!params.cpwd) {
       res.isPass = false
-      res.msg = '请把刚刚设置的登录密码重新再输一次!'
+      res.msg = '请确认登录密码!'
       res.key = 'cpwd'
       return res
     }
@@ -364,6 +358,10 @@ async function loginSubmit(type) {
 let timer = null //验证码定时器
 let count = 60 //定时时间
 async function sendCode(type = 'register') {
+  if (timer && count < 60) {
+    console.log("已有定时器")
+    return
+  }
 
   //1. 获取表单
   const form = document.forms['login']
@@ -418,14 +416,11 @@ async function sendCode(type = 'register') {
     clearInterval(timer)
     timer = setInterval(() => {
       if (count > 0) {
-        // 
-        $("#obn-code").val(count--)
-        $("#obn-code").attr("disabled", true)
+        $("#obn-code span").text(count--)
       } else {
         clearInterval(timer)
         count = 60
-        $("#obn-code").val('发送验证码')
-        $("#obn-code").attr("disabled", false)
+        $("#obn-code span").text('发送验证码')
       }
     }, 1000)
 
@@ -488,7 +483,7 @@ function showHeaderBg() {
 
 $(window).scroll(showHeaderBg)
 
-$(function(){
+$(function () {
   showHeaderBg()
 })
 
