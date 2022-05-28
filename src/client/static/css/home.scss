@@ -478,13 +478,12 @@
       }
     }
     .content-bg {
-      // display: flex;
-      // flex-wrap: wrap;
       .advance-left {
         max-width: 730px;
         float: left;
         img {
           height: 441px;
+          width: 100%;
         }
       }
 

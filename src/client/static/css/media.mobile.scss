@@ -57,6 +57,16 @@
 }
 
 @media screen and (max-width: 775px) {
+  // 套餐购买
+  .packageBuy {
+    .changeTab.mediaStyle {
+      width: 50% !important;
+      min-width: 400px;
+    }
+    .modal-content {
+      width: auto !important;
+    }
+  }
   //帮助中心
   div.help-center {
     margin-top: 30px;
@@ -151,24 +161,58 @@
   }
 
   //业务场景
-  div.business-wrap {
-    border: 1px solid red;
-    width: auto;
+  .business-scene {
+    .widthAll {
+      margin-top: 100px !important;
+    }
     .top {
+      img {
+        height: auto;
+      }
+    }
+    div.business-wrap {
+      width: auto;
+      .left_text {
+        grid-template-columns: minmax(min-content, 0.8fr);
+        grid-template-rows: repeat(3, auto);
+      }
+    }
+
+    #kernelBox {
+      justify-content: flex-start;
+    }
+    .content-bg {
+      display: flex;
+      justify-content: center;
+      .advance-left {
+        float: none !important;
+        img {
+          height: auto !important;
+        }
+      }
+      .advance-right {
+        float: none !important;
+        margin-left: 0 !important;
+      }
+    }
+
+    div.business-wrap.top {
       display: flex;
       flex-wrap: wrap-reverse;
     }
-    .left_text {
-      grid-template-columns: minmax(min-content, 0.8fr);
-      grid-template-rows: repeat(3, auto);
+    div.firm-banner {
+      margin-top: 80px;
+      max-width: 100%;
+      height: 120px;
+      background: url(/images/companyServe/banner-mobile.png) no-repeat;
+      background-size: 100% 100%;
     }
   }
-  div.firm-banner {
-    margin-top: 80px;
-    max-width: 100%;
-    height: 120px;
-    background: url(/images/companyServe/banner-mobile.png) no-repeat;
-    background-size: 100% 100%;
+
+  div.homeContent .fourthRow .content ul {
+    border-bottom: 1px solid #d0e0ff;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 
   //提取ip
@@ -185,18 +229,18 @@
       padding: 0;
     }
 
-    .narrow_box{
+    .narrow_box {
       margin-top: 40px;
     }
 
-    .choose_area{
+    .choose_area {
       display: block;
-      .isProvince{
+      .isProvince {
         margin-top: 40px;
       }
     }
 
-    .ip_use_box{
+    .ip_use_box {
       justify-content: center !important;
     }
 
@@ -205,19 +249,19 @@
       max-width: none;
     }
 
-    .getip-select-wrap{
+    .getip-select-wrap {
       margin: 0 auto;
       width: 90%;
-      &::after{
+      &::after {
         transform: translateY(150%);
       }
 
-      ul{
+      ul {
         width: 100%;
       }
     }
-    .getip-select-wrap.is-active-s{
-      &::after{
+    .getip-select-wrap.is-active-s {
+      &::after {
         transform: translateY(150%) rotate(180deg);
         // transform: rotate(180deg);
       }
@@ -233,34 +277,36 @@
       justify-content: center;
     }
 
-    .choose_area_box{
+    .choose_area_box {
       display: block;
     }
 
-    .data_format_box{
+    .data_format_box {
       display: block;
     }
 
-    .note_box{
+    .note_box {
       grid-template-columns: 70px auto;
-      .white_box, .error_box, .extract_box{
-        li{
+      .white_box,
+      .error_box,
+      .extract_box {
+        li {
           padding: 5px;
         }
       }
       width: 100%;
     }
-    .note_content{
-      li{
+    .note_content {
+      li {
         padding: 5px;
       }
     }
 
-    .extract_return{
+    .extract_return {
       width: 90vw;
     }
 
-    .code{
+    .code {
       width: 90%;
       padding-left: 5px;
       padding-right: 5px;
@@ -274,7 +320,6 @@
 
   // 顶部导航
   .header {
-    
     .fold.show {
       .nav-list {
         .mixed-range {
@@ -282,25 +327,23 @@
           grid-column-gap: 20px; // 列间距50px
           grid-row-gap: 10px; // 行间距30px
           .child-item {
-            
-            .meal-icon{
+            .meal-icon {
               transform: scale(0.6);
             }
             .content {
               display: inline-flex;
               align-items: center;
             }
-            .describe{
+            .describe {
               display: none;
             }
           }
-          
         }
         .nav-item {
-          &.nav-business{
+          &.nav-business {
             .child-list {
               transform: translate(-100%, -50%);
-              .child-link{
+              .child-link {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -315,7 +358,7 @@
                 &:nth-child(-n + 2) {
                   margin-top: 0;
                 }
-              
+
                 // 最后两个
                 &:nth-last-child(-n + 2) {
                   margin-bottom: 0;
@@ -335,7 +378,6 @@
           }
         }
       }
-      
     }
   }
   // .header .fold.show .nav-item:hover.nav-business .child-list .child-link{
@@ -352,7 +394,6 @@
       grid-auto-rows: unset;
       column-gap: 10px;
       row-gap: 20px;
-
 
       .cooperate-content {
         grid-template-columns: minmax(250px, 1fr);
@@ -461,55 +502,72 @@
   }
 
   //业务场景
-  div.business-wrap {
-    .top {
-      img {
-        width: 550px;
-        height: 360px;
-      }
+
+  .business-scene {
+    .mt-80 {
+      margin-top: 40px !important;
+    }
+    .advance-right {
+      height: 200px !important;
+    }
+
+    .fiveRow {
+      margin-top: 80px !important;
+    }
+    .module_img {
+      width: 100% !important;
+      height: auto !important;
+    }
+    .common-main-button {
+      width: auto;
+      margin-left: 0 !important;
+      padding: 0;
+      margin: 0;
     }
   }
 
-  div.getip-wrap{
-
-    .top_title{
+  div.getip-wrap {
+    .top_title {
       width: 70%;
     }
 
-    .ip_use_box{
+    .ip_use_box {
       grid-template-columns: 150px 150px;
     }
 
-    .separator{
+    .separator {
       width: 100%;
     }
 
-    .meal_item .desc{
+    .meal_item .desc {
       width: 100%;
     }
 
-    .narrow_box{
+    .narrow_box {
       width: 38%;
       margin-right: 20px !important;
     }
 
-    .operator_box_wrap, .ip_box{
+    .operator_box_wrap,
+    .ip_box {
       display: block;
     }
 
-    .copy,.open{
+    .copy,
+    .open {
       width: 80px !important;
     }
 
-    .create_api_url, .create_api_url1{
+    .create_api_url,
+    .create_api_url1 {
       width: 160px !important;
       height: 50px !important;
     }
 
-    .demo_box{
+    .demo_box {
       column-gap: 20px;
     }
-    .demo_box_item{
+    .demo_box_item {
       padding: 5px;
       width: 45%;
       height: 140px;
@@ -528,6 +586,15 @@
     font-size: 14px;
   }
 
+  //业务场景
+  .business-scene {
+    .bottom_btn {
+      button {
+        width: 120px;
+        font-size: 18px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 414px) {
