@@ -30,7 +30,7 @@ const renderTab = async () => {
     data = res.data
     setStore(active_tab, data)
   }
-  console.info("活动tab:", res)
+  
   return data
 }
 
@@ -48,7 +48,7 @@ const getQueryLink = async () => {
 
   try {
     const res = await getQueryLinkData()
-    console.log("获取友情链接时间:",res)
+    
     if (+res.code === 200) {
       let data = res.data || []
       arr = data.map(({ linkName = null, linkUrl = null, linkTarget = null }) => {
@@ -62,7 +62,7 @@ const getQueryLink = async () => {
       setStore(links, arr)
     }
   } catch (error) {
-    console.error("getQueryLink: ", error);
+    
   }
 
   return arr
