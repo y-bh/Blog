@@ -58,11 +58,31 @@
 
 @media screen and (max-width: 775px) {
   //首页
-  .homeContent {
-    img {
-      width: 100% !important;
-      height: auto !important;
+  div.home {
+    padding-bottom: 60px;
+    .homeContent {
+      img {
+        width: 100% !important;
+        height: auto !important;
+      }
+      .nineRow {
+        margin-top: 80px !important;
+        ul {
+          justify-content: center;
+        }
+      }
     }
+
+    .mt-140 {
+      // margin-top: 80px !important;
+    }
+  }
+
+  div.common-main-button {
+    width: auto;
+    margin-left: 0 !important;
+    padding: 0;
+    margin: 0;
   }
   // 套餐购买
   .packageBuy {
@@ -509,7 +529,6 @@
   }
 
   //业务场景
-
   .business-scene {
     .mt-80 {
       margin-top: 40px !important;
@@ -524,12 +543,6 @@
     .module_img {
       width: 100% !important;
       height: auto !important;
-    }
-    .common-main-button {
-      width: auto;
-      margin-left: 0 !important;
-      padding: 0;
-      margin: 0;
     }
   }
 
