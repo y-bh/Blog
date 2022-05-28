@@ -566,7 +566,8 @@
     }
   }
   .sixRow {
-    background: linear-gradient(40deg, rgb(25 104 252 / 10%) 0%, #ffffff 100%);
+    background: linear-gradient(40deg, rgb(25 104 252 / 10%) 10%, #ffffff 100%);
+    box-shadow: 0 0 80px 20px #f4f8ff;
     > ul {
       display: flex;
       justify-content: center;
@@ -717,6 +718,7 @@
         box-shadow: 0px 20px 40px rgba(76, 86, 100, 0.1);
         border-radius: 8px;
         position: relative;
+        cursor: pointer;
         .arrow {
           opacity: 0;
           transition: all 0.3s;
@@ -731,7 +733,8 @@
         .content {
           font-size: 14px;
           color: #091d43;
-          min-height: 180px;
+          // min-height: 180px;
+          height: 180px;
           // min-width: 340px;
           width: 340px;
           li {
@@ -757,11 +760,28 @@
           text-align: right;
           font-size: 14px;
           color: #26abc3;
+          padding: 2px;
+          line-height: 18px;
+          span {
+            display: inline-block;
+          }
+          &:hover {
+            opacity: 0.8;
+            .arrowRight {
+              transform: translateX(5px);
+              transition: 0.3s;
+            }
+          }
         }
       }
       .news1 {
         background: rgba(234, 252, 255, 0.39);
         border-top: 1px solid #7ae1f4;
+        background: rgba(234, 252, 255, 0.39) url("/images/home/new-backg1.png") no-repeat;
+        background-size: 440px 397px;
+        background-position: right bottom;
+        width: 440px;
+        // max-height: 397px;
         .title {
           border-bottom: 1px solid #84eafa;
         }
@@ -772,22 +792,26 @@
         .darkColour {
           color: #27adc2;
         }
-        &::after {
-          content: "";
-          display: block;
-          background: url("/images/home/new-backg1.png") no-repeat;
-          background-size: 440px 397px;
-          width: 440px;
-          height: 397px;
-          position: absolute;
-          z-index: 99;
-          bottom: 0;
-          right: 0;
-        }
+        // &::after {
+        //   content: "";
+        //   display: block;
+        //   background: url("/images/home/new-backg1.png") no-repeat;
+        //   background-size: 440px 397px;
+        //   width: 440px;
+        //   height: 397px;
+        //   position: absolute;
+        //   // z-index: 9;
+        //   bottom: 0;
+        //   right: 0;
+        // }
       }
       .news2 {
         background: rgba(240, 243, 253, 0.39);
         border-top: 1px solid #1968fc;
+        background: rgba(240, 243, 253, 0.39) url("/images/home/new-backg2.png") no-repeat;
+        background-size: 440px 397px;
+        background-position: right bottom;
+        width: 440px;
         .title {
           border-bottom: 1px solid #1968fc;
         }
@@ -799,22 +823,26 @@
         .queryBtn {
           color: #1968fc;
         }
-        &::after {
-          content: "";
-          display: block;
-          background: url("/images/home/new-backg2.png") no-repeat;
-          background-size: 440px 397px;
-          width: 440px;
-          height: 397px;
-          position: absolute;
-          z-index: 99;
-          bottom: 0;
-          right: 0;
-        }
+        // &::after {
+        //   content: "";
+        //   display: block;
+        //   background: url("/images/home/new-backg2.png") no-repeat;
+        //   background-size: 440px 397px;
+        //   width: 440px;
+        //   height: 397px;
+        //   position: absolute;
+        //   z-index: 9;
+        //   bottom: 0;
+        //   right: 0;
+        // }
       }
       .news3 {
         background: rgba(255, 244, 237, 0.39);
         border-top: 1px solid #fc7019;
+        background: rgba(255, 244, 237, 0.39) url("/images/home/new-backg3.png") no-repeat;
+        background-size: 440px 397px;
+        background-position: right bottom;
+        width: 440px;
         .title {
           border-bottom: 1px solid #fc7019;
         }
@@ -826,18 +854,18 @@
         .queryBtn {
           color: #fc7019;
         }
-        &::after {
-          content: "";
-          display: block;
-          background: url("/images/home/new-backg3.png") no-repeat;
-          background-size: 440px 397px;
-          width: 440px;
-          height: 397px;
-          position: absolute;
-          z-index: 99;
-          bottom: 0;
-          right: 0;
-        }
+        // &::after {
+        //   content: "";
+        //   display: block;
+        //   background: url("/images/home/new-backg3.png") no-repeat;
+        //   background-size: 440px 397px;
+        //   width: 440px;
+        //   height: 397px;
+        //   position: absolute;
+        //   z-index: 9;
+        //   bottom: 0;
+        //   right: 0;
+        // }
       }
     }
   }
