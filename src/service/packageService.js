@@ -9,7 +9,7 @@ const { getProxyMealList } = require("dao/packageDao")
 
 const renderPackage = async () => {
   const res = await getProxyMealList()
-  console.info("业务层:", res)
+  
   let packageObj = {
     activityVoMap: {},//打折活动
     countMeal: [],//IP价格

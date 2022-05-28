@@ -58,7 +58,6 @@ const getIconDao = async(token, params = {}) => {
   const url = api.POST_AUTH_GETMINEINFO
   try {
     const res = await service.post(url,params, token)
-    console.log(res, 'daooooooooooooooo');
     return res
   } catch (error) {
     console.error('getWhiteListApi_Dao: ', error);
