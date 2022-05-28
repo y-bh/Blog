@@ -869,3 +869,30 @@ $columnMt: 60px;
     }
   }
 }
+
+.common-select {
+  /* 鼠标移上，变小手 */
+  cursor: pointer;
+  /* 清除默认的箭头样式 */
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  /* 右侧添加箭头的背景图  自行调整位置 */
+  background: url("/images/arrow-down.png") 460px center no-repeat #fff;
+  background-size: 40px 24px;
+  padding: 0 30px;
+  color: #b2bccb;
+  width: 100%;
+  // height: calc(1.5em + 0.75rem + 2px);
+  // padding: 0.375rem 0.75rem;
+  // font-size: 1rem;
+  // font-weight: 400;
+  // line-height: 1.5;
+  // color: #495057;
+  // background-color: #fff;
+  // background-clip: padding-box;
+  // border: 1px solid #ced4da;
+  // border-radius: 0.25rem;
+  // transition: border-color 0.15s ease-in-out;
+  // box-shadow: 0.15s ease-in-out;
+}
