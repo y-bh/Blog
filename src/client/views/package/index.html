@@ -50,9 +50,9 @@
               </div>
               <div class="tabContent">
                 <!-- 按次提取 tab内容 -->
-                <div id="balancePackage" class="tab-balance wow fadeInUp">
+                <div id="balancePackage" class="tab-balance">
                   <!-- ip价格区域 -->
-                  <div class="ipPrice">
+                  <div class="ipPrice wow fadeInUp">
                     <div class="ipPrice-left">
                       <div class="ipPrice-title"><span>IP价格</span></div>
                       <ul class="ipPrice-list">
@@ -79,7 +79,7 @@
 
                   <div class="rechargeAmount mt-60">
                     <div class="rechargeAmount-title mb-10"><span>选择预充值金额</span></div>
-                    <ul id="selectRechargeMeals" class="amount-list">
+                    <ul id="selectRechargeMeals" class="amount-list wow fadeInUp animate__delay-0">
                       <!-- 选择预充值金额 -->
                       <% rechargeMeals.forEach(function(rate,index) { %>
                         <% if (index==0) { %>
@@ -114,7 +114,7 @@
                   </div>
 
                   <!-- 选择支付方式 -->
-                  <div class="payType mt-50">
+                  <div class="payType mt-50 wow fadeInUp">
                     <div class="payType-content">
                       <div class="payType-title mr-40"><span>选择支付方式</span></div>
                       <ul id="balancePagPayType" class="payMode">
@@ -134,7 +134,7 @@
                   </div>
 
                   <!-- 支付金额 -->
-                  <div class="payMoney">
+                  <div class="payMoney wow  fadeInUp">
                     <div class="payMoney-title mr-40"><span>支付金额</span></div>
                     <div class="payMoney-number mr-30"><span id="rechargeMoney" class="moneyFont">0.00</span><span>元</span></div>
                     <div class="payMoney-origin2"><span>原价：</span><span id="totalPrice2" class="moneyFont"
@@ -144,7 +144,7 @@
                 </div>
                 <!-- 短效IP  tab内容-->
                 <div id="packageTime" class="tab-packageTime" style="display: none;">
-                  <ul class="package-params">
+                  <ul class="package-params  wow fadeInUp">
                     <li class="wt-170"><span>IP可用率：</span><span class="blue">99%</span></li>
                     <li class="wt-170"><span>多机器调用：</span><span class="blue">不限制</span></li>
                     <li class="wt-375"><span>API最快调用频率：</span><span class="blue">1秒</span></li>
@@ -155,7 +155,7 @@
                   </ul>
 
                   <!--选择IP时效  -->
-                  <div class="package-column">
+                  <div class="package-column  wow  fadeInUp animate__delay-0">
                     <div class="column-title">
                       <span>选择IP时效</span>
                     </div>
@@ -180,7 +180,7 @@
                   </div>
 
                   <!-- 选择购买时长 -->
-                  <div id="selectBuyDuration" class="package-column">
+                  <div id="selectBuyDuration" class="package-column wow  fadeInUp">
                     <div class="column-title">
                       <span>选择购买时长</span>
                     </div>
@@ -263,7 +263,7 @@
                   </div>
 
                   <!-- 选择提取数量 -->
-                  <div class="ipNumber mt-50">
+                  <div class="ipNumber mt-50 wow  fadeInUp">
                     <div class="column-title">
                       <span>选择提取数量</span>
                     </div>
@@ -297,7 +297,7 @@
                     </div>
                   </div>
                   <!--选择支付方式  -->
-                  <div class="payType mt-50">
+                  <div class="payType mt-50 wow  fadeInUp">
                     <div class="payType-content">
                       <div class="payType-title mr-40"><span>选择支付方式</span></div>
                       <ul id="packagePayType" class="payMode">
@@ -317,7 +317,7 @@
                     <div class="payType-tip mt-20"><span>友情提示：如遇微信支付异常，请使用支付宝付款或联系专属销售</span></div>
                   </div>
                   <!-- 支付金额 -->
-                  <div class="payMoney mt-50">
+                  <div class="payMoney mt-50 wow  fadeInUp">
                     <div class="payMoney-title mr-30"><span>支付金额</span></div>
                     <div class="payMoney-number mr-30"><span id="discountPrice" class="moneyFont">0.00</span><span>元</span></div>
                     <div class="payMoney-origin"><span>原价：</span><span id="totalPrice" class="moneyFont"

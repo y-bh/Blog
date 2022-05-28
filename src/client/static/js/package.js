@@ -198,12 +198,12 @@ $(document).on("click", '#changeTab>div', function () {
   let type = $(this).attr("type");
   //sessionStorage.setItem("packageTab", type);//1:余额 2：包时
   if (type == 1) {
-    $("#balancePackage").addClass('wow fadeInUp').show();
-    $("#packageTime").removeClass('wow fadeInUp').hide();
+    $("#balancePackage").show();
+    $("#packageTime").hide();
   }
   if (type == 2) {
-    $("#balancePackage").removeClass('wow fadeInUp').hide();
-    $("#packageTime").addClass('wow fadeInUp').show();
+    $("#balancePackage").hide();
+    $("#packageTime").show();
   }
   new WOW().init();
 })
