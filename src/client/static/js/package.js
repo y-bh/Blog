@@ -188,24 +188,6 @@ function convertMultiple(number, min, max, tip) {
 
 
 //切换头部TAb页面 1：余额 2：包时
-function changeTab(params, dom) {
-  let isCur = $(dom).hasClass("current")
-  if (isCur) {
-    return;
-  }
-  $(dom).addClass("current");
-  $(dom).siblings().removeClass("current");
-  if (params == 1) {
-    $("#balancePackage").show();
-    $("#packageTime").hide();
-  }
-  if (params == 2) {
-    $("#balancePackage").hide();
-    $("#packageTime").show();
-  }
-}
-
-
 $(document).on("click", '#changeTab>div', function () {
   let isCur = $(this).hasClass("current")
   if (isCur) {
@@ -216,13 +198,14 @@ $(document).on("click", '#changeTab>div', function () {
   let type = $(this).attr("type");
   //sessionStorage.setItem("packageTab", type);//1:余额 2：包时
   if (type == 1) {
-    $("#balancePackage").show();
-    $("#packageTime").hide();
+    $("#balancePackage").addClass('wow fadeInUp').show();
+    $("#packageTime").removeClass('wow fadeInUp').hide();
   }
   if (type == 2) {
-    $("#balancePackage").hide();
-    $("#packageTime").show();
+    $("#balancePackage").removeClass('wow fadeInUp').hide();
+    $("#packageTime").addClass('wow fadeInUp').show();
   }
+  new WOW().init();
 })
 
 //切换头部modal的tab页面 1：余额 2：包时
