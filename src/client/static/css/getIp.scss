@@ -69,10 +69,12 @@
   
   ul{
     position: absolute;
+    z-index: 9999;
     display: none;
-    background-color: #f7f7f7;
+    background-color: #ffff;
     width: inherit;
     border: 1px solid #1968fc;
+    border-radius: 4px;
     .options{
       display: block;
       width: inherit;

@@ -1,16 +1,16 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-27 18:05:57
+ * @LastEditTime: 2022-05-28 10:22:43
 -->
 <template>
   <div class="white-list-wrap">
     <div class="list-head">
       <div class="white-list-text">
         <div class="white-list-count">
-          已设/总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.count }}</span>
+          已设 / 总IP白名单数：<span>{{ whiteIpData.used }}/{{ whiteIpData.count }}</span>
         </div>
         <div class="tooltip tooltip-icon">
           <i class="iconfont icon-xianxing-wenhao"></i>
@@ -32,6 +32,7 @@
           v-model="switchVal"
           class="auto-replace-switch"
           @change="switchChange"
+          active-color="#1968fc"
         ></el-switch>
       </div>
       <div class="api-text list-space">
@@ -73,7 +74,7 @@
         </el-table-column>
         <el-table-column prop="operator" label="操作" align="center">
           <template #default="{ row }">
-            <el-button type="danger" @click="openRemoveDialog(row)"
+            <el-button type="danger" class="remove-btn" @click="openRemoveDialog(row)"
               >移除</el-button
             >
           </template>

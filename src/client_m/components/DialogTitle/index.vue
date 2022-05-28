@@ -1,9 +1,9 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 李云涛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-12 17:52:14
- * @LastEditTime: 2022-05-12 18:13:41
+ * @LastEditTime: 2022-05-28 10:53:59
 -->
 <template #title>
   <div class="dialog-title">
@@ -12,7 +12,7 @@
     <div class="bg"></div>
     <div class="bg"></div>
     <div class="bg"></div>
-    <div class="title-text">{{titleContent}}</div>
+    <div class="bg title-text">{{titleContent}}</div>
   </div>
 </template>
 
@@ -41,31 +41,31 @@ export default {
     height: 100%;
     border-radius: inherit;
     &:nth-child(1) {
-      background-color: rgba(25, 104, 252, 0.37);
+      background-color: #b9d1fe;
     }
     &:nth-child(2) {
       clip-path: polygon(0 0, 50px 0, 0 100%);
-      background: linear-gradient(300deg, #e3ecff, #cfe0ff);
+      background: linear-gradient(300deg, #e2ecff, #e2ecff 90%, #dce8fe);
     }
     &:nth-child(3) {
-      clip-path: polygon(50px 0, 100px 0, 50px 100%, 0 100%);
+      clip-path: polygon(50px 0, 112px 0, 62px 100%, 0 100%);
 
-      background: linear-gradient(300deg, #edf3ff, #b9d1fe);
+      background: linear-gradient(300deg, #d5e3fe, #d5e3fe 80%, #ccdcfd);
     }
     &:nth-child(4) {
       clip-path: polygon(
-        calc(100% - 100px) 0,
+        calc(100% - 112px) 0,
         calc(100% - 50px) 0,
         100% 100%,
-        calc(100% - 50px) 100%
+        calc(100% - 62px) 100%
       );
 
-      background: linear-gradient(60deg, #edf3ff, #b9d1fe);
+      background: linear-gradient(60deg, #d5e3fe, #d5e3fe 80%, #ccdcfd);
     }
     &:nth-child(5) {
       clip-path: polygon(calc(100% - 50px) 0, 100% 0, 100% 100%);
 
-      background: linear-gradient(60deg, #e3ecff, #cfe0ff);
+      background: linear-gradient(60deg, #e2ecff, #e2ecff 90%, #dce8fe);
     }
   }
   .title-text {
@@ -74,6 +74,7 @@ export default {
     color: #1968fc;
     font-weight: 700;
     text-align: center;
+    z-index: 2;
   }
 }
 </style>

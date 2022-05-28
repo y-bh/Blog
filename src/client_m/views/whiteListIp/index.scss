@@ -112,6 +112,7 @@
 
     .auto-replace-switch {
       top: -2px;
+      width: 40px;
       margin-left: 10px;
     }
 
@@ -143,5 +144,16 @@
 
 .edit-desc{
   cursor: pointer;
+  color: #4c5664;
+}
+
+
+.remove-btn{
+  background-color: white;
+  border: 1px solid #F8486F;
+  color: #F8486F;
+  &:hover{
+    color: white;
+  }
 }
 

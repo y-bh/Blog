@@ -81,6 +81,11 @@
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
   }
+
+  .el-form-item__label{
+    padding-right: 0px;
+    margin-right: 30px;
+  }
 }
 
 .customize_dialog {

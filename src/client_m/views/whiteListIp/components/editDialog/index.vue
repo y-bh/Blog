@@ -1,14 +1,14 @@
 <!--
  * @Author: 李云涛
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-12 10:19:45
- * @LastEditTime: 2022-05-19 15:31:46
+ * @LastEditTime: 2022-05-28 12:21:58
 -->
 <template>
   <el-dialog
     v-model="dialogVisible"
-    width="28%"
+    width="30%"
     top="21vh"
     custom-class="desc-dialog"
     @closed="closeCallback"

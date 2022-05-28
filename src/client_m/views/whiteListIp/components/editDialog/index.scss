@@ -2,6 +2,9 @@
 .desc-dialog {
   .desc-form-wrap{
     padding: 40px 40px 0px;
+    .el-form-item__label{
+      padding-right: 30px !important;
+    }
   }
   .footer-btn{
     padding: 0px 40px 40px;
