@@ -57,6 +57,13 @@
 }
 
 @media screen and (max-width: 775px) {
+  //首页
+  .homeContent {
+    img {
+      width: 100% !important;
+      height: auto !important;
+    }
+  }
   // 套餐购买
   .packageBuy {
     .changeTab.mediaStyle {
