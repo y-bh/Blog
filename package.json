@@ -9,7 +9,7 @@
     "build:test": "node ./env.build.js --test",
     "build:prod": "node ./env.build.js --production",
     "local:test": "nodemon ./start.js  --test",
-    "local:develop": "nodemon ./start.js  --develop",
+    "local:dev": "nodemon ./start.js  --develop",
     "local:prod": "nodemon ./start.js  --production",
     "serve:dev": "pm2 start ./start.js --  m:develop",
     "serve:test": "pm2 start ./start.js --  m:test",
