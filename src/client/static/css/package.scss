@@ -67,6 +67,16 @@ $columnMt: 60px;
 }
 
 .packageBuy {
+  .common-title-color {
+    color: #091d43;
+    font-size: 24px;
+  }
+  .moneyFont {
+    font-family: "DIN Alternate";
+  }
+  .fontblod {
+    font-weight: bold;
+  }
   .payMoney-origin,
   .payMoney-origin2 {
     span {
@@ -90,7 +100,9 @@ $columnMt: 60px;
   input:focus-visible {
     outline: none !important;
   }
-
+  .font16 {
+    font-size: 16px;
+  }
   //活动-start
   // old
   .package-banner-l {
@@ -135,21 +147,25 @@ $columnMt: 60px;
     display: flex;
     align-items: center;
     .redPacket-title {
-      color: #333333;
-      min-width: 140px;
-      font-size: 23px;
+      color: #091d43;
+      min-width: 96px;
+      font-size: 24px;
     }
     select {
       width: 512px;
       height: 60px;
       border: 1px solid #e4e5eb;
       border-radius: 4px;
+      input::placeholder {
+        color: #b2bccb;
+        font-size: 21px;
+      }
     }
   }
   .payType {
     .payType-title {
-      color: #333333;
-      font-size: 23px;
+      color: #091d43;
+      font-size: 24px;
       min-width: 140px;
       span {
         font-weight: 400;
@@ -192,7 +208,7 @@ $columnMt: 60px;
   .package-content {
     max-width: 1440px;
     margin: auto;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     padding: 0 20px;
     .changeTab {
       display: flex;
@@ -214,7 +230,6 @@ $columnMt: 60px;
         cursor: pointer;
         span {
           margin-left: 36px;
-          font-weight: bold;
         }
         i {
           margin-left: 16px;
@@ -223,8 +238,8 @@ $columnMt: 60px;
           // font-weight: bold;
           &:hover::after {
             position: absolute;
-            top: -58px;
-            left: 50%;
+            left: -155px;
+            top: -45px;
             // transform: translateX(-50%);
             z-index: 9999;
             content: attr(data-title);
@@ -245,6 +260,9 @@ $columnMt: 60px;
           background: #1968fc;
           color: #ffffff;
           position: relative;
+          span {
+            font-weight: bold;
+          }
           &::after {
             display: inline-block;
             content: "";
@@ -294,10 +312,39 @@ $columnMt: 60px;
           }
 
           .ipPrice-markPng {
-            margin-left: 20px;
-            position: absolute;
-            right: 0;
-            bottom: 0;
+            margin-left: 150px;
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            // position: absolute;
+            // right: 0;
+            // bottom: 0;
+            .orText {
+              width: 110px;
+              height: 32px;
+              background: rgba(252, 112, 25);
+              color: #ffffff;
+              border-radius: 27px;
+              text-align: center;
+              line-height: 32px;
+              position: relative;
+              display: flex;
+              justify-content: flex-start;
+              padding: 0 12px;
+              text-align: left;
+              white-space: nowrap;
+              &::after {
+                display: block;
+                content: "";
+                height: 0;
+                width: 0;
+                border: 8px solid #fc7019;
+                border-color: #fc7019 transparent transparent transparent;
+                bottom: -16px;
+                left: 16px;
+                position: absolute;
+              }
+            }
             img {
               width: 156px;
               height: 111px;
@@ -307,8 +354,12 @@ $columnMt: 60px;
         }
         .rechargeAmount {
           .rechargeAmount-title {
-            font-size: 23px;
+            font-size: 24px;
             line-height: 30px;
+            color: #091d43;
+          }
+          .moreMoney {
+            font-size: 32px;
           }
           .amount-list {
             display: flex;
@@ -344,6 +395,7 @@ $columnMt: 60px;
                 }
                 .lastAmount {
                   background-color: #fff4edff;
+                  font-size: 16px;
                 }
               }
               .discount {
@@ -367,8 +419,9 @@ $columnMt: 60px;
                 line-height: 56px;
                 color: #333333;
                 font-weight: bold;
+                font-family: "DIN Alternate";
                 span {
-                  font-weight: bold;
+                  // font-weight: bold;
                 }
               }
               .lastAmount {
@@ -381,7 +434,7 @@ $columnMt: 60px;
                 background: rgba(232, 240, 255);
                 border-radius: 30px;
                 span {
-                  font-weight: bold;
+                  // font-weight: bold;
                 }
               }
             }
@@ -393,9 +446,9 @@ $columnMt: 60px;
           display: flex;
           align-items: center;
           .payMoney-title {
-            font-size: 23px;
+            font-size: 24px;
             line-height: 30px;
-            color: #333333;
+            color: #091d43;
             span {
               font-weight: 400;
             }
@@ -403,7 +456,7 @@ $columnMt: 60px;
           .payMoney-number span {
             font-size: 23px;
             color: #ff5f00;
-            font-weight: bold;
+            // font-weight: bold;
           }
           .pay-button {
             width: 240px;
@@ -442,12 +495,13 @@ $columnMt: 60px;
               min-width: 240px;
             }
             span {
+              font-size: 16px;
               font-weight: 400;
               line-height: 21px;
-              color: #333333;
+              color: #091d43;
             }
             .blue {
-              color: #3e6ae2;
+              color: #1968fc;
             }
           }
         }
@@ -457,7 +511,7 @@ $columnMt: 60px;
             font-size: 24px;
             font-weight: 400;
             line-height: 30px;
-            color: #333333;
+            color: #091d43;
           }
           .column-list {
             display: flex;
@@ -491,8 +545,9 @@ $columnMt: 60px;
                 line-height: 40px;
                 color: #333333;
                 margin-bottom: 14px;
+                font-family: "DIN Alternate";
                 span {
-                  font-weight: bold;
+                  // font-weight: bold;
                 }
               }
               .amount {
@@ -532,7 +587,7 @@ $columnMt: 60px;
             font-size: 24px;
             font-weight: 400;
             line-height: 30px;
-            color: #333333;
+            color: #091d43;
           }
           .content {
             display: flex;
@@ -582,9 +637,9 @@ $columnMt: 60px;
           align-items: center;
           flex-wrap: wrap;
           .payMoney-title {
-            font-size: 23px;
+            font-size: 24px;
             line-height: 30px;
-            color: #333333;
+            color: #091d43;
             span {
               font-weight: 400;
             }
