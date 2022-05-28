@@ -514,7 +514,7 @@ $(function () {
 })
 
 
-$(function (){
-  let path = window.location.pathname
-  $('a#user-login').attr('href', '/login' + `?back=${path}`)
-})
+// $(function (){
+//   let path = window.location.pathname
+//   $('a#user-login').attr('href', '/login' + `?back=${path}`)
+// })
