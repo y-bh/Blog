@@ -609,10 +609,11 @@
       .time-package {
         .timesRange,
         .setMeal-limt {
-          justify-content: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+          // justify-content: center;
+          // display: flex;
+          // flex-direction: column;
+          // align-items: center;
+          margin: auto;
           li {
             width: 290px;
           }
@@ -624,6 +625,7 @@
     //background: linear-gradient(40deg, rgb(25 104 252 / 10%) 10%, #ffffff 100%);
     background: url("/images/home/custom-bg.png") no-repeat;
     // box-shadow: 0 0 80px 20px #f4f8ff;
+    background-size: 100% 100%;
     > ul {
       display: flex;
       justify-content: center;
@@ -732,7 +734,9 @@
     }
   }
   .eightRow {
-    background: linear-gradient(90deg, #e7eefd 0%, #f3fafb 47%, #f0fcff 100%);
+    //background: linear-gradient(90deg, #e7eefd 0%, #f3fafb 47%, #f0fcff 100%);
+    background: url("/images/home/regist-bg.png") no-repeat;
+    background-size: 100% 100%;
     .egihtWidth {
       display: flex;
       justify-content: space-between;
