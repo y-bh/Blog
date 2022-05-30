@@ -21,7 +21,13 @@
 //     transform: translateY(0);
 //   }
 // }
-
+.right-dot {
+  width: 83px;
+  height: 0;
+  position: absolute;
+  right: -103px;
+  color: #1968fc;
+}
 .common-scrollLeft {
   display: flex;
   width: 100%;
@@ -641,13 +647,13 @@
           height: 430px;
         }
         ul {
-          li {
+          .custom-made-item {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 400px;
             height: 80px;
-            background: rgba(255, 255, 255, 0.39);
+            background: #ffffff;
             border: 1px solid #d0e0ff;
             border-radius: 8px;
             cursor: pointer;
@@ -776,7 +782,7 @@
         // height: 397px;
         background: rgba(234, 252, 255, 0.39);
         box-shadow: 0px 20px 40px rgba(76, 86, 100, 0.1);
-        border-radius: 8px;
+        // border-radius: 8px;
         position: relative;
         cursor: pointer;
         .arrow {
@@ -836,14 +842,14 @@
       }
       .news1 {
         background: rgba(234, 252, 255, 0.39);
-        border-top: 1px solid #7ae1f4;
+        border-top: 2px solid #27adc2;
         background: rgba(234, 252, 255, 0.39) url("/images/home/new-backg1.png") no-repeat;
         background-size: 440px 397px;
         background-position: right bottom;
         width: 440px;
         // max-height: 397px;
         .title {
-          border-bottom: 1px solid #84eafa;
+          border-bottom: 1px solid rgba(39, 173, 194, 0.5);
         }
         .lightColour {
           color: #95d8e2;
@@ -867,13 +873,13 @@
       }
       .news2 {
         background: rgba(240, 243, 253, 0.39);
-        border-top: 1px solid #1968fc;
+        border-top: 2px solid #1968fc;
         background: rgba(240, 243, 253, 0.39) url("/images/home/new-backg2.png") no-repeat;
         background-size: 440px 397px;
         background-position: right bottom;
         width: 440px;
         .title {
-          border-bottom: 1px solid #1968fc;
+          border-bottom: 1px solid rgba(25, 104, 252, 0.5);
         }
         .lightColour {
           color: #89b1fd;
@@ -898,13 +904,13 @@
       }
       .news3 {
         background: rgba(255, 244, 237, 0.39);
-        border-top: 1px solid #fc7019;
+        border-top: 2px solid #fc7019;
         background: rgba(255, 244, 237, 0.39) url("/images/home/new-backg3.png") no-repeat;
         background-size: 440px 397px;
         background-position: right bottom;
         width: 440px;
         .title {
-          border-bottom: 1px solid #fc7019;
+          border-bottom: 1px solid rgba(252, 112, 25, 0.5);
         }
         .lightColour {
           color: #fdb88d;
@@ -940,5 +946,98 @@
   ul {
     width: 300px;
     margin: 0 auto;
+  }
+}
+// $border-radius-width: 5px;
+// $border-width-set: 1px;
+.borderAnimat {
+  position: relative;
+  // border: 1px solid red !important;
+  .line {
+    position: absolute;
+    z-index: 9;
+    background: #1968fc;
+    min-width: auto !important;
+  }
+  .left {
+    left: -1px;
+    top: -1px;
+    // width: 5px;
+    width: 1px;
+    height: 0;
+    // height: calc(100% + 2px);
+  }
+  .top {
+    right: 0px;
+    top: -1px;
+    // width: calc(100% - 8px);
+    height: 1px;
+    width: 0;
+  }
+  .right {
+    right: -1px;
+    bottom: -1px;
+    // width: 5px;
+    width: 1px;
+    // height: calc(100% + 2px);
+    height: 0;
+  }
+  .bottom {
+    left: 0px;
+    top: 100%;
+    //width: calc(100% - 8px);
+    width: 0;
+    height: 1px;
+  }
+  &:hover {
+    border-radius: 0 !important;
+    .bottom {
+      animation: animateBottom 1s linear 0s;
+      animation-fill-mode: forwards;
+    }
+    .left {
+      animation: animateLeft 1s linear 1s;
+      animation-fill-mode: forwards;
+    }
+    .top {
+      animation: animateTop 1s linear 0s;
+      animation-fill-mode: forwards;
+    }
+    .right {
+      animation: animateRight 1s linear 1s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+@keyframes animateLeft {
+  0% {
+    height: 0;
+  }
+  to {
+    height: calc(100% + 2px);
+  }
+}
+@keyframes animateTop {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes animateRight {
+  0% {
+    height: 0;
+  }
+  to {
+    height: calc(100% + 2px);
+  }
+}
+@keyframes animateBottom {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
   }
 }

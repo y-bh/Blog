@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-27 16:17:19
+ * @LastEditTime: 2022-05-30 16:09:29
 -->
 <template>
   <div class="container">
@@ -79,7 +79,7 @@
         </el-table-column>
         <el-table-column align='center' label="套餐类型" prop="proxyType" width="85">
           <template #default="{ row }">
-            {{ mealType[row.proxyType] ? mealType[row.proxyType] : null }}
+            {{ mealType[row.proxyType] ? (row.proxyType === 70 ? '不限量' : mealType[row.proxyType]) : null }}
           </template>
         </el-table-column>
         <el-table-column align='center' label="提取密钥" prop="key" width="85">
