@@ -8,6 +8,8 @@
 .container {
   margin-top: 80px;
   grid-template-columns: 1fr;
+  max-width: 1400px;
+  box-sizing: border-box;
 }
 .nav {
   width: 900px;
@@ -145,6 +147,17 @@
 }
 
 // 关键词聚合页
+
+.tags {
+  padding-left: 0;
+  .blog_item {
+    width: 990px;
+  }
+
+  .icon-shouqi {
+    transform: rotate(90deg);
+  }
+}
 .tab-nav {
   max-width: 350px;
   .b_box {
@@ -164,7 +177,6 @@
 }
 .a_tag {
   padding: 10px 25px;
-  height: 36px;
   color: #3e6ae2;
   background: rgba(255, 255, 255, 0.39);
   box-shadow: 0px 0px 3px #3e6ae2;
