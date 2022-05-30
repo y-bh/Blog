@@ -990,7 +990,7 @@
     height: 1px;
   }
   &:hover {
-    border: none;
+    border-radius: 0 !important;
     .bottom {
       animation: animateBottom 1s linear 0s;
       animation-fill-mode: forwards;
@@ -1014,7 +1014,7 @@
     height: 0;
   }
   to {
-    height: calc(100% + 4px);
+    height: calc(100% + 2px);
   }
 }
 @keyframes animateTop {
@@ -1030,7 +1030,7 @@
     height: 0;
   }
   to {
-    height: calc(100% + 4px);
+    height: calc(100% + 2px);
   }
 }
 @keyframes animateBottom {
