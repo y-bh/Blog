@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 注册后端路由
  * @Date: 2022-04-22 15:07:10
- * @LastEditTime: 2022-05-25 15:34:53
+ * @LastEditTime: 2022-05-30 11:07:47
  */
 
 
@@ -53,9 +53,6 @@ function Router(App) {
 
     homeData.articleList = list.typeList ? list.typeList : [];
 
-    //activity
-    const t = getTime()
-    homeData.actt = t
     return ctx.render("home/index", homeData)
   })
 
@@ -71,9 +68,6 @@ function Router(App) {
     // 套餐数据
     let packageObj = await renderPackage();
 
-    //activity
-    const t = getTime()
-    packageObj.actt = t
     return ctx.render("package/index", packageObj)
   })
 
@@ -236,7 +230,7 @@ function Router(App) {
 
 
     //公共头部
-    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], token, [appKey.cateTypes]: ctx.state[appKey.cateTypes] })
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], token, [appKey.cateTypes]: ctx.state[appKey.cateTypes], actt: ctx.state['actt'] })
 
 
     //公共底部

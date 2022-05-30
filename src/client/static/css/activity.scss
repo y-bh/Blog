@@ -12,7 +12,7 @@
     width: 380px;
     height: 400px;
     margin: 0 auto;
-    transform: translate(0, 28vh);
+    transform: translate(0, 24vh);
 
     // old act img
     background-image: url('/images/activity/june/homeCenterDialog-202205.png');
@@ -25,11 +25,11 @@
     width: 380px;
     height: 400px;
     margin: 0 auto;
-    transform: translate(0, 28vh);
-    background-color: red;
+    transform: translate(0, 24vh);
+    // background-color: red;
 
     // new act img
-    // background-image: url('/images/activity/june/homeCenterDialog-202205.png');
+    background-image: url('/images/activity/june/home/homeCenterDialog-202206.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -41,9 +41,9 @@
 .left-dialog-wrap{
   position: fixed;
   top: 0;
-  width: 15%;
-  height: 6vw;
-  transform: translate(3vh, 48vh);
+  width: 10%;
+  height: 9vw;
+  transform: translate(3vh, 37vh);
 
   // old act img
   .left-dialog-l{
@@ -64,11 +64,13 @@
     width: 100%;
     height: 100%;
 
-    background-color: red;
-    // background-image: url('/images/activity/june/homeLeftDialog-202205.png');
+    // background-color: red;
+    background-image: url('/images/activity/june/home/homeLeftDialog-202206.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+
+    animation: .5s cubic-bezier(0.5, 2.0, 0.4, 0.6) 0s 1 leftshow ;
   }
 }
 
@@ -77,7 +79,7 @@
 
 .close-center-dialog-btn{
   text-align: center;
-  transform: translate(0, 29vh);
+  transform: translate(0, 25vh);
   
   .close-i{
     color: rgba($color: #ffffff, $alpha: 0.5);

@@ -347,6 +347,15 @@
 
   // 顶部导航
   .header {
+    .buy-header{
+      display: block;
+    }
+
+    .buy-header-d,.buy-header-i{
+      display: none;
+    }
+
+    
     .fold.show {
       .nav-list {
         .mixed-range {

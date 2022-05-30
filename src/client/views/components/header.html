@@ -30,8 +30,15 @@
           </li> -->
                     <li class="nav-item box-border nav-meal" data-path="package">
                       <a href="/package" title="套餐购买">
-                        <span>套餐购买</span>
-                        <i class="iconfont icon-xiala"></i>
+                        <div class="buy-header">
+                          <span>套餐购买</span>
+                          <i class="iconfont icon-xiala"></i>
+                        </div>
+                        <% if(actt==='l') { %>
+                          <div class="buy-header-i buy-header-l"></div>
+                        <% } else if(actt==='f') { %>
+                          <div class="buy-header-i buy-header-f"></div>
+                        <% } %>
                       </a>
                       <!-- 子导航 -->
                       <ul class="child-list flex-center">

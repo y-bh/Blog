@@ -1438,6 +1438,30 @@ a:hover {
     align-items: center;
     justify-content: flex-end;
   }
+
+
+
+  .buy-header-i{
+    display: block;
+    width: 150px;
+    height: 100%;
+    background-size: 85% 85%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  //铑活动
+  .buy-header-l{
+    background-image: url('/images/activity/june/package/buyHeader-202206.png');
+  }
+  //锌活动
+  .buy-header-f{
+    background-image: url('/images/activity/june/package/buyHeader-202206.png');
+  }
+
+  .buy-header{
+    display: none;
+  }
 }
 
 .header-pos {

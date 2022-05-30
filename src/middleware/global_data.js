@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 处理node 上下文全局数据
  * @Date: 2022-05-16 18:06:42
- * @LastEditTime: 2022-05-27 14:27:58
+ * @LastEditTime: 2022-05-30 11:05:20
  */
 
 const appKey = require("config/app.key.config")
@@ -11,6 +11,8 @@ const appKey = require("config/app.key.config")
 //顶部导航活动
 const { renderTab, getQueryLink } = require("service/commonService")
 const { getCateTypes } = require("service/helpCenterService")
+
+const { getTime } = require('utils/activityTime')
 
 
 //需要获取全局数据【例如用户信息,公共底部的数据等必须配置路由权限】
@@ -41,6 +43,9 @@ module.exports = function (app) {
     if (method === 'GET' && (URLS.includes(url) || isPass)) {
       //顶部导航 活动相关数据
       const tabActivity = await renderTab();
+
+      const t = getTime()
+      state['actt'] = t
 
       state[appKey.active_tab] = tabActivity
 
