@@ -81,10 +81,10 @@
   }
 
   div.common-main-button {
-    width: auto;
-    margin-left: 0 !important;
+    width: 80%;
+    margin-left: 10% !important;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
   }
 
   // 登录/注册
@@ -292,6 +292,15 @@
     .count_box {
       width: auto;
       max-width: none;
+      .btn {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: center;
+        // :last-child {
+        //   margin-top: 5px;
+        // }
+      }
     }
 
     .getip-select-wrap {
@@ -394,6 +403,8 @@
           }
         }
         .nav-item {
+          height: 50px !important;
+          line-height: 50px;
           &.nav-business {
             .child-list {
               transform: translate(-100%, -50%);
@@ -574,6 +585,7 @@
     }
   }
 
+  //提取ip
   div.getip-wrap {
     .top_title {
       width: 70%;
@@ -619,6 +631,14 @@
       padding: 5px;
       width: 45%;
       height: 140px;
+    }
+
+    .count_box {
+      .btn {
+        :last-child {
+          margin-top: 5px;
+        }
+      }
     }
   }
 }
