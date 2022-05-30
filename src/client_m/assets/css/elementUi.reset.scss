@@ -24,28 +24,54 @@
     background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.5), rgba(208, 224, 255, 0.2), #fff, #fff, #fff);
   
     .el-menu-item {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 30px;
-      line-height: 30px;
       padding: 0 !important;
       font-size: 16px;
       margin: 10px 0;
+      transition: all 0.4s;
+
+      &:hover {
+        background: transparent;
+        color: $main;
+      }
 
       &.is-active {
-          color: #1968FC;
-          border-right: 1px solid #1968FC;
-          &::after {
-            width: 2px;
-            height: 30px;
-            background: rgba(25, 104, 252, 0.39);
-            box-shadow: 0px 0px 4px rgba(51, 51, 51, 0.1);
-            opacity: 1;
-            border-radius: 10px;
-          }
+          color: $main;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 0;
+        
+        background-color: $main;
+        transition: all 0.8s;
+      }
+
+      &:hover::after {
+
+        height: 30px;
       }
      
+    }
+
+    .el-menu-item.is-active::after {
+      content: " ";
+      display: block;
+      width: 1px;
+      height: 30px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: $main;
     }
   }
 }
