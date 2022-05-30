@@ -1,9 +1,9 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 批量删除
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-25 17:42:02
+ * @LastEditTime: 2022-05-30 11:26:00
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -12,7 +12,7 @@
             <p class="child-item">确定删除吗？</p>
             <div class="dialog-footer child-item double-item">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="submitMerge()">确 定</el-button>
+                <el-button type="primary" @click="submitDelete()">确 定</el-button>
             </div>
         </div>
     </el-dialog>
