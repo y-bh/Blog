@@ -1,13 +1,15 @@
 <!--
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 个人中心首页
  * @Date: 2022-04-25 16:08:31
- * @LastEditTime: 2022-05-27 16:03:11
+ * @LastEditTime: 2022-05-30 16:32:40
 -->
 
 <template>
+<div class="">
  <router-view />
+</div>
 </template>
 
 <script>

@@ -3,11 +3,13 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-24 15:39:57
+ * @LastEditTime: 2022-05-30 17:28:24
 -->
 <template>
     <!-- 支付弹窗 -->
-    <el-dialog v-model="dialogVisible"
+    <el-dialog 
+        v-model="dialogVisible"
+        :show-close="true"
         @closed="cancelForm"
         custom-class="customize_dialog dialog-alone">
         <DialogTitle title-content="续费" />

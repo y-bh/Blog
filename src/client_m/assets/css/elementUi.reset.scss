@@ -107,7 +107,7 @@
     .el-dialog__headerbtn{
       position: absolute;
       top: 0;
-      right: -40px;
+      right: -80px;
       z-index: 999;
       width: 30px; 
       height: 30px;
@@ -175,6 +175,10 @@
         // margin-right: 20px;
       }
     }
+  }
+
+  .pagination-body {
+    margin-top: 20px;
   }
 
   &.dialog-double {
