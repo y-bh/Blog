@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-30 16:24:18
+ * @LastEditTime: 2022-05-30 17:29:29
 -->
 <template>
   <div class="layout">
@@ -105,8 +105,6 @@ export default {
 .layout {
   background: #fff;
   margin-top: 80px;
-  position: relative;
-  z-index: 1;
   .main {
     position: relative;
     height: calc(100% - 84px);
