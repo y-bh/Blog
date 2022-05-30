@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-30 16:52:06
+ * @LastEditTime: 2022-05-30 17:24:03
 -->
 <template>
   <div class="container">
@@ -456,7 +456,6 @@ export default {
           // console.log('api提取跳转');
           location.href='/getIp'
         } else if (command === 'changeLog') {
-          console.log('变更记录');
           logRef.value.onOpen(row)
         } else {
           message.error({

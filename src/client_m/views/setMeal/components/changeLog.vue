@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 变更记录
  * @Date: 2022-05-17 11:19:40
- * @LastEditTime: 2022-05-24 16:06:27
+ * @LastEditTime: 2022-05-30 17:26:10
 -->
 <template>
   <el-dialog
@@ -48,19 +48,19 @@
         </el-table-column>
       </el-table>
 
-      
+      <!-- 分页 -->
+      <el-pagination
+          v-model:currentPage="searchForm.page"
+          class="text-right pagination-body"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+          :page-sizes="[20, 50, 100, 500]"
+          :page-size="searchForm.size"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+      />
     </div>
-    <!-- 分页 -->
-    <el-pagination
-        v-model:currentPage="searchForm.page"
-        class="text-right"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-        :page-sizes="[20, 50, 100, 500]"
-        :page-size="searchForm.size"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-    />
+    
   </el-dialog>
 </template>
 <script>
