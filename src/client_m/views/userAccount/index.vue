@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-26 17:12:04
+ * @LastEditTime: 2022-05-30 16:42:46
 -->
 <template>
   <div class="userAccount">
@@ -26,13 +26,9 @@
           <a
             href="https://wpa1.qq.com/Lkz12X21?_type=wpa&qidian=true"
             target="_blank"
+            v-if="!userInfo.isHasSeller"
           >
-            <el-button
-              type="warning"
-              class="ml-20"
-            >
-              联系销售</el-button
-            >
+            <el-button type="warning" class="ml-20"> 联系销售</el-button>
           </a>
         </div>
       </div>
@@ -70,6 +66,7 @@
               class="common-tooltip"
             >
               <i class="iconfont icon-xianxing-wenhao"></i>
+              <!-- <i class="iconfont icon-mianxing-wenhao"></i> -->
             </el-tooltip>
           </span>
         </div>
@@ -103,8 +100,8 @@
           <el-button type="primary" plain @click="personAuth"
             >个人认证</el-button
           >
-          <el-button class="customTip" type="primary" plain @click="companyAuth"
-            >企业认证</el-button
+          <el-button type="primary" plain @click="companyAuth"
+            ><div class="customTip">企业认证</div></el-button
           >
         </div>
         <!--个人认证通过后如下显示  -->
@@ -178,7 +175,7 @@
             ><span class="ml-15">{{ userInfo.sale.profession }}</span>
           </div>
           <div class="telep mt-20">
-            <span>{{ userInfo.sale.sellerPhone }}</span>
+            <span class="number">{{ userInfo.sale.sellerPhone }}</span>
             <span class="copyBtn ml-20" @click="copy(userInfo.sale.sellerPhone)"
               >复制</span
             >
@@ -203,13 +200,19 @@
     ></updatePwdDialog>
 
     <!-- 换绑手机 -->
-    <UpdateMobile ref="updateMobileRef" @updateUserInfo="getUserInfo"></UpdateMobile>
+    <UpdateMobile
+      ref="updateMobileRef"
+      @updateUserInfo="getUserInfo"
+    ></UpdateMobile>
     <!-- 密匙 -->
     <KeyDialog ref="keyRef"></KeyDialog>
     <!-- 个人认证 -->
     <PersonalAuth ref="perAuthRef" @updateUserInfo="getUserInfo"></PersonalAuth>
     <!-- 企业认证 -->
-    <companyAuth ref="companyAuthRef" @updateUserInfo="getUserInfo"></companyAuth>
+    <companyAuth
+      ref="companyAuthRef"
+      @updateUserInfo="getUserInfo"
+    ></companyAuth>
   </div>
 </template>
 
@@ -354,13 +357,13 @@ export default {
         companyAuthRef.value.title = "企业认证";
         companyAuthRef.value.authCompanyStep = 7;
         companyAuthRef.value.dialogVisible = true;
-         return;
+        return;
       }
       if (!auth && status == "cut") {
         companyAuthRef.value.title = "企业认证";
         companyAuthRef.value.authCompanyStep = 3;
         companyAuthRef.value.dialogVisible = true;
-         return;
+        return;
       }
     };
     const getUserInfo = async () => {

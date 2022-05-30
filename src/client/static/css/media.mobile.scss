@@ -2,7 +2,9 @@
   //帮助中心
   .help-center {
   }
-
+  .right-dot {
+    display: none;
+  }
   .rightToolbar.mediaStyle {
     top: 150px;
   }
@@ -347,15 +349,15 @@
 
   // 顶部导航
   .header {
-    .buy-header{
+    .buy-header {
       display: block;
     }
 
-    .buy-header-d,.buy-header-i{
+    .buy-header-d,
+    .buy-header-i {
       display: none;
     }
 
-    
     .fold.show {
       .nav-list {
         .mixed-range {
@@ -451,7 +453,6 @@
       }
     }
   }
-
 }
 
 @media screen and (max-width: 575px) {

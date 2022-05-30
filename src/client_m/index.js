@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 个人中心入口文件
  * @Date: 2022-04-25 15:58:48
- * @LastEditTime: 2022-05-19 16:15:39
+ * @LastEditTime: 2022-05-30 14:10:53
  */
 
 import { createApp } from 'vue';
@@ -20,6 +20,7 @@ import App from './index.vue';
 /** **************全局css管理 */
 import "element-plus/packages/theme-chalk/lib/index";
 import 'assets/css/elementUi.reset.scss';
+import 'assets/css/media.mobile.scss';
 import * as re from 'config/re.config';
 
 const app = createApp(App);

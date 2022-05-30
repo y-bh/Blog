@@ -21,7 +21,13 @@
 //     transform: translateY(0);
 //   }
 // }
-
+.right-dot {
+  width: 83px;
+  height: 0;
+  position: absolute;
+  right: -103px;
+  color: #1968fc;
+}
 .common-scrollLeft {
   display: flex;
   width: 100%;
@@ -647,7 +653,7 @@
             align-items: center;
             width: 400px;
             height: 80px;
-            background: rgba(255, 255, 255, 0.39);
+            background: #ffffff;
             border: 1px solid #d0e0ff;
             border-radius: 8px;
             cursor: pointer;
@@ -944,94 +950,94 @@
 }
 // $border-radius-width: 5px;
 // $border-width-set: 1px;
-// .borderAnimat {
-//   position: relative;
-//   // border: 1px solid red !important;
-//   .line {
-//     position: absolute;
-//     z-index: 9;
-//     background: #1968fc;
-//     min-width: auto !important;
-//   }
-//   .left {
-//     left: -1px;
-//     top: -1px;
-//     // width: 5px;
-//     width: 1px;
-//     height: 0;
-//     // height: calc(100% + 2px);
-//   }
-//   .top {
-//     right: 4px;
-//     top: -1px;
-//     // width: calc(100% - 8px);
-//     height: 1px;
-//     width: 0;
-//   }
-//   .right {
-//     right: -1px;
-//     bottom: -1px;
-//     // width: 5px;
-//     width: 1px;
-//     // height: calc(100% + 2px);
-//     height: 0;
-//   }
-//   .bottom {
-//     left: 4px;
-//     top: 100%;
-//     //width: calc(100% - 8px);
-//     width: 0;
-//     height: 1px;
-//   }
-//   &:hover {
-//     border: none;
-//     .bottom {
-//       animation: animateBottom 1s linear 0s;
-//       animation-fill-mode: forwards;
-//     }
-//     .left {
-//       animation: animateLeft 1s linear 1s;
-//       animation-fill-mode: forwards;
-//     }
-//     .top {
-//       animation: animateTop 1s linear 0s;
-//       animation-fill-mode: forwards;
-//     }
-//     .right {
-//       animation: animateRight 1s linear 1s;
-//       animation-fill-mode: forwards;
-//     }
-//   }
-// }
-// @keyframes animateLeft {
-//   0% {
-//     height: 0;
-//   }
-//   to {
-//     height: calc(100% + 2px);
-//   }
-// }
-// @keyframes animateTop {
-//   0% {
-//     width: 0;
-//   }
-//   100% {
-//     width: calc(100% - 8px);
-//   }
-// }
-// @keyframes animateRight {
-//   0% {
-//     height: 0;
-//   }
-//   to {
-//     height: calc(100% + 2px);
-//   }
-// }
-// @keyframes animateBottom {
-//   0% {
-//     width: 0;
-//   }
-//   100% {
-//     width: calc(100% - 8px);
-//   }
-// }
+.borderAnimat {
+  position: relative;
+  // border: 1px solid red !important;
+  .line {
+    position: absolute;
+    z-index: 9;
+    background: #1968fc;
+    min-width: auto !important;
+  }
+  .left {
+    left: -1px;
+    top: -1px;
+    // width: 5px;
+    width: 1px;
+    height: 0;
+    // height: calc(100% + 2px);
+  }
+  .top {
+    right: 0px;
+    top: -1px;
+    // width: calc(100% - 8px);
+    height: 1px;
+    width: 0;
+  }
+  .right {
+    right: -1px;
+    bottom: -1px;
+    // width: 5px;
+    width: 1px;
+    // height: calc(100% + 2px);
+    height: 0;
+  }
+  .bottom {
+    left: 0px;
+    top: 100%;
+    //width: calc(100% - 8px);
+    width: 0;
+    height: 1px;
+  }
+  &:hover {
+    border-radius: 0 !important;
+    .bottom {
+      animation: animateBottom 1s linear 0s;
+      animation-fill-mode: forwards;
+    }
+    .left {
+      animation: animateLeft 1s linear 1s;
+      animation-fill-mode: forwards;
+    }
+    .top {
+      animation: animateTop 1s linear 0s;
+      animation-fill-mode: forwards;
+    }
+    .right {
+      animation: animateRight 1s linear 1s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+@keyframes animateLeft {
+  0% {
+    height: 0;
+  }
+  to {
+    height: calc(100% + 2px);
+  }
+}
+@keyframes animateTop {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes animateRight {
+  0% {
+    height: 0;
+  }
+  to {
+    height: calc(100% + 2px);
+  }
+}
+@keyframes animateBottom {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
