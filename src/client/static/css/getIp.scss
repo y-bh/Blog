@@ -305,6 +305,15 @@
 .apiUrl_input {
   border: none !important;
 }
+.apiUrl_input:-moz-placeholder{
+  color: #b2bccb !important;
+}
+.apiUrl_input::-moz-placeholder{
+  color: #b2bccb !important;
+}
+.apiUrl_input:-ms-input-placeholder{
+  color: #b2bccb !important;
+}
 .apiUrl_input::-webkit-input-placeholder{
   color: #b2bccb !important;
 }
@@ -326,7 +335,7 @@
 }
 .note_box {
   display: grid;
-  grid-template-columns: 60px minmax(min-content, 870px);
+  grid-template-columns: 200px minmax(min-content, 870px);
   width: fit-content;
   box-sizing: border-box;
   border: 1px solid #E4E5EB;
@@ -338,7 +347,6 @@
   border-right: 1px solid #E4E5EB;
 }
 .note_desc li{
-  max-width: 200px;
   border-bottom: 1px solid #E4E5EB;
 }
 .note_desc li:last-child {
@@ -377,6 +385,7 @@
   background-color: rgba(208, 224, 255, 0.25);
   margin: 0 auto;
   font-size: 14px;
+  color: #677294;
 }
 .params_desc {
   grid-template-columns: repeat(2,1fr);
@@ -388,6 +397,7 @@
   width: 96%;
   border-radius: 8px;
   background-color: rgba(208, 224, 255, 0.25);
+  color: #677294;
 
   p{
     font-size: 14px;
@@ -405,6 +415,7 @@
     span{
       margin-bottom: 12px;
     }
+    color: #677294;
   }
 }
 .top_title {
@@ -469,6 +480,7 @@
   margin: 0 auto;
   font-size: 14px;
   word-break: break-all;
+  color: #677294;
 }
 
 

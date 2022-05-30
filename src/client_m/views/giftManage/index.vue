@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-27 18:10:04
+ * @LastEditTime: 2022-05-30 13:30:11
 -->
 <template>
   <div
@@ -26,7 +26,10 @@
       <div class="gift-use" @click="useGift"><span>立即使用</span></div>
     </div>
 
-    <div class="show-gift"><span @click="changeShowGift">隐藏过期/已用礼券</span></div>
+    <div class="show-gift">
+      <span @click="changeShowGift" v-if="showGift">隐藏过期/已用礼券</span>
+      <span @click="changeShowGift" v-else>显示过期/已用礼券</span>
+    </div>
 
     <div
       class="gift gift-used"
