@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 批量删除
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-30 11:26:00
+ * @LastEditTime: 2022-05-30 11:36:49
 -->
 <template>
     <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -40,7 +40,7 @@ export default {
                 state.dialogVisible = true;
             },
             async submitDelete(){
-                let res = await deleteMeal(state.proxyIds);
+                let res = await deleteMeal({proxyIds: state.proxyIds});
                 if(res && res.code === 200){
                     message.success({
                         message: '删除成功',
