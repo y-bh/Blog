@@ -3,30 +3,30 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-30 17:27:02
+ * @LastEditTime: 2022-05-30 18:31:32
 -->
 <template>
   <div class="dialog-wrap-p">
-    <div class="dialog-bg">
-      <div class="dialog-img">
+    <div class="dialog-bg" v-if="userInfo.newUser">
+      <div class="dialog-img dialog-img-fst" @click="jumpRegisteIp">
         
       </div>
-      <div class="dialog-close-fst">
-        <i class="iconfont icon-guanbi close-i"></i>
+      <div class="dialog-close dialog-close-fst">
+        <i class="iconfont icon-guanbi close-i" @click="closeOne"></i>
       </div>
     </div>
 
-    <div class="dialog-bg">
-      <div class="dialog-img">
-        <div class="pesonal-btn">
-
+    <div class="dialog-bg" v-if="!userInfo.newUser && !userInfo.gotWxWelfare">
+      <div class="dialog-img  dialog-img-snd">
+        <div class="snd-btn pesonal-btn">
+          个人认证
         </div>
-        <div class="company-btn">
-
+        <div class="snd-btn company-btn">
+          企业认证
         </div>
       </div>
-      <div class="dialog-close-snd">
-
+      <div class="dialog-close dialog-close-snd">
+        <i class="iconfont icon-guanbi close-i" @click="closeOne"></i>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
 
       </div>
       <div class="dialog-close-thd">
-
+        <i class="iconfont icon-guanbi close-i" @click="closeOne"></i>
       </div>
     </div>
   </div>
@@ -43,14 +43,33 @@
 
 <script>
 import { onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
 export default {
   setup(){
-    let e = ref(false)
+    let e = ref(true)
+    let $store = useStore()
+
+    let userInfo = $store.state.userInfo
+
+    function closeOne(a){
+      console.log(a);
+      console.log(e);
+    }
+
+    function jumpRegisteIp() {
+      
+    }
+
     onMounted(()=>{
-      e = true
+      console.log(userInfo);
     })
+
+
+
     return {
-      e
+      e,
+      userInfo,
+      closeOne,
     }
 
   }
@@ -70,17 +89,77 @@ export default {
   .dialog-bg{
     width: 100%;
     height: 100%;
-    position: absolute;
     background-color: rgba($color: #000000, $alpha: 0.3);
 
     .dialog-img{
       width: 39%;
       height: 70%;
-      background-image: url("../../assets/images/newUser.png");
       background-repeat: no-repeat;
       background-size: cover;
       margin: 0 auto;
       transform: translateY(10%);
+    }
+
+    .dialog-img-fst{
+      background-image: url("../../assets/images/newUser.png");
+    }
+
+
+    .dialog-img-snd{
+      width: 35%;
+      height: 61%;
+      background-image: url("../../assets/images/wechatBig.png");
+      transform: translate(-1%, 19%);
+
+      .snd-btn{
+        width: 260px;
+        height: 50px;
+        margin: 0 auto;
+        background-image: url("../../assets/images/wechatBtn.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        text-align: center;
+        line-height: 50px;
+        font-size: 20px;
+        color: #000000;
+      }
+
+      .pesonal-btn{
+        transform: translate(4%,44vh);
+      }
+      .company-btn{
+        transform: translate(4%,47vh);
+      }
+    }
+  }
+
+
+
+  .small-dia-bg{
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    
+    .small-dia-img{
+      width: 100%;
+      height: 100%;
+      background-image: url("../../assets/images/newUserFuli.png");
+      background-size: cover;
+      transform: translate(15%, 65vh);
+    }
+
+    .dialog-close-thd{
+      text-align: center;
+      transform: translate(15%, 65vh);
+      .close-i{
+        margin: 0 auto;
+        color: rgba($color: #000000, $alpha: 0.4);
+        font-size: 26px;
+    
+        &:hover{
+          font-size: 30px;
+        }
+      }
     }
   }
 
@@ -89,10 +168,8 @@ export default {
 
   
 
-  .dialog-close-fst{
+  .dialog-close{
     text-align: center;
-    transform: translate(0, 8vh);
-    
     .close-i{
       color: rgba($color: #ffffff, $alpha: 0.5);
       font-size: 26px;
@@ -101,6 +178,12 @@ export default {
         font-size: 30px;
       }
     }
+  }
+  .dialog-close-fst{
+    transform: translate(0, 8vh);
+  }
+  .dialog-close-snd{
+    transform: translate(0, 13vh);
   }
 }
 </style>

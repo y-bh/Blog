@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-30 17:29:29
+ * @LastEditTime: 2022-05-30 18:34:10
 -->
 <template>
   <div class="layout">
@@ -21,7 +21,7 @@
         </el-config-provider>
       </div>
     </el-row>
-    <!-- <GiftDialog></GiftDialog> -->
+    <GiftDialog :userInfo="userInfo"></GiftDialog>
   </div>
 </template>
 
@@ -54,6 +54,7 @@ export default {
   props: {},
   setup() {
     const $store = useStore()
+    let userInfo = {}
 
     let defaultHeight = ref(800);
     const headerRef = ref(null);
@@ -76,9 +77,9 @@ export default {
     const getMineInfoFunc = async () => {
       const res = await getMineInfo()
       if(res && res.code === 200) {
+        userInfo = res.data
         $store.dispatch('saveUserinfo', res.data)
       }
-      console.log($store.state.userInfo, 'layout data');
     }
 
     onBeforeMount(() => {});
