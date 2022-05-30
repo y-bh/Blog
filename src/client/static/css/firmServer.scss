@@ -35,6 +35,7 @@
 .error-wrap {
   height: 20px;
   width: 100%;
+  display: none;
 }
 .error {
   position: relative;
@@ -44,4 +45,9 @@
 
 .red-border {
   border: 1px solid red !important;
+}
+.form-group {
+  input::-webkit-input-placeholder {
+    color: #b2bccb;
+  }
 }
