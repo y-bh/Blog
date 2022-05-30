@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-26 15:44:39
+ * @LastEditTime: 2022-05-30 18:10:34
 -->
 <template>
   <div class="container grid">
@@ -80,11 +80,12 @@
         </el-table-column>
         <el-table-column prop="price" label="支付金额" align="center">
         </el-table-column>
-        <el-table-column label="交易前后余额(币)" align="center" width="180px">
+        <el-table-column label="交易前后余额(元)" align="center" width="180px">
           <template #default="{ row }">
             <div class="box flex-center flex-column">
-              <span>{{ row?.preAmount ?? "--" }}</span>
-              <span>{{ row?.curAmount ?? "--" }}</span>
+              <span>{{ row.preAmount || row.preAmount === 0 ? (row.preAmount / 100).toFixed(2) : "--" }}</span>
+              <span>{{ row.curAmount || row.curAmount === 0 ? (row.curAmount / 100).toFixed(2) : "--" }}</span>
+               
             </div>
           </template>
         </el-table-column>

@@ -3,11 +3,13 @@
  * @LastEditors: 秦琛
  * @description: 补量
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-24 15:31:41
+ * @LastEditTime: 2022-05-30 18:06:42
 -->
 <template>
     <!-- 支付弹窗 -->
-    <el-dialog v-model="dialogVisible" destroy-on-close 
+    <el-dialog v-model="dialogVisible" 
+        :show-close="true"
+        destroy-on-close 
         @closed="cancelForm"
         custom-class="customize_dialog dialog-alone">
         <DialogTitle title-content="补量" />
