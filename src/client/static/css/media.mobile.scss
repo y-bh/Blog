@@ -641,6 +641,34 @@
       }
     }
   }
+
+  //套餐购买
+  div.packageBuy {
+    .package-content {
+      .tabContent {
+        .payType-content {
+          justify-content: space-between;
+          ul {
+            li {
+              width: 130px;
+            }
+          }
+          .payType-title {
+            min-width: 150px;
+          }
+        }
+        .amount-list {
+          justify-content: center !important;
+          margin-right: 0 !important;
+          .amount-item {
+            width: 90% !important;
+            margin: 0 auto !important;
+            margin-top: 30px !important;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 450px) {

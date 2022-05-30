@@ -205,7 +205,9 @@ $(document).on("click", '#changeTab>div', function () {
     $("#balancePackage").hide();
     $("#packageTime").show();
   }
-  new WOW().init();
+  new WOW({
+    mobile:false
+  }).init();
 })
 
 //切换头部modal的tab页面 1：余额 2：包时
@@ -689,7 +691,9 @@ function pointerMe() {
     }, 300);
 }
 //动画
-new WOW().init();
+new WOW({
+  mobile:false
+}).init();
 //初始化
 $(async function () {
   pointerMe();
