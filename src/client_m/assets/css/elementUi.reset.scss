@@ -93,6 +93,7 @@
 
 //个人中心重置弹框内边距
 .el-dialog {
+  position: relative;
   border-radius: 8px;
   .el-dialog__header,
   .el-dialog__body,
@@ -102,6 +103,31 @@
   .el-dialog__header {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+
+    .el-dialog__headerbtn{
+      position: absolute;
+      top: 0;
+      right: -40px;
+      z-index: 999;
+      width: 30px; 
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      border-radius: 50%;
+      align-items: center;
+      background: rgb(255, 255, 255);
+      color: rgb(204, 204, 224);
+      font-weight: 600;
+      .el-dialog__close {
+        font-size: 16px;
+      }
+      &:hover {
+        color: inherit;
+        .el-dialog__close {
+          color: inherit;
+        }
+      }
+    }
   }
   .el-dialog__footer {
     border-bottom-left-radius: inherit;
