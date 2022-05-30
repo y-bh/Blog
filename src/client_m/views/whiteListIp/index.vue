@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:46:10
- * @LastEditTime: 2022-05-28 10:22:43
+ * @LastEditTime: 2022-05-30 16:26:16
 -->
 <template>
   <div class="white-list-wrap">
@@ -17,7 +17,7 @@
           <i class="iconfont icon-mianxing-wenhao"></i>
         </div>
         <div class="tooltip tooltip-text">
-          <p>IP的使用和提取地址须同时在白名单内，该白名单功能仅针对长效IP</p>
+          <p>使用和提取IP需设置白名单，特殊需求请联系专属销售</p>
         </div>
       </div>
       <div class="white-list-btn">

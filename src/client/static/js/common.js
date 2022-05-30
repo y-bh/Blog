@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 公共方法
  * @Date: 2022-05-10 18:18:47
- * @LastEditTime: 2022-05-27 15:11:57
+ * @LastEditTime: 2022-05-30 14:41:08
  */
 
 function Helper() { }
@@ -514,7 +514,7 @@ $(function () {
 })
 
 
-// $(function (){
-//   let path = window.location.pathname
-//   $('a#user-login').attr('href', '/login' + `?back=${path}`)
-// })
+$(function (){
+  let path = window.location.pathname
+  $('a#user-login').attr('href', '/login' + `?back=${path}`)
+})

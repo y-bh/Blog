@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-27 18:36:55
+ * @LastEditTime: 2022-05-30 16:24:18
 -->
 <template>
   <div class="layout">
@@ -21,6 +21,7 @@
         </el-config-provider>
       </div>
     </el-row>
+    <!-- <GiftDialog></GiftDialog> -->
   </div>
 </template>
 
@@ -35,18 +36,25 @@ import {
   onBeforeUnmount,
 } from "vue";
 
+import { getMineInfo } from "model/user.js";
+import { useStore } from 'vuex';
+
 import Header from "components/Header";
 import Footer from "components/Footer";
 import SideBar from "components/SideBar";
+import GiftDialog from "components/GiftDialog"
 export default {
   name: "layout",
   components: {
     Header,
     Footer,
     SideBar,
+    GiftDialog
   },
   props: {},
   setup() {
+    const $store = useStore()
+
     let defaultHeight = ref(800);
     const headerRef = ref(null);
     const getMainHeight = () => {
@@ -64,10 +72,23 @@ export default {
   
     };
 
+
+    const getMineInfoFunc = async () => {
+      const res = await getMineInfo()
+      if(res && res.code === 200) {
+        $store.dispatch('saveUserinfo', res.data)
+      }
+      console.log($store.state.userInfo, 'layout data');
+    }
+
     onBeforeMount(() => {});
     onMounted(() => {
       getMainHeight();
       window.addEventListener("resize", getMainHeight);
+
+
+      getMineInfoFunc()
+
     });
     onBeforeUnmount(() => {
       window.removeEventListener("resize", getMainHeight);
@@ -84,6 +105,8 @@ export default {
 .layout {
   background: #fff;
   margin-top: 80px;
+  position: relative;
+  z-index: 1;
   .main {
     position: relative;
     height: calc(100% - 84px);
