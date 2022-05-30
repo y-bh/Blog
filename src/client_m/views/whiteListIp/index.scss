@@ -152,7 +152,7 @@
   background-color: white;
   border: 1px solid #F8486F;
   color: #F8486F;
-  &:hover{
+  &:focus,&:hover{
     color: white;
   }
 }

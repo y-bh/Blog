@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 17:47:07
- * @LastEditTime: 2022-05-30 13:30:11
+ * @LastEditTime: 2022-05-30 14:04:54
 -->
 <template>
   <div
@@ -39,7 +39,7 @@
     >
       <div class="gift-header">
         <div><span>￥</span>{{ item.money }}</div>
-        <div>{{ item.doorsill }}</div>
+        <div>满{{ item.doorsill }}元可用</div>
       </div>
       <div class="gift-text">
         <div>{{ item.redPackageName }}</div>
