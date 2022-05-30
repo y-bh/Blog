@@ -111,19 +111,49 @@
   // background-size: 633px 937px;
   background: url("/images/home/backg-img.png") no-repeat;
   background-size: 690px 3439px;
-  background-position: top right;
-  -webkit-animation: bannerGo 1s steps(4) forwards;
-  animation: bannerGo 1s steps(4) forwards;
+  //background-position: top right;
+  background-position: -26px -87px;
+  // -webkit-animation: bannerGoUp 1s steps(4) forwards;
+  // animation: bannerGoUp 1s steps(4) forwards;
+  -webkit-animation-name: fadeInRight, bannerGoUp, bannerUpDown;
+  -webkit-animation-duration: 1s, 2s, 1.5s;
+  -webkit-animation-timing-function: ease, steps(4), linear;
+  -webkit-animation-delay: 0s, 1s, 3s;
+  -webkit-animation-iteration-count: 1, 1, infinite;
+  -webkit-animation-fill-mode: none, forwards, none;
 }
-@keyframes bannerGo {
+@keyframes bannerGoUp {
   0% {
-    background-position-y: -35px;
+    background-position-y: -87px;
   }
+  // 25% {
+  //   background-position-y: -768px;
+  // }
+  // 50% {
+  //   background-position-y: -1450px;
+  // }
+  // 75% {
+  //   background-position-y: -2131px;
+  // }
 
   100% {
-    background-position-y: -2760px;
+    background-position-y: -2814px;
   }
 }
+
+@keyframes bannerUpDown {
+  25% {
+    transform: translateY(-10px);
+  }
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(10px);
+  }
+}
+
 //优质代理IP资源
 @mixin animation-proxy {
   -webkit-animation: keyframe-proxy 3s steps(5) forwards;
@@ -243,7 +273,15 @@
     // right: 0;
     //background: url("/images/home/backg-img.png") no-repeat;
     background-position: right;
-    @include banner-background;
+    position: relative;
+    .homeBackg {
+      position: absolute;
+      height: 675px;
+      width: 657px;
+      right: 0;
+      top: 0;
+      @include banner-background;
+    }
   }
   .banner-board {
     // display: flex;
@@ -291,14 +329,16 @@
   .secondRow {
     width: 100%;
     // height: 204px;
-    background: rgba(255, 255, 255, 0.39);
+    background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 18px 80px rgba(112, 144, 176, 0.12);
-    opacity: 0.7;
+    // opacity: 0.7;
     border-radius: 8px;
     display: flex;
     // justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 99;
     li {
       text-align: center;
       min-width: 250px;
@@ -542,12 +582,15 @@
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
+          margin: 0 -30px;
           li {
             font-size: 16px;
             line-height: 20px;
             color: #4c5664;
             i {
               color: #758dff;
+              width: 18px;
+              font-size: 20px;
             }
           }
         }
@@ -563,11 +606,24 @@
           }
         }
       }
+      .time-package {
+        .timesRange,
+        .setMeal-limt {
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          li {
+            width: 290px;
+          }
+        }
+      }
     }
   }
   .sixRow {
-    background: linear-gradient(40deg, rgb(25 104 252 / 10%) 10%, #ffffff 100%);
-    box-shadow: 0 0 80px 20px #f4f8ff;
+    //background: linear-gradient(40deg, rgb(25 104 252 / 10%) 10%, #ffffff 100%);
+    background: url("/images/home/custom-bg.png") no-repeat;
+    // box-shadow: 0 0 80px 20px #f4f8ff;
     > ul {
       display: flex;
       justify-content: center;
@@ -707,6 +763,7 @@
   }
   .nineRow {
     > ul {
+      display: flex;
       // flex-wrap: wrap;
       margin: 0 -20px;
       > li {
