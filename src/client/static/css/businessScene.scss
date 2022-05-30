@@ -25,11 +25,12 @@
   color: #091d43;
 }
 .top {
-  grid-template-columns: 8fr 4fr;
+  grid-template-columns: 7fr 4fr;
   img {
     max-width: 703px;
-    width: 100%;
+    width: 117%;
     height: 444px;
+    transform: translateX(-35px);
   }
 }
 .top .left_text {
