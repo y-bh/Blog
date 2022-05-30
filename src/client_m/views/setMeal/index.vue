@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-30 16:09:29
+ * @LastEditTime: 2022-05-30 16:52:06
 -->
 <template>
   <div class="container">
@@ -411,7 +411,7 @@ export default {
       },
 
       rowClass (val) {
-        if (val.row.state == 4) {
+        if (val.row.state === 4 || val.row.state === 3) {
           return { "color": "#B2BCCB !important" };
         } else {
           return { "color": "#4C5664" }

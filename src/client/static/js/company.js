@@ -14,11 +14,11 @@ $(function () {
 
   //校验不通过
   function validateNo(e) {
-    e.addClass('red-border').siblings('.error-wrap').children().show()
+    e.addClass('red-border').siblings('.error-wrap').show().children().show()
   }
   //通过
   function validateYes(e){
-    e.removeClass('red-border').siblings('.error-wrap').children().hide()
+    e.removeClass('red-border').siblings('.error-wrap').hide().children().hide()
   }
 
   let btn = document.querySelector('.submit')

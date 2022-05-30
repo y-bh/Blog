@@ -12,8 +12,11 @@
       font-size: 18px;
       color: #091d43;
       min-width: 500px;
+      display: flex;
+      align-items: center;
       .user-info {
         display: flex;
+        align-items: center;
         .user-name {
           .user-edit {
             cursor: pointer;
@@ -29,6 +32,7 @@
       .orange {
         color: #ff5f00;
         font-weight: bold;
+        font-family: "DIN Alternate";
       }
     }
   }
@@ -38,7 +42,7 @@
     margin: 0 -20px;
     .customTip {
       position: relative;
-      &:after {
+      &::before {
         content: "赠3000IP";
         color: #ffffff;
         font-size: 14px;
@@ -49,7 +53,7 @@
         border-radius: 15px 15px 15px 0;
         display: block;
         position: absolute;
-        top: -32px;
+        top: -44px;
       }
     }
 
@@ -57,12 +61,16 @@
       flex-wrap: wrap;
       width: 500px;
       height: 144px;
-      background: rgba(255, 255, 255, 0.39);
+      // background: rgba(255, 255, 255, 0.39);
       box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
       // opacity: 0.6;
       border-radius: 8px;
       padding: 30px 40px;
       box-sizing: border-box;
+      background-image: linear-gradient(to bottom left, rgba(208, 224, 255, 0.5), #fff, #fff, #fff);
+      background-size: 200px 200px;
+      background-repeat: no-repeat;
+      background-position: right top;
       .name {
         font-size: 18px;
         line-height: 24px;
@@ -75,6 +83,7 @@
           font-size: 20px;
           color: #091d43;
           line-height: 40px;
+          font-family: "DIN Alternate";
         }
       }
       .explain {
@@ -104,6 +113,9 @@
           font-size: 20px;
           line-height: 26px;
           color: #091d43;
+          .number {
+            font-family: "DIN Alternate";
+          }
           .copyBtn {
             font-size: 14px;
             line-height: 26px;
@@ -134,6 +146,7 @@
           font-weight: bold;
           line-height: 40px;
           color: #091d43;
+          font-family: "DIN Alternate";
         }
       }
     }
