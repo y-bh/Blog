@@ -1,12 +1,12 @@
 <!--
  * @Author: 秦琛
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 批量删除
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-30 11:36:49
+ * @LastEditTime: 2022-05-31 09:38:00
 -->
 <template>
-    <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
+    <el-dialog v-model="dialogVisible" :show-close="false" destroy-on-close custom-class="customize_dialog dialog-alone">
         <DialogTitle title-content="温馨提示" />
         <div class="dialog-body">
             <p class="child-item">确定删除吗？</p>
