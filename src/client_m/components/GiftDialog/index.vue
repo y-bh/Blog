@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 20:18:36
+ * @LastEditTime: 2022-05-31 20:24:20
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -227,6 +227,7 @@ export default {
 
     .dialog-img-fst {
       background-image: url("../../assets/images/newUser.png");
+      cursor: pointer;
     }
 
     .dialog-img-snd {
@@ -250,9 +251,11 @@ export default {
 
       .pesonal-btn {
         transform: translate(4%, 22vw);
+        cursor: pointer;
       }
       .company-btn {
         transform: translate(4%, 23vw);
+        cursor: pointer;
       }
     }
   }
@@ -281,6 +284,7 @@ export default {
   height: 150px;
   position: fixed;
   z-index: 1000;
+  cursor: pointer;
 
   .small-dia-img-n {
     width: 100%;
