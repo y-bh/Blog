@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-31 13:33:06
+ * @LastEditTime: 2022-05-31 17:43:13
 -->
 <template>
   <div class="container grid">
@@ -194,7 +194,8 @@ export default {
 
         if (state.tableData && state.tableData.length) {
           state.tableData.forEach(elem => {
-            if (elem && elem.state === 1) {
+            // 非api预购订单24小时支付倒计时
+            if (elem && elem.state === 1 && !elem.preOrderPaid) {
               // 待支付订单显示倒计时 创建时间 订单编号
               deadLine(elem.createTime, elem.orderNo);
             }
@@ -208,16 +209,21 @@ export default {
     const deadLine = (createTime, id) => {
       // console.log(createTime, id);
       // 创建时间精确到毫秒
-      const startTime = createTime && createTime * 1000 || null;
+      let startTime = createTime && createTime * 1000 || null;
+      console.log(startTime,'startTime');
       // 结束时间戳 延后24小时
       const endTime = startTime && (startTime + 86400000) || null;
+      console.log(endTime,'endTime');
+      const nowTime = Date.parse(new Date()); // 当前时间时间戳 
+        const remainTime =
+          endTime - nowTime >= 0 ? (endTime - nowTime) / 1000 : 0;
+          // console.log(remainTime,'remainTime');
       // 计时器
       const timer = setInterval(() => {
         const nowTime = Date.parse(new Date()); // 当前时间时间戳 
         // console.log(endTime - nowTime, 'timeDiffer时间差');
-
         const remainTime =
-          endTime - nowTime >= 0 ? (endTime - nowTime) / 1000 : 0; // 距离到期所剩时间(转成秒)
+          endTime - nowTime >= 0 ? (endTime - nowTime) / 1000 : null; // 距离到期所剩时间(转成秒)
 
         const waitPay = {
           timer,
