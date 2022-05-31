@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-05 18:02:35
- * @LastEditTime: 2022-05-31 18:09:30
+ * @LastEditTime: 2022-05-31 18:54:26
 -->
 <template>
   <li class="show-side" @click="props.showB"><i class="iconfont icon-zhankai"></i></li>
