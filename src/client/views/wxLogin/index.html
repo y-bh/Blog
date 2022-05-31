@@ -21,8 +21,7 @@
     <div class="wxlogin-info mt-80">
       <div class="title">
         <h2 class="text-center">领取关注福利1000IP！</h2>
-        <p class="text-center mt-10"><span>没有账号？</span> <a href="https://www.tianqiip.com"
-            style="color: #63A2FF">去注册</a></p>
+        <p class="text-center mt-10"><span>没有账号？</span> <a href="/register" style="color: #63A2FF">去注册</a></p>
       </div>
 
       <div class="wxLogin-form mt-60">
@@ -72,10 +71,10 @@
 
     <div class="wxLogin-message mt-100" style="display: none;">
       <p id="res" class="text-center  mt-20">响应信息</p>
-      <p class="text-center  mt-20">详情可登录 <a href="/manager/user" style="color: #63A2FF">官网--个人中心</a>查看。
+      <p class="text-center  mt-20">详情可登录 <a href="/" style="color: #63A2FF">官网--个人中心</a>查看。
       </p>
       <p class="text-center mt-20">在电脑端查看操作更便捷哦</p>
-      <div class="text-center mt-40 btn-success save">
+      <div class="text-center mt-40 btn-success save hover" onclick="copy()">
         复制网站地址
       </div>
     </div>
@@ -85,150 +84,6 @@
 <script src="/lib/js/jquery-3.5.1.min.js"></script>
 <script src="/js/common.js"></script>
 
-<script>
-  function is_weixn() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-
-
-
-
-  //获取参数
-  window.openId = null
-
-
-  async function loginSubmit() {
-
-    const params = {
-      username: $("#username").val(),
-      password: $("#password").val(),
-      wxOpenId: window.openId || sessionStorage.getItem('openId')
-    }
-
-    console.log("params", params)
-
-    if (!params.username) {
-      $("#username1").show()
-      return
-    } else {
-      $("#username1").hide()
-    }
-
-    if (!params.password) {
-      $("#password1").show()
-      return
-    } else {
-      $("#password1").hide()
-    }
-
-    if (!params.wxOpenId) {
-      return Helper.$message({
-        message: 'wxOpenId 获取失败',
-        type: 'warning'
-      })
-
-
-    }
-
-
-    // const res = await ajax({
-    //   url: "/wxFollowWelfare",
-    //   query: JSON.stringify(params)
-    // }, '/api')
-
-
-
-    //console.log("接口响应结果:", res)
-
-    //注册成功后
-    $(".wxlogin-info").eq(0).hide()
-      .siblings(".wxLogin-message").show()
-
-    // if(res){
-
-
-    // }
-  }
-
-
-
-
-  //获取openId
-  async function getOpenId(code) {
-
-    if (!code) {
-      console.log("请传入code")
-      return
-    }
-
-    // const res = await ajax({
-    //   type: 'get',
-    //   url: `/proxy/getWxOpenId/${code}`,
-    //   query: null
-    // })
-
-    console.log("获取结果:", res)
-
-    // if (+res.code !== 200) {
-
-    //   return Helper.$message({
-    //     message: res.message || 'openId 获取失败',
-    //     type: 'warning'
-    //   })
-    // }
-
-    return 1
-
-  }
-
-
-
-
-
-
-  $(async function () {
-    //判断是否是微信
-    // var isWx = !is_weixn()
-    // if (!isWx) {
-    //   $("#wx-client").hide().siblings("#browser-client").show()
-    // } else {
-    //   $("#wx-client").show().siblings("#browser-client").hide()
-    // }
-
-
-    var query = getParams()
-    console.log("查询参数:", query.code, query && !query.code)
-    if (query && !query.code) {
-      $("#wx-client").hide().siblings("#browser-client").show()
-      return;
-    } else {
-      //当前是微信端
-      $("#wx-client").show().siblings("#browser-client").hide()
-
-      //获取微信openId
-      window.openId = await getOpenId(query.code)
-      console.log("vvvvvvvvvvvvvvvvvv", openId)
-      window.openId = openId
-      sessionStorage.setItem('openId', openId)
-    }
-
-
-    //this.openId = await this.$api('Proxy.GetWxOpenId', { code: code });
-
-
-
-
-
-
-
-
-  })
-</script>
+<script src="/js/wxLogin.js"></script>
 
 </html>
