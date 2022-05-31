@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 14:27:45
+ * @LastEditTime: 2022-05-31 15:33:51
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -96,6 +96,9 @@ export default {
           state.one = true
           $message.success("领取成功");
         }
+      }else{
+        $message.error("领取失败");
+        state.e = true
       }
     }
 
@@ -110,7 +113,6 @@ export default {
       }
       
       if(e){
-        state.userInfo.newUser = false
         state.e = false
         state.one = true
       }

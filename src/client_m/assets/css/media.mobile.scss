@@ -12,8 +12,20 @@
   }
 
   div.slide-affix {
-    display: none;
-  }
+    // display: none;
+
+    .slide-affix--fixed{
+      width: 55px !important;
+      .sideBar{
+        width: 100%;
+        .el-menu-item{
+          span{
+            display: none;
+          }
+        }
+      }
+    }
+  } 
 }
 
 @media screen and (max-width: 575px) {
