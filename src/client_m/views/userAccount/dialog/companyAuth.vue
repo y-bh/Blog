@@ -3,11 +3,12 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-27 09:29:56
+ * @LastEditTime: 2022-05-31 13:36:13
 -->
 <template>
-  <div class="companyAuth">
+  <div class="companyAuth common-userAuthDialog">
     <el-dialog
+      :show-close="showCloseFlag"
       v-model="dialogVisible"
       custom-class="customClass customize_dialog dialog-alone"
       @close="closeDialog"
@@ -15,7 +16,7 @@
       <DialogTitle :title-content="title" />
       <!-- 姓名身份证 -->
       <div class="formContent" v-show="authCompanyStep == 1">
-        <div class="tip">
+        <div class="tip title-grey">
           <span>
             天启HTTP采用支付宝实名认证服务，仅能获取支付宝返回的实名认证结果信息。您的实名信息仍将保留在支付宝，受支付宝数据安全保护。
           </span>
@@ -27,29 +28,33 @@
           ref="vaildCompanyCardRef"
           :model="ruleForm"
           :rules="rules"
-          label-width="120px"
+          label-width="93px"
+          label-position="right"
           class="demo-ruleForm mt-30"
         >
-          <el-form-item label="真实姓名" prop="name">
+          <el-form-item label="真实姓名" prop="name" class="mb-0">
             <el-input
               v-model="ruleForm.name"
               placeholder="请输入联系人/法人身份证姓名"
             />
           </el-form-item>
-          <el-form-item label="身份证号码" prop="idCardNo">
+          <el-form-item label="身份证号码" prop="idCardNo" class="mb-0">
             <el-input
               v-model="ruleForm.idCardNo"
               placeholder="请输入联系人/法人身份证号"
             />
           </el-form-item>
-          <div class="common-btnGroup pt-30 pb-40">
+          <div class="common-btnGroup pt-10">
             <el-button
+              class="btn-wt100"
               type="primary"
               plain
               @click="companyCancel(vaildCompanyCardRef)"
               >取消</el-button
             >
-            <el-button type="warning" @click="onCompanySubmit">确定</el-button>
+            <el-button type="warning" @click="onCompanySubmit" class="btn-wt100"
+              >确定</el-button
+            >
           </div>
         </el-form>
       </div>
@@ -76,7 +81,7 @@
       </div>
       <!-- 提交文件 -->
       <div class="authContent" v-show="authCompanyStep == 3">
-        <div class="tip mt-40">
+        <div class="tip mt-40 title-grey">
           <span>
             支付宝认证成功，可正常提取使用IP，请继续企业认证，请上传企业营业执照照片
           </span>
@@ -94,9 +99,15 @@
             accept="image/*"
           >
             <template #trigger>
-              <el-button type="primary" plain>选择文件</el-button>
+              <el-button type="primary" plain class="setWidth-120"
+                >选择文件</el-button
+              >
             </template>
-            <el-button class="ml-50" type="warning" @click="submitUpload">
+            <el-button
+              class="ml-50 setWidth-120"
+              type="warning"
+              @click="submitUpload"
+            >
               提交
             </el-button>
 
@@ -151,7 +162,7 @@
 
       <!-- 认证失败 -->
       <div class="authContent" v-show="authCompanyStep == 7">
-        <div class="smallGrey mt-40 mb-30">
+        <div class="smallGrey mt-40 mb-20">
           <span>授权支付宝安全认证，平台不会泄露您的认证信息</span>
         </div>
         <div class="title erro"><span>企业认证失败</span></div>
@@ -198,7 +209,7 @@
 
 <script>
 import DialogTitle from "components/DialogTitle";
-import { ref, reactive, computed, toRefs, onMounted, inject } from "vue";
+import { ref, reactive, computed, toRefs, onMounted, inject, watch } from "vue";
 import { companyImg, zfbAuthCompany, getAuthResult } from "model/user.js";
 import QRCode from "qrcodejs2";
 export default {
@@ -208,6 +219,7 @@ export default {
   },
   props: {},
   setup(props, { emit }) {
+    let showCloseFlag = ref(false);
     let certifyId = ref("");
     const companyQrcodeRef = ref(null);
     let userInfoSon = inject("userInfoSon");
@@ -216,7 +228,7 @@ export default {
     const vaildCompanyCardRef = ref(null);
     const message = inject("message");
     const authCompanyStep = ref(1); //认证步骤 1 1：姓名身份认证 2.扫支付宝 3：上传文件 4:提交后资料审核中 5：审核中 6：认证成功 7:认证失败 8：个人认证
-    const title = ref("企业认证");
+    let title = ref("企业认证");
     let isSubmitIdCard = ref(false); //是否已经提交用户信息
     // const userInfo = reactive({
     //   userName:"",
@@ -368,12 +380,12 @@ export default {
       uploadRef.value.handleStart(uploadFile);
     };
     const goPersonAuth = () => {
-      title.value = "个人认证";
+      //title.value = "个人认证";
       emit("updateUserInfo");
       authCompanyStep.value = 8;
     };
     const upgradeCompany = () => {
-      title.value = "企业认证";
+      //title.value = "企业认证";
       authCompanyStep.value = 3;
     };
     const reCompanyAuth = () => {
@@ -398,7 +410,31 @@ export default {
       sessionStorage.setItem("packageTab", 1); //1:余额 2：包时
       window.location.href = "/package";
     };
+    watch(
+      () => authCompanyStep.value,
+      // 路由刷新回到页面顶部
+      () => {
+        // console.log(33333333333,"3333333333333")
+        if (authCompanyStep.value == 1) {
+          showCloseFlag.value = false;
+        } else {
+          showCloseFlag.value = true;
+        }
+        //认证步骤 1 1：姓名身份认证 2.扫支付宝 3：上传文件 4:提交后资料审核中 5：审核中 6：认证成功 7:认证失败 8：个人认证
+        if (authCompanyStep.value == 6) {
+          title.value = "企业认证成功";
+        } else if (authCompanyStep.value == 7) {
+          title.value = "企业认证失败";
+        } else if (authCompanyStep.value == 8) {
+          title.value = "个人认证";
+        } else {
+          title.value = "企业认证";
+        }
+      },
+      { immediate: true }
+    );
     return {
+      showCloseFlag,
       goPackage,
       closeDialog,
       reCompanyAuth,
@@ -469,17 +505,39 @@ export default {
         font-size: 14px;
         line-height: 30px;
         width: 81px;
-        height: 35px;
+        height: 30px;
         border-radius: 15px 15px 15px 0;
         display: block;
         position: absolute;
-        top: -3px;
-        left: 10px;
+        top: 0;
+        left: 8px;
+      }
+      image {
+        height: 30px;
       }
     }
   }
   .reason {
     color: #677294;
+  }
+  .title-grey {
+    color: #677294;
+  }
+}
+</style>
+<style lang="scss" >
+.companyAuth {
+  .el-form-item__label {
+    text-align: right !important;
+    font-size: 16px;
+    color: #4c5664 !important;
+  }
+  .setWidth-120 {
+    width: 120px !important;
+    height: 40px !important;
+  }
+  .el-upload-list {
+    margin-left: 65px;
   }
 }
 </style>

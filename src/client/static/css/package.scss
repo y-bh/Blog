@@ -67,6 +67,23 @@ $columnMt: 60px;
 }
 
 .packageBuy {
+  .modal-dialog {
+    max-width: fit-content !important;
+    margin: 200px auto !important;
+    position: relative !important;
+    .closeBtn {
+      cursor: pointer;
+      display: block;
+      color: #ffffff;
+      top: 0;
+      right: -80px;
+      position: absolute;
+      border-radius: 50%;
+      .iconfont {
+        font-size: 30px;
+      }
+    }
+  }
   .common-title-color {
     color: #091d43;
     font-size: 24px;
@@ -672,7 +689,7 @@ $columnMt: 60px;
     .modal-content {
       overflow-x: auto;
       background: #ffffff url(/images/package/calcutaDialog.png) no-repeat;
-      background-size: 800px 215px;
+      background-size: 100% 188px;
       background-position: 0 0;
       width: 800px;
       height: 588px;
