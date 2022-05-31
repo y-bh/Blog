@@ -168,28 +168,28 @@
 
 @keyframes keyframe-proxy1 {
   0% {
-    background-position-y: -25px;
+    background-position-y: -29px;
   }
   100% {
-    background-position-y: -424px;
+    background-position-y: -427px;
   }
 }
 
 @keyframes keyframe-proxy2 {
   0% {
-    background-position-y: -24px;
+    background-position-y: -16px;
   }
   100% {
-    background-position-y: -473px;
+    background-position-y: -432px;
   }
 }
 
 @keyframes keyframe-proxy3 {
   0% {
-    background-position-y: -25px;
+    background-position-y: -26px;
   }
   100% {
-    background-position-y: -425px;
+    background-position-y: -411px;
   }
 }
 // 产品核心优势
@@ -210,7 +210,7 @@
 //优质代理IP资源
 @mixin proxyIconImg {
   width: 60px;
-  height: 65px;
+  height: 62px;
 }
 
 .common-main-button {
@@ -432,19 +432,19 @@
           .icon-img1 {
             background: url("/images/home/proxy1.png") no-repeat;
             background-size: 82px 517px;
-            background-position: -10px -25px;
+            background-position: -10px -29px;
             @include proxyIconImg;
           }
           .icon-img2 {
             background: url("/images/home/proxy2.png") no-repeat;
-            background-size: 82px 568px;
-            background-position: -16px -24px;
+            background-size: 82px 522px;
+            background-position: -18px -16px;
             @include proxyIconImg;
           }
           .icon-img3 {
             background: url("/images/home/proxy3.png") no-repeat;
-            background-size: 82px 505px;
-            background-position: -10px -25px;
+            background-size: 82px 495px;
+            background-position: -6px -26px;
             @include proxyIconImg;
           }
         }
@@ -776,6 +776,10 @@
       display: flex;
       // flex-wrap: wrap;
       margin: 0 -20px;
+      .title {
+        font-size: 30px;
+        color: #091d43 !important;
+      }
       > li {
         // min-width: 340px;
         // width: 340px;
@@ -785,6 +789,7 @@
         // border-radius: 8px;
         position: relative;
         cursor: pointer;
+
         .arrow {
           opacity: 0;
           transition: all 0.3s;
@@ -992,19 +997,19 @@
   &:hover {
     border-radius: 0 !important;
     .bottom {
-      animation: animateBottom 1s linear 0s;
+      animation: animateBottom 0.6s linear 0s;
       animation-fill-mode: forwards;
     }
     .left {
-      animation: animateLeft 1s linear 1s;
+      animation: animateLeft 0.6s linear 1s;
       animation-fill-mode: forwards;
     }
     .top {
-      animation: animateTop 1s linear 0s;
+      animation: animateTop 0.6s linear 0s;
       animation-fill-mode: forwards;
     }
     .right {
-      animation: animateRight 1s linear 1s;
+      animation: animateRight 0.6s linear 1s;
       animation-fill-mode: forwards;
     }
   }

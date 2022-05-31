@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: 秦琛
  * @description: 公共接口
  * @Date: 2022-05-16 19:16:37
- * @LastEditTime: 2022-05-23 19:55:40
+ * @LastEditTime: 2022-05-31 15:41:20
  */
 
 const { getQueryLinkData, getMealActivity } = require("dao/commonDao")
@@ -16,7 +16,8 @@ const { setStore, getStore } = require("store")
 
 //获取顶部活动数据
 const renderTab = async () => {
-  let data = null;
+  // 赋予初始值  防止ssr渲染出错
+  let data = { maxRechargeGift: null, minPurchaseRate: null, maxPurchaseGift: null };
 
   //如果缓存有数据
   if (getStore(active_tab)) {

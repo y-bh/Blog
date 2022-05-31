@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 合并套餐
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-31 09:37:48
+ * @LastEditTime: 2022-05-31 14:51:40
 -->
 <template>
     <el-dialog v-model="dialogVisible" :show-close="false" destroy-on-close custom-class="customize_dialog dialog-alone">
@@ -60,7 +60,7 @@ export default {
                         })
                         context.emit('updateTable', false)
                     } else {
-                        message.success({
+                        message.error({
                             message: res && res.message || '合并失败',
                             showClose: true
                         })

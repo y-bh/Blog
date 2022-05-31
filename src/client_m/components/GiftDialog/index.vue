@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 14:27:45
+ * @LastEditTime: 2022-05-31 15:46:35
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -21,7 +21,7 @@
 
       <div class="dialog-bg" v-if="!e && one">
         <div class="dialog-img dialog-img-snd">
-          <div class="snd-btn pesonal-btn" v-if="!userInfo.identityAuth">个人认证</div>
+          <div class="snd-btn pesonal-btn" v-if="(!userInfo.identityAuth && !userInfo.companyAuth && (userInfo.res === 'cut' || userInfo.res === 'none' || userInfo.res === 'fail' ))">个人认证</div>
           <div class="snd-btn company-btn" v-if="!userInfo.companyAuth && (userInfo.res === 'cut' || userInfo.res === 'none' || userInfo.res === 'fail' )" >企业认证(赠3000IP)</div>
         </div>
         <div class="dialog-close dialog-close-snd">
@@ -96,6 +96,9 @@ export default {
           state.one = true
           $message.success("领取成功");
         }
+      }else{
+        $message.error("领取失败");
+        state.e = true
       }
     }
 
@@ -110,7 +113,6 @@ export default {
       }
       
       if(e){
-        state.userInfo.newUser = false
         state.e = false
         state.one = true
       }

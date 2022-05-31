@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-31 14:48:43
+ * @LastEditTime: 2022-05-31 15:45:37
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -118,7 +118,6 @@ export default {
                     state.renewForm.mealTime = formatInt(row.proxyMealId)   // 表格对应的套餐时长id
                     // 获取套餐续费信息
                     await methods.getRenewData(row);
-console.log(row.proxyMealId,'row.proxyMealId');
                     state.renewForm.proxyId = state.renewInfo && state.renewInfo.proxyId;  // 支付id
                     state.renewForm.desc = state.renewInfo && state.renewInfo.desc;  // 支付desc
 
@@ -144,6 +143,9 @@ console.log(row.proxyMealId,'row.proxyMealId');
                     state.renewForm.payPrice = state.renewInfo.discount ?
                         (state.renewInfo.price * state.renewInfo.discount * 0.01).toFixed(2) :
                         state.renewForm.price;
+
+                    // 包量套餐mealId是自己 
+                    state.renewForm.timeMealId = row.proxyMealId;
                 }
                 
             },
@@ -160,7 +162,7 @@ console.log(row.proxyMealId,'row.proxyMealId');
 
                 state.packageTime.forEach(elem => {
                     //  elem.mealId == state.renewForm.mealTime
-                    if (elem) {
+                    if (elem && elem.mealId == state.renewForm.mealTime) {
                         state.renewForm.timeMealId = elem.mealId;
                         state.renewForm.price = elem.price ? (elem.price).toFixed(2) : 0;
                         state.renewForm.payDiscount = elem.discount !== null ? elem.discount[0] : 100;
