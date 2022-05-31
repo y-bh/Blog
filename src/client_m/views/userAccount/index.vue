@@ -3,10 +3,10 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-30 16:42:46
+ * @LastEditTime: 2022-05-30 17:05:01
 -->
 <template>
-  <div class="userAccount">
+  <div class="userAccount mb-60">
     <div class="account pt-40">
       <div class="left mb-10">
         <div class="user-info">
@@ -65,8 +65,10 @@
               placement="right"
               class="common-tooltip"
             >
-              <i class="iconfont icon-xianxing-wenhao"></i>
-              <!-- <i class="iconfont icon-mianxing-wenhao"></i> -->
+              <span class="iconHover">
+                <i class="iconfont icon-xianxing-wenhao"></i>
+                <i class="iconfont icon-mianxing-wenhao"></i>
+              </span>
             </el-tooltip>
           </span>
         </div>
@@ -81,7 +83,7 @@
           </div>
         </div>
       </div>
-      <div class="operate-box operate-box-big ml-20 mr-20 mt-20 mb-20">
+      <div class="operate-box operate-box-big ml-20 mr-20 mt-20 mb-60">
         <div class="name"><span>实名认证</span></div>
         <div class="explain mt-20">
           <span
@@ -166,7 +168,7 @@
       <!-- 有销售 -->
       <div
         v-if="userInfo.isHasSeller"
-        class="operate-box operate-box-big ml-20 mr-20 mt-20 mb-20 saleBox"
+        class="operate-box operate-box-big ml-20 mr-20 mt-20 mb-60 saleBox"
       >
         <div class="saleInfo">
           <div class="name"><span>您的专属销售</span></div>

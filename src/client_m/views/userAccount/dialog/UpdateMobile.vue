@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 15:36:59
+ * @LastEditTime: 2022-05-30 18:18:55
 -->
 <template>
   <div class="updateMobile">
@@ -11,7 +11,7 @@
       v-model="dialogVisible"
       :before-close="beforeCloseFun"
       @close="closeDialog"
-      custom-class="customize_dialog dialog-alone"
+      custom-class="customize_dialog dialog-alone updatePhoneDialog"
     >
       <DialogTitle title-content="换绑手机" />
       <div class="formContent dialog-body">
@@ -24,7 +24,7 @@
           ref="vaildPhoneRef"
           :model="ruleForm"
           :rules="rules"
-          label-width="120px"
+          label-width="100px"
           class="demo-ruleForm mt-30 el-form-right"
         >
           <el-form-item label="当前手机号" prop="curPhone">
@@ -42,7 +42,7 @@
           <el-form-item label="验证码" prop="vaildCode">
             <div class="vaildCode">
               <el-input
-                class="mr-20"
+                class="mr-20 vaild-wt"
                 v-model="ruleForm.vaildCode"
                 placeholder="请输入验证码"
               />
@@ -58,11 +58,18 @@
               >
             </div>
           </el-form-item>
-          <div class="dialog-footer child-item footer-double">
-            <el-button type="primary" plain @click="onCancel(vaildPhoneRef)">
+          <div class="dialog-footer child-item footer-double mr-0 pr-0">
+            <el-button
+              type="primary btn-wt100"
+              plain
+              @click="onCancel(vaildPhoneRef)"
+            >
               取消
             </el-button>
-            <el-button type="warning" @click="onSubmit(vaildPhoneRef)">
+            <el-button
+              type="warning btn-wt100"
+              @click="onSubmit(vaildPhoneRef)"
+            >
               确定
             </el-button>
           </div>
@@ -134,10 +141,10 @@ export default {
       if (!vaildFlag) {
         return;
       }
-     // console.log(88888888888888);
+      // console.log(88888888888888);
       const TIME_COUNT = 60;
       counter.show = false;
-     // console.log(3333333333333, counter.timer);
+      // console.log(3333333333333, counter.timer);
       if (!counter.timer) {
         counter.count = TIME_COUNT;
         counter.show = false;
@@ -246,6 +253,34 @@ export default {
     .vaildCode {
       display: flex;
     }
+  }
+  .el-form {
+    margin-left: -5px;
+  }
+  .btn-wt100 {
+    width: 100px;
+    height: 40px;
+  }
+  .dialog-footer{
+    margin-right: 0 !important;
+  }
+  
+}
+</style>
+
+<style lang="scss">
+.updateMobile {
+  .updatePhoneDialog {
+    width: 526px !important;
+  }
+  .el-input {
+    width: 310px !important;
+  }
+  .vaild-wt .el-input__inner {
+    width: 172px !important;
+  }
+  .el-form-item{
+    margin-right: 0 !important;
   }
 }
 </style>
