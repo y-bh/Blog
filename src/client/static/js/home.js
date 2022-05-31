@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-14 13:51:32
- * @LastEditTime: 2022-05-24 13:20:52
+ * @LastEditTime: 2022-05-31 16:15:32
  */
 
 function onFreeTry() {
@@ -161,4 +161,11 @@ $(async function () {
   new WOW({
     mobile: false
   }).init();
+})
+
+
+$(".borderAnimat").hover(function(){
+},function(){
+  $(this).addClass("borderAnimat-moveOut");
+
 })
