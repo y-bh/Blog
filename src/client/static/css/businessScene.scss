@@ -30,7 +30,7 @@
     max-width: 703px;
     width: 151%;
     height: 444px;
-    transform: translateX(-206px);
+    transform: translate(-206px, 0%);
     transition: all .3s 2s;
   }
 }
@@ -57,4 +57,20 @@
 }
 .tab .common-row-title {
   font-size: 36px;
+}
+
+.fadeInRightBuss{
+  animation-name: fadeInRightBus;
+}
+
+
+@keyframes fadeInRightBus {
+    0%{
+      opacity:0;
+      transform:translate3d(38%,0,0);
+    }
+    100%{
+      opacity:1;
+      transform:translate3d(-206px, 0%, 0);
+    }
 }
