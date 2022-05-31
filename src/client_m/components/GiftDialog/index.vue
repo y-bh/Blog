@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 17:59:53
+ * @LastEditTime: 2022-05-31 18:08:09
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -156,18 +156,17 @@ export default {
       const res = await getMineInfo();
       if (res && res.code === 200) {
         state.userInfo = res.data;
-        if(res.data.length === 0){
-          
-        }else if (!res.data.newUser) {
+        if (!res.data.newUser) {
           state.e = true;
         }
+      }else{
+        state.e = true
       }
 
       if (e) {
         state.e = false;
         state.one = true;
       }
-      console.log(state.userInfo, "userInfo");
     };
 
     const personAuth = () => {
