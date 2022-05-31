@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 按需注入element-plus
  * @Date: 2022-04-26 14:41:46
- * @LastEditTime: 2022-05-26 15:58:29
+ * @LastEditTime: 2022-05-31 14:14:29
  */
 
 import {
@@ -11,7 +11,7 @@ import {
   ElMenu, ElSubmenu, ElMenuItem, ElMenuItemGroup, ElRow, ElCol, ElSwitch,
   ElForm, ElFormItem, ElInput, ElDatePicker, ElMessage, ElSelect, ElOption,
   ElDropdown, ElDropdownMenu, ElDropdownItem, ElTooltip, ElPagination,
-  ElConfigProvider, ElUpload, ElAffix
+  ElConfigProvider, ElUpload, ElAffix, ElIcon
 } from "element-plus";
 
 
@@ -41,7 +41,8 @@ const components = [
   ElPagination,
   ElConfigProvider,
   ElUpload,
-  ElAffix
+  ElAffix,
+  ElIcon
 ]
 const plugins = [
   ElMessage,
