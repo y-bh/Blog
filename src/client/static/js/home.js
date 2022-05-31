@@ -123,26 +123,42 @@ $("#kernelBox li").hover(function () {
   $(this).siblings().removeClass("active");
 })
 
-//初始化
-$(function () {
+
+
+//获取当日ip随机数
+
+async function getTodayRandom() {
   if (getCookie && !getCookie('ipNumTotal')) {
-    let ipNumTotal = randomNum(2000000, 2999999);
-    let ipNumUpdate = randomNum(7000000, 1300000);
-    setCookie('ipNumTotal', ipNumTotal, 0.5)
-    setCookie('ipNumUpdate', ipNumUpdate, 0.5)
+    // let ipNumTotal = randomNum(2000000, 2999999);
+    // let ipNumUpdate = randomNum(7000000, 1300000);
+    // setCookie('ipNumTotal', ipNumTotal, 0.5)
+    // setCookie('ipNumUpdate', ipNumUpdate, 0.5)
+    const res = await ajax({
+      url: "/randomNums",
+    }, '/api')
+    if (res) {
+
+      setCookie('ipNumTotal', res.ipNumTotal, 0.5)
+      setCookie('ipNumUpdate', res.ipNumUpdate, 0.5)
+    }
   }
+}
 
 
+//初始化
+$(async function () {
 
+  //获取当日ip随机数
+  await getTodayRandom()
   numDynamic("cityNum", 0, 200, 4, 50)
   numDynamic("ipTotalNum", 100000, +getCookie('ipNumTotal'), 50000, 50)
   numDynamic("ipNum", 600000, +getCookie('ipNumUpdate'), 80000, 50)
-  numDynamic("canUserNum", 8, 99, 2, 50)
+  numDynamic("canUserNum", 8, (+getCookie('ipNumUpdate') * 100 / +getCookie('ipNumTotal')).toFixed(2), 2, 50)
 
   // 1.首页|业务场景  产品优势动画初始化
   new WOW({ boxClass: 'advanceWow', }).init();
   //动画
   new WOW({
-    mobile:false
+    mobile: false
   }).init();
 })

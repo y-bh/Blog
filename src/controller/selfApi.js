@@ -9,7 +9,7 @@ const Router = require("koa-router");
 const router = new Router();
 const appKey = require("config/app.key.config")
 const { registerService, resetService, loginService, registerCodeService, resetCodeService } = require("service/userService")
-
+const {getDayIpNums}  = require("service/commonService") 
 
 //针对登录/注册/ 重置密码相关java 接口做转发
 router.post("/login", async (ctx) => {
@@ -81,4 +81,27 @@ router.post("/layout", async (ctx) => {
   ctx.cookies.set(appKey.userInfo, '')
   return ctx.success(null, '已退出登录');
 });
+
+
+
+//每天获取一次ip任意随基数
+router.post("/randomNums", async (ctx) => {
+  const data = getDayIpNums()
+  // ctx.cookies.set(appKey.ipNumTotal, data.ipNumTotal)
+  // ctx.cookies.set(appKey.ipNumUpdate, data.ipNumUpdate)
+  //获取随机值
+  return ctx.success(data, '已获取随机数');
+});
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

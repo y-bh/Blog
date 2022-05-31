@@ -24,9 +24,7 @@ const { getHelpService, postKeywordsService, getArticleDetailService, getInfoLis
 const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService, data } = require('service/getIpService')
 const { renderPackage } = require("service/packageService");
 
-const { getTime } = require('utils/activityTime')
-
-
+const { getDayIpNums } = require("service/commonService");
 
 //注册后端路由功能
 function Router(App) {
@@ -50,9 +48,11 @@ function Router(App) {
     const homeData = {}
     //资讯中心数据
     let list = await getInfoListService();
-
     homeData.articleList = list.typeList ? list.typeList : [];
 
+    //获取当日ip随机数
+    const todayIp = getDayIpNums()
+    homeData.todayIp = todayIp || null
     return ctx.render("home/index", homeData)
   })
 
