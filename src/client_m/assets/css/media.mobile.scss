@@ -7,7 +7,8 @@
 @media screen and (max-width: 775px) {
   .layout .main {
     .main-right {
-      max-width: 700px;
+      max-width: 90vw;
+      overflow-x: auto !important;
     }
   }
 
@@ -15,45 +16,54 @@
     // display: none;
     width: 15px !important;
 
-    .slide-affix--fixed{
+    .slide-affix--fixed {
       width: 55px !important;
-      .sideBar{
+      .sideBar {
         width: 55px !important;
-        .show-side{
+        .show-side {
           display: flex !important;
         }
-        .el-menu-item{
-          span{
+        .el-menu-item {
+          span {
             display: none;
           }
         }
+        .iconfont {
+          display: block;
+        }
       }
     }
-  } 
+  }
 
-  div.slide-affix.show-on-hidden{
+  div.slide-affix.show-on-hidden {
     // display: none;
     width: 80px !important;
 
-    .slide-affix--fixed{
+    .slide-affix--fixed {
       width: 115px !important;
-      .sideBar{
+      .sideBar {
         width: 115px !important;
-        .show-side{
+        .show-side {
           display: flex !important;
           transform: rotate(180deg);
-          transition: all .3s;
+          transition: all 0.3s;
         }
-        i{
+        i {
           padding-left: 5px;
         }
-        .el-menu-item{
-          span{
+        .el-menu-item {
+          span {
             display: block;
           }
         }
       }
     }
+  }
+  .personalAuth .el-dialog {
+    width: 100% !important;
+  }
+  .operate-box .group-btn {
+    display: flex;
   }
 }
 
@@ -61,6 +71,15 @@
 }
 
 @media screen and (max-width: 450px) {
+  .header .logo .logo-title {
+    padding-right: 10px;
+  }
+  .header .user .button {
+    width: 60px;
+    height: 36px;
+    line-height: 34px;
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 375px) {

@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 17:59:53
+ * @LastEditTime: 2022-05-31 20:39:21
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -24,11 +24,7 @@
           <div
             class="snd-btn pesonal-btn"
             v-if="
-              (!userInfo.identityAuth &&
-              !userInfo.companyAuth) &&
-              (userInfo.res === 'cut' ||
-                userInfo.res === 'none' ||
-                userInfo.res === 'fail')
+              !(userInfo.identityAuth || userInfo.intermediate || userInfo.companyAuth || userInfo.res === 'wait' || userInfo.res === 'cut')
             "
             @click="personAuth"
           >
@@ -37,11 +33,7 @@
           <div
             class="snd-btn company-btn"
             v-if="
-              (!userInfo.identityAuth &&
-              !userInfo.companyAuth) &&
-              (userInfo.res === 'cut' ||
-                userInfo.res === 'none' ||
-                userInfo.res === 'fail')
+              !userInfo.companyAuth && !(userInfo.res === 'cut' || userInfo.res === 'wait')
             "
             @click="companyAuth"
           >
@@ -156,18 +148,17 @@ export default {
       const res = await getMineInfo();
       if (res && res.code === 200) {
         state.userInfo = res.data;
-        if(res.data.length === 0){
-          
-        }else if (!res.data.newUser) {
+        if (!res.data.newUser) {
           state.e = true;
         }
+      }else{
+        state.e = true
       }
 
       if (e) {
         state.e = false;
         state.one = true;
       }
-      console.log(state.userInfo, "userInfo");
     };
 
     const personAuth = () => {
@@ -179,10 +170,10 @@ export default {
     const companyAuth = () => {
       state.e = true
       companyAuthRef.value.title = "企业认证";
-      if(userInfo.identityAuth){
-        companyAuthRef.value.authCompanyStep = 1;
+      if(state.userInfo.identityAuth || state.userInfo.intermediate){
+        companyAuthRef.value.authCompanyStep = 3;
       }else{
-        companyAuthRef.value.authCompanyStep = 2;
+        companyAuthRef.value.authCompanyStep = 1;
       }
       companyAuthRef.value.dialogVisible = true;
     };
@@ -236,6 +227,7 @@ export default {
 
     .dialog-img-fst {
       background-image: url("../../assets/images/newUser.png");
+      cursor: pointer;
     }
 
     .dialog-img-snd {
@@ -258,10 +250,12 @@ export default {
       }
 
       .pesonal-btn {
-        transform: translate(4%, 44vh);
+        transform: translate(4%, 22vw);
+        cursor: pointer;
       }
       .company-btn {
-        transform: translate(4%, 47vh);
+        transform: translate(4%, 23vw);
+        cursor: pointer;
       }
     }
   }
@@ -290,6 +284,7 @@ export default {
   height: 150px;
   position: fixed;
   z-index: 1000;
+  cursor: pointer;
 
   .small-dia-img-n {
     width: 100%;

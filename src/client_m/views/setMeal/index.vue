@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-31 15:10:54
+ * @LastEditTime: 2022-05-31 19:56:21
 -->
 <template>
   <div class="container">
@@ -62,7 +62,7 @@
         </template>
 
         <el-table-column align="center" type="selection" width="50"></el-table-column>
-        <el-table-column align='center' label="套餐ID" prop="sequence" width="120" fixed>
+        <el-table-column align='center' label="套餐ID" prop="sequence" width="120">
           <template #default="{ row }">
             <div class="sequence">
               <!--定制套餐显示 标签-->
