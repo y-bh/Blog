@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 支付宝支付中间数据处理
  * @Date: 2022-05-20 17:50:04
- * @LastEditTime: 2022-05-24 15:35:40
+ * @LastEditTime: 2022-05-31 15:17:49
  */
 
 /*
@@ -14,8 +14,8 @@
 
 $(async function () {
   const params = JSON.parse(localStorage.getItem('TQParams'));
-  console.log(localStorage.getItem('TQParams'),'======');
-  console.log(params,'params=====');
+  console.log(localStorage.getItem('TQParams'), '======');
+  console.log(params, 'params=====');
   // let params = JSON.parse(getParams().params) // 获取付款参数
   // 个人中心/我的套餐/续费
   if (ajax) {
@@ -47,5 +47,5 @@ $(async function () {
       console.log(error);
     }
   }
-  
+
 })

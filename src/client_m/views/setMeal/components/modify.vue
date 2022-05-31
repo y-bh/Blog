@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-30 18:06:12
+ * @LastEditTime: 2022-05-31 15:45:25
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -149,7 +149,6 @@ export default {
         };
 
         var checkLimit = (rule, value, callback) => {
-            console.log(value, state.ipCountLimit, '=====-----$$$$$%%%%%');
             if (value < state.ipCountLimit) {
                 callback(new Error("每日提取上限不可小于" + state.ipCountLimit))
             } else {
@@ -207,7 +206,6 @@ export default {
         const methods = {
             async onOpen (row) {
                 if (row) {
-                    console.log(row, 'row');
                     state.mealForm.name = row.mealName;
                     state.mealForm.mealId = row.id;
                     state.mealForm.mealType = row.proxyType;
@@ -225,7 +223,6 @@ export default {
                
                 let res = await getDuration(formatInt(row.id));
                 if (res && res.code === 200) {
-                    console.log(res, 'res===修改时效');
                     state.mealForm.ipUnit = res.data.oldUnitPrice;  // ip单价
                     state.mealForm.ipSend = res.data.sendCount;
                     state.mealForm.balance = res.data.balance;  // 套餐余额
@@ -250,11 +247,10 @@ export default {
                             return
                         }
                     })
-
                     if (item) {
                         state.ipCountLimit = item.total;   // 当前IP时效对应的剩余IP总量
-                        state.mealForm.laveIp = item.total;  // 剩余IP总量  包量
-                        state.mealForm.limit = item.total;  // 每日提取上限  包时
+                        state.mealForm.changeForm.laveIp = item.total;  // 剩余IP总量  包量
+                        state.mealForm.changeForm.limit = item.total;  // 每日提取上限  包时
                         state.unitPrice = item.unitPrice;   // 时效的单价
                     }
                 }
