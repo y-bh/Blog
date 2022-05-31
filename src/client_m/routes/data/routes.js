@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: 静态路由数据
  * @Date: 2022-04-27 13:26:51
- * @LastEditTime: 2022-05-27 18:15:42
+ * @LastEditTime: 2022-05-31 14:42:03
  */
 let prefix = '/manager';
 let path404 = `${prefix}/404`;
@@ -45,40 +45,40 @@ export const routes = [
         name: 'user',
         meta: {
           title: "个人账户",
-          icon: ""
+          icon: "icon-wxbzhanghu"
         },
         component: () => import('views/userAccount'),
       },
       {
         path: 'setMeal',
         name: 'setMeal',
-        meta: { title: "我的套餐", icon: "" },
+        meta: { title: "我的套餐", icon: "icon-taocanmoban-1" },
         component: () => import('views/setMeal'),
       },
       {//IP白名单
         path: 'whiteListIp',
         name: 'whiteListIp',
-        meta: { title: "IP白名单", icon: "" },
+        meta: { title: "IP白名单", icon: "icon-heibaimingdanhuise" },
         component: () => import('views/whiteListIp'),
       },
       { //购买记录
         path: 'payRecord',
         name: 'payRecord',
-        meta: { title: "购买记录", icon: "" },
+        meta: { title: "购买记录", icon: "icon-goumaijilu" },
         component: () => import('views/payRecord'),
       },
       {
         path: 'giftManage',
         name: 'giftManage',
         // ignore: true,
-        meta: { title: "礼券管理", icon: "" },
+        meta: { title: "礼券管理", icon: "icon-liquan" },
         component: () => import('views/giftManage'),
       },
       {
         path: 'submitTicket',
         name: 'submitTicket',
         // ignore: true,
-        meta: { title: "提交工单", icon: "" },
+        meta: { title: "提交工单", icon: "icon-gongdan" },
         component: () => import('views/submitTicket'),
       },
     ],
