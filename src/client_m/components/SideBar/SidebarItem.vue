@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-05 18:02:35
- * @LastEditTime: 2022-05-31 15:20:14
+ * @LastEditTime: 2022-05-31 15:38:38
 -->
 <template>
   <li class="show-side"><i class="iconfont icon-zhankai"></i></li>
@@ -48,5 +48,7 @@ export default {
   display: flex;
   height: 55px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 </style>
