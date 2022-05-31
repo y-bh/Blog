@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: 接口统一管理
  * @Date: 2022-04-26 13:37:42
- * @LastEditTime: 2022-05-30 11:53:27
+ * @LastEditTime: 2022-05-31 11:06:15
  */
 
 module.exports = {
@@ -97,5 +97,9 @@ module.exports = {
 
   //重置验证码接口
   "POST_USER_RESET_CODE": "/user/forget/password/getCode",
+
+
+  //个人中心领取1000
+  "POST_PROXY_RECEIVE_NEW_USERMEAL" : "proxy/receiveNewUserMeal",
 
 }
