@@ -194,8 +194,8 @@
 }
 // 产品核心优势
 @mixin animation-kernel {
-  -webkit-animation: keyframe-kernel steps(1) forwards;
-  animation: keyframe-kernel steps(1) forwards;
+  -webkit-animation: 0.1s keyframe-kernel steps(1) forwards;
+  animation: 0.1s keyframe-kernel steps(1) forwards;
 }
 
 @keyframes keyframe-kernel {
@@ -391,16 +391,16 @@
 
         &:hover {
           .icon-img1 {
-            -webkit-animation: 0.5s keyframe-proxy1 steps(5) forwards;
-            animation: 0.5s keyframe-proxy1 steps(5) forwards;
+            -webkit-animation: 0.2s keyframe-proxy1 steps(5) forwards;
+            animation: 0.2s keyframe-proxy1 steps(5) forwards;
           }
           .icon-img2 {
-            -webkit-animation: 0.5s keyframe-proxy2 steps(5) forwards;
-            animation: 0.5s keyframe-proxy2 steps(5) forwards;
+            -webkit-animation: 0.2s keyframe-proxy2 steps(5) forwards;
+            animation: 0.2s keyframe-proxy2 steps(5) forwards;
           }
           .icon-img3 {
-            -webkit-animation: 0.5s keyframe-proxy3 steps(5) forwards;
-            animation: 0.5s keyframe-proxy3 steps(5) forwards;
+            -webkit-animation: 0.2s keyframe-proxy3 steps(5) forwards;
+            animation: 0.2s keyframe-proxy3 steps(5) forwards;
             //transition: all 0.3s;
             //transform: translate(8px, -8px);
           }
@@ -1001,7 +1001,7 @@
       animation-fill-mode: forwards;
     }
     .left {
-      animation: animateLeft 0.6s linear 1s;
+      animation: animateLeft 0.15s linear 0.6s;
       animation-fill-mode: forwards;
     }
     .top {
@@ -1009,7 +1009,7 @@
       animation-fill-mode: forwards;
     }
     .right {
-      animation: animateRight 0.6s linear 1s;
+      animation: animateRight 0.15s linear 0.6s;
       animation-fill-mode: forwards;
     }
   }
@@ -1044,5 +1044,60 @@
   }
   100% {
     width: 100%;
+  }
+}
+
+.borderAnimat-moveOut {
+  .left {
+    height: calc(100% + 2px);
+    animation: animateLeft-out 0.15s linear 0s;
+    animation-fill-mode: forwards;
+  }
+  .top {
+    width: 100%;
+    animation: animateTop-out 0.6s linear 0.15s;
+    animation-fill-mode: forwards;
+  }
+  .right {
+    height: calc(100% + 2px);
+    animation: animateRight-out 0.15s linear 0s;
+    animation-fill-mode: forwards;
+  }
+  .bottom {
+    width: 100%;
+    animation: animateBottom-out 0.6s linear 0.15s;
+    animation-fill-mode: forwards;
+  }
+}
+@keyframes animateLeft-out {
+  0% {
+    height: calc(100% + 2px);
+  }
+  to {
+    height: 0;
+  }
+}
+@keyframes animateTop-out {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+@keyframes animateRight-out {
+  0% {
+    height: calc(100% + 2px);
+  }
+  to {
+    height: 0;
+  }
+}
+@keyframes animateBottom-out {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
   }
 }
