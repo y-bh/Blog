@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 20:13:58
+ * @LastEditTime: 2022-05-31 20:18:36
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -171,7 +171,7 @@ export default {
       state.e = true
       companyAuthRef.value.title = "企业认证";
       if(state.userInfo.identityAuth || state.userInfo.intermediate){
-        companyAuthRef.value.authCompanyStep = 2;
+        companyAuthRef.value.authCompanyStep = 3;
       }else{
         companyAuthRef.value.authCompanyStep = 1;
       }
