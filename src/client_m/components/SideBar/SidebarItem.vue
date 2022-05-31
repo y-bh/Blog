@@ -3,10 +3,10 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-05 18:02:35
- * @LastEditTime: 2022-05-31 15:38:38
+ * @LastEditTime: 2022-05-31 16:18:04
 -->
 <template>
-  <li class="show-side"><i class="iconfont icon-zhankai"></i></li>
+  <li class="show-side" @click="props.showB"><i class="iconfont icon-zhankai"></i></li>
   <template v-for="(item, index) in menuList" :key="index" class="aaaa">
     <el-submenu v-if="item.children && item.children.length" :index="item.path">
       <template #title>
@@ -33,22 +33,29 @@ export default {
       type: Array,
       default: () => [],
     },
+    showB: {
+      type: Function,
+      default: () => {}
+    }
   },
-  setup() {
-    onMounted(() => {});
+  setup(props) {
     //const refData = toRefs(null);
+
+
     return {
       //   ...refData,
+      props
     };
   },
 };
 </script>
 <style lang="scss" scoped>
 .show-side{
-  display: flex;
+  display: none;
   height: 55px;
   text-align: center;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 </style>

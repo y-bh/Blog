@@ -122,7 +122,7 @@
   // -webkit-animation: bannerGoUp 1s steps(4) forwards;
   // animation: bannerGoUp 1s steps(4) forwards;
   -webkit-animation-name: fadeInRight, bannerGoUp, bannerUpDown;
-  -webkit-animation-duration: 1s, 2s, 1.5s;
+  -webkit-animation-duration: 1s, 1s, 1.5s;
   -webkit-animation-timing-function: ease, steps(4), linear;
   -webkit-animation-delay: 0s, 1s, 3s;
   -webkit-animation-iteration-count: 1, 1, infinite;
@@ -131,6 +131,7 @@
 @keyframes bannerGoUp {
   0% {
     background-position-y: -87px;
+    //opacity: 1;
   }
   // 25% {
   //   background-position-y: -768px;
@@ -144,6 +145,7 @@
 
   100% {
     background-position-y: -2814px;
+    //opacity: 0.5;
   }
 }
 
@@ -171,7 +173,8 @@
     background-position-y: -29px;
   }
   100% {
-    background-position-y: -427px;
+    //background-position-y: -427px;
+    background-position-y: -347px;
   }
 }
 
@@ -194,8 +197,8 @@
 }
 // 产品核心优势
 @mixin animation-kernel {
-  -webkit-animation: 0.1s keyframe-kernel steps(1) forwards;
-  animation: 0.1s keyframe-kernel steps(1) forwards;
+  -webkit-animation: 0.01s keyframe-kernel steps(1) forwards;
+  animation: 0.01s keyframe-kernel steps(1) forwards;
 }
 
 @keyframes keyframe-kernel {
@@ -391,12 +394,12 @@
 
         &:hover {
           .icon-img1 {
-            -webkit-animation: 0.2s keyframe-proxy1 steps(5) forwards;
-            animation: 0.2s keyframe-proxy1 steps(5) forwards;
+            -webkit-animation: 0.15s keyframe-proxy1 steps(4) forwards;
+            animation: 0.15s keyframe-proxy1 steps(4) forwards;
           }
           .icon-img2 {
-            -webkit-animation: 0.2s keyframe-proxy2 steps(5) forwards;
-            animation: 0.2s keyframe-proxy2 steps(5) forwards;
+            -webkit-animation: 0.15s keyframe-proxy2 steps(5) forwards;
+            animation: 0.15s keyframe-proxy2 steps(5) forwards;
           }
           .icon-img3 {
             -webkit-animation: 0.2s keyframe-proxy3 steps(5) forwards;

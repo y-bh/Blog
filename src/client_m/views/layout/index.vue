@@ -3,14 +3,14 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-31 11:07:17
+ * @LastEditTime: 2022-05-31 17:40:09
 -->
 <template>
   <div class="layout">
     <el-row class="main" :style="{ minHeight: defaultHeight + 'px'}">
-      <div class="slide-affix">
+      <div class="slide-affix" :class="b ? 'show-on-hidden' : ''">
         <div class="slide-affix--fixed">
-          <SideBar></SideBar>
+          <SideBar :showB="showSideB"></SideBar>
         </div>
       </div>
 
@@ -52,6 +52,9 @@ export default {
   },
   props: {},
   setup() {
+    const state = reactive({
+      b: false
+    })
 
     let defaultHeight = ref(800);
     const headerRef = ref(null);
@@ -70,6 +73,10 @@ export default {
   
     };
 
+    function showSideB() {
+      state.b = !state.b
+    }
+
 
     onBeforeMount(() => {});
     onMounted(() => {
@@ -84,6 +91,8 @@ export default {
       defaultHeight,
       headerRef,
       locale: zhCn,
+      ...toRefs(state),
+      showSideB,
     };
   },
 };
@@ -128,6 +137,19 @@ export default {
       // margin-right: -20px;
       box-sizing: border-box;
       // margin-left: 20px;
+    }
+
+    .slide-affix{
+      transition: width 0.3s;
+      .slide-affix--fixed{
+        transition: width 0.3s;
+        .sideBar{
+          transition: width 0.3s;
+          i{
+            display: none;
+          }
+        }
+      }
     }
   }
 }

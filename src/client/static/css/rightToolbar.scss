@@ -15,8 +15,12 @@
     height: 94px;
     background: url("/images/rightToolbar/give.png") no-repeat;
     background-size: 100px 94px;
-    animation: bounce 4s linear infinite;
+    //animation: bounce 4s linear infinite;
     cursor: pointer;
+    animation-name: fetureanimate;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
   }
   .toolbar-toTop a {
     width: 100px;
@@ -161,4 +165,13 @@
 .class_qidian_wpa {
   left: auto !important;
   right: 36px !important;
+}
+@keyframes fetureanimate {
+  0.00%,
+  100% {
+    transform: translateY(8px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
