@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 15:04:59
- * @LastEditTime: 2022-05-30 17:05:01
+ * @LastEditTime: 2022-05-31 10:18:02
 -->
 <template>
   <div class="userAccount mb-60">
@@ -508,4 +508,14 @@ export default {
   background: #e8f0ff;
   right: 0;
 }
+</style>
+<style lang="scss">
+.common-userAuthDialog .el-dialog {
+  max-width: 533px !important;
+  .btn-wt100 {
+    width: 100px;
+    height: 40px;
+  }
+}
+
 </style>

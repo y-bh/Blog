@@ -3,11 +3,12 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-30 18:30:41
+ * @LastEditTime: 2022-05-31 09:53:46
 -->
 <template>
   <div class="personalFormDialog">
     <el-dialog
+      :show-close="false"
       @close="closeDialog"
       v-model="dialogVisibleFlag"
       custom-class="customClass customize_dialog dialog-double"

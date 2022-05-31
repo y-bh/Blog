@@ -3,12 +3,16 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-27 09:29:16
+ * @LastEditTime: 2022-05-31 13:25:24
 -->
 <template>
-  <div class="personalAuth">
-    <el-dialog v-model="dialogVisible"  @close ="closeDialog">
-      <DialogTitle title-content="个人认证" />
+  <div class="personalAuth common-userAuthDialog">
+    <el-dialog
+      v-model="dialogVisible"
+      @close="closeDialog"
+      :show-close="showCloseFlag"
+    >
+      <DialogTitle :title-content="titleContent" />
       <!-- 姓名身份证 -->
       <div class="formContent" v-show="authPersonStep == 1">
         <div class="remarks">
@@ -20,7 +24,7 @@
           ref="vaildIDCardRef"
           :model="ruleForm"
           :rules="rules"
-          label-width="120px"
+          label-width="93px"
           class="demo-ruleForm mt-30"
         >
           <el-form-item label="真实姓名" prop="name">
@@ -32,11 +36,17 @@
               placeholder="请输入身份证号码"
             />
           </el-form-item>
-          <div class="common-btnGroup pt-30 pb-40">
-            <el-button type="primary" plain @click="cancel(vaildIDCardRef)"
+          <div class="common-btnGroup pt-10">
+            <el-button
+              type="primary"
+              plain
+              @click="cancel(vaildIDCardRef)"
+              class="btn-wt100"
               >取消</el-button
             >
-            <el-button type="warning" @click="onZFBSubmit">确定</el-button>
+            <el-button type="warning" @click="onZFBSubmit" class="btn-wt100"
+              >确定</el-button
+            >
           </div>
         </el-form>
       </div>
@@ -98,7 +108,7 @@
 
 <script>
 import DialogTitle from "components/DialogTitle";
-import { ref, reactive, computed, toRefs, onMounted, inject } from "vue";
+import { ref, reactive, computed, toRefs, onMounted, inject, watch } from "vue";
 import { zfbAuth, getAuthResult } from "model/user.js";
 import QRCode from "qrcodejs2";
 export default {
@@ -108,6 +118,8 @@ export default {
   },
   props: {},
   setup(props, { emit }) {
+    let titleContent = ref("个人认证");
+    let showCloseFlag = ref(false);
     //const
     let certifyId = ref("");
     const qrcodeRef = ref(null);
@@ -199,15 +211,36 @@ export default {
       if (!formEl) return;
       formEl.resetFields();
     };
-    const closeDialog = function(){
+    const closeDialog = function () {
       //console.log("----------测试关闭-------------");
-      if(isSubmitIdCard.value){
+      if (isSubmitIdCard.value) {
         emit("updateUserInfo");
       }
       if (!vaildIDCardRef.value) return;
       vaildIDCardRef.value.resetFields();
-    }
+    };
+    watch(
+      () => authPersonStep.value,
+      // 路由刷新回到页面顶部
+      () => {
+        console.log(3333333333333, "jaino");
+        if (authPersonStep.value == 1) {
+          showCloseFlag.value = false;
+        } else {
+          showCloseFlag.value = true;
+        }
+
+        if ([3, 4].includes(authPersonStep.value)) {
+          titleContent.value = "认证结果";
+        } else {
+          titleContent.value = "个人认证";
+        }
+      },
+      { immediate: true }
+    );
     return {
+      titleContent,
+      showCloseFlag,
       closeDialog,
       cancel,
       qrcodeRef,
@@ -226,5 +259,11 @@ export default {
 <style lang="scss" scope>
 @import "./index.scss";
 .personalAuth {
+  .el-form-item__label {
+    text-align: right !important;
+    font-size: 16px !important;
+    color: #4c5664 !important;
+  }
 }
 </style>
+

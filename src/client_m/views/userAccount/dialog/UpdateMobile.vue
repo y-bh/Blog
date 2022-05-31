@@ -3,11 +3,12 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-30 18:18:55
+ * @LastEditTime: 2022-05-31 09:54:25
 -->
 <template>
   <div class="updateMobile">
     <el-dialog
+      :show-close="false"
       v-model="dialogVisible"
       :before-close="beforeCloseFun"
       @close="closeDialog"
@@ -261,10 +262,9 @@ export default {
     width: 100px;
     height: 40px;
   }
-  .dialog-footer{
+  .dialog-footer {
     margin-right: 0 !important;
   }
-  
 }
 </style>
 
@@ -279,7 +279,7 @@ export default {
   .vaild-wt .el-input__inner {
     width: 172px !important;
   }
-  .el-form-item{
+  .el-form-item {
     margin-right: 0 !important;
   }
 }

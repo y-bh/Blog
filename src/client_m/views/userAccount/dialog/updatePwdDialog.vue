@@ -3,11 +3,12 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-26 15:37:26
+ * @LastEditTime: 2022-05-31 09:54:33
 -->
 <template>
   <div class="updatePwdDialog">
     <el-dialog
+      :show-close="false"
       v-model="dialogVisibleFlag"
       @close="closeDialog"
       custom-class="customize_dialog dialog-alone"
@@ -140,7 +141,7 @@ export default {
             newPassword: form.ruleForm.newPassword,
             checkPassword: form.ruleForm.confirmPassword,
           };
-         // console.log(333333333333, params);
+          // console.log(333333333333, params);
           let res = await updatePassword({ data: JSON.stringify(params) });
           if (res.code == 200) {
             $message.success("登录密码修改成功");
