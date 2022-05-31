@@ -239,7 +239,6 @@
     &:after {
       border-radius: inherit;
     }
-
   }
 
   .el-button--small {
@@ -254,10 +253,9 @@
       outline: 0;
     }
 
-    
-    &:focus{
+    &:focus {
       background-color: white;
-      color: #1964fc
+      color: #1964fc;
     }
   }
 
@@ -454,12 +452,16 @@
   }
 }
 
-
-
-.ip-input{
-  .el-input__inner:disabled{
+.ip-input {
+  .el-input__inner:disabled {
     font-size: 16px;
-    background-color: #E4E5EB;
-    color: #B2BCCB;
+    background-color: #e4e5eb;
+    color: #b2bccb;
+  }
+}
+
+.el-overlay {
+  .el-dialog {
+    margin-top: 21vh !important;
   }
 }

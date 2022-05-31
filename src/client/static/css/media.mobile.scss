@@ -565,7 +565,7 @@
 
     div.tab-content {
       margin-top: 40px !important;
-      min-width: 500px;
+      // min-width: 500px;
       .tab-pane {
         .content {
           .blog_item {
@@ -594,12 +594,17 @@
   }
 
   //关键词聚合页
-  .tags {
+  div.tags {
     max-width: none;
     margin-bottom: 0px !important;
     margin-top: 40px !important;
+    padding-right: 0;
+    .a_top {
+      margin-left: 12px;
+    }
     .blog_item {
-      width: auto;
+      width: 92%;
+      margin: 0 auto;
 
       .right {
         .desc {
