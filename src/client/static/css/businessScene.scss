@@ -28,9 +28,10 @@
   grid-template-columns: 7fr 4fr;
   img {
     max-width: 703px;
-    width: 117%;
+    width: 151%;
     height: 444px;
-    transform: translateX(-35px);
+    transform: translateX(-206px);
+    transition: all .3s 2s;
   }
 }
 .top .left_text {
