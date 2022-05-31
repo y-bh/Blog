@@ -95,6 +95,11 @@
           }
         }
       }
+      .fourthRow {
+        .advance-right {
+          width: 100%;
+        }
+      }
       .eightRow {
         .egihtWidth {
           justify-content: center;
@@ -148,6 +153,9 @@
 
     .package-content {
       overflow: hidden;
+      .ipPrice-markPng {
+        display: none !important;
+      }
       .changeTab {
         .tab-header {
           flex: 1;
