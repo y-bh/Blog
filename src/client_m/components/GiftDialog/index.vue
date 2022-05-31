@@ -3,37 +3,39 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 09:41:19
+ * @LastEditTime: 2022-05-31 10:33:00
 -->
 <template>
-  <div class="dialog-wrap-p">
-    <div class="dialog-bg" v-if="userInfo.newUser" :key="userInfo.newUser">
-      <div class="dialog-img dialog-img-fst" @click="jumpRegisteIp">
-        
+  <div style="position: absolute; top: 0">
+    <div class="dialog-wrap-p" v-if="!e">
+      <div
+        class="dialog-bg"
+        v-if="userInfo.newUser && !e"
+        :key="userInfo.newUser"
+      >
+        <div class="dialog-img dialog-img-fst" @click="jumpRegisteIp"></div>
+        <div class="dialog-close dialog-close-fst">
+          <i class="iconfont icon-guanbi close-i" @click="close('o')"></i>
+        </div>
       </div>
-      <div class="dialog-close dialog-close-fst">
-        <i class="iconfont icon-guanbi close-i" @click="close(o)"></i>
+
+      <div class="dialog-bg" v-if="!e && one">
+        <div class="dialog-img dialog-img-snd">
+          <div class="snd-btn pesonal-btn">个人认证</div>
+          <div class="snd-btn company-btn">企业认证(赠3000IP)</div>
+        </div>
+        <div class="dialog-close dialog-close-snd">
+          <i class="iconfont icon-guanbi close-i" @click="close('s')"></i>
+        </div>
       </div>
     </div>
 
-    <div class="dialog-bg" v-if="e">
-      <div class="dialog-img  dialog-img-snd">
-        <div class="snd-btn pesonal-btn">
-          个人认证
-        </div>
-        <div class="snd-btn company-btn">
-          企业认证
-        </div>
-      </div>
-      <div class="dialog-close dialog-close-snd">
-        <i class="iconfont icon-guanbi close-i" @click="close(s)"></i>
-      </div>
-    </div>
-
-    <div class="small-dia-bg" v-if="!userInfo.newUser && !userInfo.gotWxWelfare"  :key="userInfo.newUser">
-      <div class="small-dia-img">
-
-      </div>
+    <div
+      class="small-dia-bg"
+      v-if="!userInfo.gotWxWelfare && e"
+      :key="userInfo.newUser"
+    >
+      <div class="small-dia-img"></div>
       <div class="dialog-close-thd">
         <i class="iconfont icon-guanbi close-i" @click="close"></i>
       </div>
@@ -44,73 +46,74 @@
 <script>
 import { getMineInfo } from "model/user.js";
 
-import { onMounted, reactive, ref } from 'vue'
-import { useStore } from 'vuex'
+import { onMounted, reactive, ref, toRefs } from "vue";
+import { useStore } from "vuex";
 export default {
-  setup(){
-    let e = ref(false)
-    let $store = useStore()
-    let userInfo = reactive({})
+  setup() {
+    let $store = useStore();
+    const state = reactive({
+      e: false,
+      one: false,
+      userInfo: {},
+    });
 
-    function close(a){
-      switch(a){
-        case 'o': 
+    function close(a) {
+      switch (a) {
+        case "o":
+          closeOne();
+          break;
+        case "s":
+          closeTwo();
+          break;
       }
     }
 
     function closeOne() {
-      
+      state.e = true;
+    }
+    function closeTwo() {
+      state.e = true;
     }
 
+    function jumpRegisteIp() {}
 
-    function jumpRegisteIp() {
-      
-    }
-
-
-    
     const getMineInfoFunc = async () => {
-      const res = await getMineInfo()
-      if(res && res.code === 200) {
-        userInfo = res.data
-        $store.dispatch('saveUserinfo', res.data)
+      const res = await getMineInfo();
+      if (res && res.code === 200) {
+        state.userInfo = res.data;
+        $store.dispatch("saveUserinfo", res.data);
       }
-      console.log(userInfo, 'userInfo');
-    }
+      console.log(state.userInfo, "userInfo");
+    };
 
-
-    onMounted(()=>{
-      getMineInfoFunc()
-    })
-
-
+    onMounted(() => {
+      getMineInfoFunc();
+    });
 
     return {
-      e,
-      userInfo,
-      closeOne,
-    }
-
-  }
-
-
-}
+      ...toRefs(state),
+      close,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.dialog-wrap-p{
+.dialog-wrap-p {
   position: absolute;
   z-index: 1000;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 
-  .dialog-bg{
+  pointer-events: auto;
+
+  .dialog-bg {
     width: 100%;
     height: 100%;
     background-color: rgba($color: #000000, $alpha: 0.3);
 
-    .dialog-img{
+    .dialog-img {
       width: 39%;
       height: 70%;
       background-repeat: no-repeat;
@@ -119,18 +122,17 @@ export default {
       transform: translateY(10%);
     }
 
-    .dialog-img-fst{
+    .dialog-img-fst {
       background-image: url("../../assets/images/newUser.png");
     }
 
-
-    .dialog-img-snd{
+    .dialog-img-snd {
       width: 35%;
       height: 61%;
       background-image: url("../../assets/images/wechatBig.png");
       transform: translate(-1%, 19%);
 
-      .snd-btn{
+      .snd-btn {
         width: 260px;
         height: 50px;
         margin: 0 auto;
@@ -143,66 +145,77 @@ export default {
         color: #000000;
       }
 
-      .pesonal-btn{
-        transform: translate(4%,44vh);
+      .pesonal-btn {
+        transform: translate(4%, 44vh);
       }
-      .company-btn{
-        transform: translate(4%,47vh);
-      }
-    }
-  }
-
-
-
-  .small-dia-bg{
-    width: 150px;
-    height: 150px;
-    position: fixed;
-    
-    .small-dia-img{
-      width: 100%;
-      height: 100%;
-      background-image: url("../../assets/images/newUserFuli.png");
-      background-size: cover;
-      transform: translate(15%, 65vh);
-    }
-
-    .dialog-close-thd{
-      text-align: center;
-      transform: translate(15%, 65vh);
-      .close-i{
-        margin: 0 auto;
-        color: rgba($color: #000000, $alpha: 0.4);
-        font-size: 26px;
-    
-        &:hover{
-          font-size: 30px;
-        }
+      .company-btn {
+        transform: translate(4%, 47vh);
       }
     }
   }
 
-
-
-
-  
-
-  .dialog-close{
+  .dialog-close {
     text-align: center;
-    .close-i{
+    .close-i {
       color: rgba($color: #ffffff, $alpha: 0.5);
       font-size: 26px;
-  
-      &:hover{
+
+      &:hover {
         font-size: 30px;
       }
     }
   }
-  .dialog-close-fst{
+  .dialog-close-fst {
     transform: translate(0, 8vh);
   }
-  .dialog-close-snd{
+  .dialog-close-snd {
     transform: translate(0, 13vh);
+  }
+
+}
+
+.small-dia-bg {
+  width: 150px;
+  height: 150px;
+  position: fixed;
+  z-index: 1000;
+
+  .small-dia-img {
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/images/newUserFuli.png");
+    background-size: cover;
+    transform: translate(15%, 65vh);
+
+    animation: 0.5s cubic-bezier(0.5, 2, 0.4, 0.6) 0s 1 leftshow;
+  }
+
+  .dialog-close-thd {
+    text-align: center;
+    transform: translate(15%, 65vh);
+    .close-i {
+      margin: 0 auto;
+      color: rgba($color: #000000, $alpha: 0.4);
+      font-size: 26px;
+
+      &:hover {
+        font-size: 30px;
+      }
+    }
+
+    animation: 0.5s cubic-bezier(0.5, 2, 0.4, 0.6) 0s 1 leftshow;
+  }
+
+
+  
+  @keyframes leftshow {
+    from {
+      transform: translate(-110%, 65vh);;
+    }
+
+    to {
+      transform: translate(15%, 65vh);;
+    }
   }
 }
 </style>
