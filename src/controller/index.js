@@ -223,7 +223,7 @@ function Router(App) {
 
 
     //公共头部
-    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab], token, [appKey.cateTypes]: ctx.state[appKey.cateTypes], actt: ctx.state['actt'] })
+    var headers = ejs.render(headerHtml, { [appKey.active_tab]: ctx.state[appKey.active_tab] || null, token, [appKey.cateTypes]: ctx.state[appKey.cateTypes], actt: ctx.state['actt'] })
 
 
     //公共底部

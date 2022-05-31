@@ -42,12 +42,12 @@ module.exports = function (app) {
 
     if (method === 'GET' && (URLS.includes(url) || isPass)) {
       //顶部导航 活动相关数据
-      const tabActivity = await renderTab();
+      const tabActivity = await renderTab() || null;
 
       const t = getTime()
       state['actt'] = t
 
-      state[appKey.active_tab] = tabActivity
+      state[appKey.active_tab] = tabActivity || null
 
       //顶部导航-帮助中心栏目文档
       const articleTypes = await getCateTypes()
