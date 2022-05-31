@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-31 18:41:16
+ * @LastEditTime: 2022-05-31 19:01:24
 -->
 <template>
   <aside class="sideBar">
@@ -118,4 +118,13 @@ export default {
   // }
   
 }
+</style>
+
+<style lang="scss">
+.sideBar{
+  .iconfont{
+    display: none;
+  }
+}
+
 </style>
