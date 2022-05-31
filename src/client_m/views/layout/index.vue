@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-31 16:30:59
+ * @LastEditTime: 2022-05-31 17:40:09
 -->
 <template>
   <div class="layout">
@@ -145,11 +145,11 @@ export default {
         transition: width 0.3s;
         .sideBar{
           transition: width 0.3s;
+          i{
+            display: none;
+          }
         }
       }
-    }
-    .show-on-hidden{
-      width: 140px !important;
     }
   }
 }

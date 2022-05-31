@@ -1,9 +1,9 @@
 /*
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-14 13:51:32
- * @LastEditTime: 2022-05-31 16:15:32
+ * @LastEditTime: 2022-05-31 17:47:43
  */
 
 function onFreeTry() {
@@ -88,12 +88,6 @@ function removeClick(s = null) {
   $('.left-dialog-jump').off('click')
 }
 
-function disableScroll() {
-  document.documentElement.style.overflowY = 'hidden'
-}
-if (actt !== 'd') {
-  disableScroll()
-}
 
 function openScroll() {
   document.documentElement.style.overflowY = 'scroll'

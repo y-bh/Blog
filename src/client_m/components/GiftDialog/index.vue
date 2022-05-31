@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 17:11:50
+ * @LastEditTime: 2022-05-31 17:59:53
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -24,8 +24,8 @@
           <div
             class="snd-btn pesonal-btn"
             v-if="
-              !userInfo.identityAuth &&
-              !userInfo.companyAuth &&
+              (!userInfo.identityAuth &&
+              !userInfo.companyAuth) &&
               (userInfo.res === 'cut' ||
                 userInfo.res === 'none' ||
                 userInfo.res === 'fail')
@@ -37,7 +37,8 @@
           <div
             class="snd-btn company-btn"
             v-if="
-              !userInfo.companyAuth &&
+              (!userInfo.identityAuth &&
+              !userInfo.companyAuth) &&
               (userInfo.res === 'cut' ||
                 userInfo.res === 'none' ||
                 userInfo.res === 'fail')
@@ -155,7 +156,9 @@ export default {
       const res = await getMineInfo();
       if (res && res.code === 200) {
         state.userInfo = res.data;
-        if (!res.data.newUser) {
+        if(res.data.length === 0){
+          
+        }else if (!res.data.newUser) {
           state.e = true;
         }
       }
@@ -176,7 +179,11 @@ export default {
     const companyAuth = () => {
       state.e = true
       companyAuthRef.value.title = "企业认证";
-      companyAuthRef.value.authCompanyStep = 1;
+      if(userInfo.identityAuth){
+        companyAuthRef.value.authCompanyStep = 1;
+      }else{
+        companyAuthRef.value.authCompanyStep = 2;
+      }
       companyAuthRef.value.dialogVisible = true;
     };
 
