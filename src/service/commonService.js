@@ -20,7 +20,7 @@ const renderTab = async () => {
 
   //如果缓存有数据
   if (getStore(active_tab)) {
-    data = getStore(active_tab)
+    data = getStore(active_tab) || null
     return data
   }
 

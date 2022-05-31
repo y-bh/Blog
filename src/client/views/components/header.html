@@ -46,6 +46,8 @@
                           <div class="title flex-center justify-start">
                             <span class="meal-icon icon_first"></span>
                             <span class="title-type">余额套餐</span>
+
+
                             <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.maxRechargeGift) { %>
                               <div class="activity">
                                 加赠<%= HEADER_ACTIVE_TAB.maxRechargeGift %>%
@@ -54,6 +56,9 @@
                                 <!-- 仅仅留作占位 -->
                                 <span></span>
                                 <% } %>
+
+
+
                           </div>
                           <span class="describe">
                             余额充值提取，自定义IP时效地区、数量
@@ -65,7 +70,8 @@
                             <span class="meal-icon icon_second"></span>
                             <span class="title-type">包时套餐</span>
 
-                            <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate ||
+
+                            <% if(HEADER_ACTIVE_TAB && HEADER_ACTIVE_TAB.minPurchaseRate || HEADER_ACTIVE_TAB &&
                               HEADER_ACTIVE_TAB.maxPurchaseGift) { %>
                               <div class="activity">
                                 <% if(HEADER_ACTIVE_TAB.minPurchaseRate) { %>
@@ -77,6 +83,9 @@
                               <% } else { %>
                                 <span></span>
                                 <% } %>
+
+
+
                           </div>
                           <span class="describe">
                             每日固定IP提取量，3 / 5 / 10 /15 分钟时效IP
