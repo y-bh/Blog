@@ -3,10 +3,10 @@
  * @LastEditors: 秦琛
  * @description: 重置密码
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-25 17:22:38
+ * @LastEditTime: 2022-05-31 09:37:23
 -->
 <template>
-    <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
+    <el-dialog v-model="dialogVisible" :show-close="false" destroy-on-close custom-class="customize_dialog dialog-alone">
         <DialogTitle title-content="重置密码" />
         <div class="dialog-body">
             <p class="child-item">确定将您的套餐密码重置吗？</p>

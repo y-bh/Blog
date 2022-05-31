@@ -3,10 +3,10 @@
  * @LastEditors: 秦琛
  * @description: 合并套餐
  * @Date: 2022-05-17 11:18:51
- * @LastEditTime: 2022-05-26 15:18:28
+ * @LastEditTime: 2022-05-31 09:37:48
 -->
 <template>
-    <el-dialog v-model="dialogVisible" destroy-on-close custom-class="customize_dialog dialog-alone">
+    <el-dialog v-model="dialogVisible" :show-close="false" destroy-on-close custom-class="customize_dialog dialog-alone">
         <DialogTitle title-content="合并套餐" />
         <div class="dialog-body">
             <p class="child-item">您想要将此套餐合并到哪个套餐？请输入套餐ID</p>

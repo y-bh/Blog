@@ -3,12 +3,13 @@
  * @LastEditors: 秦琛
  * @description: 修改时效
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-24 15:44:13
+ * @LastEditTime: 2022-05-30 18:06:12
 -->
 <template>
     <!-- 支付弹窗 -->
     <el-dialog 
         v-model="dialogVisible" 
+        :show-close="true"
         destroy-on-close 
         custom-class="customize_dialog dialog-double">
         <DialogTitle title-content="修改时效" />

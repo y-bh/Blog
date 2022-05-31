@@ -62,10 +62,46 @@
   //首页
   div.home {
     padding-bottom: 60px;
+    .mt-140 {
+      margin-top: 80px !important;
+    }
+    .mt-80 {
+      margin-top: 50px !important;
+    }
     .homeContent {
       img {
         width: 100% !important;
         height: auto !important;
+      }
+
+      .banner-right {
+        padding: 0 12px;
+        .homeBackg {
+          display: none;
+        }
+      }
+
+      .secondRow {
+        li {
+          width: auto;
+          min-width: unset;
+        }
+      }
+      .threeRow {
+        ul {
+          justify-content: center;
+          li {
+            width: auto;
+          }
+        }
+      }
+      .eightRow {
+        .egihtWidth {
+          justify-content: center;
+          .desc {
+            margin: 10px 0;
+          }
+        }
       }
       .nineRow {
         margin-top: 80px !important;
@@ -81,11 +117,26 @@
   }
 
   div.common-main-button {
-    width: auto;
-    margin-left: 0 !important;
+    width: 80%;
+    margin-left: 10% !important;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
   }
+
+  // 登录/注册
+  div.login {
+    .login-page {
+      width: 80%;
+      .login-banager {
+        display: none;
+      }
+
+      .login-box {
+        margin: 0 auto;
+      }
+    }
+  }
+
   // 套餐购买
   .packageBuy {
     .changeTab.mediaStyle {
@@ -180,6 +231,7 @@
     }
     .form-group {
       margin-bottom: 0;
+      margin-top: 10px;
     }
     .label-key {
       justify-content: flex-start !important;
@@ -276,6 +328,15 @@
     .count_box {
       width: auto;
       max-width: none;
+      .btn {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: center;
+        // :last-child {
+        //   margin-top: 5px;
+        // }
+      }
     }
 
     .getip-select-wrap {
@@ -378,6 +439,8 @@
           }
         }
         .nav-item {
+          height: 50px !important;
+          line-height: 50px;
           &.nav-business {
             .child-list {
               transform: translate(-100%, -50%);
@@ -470,6 +533,7 @@
 
     div.tab-content {
       margin-top: 40px !important;
+      min-width: 500px;
       .tab-pane {
         .content {
           .blog_item {
@@ -557,6 +621,7 @@
     }
   }
 
+  //提取ip
   div.getip-wrap {
     .top_title {
       width: 70%;
@@ -603,6 +668,42 @@
       width: 45%;
       height: 140px;
     }
+
+    .count_box {
+      .btn {
+        :last-child {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  //套餐购买
+  div.packageBuy {
+    .package-content {
+      .tabContent {
+        .payType-content {
+          justify-content: space-between;
+          ul {
+            li {
+              width: 130px;
+            }
+          }
+          .payType-title {
+            min-width: 150px;
+          }
+        }
+        .amount-list {
+          justify-content: center !important;
+          margin-right: 0 !important;
+          .amount-item {
+            width: 90% !important;
+            margin: 0 auto !important;
+            margin-top: 30px !important;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -623,6 +724,28 @@
       button {
         width: 120px;
         font-size: 18px;
+      }
+    }
+  }
+
+  // 登录/注册
+  div.login {
+    font-size: 14px;
+    .login-page {
+      padding: 100px 0 60px;
+      width: 95%;
+      .login-box {
+        margin: 0 auto;
+        .form-input > input:first-of-type {
+          width: 90%;
+        }
+        .login-other {
+          width: 90%;
+          #obn-code {
+            margin-left: 10px !important;
+            font-size: 14px;
+          }
+        }
       }
     }
   }

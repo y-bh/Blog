@@ -1,22 +1,25 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-18 15:30:19
- * @LastEditTime: 2022-05-26 11:39:42
+ * @LastEditTime: 2022-05-30 17:18:16
 -->
 <template>
   <div class="keyDialog">
-    <el-dialog v-model="dialogVisible" custom-class="customClass customize_dialog dialog-alone">
+    <el-dialog
+      v-model="dialogVisible"
+      custom-class="customClass customize_dialog dialog-alone"
+    >
       <DialogTitle title-content="自助开通代理API密码加密密钥" />
       <div class="content pt-40 pb-40">
         <div class="title"><span>请使用AES加密</span></div>
         <div class="keys mt-30">
           <span>
-            <span class="addImpor">key:</span>{{userInfo.keyInfo.key}}
+            <span class="addImpor">key:</span>{{ userInfo.keyInfo.key }}
           </span>
           <span>
-            <span class="addImpor">iv:</span>{{userInfo.keyInfo.value}}
+            <span class="addImpor">iv:</span>{{ userInfo.keyInfo.value }}
           </span>
         </div>
       </div>
@@ -59,12 +62,16 @@ export default {
       display: flex;
       justify-content: space-between;
       font-size: 16px;
-      line-height: 26px;
+      line-height: 21px;
       color: #4c5664;
       .addImpor span {
         font-weight: bold;
       }
     }
+  }
+  ::v-deep .customClass {
+    max-width: 660px;
+    max-height: 237px;
   }
 }
 </style>
