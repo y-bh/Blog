@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-30 18:34:10
+ * @LastEditTime: 2022-05-31 09:27:55
 -->
 <template>
   <div class="layout">
@@ -21,7 +21,7 @@
         </el-config-provider>
       </div>
     </el-row>
-    <GiftDialog :userInfo="userInfo"></GiftDialog>
+    <GiftDialog></GiftDialog>
   </div>
 </template>
 
@@ -36,8 +36,7 @@ import {
   onBeforeUnmount,
 } from "vue";
 
-import { getMineInfo } from "model/user.js";
-import { useStore } from 'vuex';
+
 
 import Header from "components/Header";
 import Footer from "components/Footer";
@@ -53,8 +52,6 @@ export default {
   },
   props: {},
   setup() {
-    const $store = useStore()
-    let userInfo = {}
 
     let defaultHeight = ref(800);
     const headerRef = ref(null);
@@ -74,21 +71,10 @@ export default {
     };
 
 
-    const getMineInfoFunc = async () => {
-      const res = await getMineInfo()
-      if(res && res.code === 200) {
-        userInfo = res.data
-        $store.dispatch('saveUserinfo', res.data)
-      }
-    }
-
     onBeforeMount(() => {});
     onMounted(() => {
       getMainHeight();
       window.addEventListener("resize", getMainHeight);
-
-
-      getMineInfoFunc()
 
     });
     onBeforeUnmount(() => {
@@ -97,7 +83,7 @@ export default {
     return {
       defaultHeight,
       headerRef,
-      locale: zhCn
+      locale: zhCn,
     };
   },
 };

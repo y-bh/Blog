@@ -3,20 +3,20 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-30 18:31:32
+ * @LastEditTime: 2022-05-31 09:41:19
 -->
 <template>
   <div class="dialog-wrap-p">
-    <div class="dialog-bg" v-if="userInfo.newUser">
+    <div class="dialog-bg" v-if="userInfo.newUser" :key="userInfo.newUser">
       <div class="dialog-img dialog-img-fst" @click="jumpRegisteIp">
         
       </div>
       <div class="dialog-close dialog-close-fst">
-        <i class="iconfont icon-guanbi close-i" @click="closeOne"></i>
+        <i class="iconfont icon-guanbi close-i" @click="close(o)"></i>
       </div>
     </div>
 
-    <div class="dialog-bg" v-if="!userInfo.newUser && !userInfo.gotWxWelfare">
+    <div class="dialog-bg" v-if="e">
       <div class="dialog-img  dialog-img-snd">
         <div class="snd-btn pesonal-btn">
           个人认证
@@ -26,42 +26,61 @@
         </div>
       </div>
       <div class="dialog-close dialog-close-snd">
-        <i class="iconfont icon-guanbi close-i" @click="closeOne"></i>
+        <i class="iconfont icon-guanbi close-i" @click="close(s)"></i>
       </div>
     </div>
 
-    <div class="small-dia-bg">
+    <div class="small-dia-bg" v-if="!userInfo.newUser && !userInfo.gotWxWelfare"  :key="userInfo.newUser">
       <div class="small-dia-img">
 
       </div>
       <div class="dialog-close-thd">
-        <i class="iconfont icon-guanbi close-i" @click="closeOne"></i>
+        <i class="iconfont icon-guanbi close-i" @click="close"></i>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { getMineInfo } from "model/user.js";
+
+import { onMounted, reactive, ref } from 'vue'
 import { useStore } from 'vuex'
 export default {
   setup(){
-    let e = ref(true)
+    let e = ref(false)
     let $store = useStore()
+    let userInfo = reactive({})
 
-    let userInfo = $store.state.userInfo
-
-    function closeOne(a){
-      console.log(a);
-      console.log(e);
+    function close(a){
+      switch(a){
+        case 'o': 
+      }
     }
+
+    function closeOne() {
+      
+    }
+
 
     function jumpRegisteIp() {
       
     }
 
+
+    
+    const getMineInfoFunc = async () => {
+      const res = await getMineInfo()
+      if(res && res.code === 200) {
+        userInfo = res.data
+        $store.dispatch('saveUserinfo', res.data)
+      }
+      console.log(userInfo, 'userInfo');
+    }
+
+
     onMounted(()=>{
-      console.log(userInfo);
+      getMineInfoFunc()
     })
 
 
