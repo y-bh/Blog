@@ -3,7 +3,7 @@
  * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-27 11:13:05
+ * @LastEditTime: 2022-05-30 18:30:41
 -->
 <template>
   <div class="personalFormDialog">
@@ -40,7 +40,7 @@
         <div class="title"><span>其他信息</span></div>
         <el-form
           :inline="true"
-          label-width="85px"
+          label-width=""
           label-position="left"
           :model="personForm"
           :rules="rules"
@@ -49,13 +49,13 @@
           <el-form-item label="微信" prop="wxNo">
             <el-input v-model="personForm.wxNo" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="QQ" prop="QQNO">
+          <el-form-item label="QQ" prop="QQNO" label-width="64px" class="ml-20">
             <el-input v-model="personForm.QQNO" placeholder="请输入" />
           </el-form-item>
           <el-form-item label="邮箱" prop="emailNo">
             <el-input v-model="personForm.emailNo" placeholder="请输入" />
           </el-form-item>
-          <el-form-item label="业务方向">
+          <el-form-item label="业务方向" class="ml-20">
             <el-select v-model="personForm.business" placeholder="请选择">
               <el-option
                 v-for="item in personForm.businessArr"
