@@ -61,6 +61,11 @@ async function webpackProd () {
         ...webpackConfig,
         plugins: [
           ...webpackConfig.plugins,
+          new webpack.DefinePlugin({
+            'process.env.APP_ENV': "'online'",
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
+          }),
           //设置全局变量
           new webpack.DefinePlugin({
             'process.env.common': appConfig.globalConfig
