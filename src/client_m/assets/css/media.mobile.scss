@@ -1,23 +1,25 @@
 @media screen and (max-width: 1200px) {
-
 }
 
 @media screen and (max-width: 900px) {
-
 }
 
 @media screen and (max-width: 775px) {
-  div.slide-affix{
+  .layout .main {
+    .main-right {
+      max-width: 700px;
+    }
+  }
+
+  div.slide-affix {
     display: none;
   }
 }
 
 @media screen and (max-width: 575px) {
-  
 }
 
 @media screen and (max-width: 450px) {
-  
 }
 
 @media screen and (max-width: 375px) {
