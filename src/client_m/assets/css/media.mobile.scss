@@ -13,11 +13,15 @@
 
   div.slide-affix {
     // display: none;
+    width: 15px !important;
 
     .slide-affix--fixed{
       width: 55px !important;
       .sideBar{
-        width: 100%;
+        width: 55px !important;
+        .show-side{
+          display: flex !important;
+        }
         .el-menu-item{
           span{
             display: none;

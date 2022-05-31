@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: 秦琛
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-27 18:36:22
+ * @LastEditTime: 2022-05-31 16:14:47
 -->
 <template>
   <aside class="sideBar">
@@ -15,7 +15,7 @@
       @open="handleOpen"
       @close="handleClose"
     > 
-      <SidebarItem :menuList="filterRouteList"></SidebarItem>
+      <SidebarItem :menuList="filterRouteList" v-bind="$attrs"></SidebarItem>
     </el-menu>
   </aside>
 </template>
@@ -26,11 +26,13 @@ import { useRouter, useRoute, onBeforeRouteUpdate } from "vue-router";
 import SidebarItem from "./SidebarItem";
 export default {
   name: "",
-  props: {},
+  props: {
+
+  },
   components: {
     SidebarItem,
   },
-  setup(props, {}) {
+  setup(props, {attrs}) {
     // route响应式对象，监控变化，传值
     const $route = useRoute();
     const $router = useRouter();
@@ -73,7 +75,7 @@ export default {
       console.log(key, keyPath);
     };
     // onBeforeMount(() => {});
-    // onMounted(() => {});
+    onMounted(() => {console.log(props, 'props-bar');});
     //const refData = toRefs(null);
     onBeforeRouteUpdate((to) => {
       console.log("onBeforeRouteUpdate", to.path);
@@ -93,6 +95,7 @@ export default {
       filterRouteList,
       handleOpen,
       handleClose,
+      attrs,
     };
   },
 };

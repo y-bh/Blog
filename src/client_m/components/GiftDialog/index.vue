@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 15:46:35
+ * @LastEditTime: 2022-05-31 17:11:50
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -21,8 +21,31 @@
 
       <div class="dialog-bg" v-if="!e && one">
         <div class="dialog-img dialog-img-snd">
-          <div class="snd-btn pesonal-btn" v-if="(!userInfo.identityAuth && !userInfo.companyAuth && (userInfo.res === 'cut' || userInfo.res === 'none' || userInfo.res === 'fail' ))">个人认证</div>
-          <div class="snd-btn company-btn" v-if="!userInfo.companyAuth && (userInfo.res === 'cut' || userInfo.res === 'none' || userInfo.res === 'fail' )" >企业认证(赠3000IP)</div>
+          <div
+            class="snd-btn pesonal-btn"
+            v-if="
+              !userInfo.identityAuth &&
+              !userInfo.companyAuth &&
+              (userInfo.res === 'cut' ||
+                userInfo.res === 'none' ||
+                userInfo.res === 'fail')
+            "
+            @click="personAuth"
+          >
+            个人认证
+          </div>
+          <div
+            class="snd-btn company-btn"
+            v-if="
+              !userInfo.companyAuth &&
+              (userInfo.res === 'cut' ||
+                userInfo.res === 'none' ||
+                userInfo.res === 'fail')
+            "
+            @click="companyAuth"
+          >
+            企业认证(赠3000IP)
+          </div>
         </div>
         <div class="dialog-close dialog-close-snd">
           <i class="iconfont icon-guanbi close-i" @click="close('s')"></i>
@@ -32,36 +55,62 @@
 
     <div
       class="small-dia-bg"
-      v-if="!userInfo.gotWxWelfare && e && l"
+      v-if="(!userInfo.gotWxWelfare || !userInfo.newUser) && e && l"
     >
-      <div class="small-dia-img" @click="openTDialog"></div>
+      <div
+        class="small-dia-img-n"
+        @click="openTDialog"
+        v-if="userInfo.newUser"
+      ></div>
+      <div
+        class="small-dia-img-w"
+        @click="openTDialog"
+        v-if="!userInfo.gotWxWelfare && !userInfo.newUser"
+      ></div>
       <div class="dialog-close-thd">
         <i class="iconfont icon-guanbi close-i" @click="close('l')"></i>
       </div>
     </div>
+
+    <PersonalAuth ref="perAuthRef" @updateUserInfo="reload"></PersonalAuth>
+    <!-- 企业认证 -->
+    <companyAuth ref="companyAuthRef" @updateUserInfo="reload"></companyAuth>
   </div>
 </template>
 
 <script>
 import { getMineInfo } from "model/user.js";
-import { getDiaOneThousand } from "model/dia.js"
+import { getDiaOneThousand } from "model/dia.js";
 
-import { inject, onMounted, reactive, ref, toRefs } from "vue";
+import { inject, onMounted, reactive, ref, toRefs, provide, } from "vue";
 import { useStore } from "vuex";
+
+import PersonalAuth from "../../views/userAccount/dialog/PersonalAuth";
+import companyAuth from "../../views/userAccount/dialog/companyAuth";
+
 export default {
+  components: {
+    PersonalAuth,
+    companyAuth,
+  },
   setup() {
-    const $message = inject('message')
-    let $store = useStore();
+    const $message = inject("message");
     const state = reactive({
       e: false,
       l: true,
       one: false,
       userInfo: {},
-      companyStatus: 'none',
+      companyStatus: "none",
     });
 
+    
+    provide("userInfoSon", state);
+
+    const perAuthRef = ref(null);
+    const companyAuthRef = ref(null);
+
     function openTDialog() {
-      getMineInfoFunc(true)
+      getMineInfoFunc(true);
     }
 
     function close(a) {
@@ -89,16 +138,16 @@ export default {
     }
 
     async function jumpRegisteIp() {
-      const res = await getDiaOneThousand()
-      if(res && res.code === 200){
-        if(res.data === true){
-          state.userInfo.newUser = false
-          state.one = true
+      const res = await getDiaOneThousand();
+      if (res && res.code === 200) {
+        if (res.data === true) {
+          state.userInfo.newUser = false;
+          state.one = true;
           $message.success("领取成功");
         }
-      }else{
+      } else {
         $message.error("领取失败");
-        state.e = true
+        state.e = true;
       }
     }
 
@@ -106,18 +155,34 @@ export default {
       const res = await getMineInfo();
       if (res && res.code === 200) {
         state.userInfo = res.data;
-        $store.dispatch("saveUserinfo", res.data);
-        if(!res.data.newUser){
-          state.e = true
+        if (!res.data.newUser) {
+          state.e = true;
         }
       }
-      
-      if(e){
-        state.e = false
-        state.one = true
+
+      if (e) {
+        state.e = false;
+        state.one = true;
       }
       console.log(state.userInfo, "userInfo");
     };
+
+    const personAuth = () => {
+      //perAuthRef.value.title = "个人认证"
+      state.e = true
+      perAuthRef.value.authPersonStep = 1;
+      perAuthRef.value.dialogVisible = true;
+    };
+    const companyAuth = () => {
+      state.e = true
+      companyAuthRef.value.title = "企业认证";
+      companyAuthRef.value.authCompanyStep = 1;
+      companyAuthRef.value.dialogVisible = true;
+    };
+
+    function reload() {
+      location.reload();
+    }
 
     onMounted(() => {
       getMineInfoFunc();
@@ -128,6 +193,11 @@ export default {
       close,
       openTDialog,
       jumpRegisteIp,
+      perAuthRef,
+      companyAuthRef,
+      personAuth,
+      companyAuth,
+      reload,
     };
   },
 };
@@ -163,7 +233,7 @@ export default {
 
     .dialog-img-snd {
       width: 35%;
-      height: 61%;
+      height: 30vw;
       background-image: url("../../assets/images/wechatBig.png");
       transform: translate(-1%, 19%);
 
@@ -206,7 +276,6 @@ export default {
   .dialog-close-snd {
     transform: translate(0, 13vh);
   }
-
 }
 
 .small-dia-bg {
@@ -215,10 +284,20 @@ export default {
   position: fixed;
   z-index: 1000;
 
-  .small-dia-img {
+  .small-dia-img-n {
     width: 100%;
     height: 100%;
     background-image: url("../../assets/images/newUserFuli.png");
+    background-size: cover;
+    transform: translate(15%, 65vh);
+
+    animation: 0.5s cubic-bezier(0.5, 2, 0.4, 0.6) 0s 1 leftshow;
+  }
+
+  .small-dia-img-w {
+    width: 100%;
+    height: 84%;
+    background-image: url("../../assets/images/wechatSmall.png");
     background-size: cover;
     transform: translate(15%, 65vh);
 
@@ -241,15 +320,13 @@ export default {
     animation: 0.5s cubic-bezier(0.5, 2, 0.4, 0.6) 0s 1 leftshow;
   }
 
-
-  
   @keyframes leftshow {
     from {
-      transform: translate(-110%, 65vh);;
+      transform: translate(-110%, 65vh);
     }
 
     to {
-      transform: translate(15%, 65vh);;
+      transform: translate(15%, 65vh);
     }
   }
 }
