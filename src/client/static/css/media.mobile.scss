@@ -749,6 +749,17 @@
       }
     }
   }
+
+  //帮助中心
+  div.help-center {
+    .nav {
+      width: 370px;
+    }
+
+    div.tab-content {
+      min-width: 370px;
+    }
+  }
 }
 
 @media screen and (max-width: 414px) {
@@ -788,7 +799,11 @@
   //帮助中心
   div.help-center {
     .nav {
-      width: 350px;
+      width: 300px;
+    }
+
+    div.tab-content {
+      min-width: 300px;
     }
   }
 }

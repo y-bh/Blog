@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="font-size: 16px;">
 
 <head>
   <meta charset="UTF-8">
@@ -45,15 +45,21 @@
               <div class="desc mt-30"><span>全国城市数量</span></div>
             </li>
             <li>
-              <div class="number"><span id="ipTotalNum">3,251,974</span></div>
+              <div class="number"><span id="ipTotalNum">
+                  0
+                </span></div>
               <div class="desc mt-30"><span>今日可用IP总数</span></div>
             </li>
             <li>
-              <div class="number"><span id="ipNum">638,451</span></div>
+              <div class="number"><span id="ipNum">
+                  0
+                </span></div>
               <div class="desc mt-30"><span>今日更新IP数</span></div>
             </li>
             <li>
-              <div class="number"><span id="canUserNum">99</span><span>%</span></div>
+              <div class="number"><span id="canUserNum">
+                  0
+                </span><span>%</span></div>
               <div class="desc mt-30"><span>IP可用率</span></div>
             </li>
           </ul>
@@ -113,7 +119,7 @@
             </div>
             <!-- 现在注册，免费领取5000IP -->
             <div class="eightRow regist wow fadeInUp mt-140">
-              <div class="egihtWidth pt-40 pb-40" >
+              <div class="egihtWidth pt-40 pb-40">
                 <div><img src="/images/home/regist.png" alt="现在注册，免费领取5000IP"></div>
                 <div class="desc"><span>现在注册，免费领取5000IP</span></div>
                 <div class="btn pr-10">
@@ -162,7 +168,8 @@
                         <% }) %>
                     </ul>
                     <a class="mt-20 queryBtn pointer d-block"
-                      href="/help-center/<%=articleItem.typeAlias%>/1.html"><span>查看全部</span><span class="arrowRight ml-10">>></span></a>
+                      href="/help-center/<%=articleItem.typeAlias%>/1.html"><span>查看全部</span><span
+                        class="arrowRight ml-10">>></span></a>
                   </li>
 
 
@@ -177,7 +184,7 @@
 
     <%#右側廣告 %>
       <%- include('../components/rightToolbar.html'); %>
-        <%# 弹窗 %> 
+        <%# 弹窗 %>
           <%- include('../components/homeDialog.html') %>
             <%#公共底部 %>
               <%- include('../components/footer.html'); %>

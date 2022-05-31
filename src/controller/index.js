@@ -23,11 +23,6 @@ const SelfApi = require("./selfApi")
 const { getHelpService, postKeywordsService, getArticleDetailService, getInfoListService } = require('service/helpCenterService')
 const { getProxyCityService, getProxyMenuService, getWhiteListApiService, getIconService, data } = require('service/getIpService')
 const { renderPackage } = require("service/packageService");
-
-const { getTime } = require('utils/activityTime')
-
-
-
 //注册后端路由功能
 function Router(App) {
 
@@ -50,9 +45,7 @@ function Router(App) {
     const homeData = {}
     //资讯中心数据
     let list = await getInfoListService();
-
     homeData.articleList = list.typeList ? list.typeList : [];
-
     return ctx.render("home/index", homeData)
   })
 

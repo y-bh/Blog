@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-30 18:10:34
+ * @LastEditTime: 2022-05-31 13:11:43
 -->
 <template>
   <div class="container grid">
@@ -194,7 +194,7 @@ export default {
 
         if (state.tableData && state.tableData.length) {
           state.tableData.forEach(elem => {
-            if (elem?.state === 1) {
+            if (elem && elem.state === 1) {
               // 待支付订单显示倒计时 创建时间 订单编号
               deadLine(elem.createTime, elem.orderNo);
             }

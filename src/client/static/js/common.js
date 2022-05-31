@@ -357,11 +357,11 @@ window.layout = debounce(layout, 300, true)
 
 
 //套餐页跳转
-function jumpPackage (type) {
+function jumpPackage(type) {
   //sessionStorage.setItem("packageTab", type);//1:余额 2：包时
-  if(type && type ==2){
+  if (type && type == 2) {
     window.location.href = "/package?type=package";
-  }else{
+  } else {
     window.location.href = "/package";
   }
 }
@@ -514,7 +514,13 @@ $(function () {
 })
 
 
-$(function (){
+$(function () {
   let path = window.location.pathname
+  //排除
+  const ext = ['/reset', '/register', '/login']
+  if (ext.includes(path)) {
+    path = "/manager/user"
+  }
+
   $('a#user-login').attr('href', '/login' + `?back=${path}`)
 })

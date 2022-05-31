@@ -23,3 +23,8 @@ exports.links = 'FOOTER_LINKS'
 //帮助中心栏目类型
 exports.cateTypes = 'CATEGORY_TYPES'
 
+//今日可用IP总数
+exports.ipNumTotal = 'IP_TODAY_NUMS'
+
+//今日更新IP数
+exports.ipNumUpdate = 'IP_TODAY_UPDATE_NUMS'

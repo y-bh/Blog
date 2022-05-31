@@ -7,9 +7,9 @@
  */
 
 const { getQueryLinkData, getMealActivity } = require("dao/commonDao")
+const { randomNum } = require("utils/dateFormat")
 
-
-const { active_tab, links } = require("config/app.key.config")
+const { active_tab, links, ipNumTotal, ipNumUpdate } = require("config/app.key.config")
 const { setStore, getStore } = require("store")
 
 
@@ -30,7 +30,7 @@ const renderTab = async () => {
     data = res.data
     setStore(active_tab, data)
   }
-  
+
   return data
 }
 
@@ -48,7 +48,7 @@ const getQueryLink = async () => {
 
   try {
     const res = await getQueryLinkData()
-    
+
     if (+res.code === 200) {
       let data = res.data || []
       arr = data.map(({ linkName = null, linkUrl = null, linkTarget = null }) => {
@@ -62,10 +62,56 @@ const getQueryLink = async () => {
       setStore(links, arr)
     }
   } catch (error) {
-    
+
   }
 
   return arr
 }
 
-module.exports = { renderTab, getQueryLink }
+
+//获取每日ip随机数
+const getDayIpNums = () => {
+  //randomNum
+
+  let obj = {
+  }
+
+  //今日可用IP总数
+  if (getStore(ipNumTotal)) {
+    obj.ipNumTotal = getStore(ipNumTotal)
+    console.log("走缓存获取随机值", obj)
+  } else {
+    let tem = randomNum(2000000, 2999999);
+    obj.ipNumTotal = tem
+    console.log("新获取", obj)
+    setStore(ipNumTotal, tem, {
+      maxAge: 1000 * 3600 * 12,
+      ttl: 1000 * 3600 * 12,
+    })
+  }
+
+
+  //今日更新IP数
+  if (getStore(ipNumUpdate)) {
+    obj.ipNumUpdate = getStore(ipNumUpdate)
+    console.log("走缓存获取随机值2", obj)
+  } else {
+    let tem = randomNum(7000000, 1300000);
+    obj.ipNumUpdate = tem
+    console.log("新获取2", obj)
+    setStore(ipNumUpdate, tem, {
+      maxAge: 1000 * 3600 * 12,
+      ttl: 1000 * 3600 * 12,
+    })
+  }
+
+
+  return obj
+}
+
+
+
+
+
+
+module.exports = { renderTab, getQueryLink, getDayIpNums }
