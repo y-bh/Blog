@@ -2,7 +2,7 @@
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 60,//数量
+      "value": 30,//数量
       "density": {
         "enable": true,//密集
         "value_area": 1920 //区域散布密度大小
