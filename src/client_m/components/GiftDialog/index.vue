@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 20:39:21
+ * @LastEditTime: 2022-05-31 21:05:24
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -24,7 +24,7 @@
           <div
             class="snd-btn pesonal-btn"
             v-if="
-              !(userInfo.identityAuth || userInfo.intermediate || userInfo.companyAuth || userInfo.res === 'wait' || userInfo.res === 'cut')
+              !(userInfo.identityAuth || userInfo.intermediate || userInfo.companyAuth || userInfo.res === 'wait')
             "
             @click="personAuth"
           >
@@ -33,7 +33,7 @@
           <div
             class="snd-btn company-btn"
             v-if="
-              !userInfo.companyAuth && !(userInfo.res === 'cut' || userInfo.res === 'wait')
+              !userInfo.companyAuth && !(userInfo.res === 'wait')
             "
             @click="companyAuth"
           >

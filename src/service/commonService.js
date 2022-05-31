@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 公共接口
  * @Date: 2022-05-16 19:16:37
- * @LastEditTime: 2022-05-31 15:41:20
+ * @LastEditTime: 2022-05-31 21:05:40
  */
 
 const { getQueryLinkData, getMealActivity } = require("dao/commonDao")
@@ -97,7 +97,7 @@ const getDayIpNums = () => {
     obj.ipNumUpdate = getStore(ipNumUpdate)
     console.log("走缓存获取随机值2", obj)
   } else {
-    let tem = randomNum(7000000, 1300000);
+    let tem = randomNum(700000, 1300000);
     obj.ipNumUpdate = tem
     console.log("新获取2", obj)
     setStore(ipNumUpdate, tem, {
