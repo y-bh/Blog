@@ -241,6 +241,10 @@ function Router(App) {
     ctx.response.body = mm
   })
 
+  /** 微信登录页 */
+  router.get("/my/wxLogin", async (ctx) => {
+    return ctx.render("wxLogin/index")
+  })
 
   /** 404 */
   router.get("/404", async (ctx) => {

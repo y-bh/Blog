@@ -63,4 +63,16 @@ const resetCodeDao = async (data) => {
 }
 
 
-module.exports = { postRegisterDao, postResetDao, postLoginDao, registerCodeDao, resetCodeDao }
+
+//微信关注公众号领取福利关注
+const remindWxDao = async (data) => {
+  try {
+    const res = await service.post(api.POST_USER_WXFOLLOW, data)
+    return res
+  } catch (error) {
+    return error
+  }
+}
+
+
+module.exports = { postRegisterDao, postResetDao, postLoginDao, registerCodeDao, resetCodeDao, remindWxDao }

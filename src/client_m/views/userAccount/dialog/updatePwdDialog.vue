@@ -76,7 +76,7 @@ export default {
       } else {
         callback();
       }
-      //console.log(333333333333, form.ruleForm.newPassword);
+      //
       callback();
     };
     const validatePwd = (rule, value, callback) => {
@@ -86,7 +86,7 @@ export default {
         if (form.ruleForm.confirmPassword !== "") {
           if (!vaildPwdRef.value) return;
           vaildPwdRef.value.validateField("confirmPassword", (valid) => {
-            console.log(`${valid}***************************`);
+            
           });
         }
         callback();
@@ -132,7 +132,7 @@ export default {
       // vaildPwdRef.value.resetFields();
     };
     const onSubmit = (formName) => {
-      console.log("=======修改密码数据======", form.ruleForm);
+      
       // if (!formEl) return
       vaildPwdRef.value.validate(async (valid) => {
         if (valid) {
@@ -141,8 +141,9 @@ export default {
             newPassword: form.ruleForm.newPassword,
             checkPassword: form.ruleForm.confirmPassword,
           };
-          // console.log(333333333333, params);
+          // 
           let res = await updatePassword({ data: JSON.stringify(params) });
+                
           if (res.code == 200) {
             $message.success("登录密码修改成功");
             emit("updateDialog", false);
@@ -154,7 +155,7 @@ export default {
             );
           }
         } else {
-          console.log("error submit!!");
+          
           return false;
         }
       });

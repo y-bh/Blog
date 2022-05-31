@@ -98,6 +98,8 @@ module.exports = {
   //重置验证码接口
   "POST_USER_RESET_CODE": "/user/forget/password/getCode",
 
+    //微信关注公众号领取福利关注
+  "POST_USER_WXFOLLOW": "/proxy/wxFollowWelfare",
 
   //个人中心领取1000
   "POST_PROXY_RECEIVE_NEW_USERMEAL" : "proxy/receiveNewUserMeal",

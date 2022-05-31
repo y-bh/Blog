@@ -8,8 +8,8 @@
 const Router = require("koa-router");
 const router = new Router();
 const appKey = require("config/app.key.config")
-const { registerService, resetService, loginService, registerCodeService, resetCodeService } = require("service/userService")
-const {getDayIpNums}  = require("service/commonService") 
+const { registerService, resetService, loginService, registerCodeService, resetCodeService, postWXWelfare } = require("service/userService")
+const { getDayIpNums } = require("service/commonService")
 
 //针对登录/注册/ 重置密码相关java 接口做转发
 router.post("/login", async (ctx) => {
@@ -96,6 +96,19 @@ router.post("/randomNums", async (ctx) => {
 
 
 
+//微信关注公众号领取福利关注
+router.post("/wxFollowWelfare", async (ctx) => {
+
+  console.log("sssssssssssssss",ctx.request.body)
+
+  const res = await postWXWelfare(ctx.request.body)
+
+  if (+res.code === 0) {
+    return ctx.body = res.data
+  } else {
+    return ctx.fail(res.msg)
+  }
+});
 
 
 

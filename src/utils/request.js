@@ -27,7 +27,7 @@ class ServiceAjax extends Requeset {
         config.headers['TQ-TOKEN'] = config.token;
       }
       //参数加密
-      if (AESAUTH[config.url]) {
+      if (process.env.APP_ENV !== 'local' && AESAUTH[config.url]) {
         if (typeof config.data === 'string') {
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)
@@ -35,6 +35,7 @@ class ServiceAjax extends Requeset {
         config.data.data = encrypt(config.data.data)
       }
 
+      console.log("vvvvvvvvvvvvvvvvvv", config.data, process.env.APP_ENV)
       return config;
     }, error => {
       return Promise.reject(error);
@@ -50,7 +51,7 @@ class ServiceAjax extends Requeset {
  * @param token  登录后token
  * @returns {Promise}
  */
-  get (url, params = {}, token) {
+  get(url, params = {}, token) {
     try {
       return this.service({
         url,
@@ -73,7 +74,7 @@ class ServiceAjax extends Requeset {
 * @param token  登录后token
 * @returns {Promise}
 */
-  post (url, data = {}, token) {
+  post(url, data = {}, token) {
     try {
       return this.service({
         url,
