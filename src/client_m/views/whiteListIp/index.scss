@@ -57,7 +57,7 @@
       }
       .icon-mianxing-wenhao{
         opacity: 0;
-        color: #FC7019;
+        color: #1968fc;
       }
     }
     .tooltip-text{
@@ -68,7 +68,7 @@
       align-items: center;
       opacity: 0;
       transition: all 0.2s;
-      color: #FC7019;
+      color: #1968fc;
       border-radius: 4px;
       background-color: #E8F0FF;
       p{
@@ -98,6 +98,14 @@
     }
     .tooltip-icon:hover + .tooltip-text{
       opacity: 1;
+    }
+  }
+
+  .white-list-btn{
+    padding-right: 10px;
+    text-align: right;
+    button:nth-child(1){
+      margin-right: 10px;
     }
   }
 
@@ -152,7 +160,7 @@
   background-color: white;
   border: 1px solid #F8486F;
   color: #F8486F;
-  &:focus,&:hover{
+  &:hover{
     color: white;
   }
 }

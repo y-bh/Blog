@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-31 10:43:31
+ * @LastEditTime: 2022-05-31 11:07:17
 -->
 <template>
   <div class="layout">
@@ -21,7 +21,7 @@
         </el-config-provider>
       </div>
     </el-row>
-    <!-- <GiftDialog></GiftDialog> -->
+    <GiftDialog></GiftDialog>
   </div>
 </template>
 

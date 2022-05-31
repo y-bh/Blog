@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-12 10:19:45
- * @LastEditTime: 2022-05-28 12:21:58
+ * @LastEditTime: 2022-05-31 14:08:57
 -->
 <template>
   <el-dialog
@@ -21,7 +21,8 @@
           <el-input
             v-model="formData.ip"
             placeholder="请输入ip"
-            :readonly="ipReadonly"
+            class="ip-input"
+            :disabled="ipReadonly"
           />
         </el-form-item>
         <el-form-item label="备注信息" label-width="80px">
@@ -71,7 +72,7 @@ export default {
 
     const state = reactive({
       dialogVisible: false, //dialog control
-      ipReadonly: null, //ip diable
+      ipReadonly: false, //ip diable
 
       formData: {
         ip: null, //data-ip
@@ -105,7 +106,7 @@ export default {
       /**this is func */
       if (type === "edit") {
         state.formData.ip = clientIP;
-        state.ipReadonly = "readonly";
+        state.ipReadonly = true;
       }
 
       openDialogControl();

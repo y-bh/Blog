@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 10:33:00
+ * @LastEditTime: 2022-05-31 14:27:45
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -21,8 +21,8 @@
 
       <div class="dialog-bg" v-if="!e && one">
         <div class="dialog-img dialog-img-snd">
-          <div class="snd-btn pesonal-btn">个人认证</div>
-          <div class="snd-btn company-btn">企业认证(赠3000IP)</div>
+          <div class="snd-btn pesonal-btn" v-if="!userInfo.identityAuth">个人认证</div>
+          <div class="snd-btn company-btn" v-if="!userInfo.companyAuth && (userInfo.res === 'cut' || userInfo.res === 'none' || userInfo.res === 'fail' )" >企业认证(赠3000IP)</div>
         </div>
         <div class="dialog-close dialog-close-snd">
           <i class="iconfont icon-guanbi close-i" @click="close('s')"></i>
@@ -32,12 +32,11 @@
 
     <div
       class="small-dia-bg"
-      v-if="!userInfo.gotWxWelfare && e"
-      :key="userInfo.newUser"
+      v-if="!userInfo.gotWxWelfare && e && l"
     >
-      <div class="small-dia-img"></div>
+      <div class="small-dia-img" @click="openTDialog"></div>
       <div class="dialog-close-thd">
-        <i class="iconfont icon-guanbi close-i" @click="close"></i>
+        <i class="iconfont icon-guanbi close-i" @click="close('l')"></i>
       </div>
     </div>
   </div>
@@ -45,17 +44,25 @@
 
 <script>
 import { getMineInfo } from "model/user.js";
+import { getDiaOneThousand } from "model/dia.js"
 
-import { onMounted, reactive, ref, toRefs } from "vue";
+import { inject, onMounted, reactive, ref, toRefs } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
+    const $message = inject('message')
     let $store = useStore();
     const state = reactive({
       e: false,
+      l: true,
       one: false,
       userInfo: {},
+      companyStatus: 'none',
     });
+
+    function openTDialog() {
+      getMineInfoFunc(true)
+    }
 
     function close(a) {
       switch (a) {
@@ -64,6 +71,9 @@ export default {
           break;
         case "s":
           closeTwo();
+          break;
+        case "l":
+          closeThr();
           break;
       }
     }
@@ -74,14 +84,35 @@ export default {
     function closeTwo() {
       state.e = true;
     }
+    function closeThr() {
+      state.l = false;
+    }
 
-    function jumpRegisteIp() {}
+    async function jumpRegisteIp() {
+      const res = await getDiaOneThousand()
+      if(res && res.code === 200){
+        if(res.data === true){
+          state.userInfo.newUser = false
+          state.one = true
+          $message.success("领取成功");
+        }
+      }
+    }
 
-    const getMineInfoFunc = async () => {
+    const getMineInfoFunc = async (e) => {
       const res = await getMineInfo();
       if (res && res.code === 200) {
         state.userInfo = res.data;
         $store.dispatch("saveUserinfo", res.data);
+        if(!res.data.newUser){
+          state.e = true
+        }
+      }
+      
+      if(e){
+        state.userInfo.newUser = false
+        state.e = false
+        state.one = true
       }
       console.log(state.userInfo, "userInfo");
     };
@@ -93,6 +124,8 @@ export default {
     return {
       ...toRefs(state),
       close,
+      openTDialog,
+      jumpRegisteIp,
     };
   },
 };
@@ -100,7 +133,7 @@ export default {
 
 <style lang="scss" scoped>
 .dialog-wrap-p {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   top: 0;
   width: 100vw;
@@ -115,7 +148,7 @@ export default {
 
     .dialog-img {
       width: 39%;
-      height: 70%;
+      height: 34vw;
       background-repeat: no-repeat;
       background-size: cover;
       margin: 0 auto;

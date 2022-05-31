@@ -239,6 +239,7 @@
     &:after {
       border-radius: inherit;
     }
+
   }
 
   .el-button--small {
@@ -246,12 +247,17 @@
   }
 
   .el-button--default {
-    &:focus,
     &:hover {
       background-color: $main;
       border-color: $main;
       color: $empty;
       outline: 0;
+    }
+
+    
+    &:focus{
+      background-color: white;
+      color: #1964fc
     }
   }
 
@@ -274,7 +280,6 @@
       outline: 0;
     }
 
-    &:focus,
     &:hover {
       &::after {
         opacity: 1;
@@ -313,7 +318,6 @@
       outline: 0;
     }
 
-    &:focus,
     &:hover {
       &::after {
         opacity: 1;
@@ -352,7 +356,6 @@
       outline: 0;
     }
 
-    &:focus,
     &:hover {
       &::after {
         opacity: 1;
@@ -448,5 +451,15 @@
       color: #1968fc;
       cursor: pointer;
     }
+  }
+}
+
+
+
+.ip-input{
+  .el-input__inner:disabled{
+    font-size: 16px;
+    background-color: #E4E5EB;
+    color: #B2BCCB;
   }
 }

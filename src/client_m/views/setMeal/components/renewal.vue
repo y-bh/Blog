@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 续费
  * @Date: 2022-05-17 11:14:55
- * @LastEditTime: 2022-05-31 09:35:59
+ * @LastEditTime: 2022-05-31 14:48:43
 -->
 <template>
     <!-- 支付弹窗 -->
@@ -115,10 +115,10 @@ export default {
                     state.isShowEnvelope = false;   // 打开弹窗默认不显示红包
                     
                     state.renewForm.mealType = formatInt(row.proxyType) || null;  //0 1 10可以用红包
-                    state.renewForm.mealTime = formatInt(row.proxyMealId)
+                    state.renewForm.mealTime = formatInt(row.proxyMealId)   // 表格对应的套餐时长id
                     // 获取套餐续费信息
                     await methods.getRenewData(row);
-
+console.log(row.proxyMealId,'row.proxyMealId');
                     state.renewForm.proxyId = state.renewInfo && state.renewInfo.proxyId;  // 支付id
                     state.renewForm.desc = state.renewInfo && state.renewInfo.desc;  // 支付desc
 
@@ -134,6 +134,7 @@ export default {
                 }
 
                 if(state.packageTime){ // 包时
+                    // 过滤下拉菜单数据是否包含表格对应的套餐时长id
                     methods.changeTime()
                 } else {   //包量
                     state.renewForm.price = state.renewInfo.price ? (state.renewInfo.price).toFixed(2) : 0;
@@ -149,8 +150,17 @@ export default {
             
             //包时套餐续费 改变时长  重新参与计算
             async changeTime () { 
+                let matchIndex = state.packageTime.findIndex((elem) => {
+                    return elem.mealId === state.renewForm.mealTime
+                })
+
+                if(matchIndex  === -1){
+                    state.renewForm.mealTime = state.packageTime[0].mealId
+                }
+
                 state.packageTime.forEach(elem => {
-                    if (elem && elem.mealId == state.renewForm.mealTime) {
+                    //  elem.mealId == state.renewForm.mealTime
+                    if (elem) {
                         state.renewForm.timeMealId = elem.mealId;
                         state.renewForm.price = elem.price ? (elem.price).toFixed(2) : 0;
                         state.renewForm.payDiscount = elem.discount !== null ? elem.discount[0] : 100;

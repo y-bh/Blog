@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: 购买记录
  * @Date: 2022-05-13 15:09:26
- * @LastEditTime: 2022-05-31 13:11:43
+ * @LastEditTime: 2022-05-31 13:33:06
 -->
 <template>
   <div class="container grid">
@@ -83,8 +83,8 @@
         <el-table-column label="交易前后余额(元)" align="center" width="180px">
           <template #default="{ row }">
             <div class="box flex-center flex-column">
-              <span>{{ row.preAmount || row.preAmount === 0 ? (row.preAmount / 100).toFixed(2) : "--" }}</span>
-              <span>{{ row.curAmount || row.curAmount === 0 ? (row.curAmount / 100).toFixed(2) : "--" }}</span>
+              <span>{{ row.preAmount || row.preAmount === 0 ? (row.preAmount / 1000).toFixed(2) : "--" }}</span>
+              <span>{{ row.curAmount || row.curAmount === 0 ? (row.curAmount / 1000).toFixed(2) : "--" }}</span>
                
             </div>
           </template>

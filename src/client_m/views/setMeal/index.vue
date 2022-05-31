@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-30 17:24:03
+ * @LastEditTime: 2022-05-31 14:33:00
 -->
 <template>
   <div class="container">
@@ -62,7 +62,7 @@
         </template>
 
         <el-table-column align="center" type="selection" width="50"></el-table-column>
-        <el-table-column align='center' label="套餐ID" prop="sequence" width="130" fixed>
+        <el-table-column align='center' label="套餐ID" prop="sequence" width="120" fixed>
           <template #default="{ row }">
             <div class="sequence">
               <!--定制套餐显示 标签-->
@@ -85,10 +85,9 @@
         <el-table-column align='center' label="提取密钥" prop="key" width="85">
 
         </el-table-column>
-        <el-table-column align='center' label="账号" prop="authKey" v-if="userInfo && userInfo.proxyApiOpend" width="70">
+        <el-table-column align='center' label="账号" prop="authKey"  v-if="userInfo && userInfo.proxyAuthKey" width="70">
         </el-table-column>
-        <el-table-column align='center' label="密码" prop="authSecret" v-if="userInfo && userInfo.proxyApiOpend"
-          width="70">
+        <el-table-column align='center' label="密码" prop="authSecret" width="70"  v-if="userInfo && userInfo.proxyAuthKey">
           <template #default="{ row }">
             <div class="repeat-wrap">
               <span class="repeat">{{ row.authSecret ? row.authSecret : '--' }}</span>
@@ -150,14 +149,18 @@
             <span v-else style="color:#fff">--</span>
           </template>
         </el-table-column>
-        <el-table-column align='center' label="操作" fixed="right">
+        <el-table-column align='center' label="操作" fixed="right" width="90px">
           <!-- mealPayType  1付费   3：测试 -->
           <!-- proxyType 套餐类型   0: '包量'     1: '包时'       10: '计次'   60: '福利'  70: '不限量'-->
           <!-- iptype     10: '普通IP'   20: '优质IP'    30: '长效固定',  40: '长效静态'-->
           <template #default="{ row }">
-            <el-dropdown trigger="click" @command="handleCommand($event, row)">
+            <el-dropdown trigger="click" @command="handleCommand($event, row)" @visible-change="toggleMenu($event, row)">
               <span class="el-dropdown-link">
                 管理
+                <el-icon class="el-icon--right dropdown">
+                  <CaretTop v-show="row.arrow"/>
+                  <CaretBottom v-show="!row.arrow"/>
+                </el-icon>
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
@@ -223,6 +226,7 @@
 </template>
 
 <script>
+import { CaretBottom, CaretTop } from "@element-plus/icons";
 import { dateFormat } from "tools/dateFormat"
 import { formatInt, deepCopy } from "tools/utility"
 import { reactive, ref, toRefs, onMounted, inject } from "vue";
@@ -240,6 +244,8 @@ import { getMineInfo } from "model/user.js";
 export default {
   name: "",
   components: {
+    CaretBottom,
+    CaretTop,
     resetPassword,
     renewal,  // 续费
     supplement,  // 补量
@@ -262,7 +268,7 @@ export default {
     const stateColor = {
       1: '#27ADC2',
       2: '#F8486F',
-      3: '#f00',
+      3: '#999',
       4: '#999'
     }
     const searchFormRef = ref(null);
@@ -464,6 +470,10 @@ export default {
           })
           return
         }
+      },
+      toggleMenu(state, row){
+        console.log(state, row,'val-=====');
+        row.arrow = state
       },
       createCode (code) {
         console.log('创建二维码', code);
