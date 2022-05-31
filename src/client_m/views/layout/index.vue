@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: liyuntao
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 14:22:11
- * @LastEditTime: 2022-05-31 17:40:09
+ * @LastEditTime: 2022-05-31 18:32:00
 -->
 <template>
   <div class="layout">
@@ -112,15 +112,19 @@ export default {
     margin: 0 auto;
 
     .sideBar {
-      width: 180px;
+      width: 220px;
       margin-right: 20px;
       flex-shrink: 0;
       background: #ffffff;
       ::v-deep(.el-menu) {
-        padding: 20px 0;
+        padding: 25px 0;
         border: none;
+        color: #4C5664;
         box-shadow: 0px 0px 20px rgba(208, 224, 255, 0.4);
-        
+        line-height: 21px;
+        li{
+          height: 51px;
+        }
       }
 
     

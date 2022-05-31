@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: liyuntao
+ * @LastEditors: dengxiujie
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-31 16:14:47
+ * @LastEditTime: 2022-05-31 18:41:16
 -->
 <template>
   <aside class="sideBar">
@@ -14,7 +14,7 @@
       :collapse="false"
       @open="handleOpen"
       @close="handleClose"
-    > 
+    >
       <SidebarItem :menuList="filterRouteList" v-bind="$attrs"></SidebarItem>
     </el-menu>
   </aside>
@@ -26,19 +26,17 @@ import { useRouter, useRoute, onBeforeRouteUpdate } from "vue-router";
 import SidebarItem from "./SidebarItem";
 export default {
   name: "",
-  props: {
-
-  },
+  props: {},
   components: {
     SidebarItem,
   },
-  setup(props, {attrs}) {
+  setup(props, { attrs }) {
     // route响应式对象，监控变化，传值
     const $route = useRoute();
     const $router = useRouter();
 
     let activePath = ref("user");
-    activePath.value = $route.path.replace("/manager/","")
+    activePath.value = $route.path.replace("/manager/", "");
     const isCollapse = ref(true);
 
     let routeList = [];
@@ -75,7 +73,9 @@ export default {
       console.log(key, keyPath);
     };
     // onBeforeMount(() => {});
-    onMounted(() => {console.log(props, 'props-bar');});
+    onMounted(() => {
+      console.log(props, "props-bar");
+    });
     //const refData = toRefs(null);
     onBeforeRouteUpdate((to) => {
       console.log("onBeforeRouteUpdate", to.path);
@@ -84,8 +84,10 @@ export default {
       () => $route.path,
       (newValue, oldValue) => {
         //console.log("watch----------", newValue);
-        let newActivePath = newValue?newValue.replace("/manager/",""):"user";
-         activePath.value = newActivePath;
+        let newActivePath = newValue
+          ? newValue.replace("/manager/", "")
+          : "user";
+        activePath.value = newActivePath;
       },
       { immediate: false }
     );
@@ -102,10 +104,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sideBar {
-  width: 200px;
+  // width: 220px;
   min-height: 200px;
   background: #dfd4bc;
-
+  border-radius: 8px;
   // :v-deep(.el-menu)  {
   //   background-image: linear-gradient(to bottom right, rgba(208, 224, 255, 0.5), rgba(208, 224, 255, 0.2), #fff, #fff, #fff);
 
@@ -114,6 +116,6 @@ export default {
   //   //   text-align: center;
   //   // }
   // }
-
+  
 }
 </style>
