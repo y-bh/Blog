@@ -11,6 +11,7 @@ const koa_static = require("koa-static");
 const bodyParser = require("koa-bodyparser");
 const views = require("koa-views");
 
+var staticCache = require('koa-static-cache');
 //应用配置文件
 const config = require("./config/app.config")
 
@@ -40,6 +41,11 @@ app.silent = true;
 app.use(views(config.templates, {
   /* 视图文件后缀名 */
   map: { html: 'ejs' }
+}))
+
+//设置静态文件缓存
+app.use(staticCache(config.static, {
+  maxAge: 60 * 60  //将这些文件添加到缓存中一小时
 }))
 
 //静态文件位置

@@ -10,6 +10,9 @@
 let path = location.pathname
 let tems = (path.split("/")).filter((item) => item)
 
+
+
+//初始化点击
 $('.nav .nav-item .nav-link').each((index, item) => {
   let id = $(item).attr("id")
   if (tems.length <= 1 && index == 0) {
@@ -21,10 +24,19 @@ $('.nav .nav-item .nav-link').each((index, item) => {
   }
 })
 
+
+
+
+//路由跳转问题
 $('.nav .nav-item .nav-link').on('click', function () {
   let href = $(this).attr("href")
-  location.href = href
+  //location.href = href
+  location.pathname=href
+
+  console.log("href",href)
 })
+
+
 
 
 //跳转页面
