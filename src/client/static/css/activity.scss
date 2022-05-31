@@ -113,6 +113,12 @@
 }
 
 
+@media screen and (max-width: 750px) {
+  .home-dialog-wrap,.left-dialog-wrap{
+    display: none;
+  }
+}
+
 
 @keyframes leftshow {
   from {
