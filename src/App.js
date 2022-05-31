@@ -43,10 +43,14 @@ app.use(views(config.templates, {
   map: { html: 'ejs' }
 }))
 
+
+
 //设置静态文件缓存
-app.use(staticCache(config.static, {
-  maxAge: 60 * 60  //将这些文件添加到缓存中一小时
-}))
+if (process.env.APP_ENV !== 'local') {
+  app.use(staticCache(config.static, {
+    maxAge: 60 * 60  //将这些文件添加到缓存中一小时
+  }))
+}
 
 //静态文件位置
 app.use(koa_static(config.static))

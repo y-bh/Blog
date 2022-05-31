@@ -681,6 +681,11 @@
   //套餐购买
   div.packageBuy {
     .package-content {
+      .changeTab {
+        .tab-header {
+          width: 150px;
+        }
+      }
       .tabContent {
         .payType-content {
           justify-content: space-between;
@@ -750,14 +755,21 @@
     }
   }
 
-  //帮助中心
-  div.help-center {
-    .nav {
-      width: 370px;
-    }
-
-    div.tab-content {
-      min-width: 370px;
+  //套餐购买
+  div.packageBuy {
+    .package-content {
+      overflow: hidden;
+      .mediaStyle {
+        width: 80% !important;
+        min-width: 350px !important;
+      }
+      .changeTab {
+        .tab-header {
+          flex: 1;
+          width: auto;
+          height: 50px;
+        }
+      }
     }
   }
 }
@@ -799,11 +811,7 @@
   //帮助中心
   div.help-center {
     .nav {
-      width: 300px;
-    }
-
-    div.tab-content {
-      min-width: 300px;
+      width: 350px;
     }
   }
 }
