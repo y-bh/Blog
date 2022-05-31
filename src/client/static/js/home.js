@@ -153,7 +153,7 @@ $(async function () {
   numDynamic("cityNum", 0, 200, 4, 50)
   numDynamic("ipTotalNum", 100000, +getCookie('ipNumTotal'), 50000, 50)
   numDynamic("ipNum", 600000, +getCookie('ipNumUpdate'), 80000, 50)
-  numDynamic("canUserNum", 8, (+getCookie('ipNumUpdate') * 100 / +getCookie('ipNumTotal')).toFixed(2), 2, 50)
+  numDynamic("canUserNum", 8, 99, 2, 50)
 
   // 1.首页|业务场景  产品优势动画初始化
   new WOW({ boxClass: 'advanceWow', }).init();
