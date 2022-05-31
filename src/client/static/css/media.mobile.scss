@@ -62,10 +62,46 @@
   //首页
   div.home {
     padding-bottom: 60px;
+    .mt-140 {
+      margin-top: 80px !important;
+    }
+    .mt-80 {
+      margin-top: 50px !important;
+    }
     .homeContent {
       img {
         width: 100% !important;
         height: auto !important;
+      }
+
+      .banner-right {
+        padding: 0 12px;
+        .homeBackg {
+          display: none;
+        }
+      }
+
+      .secondRow {
+        li {
+          width: auto;
+          min-width: unset;
+        }
+      }
+      .threeRow {
+        ul {
+          justify-content: center;
+          li {
+            width: auto;
+          }
+        }
+      }
+      .eightRow {
+        .egihtWidth {
+          justify-content: center;
+          .desc {
+            margin: 10px 0;
+          }
+        }
       }
       .nineRow {
         margin-top: 80px !important;

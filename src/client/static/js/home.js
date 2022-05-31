@@ -142,5 +142,7 @@ $(function () {
   // 1.首页|业务场景  产品优势动画初始化
   new WOW({ boxClass: 'advanceWow', }).init();
   //动画
-  new WOW().init();
+  new WOW({
+    mobile:false
+  }).init();
 })
