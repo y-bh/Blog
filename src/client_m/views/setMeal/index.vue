@@ -3,7 +3,7 @@
  * @LastEditors: 秦琛
  * @description: page description
  * @Date: 2022-04-27 17:37:35
- * @LastEditTime: 2022-05-31 14:33:00
+ * @LastEditTime: 2022-05-31 15:10:54
 -->
 <template>
   <div class="container">
@@ -97,7 +97,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column align='center' label="IP时效" prop="proxyTime">
+        <el-table-column align='center' label="IP时效(s)" prop="proxyTime">
           <template #default="{ row }">
             <!-- 计次显示不定 -->
             {{ row.proxyTime ? row.proxyTime : (row.proxyType == '10' ? '不定' : 0) }}
@@ -425,8 +425,8 @@ export default {
       },
       // 操作
       handleCommand (command, row) {
-        console.log(row,'row===');
         if (command === 'renewal') {
+          console.log(row,'row===');
           if (row.proxyType === 10) {
             // console.log('去套餐购买页');
             location.href = '/package'
@@ -472,7 +472,6 @@ export default {
         }
       },
       toggleMenu(state, row){
-        console.log(state, row,'val-=====');
         row.arrow = state
       },
       createCode (code) {
