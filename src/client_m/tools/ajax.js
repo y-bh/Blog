@@ -22,7 +22,12 @@ class ClientAjax extends Requeset {
         config.headers['TQ-TOKEN'] = token;
       }
 
-      // 部分接口加密  && process.env.NODE_ENV !== 'development'
+      //开发环境不加密
+      if (process.env.APP_ENV === 'local') {
+        return config
+      }
+
+      // 部分接口加密
       if (AESAUTH[config.url]) {
         if (typeof config.data === 'string') {
           config.data = config.data.trim()
@@ -53,7 +58,7 @@ class ClientAjax extends Requeset {
 
 const service = new ClientAjax(baseURL)
 
-// console.log("service--------------------》",service)
+// 
 export default service
 
 

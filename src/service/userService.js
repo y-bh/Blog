@@ -7,7 +7,7 @@
  */
 
 
-const { postRegisterDao, postResetDao, postLoginDao,resetCodeDao,registerCodeDao } = require('dao/userDao')
+const { postRegisterDao, postResetDao, postLoginDao, resetCodeDao, registerCodeDao, remindWxDao } = require('dao/userDao')
 
 
 // 注册服务
@@ -38,7 +38,7 @@ const registerService = async (data = null) => {
   const params = {
     "data": JSON.stringify(tem)
   }
-  
+
 
   // 获取注册数据
   const res = await postRegisterDao(params)
@@ -118,4 +118,54 @@ const resetCodeService = async (phone = null) => {
 
 }
 
-module.exports = { registerService, resetService, loginService,registerCodeService,resetCodeService }
+
+// 注册验证码
+const postWXWelfare = async (data = null) => {
+
+  console.log("来自前端传参:", data)
+
+  if (!data.username) {
+    return {
+      code: -1,
+      msg: '请传入username'
+    }
+  }
+
+  if (!data.password) {
+    return {
+      code: -1,
+      msg: '请传入password'
+    }
+  }
+
+  if (!data.wxOpenId) {
+    return {
+      code: -1,
+      msg: '请传入wxOpenId'
+    }
+  }
+
+
+  //1. 入参
+  const params = {
+    "data": JSON.stringify({
+      username: data.username.trim(),
+      password: data.password,
+      wxOpenId: data.wxOpenId + ""
+    })
+  }
+
+  const res = await remindWxDao(params)
+  return {
+    code: 0,
+    data: res
+  }
+
+}
+
+
+
+
+
+
+module.exports = { registerService, resetService, loginService, registerCodeService, resetCodeService, postWXWelfare }
