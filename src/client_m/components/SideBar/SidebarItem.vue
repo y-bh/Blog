@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-05 18:02:35
- * @LastEditTime: 2022-05-31 16:18:04
+ * @LastEditTime: 2022-05-31 18:09:30
 -->
 <template>
   <li class="show-side" @click="props.showB"><i class="iconfont icon-zhankai"></i></li>
@@ -57,5 +57,6 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all .3s;
 }
 </style>
