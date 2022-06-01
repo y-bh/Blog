@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-05-31 19:01:24
+ * @LastEditTime: 2022-06-01 10:39:46
 -->
 <template>
   <aside class="sideBar">
@@ -124,6 +124,11 @@ export default {
 .sideBar{
   .iconfont{
     display: none;
+  }
+
+  .sideBar-menu{
+    border-radius: 8px;
+    border: 1px solid #fff !important;
   }
 }
 
