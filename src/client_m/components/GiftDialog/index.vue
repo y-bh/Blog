@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-30 15:34:53
- * @LastEditTime: 2022-05-31 21:05:24
+ * @LastEditTime: 2022-06-01 13:33:56
 -->
 <template>
   <div style="position: absolute; top: 0">
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="dialog-bg" v-if="!e && one">
+      <div class="dialog-bg" v-if="!userInfo.gotWxWelfare && !e && one">
         <div class="dialog-img dialog-img-snd">
           <div
             class="snd-btn pesonal-btn"
@@ -48,7 +48,7 @@
 
     <div
       class="small-dia-bg"
-      v-if="(!userInfo.gotWxWelfare || !userInfo.newUser) && e && l"
+      v-if="(!userInfo.gotWxWelfare || userInfo.newUser) && e && l"
     >
       <div
         class="small-dia-img-n"
