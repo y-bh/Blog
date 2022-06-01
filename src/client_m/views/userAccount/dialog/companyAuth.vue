@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-17 17:07:26
- * @LastEditTime: 2022-05-31 13:36:13
+ * @LastEditTime: 2022-06-01 13:39:28
 -->
 <template>
   <div class="companyAuth common-userAuthDialog">
@@ -223,7 +223,6 @@ export default {
     let certifyId = ref("");
     const companyQrcodeRef = ref(null);
     let userInfoSon = inject("userInfoSon");
-    console.log("-userInfoSon-2-2222--", userInfoSon);
     const dialogVisible = ref(false);
     const vaildCompanyCardRef = ref(null);
     const message = inject("message");

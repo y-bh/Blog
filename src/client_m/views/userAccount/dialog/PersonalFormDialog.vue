@@ -1,9 +1,9 @@
 <!--
  * @Author: dengxiujie
- * @LastEditors: dengxiujie
+ * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-05-17 15:33:37
- * @LastEditTime: 2022-05-31 09:53:46
+ * @LastEditTime: 2022-06-01 13:40:59
 -->
 <template>
   <div class="personalFormDialog">
@@ -108,7 +108,6 @@ export default {
     const $message = inject("message");
     let userInfoSon = inject("userInfoSon");
     let perFormRefs = ref(null);
-    console.log(1111111, userInfoSon);
     let rules = reactive({
       wxNo: [
         {

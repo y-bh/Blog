@@ -3,7 +3,7 @@
  * @LastEditors: liyuntao
  * @description: page description
  * @Date: 2022-04-27 14:53:12
- * @LastEditTime: 2022-06-01 10:39:46
+ * @LastEditTime: 2022-06-01 13:41:04
 -->
 <template>
   <aside class="sideBar">
@@ -73,9 +73,7 @@ export default {
       console.log(key, keyPath);
     };
     // onBeforeMount(() => {});
-    onMounted(() => {
-      console.log(props, "props-bar");
-    });
+    onMounted(() => {});
     //const refData = toRefs(null);
     onBeforeRouteUpdate((to) => {
       console.log("onBeforeRouteUpdate", to.path);
