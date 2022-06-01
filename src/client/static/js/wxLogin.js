@@ -57,11 +57,24 @@ async function loginSubmit() {
 
 
   }
-
+  Helper.$message({
+    message: "loginSubmit"+JSON.stringify(params),
+    type: 'warning'
+  })
   const res = await ajax({
     url: "/wxFollowWelfare",
     query: JSON.stringify(params)
   }, '/api')
+
+  Helper.$message({
+    message: "ccccccccccccccccccccccccccccccccccccccccc",
+    type: 'warning'
+  })
+  Helper.$message({
+    message: JSON.stringify(res),
+    type: 'warning'
+  })
+
 
   console.log("loginSubmit接口响应结果:", res)
   //注册成功后
@@ -76,6 +89,10 @@ async function loginSubmit() {
 
 //获取openId
 async function getOpenId(code) {
+  Helper.$message({
+    message: "getOpenId"+code,
+    type: 'warning'
+  })
   if (!code) {
     console.log("请传入code")
     return
@@ -110,6 +127,10 @@ $(async function () {
 
   console.log("查询参数:", query.code, query && !query.code)
 
+  Helper.$message({
+    message: "获取code"+query.code,
+    type: 'warning'
+  })
   //2. 如果是微信端
   if (query && !query.code) {
     $("#wx-client").hide().siblings("#browser-client").show()
@@ -120,6 +141,10 @@ $(async function () {
 
     //获取微信openId
     let openId = await getOpenId(query.code)
+    Helper.$message({
+      message: "获取openId"+openId,
+      type: 'warning'
+    })
     console.log("获取的openId:", openId)
     window.openId = openId
     sessionStorage.setItem('openId', openId)
