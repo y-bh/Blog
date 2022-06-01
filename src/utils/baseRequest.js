@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: dengxiujie
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 19:54:58
+ * @LastEditTime: 2022-06-01 13:50:52
  */
 
 import axios from 'axios';
@@ -34,6 +34,7 @@ class Request {
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
+        console.log("--------响应拦截返回数据------------",response.data);
         if (+data.code === 200) {
           return {
             code: 200,
