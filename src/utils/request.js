@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: 秦琛
+ * @LastEditors: dengxiujie
  * @description: 通信封装
  * @Date: 2022-04-25 10:37:04
- * @LastEditTime: 2022-05-26 14:22:56
+ * @LastEditTime: 2022-06-01 11:24:59
  */
 
 
@@ -26,8 +26,10 @@ class ServiceAjax extends Requeset {
       if (config.token) {
         config.headers['TQ-TOKEN'] = config.token;
       }
+      console.log("------------ServiceAjax--------------", config.data, process.env.APP_ENV)
       //参数加密
       if (process.env.APP_ENV !== 'local' && AESAUTH[config.url]) {
+        console.log("------------token--------------", config.data, process.env.APP_ENV)
         if (typeof config.data === 'string') {
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)
@@ -35,7 +37,7 @@ class ServiceAjax extends Requeset {
         config.data.data = encrypt(config.data.data)
       }
 
-      console.log("vvvvvvvvvvvvvvvvvv", config.data, process.env.APP_ENV)
+      console.log("------------token-after----------------", config.data, process.env.APP_ENV)
       return config;
     }, error => {
       return Promise.reject(error);
