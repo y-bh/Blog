@@ -6,5 +6,5 @@
  * @LastEditTime: 2022-05-18 16:48:24
  */
 module.exports = {
-  "API": "http://dev-www.tianqiip.com"
+  "API": "http://localhost"
 }
