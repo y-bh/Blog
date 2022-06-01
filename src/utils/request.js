@@ -27,7 +27,11 @@ class ServiceAjax extends Requeset {
         config.headers['TQ-TOKEN'] = config.token;
       }
       //参数加密
-      if (process.env.APP_ENV !== 'local' && AESAUTH[config.url]) {
+      if (process.env.APP_ENV && process.env.APP_ENV === 'local') {
+        return config
+      }
+
+      if (AESAUTH[config.url]) {
         if (typeof config.data === 'string') {
           config.data = config.data.trim()
           config.data = JSON.parse(config.data)

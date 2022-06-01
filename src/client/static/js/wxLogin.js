@@ -88,6 +88,10 @@ async function getOpenId(code) {
   })
 
   console.log("getOpenId获取结果:", res)
+   Helper.$message({
+    message: JSON.stringify(res),
+    type: 'warning'
+  })
   if (+res.code !== 200) {
     return Helper.$message({
       message: res.message || 'openId 获取失败',
