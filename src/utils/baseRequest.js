@@ -1,9 +1,9 @@
 /*
  * @Author: 朱占伟
- * @LastEditors: liyuntao
+ * @LastEditors: dengxiujie
  * @description: 提供给node 端和 客户端的基础ajax 服务
  * @Date: 2022-05-19 12:31:07
- * @LastEditTime: 2022-05-24 19:54:58
+ * @LastEditTime: 2022-06-01 14:05:14
  */
 
 import axios from 'axios';
@@ -31,26 +31,28 @@ class Request {
 
     // 客户端 | 服务端 响应拦截器
     service.interceptors.response.use(response => {
+      console.log("--------响应拦截----------URl------------", response.config.url);
       // 响应正确
       if (response.status >= 200 && response.status <= 210) {
         const data = response.data;
         if (+data.code === 200) {
+          console.log("--------响应拦截----成功----返回数据------------", data ? JSON.stringify(data) : {});
           return {
             code: 200,
             data: data.data
           };
         } else {
-
+          console.log("--------响应拦截----不是200------", data);
           return {
             code: data.code || -1,
-            message:data.message || '接口异常'
+            message: data.message || '接口异常'
           };
         }
       }
       return response && response.data || response;
     },
       error => {
-
+        console.log("--------响应拦截----出错了------");
         return Promise.resolve({
           code: error.response && error.response.data && error.response.data.code || -1,
           message: error
