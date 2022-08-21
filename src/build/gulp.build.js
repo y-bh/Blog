@@ -1,10 +1,4 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: liyuntao
- * @description: 官网页面生产环境工程
- * @Date: 2022-04-22 16:57:34
- * @LastEditTime: 2022-05-23 17:51:04
- */
+
 
 const gulp = require('gulp');
 var shell = require('shelljs');

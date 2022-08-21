@@ -1,10 +1,3 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: 朱占伟
- * @description: 项目启动文件
- * @Date: 2022-04-22 15:36:56
- * @LastEditTime: 2022-05-18 16:51:58
- */
 
 //加babel 编译
 require('babel-register')({

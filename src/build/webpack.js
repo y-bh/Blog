@@ -1,10 +1,4 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: 秦琛
- * @description: 个人中心开发环境配置
- * @Date: 2022-04-25 16:16:31
- * @LastEditTime: 2022-05-26 14:46:46
- */
+
 
 const gulp = require('gulp');
 const path = require("path")

@@ -1,11 +1,3 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: liyuntao
- * @description: 官网页面开发环境工程
- * @Date: 2022-04-22 16:57:08
- * @LastEditTime: 2022-05-23 16:39:56
- */
-
 
 const gulp = require('gulp');
 
@@ -48,7 +40,7 @@ gulp.task('CssComplie', function () {
   console.info("编译css任务")
   return gulp.src([localConfig.sourceDir + "/css/*.scss", localConfig.sourceDir + "/css/*.css"])
     .pipe(Sass()) //编译sass
-    .pipe(px2rem(px2remOptions, postCssOptions))
+    // .pipe(px2rem(px2remOptions, postCssOptions))  //px2rem自适应
     .pipe(Autoprefixer({
       cascade: true, //是否美化属性值 默认：true 像这样：
       remove: false, //是否去掉不必要的前缀 默认：true

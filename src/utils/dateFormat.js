@@ -1,10 +1,4 @@
-/*
- * @Author: 陈昊天
- * @LastEditors: 陈昊天
- * @description: 时间戳处理
- * @Date: 2022-05-17 11:13:37
- * @LastEditTime: 2022-05-17 11:15:42
- */
+
 function dateFormat (date_ms, fmt = 'YYYY-mm-dd HH:MM:SS') {
   let date = new Date(date_ms)
   let ret

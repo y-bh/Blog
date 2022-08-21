@@ -1,10 +1,4 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: 朱占伟
- * @description: 应用配置文件
- * @Date: 2022-04-22 16:09:16
- * @LastEditTime: 2022-05-18 17:32:45
- */
+
 
 const path = require("path")
 const resolve = (dir) => {
@@ -26,7 +20,7 @@ var config = {
   static: resolve('/client/public'),
 
   //本应用启动端口
-  appPort: '8080',
+  appPort: '3000',
 
   //与java端通信地址
   url: envConfig.API,

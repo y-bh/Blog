@@ -1,22 +1,14 @@
 
-/*
- * @Author: 朱占伟
- * @LastEditors: liyuntao
- * @description: 前端工程文件
- * @Date: 2022-04-11 13:50:30
- * @LastEditTime: 2022-05-23 17:51:59
- */
 
 require('module-alias/register')
-const webpackConfig = require('./src/build/webpack')
 var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
 
 
 //本地开发环境任务
 require("./src/build/gulp.dev");
-gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", 'HandleFont', 'DownloadZip', webpackConfig.webpackDev, function (done) {
-  console.info("开发环境工程编译完成,开启启动应用")
+gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageComplie', "ThirdPlugin", 'HandleFont', function (done) {
+  console.info("开发环境编译")
   var stream = nodemon({
     script: './start.js',
     env: { 'NODE_ENV': 'development' }
@@ -57,20 +49,15 @@ gulp.task('develop', gulp.series("clean", "JsComplie", "CssComplie", 'ImageCompl
     gulp.watch([
       'src/client/static/font/**'
     ], gulp.series('HandleFont'))
-
-    //监听下载zip 变化
-    gulp.watch([
-      'src/client/static/download/**'
-    ], gulp.series('DownloadZip'))
   })
 }
 ))
 
 
-//生产环境打包任务 【官网seo页面 与 个人中心 同步构建】
+//生产环境打包任务 【构建】
 const prodServer = require("./src/build/gulp.build")
 function buildCompile() {
-  return gulp.series(webpackConfig.webpackProd, prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie,prodServer.DownloadZip)
+  return gulp.series(prodServer.JsComplie, prodServer.CssComplie, prodServer.ThirdPlugin, prodServer.HandleFont, prodServer.ImageComplie)
 }
 
 //生产环境

@@ -1,10 +1,4 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: 朱占伟
- * @description:  全局共用的数据储存
- * @Date: 2022-05-16 17:28:39
- * @LastEditTime: 2022-05-16 19:40:19
- */
+
 
 const LRU = require('lru-cache');
 const options = {

@@ -1,10 +1,4 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: 秦琛
- * @description: 服务端应用入口
- * @Date: 2022-04-22 15:00:25
- * @LastEditTime: 2022-05-19 15:26:58
- */
+
 
 const Koa = require("koa");
 const koa_static = require("koa-static");
@@ -62,10 +56,10 @@ app.use(bodyParser());
 
 
 //本地开发环境 走前端proxy代理  | 服务端环境走nginx 代理
-if (process.env.APP_ENV === 'local') {
-  console.log("本地环境,使用node代理")
-  app.use(require("middleware/proxy")());
-}
+// if (process.env.APP_ENV === 'local') {
+//   console.log("本地环境,使用node代理")
+//   app.use(require("middleware/proxy")());
+// }
 
 
 
@@ -74,13 +68,13 @@ if (process.env.APP_ENV === 'local') {
 app.use(routerResponse());
 
 //设置全局数据
-require("middleware/global_data")(app)
+// require("middleware/global_data")(app)
 
 //路由器
 Router(app);
 
 //处理404
-app.use(require("middleware/error_middleware.js")())
+// app.use(require("middleware/error_middleware.js")())
 
 
 app.on("error", (err) => {
@@ -89,5 +83,5 @@ app.on("error", (err) => {
 
 
 app.listen(config.appPort, async () => {
-  console.log("天启http 应用启动成功", config.appPort);
+  console.log("Bke run success", config.appPort);
 });

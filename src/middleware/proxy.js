@@ -1,10 +1,4 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: 秦琛
- * @description: 客户端接口跨域代理
- * @Date: 2022-05-18 17:24:02
- * @LastEditTime: 2022-05-19 15:26:32
- */
+
 
 const proxyAjax = require("utils/proxyRequest")
 const appKey = require("config/app.key.config");

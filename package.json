@@ -1,5 +1,5 @@
 {
-  "name": "tianqi",
+  "name": "bke",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,12 +15,11 @@
     "serve:test": "pm2 start ./start.js --  m:test",
     "serve:prod": "pm2 start ./start.js --  m:production"
   },
-  "author": "zhuzhanwei",
+  "author": "liyuntao",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
     "ejs": "^3.1.7",
-    "element-plus": "^1.0.2-beta.70",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
@@ -28,14 +27,7 @@
     "koa-static-cache": "^5.1.4",
     "koa-views": "^8.0.0",
     "lru-cache": "^7.10.1",
-    "module-alias": "^2.2.2",
-    "qrcode": "^1.5.0",
-    "qrcode.vue": "^3.3.3",
-    "qrcodejs2": "^0.0.2",
-    "vue": "^3.0.0",
-    "vue-clipboard3": "^2.0.0",
-    "vue-router": "^4.0.10",
-    "vuex": "^4.0.2"
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

@@ -1,10 +1,3 @@
-/*
- * @Author: 朱占伟
- * @LastEditors: dengxiujie
- * @description: 正则管理文件
- * @Date: 2021-08-12 17:00:14
- * @LastEditTime: 2022-05-16 18:55:13
- */
 
 // 手机号码，包含排除号段
 export const minPHONE = /^1[3456789]\d{9}$/
