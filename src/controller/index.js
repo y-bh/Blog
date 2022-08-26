@@ -20,6 +20,26 @@ function Router(App) {
     return ctx.render("home/index", homeData)
   })
 
+  //登录页
+  router.get(["/login", "/reset", "/register"], async (ctx) => {
+    let { url, query } = ctx.request
+
+    //处理掉查询串情况
+    if (query && url.includes('?')) {
+      url = (url.split("?"))[0]
+    }
+
+    //处理掉hash 情况
+    if (url.includes('#')) {
+      url = (url.split("#"))[0]
+    }
+
+    const data = {
+      type: url.slice(1)
+    }
+    return ctx.render("login/index", data)
+  })
+
   App.use(router.routes()); //作用：启动路由
   App.use(router.allowedMethods());
 }

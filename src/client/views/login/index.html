@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <%- include('../components/style.html'); %>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+  <div class="lrr-wrap">
+    <div class="card-bg">
+
+    </div>
+    <section id="login-card" class="lrr-card is-unactive-1">
+      Login
+      <span class="reg-bt">
+        Register
+      </span>
+      <span class="reset-bt">
+        Reset
+      </span>
+    </section>
+    <section id="register-card" class="lrr-card is-active">
+      Register
+      <span class="login-bt">
+        Login
+      </span>
+      <span class="reset-bt">
+        Reset
+      </span>
+    </section>
+    <section id="reset-card" class="lrr-card is-unactive-2">
+      Reset
+      <span class="login-bt">
+        Login
+      </span>
+      <span class="reg-bt">
+        Register
+      </span>
+    </section>
+  </div>
+</body>
+<script src="/js/login.js"></script>
+</html>
