@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run dev",
     "dev": "gulp develop",
     "build:dev": "node ./env.build.js --develop",
     "build:test": "node ./env.build.js --test",

@@ -13,7 +13,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -55%);
-    background-color: gold;
+    // background-color: gold;
+    border-radius: 6px;
   }
 
   .lrr-card {
@@ -21,16 +22,112 @@
     width: 400px;
     height: 500px;
     transition: transform .25s;
+    border-radius: 6px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .lrr-title {
+      font-size: 24px;
+      height: 50px;
+      line-height: 50px;
+      font-style: italic;
+    }
+
+    form{
+      .form-item {
+        position: relative;
+        height: 60px;
+        width: 100%;
+        padding: 0px 10px;
+        border-bottom: 2px solid orange;
+        color: rgb(65, 65, 65);
+        box-sizing: border-box;
+
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
+        
+        .form-label {
+          font-size: 22px;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          transition: all .25s;
+          font-style: italic;
+          cursor: text;
+        }
+
+        .form-input {
+          width: 100%;
+          height: 60px;
+          line-height: 60px;
+          font-size: 20px;
+          border: unset;
+          outline: unset;
+
+          background: transparent;
+
+          &::placeholder {
+            font-size: 0;
+          }
+
+          &:focus+.form-label,
+          &:not(:placeholder-shown)+.form-label {
+            top: 0;
+            font-size: 12px;
+          }
+        }
+      }
+      
+      .form-btn {
+        display: block;
+        width: 50%;
+        height: 40px;
+        margin: 0 auto;
+        margin-top: 30px;
+        border: 1px solid orange;
+        border-radius: 6px;
+        background: transparent;
+        line-height: 40px;
+        font-size: 16px;
+        transition: width .25s;
+
+        &:hover {
+          width: 100%;
+          box-shadow: 1px 2px 3px rgba($color: rgba(255, 166, 0, 0.479), $alpha: 0.3);
+          transition: width .15s, box-shadow .15s .08s;
+        }
+      }
+    } 
+  }
+  
+  .card-change {
+    width: 95%;
+    height: 20px;
+    text-align: right;
+    font-size: 14px;
+
+    span:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 
   #login-card {
-    background-color: skyblue;
+    // background-color: skyblue;
+    background: white;
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,.3);
   }
   #register-card {
-    background-color: pink;
+    // background-color: pink;
+    background: white;
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,.3);
   }
   #reset-card {
-    background-color: plum;
+    // background-color: plum;
+    background: white;
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,.3);
   }
   
   .is-unactive-1 {
@@ -45,10 +142,35 @@
     transform: translate(-12%, -55%) scale(0.93);
   }
 
+  .is-unactive-2,.is-unactive-1 {
+    filter: blur(2px);
+    box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.1);
+
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      content: '';
+    }
+  }
+
   .is-active {
     top: 50%;
     left: 50%;
     transform: translate(-60%, -55%) scale(1.1);
     z-index: 10;
+  }
+
+  .hitokoto {
+    margin-top: 40px;
+    font-style: italic;
+
+    .hito-from {
+      width: 90%;
+      margin-top: 10px;
+      text-align: right;
+    }
   }
 }

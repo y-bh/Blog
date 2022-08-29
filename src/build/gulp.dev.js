@@ -9,7 +9,7 @@ const localConfig = require("../config/app.config")
 // css
 const Sass = require('gulp-sass')(require('sass')) //编辑sass
 const Autoprefixer = require("gulp-autoprefixer"); // 添加 CSS 浏览器前缀
-const px2rem = require('gulp-px2rem'); //浏览器适配
+// const px2rem = require('gulp-px2rem'); //浏览器适配
 
 
 //js

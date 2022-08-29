@@ -9,9 +9,6 @@ function resetClass() {
 }
 
 function loginClick() {
-  if(this.parentNode.className.indexOf('is-active') === -1){
-    return 
-  }
   resetClass()
   loginDom.classList.add('is-active')
   regDom.classList.add('is-unactive-1')
@@ -19,9 +16,6 @@ function loginClick() {
 }
 
 function regClick() {
-  if(this.parentNode.className.indexOf('is-active') === -1){
-    return 
-  }
   resetClass()
   loginDom.classList.add('is-unactive-1')
   regDom.classList.add('is-active')
@@ -29,9 +23,6 @@ function regClick() {
 }
 
 function resetClick() {
-  if(this.parentNode.className.indexOf('is-active') === -1){
-    return 
-  }
   resetClass()
   loginDom.classList.add('is-unactive-1')
   regDom.classList.add('is-unactive-2')
@@ -49,3 +40,5 @@ function addArrClick(e, fn) {
   addArrClick(document.getElementsByClassName('reg-bt'), regClick)
   addArrClick(document.getElementsByClassName('reset-bt'), resetClick)
 })()
+
+console.log('test stream')

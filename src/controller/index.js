@@ -6,6 +6,7 @@
  * @LastEditTime: 2022-05-30 11:07:47
  */
 
+const { getHitokotoService } = require("service/public")
 
 
 const router = require("koa-router")();
@@ -34,8 +35,16 @@ function Router(App) {
       url = (url.split("#"))[0]
     }
 
+    //hitokoto params
+    const hparams = {
+      c: 'i, k'
+    }
+    const re = await getHitokotoService(hparams)
+    console.log(re)
+
     const data = {
-      type: url.slice(1)
+      type: url.slice(1),
+      hito: re
     }
     return ctx.render("login/index", data)
   })

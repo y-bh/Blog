@@ -17,6 +17,19 @@ class ServiceAjax extends Requeset {
       return Promise.reject(error);
     });
 
+    this.service.interceptors.response.use(config => {
+
+      console.log("------------interceptors Reponse----------------")
+
+      if(config.status === 200) {
+        return config.data
+      }
+
+      return config;
+    }, error => {
+      return Promise.reject(error);
+    });
+
   }
 
 
