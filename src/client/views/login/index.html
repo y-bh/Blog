@@ -10,6 +10,9 @@
 </head>
 <body>
   <div class="lrr-wrap">
+    <div class="lrr-bg">
+      
+    </div>
     <div class="card-bg">
 
     </div>
@@ -19,14 +22,14 @@
       </div>
       <form onsubmit="return function () { return false }">
         <div class="form-item">
-          <input type="text" id="user-input" class="form-input" placeholder="username">
-          <label for="user-input" class="form-label"> UserName </label>
+          <input type="text" id="login-user-input" class="form-input" placeholder="username">
+          <label for="login-user-input" class="form-label"> Phone </label>
         </div>
         <div class="form-item">
-          <input type="text" id="pw-input" class="form-input" placeholder="password">
-          <label for="pw-input" class="form-label"> PassWord </label>
+          <input type="password" id="login-pw-input" class="form-input" placeholder="password">
+          <label for="login-pw-input" class="form-label"> PassWord </label>
         </div>
-        <button class="form-btn" type="button">
+        <button id="login-submit-bt" class="form-btn" type="button">
           Login
         </button>
       </form>
@@ -55,18 +58,18 @@
       </div>
       <form onsubmit="return function () { return false }">
         <div class="form-item">
-          <input type="text" id="user-input" class="form-input" placeholder="username">
-          <label for="user-input" class="form-label"> UserName </label>
+          <input type="text" id="reg-user-input" class="form-input" placeholder="username">
+          <label for="reg-user-input" class="form-label"> Phone </label>
         </div>
         <div class="form-item">
-          <input type="text" id="pw-input" class="form-input" placeholder="password">
-          <label for="pw-input" class="form-label"> PassWord </label>
+          <input type="password" id="reg-pw-input" class="form-input" placeholder="password">
+          <label for="reg-pw-input" class="form-label"> PassWord </label>
         </div>
         <div class="form-item">
-          <input type="text" id="pw-input" class="form-input" placeholder="password">
-          <label for="pw-input" class="form-label"> Again PW </label>
+          <input type="password" id="reg-pw-input-again" class="form-input" placeholder="password">
+          <label for="reg-pw-input-again" class="form-label"> Again PW </label>
         </div>
-        <button class="form-btn" type="button">
+        <button id="reg-submit-bt" class="form-btn" type="button">
           Register
         </button>
       </form>
@@ -88,18 +91,18 @@
       <form onsubmit="return function () { return false }">
         <div class="form-item">
           <input type="text" id="user-input" class="form-input" placeholder="username">
-          <label for="user-input" class="form-label"> UserName </label>
+          <label for="user-input" class="form-label"> Phone </label>
         </div>
         <div class="form-item">
-          <input type="text" id="pw-input" class="form-input" placeholder="password">
+          <input type="password" id="pw-input" class="form-input" placeholder="password">
           <label for="pw-input" class="form-label"> PassWord </label>
         </div>
         <div class="form-item">
-          <input type="text" id="pw-input" class="form-input" placeholder="password">
+          <input type="password" id="pw-input" class="form-input" placeholder="password">
           <label for="pw-input" class="form-label"> Again PW </label>
         </div>
         <button class="form-btn" type="button">
-          Register
+          Reset
         </button>
       </form>
       <div class="card-change">
@@ -109,11 +112,12 @@
       </div>
       <div class="card-change">
         <span class="reg-bt">
-          Register
+          Register 
         </span>
       </div>
     </section>
   </div>
 </body>
+<%- include('../components/js.html'); %>
 <script src="/js/login.js"></script>
 </html>

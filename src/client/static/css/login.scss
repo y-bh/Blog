@@ -6,6 +6,18 @@
   bottom: 0;
   right: 0;
 
+  .lrr-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url("/images/public/bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+  }
+
   .card-bg {
     position: absolute;
     width: 50%;

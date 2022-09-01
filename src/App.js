@@ -14,6 +14,7 @@ const { routerResponse } = require("middleware/parseJson")
 
 //路由配置文件
 const Router = require("controller/index")
+const pRouter = require("controller/public")
 
 
 const app = new Koa();
@@ -72,6 +73,7 @@ app.use(routerResponse());
 
 //路由器
 Router(app);
+pRouter(app)
 
 //处理404
 // app.use(require("middleware/error_middleware.js")())

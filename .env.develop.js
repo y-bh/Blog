@@ -1,5 +1,5 @@
 //线上开发
 
 module.exports = {
-  "API": "http://www.baidu.com"
+  "API": "http://124.222.129.50:8001"
 }

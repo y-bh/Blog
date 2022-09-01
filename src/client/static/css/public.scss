@@ -12,3 +12,32 @@ html, body {
 div {
     text-align: center;
 }
+
+
+// tips
+.success-tips {
+  display: inline-block;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  border-radius: 14px;
+  transform: translateX(-50%);
+  padding: 20px 40px;
+  color: rgb(66, 216, 7);
+  border: 1px solid rgb(66, 216, 7);
+  background: rgba(10, 252, 10, 0.144);
+  font-size: 16px;
+  line-height: 16px;
+
+  animation: tips .5s cubic-bezier(.25,1.16,.38,1.13) 0s 1 normal forwards;
+}
+
+
+@keyframes tips {
+  from{
+    top: -10%;
+  }
+  to{
+    top: 20px;
+  }
+}

@@ -12,6 +12,8 @@ class ServiceAjax extends Requeset {
 
       console.log("------------interceptors Request----------------")
 
+      console.log("----------------", config, "--------------------")
+
       return config;
     }, error => {
       return Promise.reject(error);
@@ -75,6 +77,29 @@ class ServiceAjax extends Requeset {
 
     }
   }
+
+    /**
+* 封装post请求
+* @param url
+* @param data
+* @param token  登录后token
+* @returns {Promise}
+*/
+postJson(url, data = {}, token) {
+  try {
+    return this.service({
+      url,
+      method: 'POST',
+      data: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json'
+      },
+      token
+    });
+  } catch (error) {
+
+  }
+}
 
 }
 
